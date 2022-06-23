@@ -28,11 +28,11 @@
  :feature/enable-block-timestamps? false
 
  ;; Disable Built-in Scheduled and deadline Query
- ;; :feature/disable-scheduled-and-deadline-query? true
+ :feature/disable-scheduled-and-deadline-query? true
 
  ;; Specify the date on which the week starts.
  ;; Goes from 0 to 6 (Monday to Sunday), default to 6
- :start-of-week 6
+ :start-of-week 0
 
  ;; Specify a custom CSS import
  ;; This option take precedence over your local `logseq/custom.css` file
