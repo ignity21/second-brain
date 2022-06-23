@@ -78,7 +78,6 @@
  ;; Tell logseq to use a specific folder in the repo as a default location for journals
  ;; if not specified, journals are stored in `journals` directory
  ;; :journals-directory "your-directory"
- :journal/file-name-format “yyyy-MM-dd”
 
  ;; Set this to true will convert
  ;; `[[Grant Ideas]]` to `[[file:./grant_ideas.org][Grant Ideas]]` for org-mode
@@ -204,6 +203,7 @@
  :favorites ["How to take dummy notes?"]
  :graph/settings {:journal? false, :orphan-pages? true, :builtin-pages? false}
  :journal/page-title-format "yyyy-MM-dd"
+ :journal/file-name-format "yyyy-MM-dd"
  :ui/show-brackets? false
 
  ;; any number between 0 and 1 (the greater it is the faster the changes of the next-interval of card reviews) (default 0.5)

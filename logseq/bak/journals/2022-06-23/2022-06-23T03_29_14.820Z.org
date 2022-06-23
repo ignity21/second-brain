@@ -1,9 +1,0 @@
-:PROPERTIES:
-:ID:       4705b95e-dc2e-4805-b9a6-e04d5db02de9
-:END:
-#+title: 2022-06-23
-* A note from org-roam
-** [[id:980e6846-6c62-4ff7-b805-558015199fd2][~auto from roam~]]
-:PROPERTIES:
-:ID:       d18eb3dc-33a9-42c5-9803-1a93647d0198
-:END:
