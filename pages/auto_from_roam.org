@@ -1,0 +1,4 @@
+:PROPERTIES:
+:ID:       980e6846-6c62-4ff7-b805-558015199fd2
+:END:
+#+TITLE: ~auto from roam~
