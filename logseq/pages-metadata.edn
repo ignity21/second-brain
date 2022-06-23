@@ -1,9 +1,6 @@
 [{:block/name "2022-06-23",
   :block/created-at 1655952119288,
-  :block/updated-at 1655952119288}
- {:block/name "2022-06-23 thursday",
-  :block/created-at 1655951619359,
-  :block/updated-at 1655951770199}
+  :block/updated-at 1655952181226}
  {:block/name "a",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
@@ -47,5 +44,5 @@
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
  {:block/name "~auto~",
-  :block/created-at 1655951767272, 
-  :block/updated-at 1655951767272}]
+  :block/created-at 1655952181225, 
+  :block/updated-at 1655952187194}]
