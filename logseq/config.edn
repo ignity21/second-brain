@@ -4,7 +4,7 @@
  ;; This can overwrite your global preference so that
  ;; maybe your personal preferred format is Org but you'd
  ;; need to use Markdown for some projects.
- ;; :preferred-format ""
+ :preferred-format "Org"
 
  ;; Preferred workflow style.
  ;; Value is either ":now" for NOW/LATER style,
