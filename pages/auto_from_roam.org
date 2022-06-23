@@ -2,3 +2,6 @@
 :ID:       980e6846-6c62-4ff7-b805-558015199fd2
 :END:
 #+TITLE: ~auto from roam~
+
+* a new notes
+* [[id:4871c5b1-be7e-4da7-9ae5-c81ff7267e5b][follow]]
