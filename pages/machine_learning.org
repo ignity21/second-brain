@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       0f5f364e-c6d8-4d8b-9141-90ae889d2da3
+:ROAM_ALIASES: ML
+:END:
+#+TITLE: Machine Learning
+
+* iurew
+* eiwurowerwe
+* oiowoww
+* [[id:470662c8-e792-4fc4-904d-e1b24f79b0d3][ABC]]
+* Algorithms
+** [[id:79677d3d-2ae3-45c9-84f1-3c8cfcbc591b][Supervised Learning]]
+  - Rapid Advancements
+  - Used most in real-world applications
+** [[id:adf942f1-8d07-4910-98b2-38d786b6bb7e][Unsupervised Learning]]
+** [[id:2f041611-0522-48a2-8f0a-ffa871e377fa][Reinforcement Learning]]

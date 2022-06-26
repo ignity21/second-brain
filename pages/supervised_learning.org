@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       79677d3d-2ae3-45c9-84f1-3c8cfcbc591b
+:END:
+#+TITLE: Supervised Learning
+
+- tags :: [[id:0f5f364e-c6d8-4d8b-9141-90ae889d2da3][Machine Learning]]
