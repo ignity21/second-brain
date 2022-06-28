@@ -3,16 +3,17 @@
 :END:
 #+TITLE: ~pipenv~
 
-* tags :: [[id:9650c2da-f75d-4d17-b27d-ce614c2530ae][Python]], [[id:8fca7cca-e1d9-42ab-ac5f-acc9ee3f1e8b][Package Manager]]
+* tags :: [[id:9650c2da-f75d-4d17-b27d-ce614c2530ae][Python]], [[id:8fca7cca-e1d9-42ab-ac5f-acc9ee3f1e8b][Package Manager]], [[id:d2ed7b60-76b6-4311-b624-aad2f629ae2b][~pyenv~]], [[id:9d7310b1-f2e8-444a-b1cf-ce3de9cef1c2][~poetry~]]
 
 * Installation
 - ~pip install --user pipenv~
+- ~pipx install pipenv~
 
 * Basic Usage
 #+begin_src bash
   cd project-dir
   pipenv install requests
-  pipenv install --dev pyright
+  pipenv install --dev pyright pyls
   pipenv run python main.py # run a command inside the virtualenv
   pipenv shell # activate this project's virtualenv
 #+end_src
