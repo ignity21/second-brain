@@ -1,6 +1,9 @@
 [{:block/name "2022-06-26",
   :block/created-at 1656236647780,
   :block/updated-at 1656250146086}
+ {:block/name "2022-06-28",
+  :block/created-at 1656419647154,
+  :block/updated-at 1656419647154}
  {:block/name "a",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
@@ -34,15 +37,27 @@
  {:block/name "later",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
+ {:block/name "linux",
+  :block/created-at 1656419647197,
+  :block/updated-at 1656419647197}
  {:block/name "machine learning",
   :block/created-at 1656252381663,
   :block/updated-at 1656252630263}
  {:block/name "now",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
+ {:block/name "package manager",
+  :block/created-at 1656419647211,
+  :block/updated-at 1656419647211}
+ {:block/name "python",
+  :block/created-at 1656419647247,
+  :block/updated-at 1656419647247}
  {:block/name "reinforcement learning",
   :block/created-at 1656252670529,
   :block/updated-at 1656252670529}
+ {:block/name "shell startup files",
+  :block/created-at 1656419647330,
+  :block/updated-at 1656419808282}
  {:block/name "supervised learning",
   :block/created-at 1656252670550,
   :block/updated-at 1656252670550}
@@ -56,5 +71,8 @@
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
  {:block/name "waiting",
-  :block/created-at 1655950355029, 
-  :block/updated-at 1655950355029}]
+  :block/created-at 1655950355029,
+  :block/updated-at 1655950355029}
+ {:block/name "~pipenv~",
+  :block/created-at 1656419647230, 
+  :block/updated-at 1656419647230}]

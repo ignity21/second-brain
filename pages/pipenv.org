@@ -12,6 +12,7 @@
 #+begin_src bash
   cd project-dir
   pipenv install requests
+  pipenv install --dev pyright
   pipenv run python main.py # run a command inside the virtualenv
   pipenv shell # activate this project's virtualenv
 #+end_src
