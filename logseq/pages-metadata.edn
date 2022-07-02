@@ -4,12 +4,18 @@
  {:block/name "2022-06-28",
   :block/created-at 1656419647154,
   :block/updated-at 1656419647154}
+ {:block/name "2022-07-02",
+  :block/created-at 1656774920501,
+  :block/updated-at 1656774920501}
  {:block/name "a",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
  {:block/name "abc",
   :block/created-at 1656252665429,
   :block/updated-at 1656252665429}
+ {:block/name "ansible",
+  :block/created-at 1656774920552,
+  :block/updated-at 1656774920552}
  {:block/name "b",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
@@ -22,6 +28,9 @@
  {:block/name "contents",
   :block/created-at 1656252684330,
   :block/updated-at 1656252684330}
+ {:block/name "deployment",
+  :block/created-at 1656774920575,
+  :block/updated-at 1656774920575}
  {:block/name "doing",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
@@ -49,6 +58,9 @@
  {:block/name "package manager",
   :block/created-at 1656419647211,
   :block/updated-at 1656419647211}
+ {:block/name "poetry",
+  :block/created-at 1656430048832,
+  :block/updated-at 1656430048832}
  {:block/name "python",
   :block/created-at 1656419647247,
   :block/updated-at 1656419647247}
@@ -74,5 +86,11 @@
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
  {:block/name "~pipenv~",
-  :block/created-at 1656419647230, 
-  :block/updated-at 1656419647230}]
+  :block/created-at 1656419647230,
+  :block/updated-at 1656419647230}
+ {:block/name "~poetry~",
+  :block/created-at 1656430156599,
+  :block/updated-at 1656430156599}
+ {:block/name "~pyenv~",
+  :block/created-at 1656430048857, 
+  :block/updated-at 1656430048857}]

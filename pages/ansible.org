@@ -1,0 +1,34 @@
+:PROPERTIES:
+:ID:       72552a04-3d7e-4b6f-bb3c-d74db95b1cf1
+:END:
+#+TITLE: Ansible
+
+* tags :: [[id:cfadb629-3176-48c2-a4b6-d96f14d7eaf9][Linux]], [[id:22b1058b-649a-4824-9ca5-14ad3f9e6798][Deployment]]
+
+* Installation
+#+begin_src bash
+  pip install --user ansible
+  # Generating a sample ansible.cfg file
+  ansible-config init --disabled -t all > ansible.cfg
+  sudo chmod 644 ansible.cfg
+#+end_src
+
+* Usage
+** Inventory
+#+begin_src yaml
+  group1:
+    hosts: # keyword
+      host_local: # alias
+        ansible_host: localhost
+        ansible_connection: local
+        proxy: test.sock5 # host variable
+      host_remote:
+        ansible_host: foo.remote
+        ansible_connection: ssh
+        ansible_user: testuser
+    vars: # group vars
+      ntp_server: ntp.example.com
+  group_all:
+    children:
+      group1:
+#+end_src
