@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       e197c941-ab2e-4504-9f82-9c24dc7d0b16
+:END:
+#+TITLE: C++ Compilation
+
+* tags :: [[id:d5ce7fb0-013b-41c4-accd-b60cad77974f][C++]]
+* Compilation Process
+#+caption: C++ Compilation Process
+[[file:../assets/cpp/c-compilation-process.svg]]
