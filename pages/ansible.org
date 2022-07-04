@@ -32,3 +32,21 @@
     children:
       group1:
 #+end_src
+
+** Ad hoc Commands
+#+begin_src bash
+  ansible group1 -a "pwd"
+  ansible group1 -a "/sbin/reboot" -f 5 -u user2
+
+  # files
+  ansible group1 -m ansible.builtin.copy -a "src=/etc/hosts dest=/tmp/hosts"
+  ansible webservers -m ansible.builtin.file -a "dest=/srv/foo/b.txt mode=600 owner=mdehaan group=mdehaan"
+
+  # package manager
+  # ansible.builtin.yum, ansible.builtin.apt
+  # sudo command options: --become --ask-become-pass
+  ansible sandboxes -m ansible.builtin.apt -a "name=build-essential" --become --ask-become-pass
+
+  # services
+  ansible webservers -m ansible.builtin.service -a "name=httpd state=started"
+#+end_src

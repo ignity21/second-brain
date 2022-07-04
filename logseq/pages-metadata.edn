@@ -1,4 +1,10 @@
-[{:block/name "2022-06-26",
+[{:block/name "../resources/cpp/c-compilation-process.svg",
+  :block/created-at 1656810065937,
+  :block/updated-at 1656810065937}
+ {:block/name "../resources/cpp/c-compilation-process.svg]]",
+  :block/created-at 1656810288190,
+  :block/updated-at 1656810288190}
+ {:block/name "2022-06-26",
   :block/created-at 1656236647780,
   :block/updated-at 1656250146086}
  {:block/name "2022-06-28",
@@ -7,6 +13,9 @@
  {:block/name "2022-07-02",
   :block/created-at 1656774920501,
   :block/updated-at 1656774920501}
+ {:block/name "2022-07-03",
+  :block/created-at 1656811478697,
+  :block/updated-at 1656811478697}
  {:block/name "a",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
@@ -22,6 +31,12 @@
  {:block/name "c",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
+ {:block/name "c++",
+  :block/created-at 1656809848893,
+  :block/updated-at 1656809848893}
+ {:block/name "c++ compilation",
+  :block/created-at 1656809833673,
+  :block/updated-at 1656810358635}
  {:block/name "card",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
@@ -40,6 +55,15 @@
  {:block/name "favorites",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
+ {:block/name "file:../assets/cpp/c-compilation-process.svg",
+  :block/created-at 1656810405504,
+  :block/updated-at 1656810405504}
+ {:block/name "file:../resources/cpp/c-compilation-process.svg",
+  :block/created-at 1656809933396,
+  :block/updated-at 1656809933396}
+ {:block/name "file:image_path",
+  :block/created-at 1656809881556,
+  :block/updated-at 1656809881556}
  {:block/name "in-progress",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
