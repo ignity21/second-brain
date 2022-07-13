@@ -6,4 +6,4 @@
 * tags :: [[id:d5ce7fb0-013b-41c4-accd-b60cad77974f][C++]]
 * Compilation Process
 #+caption: C++ Compilation Process
-[[file:../assets/cpp/c-compilation-process.svg]]
+[[../assets/cpp/c-compilation-process.svg]]

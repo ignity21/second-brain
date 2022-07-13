@@ -1,27 +1,15 @@
-[{:block/name "../resources/cpp/c-compilation-process.svg",
-  :block/created-at 1656810065937,
-  :block/updated-at 1656810065937}
- {:block/name "../resources/cpp/c-compilation-process.svg]]",
-  :block/created-at 1656810288190,
-  :block/updated-at 1656810288190}
- {:block/name "2022-06-26",
+[{:block/name "2022-06-26",
   :block/created-at 1656236647780,
   :block/updated-at 1656250146086}
- {:block/name "2022-06-28",
-  :block/created-at 1656419647154,
-  :block/updated-at 1656419647154}
- {:block/name "2022-07-02",
-  :block/created-at 1656774920501,
-  :block/updated-at 1656774920501}
- {:block/name "2022-07-03",
-  :block/created-at 1656811478697,
-  :block/updated-at 1656811478697}
+ {:block/name "2022-07-13",
+  :block/created-at 1657692808508,
+  :block/updated-at 1657692808508}
  {:block/name "a",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
  {:block/name "abc",
   :block/created-at 1656252665429,
-  :block/updated-at 1656252665429}
+  :block/updated-at 1657692879569}
  {:block/name "ansible",
   :block/created-at 1656774920552,
   :block/updated-at 1656774920552}
@@ -36,7 +24,7 @@
   :block/updated-at 1656809848893}
  {:block/name "c++ compilation",
   :block/created-at 1656809833673,
-  :block/updated-at 1656810358635}
+  :block/updated-at 1657694934034}
  {:block/name "card",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
@@ -55,15 +43,9 @@
  {:block/name "favorites",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
- {:block/name "file:../assets/cpp/c-compilation-process.svg",
-  :block/created-at 1656810405504,
-  :block/updated-at 1656810405504}
- {:block/name "file:../resources/cpp/c-compilation-process.svg",
-  :block/created-at 1656809933396,
-  :block/updated-at 1656809933396}
- {:block/name "file:image_path",
-  :block/created-at 1656809881556,
-  :block/updated-at 1656809881556}
+ {:block/name "financial terminology",
+  :block/created-at 1657608669364,
+  :block/updated-at 1657608669364}
  {:block/name "in-progress",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
@@ -82,9 +64,6 @@
  {:block/name "package manager",
   :block/created-at 1656419647211,
   :block/updated-at 1656419647211}
- {:block/name "poetry",
-  :block/created-at 1656430048832,
-  :block/updated-at 1656430048832}
  {:block/name "python",
   :block/created-at 1656419647247,
   :block/updated-at 1656419647247}
@@ -95,8 +74,8 @@
   :block/created-at 1656419647330,
   :block/updated-at 1656419808282}
  {:block/name "supervised learning",
-  :block/created-at 1656252670550,
-  :block/updated-at 1656252670550}
+  :block/created-at 1657608874456,
+  :block/updated-at 1657608874456}
  {:block/name "todo",
   :block/created-at 1656252086751,
   :block/updated-at 1656252086751}
