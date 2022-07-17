@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       23a06886-3f73-4ad5-bf5f-a06cec8380a7
+:END:
+#+TITLE: System Summary Tools
+
+* ~vmstat~
+查看系统整体指标
+#+begin_src bash
+  # 每隔5秒输出1组数据 --unit=M 可用于对齐输出
+  vmstat --unit=M 5
+#+end_src
+- cs（context switch）是每秒上下文切换的次数
+- in（interrupt）则是每秒中断的次数
+- r（Running or Runnable）是就绪队列的长度，也就是正在运行和等待 CPU 的进程数
+- b（Blocked）则是处于不可中断睡眠状态的进程数

@@ -1,0 +1,29 @@
+:PROPERTIES:
+:ID:       89e6ed74-8f97-4246-b041-cc738d4e40c0
+:END:
+#+TITLE: File Sharing
+
+- tags :: [[id:14987d03-a0b8-49f5-97ba-d51f37aafd5f][File System]], [[id:646571a4-292f-499c-a7fb-afead1cb33ed][Multiprocessing]], [[id:fb86b71c-891f-4699-9976-8b2cdc76b565][File Descriptor]]
+
+Sharing of open files among different processes.
+
+* Three Data Structures
+- The per-process file descriptor table
+  - file descriptor flags: there is just one such flag, the *close-on-exec* flag
+  - a reference to the open file description
+- The system-wide table of open file descriptions
+  - the current file offset
+  - status flags specified when opening the file
+  - the file access mode (read-only, read-write, etc.)
+  - setting relating to signal-driven I/O
+  - a reference to the i-node object for this file
+- The file system i-node table
+  - file type (regular file, socket, or FIFO) and permissions
+  - a pointer to a list of locks held on this file
+  - properties of the file, such as size, timestamps etc.
+
+[[../assets/Linux/FileSharing_1.png]]
+- Open file description 23 可能通过系统调用 ~dup()~, ~fcntl()~ 形成的
+- Open file description 73 可能通过 ~fork()~ 造成的，或者通过 Unix Domain socket 将文件描述符从一个进程传递给另一个进程
+- i-node 1976 通过两个进程分别指向两个 Open file description 再指向到同一个 i-node
+  - 每个进程各自对这个文件发起了 ~open()~ 调用

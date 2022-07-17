@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       ed1a8a51-ec7f-42fb-9ee5-606f855ff529
+:END:
+#+TITLE: Linux Error Handling
+
+- tags :: [[id:87236eae-a3ef-4227-a905-b0c2a7c77a20][Linux]]
+
+#+begin_src cpp
+  extern in errno; // historical definition
+  extern int *__errno_location(void); // supports multithreaded access to errno
+
+  #include <string.h>
+  char *strerror(int errnum); // C statndard to help with printing error messages
+
+  #include <stdio.h>
+  void perror(const char *msg); // print to stderr based on the value of errno
+  // Output -> "{msg}: {sys error msg}"
+#+end_src
+* Fatal Errors
+  - *fatal* error has no recovery action.
+  - The best we can do is print an error message on the user's
+    screen or to a log file, and then exit.
+* Nonfatal Errors
+  - Resource-related: EAGAUN, ENFILE, ENOBUFS, ENOLCK, ENOSPC, EWOULDBLOCK
+  - The typical recovery action for a resource-related nonfatal error is to delay and retry later.

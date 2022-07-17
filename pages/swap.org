@@ -1,0 +1,51 @@
+:PROPERTIES:
+:ID:       fbf5ab03-e642-4aab-97db-37c8a2b53f58
+:END:
+#+TITLE: Swap
+
+- tags :: [[id:25e1e331-29f7-42fd-908d-48cf563db181][Garbage Collection]],  [[id:a4d6ea49-ad7b-48f8-8f5d-f5510e7ef392][Out of Memory]], [[id:3c6d61f8-9ddf-429f-80d1-db89a0fd857c][Memory Measure]], [[id:33973869-8b9b-4458-8507-be5b14ebd339][Memory]]
+
+
+* Terms
+- 换入 :: 在进程再次访问这些内存的时候，把它们从磁盘读到内存中来。
+- 换出 :: 把进程暂时不用的内存数据存储到磁盘中，并释放这些数据占用的内存。
+
+* swappiness
+- 通过 [[id:c6678eb9-f47b-4db1-b9b8-1c3c363229b0][=/proc/sys/vm/swappiness=]] 选项来调整 Swap 的 *积极程度*
+
+* 创建Swap文件
+  #+begin_src bash
+    fallocate -l 4G /mnt/swapfile
+    chmod 600 /mnt/swapfile
+    mkswap /mnt/swapfile
+    swapon /mnt/swapfile
+  #+end_src
+
+* Swap 使用情况监控
+[[id:a4ca7e8c-82e2-42c5-b20e-dc3ab62bd42f][~sar~]]: ~sar -r -S 1~
+- =kbcommit=: 表示当前系统负载需要的内存。它实际上是为了保证系统内存不溢出，对需要内存的估计值。
+- =%commit=: 是 =kbcommit= 相对总内存的百分比。
+
+* 查看 Swap 换出影响的应用程序
+- =/proc/[pid]/status=
+#+begin_src bash
+  # 按VmSwap使用量对进程排序，输出进程名称、进程ID以及SWAP用量
+  for file in /proc/*/status ; do awk '/VmSwap|Name|^Pid/{printf $2 " " $3}END{ print ""}' $file; done | sort -k 3 -n -r | head
+  # Output:
+  # dockerd 2226 10728 kB
+  # docker-containe 2251 8516 kB
+  # snapd 936 4020 kB
+  # networkd-dispat 911 836 kB
+  # polkitd 1004 44 kB
+
+  # 解读：使用 Swap 比较多的是 dockerd 和 docker-containe 进程
+#+end_src
+
+* 优化建议
+降低 Swap 的使用，可以提高系统的整体性能。
+- 禁止 Swap
+- 如果实在需要用到 Swap，可以尝试降低 swappiness 的值，减少内存回收时 Swap 的使用倾向。
+- 响应延迟敏感的应用，如果它们可能在开启 Swap 的服务器中运行，可以使用库函数 ~mlock()~ 或者 ~mlockall()~ 锁定内存，阻止它们的内存换出。
+
+* 计算机休眠
+休眠时把系统的内存存入 *磁盘* ，等到再次开机时，只要从磁盘中加载内存就可以。

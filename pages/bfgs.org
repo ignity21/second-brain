@@ -1,0 +1,4 @@
+:PROPERTIES:
+:ID:       365e1146-5084-4ba1-afdc-f358e8ba6661
+:END:
+#+TITLE: BFGS

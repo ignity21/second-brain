@@ -1,0 +1,4 @@
+:PROPERTIES:
+:ID:       2233d2b3-9810-4f8f-b92c-dcb4eec93561
+:END:
+#+TITLE: Frontend

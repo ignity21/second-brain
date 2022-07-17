@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       6609415e-540b-4ea1-badc-46ea07ff0107
+:END:
+#+TITLE: Sorting Algorithm
+
+- tags :: [[id:43e3d72c-1b4a-4ce0-a844-25348fe594ce][Algorithm]], [[id:ce4217dc-161b-45ab-b615-2d52f2649200][Bucket Sort]], [[id:8fe64df9-3a1f-40d8-992b-07bfa58a6542][Counting Sort]], [[id:14c3c4bd-9c18-459f-8753-0926169b0190][Radix Sort]], [[id:7b5ae466-c2aa-47b1-8ea1-fd7a01997bb8][Quick Sort]]
+
+* 总结表
+| 算法      | 时间                 | 稳定？ | 原地？ |
+|-----------+----------------------+--------+--------|
+| Bubble    | $O(n^2)$             | 是     | 是     |
+| Insertion | $O(n^2)$             | 是     | 是     |
+| Selection | $O(n^2)$             | 否     | 是     |
+| Quick     | $O(n\log(n))$        | 否     | 是     |
+| Merge     | $O(n\log(n))$        | 是     | 否     |
+| Bucket    | $O(n)$               | 是     | 否     |
+| Counting  | $O(n+k)$ k为数据范围 | 是     | 是     |
+| Radix     | $O(dn)$ d为维度      | 是     | 是     |
+
+
+* 冒泡排序 (Bubble Sort)
+- 优化：一次冒泡过程没有元素交换则已排序完毕
+
+* 插入排序 (Insertion Sort)
+- 排序已经排好序的集合，复杂度 $O(n)$
+
+* 选择排序 (Selection Sort)
+与插入排序类似，区别在于从未排序区间找到最小元素放到已排序区间的末端
+
+* 其他
+- 对多个已排序好的大文件合并（内存限制）：使用最小堆实现，取出的记录从该条记录所属的文件中补进新记录。

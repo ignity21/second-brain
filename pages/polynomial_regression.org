@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       30ed8e77-e922-4d48-b07b-a447ef29dba4
+:END:
+#+TITLE: Polynomial Regression
+
+- tags :: [[id:4d9aa428-be23-4297-b24f-6f5d05f565f4][Regression Problem]], [[id:46646008-096b-4086-beab-62c2dd5f5825][Linear Regression]]
+
+
+* Hypothesis
+A hypothesis function could be
+- Quadratic: $\theta_0+\theta_1 x_n + \theta_2 x_n^2$
+- Cubic: $\theta_0+\theta_1 x_n + \theta_2 x_n^2 + \theta_3 x_n^3$
+- Square Root: $\theta_0+\theta_1 x_n + \theta_2 \sqrt{x_n}$
+
+** Tricks
+- new features
+  - $x_1=x_n$
+  - $x_2=x_n^2$
+  - $x_3=x_n^3$

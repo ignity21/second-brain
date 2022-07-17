@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       41fd04ea-7b92-410e-b351-3b498f084bc7
+:END:
+#+TITLE: Data Model
+
+- tags :: [[id:4b3034da-6ea4-4e87-bd3e-49759dac3843][Relational Model]], [[id:2e0f2000-06f6-453a-85fe-5cfbc71cf4e0][Document Model]], [[id:289638d6-401a-4207-80ae-16943313e87d][Graph-Like Data Model]], [[id:4529f903-e219-4978-89e6-281a93fdf3f0][Other Data Models]], [[id:9dcfe726-0882-4448-a334-545bba4c5746][Query Language]]

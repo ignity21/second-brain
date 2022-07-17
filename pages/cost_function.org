@@ -1,0 +1,4 @@
+:PROPERTIES:
+:ID:       f05e4c45-31d8-47d0-bac8-183f1bc7447b
+:END:
+#+TITLE: Cost Function

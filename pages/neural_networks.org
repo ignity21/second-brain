@@ -1,0 +1,43 @@
+:PROPERTIES:
+:ID:       024e4a3a-3268-45c8-90f6-24674638af0d
+:END:
+#+TITLE: Neural Networks
+
+- tags :: [[id:e0e88d4d-69d2-4e20-be4c-5aa8b849e968][Classification Problem]]
+
+
+used for Non-linear Hypotheses
+
+* Activation Units
+- $\frac{1}{1+e^{\theta^Tx}}$ -- sigmoid logistic activation function
+- $a_i^j$: "activation" of unit /i/ in layer /j/
+
+* Parameters
+- $\mathbf{\theta^j}$: matrix of weights controlling function mapping from layer /j/ to layer /j+1/
+
+* An 3-layer Example
+$$[x_0 x_1 x_2 x_3]\Longrightarrow[a_1^2 a_2^2 a_3^2]\Longrightarrow h_\theta(\vec{x})$$
+
+
+$$a_1^2=g(\theta_{10}^1 x_0+\theta_{11}^1 x_1+\theta_{12}^1 x_2+\theta_{13}^1 x_3)$$
+
+$$a_2^2=g(\theta_{20}^1 x_0+\theta_{21}^1 x_1+\theta_{22}^1 x_2+\theta_{23}^1 x_3)$$
+
+$$a_3^2=g(\theta_{30}^1 x_0+\theta_{31}^1 x_1+\theta_{32}^1 x_2+\theta_{33}^1 x_3)$$
+
+$$h_\theta(\vec{x})=g(\theta_{10}^2 a_0^2 + \theta_{11}^2 a_1^2 + \theta_{12}^2 a_2^2 + \theta_{13}^2 a_3^2)$$
+
+- $x_0$ and $a_0$ are bias variables equal to 1.
+
+* Vectorized Implementation
+$$z_k^2=\theta_{k0}^1 x_0 + \theta_{k1}^1 x_1 + \cdots + \theta_{kn}^1 x_n$$
+
+$$a^j=g(z^j)$$
+
+$$z^{j+1}=\theta^j a^j$$
+
+$$h_\theta(x)=a^{j+1}=g(z^{z+1})$$
+
+
+* Multiclass Classification
+- Multiple output units: One-vs-all. e.g. n output: [$h_\theat(x)_1$, $h_\theat(x)_2$, ..., $h_\theat(x)_n$]

@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       b35f9844-5e5f-426e-a746-a94831b5c886
+:END:
+#+TITLE: Short Period Process
+
+- tags :: [[id:65ffd8bc-fcb7-4875-9b70-69b0f24979cb][Profiling]], [[id:60cfb15c-18c7-479a-b489-b14ce161f4bf][Process]], [[id:43c1d0be-c8a4-448f-a8df-574a93e14ee6][Process State]], [[id:d3bd3cd6-c056-4093-8abd-b682fecafebd][CPU Troubleshooting]]
+
+1. ~top~ 过滤显示Running状态进程 -> "o" -> "S=R"
+2. ~sar -w 1~ 显示每秒新建任务数和上下文切换数 =proc/s   cswch/s=
+3. ~execsnoop~

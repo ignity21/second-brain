@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       a4820e20-9153-4176-a559-ff5436c446b4
+:END:
+#+TITLE: The Hessian
+- tags :: [[id:ffb77b30-9edd-4c1b-af88-0171c342111b][Linear Algebra]], [[id:2c7bd9e0-2600-472c-b61f-a194cb88f769][Multivariate Derivative]], [[id:7e9846a9-16b8-42e3-9b6c-94bd6a2f81d8][Partial Derivative]], [[id:fbe7bc3b-3003-4783-9c5f-03bb6bf9d75c][The Jacobian]]
+
+
+The Jacobian is the first order derivative. (vector)
+
+The Hessian is the second order derivative. (matrix)
+
+* An Example
+$$f(x,y,z)=x^2 yz$$
+
+$$J=\begin{bmatrix}2xyz & x^{2}z & x^{2}y\end{bmatrix}$$
+
+$$H=\begin{bmatrix}2yz & 2xz & 2xy \\
+2xz & 0 & x^2 \\
+2xy & x^2 & 0\end{bmatrix}$$
+
+1. If the $det(H) > 0$, the maximum/minium exists.
+2. If the $H_{11} > 0$, it's a minium value.

@@ -1,0 +1,4 @@
+:PROPERTIES:
+:ID:       e86f5e4d-9634-4b96-8576-1bf9b5af8643
+:END:
+#+TITLE: Multi-Core

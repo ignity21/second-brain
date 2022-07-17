@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       7302cc75-adc6-40dc-940c-9accd4de0738
+:END:
+#+TITLE: Maintainability
+
+- tags :: [[id:90290142-8c00-4e76-b2fd-6bfc17150cf0][Data System]], [[id:50b298d4-52e0-4f74-bf8c-09886bd2ae84][Architecture]], [[id:d78c8783-4063-4d92-8d8c-c23cee74de4b][System Design]]
+
+Over time, many different people will work on the system (engineering and operations,
+both maintaining current behavior and adapting the system to new use cases), and
+they should all be able to work on it productively.
+
+* Operability
+Make it easy for operations teams to keep the system running smoothly.
+- Monitoring the health of the system and quickly restoring service if it goes into a bad state
+- Tracking down the cause of problems
+- Keeping software and platforms up to date, including security patches
+- Establishing good practices and tools for deployment, configuration management, and more
+- Defining processes that make operations predictable and help keep the production environment stable
+- Preserving the organization's knowledge about the system, even as individual people come and go
+
+* Simplicity
+Make it easy for new engineers to understand the system, by removing as much complexity as possible from the system.
+
+* Complexities
+- Explosion of the state space
+- Tight coupling of modules
+- Tangled dependencies
+- Inconsistent naming and terminology
+- etc...
+
+* Evolvability
+Make it easy for engineers to make changes to the system in the future, adapting it for unanticipated use cases as requirements change.

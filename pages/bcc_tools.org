@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       5b542c10-2485-4379-a2c0-5f7fdb1b5dad
+:END:
+#+TITLE: bcc-tools
+
+- tags :: [[id:6635fea0-9e64-432a-8c02-57df8290640f][eBPF]], [[id:65ffd8bc-fcb7-4875-9b70-69b0f24979cb][Profiling]], [[id:b27e906e-c09a-4ff8-800c-5059e64595f0][Performance Tools]], [[id:991853b2-8e30-43ac-a772-77cbde4b659b][Cache Hit Ratio]]
+
+基于 eBPF(extended Berkeley Packet Filters) 机制
+- Install on Arch Linux: ~sudo pacman -S bcc bcc-tools python-bcc~
+
+* Memory Related
+- ~cachestat~: 提供了整个操作系统缓存的读写命中情况
+- ~cachetop~: 提供了每个进程的缓存命中情况(单位是页)
+- ~memleak~: 内存泄漏
+
+** ~memleak~
+- ~memleak -p $(pidof app) -a~
+
+* I/O Related
+- ~biosnoop~
+- ~biotop~
+- ~filetop~: File reads and writes by filename and process. Top for files.
+- ~opensnoop~: Trace open() syscalls.

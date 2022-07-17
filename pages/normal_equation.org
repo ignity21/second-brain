@@ -1,0 +1,30 @@
+:PROPERTIES:
+:ID:       04c99717-5839-4808-ab6b-116a0839b9f6
+:END:
+#+TITLE: Normal Equation
+
+- tags :: [[id:46646008-096b-4086-beab-62c2dd5f5825][Linear Regression]], [[id:f05e4c45-31d8-47d0-bac8-183f1bc7447b][Cost Function]]
+
+Contract to [[id:89f66c7d-3d49-4308-91ae-1bb844fcbbec][Gradient Descent]], normal equation solves for $\theta$ analytically.
+- Formula to calculate $\vec\theta$:
+
+$\vec\theta=(\mathbf{X}^T \mathbf{X})^{-1}\mathbf{X}^T\vec{y}$
+
+$X^T X$ is a $n\times n$ matrix.
+
+* Advantage
+- Non-iterative
+- No choosing alpha
+- No feature scaling
+
+* Disadvantages
+- Slow if the number of features *n* is very large($n>10^4$) due to the computation of $(X^T X)^{-1}$.
+  - Computing $(\mathbf{X}^T\mathbf{X})^{-1}$ is $O(n^3)$
+
+
+* If $X^T X$ is Non-invertible
+- Use pseudo-inverse: ~np.linalg.pinv(a)~
+- Remove redundant features: $x_2 = C x_1$
+- Too many features: m is notably less than n. Solutions:
+  - Delete some features, so that number of features $d\le n$
+  - Use regularization

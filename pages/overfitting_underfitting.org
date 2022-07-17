@@ -1,0 +1,28 @@
+:PROPERTIES:
+:ID:       d6364077-06d1-4de4-9a0e-3c7a7337e8ad
+:END:
+#+TITLE: Overfitting/Underfitting
+
+- tags :: [[id:9d343f34-3ee6-4737-8612-6718f77dba03][Machine Learning]], [[id:eb9214d7-7c4d-4fd2-8836-b0f40f6ca466][ML Algorithms]], [[id:e92991a2-8dd2-4816-82e3-66d09d410a78][Measuring Success]]
+
+
+
+#+caption: The trade-off between overfitting and underfitting
+[[../assets/ML/Overfitting_1.png]]
+
+* Generalization
+A model is able to make accurate predictions on unseen data.
+- It is able to generalize from the training set to the test set.
+
+* Overfitting/Underfitting
+- Choosing too simple a model is called underfitting
+- Overfitting occurs when you fit a model too closely to the particularities of the training set.
+- If dataset is large enough, it becomes harder for a model to overfit, or memorize the data.
+- Too many features will cause overfitting
+
+
+* Reducing Overfitting
+1. Reduce number of features
+   - Manually select which features to keep.
+   - [[id:929621f8-f5c6-4bb1-8ce7-c5c79fcdafa6][Model Selection]] Algorithm
+2. Regularization: Keep all the features, but reduce magnitude/values of parameters $\theta_j$

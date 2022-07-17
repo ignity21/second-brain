@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       c1f37cbc-7715-4e0e-a443-29e7a7ba8afe
+:END:
+#+TITLE: Linux Programming
+
+- tags :: [[id:87236eae-a3ef-4227-a905-b0c2a7c77a20][Linux]]
+
+
+* 库函数
+标准 C 语言函数库 (glibc)
+- 查看 glibc 版本： ~/lib/libc.so.6~
+
+* 错误处理
+通常，函数返回 -1 表示出错，之后再检查错误码
+#+begin_src cpp
+  #include <error.h> // errno
+  #include <fcntl.h> // open()
+  #include <stdio.h> // perror()
+  #include <string.h> //strerror()
+  #include <iostream>
+
+  int main(int argc, char *argv[]) {
+    auto fd = open("/notexisted", O_RDONLY);
+    if (fd == -1) {
+      std::cout << "errno: " << errno << "; errmsg: " << strerror(errno) << "\n";
+      perror("open() failed"); // open() failed: No such file or directory
+      exit(EXIT_FAILURE);
+    }
+    exit(EXIT_SUCCESS);
+  }
+#+end_src

@@ -1,4 +1,6 @@
 :PROPERTIES:
-:ID:       cfadb629-3176-48c2-a4b6-d96f14d7eaf9
+:ID:       87236eae-a3ef-4227-a905-b0c2a7c77a20
 :END:
 #+TITLE: Linux
+
+- tags :: [[id:2c4b9bb4-7806-4d8f-b08e-58001408a8e5][Troubleshooting]], [[id:eee45e41-6b08-46a9-846e-11edb0e99e6c][CPU]], [[id:33973869-8b9b-4458-8507-be5b14ebd339][Memory]], [[id:d5f8c354-df83-45fa-bb36-c8a0b81d0fe9][I/O]], [[id:022fc90e-eac3-48d4-a305-fbf6d88969e4][Network]], [[id:3cee8e70-ad02-48c7-8948-b1d588985442][Shell]], [[id:14987d03-a0b8-49f5-97ba-d51f37aafd5f][File System]], [[id:c1f37cbc-7715-4e0e-a443-29e7a7ba8afe][Linux Programming]], [[id:ed1a8a51-ec7f-42fb-9ee5-606f855ff529][Linux Error Handling]]

@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       64fb06f4-fc2d-4c10-943b-b854c2d4f2ec
+:END:
+#+TITLE: LSM-Trees
+
+- tags :: [[id:14f13f85-3cb8-424f-9d37-4c375b8bc29c][Indexing]], [[id:5cdcdf52-63a9-4f93-86f1-1a4c1f3f9792][Database]]
+
+
+- Index can be sparse: one key for every few kilobytes of segment file is sufficient
+- Read requests nee to scan over several key-value pairs anyway, it is possible to group records
+  into a block and compress it before writing it to disk.
+
+
+* Advantages
+- LSM-trees are typically able to sustain higher write throughput than B-Trees
+- LSM-trees can be compressed better
+
+* Disadvantages
+- The compaction process can interfere with the performance of ongoing reads and writes.
+- Typically, SSTable-based storage engines do not throttle the rate of
+  incoming writes, need explicit monitoring to detect this situation

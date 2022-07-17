@@ -1,0 +1,33 @@
+:PROPERTIES:
+:ID:       b6d81516-bed4-407f-a551-1b33c1753781
+:END:
+#+TITLE: K-Neighbors Regression
+
+- tags :: [[id:ef7033b4-2788-4166-9958-f7b48dfb8098][K-Nearest Neighbors]], [[id:4d9aa428-be23-4297-b24f-6f5d05f565f4][Regression Problem]], [[id:eb9214d7-7c4d-4fd2-8836-b0f40f6ca466][ML Algorithms]]
+
+
+
+- A regression variant of the k-nearest neighbors algorithm.
+- When using multiple nearest neighbors, the prediction is the average, or mean, of the relevant neighbors.
+
+* Code
+  #+begin_src python
+    import mglearn
+    from sklearn.neighbors import KNeighborsRegressor
+
+    # 1 feature, 1 target
+    X, y = mglearn.datasets.make_wave(n_samples=40)
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+
+    reg = KNeighborsRegressor(n_neighbors=3)
+    reg.fit(X_train, y_train)
+
+    print("Training set accuracy: {:.2f}".format(reg.score(X_train, y_train)))
+    print("Test set accuracy: {:.2f}".format(reg.score(X_test, y_test)))
+  #+end_src
+
+* Important Parameters
+See [[id:ef7033b4-2788-4166-9958-f7b48dfb8098][K-Nearest Neighbors]]
+** N-Neighbors Comparison
+[[../assets/ML/KNR_1.png]]

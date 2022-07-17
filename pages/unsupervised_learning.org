@@ -1,4 +1,19 @@
 :PROPERTIES:
-:ID:       adf942f1-8d07-4910-98b2-38d786b6bb7e
+:ID:       9e912db1-5798-4398-84fb-0fb853806217
 :END:
 #+TITLE: Unsupervised Learning
+
+- tags :: [[id:9d343f34-3ee6-4737-8612-6718f77dba03][Machine Learning]]
+
+
+Unsupervised learning allows us to approach problems with little or no idea
+what our results should look like.
+- With unsupervised learning there is *no feedback* based on the prediction results.
+
+* Examples
+- [[id:b19d3b93-0200-4d6b-8c68-10acd92b2fcd][Clustering]]: Take a collection of 1,000,000 different genes, and find a way to
+  automatically group these genes into groups that are somehow similar or related
+  by different variables, such as lifespan, location, roles, and so on.
+- [[id:299fced8-3be5-47ef-96d2-a5fa2fa043a1][Non-Clustering]]: The "Cocktail Party Algorithm", allows you to find structure in a
+  chaotic environment. (i.e. identifying individual voices and music from a mesh of
+  sounds at a cocktail party).

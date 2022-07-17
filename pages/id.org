@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       a33acb11-3e6b-4300-99b4-26e1bcc44e17
+:END:
+#+TITLE: ID
+
+- tags :: [[id:41fd04ea-7b92-410e-b351-3b498f084bc7][Data Model]], [[id:4b3034da-6ea4-4e87-bd3e-49759dac3843][Relational Model]], [[id:2e0f2000-06f6-453a-85fe-5cfbc71cf4e0][Document Model]]
+
+The advantage of using an *ID* is that because it has no meaning to humans, it *never needs to change*.

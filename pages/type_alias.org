@@ -1,0 +1,47 @@
+:PROPERTIES:
+:ID:       aec7fabd-9572-4067-94fb-b48f2d8c57aa
+:END:
+#+TITLE: Type Alias
+
+- tags :: [[id:f670bcb9-d35a-449e-9b40-682471392631][Modern C++]], [[id:788c8684-9602-4ec8-b99a-df91521b9062][C++ Template]], [[id:53f550ed-95bf-42ac-a954-d8a0b7892273][Template Metaprogramming]]
+
+
+#+begin_src cpp
+  typedef std::unique_ptr<std::unordered_map<std::string, int>> UPtrMapSI;
+  using UPtrMapSI = std::unique_ptr<std::unordered_map<std::string, int>>;
+
+  // function pointers
+  typedef void (*FP)(int, const std::string&);
+  using FP = void (*)(int, const std::string&);
+#+end_src
+
+* Templatized Alias Declaration
+  #+begin_src cpp
+    template<typename T>
+    using MyAllocList = std::list<T, MyAlloc<T>>;
+
+    // client code
+    MyAllocList<Widget> lw;
+  #+end_src
+- Alternative: ~typedef~ version
+#+begin_src cpp
+  template<typename T>
+  struct MyAllocList {
+    typedef std::list<T, MyAlloc<T>> type;
+  };
+
+  // client code
+  MyAllocList<Widget>::type lw;
+#+end_src
+- Alias templates avoid the "::type" suffix
+
+* Type Traits Transformations in C11 and C14
+  #+begin_src cpp
+    std::remove_const<T>::type // C++11: const T -> T, historical reason
+    std::remove_const_t<T> // C++14, preferred one.
+
+    // C++14 implementation
+    template <class T>
+    using remove_const_t = typename remove_const<T>::type;
+  #+end_src
+- same for ~remove_reference_t~, ~add_lvalue_reference_t~

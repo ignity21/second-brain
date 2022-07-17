@@ -1,0 +1,4 @@
+:PROPERTIES:
+:ID:       e31f5313-c3aa-4062-af1e-32adbc0f90ba
+:END:
+#+TITLE: ~std::underlying_type~

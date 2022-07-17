@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       d3bd3cd6-c056-4093-8abd-b682fecafebd
+:END:
+#+TITLE: CPU Troubleshooting
+
+- tags :: [[id:2c4b9bb4-7806-4d8f-b08e-58001408a8e5][Troubleshooting]], [[id:b27e906e-c09a-4ff8-800c-5059e64595f0][Performance Tools]], [[id:c1d34b1b-c8ad-4b48-b54a-9dfb6ca8f878][Special Files]]
+
+
+* CPU性能问题排查
+1. CPU使用率
+  - 用户 CPU 使用率：应用程序比较忙
+  - 系统 CPU 使用率：内核比较忙
+  - 等待 I/O 使用率: 系统与硬件设备的I/O交互时间较长
+  - 软中断和硬中断
+2. 平均负载
+3. 进程上下文切换
+  - 无法获取资源而导致的自愿上下文切换
+  - 被系统强制调度导致的非自愿上下文切换
+4. CPU缓存命中率
+
+* 工具 Tips
+** ~top~
+- Filter by field "o/O" -> "COMMAND=emacs"
+
+** ~pstree~
+- ~pstree -aps 3084~: -a 表示输出命令行选项，p表示PID s表示指定进程的父进程

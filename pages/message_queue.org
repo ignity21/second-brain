@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       65c82e61-9de1-4152-82da-a14df396e880
+:END:
+#+TITLE: Message Queue
+
+- tags :: [[id:8f9d6bdc-d40a-4c73-9ce8-69bfcd3baf0f][Kafka]], [[id:4f534a7d-f9c1-4c95-aa2f-42823d6ed9d0][Redis]]

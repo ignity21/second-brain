@@ -1,0 +1,4 @@
+:PROPERTIES:
+:ID:       b2aac42a-051d-4649-9ebe-be1275eab5bf
+:END:
+#+TITLE: Functional Programming

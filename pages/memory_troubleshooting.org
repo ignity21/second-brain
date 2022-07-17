@@ -1,0 +1,42 @@
+:PROPERTIES:
+:ID:       73d4c48e-1c1b-4d80-b7ba-116d5dedbf49
+:END:
+#+TITLE: Memory Troubleshooting
+
+- tags :: [[id:2c4b9bb4-7806-4d8f-b08e-58001408a8e5][Troubleshooting]], [[id:3c6d61f8-9ddf-429f-80d1-db89a0fd857c][Memory Measure]], [[id:991853b2-8e30-43ac-a772-77cbde4b659b][Cache Hit Ratio]], [[id:33973869-8b9b-4458-8507-be5b14ebd339][Memory]]
+
+
+* 内存性能问题排查
+1. 查看系统整体内存使用情况 ~free~, ~top~
+2. 跟踪内存使用趋势 ~vmstat~, ~pidstat~
+3. 详细分析
+   - 内存分配分析: [[id:5b542c10-2485-4379-a2c0-5f7fdb1b5dad][~memleak~]], [[id:a1e19193-14f8-4ce9-b161-67f323133064][~strace~]], [[id:40529dbb-e549-4de1-8aee-878bc73445e9][~valgrind~]], ~slabtop~, =/proc/buddyinfo=
+   - Buffer/Cache 使用情况: [[id:5b542c10-2485-4379-a2c0-5f7fdb1b5dad][~cachetop~]], ~slabtop~, [[id:5b542c10-2485-4379-a2c0-5f7fdb1b5dad][~cachestat~]], ~pcstat~
+   - 具体进程的内存使用分析: [[id:a4ca7e8c-82e2-42c5-b20e-dc3ab62bd42f][~pidstat~]], ~pmap~, =/proc/[pid]/status=, =/proc/[pid]/smaps=
+
+* 内存工具总结
+| 指标               | 工具                                 |
+|--------------------+--------------------------------------|
+| System Memory Info | ~free~, =/proc/meminfo=              |
+| VIRT, RES, SHR     | ~top~, ~ps~                          |
+| 进程内存分布       | ~pmap~                               |
+| Swap换出内存       | ~top~, =/proc/[pid]/status=          |
+| 进程缺页异常       | ~ps~, ~top~                          |
+| 系统换页情况       | ~sar~                                |
+| Buffer/Cache       | ~free~, ~vmstat~, ~sar~, ~cachestat~ |
+| 缓存命中率         | ~cachetop~                           |
+| SWAP已用/剩余      | ~free~, ~sar~                        |
+| SWAP换入/换出      | ~vmstat~                             |
+| 内存泄露           | ~memleak~, ~valgrind~                |
+| 指定文件的缓存大小 | ~pcstat~                             |
+
+* 工具 Tips
+** ~slabtop~
+Display kernel *slab* cache information in real time.
+- Data Source: =/proc/slabinfo=
+
+** ~pmap~
+Report memory map of a process or processes.
+
+** ~pcstat~
+用来指定文件的缓存大小

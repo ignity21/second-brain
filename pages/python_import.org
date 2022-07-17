@@ -1,0 +1,45 @@
+:PROPERTIES:
+:ID:       4ecac578-a678-460b-9b25-730bc8c18de6
+:END:
+#+TITLE: Python ~import~
+
+- tags :: [[id:87849bbc-e437-41aa-b44d-db9ffa63e633][Python]], [[id:5dfcf333-8be7-45d1-8ca7-13b4e2335eb1][Python Troubleshooting]]
+
+
+* Finder
+An object that tries to find the loader for a module that is being imported.
+- ~PathFinder~
+  - ~ZipImporter~
+  - ~FileImporter~
+- ~BuiltinImporter~
+- ~FrozenImporter~
+
+* Loader
+An object that loads a module.
+- ~SourceLessFileLoader~
+- ~SourceFileLoader~
+- ~ExtensionFileLoader~
+- ...
+
+* 模块元信息
+- ~module.__dict__~
+  - 例子： ~import math; math.__dict__~
+  - ~__package__~: 所属package
+  - ~__spec__~: ModuleSpec 模块元信息
+  - ~__loader__~: 模块加载器
+
+* Import Steps
+1. ~import m~ （实际执行语句为 ~__import__(m)~ ）
+2. ~_calc__package__~, then ~_resolve_name~ (relative import only)
+4. ~_find_and_load~
+   - ~_find_spec('m', path)~
+   - ~_load_unlocked~: check ~__package__~ in the current module
+5. 加载完成，存入 ~sys.modules~
+[[file:.../resources/Python/PythonImport_1.png]]
+
+** ~__main__~ Module
+解释器会将当前执行脚本设为 ~__main__~ module
+
+
+* More Detail
+[[https://tenthousandmeters.com/blog/python-behind-the-scenes-11-how-the-python-import-system-works/][How the python import system works]]

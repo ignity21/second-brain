@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       5cdcdf52-63a9-4f93-86f1-1a4c1f3f9792
+:END:
+#+TITLE: Database
+
+- tags :: [[id:93bc8c31-ee23-43c7-b4e2-c6938d54e09b][SQL]], [[id:b1b056b2-880a-4bbc-a2f3-de1e0bd52a9f][NoSQL]], [[id:22dbe3a6-5c09-48cc-b1f9-69be4024dc8b][Replication]], [[id:6ea230d9-95a4-416e-92ac-3beaf3e06dc4][Sharding]]
+
+
+- Relational
+- Non-relational
+- Specialized
+  - Blob Storage: *GCS*, *S3*, ...
+  - Time Series: *InfluxDB*, *Graphite*, *Prometheus*, ...
+  - Graph Database: *Neo4j*
+  - Spatial Database: spatial indexes like *quadtrees* to perform spatial queries quickly

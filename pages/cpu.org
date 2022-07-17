@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       eee45e41-6b08-46a9-846e-11edb0e99e6c
+:END:
+#+TITLE: CPU
+
+- tags :: [[id:87236eae-a3ef-4227-a905-b0c2a7c77a20][Linux]], [[id:d3bd3cd6-c056-4093-8abd-b682fecafebd][CPU Troubleshooting]]
+
+* Terms
+
+- *SIMD*: Single instruction, multiple data. Efficient with high IPC. (CPU vectorization instruction)
+- *Hyperthreading* presents a virtual second CPU to the host OS, and clever hardware logic tries
+  to interleave two threads of instructions into the execution units on a single CPU. When successful,
+  gains of up to 30% over a single thread can be achieved.
+- *Pipelining*: With pipelining, the CPU is able to run the current operation while fetching and
+  preparing the next one.

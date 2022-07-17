@@ -1,0 +1,4 @@
+:PROPERTIES:
+:ID:       43e3d72c-1b4a-4ce0-a844-25348fe594ce
+:END:
+#+TITLE: Algorithm

@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       63cdb27d-d881-4ad7-8e41-8b17f93bf62f
+:END:
+#+TITLE: Hash Indexes
+
+- tags :: [[id:14f13f85-3cb8-424f-9d37-4c375b8bc29c][Indexing]], [[id:5cdcdf52-63a9-4f93-86f1-1a4c1f3f9792][Database]]
+
+
+- Appending and segment merging are *sequential* write operations.
+- Concurrency and crash recovery are much simpler if segment files are append-only or immutable.
+- The hash table must fit in memory.
+- Range queries are not efficient. @[[id:bb8db9df-a3cb-485a-b281-08e09d6212e2][B-Trees]]

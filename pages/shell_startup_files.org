@@ -3,7 +3,7 @@
 :END:
 #+TITLE: Shell Startup Files
 
-* tags :: [[id:cfadb629-3176-48c2-a4b6-d96f14d7eaf9][Linux]]
+* tags :: [[id:87236eae-a3ef-4227-a905-b0c2a7c77a20][Linux]]
 
 * System
 - =/etc/profile= :: System-wide environment variables, and startup programs.

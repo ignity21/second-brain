@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       5a859956-25b8-42cb-9faf-5a67e61061b4
+:END:
+#+TITLE: OLS Linear Regression
+
+- tags :: [[id:46646008-096b-4086-beab-62c2dd5f5825][Linear Regression]], [[id:3b3cfd5f-2a7d-4353-a6f3-5bd25519c067][ML Models]], [[id:4d9aa428-be23-4297-b24f-6f5d05f565f4][Regression Problem]]
+
+
+OLS(ordinary least squares) linear regression is the simplest and most classic linear method for regression.
+Linear regression finds the parameters /w/ and /b/ that minimize the *mean squared error* between predictions
+and the true regression targets.
+
+- /w/ called weights or coefficients
+- /b/ called offset or intercept
+
+* Code
+  #+begin_src python
+    import mglearn
+    from sklearn.linear_model import LinearRegression
+    X, y = mglearn.datasets.make_wave(n_samples=60)
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
+
+    lr = LinearRegression().fit(X_train, y_train)
+
+    print("lr.coef_: {}".format(lr.coef_)) # all slopes w
+    print("lr.intercept_: {}".format(lr.intercept_)) # intercept b
+
+    print("Training set score: {:.2f}".format(lr.score(X_train, y_train)))
+    print("Test set score: {:.2f}".format(lr.score(X_test, y_test)))
+  #+end_src

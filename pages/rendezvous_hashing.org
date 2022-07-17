@@ -1,0 +1,60 @@
+:PROPERTIES:
+:ID:       c458a27a-0470-4ae8-bac9-6e5a972c1976
+:END:
+#+TITLE: Rendezvous Hashing
+
+A type of hashing also coined *highest random weight* hashing.
+- Allows for minimal re-distribution of mappings when a server goes down.
+
+* Code Example
+#+begin_src python
+  from typing import List
+
+  Servers = [
+      "Server1",
+      "Server2",
+      "Server3",
+      "Server4",
+      "Server5"
+  ]
+
+  ServersModified = [
+      "Server1",
+      "Server2",
+      "Server3",
+      "Server4",
+      "Server6"
+  ]
+
+  def hash_string(str_value: str) -> int:
+      hash_value = 0
+      for ch in str_value:
+          char_code = ord(ch)
+          hash_value = (hash_value << 5) - hash_value + char_code
+          hash_value |= 0
+      return hash_value
+
+  def compute_score(user: str, server: str) -> int:
+      user_hash = hash_string(user)
+      server_hash = hash_string(server)
+
+      # some sort of evenly distribution calculation
+      return (user_hash * 13 + server_hash * 11) % 67
+
+  def pick_server_rendezvous(user: str, servers: List[str]) -> str:
+      max_score = None
+      max_server = None
+      for server in servers:
+          score = compute_score(user, server)
+          if max_score is None or score > max_score:
+              max_score = score
+              max_server = server
+      return max_server
+
+
+  if __name__ == '__main__':
+      for user in ("Jake", "Mary", "Mike", "Steve", "Luke", "Chris"):
+          server1 = pick_server_rendezvous(user, Servers)
+          server2 = pick_server_rendezvous(user, ServersModified)
+          print(server1, server2)
+#+end_src

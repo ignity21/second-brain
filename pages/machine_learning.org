@@ -1,16 +1,57 @@
 :PROPERTIES:
-:ID:       0f5f364e-c6d8-4d8b-9141-90ae889d2da3
-:ROAM_ALIASES: ML
+:ID:       9d343f34-3ee6-4737-8612-6718f77dba03
 :END:
 #+TITLE: Machine Learning
 
-* iurew
-* eiwurowerwe
-* oiowoww
-* [[id:470662c8-e792-4fc4-904d-e1b24f79b0d3][ABC]]
+- tags :: [[id:3d4eba1c-0c07-42fb-94e6-57fc011cc90e][Data Science]], [[id:eb9214d7-7c4d-4fd2-8836-b0f40f6ca466][ML Algorithms]]
+
+
+* Definition
+A computer program is said to learn from experience /E/ with respect to some class
+of tasks /T/ and performance measure /P/, if its performance at tasks in /T/, as
+measured by /P/, improves with experience /E/.
+
+- E = the experience of playing many games of checkers
+- T = the task of playing checkers.
+- P = the probability that the program will win the next game.
+** Example
+- Task :: Classifying emails as spam or not spam.
+- Experience :: Watching you label emails as span or not spam.
+- Performance Measure :: The number of emails correctly classified as spam/not spam.
+
 * Algorithms
-** [[id:79677d3d-2ae3-45c9-84f1-3c8cfcbc591b][Supervised Learning]]
+** [[id:985a47ab-36b7-458b-b45b-a4abb934e8d9][Supervised Learning]]
   - Rapid Advancements
   - Used most in real-world applications
-** [[id:adf942f1-8d07-4910-98b2-38d786b6bb7e][Unsupervised Learning]]
-** [[id:2f041611-0522-48a2-8f0a-ffa871e377fa][Reinforcement Learning]]
+** [[id:9e912db1-5798-4398-84fb-0fb853806217][Unsupervised Learning]]
+** [[id:dddc3c0d-d7ea-4cd5-8b84-a90c0f1734a0][Reinforcement Learning]]
+** [[id:d98b349c-896a-4c89-923d-0a19e86f38f1][Recommender System]]
+
+* Questions Before Building a ML Solution
+- What question am I trying to answer?
+  - Do I think the data collected can answer that question?
+- What is the best way to phrase my question as a machine learning problem?
+- Have I collected *enough data* to represent the problem I want to solve?
+- What *features* of the data did I extract, and will these enable the right predictions?
+  - [[id:09219934-27c3-4b88-bf2b-4b9db30044f0][Feature Engineering]]
+- How will I *measure success* in my application?
+  - [[id:e92991a2-8dd2-4816-82e3-66d09d410a78][Measuring Success]]
+- How will the machine learning solution interact with other parts of my research or business product?
+
+* Steps
+1. Meet the data (visualization)
+2. Split the data into training and test parts
+3. Build the model (notice [[id:d6364077-06d1-4de4-9a0e-3c7a7337e8ad][Overfitting/Underfitting]] problem)
+4. Evaluate the model
+5. Make predictions
+
+[[../resources/ML/BuildingMLModel.jpeg]]
+
+* Engineering Steps
+1. Problem formulation
+2. Data collection
+3. Data preparation
+4. Model training
+5. Model evaluation
+6. Model deployment
+7. Model monitoring

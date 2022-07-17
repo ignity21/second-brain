@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       c1f24ac3-b39d-4aba-b6b5-2cf03784a53f
+:END:
+#+TITLE: CSS
+
+- tags :: [[id:2233d2b3-9810-4f8f-b92c-dcb4eec93561][Frontend]]
+
+* Stylesheet Link
+#+begin_src html
+  <link rel="stylesheet" herf="style.css">
+#+end_src

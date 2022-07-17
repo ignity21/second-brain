@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       29f6ef00-42af-46d1-8b27-8581fafbd908
+:END:
+#+TITLE: dentry
+
+- tags :: [[id:75673658-2b95-46cd-899a-adeb147629c9][inode]], [[id:14987d03-a0b8-49f5-97ba-d51f37aafd5f][File System]]
+
+记录文件的名字、索引节点(inode)指针以及与其他目录项的关联关系。
+- 目录项是由内核维护的一个 *内存数据结构* ，通常被叫做目录项缓存。

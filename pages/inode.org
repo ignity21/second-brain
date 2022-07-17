@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       75673658-2b95-46cd-899a-adeb147629c9
+:END:
+#+TITLE: inode
+
+- tags :: [[id:14987d03-a0b8-49f5-97ba-d51f37aafd5f][File System]], [[id:29f6ef00-42af-46d1-8b27-8581fafbd908][dentry]]
+
+
+记录文件的元数据，如 inode 编号、文件大小、访问权限、修改日期、实际数据位置等。
+- inode 占用磁盘空间
+- inode 是每个文件的唯一标识
+- inode 会缓存到页缓存 Cache 中

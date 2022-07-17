@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       5642aea5-503e-4d6b-861d-0006a4b4274f
+:END:
+#+TITLE: Multivariate Chain Rule
+
+- tags :: [[id:2c7bd9e0-2600-472c-b61f-a194cb88f769][Multivariate Derivative]], [[id:ffb77b30-9edd-4c1b-af88-0171c342111b][Linear Algebra]], [[id:fbe7bc3b-3003-4783-9c5f-03bb6bf9d75c][The Jacobian]]
+
+
+
+$$\frac{df}{dt}=\frac{\partial f}{\partial \vec{x}}\frac{d\vec{x}}{dt}$$
+
+$$\frac{df}{dt}=\frac{\partial f}{\partial \vec{x}}\frac{\partial \vec{x}}{\partial \vec{u}}\frac{d\vec{u}}{dt}$$

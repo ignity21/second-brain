@@ -1,0 +1,89 @@
+:PROPERTIES:
+:ID:       e1760304-292f-463c-a774-0338f5c7ba4c
+:END:
+#+TITLE: I/O System Calls
+#+OPTIONS: ^:nil
+
+- tags :: [[id:62289ff0-f3b6-402f-b6bc-6fd33cd8ca44][Page Cache]], [[id:d5f8c354-df83-45fa-bb36-c8a0b81d0fe9][I/O]]
+
+* 基本 I/O
+- ~open~: ~fd = open(pathname, oflags, mode)~
+- ~read~: ~numread = read(fd, buffer, count)~
+- ~write~: ~numwrite = write(fd, buffer, count)~
+- ~close~: ~status = close(fd)~
+- ~lseek~: 设置文件偏移量 ~offset = lseek(fd, offset, whence)~
+
+** ~open~, ~openat~, ~creat~
+- ~fd = open(pathname, oflags, mode)~
+- ~fd = openat(fd, pathname, oflags, mode)~: 在指定目录或当前工作目录使用相对路0径打开文件
+- ~fd = creat(path, mode)~: 早期 Linux ~open~ 无法创建新文件时使用
+  - 等价于 ~fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, mode)~0
+- 特殊的 flag:
+  - *O_DIRECT*: 无缓冲输入输出
+  - *O_ASYNC*: 当 I/O 操作可行时，产生信号通知进程
+  - *O_DSYNC*: 提供同步的 I/O 数据完整性
+  - *O_NONBLOCK*: 以非阻塞方式打开
+  - *O_SYNC*: 以同步方式写入文件
+
+** An Example
+#+begin_src cpp
+  #define BUFFSIZE 4096
+  #include <fcntl.h>
+  #include <stdio.h>
+  #include <unistd.h>
+
+  int main(int argc, char *argv[]) {
+    int n = 0;
+    char buf[BUFFSIZE];
+
+    while ((n = read(STDIN_FILENO, buf, BUFFSIZE)) > 0) {
+      if (write(STDOUT_FILENO, buf, n) != n) {
+        perror("write error");
+      }
+    }
+    if (n < 0) {
+      perror("read error");
+    }
+    return 0;
+  }
+#+end_src
+
+* 高级 I/O
+** 原子操作
+- *O_APPEND* 打开的文件，每次写都会执行原子操作 1. seek to EOF 2. write
+- ~pread~, ~pwrite~ 同理，都是先 seek 后 read/write，都是一次系统调用，保证是原子操作。
+- *O_CREAT | O_EXCL*: 以独占方式创建一个文件
+  - *O_CREAT*: 文件不存在则创建
+  - *O_EXCL*: 如文件已存在， ~open()~ 会返回错误。使得“测试和创建”两步骤成为一个原子操作
+
+* 其他 I/O 调用
+** ~ioctl()~
+对于非标准 I/O 模型的设备和文件操作， ~ioctl~ 是系统提供的万能接口。
+
+** ~sync~, ~fsync~, and ~fdatasync~
+- ~void sync(void)~: simply queues all the modified block buffers for writing and returns.
+- ~int fsync(int fd)~: waits for the disk writes to complete before returning
+  - is used when an application needs to be sure that the modified blocks have been written to the disk.
+- ~int fdatasync(int fd)~: is similar to ~fsync~, but it doesn't affect the file's attributes.
+
+** ~fcntl~
+Features
+1. Duplicate an existing descriptor (cmd =F_DUPFD= or =F_DUPFD_CLOEXEC=)
+2. Get/set file descriptor flags (cmd =F_GETFD= or =F_SETFD=)
+3. Get/set file status flags (cmd =F_GETEL= or =F_SETFL=)
+4. Get/set asynchronous I/O ownership (cmd =F_GETOWN= or =F_SETOWN=)
+5. Get/set record locks (cmd =F_GETLK=, =F_SETLK=, or ~F_SETLKW~)
+*** 适用场景
+常用用途：修改 *file status flags*
+- 文件不是由调用程序打开的，比如标准输入输出
+- 文件描述符的获取是通过 ~open()~ 之外的系统调用，比如 ~pipe()~, ~socket()~ 调用
+#+begin_src c++
+  int flags;
+
+  flags = fcntl(fd, F_GETFL);
+  if (flags == -1)
+    perror("read flags error");
+  flags |= O_APPEND;
+  if (fcntl(fd, F_SETFL, flags) == -1)
+    perror("set flags error");
+#+end_src

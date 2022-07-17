@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       53f550ed-95bf-42ac-a954-d8a0b7892273
+:ROAM_ALIASES: TMP
+:END:
+#+TITLE: Template Metaprogramming
+
+- tags :: [[id:09496819-511f-4c99-aa21-461c7387a30c][Black Magic]], [[id:788c8684-9602-4ec8-b99a-df91521b9062][C++ Template]]

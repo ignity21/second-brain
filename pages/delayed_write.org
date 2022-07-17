@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       b8b9ce75-3fbd-4005-a2f5-89ff6f7b29eb
+:END:
+#+TITLE: Delayed Write
+
+- tags :: [[id:62289ff0-f3b6-402f-b6bc-6fd33cd8ca44][Page Cache]], [[id:d5f8c354-df83-45fa-bb36-c8a0b81d0fe9][I/O]]

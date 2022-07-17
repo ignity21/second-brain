@@ -1,0 +1,28 @@
+:PROPERTIES:
+:ID:       5b97c50c-88a5-477d-a92c-57b375341fe3
+:END:
+#+TITLE: Race Condition
+
+- tags :: [[id:d8d60df7-d4d4-4e0e-8d82-2521cc9bac97][Multithreading]], [[id:fb9bdd74-144c-4638-a873-b7a7cc29e843][Concurrency]], [[id:b343ed4d-c06d-41d1-838a-a603d8d6f80f][Multi-thread Data Sharing]]
+
+
+Race Condition is where the outcome depends on the relative ordering of execution of operations on two or more threads.
+
+* Solutions to Avoid Race Condition
+
+** Solution 1
+
+Wrap *data structure* up with a protection mechanism to ensure that only the thread performing a modification can see
+the intermediate states. From the point of view of other threads accessing that data structure, such modifications
+either haven't started or have completed.
+
+** Solution 2
+
+*Lock-free programming* - Modify the design of your data structure and its invariants so that modifications are done as a
+series of indivisible changes, each of which preserves the invariants.
+
+** Solutions 3
+
+*STM(software transactional memory)* - Handle the updates to the data structure as a *transaction*. The required series
+of data modifications and reads are stored in a transaction log and then committed in a single step. If a commit can't proceed
+because the data structure has been modified by another thread, the transaction is restarted.

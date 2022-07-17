@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       6ea230d9-95a4-416e-92ac-3beaf3e06dc4
+:END:
+#+TITLE: Sharding
+
+
+Sharding is the act of splitting a database into two or more pieces called shards.
+- also called *data partitioning*
+- to increase the throughput
+
+* Sharding Strategies
+- based on a client's region
+- based on the type of data being stored (e.g: user data in one shard, payments data in another shard)
+- based on the hash of a column (only for structured data)

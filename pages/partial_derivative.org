@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       7e9846a9-16b8-42e3-9b6c-94bd6a2f81d8
+:END:
+#+TITLE: Partial Derivative
+
+- tags :: [[id:2c7bd9e0-2600-472c-b61f-a194cb88f769][Multivariate Derivative]]

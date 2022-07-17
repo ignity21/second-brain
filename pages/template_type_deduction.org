@@ -1,0 +1,109 @@
+:PROPERTIES:
+:ID:       1997e919-796c-4aac-b621-2f692feab38b
+:END:
+#+TITLE: Template Type Deduction
+
+- tags :: [[id:3b2b0e4b-eb38-4d97-ac27-795377571449][Type Deduction]], [[id:788c8684-9602-4ec8-b99a-df91521b9062][C++ Template]]
+
+
+#+begin_src cpp
+  template<typename T>
+  void f(ParamType param); // ParamType often contains adornments, such as const/& ...
+
+  f(expr);
+#+end_src
+
+#+BEGIN_SRC cpp
+  int x = 42;
+  const int cx = x;
+  const int &rx = x;
+#+END_SRC
+
+* Case 1: reference or pointer (obvious and intuitive)
+1. If /expr/'s type is a reference, ignore the reference part.
+2. Then pattern-match /expr/'s type against ParamType to determine T.
+#+BEGIN_SRC cpp
+  template<typename T>
+  void f(T &param);
+
+  f(x); // T -> int, ParamType -> is int &
+  f(cx); // T -> const int, ParamType -> is const int &
+  f(rx); // T -> const int, ParamType -> is const int &, rule 1: rx's reference-ness is ignored
+  f(5); // wrong 不接受右值
+
+
+  template<typename T>
+  void f(const T &param);
+  // ignore const too
+  f(x); // T -> int, ParamType -> const int &
+  f(cx); // T -> int, ParamType -> const int &
+  f(rx); // T -> int, ParamType -> const int &
+#+END_SRC
+
+* Case 2: universal reference
+Declared like rvalue references in a non-template function.
+1. If /expr/ is an lvalue, both T and ParamType are deduced to be lvalue *references*.
+2. If /expr/ is an rvalue, the Case 1 rule applies.
+#+BEGIN_SRC cpp
+  template <typename T>
+  void f(T &&param);
+
+  f(x);  // x is lvalue, T -> int &, ParamType -> int &&& -> int &
+  f(cx); // T -> const int &, ParamType -> const int &&& -> const int &
+  f(rx); // T -> const int &, ParamType -> const int &&& -> const int &
+  f(42); // x is rvalue, T -> int, ParamType -> int &&
+#+END_SRC
+
+* Case 3: neither reference nor pointer (just pass-by-value)
+1. If /expr/'s type is a reference, ignore the reference part.
+2. If, after ignoring /expr/'s reference-ness, /expr/ is const, ignore that, too. If it's volatile, also ignore that.
+#+BEGIN_SRC cpp
+  template<typename T>
+  void f(T param);
+
+  f(x); // T -> int, ParamType -> int
+  f(cx); // T -> int, ParamType -> int
+  f(rx); // T -> int, ParamType -> int
+
+  const char* const ptr = {"42"}; // ptr is const pointer to const char
+  f(ptr); // T -> const char *, ParamType -> const char *; the right const is ignored.
+  // i.e. a modifiable pointer to a const char
+#+END_SRC
+
+* Case 4: array
+decay into pointers when pass-by-value
+#+begin_src cpp
+  const char array[] = {"42"};
+
+  template<typename T>
+  void f(T param);
+  f(array); // T -> const char *, ParamType -> const char *
+
+  template<typename T>
+  void f2(T &param);
+  f2(array); // T -> const char [2], ParamType -> const char (&)[2]
+
+  // practical array template example
+  template<typename T, std::size_t N>
+  constexpr std::size_t arraySize(T (&)[N]) noexcept {
+    return N;
+  }
+  int values[] = {2, 3, 5, 7};
+  int mappedValues[arraySize(values)];
+  std::array<int, arraySize(values)> mappedValues2;
+#+end_src
+
+* Case 5: function
+decay into pointers when pass-by-value
+#+begin_src cpp
+  void someFunc(int, double);
+
+  template<typename T>
+  void f1(T param);
+
+  template<typename T>
+  void f2(T& param);
+
+  f1(someFunc); // T -> void (*)(int, double)
+  f2(someFunc); // T -> void(int, double); ParamType -> void (&)(int, double)
+#+end_src

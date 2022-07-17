@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       7e3199ce-dab4-417f-8ad1-dd7a8a072f42
+:END:
+#+TITLE: ~ab~
+
+- tags :: [[id:509ed1f0-12fd-4ff1-8fe1-686cf1fa94c9][Stress Test]], [[id:10238dbb-e053-409b-9ee2-32df8af4d748][Testing]], [[id:19ed49e3-84c3-4bf2-92e7-899ff1539682][Web Server]]
+
+
+Web服务器性能测试工具，Apache HTTP server benchmarking tool
+
+#+begin_src bash
+  # 并发10个请求测试Web服务器性能，总共测试100个请求
+  ab -c 10 -n 100 http://192.168.0.10:10000/
+#+end_src

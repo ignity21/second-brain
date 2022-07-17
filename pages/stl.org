@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       d0a21243-4315-47c6-b07a-558f557f6837
+:END:
+#+TITLE: STL
+
+- tags :: [[id:06e89bdb-d919-4a77-8649-dc6d525f8bf5][C++]]

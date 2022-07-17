@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       7ee1c0d5-498f-414b-b70a-9eac7552c4c6
+:END:
+#+TITLE: Hard Link
+
+- tags :: [[id:14987d03-a0b8-49f5-97ba-d51f37aafd5f][File System]]
+
+
+硬链接：与普通文件没什么不同，硬链接创建的目录项指向的 inode 一致，说明都是指向同一个文件在硬盘中的区块。内核维护 inode 的引用。

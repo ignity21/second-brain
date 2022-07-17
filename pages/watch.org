@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       143b1a30-4a7e-4d69-b2c0-16d9d8f967e2
+:END:
+#+TITLE: ~watch~
+
+- tags :: [[id:10238dbb-e053-409b-9ee2-32df8af4d748][Testing]], [[id:b27e906e-c09a-4ff8-800c-5059e64595f0][Performance Tools]], [[id:2c4b9bb4-7806-4d8f-b08e-58001408a8e5][Troubleshooting]]
+
+持续执行指定命令输出，并标注出变化
+#+begin_src bash
+  watch -d uptime
+  watch -d cat /proc/interrupts
+  watch -d grep "Rescheduling interrupts" /proc/interrupts
+  watch -d grep -A 15 'Normal' /proc/zoneinfo # grep -A 表示仅显示Normal行以及之后的15行输出
+#+end_src

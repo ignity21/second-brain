@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       a73be17c-37dd-45ed-b199-c71f6d7f4084
+:END:
+#+TITLE: TLS Handshake
+
+- tags :: [[id:022fc90e-eac3-48d4-a305-fbf6d88969e4][Network]]
+
+
+
+1. The client sends a *client hello* (a string of random bytes) to the server.
+2. The server responds with a *server hello* as well as its *SSL Certificate*, which contains its *public key*.
+3. The client verifies that the certificate was issued by a *CA* (certificate authority) and sends
+a *premaster secret* (a string encrypted with the server's public key).
+4. The client and the server use the *client hello*, the *server hello*, and the *premaster secret* to generate the same
+*symmetric-encryption* session keys, to be used to encrypt and decrypt all data communicated during this connection.
+
+* *SSL Certificate*
+A digital certificate granted to a server by a *certificate authority*.
+- contains the server's public key
+- are a crucial defense against *man-in-the-middle attack*

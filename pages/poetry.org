@@ -3,7 +3,7 @@
 :END:
 #+TITLE: ~poetry~
 
-* tags :: [[id:9650c2da-f75d-4d17-b27d-ce614c2530ae][Python]], [[id:8fca7cca-e1d9-42ab-ac5f-acc9ee3f1e8b][Package Manager]], [[id:1af0f1ec-512b-4edc-8978-fc92e5e0d6dd][~pipenv~]]
+* tags :: [[id:87849bbc-e437-41aa-b44d-db9ffa63e633][Python]], [[id:8fca7cca-e1d9-42ab-ac5f-acc9ee3f1e8b][Package Manager]], [[id:1af0f1ec-512b-4edc-8978-fc92e5e0d6dd][~pipenv~]]
 
 * Installation
 - ~pipx install poetry~

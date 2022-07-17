@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       76f308f4-33d9-4ea8-ab76-a3dda102729f
+:END:
+#+TITLE: Python Dictionary
+
+- tags :: [[id:87849bbc-e437-41aa-b44d-db9ffa63e633][Python]], [[id:da9a45cf-d6b1-4dea-8e9e-bf1dd330bb05][Data Structure]]
+
+
+- Optimization: Python first appends the key/value data into a standard array and then stores only the
+index into this array in the hash table. The array also helps keep the insertion order of items.
+- How well distributed the data throughout the hash table is called the *load factor* and is related to
+the *entropy* of the hash function
+- By default, the smallest size of a dictionary or set is 8, and it will resize by 3x if the dictionary
+is more than two-thirds full. (possible sizes: 8->18->39->81->165->...)

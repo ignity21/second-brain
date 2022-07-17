@@ -1,6 +1,0 @@
-:PROPERTIES:
-:id: 85048dee-9ec3-483a-aacf-039a896d01e7
-:END:
-#+title: 2022-06-26
-
-* [[id:0f5f364e-c6d8-4d8b-9141-90ae889d2da3][Machine Learning]]

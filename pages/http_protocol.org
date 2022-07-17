@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       38d49ec9-d641-4cc8-a7dc-0faa1c377cd2
+:END:
+#+TITLE: HTTP Protocol
+
+- tags :: [[id:14741faa-6dce-4975-a065-c11c424b875c][Network Application Layer]]

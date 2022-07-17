@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       fb9bdd74-144c-4638-a873-b7a7cc29e843
+:END:
+#+TITLE: Concurrency
+
+- tags :: [[id:06e89bdb-d919-4a77-8649-dc6d525f8bf5][C++]], [[id:f670bcb9-d35a-449e-9b40-682471392631][Modern C++]], [[id:da56581d-ffc5-412f-8173-ce8d40341b32][~std::thread~]], [[id:fa63f51e-59a5-4a0a-8a51-b04aeae9122e][Thread Management]]
+
+* Purpose
+Two main reasons:
+- Separation of concerns
+  - Based on the conceptual design rather than an attempt to increase throughput
+  - The number of threads is *independent* of the number of CPU cores available.
+- Performance
+  - Task parallelism: Divide a single task into parts and run each in parallel.
+  - Data parallelism: Each thread performs the same operation on different parts of the data.

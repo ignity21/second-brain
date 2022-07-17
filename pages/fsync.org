@@ -1,0 +1,4 @@
+:PROPERTIES:
+:ID:       3540da8c-29cd-43f1-a75e-5df435ac3c2f
+:END:
+#+TITLE: ~fsync()~

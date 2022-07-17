@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       a794b794-b3e7-44e2-8dea-8c74fd1d6e60
+:END:
+#+TITLE: Memory DB
+
+- tags :: [[id:4f534a7d-f9c1-4c95-aa2f-42823d6ed9d0][Redis]]

@@ -1,0 +1,47 @@
+:PROPERTIES:
+:ID:       9647aa74-6595-4453-a019-2ac5353f790e
+:END:
+#+TITLE: Reliability
+- tags :: [[id:90290142-8c00-4e76-b2fd-6bfc17150cf0][Data System]], [[id:50b298d4-52e0-4f74-bf8c-09886bd2ae84][Architecture]], [[id:d78c8783-4063-4d92-8d8c-c23cee74de4b][System Design]]
+
+The system should continue to work correctly (performing the correct function at
+the desired level of performance) even in the face of adversity (hardware or
+software faults, and even human error).
+
+* Fault vs. Failure
+- Fault :: Fault is defined as one component of the system deviating from its spec.
+- Failure :: Failure is when the system as a whole stops providing the required service to the user.
+
+* Hardware Faults
+- Add redundancy to reduce the failure rate.
+- A single-server system requires planned downtime if you need to reboot the machine
+  (to apply operating system security patches, for example).
+- Multi-machine redundancy was only required by a small number of applications for
+  which high availability was absolutely essential.
+- Hardware faults are thought of random and independent from each other.
+- Tolerate the loss of entire machines, by using software *fault-tolerance techniques in preference*.
+
+* Software Errors
+- Systematic errors tend to cause many more system failures than uncorrelated hardware faults.
+- Examples of systematic errors:
+  - A software bug that causes every instance of an application server to crash when given a particular bad input.
+  - A runaway process that uses up some shared resource.
+  - A service that the system depends on that slows down, becomes unresponsive, or starts returning corrupted responses.
+  - Cascading failures, where a small fault in one component triggers a fault in another component, which in turn triggers
+    further faults.
+- Solutions
+  - Carefully thinking about assumptions and interactions in the system
+  - *Thorough Testing*
+  - Process Isolation
+  - Allowing processes to crash and restart
+  - Measuring, monitoring, and analyzing system behavior in production
+
+* Human Errors
+Approaches to deal with unreliable humans
+- Well-designed abstractions, APIs and *admin interfaces*
+- Decouple the places where people make the most mistakes from the places where they can cause failures.
+- Sandbox environments to help explore and experiment safely using real data.
+- Test thoroughly at all levels, from unit tests to whole-system integration tests and manual tests.
+- Allow quick and easy recovery from human errors.
+- Set up detailed and clear monitoring, such as performance metrics and error rates.
+- Implement good management practices and training

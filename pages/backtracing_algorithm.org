@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       9550b852-7e5d-47fe-8d75-2fa347a7f36a
+:END:
+#+TITLE: Backtracing Algorithm
+
+- tags :: [[id:d1ce3f74-a595-4c43-8da1-042f5ff8dc3b][Dynamic Programming]], [[id:43e3d72c-1b4a-4ce0-a844-25348fe594ce][Algorithm]]
+
+
+类似枚举思想，穷举所有路径，例如：深度优先遍历
+
+- 优化重复子问题
+
+缓存子问题结果，避免重复计算
+
+- 经典案例
+
+数独、八皇后、0-1背包问题、图的着色、旅行商问题、全排列，正则表达式等

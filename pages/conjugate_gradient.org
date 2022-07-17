@@ -1,0 +1,4 @@
+:PROPERTIES:
+:ID:       46e75b6c-6a72-4e8d-86e9-07e7ec44ffed
+:END:
+#+TITLE: Conjugate Gradient

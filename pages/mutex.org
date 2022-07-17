@@ -1,0 +1,38 @@
+:PROPERTIES:
+:ID:       4453b464-8e6a-452b-9c2d-9021f7c129d6
+:END:
+#+TITLE: Mutex
+
+- tags :: [[id:5b97c50c-88a5-477d-a92c-57b375341fe3][Race Condition]], [[id:b343ed4d-c06d-41d1-838a-a603d8d6f80f][Multi-thread Data Sharing]], [[id:78432732-16ee-4d1a-badc-ca6518876abf][Deadlock]]
+
+Mark all the pieces of code that access the data structure as *mutually exclusive*, i.e. *mutex*.
+/Lock/ the mutex *associated with* that data, and when you finished accessing the data structure, you /unlock/ the mutex.
+This ensures that all threads see a *self-consistent* view of the shared data.
+
+* Practical Suggestion
+
+- It's common to group the mutex and the protected data together in a class.
+- Protecting data with a mutex requires careful interface design.
+  - Don't pass pointers and references to protected data outside the scope of the lock.
+
+* Cons
+
+- may cause *deadlock*
+- protecting too much or too little data
+
+* An Example
+#+begin_src cpp
+  #include <mutex>
+  #include <list>
+
+  std::list<int> a_list;
+  std::mutex a_mutex;
+
+  void add_to_list(int value) {
+    std::lock_guard<std::mutex> guard{a_mutex};
+    // std::scoped_lock guard{a_mutex}; // C++ 17
+    a_list.push_back(value);
+  }
+#+end_src
+- ~std::scoped_lock guard{a_mutex}~: *template argument deduction*
+- ~std::scoped_lock~: the enhanced version of ~std::lock_guard~

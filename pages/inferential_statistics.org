@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       4d2cf65a-79e1-4a45-a5f4-ae67cb7aa986
+:END:
+#+TITLE: Inferential Statistics
+
+- tags :: [[id:85f5e00c-ffca-4cdb-a5ed-7bd0a9226ab4][Statistics]]
+
+* Steps
+1. Define null(H0) and alternative(H1) hypothesis
+2. Choose the appropriate statistical test
+   - [[id:4914035f-5af6-4364-96b7-a19f26ad0b86][T-test]]:
+   - Z-test: compare two groups/categories of numeric variables with large sample size
+   - ANOVA test: compare the difference between two or more groups/categories of numeric variables
+   - Chi-Squared test: examine the relationship between two categorical variables
+   - Correlation test: examine the relationship between two numeric variables
+3. Calculate the p-value
+4. Determine the statistical significance -- p value is then compared against the significance level.
+
+* Choose the Appropriate Test
+[[../assets/Statistics/InferentialStats_1.png]]
+
+* Implications
+- Clinical research
+- A/B testing
+- Feature selection in ML

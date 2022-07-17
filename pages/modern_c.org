@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       f670bcb9-d35a-449e-9b40-682471392631
+:END:
+#+TITLE: Modern C++
+
+- tags :: [[id:06e89bdb-d919-4a77-8649-dc6d525f8bf5][C++]]

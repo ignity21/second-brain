@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       e532675a-9906-4cfc-91b7-736d0e26c4a9
+:END:
+#+TITLE: Shell Tips
+
+- tags :: [[id:3cee8e70-ad02-48c7-8948-b1d588985442][Shell]]
+
+
+- ~watch [command]~
+- ~while true; do [command]; sleep 5; done~
+- ~[command] 2>&1 > grep keyword~
+- ~echo $?~: 输出上一条命令退出时的返回值
+- ~-~: The special meaning of ~-~ as a command-line argument to refer to the standard input/output

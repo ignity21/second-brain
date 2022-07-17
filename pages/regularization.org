@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       483b6d38-f2bc-4879-84ab-27e0a76561fa
+:END:
+#+TITLE: Regularization
+
+- tags :: [[id:d6364077-06d1-4de4-9a0e-3c7a7337e8ad][Overfitting/Underfitting]]
+
+Regularization means explicitly restricting a model to avoid [[id:d6364077-06d1-4de4-9a0e-3c7a7337e8ad][Overfitting]].
+- with enough training data, regularization becomes less important.

@@ -1,0 +1,33 @@
+:PROPERTIES:
+:ID:       90290142-8c00-4e76-b2fd-6bfc17150cf0
+:END:
+#+TITLE: Data System
+
+- tags :: [[id:f7be9f53-d9bb-4149-839e-7ee44f69f7ce][Big Data]], [[id:5cdcdf52-63a9-4f93-86f1-1a4c1f3f9792][Database]], [[id:50b298d4-52e0-4f74-bf8c-09886bd2ae84][Architecture]], [[id:d78c8783-4063-4d92-8d8c-c23cee74de4b][System Design]],
+  [[id:9647aa74-6595-4453-a019-2ac5353f790e][Reliability]], [[id:52dc54c7-2838-490d-ba2e-21f2d9d58c00][Scalability]], [[id:7302cc75-adc6-40dc-940c-9accd4de0738][Maintainability]], [[id:41fd04ea-7b92-410e-b351-3b498f084bc7][Data Model]],
+  [[id:a794b794-b3e7-44e2-8dea-8c74fd1d6e60][Memory DB]], [[id:65c82e61-9de1-4152-82da-a14df396e880][Message Queue]], [[id:b0008138-5a1c-42f1-a246-71dbd05945f2][Full-Text Search]]
+
+Many applications today are data-intensive, as opposed to compute-intensive.
+
+* Questions
+- How do you ensure that the data remains correct and complete?
+- How do you provide consistently good performance to clients?
+- How do you scale to handle an increase in load?
+- What does a good API for the service look like?
+
+* Factors Influence the Design
+- Skills and experience of the people involved
+- Legacy system dependencies
+- The timescale for delivery
+- *Organization's tolerance of different kinds of risk*
+- Regulatory constraints
+
+* Functionalities
+- Store data (databases)
+- Remember the result of an expensive operation (caches)
+- Allow users to search data by filter (search indexes)
+- Send a message to another process, to be handled asynchronously (stream processing)
+- Periodically crunch a large amount of accumulated data (batch processing)
+
+* A Simple Architecture
+[[../assets/Data/data_system_1.png]]

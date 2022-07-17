@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       2c7bd9e0-2600-472c-b61f-a194cb88f769
+:END:
+#+TITLE: Multivariate Derivative
+
+- tags :: [[id:071004e4-2232-4187-96f7-4f9380275e05][Calculus]]

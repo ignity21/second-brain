@@ -1,0 +1,60 @@
+:PROPERTIES:
+:ID:       a4ca7e8c-82e2-42c5-b20e-dc3ab62bd42f
+:END:
+#+TITLE: ~sysstat~
+
+- tags :: [[id:2c4b9bb4-7806-4d8f-b08e-58001408a8e5][Troubleshooting]], [[id:23a06886-3f73-4ad5-bf5f-a06cec8380a7][System Summary]], [[id:b27e906e-c09a-4ff8-800c-5059e64595f0][Performance Tools]]
+
+
+The sysstat package contains various utilities, common to many commercial Unixes,
+to monitor system performance and usage activity
+
+[[https://github.com/sysstat/sysstat][Github]]
+
+* ~sar~
+Collect, report, or save system activity information.
+
+- ~sar -r~: Report memory statistics.
+  - ~sar -r -S 1~: 显示 [[id:fbf5ab03-e642-4aab-97db-37c8a2b53f58][Swap]] 的使用情况
+- ~sar -n~: Report network statistics.
+  - 可以观察网络收发的 PPS，即每秒收发的网络帧数。
+  - ~sar -n DEV 1~: 表示显示网络收发的报告，间隔1秒输出一组数据
+- ~sar -w~: Report task creation and system switching activity.
+- ~sar -d~: Report activity for each block device.
+
+* ~iostat~
+- ~iostat -d -x 1~ 显示所有磁盘I/O的指标
+
+** 重要指标
+- =%util= 磁盘I/O使用率，使用时间/总时间
+- =r/s=, =w/s= IOPS
+- =rKB/s=, =wkB/s= 吞吐量
+- =r_await=, =w_wawait= 响应时间
+- =rareq-sz=, =wareq-sz= 平均请求大小 (单位: kB)
+
+* ~pidstat~
+** CPU 性能分析
+#+begin_src bash
+  # 间隔5秒后输出一组数据
+  pidstat -u 5 1
+
+  # -w参数表示输出进程切换指标，而-u参数则表示输出CPU使用指标
+  pidstat -w -u 1
+
+  # pidstat 默认输出进程指标，-t 可输出线程指标
+  pidstat -t 8929
+
+  # -d 展示 I/O 统计数据，间隔 1 秒输出 3 组数据
+  pidstat -d 1 3
+#+end_src
+- cswch/s 每秒自愿上下文切换（voluntary context switches）的次数；指进程无法获取所需资源，导致的上下文切换
+- nvcswch/s 每秒非自愿上下文切换（non voluntary context switches）的次数；是指进程由于时间片已到等原因，被系统强制调度，进而发生的上下文切换
+
+** I/O 性能分析
+~pidstat -d 1~
+- =kB_ccwr/s= 每秒取消的写请求数据大小
+- =iodelay= 块 I/O 延迟，包括等待同步块 I/O 和换入块 I/O 结束的时间，单位是时钟周期。
+
+* ~mpstat~
+多核CPU性能分析工具
+- ~mpstat -P ALL 5~: -P ALL 表示监控所有CPU，后面数字5表示间隔5秒后输出一组数据=

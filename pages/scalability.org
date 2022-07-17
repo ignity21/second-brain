@@ -1,0 +1,40 @@
+:PROPERTIES:
+:ID:       52dc54c7-2838-490d-ba2e-21f2d9d58c00
+:END:
+#+TITLE: Scalability
+- tags :: [[id:90290142-8c00-4e76-b2fd-6bfc17150cf0][Data System]], [[id:f7be9f53-d9bb-4149-839e-7ee44f69f7ce][Big Data]], [[id:50b298d4-52e0-4f74-bf8c-09886bd2ae84][Architecture]], [[id:d78c8783-4063-4d92-8d8c-c23cee74de4b][System Design]]
+
+As the system grows (in data volume, traffic volume, or complexity), there
+should be reasonable ways of dealing with that growth.
+
+* Describing Load
+Load parameter Example:
+- Requests per second
+- The ratio of reads to writes in a database
+- The hit rate on a cache
+- The number of simultaneously active users in a chat room
+- Twitter: The distribution of followers per user (maybe weighted by how often those users tweet) is a key load parameter
+  for discussing scalability, since it determines the fan-out load.
+
+* Describing Performance
+** Look at it in two ways
+- When you increase a load parameter and keep the system resources unchanged, how is the performance of your system affected?
+- When you increase a load parameter, how much do you need to increase the resources if you want to keep performance unchanged?
+
+** Performance Examples
+- Throughput :: The number of records we can process per second, or the total time it takes to run a job on a dataset of a certain size. (Important for batch processing system)
+- Response Time :: The time between a client sending a request and receiving a response. (Important for online systems)
+- Latency :: Latency is the duration that a request is waiting to be handled—during which it is latent, awaiting service.
+  - The causes of outliers: context switch, the loss of a network packet, a garbage collection pause, a page fault forcing a read from disk, etc.
+  - Amazon describes response time requirements for internal services in terms of the 99.9th percentile,
+    even though it only affects 1 in 1,000 requests. This is because the customers with the slowest requests
+    are often those who have the most data on their accounts
+  - Reducing response times at very high percentiles is difficult because they are easily affected by random
+    events outside of your control, and the benefits are diminishing.
+
+* Coping with Load
+Recommended Practices
+- keep your database on a single node (scale up) until scaling cost or high-availability
+  requirements forced you to make it distributed.
+- An architecture that scales well for a particular application is built around assumptions
+  of which operations will be common and which will be rare—the load parameters.

@@ -1,0 +1,90 @@
+:PROPERTIES:
+:ID:       46646008-096b-4086-beab-62c2dd5f5825
+:END:
+#+TITLE: Linear Regression
+
+- tags :: [[id:985a47ab-36b7-458b-b45b-a4abb934e8d9][Supervised Learning]], [[id:4d9aa428-be23-4297-b24f-6f5d05f565f4][Regression Problem]], [[id:89f66c7d-3d49-4308-91ae-1bb844fcbbec][Gradient Descent]], [[id:04c99717-5839-4808-ab6b-116a0839b9f6][Normal Equation]]
+
+* Parameters
+$$\theta_0, \theta_1, \theta_2, \cdots, \theta_n$$
+
+* Hypothesis
+$$h_\theta(\vec{x})=\theta_0 x_0 + \theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_n x_n=\theta^T\vec{x}$$
+- let $x_0=1$
+
+* Cost Function
+- Squared Error Function(or "Mean squared error")
+
+$$J(\vec{\theta})=\frac{1}{m}\sum_{i=1}^m Cost(h_\theta(\vec{x_i}), \vec{y_i})$$
+
+-  The mean is halved $\frac{1}{2}$ as a convenience for the computation of the gradient descent
+
+$$Cost(h_\theta(\vec{x_i}), \vec{y_i}))=\frac{1}{2}(h_\theta(\vec{x_i})-\vec{y_i})^2$$
+
+$$J(\vec{\theta})=\frac{1}{2m}\sum_{i=1}^m (h_\theta{(x_i)}-{y_i})^2=\frac{1}{2m}\sum_{i=1}^m(\theta^T\vec{x_i}-\vec{y_i})^2$$
+
+- Vectorized
+
+$$J(\vec{\theta})=\frac{1}{2m}(\mathbf{X}\vec{\theta}-\vec{y})^T(\mathbf{X}\vec{\theta}-\vec{y})$$
+
+Python code:
+#+begin_src python
+  J = (1/2*m) * ((X @ theta.T - y) ** 2).sum()
+#+end_src
+
+- Goal
+
+Minimize $J(\vec{\theta})$
+
+* Gradient Descent Approach
+- /n/ features /m/ samples
+- repeat until convergence
+
+$$\theta_0=\theta_0-\alpha\frac{1}{m}\sum_{i=1}^{m} (\theta^T\vec{x_i}-y_i)x_{i0}$$
+
+$$\theta_1=\theta_1-\alpha\frac{1}{m}\sum_{i=1}^{m} (\theta^T\vec{x_i}-y_i)x_{i1}$$
+
+$$\theta_j=\theta_j-\alpha\frac{1}{m}\sum_{i=1}^{m} (\theta^T\vec{x_i}-y_i)x_{ij}$$
+
+* Normal Equation Approach
+$$\theta=(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\vec{y}$$
+
+* Vectorized Summary
+** Hypothesis
+$$\vec{\theta}^T=\begin{bmatrix}
+\theta_0 & \theta_1& \cdots & \theta_n
+\end{bmatrix}$$
+
+$$\vec{x}=\begin{bmatrix}
+1 \\ x_1 \\ \vdots \\ x_n
+\end{bmatrix}$$
+
+$$h(\vec{x})=\vec{\theta}^T\vec{x}$$
+
+$$h_\theta(\mathbf{X})=\mathbf{X}\vec{\theta}$$
+- $h_\theta(\mathbf{X})$ is a vector of hypotheses
+
+** Cost Function
+$$J(\vec{\theta})=\frac{1}{2m}(\mathbf{X}\vec{\theta}-\vec{y})^T(\mathbf{X}\vec{\theta}-\vec{y})$$
+
+** Gradient Descent
+- repeat until convergence
+$$\vec\theta=\vec\theta-\alpha\frac{1}{m}\mathbf{X}^T(\mathbf{X}\vec{\theta}-\vec{y})$$
+
+* Regularized Linear Regression
+** Cost Function
+$$J(\vec{\theta})=\frac{1}{2m}\sum_{i=1}^m (h_\theta{(x_i)}-{y_i})^2+\lambda\sum_{j=1}^n\theta_j^2$$
+- $\lambda$ is the regularization parameter. It determines how much the costs of our theta parameters are inflated.
+- $\theta_0$ should not be penalized
+
+** Gradient Descent
+$$\theta_0=\theta_0-\alpha\frac{1}{m}\sum_{i=1}^{m} (\theta^T\vec{x_i}-y_i)x_{i0}$$
+
+$$\theta_j=\theta_j-\alpha[\frac{1}{m}\sum_{i=1}^{m} (\theta^T\vec{x_i}-y_i)x_{ij}+\frac{\lambda}{m}\theta_j]$$
+- can also be represented as:
+
+$$\theta_j=\theta_j(1-\alpha\frac{\lambda}{m})-\frac{\alpha}{m}\sum_{i=1}^m(h_\theta(x_i)-y_i)x_{ij}$$
+
+** Normal Equation
+$$\theta=(\mathbf{X}^T\mathbf{X}+\lambda\cdot \mathbf{L})^{-1}\mathbf{X}^T\vec{y}$$
+- $L$ is a matrix with 0 at the top left and 1's down the diagonal, with 0's everywhere else.
