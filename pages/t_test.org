@@ -8,7 +8,7 @@
 
 Compare two groups/categories of numeric variables with small sample size
 
-[[../resources/Statistics/TTest_1.png]]
+[[../assets/Statistics/TTest_1.png]]
 
 * Types
 - One sample t-test :: test the mean of one group against a constant value.

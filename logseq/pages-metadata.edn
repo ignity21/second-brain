@@ -1,90 +1,864 @@
-[{:block/name "2022-06-26",
-  :block/created-at 1656236647780,
-  :block/updated-at 1656250146086}
+[{:block/name "* special cases for ~auto~",
+  :block/created-at 1658059295193,
+  :block/updated-at 1658059295193}
+ {:block/name "* ~auto~ deduces undesired types",
+  :block/created-at 1658059295193,
+  :block/updated-at 1658059295193}
+ {:block/name "+begin_src",
+  :block/created-at 1658059300553,
+  :block/updated-at 1658059300553}
+ {:block/name "+end_src",
+  :block/created-at 1658059300553,
+  :block/updated-at 1658059300553}
+ {:block/name "../resources/ml/buildingmlmodel.jpeg",
+  :block/created-at 1658059147834,
+  :block/updated-at 1658059147834}
+ {:block/name "../resources/ml/gradientdescent_1.png",
+  :block/created-at 1658058338657,
+  :block/updated-at 1658058338657}
  {:block/name "2022-07-17",
   :block/created-at 1658023706711,
   :block/updated-at 1658023706711}
+ {:block/name "5, 2.9, 1, 0.2",
+  :block/created-at 1658059295095,
+  :block/updated-at 1658059295095}
+ {:block/name "=",
+  :block/created-at 1658059304003,
+  :block/updated-at 1658059304003}
+ {:block/name "=/proc",
+  :block/created-at 1658059304004,
+  :block/updated-at 1658059304004}
+ {:block/name "=/proc/sys",
+  :block/created-at 1658059305027,
+  :block/updated-at 1658059305027}
+ {:block/name "=/proc/sys/vm=",
+  :block/created-at 1658059305026,
+  :block/updated-at 1658059305026}
+ {:block/name "=/proc/zoneinfo=",
+  :block/created-at 1658059304003,
+  :block/updated-at 1658059304003}
  {:block/name "a",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
+ {:block/name "algorithm",
+  :block/created-at 1658059295074,
+  :block/updated-at 1658059295074}
+ {:block/name "an ml simple example",
+  :block/created-at 1658059295097,
+  :block/updated-at 1658059295097}
  {:block/name "ansible",
   :block/created-at 1656774920552,
   :block/updated-at 1656774920552}
+ {:block/name "architecture",
+  :block/created-at 1658059294999,
+  :block/updated-at 1658059294999}
+ {:block/name "array",
+  :block/created-at 1658059295113,
+  :block/updated-at 1658059295113}
+ {:block/name "availability",
+  :block/created-at 1658059295158,
+  :block/updated-at 1658059295158}
  {:block/name "b",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
+ {:block/name "b-trees",
+  :block/created-at 1658059295273,
+  :block/updated-at 1658059295273}
+ {:block/name "backtracing algorithm",
+  :block/created-at 1658059295328,
+  :block/updated-at 1658059295328}
+ {:block/name "basic html example",
+  :block/created-at 1658059295255,
+  :block/updated-at 1658059295255}
+ {:block/name "batch processing",
+  :block/created-at 1658059295123,
+  :block/updated-at 1658059295123}
+ {:block/name "bcc-tools",
+  :block/created-at 1658059295146,
+  :block/updated-at 1658059295146}
+ {:block/name "bfgs",
+  :block/created-at 1658059295300,
+  :block/updated-at 1658059295300}
+ {:block/name "big data",
+  :block/created-at 1658059295263,
+  :block/updated-at 1658059295263}
+ {:block/name "binary classification",
+  :block/created-at 1658059295334,
+  :block/updated-at 1658059295334}
+ {:block/name "black magic",
+  :block/created-at 1658059295291,
+  :block/updated-at 1658059295291}
+ {:block/name "block i",
+  :block/created-at 1658059295282,
+  :block/updated-at 1658059295282}
+ {:block/name "block i/o",
+  :block/created-at 1658059295281,
+  :block/updated-at 1658059295281}
+ {:block/name "block layer",
+  :block/created-at 1658059295313,
+  :block/updated-at 1658059295313}
+ {:block/name "bucket sort",
+  :block/created-at 1658059295348,
+  :block/updated-at 1658059295348}
  {:block/name "c",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
  {:block/name "c++",
-  :block/created-at 1656809848893,
-  :block/updated-at 1656809848893}
+  :block/created-at 1658058595433,
+  :block/updated-at 1658058595433}
  {:block/name "c++ compilation",
   :block/created-at 1656809833673,
   :block/updated-at 1657694934034}
+ {:block/name "c++ template",
+  :block/created-at 1658059299977,
+  :block/updated-at 1658059299977}
+ {:block/name "cache hit ratio",
+  :block/created-at 1658058392953,
+  :block/updated-at 1658058392953}
+ {:block/name "calculus",
+  :block/created-at 1658059296487,
+  :block/updated-at 1658059296487}
  {:block/name "card",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
+ {:block/name "child process",
+  :block/created-at 1658059296494,
+  :block/updated-at 1658059296494}
+ {:block/name "classification problem",
+  :block/created-at 1658059296548,
+  :block/updated-at 1658059296548}
+ {:block/name "clustering",
+  :block/created-at 1658059296463,
+  :block/updated-at 1658059296463}
+ {:block/name "concurrency",
+  :block/created-at 1658059296477,
+  :block/updated-at 1658059296477}
+ {:block/name "conjugate gradient",
+  :block/created-at 1658059296501,
+  :block/updated-at 1658059296501}
+ {:block/name "consistent hashing",
+  :block/created-at 1658059296511,
+  :block/updated-at 1658059296511}
  {:block/name "contents",
   :block/created-at 1656252684330,
   :block/updated-at 1656252684330}
+ {:block/name "context switching",
+  :block/created-at 1658059296534,
+  :block/updated-at 1658059296534}
+ {:block/name "cost function",
+  :block/created-at 1658059296555,
+  :block/updated-at 1658059296555}
+ {:block/name "counting sort",
+  :block/created-at 1658058392987,
+  :block/updated-at 1658058392987}
+ {:block/name "cpu",
+  :block/created-at 1658059300103,
+  :block/updated-at 1658059300103}
+ {:block/name "cpu time",
+  :block/created-at 1658059300090,
+  :block/updated-at 1658059300090}
+ {:block/name "cpu troubleshooting",
+  :block/created-at 1658059300058,
+  :block/updated-at 1658059300058}
+ {:block/name "cpu usage",
+  :block/created-at 1658059300080,
+  :block/updated-at 1658059300080}
+ {:block/name "css",
+  :block/created-at 1658059300117,
+  :block/updated-at 1658059300117}
+ {:block/name "css selectors",
+  :block/created-at 1658059300197,
+  :block/updated-at 1658059300197}
+ {:block/name "css units",
+  :block/created-at 1658059300143,
+  :block/updated-at 1658059300143}
+ {:block/name "data model",
+  :block/created-at 1658059300206,
+  :block/updated-at 1658059300206}
+ {:block/name "data science",
+  :block/created-at 1658059300133,
+  :block/updated-at 1658059300133}
+ {:block/name "data structure",
+  :block/created-at 1658059300110,
+  :block/updated-at 1658059300110}
+ {:block/name "data system",
+  :block/created-at 1658058393034,
+  :block/updated-at 1658058393034}
+ {:block/name "database",
+  :block/created-at 1658059300127,
+  :block/updated-at 1658059300127}
+ {:block/name "deadlock",
+  :block/created-at 1658059300212,
+  :block/updated-at 1658059300212}
+ {:block/name "delayed write",
+  :block/created-at 1658059300249,
+  :block/updated-at 1658059300249}
+ {:block/name "dentry",
+  :block/created-at 1658059300242,
+  :block/updated-at 1658059300242}
  {:block/name "deployment",
   :block/created-at 1656774920575,
   :block/updated-at 1656774920575}
+ {:block/name "dirty pages",
+  :block/created-at 1658059300284,
+  :block/updated-at 1658059300284}
+ {:block/name "distributed system",
+  :block/created-at 1658059300340,
+  :block/updated-at 1658059300340}
+ {:block/name "docker",
+  :block/created-at 1658059300371,
+  :block/updated-at 1658059300371}
+ {:block/name "docker troubleshooting",
+  :block/created-at 1658059300385,
+  :block/updated-at 1658059300385}
+ {:block/name "document model",
+  :block/created-at 1658059300357,
+  :block/updated-at 1658059300357}
  {:block/name "doing",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
  {:block/name "done",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
+ {:block/name "dynamic programming",
+  :block/created-at 1658058393101,
+  :block/updated-at 1658058393101}
+ {:block/name "ebpf",
+  :block/created-at 1658059300292,
+  :block/updated-at 1658059300292}
+ {:block/name "elasticsearch",
+  :block/created-at 1658059300364,
+  :block/updated-at 1658059300364}
+ {:block/name "error handling",
+  :block/created-at 1658059300403,
+  :block/updated-at 1658059300403}
+ {:block/name "exception handling",
+  :block/created-at 1658059300391,
+  :block/updated-at 1658059300391}
  {:block/name "favorites",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
+ {:block/name "feature engineering",
+  :block/created-at 1658059300346,
+  :block/updated-at 1658059300346}
+ {:block/name "file descriptor",
+  :block/created-at 1658059300378,
+  :block/updated-at 1658059300378}
+ {:block/name "file sharing",
+  :block/created-at 1658059300509,
+  :block/updated-at 1658059300509}
+ {:block/name "file system",
+  :block/created-at 1658059300444,
+  :block/updated-at 1658059300444}
+ {:block/name "file:.../resources/python/pythonimport_1.png",
+  :block/created-at 1658059306561,
+  :block/updated-at 1658059306561}
  {:block/name "financial terminology",
   :block/created-at 1657608669364,
   :block/updated-at 1657608669364}
+ {:block/name "fork()",
+  :block/created-at 1658059300415,
+  :block/updated-at 1658059300415}
+ {:block/name "frontend",
+  :block/created-at 1658059300494,
+  :block/updated-at 1658059300494}
+ {:block/name "full-text search",
+  :block/created-at 1658059300563,
+  :block/updated-at 1658059300563}
+ {:block/name "functional programming",
+  :block/created-at 1658059300517,
+  :block/updated-at 1658059300517}
+ {:block/name "garbage collection",
+  :block/created-at 1658059300536,
+  :block/updated-at 1658059300536}
+ {:block/name "gradient descent",
+  :block/created-at 1658058393179,
+  :block/updated-at 1658058393179}
+ {:block/name "graph-like data model",
+  :block/created-at 1658059300571,
+  :block/updated-at 1658059300571}
+ {:block/name "greedy algorithm",
+  :block/created-at 1658058393209,
+  :block/updated-at 1658058393209}
+ {:block/name "hard link",
+  :block/created-at 1658059300582,
+  :block/updated-at 1658059300582}
+ {:block/name "hash indexes",
+  :block/created-at 1658058393236,
+  :block/updated-at 1658058393236}
+ {:block/name "hash table",
+  :block/created-at 1658059300587,
+  :block/updated-at 1658059300587}
+ {:block/name "hashing",
+  :block/created-at 1658058393260,
+  :block/updated-at 1658058393260}
+ {:block/name "heap",
+  :block/created-at 1658058393286,
+  :block/updated-at 1658058393286}
+ {:block/name "high performance python",
+  :block/created-at 1658059300592,
+  :block/updated-at 1658059300592}
+ {:block/name "html",
+  :block/created-at 1658059300576,
+  :block/updated-at 1658059300576}
+ {:block/name "html header",
+  :block/created-at 1658059300671,
+  :block/updated-at 1658059300671}
+ {:block/name "html layout",
+  :block/created-at 1658059300642,
+  :block/updated-at 1658059300642}
+ {:block/name "http client",
+  :block/created-at 1658059300689,
+  :block/updated-at 1658059300689}
+ {:block/name "http protocol",
+  :block/created-at 1658059300696,
+  :block/updated-at 1658059300696}
+ {:block/name "i",
+  :block/created-at 1658058338812,
+  :block/updated-at 1658058338812}
+ {:block/name "i/o",
+  :block/created-at 1658058393320,
+  :block/updated-at 1658058393320}
+ {:block/name "i/o measure",
+  :block/created-at 1658059300680,
+  :block/updated-at 1658059300680}
+ {:block/name "i/o optimization",
+  :block/created-at 1658059300663,
+  :block/updated-at 1658059300663}
+ {:block/name "i/o system calls",
+  :block/created-at 1658059300718,
+  :block/updated-at 1658059300718}
+ {:block/name "i/o troubleshooting",
+  :block/created-at 1658058393356,
+  :block/updated-at 1658058393356}
+ {:block/name "id",
+  :block/created-at 1658059300733,
+  :block/updated-at 1658059300733}
  {:block/name "in-progress",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
+ {:block/name "indexing",
+  :block/created-at 1658059301695,
+  :block/updated-at 1658059301695}
+ {:block/name "inferential statistics",
+  :block/created-at 1658059301735,
+  :block/updated-at 1658059301735}
+ {:block/name "inode",
+  :block/created-at 1658059301706,
+  :block/updated-at 1658059301706}
+ {:block/name "interupt",
+  :block/created-at 1658059301762,
+  :block/updated-at 1658059301762}
+ {:block/name "interview expressions",
+  :block/created-at 1658059301746,
+  :block/updated-at 1658059301746}
+ {:block/name "job hunting",
+  :block/created-at 1658059301893,
+  :block/updated-at 1658059301893}
+ {:block/name "k-nearest neighbors",
+  :block/created-at 1658059301784,
+  :block/updated-at 1658059301784}
+ {:block/name "k-neighbors regression",
+  :block/created-at 1658059301883,
+  :block/updated-at 1658059301883}
+ {:block/name "kafka",
+  :block/created-at 1658059301951,
+  :block/updated-at 1658059301951}
+ {:block/name "l-bfgs",
+  :block/created-at 1658059301715,
+  :block/updated-at 1658059301715}
+ {:block/name "lasso linear regression",
+  :block/created-at 1658059301959,
+  :block/updated-at 1658059301959}
  {:block/name "later",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
+ {:block/name "leader election",
+  :block/created-at 1658058393386,
+  :block/updated-at 1658058393386}
+ {:block/name "linear algebra",
+  :block/created-at 1658059301902,
+  :block/updated-at 1658059301902}
+ {:block/name "linear regression",
+  :block/created-at 1658059301928,
+  :block/updated-at 1658059301928}
+ {:block/name "linear sort",
+  :block/created-at 1658058393412,
+  :block/updated-at 1658058393412}
+ {:block/name "linked list",
+  :block/created-at 1658058393437,
+  :block/updated-at 1658058393437}
  {:block/name "linux",
   :block/created-at 1656419647197,
   :block/updated-at 1656419647197}
+ {:block/name "linux error handling",
+  :block/created-at 1658059302343,
+  :block/updated-at 1658059302343}
+ {:block/name "linux programming",
+  :block/created-at 1658059302368,
+  :block/updated-at 1658059302368}
+ {:block/name "load average",
+  :block/created-at 1658059302439,
+  :block/updated-at 1658059302439}
+ {:block/name "load balancing",
+  :block/created-at 1658058393482,
+  :block/updated-at 1658058393482}
+ {:block/name "logistic regression",
+  :block/created-at 1658058393514,
+  :block/updated-at 1658058393514}
+ {:block/name "lsm-trees",
+  :block/created-at 1658059302356,
+  :block/updated-at 1658059302356}
  {:block/name "machine learning",
   :block/created-at 1656252381663,
   :block/updated-at 1656252630263}
+ {:block/name "maintainability",
+  :block/created-at 1658058393588,
+  :block/updated-at 1658058393588}
+ {:block/name "malloc()",
+  :block/created-at 1658059303505,
+  :block/updated-at 1658059303505}
+ {:block/name "mapreduce",
+  :block/created-at 1658059303548,
+  :block/updated-at 1658059303548}
+ {:block/name "match the device size",
+  :block/created-at 1658059303498,
+  :block/updated-at 1658059303498}
+ {:block/name "measuring success",
+  :block/created-at 1658059303395,
+  :block/updated-at 1658059303395}
+ {:block/name "memory",
+  :block/created-at 1658059303516,
+  :block/updated-at 1658059303516}
+ {:block/name "memory allocation",
+  :block/created-at 1658059303535,
+  :block/updated-at 1658059303535}
+ {:block/name "memory db",
+  :block/created-at 1658059303404,
+  :block/updated-at 1658059303404}
+ {:block/name "memory leak",
+  :block/created-at 1658058393629,
+  :block/updated-at 1658058393629}
+ {:block/name "memory management",
+  :block/created-at 1658059303522,
+  :block/updated-at 1658059303522}
+ {:block/name "memory measure",
+  :block/created-at 1658059303618,
+  :block/updated-at 1658059303618}
+ {:block/name "memory troubleshooting",
+  :block/created-at 1658058393659,
+  :block/updated-at 1658058393659}
+ {:block/name "message queue",
+  :block/created-at 1658059303527,
+  :block/updated-at 1658059303527}
+ {:block/name "meta tag",
+  :block/created-at 1658059303602,
+  :block/updated-at 1658059303602}
+ {:block/name "ml algorithms",
+  :block/created-at 1658059303554,
+  :block/updated-at 1658059303554}
+ {:block/name "ml models",
+  :block/created-at 1658059303540,
+  :block/updated-at 1658059303540}
+ {:block/name "model selection",
+  :block/created-at 1658059303758,
+  :block/updated-at 1658059303758}
+ {:block/name "modern c++",
+  :block/created-at 1658059303609,
+  :block/updated-at 1658059303609}
+ {:block/name "mongodb",
+  :block/created-at 1658059303624,
+  :block/updated-at 1658059303624}
+ {:block/name "multi-core",
+  :block/created-at 1658059303636,
+  :block/updated-at 1658059303636}
+ {:block/name "multi-thread data sharing",
+  :block/created-at 1658059303642,
+  :block/updated-at 1658059303642}
+ {:block/name "multiprocessing",
+  :block/created-at 1658059303661,
+  :block/updated-at 1658059303661}
+ {:block/name "multithreading",
+  :block/created-at 1658059303630,
+  :block/updated-at 1658059303630}
+ {:block/name "multivariate chain rule",
+  :block/created-at 1658059303654,
+  :block/updated-at 1658059303654}
+ {:block/name "multivariate derivative",
+  :block/created-at 1658059303682,
+  :block/updated-at 1658059303682}
+ {:block/name "mutex",
+  :block/created-at 1658059303672,
+  :block/updated-at 1658059303672}
+ {:block/name "mysql",
+  :block/created-at 1658059303647,
+  :block/updated-at 1658059303647}
+ {:block/name "network",
+  :block/created-at 1658059303702,
+  :block/updated-at 1658059303702}
+ {:block/name "network application layer",
+  :block/created-at 1658059303782,
+  :block/updated-at 1658059303782}
+ {:block/name "network troubleshooting",
+  :block/created-at 1658059303813,
+  :block/updated-at 1658059303813}
+ {:block/name "neural networks",
+  :block/created-at 1658059303773,
+  :block/updated-at 1658059303773}
+ {:block/name "non-clustering",
+  :block/created-at 1658059303802,
+  :block/updated-at 1658059303802}
+ {:block/name "normal equation",
+  :block/created-at 1658059303793,
+  :block/updated-at 1658059303793}
+ {:block/name "nosql",
+  :block/created-at 1658059303807,
+  :block/updated-at 1658059303807}
  {:block/name "now",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
+ {:block/name "numa",
+  :block/created-at 1658059303840,
+  :block/updated-at 1658059303840}
+ {:block/name "ols linear regression",
+  :block/created-at 1658059303823,
+  :block/updated-at 1658059303823}
+ {:block/name "optimization",
+  :block/created-at 1658059303846,
+  :block/updated-at 1658059303846}
+ {:block/name "other data models",
+  :block/created-at 1658059303831,
+  :block/updated-at 1658059303831}
+ {:block/name "out of memory",
+  :block/created-at 1658059303856,
+  :block/updated-at 1658059303856}
+ {:block/name "overfitting",
+  :block/created-at 1658059303912,
+  :block/updated-at 1658059303912}
+ {:block/name "overfitting/underfitting",
+  :block/created-at 1658059303911,
+  :block/updated-at 1658059303911}
  {:block/name "package manager",
   :block/created-at 1656419647211,
   :block/updated-at 1656419647211}
+ {:block/name "page cache",
+  :block/created-at 1658058393705,
+  :block/updated-at 1658058393705}
+ {:block/name "parallel computation",
+  :block/created-at 1658059303969,
+  :block/updated-at 1658059303969}
+ {:block/name "partial derivative",
+  :block/created-at 1658059303923,
+  :block/updated-at 1658059303923}
+ {:block/name "performance measure",
+  :block/created-at 1658059303938,
+  :block/updated-at 1658059303938}
+ {:block/name "performance tools",
+  :block/created-at 1658059303982,
+  :block/updated-at 1658059303982}
+ {:block/name "polynomial regression",
+  :block/created-at 1658059303995,
+  :block/updated-at 1658059303995}
+ {:block/name "postgresql",
+  :block/created-at 1658059305048,
+  :block/updated-at 1658059305048}
+ {:block/name "process",
+  :block/created-at 1658059305038,
+  :block/updated-at 1658059305038}
+ {:block/name "process environment",
+  :block/created-at 1658059305101,
+  :block/updated-at 1658059305101}
+ {:block/name "process state",
+  :block/created-at 1658059305067,
+  :block/updated-at 1658059305067}
+ {:block/name "process time",
+  :block/created-at 1658059306278,
+  :block/updated-at 1658059306278}
+ {:block/name "profiling",
+  :block/created-at 1658059305077,
+  :block/updated-at 1658059305077}
+ {:block/name "programming languages",
+  :block/created-at 1658059305084,
+  :block/updated-at 1658059305084}
+ {:block/name "pub",
+  :block/created-at 1658059305119,
+  :block/updated-at 1658059305119}
+ {:block/name "pub/sub pattern",
+  :block/created-at 1658059305118,
+  :block/updated-at 1658059305118}
  {:block/name "python",
   :block/created-at 1656419647247,
   :block/updated-at 1656419647247}
+ {:block/name "python dictionary",
+  :block/created-at 1658059306541,
+  :block/updated-at 1658059306541}
+ {:block/name "python modules",
+  :block/created-at 1658059306704,
+  :block/updated-at 1658059306704}
+ {:block/name "python profiling",
+  :block/created-at 1658059306681,
+  :block/updated-at 1658059306681}
+ {:block/name "python troubleshooting",
+  :block/created-at 1658059306655,
+  :block/updated-at 1658059306655}
+ {:block/name "python ~import~",
+  :block/created-at 1658059306562,
+  :block/updated-at 1658059306562}
+ {:block/name "quantitative libs",
+  :block/created-at 1658059306579,
+  :block/updated-at 1658059306579}
+ {:block/name "quantitative research",
+  :block/created-at 1658059306589,
+  :block/updated-at 1658059306589}
+ {:block/name "query language",
+  :block/created-at 1658059306697,
+  :block/updated-at 1658059306697}
+ {:block/name "query optimization",
+  :block/created-at 1658059306547,
+  :block/updated-at 1658059306547}
+ {:block/name "queue",
+  :block/created-at 1658058393835,
+  :block/updated-at 1658058393835}
+ {:block/name "quick sort",
+  :block/created-at 1658059306732,
+  :block/updated-at 1658059306732}
+ {:block/name "race condition",
+  :block/created-at 1658059306715,
+  :block/updated-at 1658059306715}
+ {:block/name "radix sort",
+  :block/created-at 1658058393861,
+  :block/updated-at 1658058393861}
+ {:block/name "raii",
+  :block/created-at 1658059306722,
+  :block/updated-at 1658059306722}
+ {:block/name "rate limiting",
+  :block/created-at 1658059306740,
+  :block/updated-at 1658059306740}
+ {:block/name "recommender system",
+  :block/created-at 1658059306727,
+  :block/updated-at 1658059306727}
+ {:block/name "recursion",
+  :block/created-at 1658058393885,
+  :block/updated-at 1658058393885}
+ {:block/name "redis",
+  :block/created-at 1658059306746,
+  :block/updated-at 1658059306746}
+ {:block/name "regression problem",
+  :block/created-at 1658059306810,
+  :block/updated-at 1658059306810}
+ {:block/name "regularization",
+  :block/created-at 1658059306841,
+  :block/updated-at 1658059306841}
  {:block/name "reinforcement learning",
-  :block/created-at 1656252670529,
-  :block/updated-at 1656252670529}
+  :block/created-at 1658059306826,
+  :block/updated-at 1658059306826}
+ {:block/name "relational model",
+  :block/created-at 1658059306820,
+  :block/updated-at 1658059306820}
+ {:block/name "reliability",
+  :block/created-at 1658058393939,
+  :block/updated-at 1658058393939}
+ {:block/name "rendezvous hashing",
+  :block/created-at 1658059306834,
+  :block/updated-at 1658059306834}
+ {:block/name "replication",
+  :block/created-at 1658059306848,
+  :block/updated-at 1658059306848}
+ {:block/name "ridge linear regression",
+  :block/created-at 1658059306873,
+  :block/updated-at 1658059306873}
+ {:block/name "sampling profiler",
+  :block/created-at 1658059306857,
+  :block/updated-at 1658059306857}
+ {:block/name "sbrk()",
+  :block/created-at 1658059306882,
+  :block/updated-at 1658059306882}
+ {:block/name "scalability",
+  :block/created-at 1658058393970,
+  :block/updated-at 1658058393970}
+ {:block/name "sha",
+  :block/created-at 1658059306899,
+  :block/updated-at 1658059306899}
+ {:block/name "sharding",
+  :block/created-at 1658059306891,
+  :block/updated-at 1658059306891}
+ {:block/name "shell",
+  :block/created-at 1658059306905,
+  :block/updated-at 1658059306905}
  {:block/name "shell startup files",
   :block/created-at 1656419647330,
   :block/updated-at 1656419808282}
+ {:block/name "shell tips",
+  :block/created-at 1658059306964,
+  :block/updated-at 1658059306964}
+ {:block/name "short period process",
+  :block/created-at 1658059306972,
+  :block/updated-at 1658059306972}
+ {:block/name "sml language",
+  :block/created-at 1658059306987,
+  :block/updated-at 1658059306987}
+ {:block/name "social network",
+  :block/created-at 1658059306997,
+  :block/updated-at 1658059306997}
+ {:block/name "sorting algorithm",
+  :block/created-at 1658058394021,
+  :block/updated-at 1658058394021}
+ {:block/name "special files",
+  :block/created-at 1658059307007,
+  :block/updated-at 1658059307007}
+ {:block/name "sql databases",
+  :block/created-at 1658059307018,
+  :block/updated-at 1658059307018}
+ {:block/name "stack",
+  :block/created-at 1658058394044,
+  :block/updated-at 1658058394044}
+ {:block/name "statistics",
+  :block/created-at 1658059307033,
+  :block/updated-at 1658059307033}
+ {:block/name "stl",
+  :block/created-at 1658059307061,
+  :block/updated-at 1658059307061}
+ {:block/name "stream processing",
+  :block/created-at 1658058394095,
+  :block/updated-at 1658058394095}
+ {:block/name "stress test",
+  :block/created-at 1658059307124,
+  :block/updated-at 1658059307124}
  {:block/name "supervised learning",
-  :block/created-at 1657608874456,
-  :block/updated-at 1657608874456}
+  :block/created-at 1658059307134,
+  :block/updated-at 1658059307134}
+ {:block/name "swap",
+  :block/created-at 1658059307159,
+  :block/updated-at 1658059307159}
+ {:block/name "system cache",
+  :block/created-at 1658059307190,
+  :block/updated-at 1658059307190}
+ {:block/name "system calls",
+  :block/created-at 1658059307204,
+  :block/updated-at 1658059307204}
+ {:block/name "system design",
+  :block/created-at 1658059307211,
+  :block/updated-at 1658059307211}
+ {:block/name "system header files",
+  :block/created-at 1658059307218,
+  :block/updated-at 1658059307218}
+ {:block/name "system summary tools",
+  :block/created-at 1658059307277,
+  :block/updated-at 1658059307277}
+ {:block/name "t-test",
+  :block/created-at 1658059307288,
+  :block/updated-at 1658059307288}
+ {:block/name "tcp",
+  :block/created-at 1658059307296,
+  :block/updated-at 1658059307296}
+ {:block/name "tcp/ip",
+  :block/created-at 1658059307296,
+  :block/updated-at 1658059307296}
+ {:block/name "template metaprogramming",
+  :block/created-at 1658058394129,
+  :block/updated-at 1658058394129}
+ {:block/name "template type deduction",
+  :block/created-at 1658059307315,
+  :block/updated-at 1658059307315}
+ {:block/name "testing",
+  :block/created-at 1658059307323,
+  :block/updated-at 1658059307323}
+ {:block/name "the hessian",
+  :block/created-at 1658059307331,
+  :block/updated-at 1658059307331}
+ {:block/name "the jacobian",
+  :block/created-at 1658059307347,
+  :block/updated-at 1658059307347}
+ {:block/name "thread",
+  :block/created-at 1658059307337,
+  :block/updated-at 1658059307337}
+ {:block/name "thread management",
+  :block/created-at 1658059307361,
+  :block/updated-at 1658059307361}
+ {:block/name "tls handshake",
+  :block/created-at 1658059307379,
+  :block/updated-at 1658059307379}
  {:block/name "todo",
   :block/created-at 1656252086751,
   :block/updated-at 1656252086751}
+ {:block/name "trading system",
+  :block/created-at 1658059307369,
+  :block/updated-at 1658059307369}
+ {:block/name "tree",
+  :block/created-at 1658059308326,
+  :block/updated-at 1658059308326}
+ {:block/name "troubleshooting",
+  :block/created-at 1658059308339,
+  :block/updated-at 1658059308339}
+ {:block/name "type alias",
+  :block/created-at 1658059308356,
+  :block/updated-at 1658059308356}
+ {:block/name "type deduction",
+  :block/created-at 1658058394148,
+  :block/updated-at 1658058394148}
+ {:block/name "type deduction diagnostics",
+  :block/created-at 1658058394169,
+  :block/updated-at 1658058394169}
  {:block/name "unsupervised learning",
-  :block/created-at 1656252670570,
-  :block/updated-at 1656252670570}
+  :block/created-at 1658059308373,
+  :block/updated-at 1658059308373}
+ {:block/name "vector",
+  :block/created-at 1658059308390,
+  :block/updated-at 1658059308390}
+ {:block/name "virtual file system",
+  :block/created-at 1658059308401,
+  :block/updated-at 1658059308401}
+ {:block/name "virtual memory",
+  :block/created-at 1658059308434,
+  :block/updated-at 1658059308434}
+ {:block/name "viztracer",
+  :block/created-at 1658059308414,
+  :block/updated-at 1658059308414}
  {:block/name "wait",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
  {:block/name "waiting",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
+ {:block/name "web server",
+  :block/created-at 1658059308546,
+  :block/updated-at 1658059308546}
+ {:block/name "zombie process",
+  :block/created-at 1658059308553,
+  :block/updated-at 1658059308553}
+ {:block/name "~ab~",
+  :block/created-at 1658059295133,
+  :block/updated-at 1658059295133}
+ {:block/name "~auto~",
+  :block/created-at 1658059295194,
+  :block/updated-at 1658059295194}
+ {:block/name "~dd~",
+  :block/created-at 1658059300232,
+  :block/updated-at 1658059300232}
+ {:block/name "~decltype~",
+  :block/created-at 1658059300224,
+  :block/updated-at 1658059300224}
+ {:block/name "~enum class~",
+  :block/created-at 1658059300554,
+  :block/updated-at 1658059300554}
+ {:block/name "~fio~",
+  :block/created-at 1658059300432,
+  :block/updated-at 1658059300432}
+ {:block/name "~fsync()~",
+  :block/created-at 1658059300421,
+  :block/updated-at 1658059300421}
+ {:block/name "~hping3~",
+  :block/created-at 1658059300652,
+  :block/updated-at 1658059300652}
+ {:block/name "~memleak~",
+  :block/created-at 1658058393609,
+  :block/updated-at 1658058393609}
+ {:block/name "~perf-tools~",
+  :block/created-at 1658059303930,
+  :block/updated-at 1658059303930}
+ {:block/name "~perf~",
+  :block/created-at 1658059303958,
+  :block/updated-at 1658059303958}
  {:block/name "~pipenv~",
   :block/created-at 1656419647230,
   :block/updated-at 1656419647230}
@@ -92,5 +866,41 @@
   :block/created-at 1656430156599,
   :block/updated-at 1656430156599}
  {:block/name "~pyenv~",
-  :block/created-at 1656430048857, 
-  :block/updated-at 1656430048857}]
+  :block/created-at 1656430048857,
+  :block/updated-at 1656430048857}
+ {:block/name "~std::function~",
+  :block/created-at 1658059307027,
+  :block/updated-at 1658059307027}
+ {:block/name "~std::initializer_list~",
+  :block/created-at 1658058394074,
+  :block/updated-at 1658058394074}
+ {:block/name "~std::thread~",
+  :block/created-at 1658059307041,
+  :block/updated-at 1658059307041}
+ {:block/name "~std::underlying_type~",
+  :block/created-at 1658059307048,
+  :block/updated-at 1658059307048}
+ {:block/name "~std::unordered_map~",
+  :block/created-at 1658059307055,
+  :block/updated-at 1658059307055}
+ {:block/name "~strace~",
+  :block/created-at 1658059307119,
+  :block/updated-at 1658059307119}
+ {:block/name "~stress~",
+  :block/created-at 1658059307143,
+  :block/updated-at 1658059307143}
+ {:block/name "~sysbench~",
+  :block/created-at 1658059307197,
+  :block/updated-at 1658059307197}
+ {:block/name "~sysstat~",
+  :block/created-at 1658059307179,
+  :block/updated-at 1658059307179}
+ {:block/name "~tcpdump~",
+  :block/created-at 1658059307302,
+  :block/updated-at 1658059307302}
+ {:block/name "~valgrind~",
+  :block/created-at 1658059308381,
+  :block/updated-at 1658059308381}
+ {:block/name "~watch~",
+  :block/created-at 1658059308535, 
+  :block/updated-at 1658059308535}]
