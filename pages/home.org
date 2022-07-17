@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       7557d485-b82c-430a-bde7-5c7c6000a55a
+:END:
+#+TITLE: Home
+
+- [[id:87236eae-a3ef-4227-a905-b0c2a7c77a20][Linux]]
+- [[id:90290142-8c00-4e76-b2fd-6bfc17150cf0][Data System]]
+- [[id:9d343f34-3ee6-4737-8612-6718f77dba03][Machine Learning]]
+- [[id:06e89bdb-d919-4a77-8649-dc6d525f8bf5][C++]]
+- [[id:87849bbc-e437-41aa-b44d-db9ffa63e633][Python]]
