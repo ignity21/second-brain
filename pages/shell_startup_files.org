@@ -27,6 +27,10 @@
   - =~/.zprofile= is similar to =~/.zlogin=
 - =~/.zlogout= is sourced when login shells exit.
 
+* =xinitrc=
+=~/.xinitrc= is handy to run programs depending on X and set environment variables on X server startup.
+
+
 * References
 - [[https://www.linuxfromscratch.org/blfs/view/svn/postlfs/profile.html][The Bash Shell Startup Files]]
 - [[https://zsh.sourceforge.io/Intro/intro_3.html#SEC3][Zsh Startup Files]]

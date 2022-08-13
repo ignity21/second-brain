@@ -14,6 +14,7 @@ measured by /P/, improves with experience /E/.
 - E = the experience of playing many games of checkers
 - T = the task of playing checkers.
 - P = the probability that the program will win the next game.
+
 ** Example
 - Task :: Classifying emails as spam or not spam.
 - Experience :: Watching you label emails as span or not spam.
