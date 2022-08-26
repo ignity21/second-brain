@@ -31,6 +31,13 @@ CPU 使用率，就是除了空闲时间外的其他时间占总 CPU 时间的�
 =/proc/stat= 统计的是开机以来的平均 CPU 使用率。为了计算 CPU 使用率，性能工具一般都会取间隔一段时间（比如 3 秒）的两次值，作差后，再计算出这段时间内的平均 CPU 使用率。
 $$usage=1 - \frac{idle_t-idle_{t-1}}{total_t-total_{t-1}}$$
 
+* 相关工具
+- ~vmstat~
+- ~mpstat~: 多核
+- [[id:d28a2474-63d6-413f-b362-f550f5101a98][~top~]], ~htop~
+- ~sar~
+- =proc/stat=
+
 * 进程相关
 =/proc/[pid]/stat=
 

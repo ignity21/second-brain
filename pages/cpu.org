@@ -3,7 +3,7 @@
 :END:
 #+TITLE: CPU
 
-- tags :: [[id:87236eae-a3ef-4227-a905-b0c2a7c77a20][Linux]], [[id:d3bd3cd6-c056-4093-8abd-b682fecafebd][CPU Troubleshooting]]
+- tags :: [[id:d3bd3cd6-c056-4093-8abd-b682fecafebd][CPU Troubleshooting]]
 
 * Terms
 

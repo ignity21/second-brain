@@ -16,9 +16,6 @@
  {:block/name "../resources/ml/gradientdescent_1.png",
   :block/created-at 1658058338657,
   :block/updated-at 1658058338657}
- {:block/name "2022-07-17",
-  :block/created-at 1658023706711,
-  :block/updated-at 1658023706711}
  {:block/name "5, 2.9, 1, 0.2",
   :block/created-at 1658059295095,
   :block/updated-at 1658059295095}
@@ -118,6 +115,15 @@
  {:block/name "calculus",
   :block/created-at 1658059296487,
   :block/updated-at 1658059296487}
+ {:block/name "canceled",
+  :block/created-at 1661052035715,
+  :block/updated-at 1661052035715}
+ {:block/name "cancelled",
+  :block/created-at 1661052035715,
+  :block/updated-at 1661052035715}
+ {:block/name "caption",
+  :block/created-at 1661049271098,
+  :block/updated-at 1661049271098}
  {:block/name "card",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
@@ -529,6 +535,9 @@
  {:block/name "optimization",
   :block/created-at 1658059303846,
   :block/updated-at 1658059303846}
+ {:block/name "options",
+  :block/created-at 1661049269294,
+  :block/updated-at 1661049269294}
  {:block/name "other data models",
   :block/created-at 1658059303831,
   :block/updated-at 1658059303831}
@@ -670,6 +679,9 @@
  {:block/name "ridge linear regression",
   :block/created-at 1658059306873,
   :block/updated-at 1658059306873}
+ {:block/name "roam-aliases",
+  :block/created-at 1661049273030,
+  :block/updated-at 1661049273030}
  {:block/name "sampling profiler",
   :block/created-at 1658059306857,
   :block/updated-at 1658059306857}

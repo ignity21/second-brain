@@ -9,8 +9,6 @@
 * 工具总结
 | 指标              | 工具                                          |
 |-------------------+-----------------------------------------------|
-| Load Average      | ~uptime~, ~top~, ~htop~                       |
-| CPU Usage         | ~vmstat~, ~mpstat~, ~top~, ~sar~, =proc/stat= |
 | Process CPU Usage | ~top~, ~pidstat~, ~ps~, ~pstree~, ~htop~      |
 | Context Switch    | ~vmstat~, ~dstat~, ~sar~                      |
 | Process CS        | ~pidstat~                                     |
