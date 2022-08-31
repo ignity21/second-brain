@@ -3,7 +3,7 @@
 :END:
 #+TITLE: ~pipenv~
 
-* tags :: [[id:87849bbc-e437-41aa-b44d-db9ffa63e633][Python]], [[id:8fca7cca-e1d9-42ab-ac5f-acc9ee3f1e8b][Package Manager]], [[id:d2ed7b60-76b6-4311-b624-aad2f629ae2b][~pyenv~]], [[id:9d7310b1-f2e8-444a-b1cf-ce3de9cef1c2][~poetry~]]
+- tags :: [[id:87849bbc-e437-41aa-b44d-db9ffa63e633][Python]], [[id:8fca7cca-e1d9-42ab-ac5f-acc9ee3f1e8b][Package Manager]], [[id:d2ed7b60-76b6-4311-b624-aad2f629ae2b][~pyenv~]], [[id:9d7310b1-f2e8-444a-b1cf-ce3de9cef1c2][~poetry~]]
 
 * Installation
 - ~pip install --user pipenv~

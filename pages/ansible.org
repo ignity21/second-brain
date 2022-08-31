@@ -3,7 +3,7 @@
 :END:
 #+TITLE: Ansible
 
-* tags :: [[id:87236eae-a3ef-4227-a905-b0c2a7c77a20][Linux]], [[id:22b1058b-649a-4824-9ca5-14ad3f9e6798][Deployment]]
+- tags :: [[id:87236eae-a3ef-4227-a905-b0c2a7c77a20][Linux]], [[id:22b1058b-649a-4824-9ca5-14ad3f9e6798][Deployment]]
 
 * Installation
 #+begin_src bash

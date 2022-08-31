@@ -3,7 +3,7 @@
 :END:
 #+TITLE: I/O Multiplexing
 
-* tags :: [[id:d5f8c354-df83-45fa-bb36-c8a0b81d0fe9][I/O]]
+- tags :: [[id:d5f8c354-df83-45fa-bb36-c8a0b81d0fe9][I/O]]
 
 * I/O 事件通知方式
 ** 水平触发

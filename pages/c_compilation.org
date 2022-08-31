@@ -3,7 +3,8 @@
 :END:
 #+TITLE: C++ Compilation
 
-* tags :: [[id:06e89bdb-d919-4a77-8649-dc6d525f8bf5][C++]]
+- tags :: [[id:06e89bdb-d919-4a77-8649-dc6d525f8bf5][C++]]
+
 * Compilation Process
 #+caption: C++ Compilation Process
 [[../assets/CPP/c-compilation-process.svg]]
