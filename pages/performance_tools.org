@@ -2,13 +2,17 @@
 :ID:       b27e906e-c09a-4ff8-800c-5059e64595f0
 :END:
 #+TITLE: Performance Tools
+#+filetags: :OS:Tool:
 
-- tags :: [[id:2c4b9bb4-7806-4d8f-b08e-58001408a8e5][Troubleshooting]], [[id:87236eae-a3ef-4227-a905-b0c2a7c77a20][Linux]], [[id:23a06886-3f73-4ad5-bf5f-a06cec8380a7][System Summary Tools]]
+- tags :: [[id:2c4b9bb4-7806-4d8f-b08e-58001408a8e5][Troubleshooting]]
 
 #+caption: Linux Performance Tools
 [[../assets/Linux/LinuxTools_1.png]]
 
-* 常规工具总结
+* Common Tools
+:PROPERTIES:
+:ID:       0064e354-1d31-4056-801c-500be1fe0f01
+:END:
 | 指标              | 工具                              |
 |-------------------+-----------------------------------|
 | Process CPU Usage | ~top~, ~pidstat~, ~ps~, ~pstree~  |
@@ -24,6 +28,7 @@
 - [[id:a4ca7e8c-82e2-42c5-b20e-dc3ab62bd42f][~sysstat~]]: 包含 mpstat, sar, pidstat
 - ~strace~ :: 记录进程系统调用
 - ~watch~ :: 辅助监控用
+* [[id:23a06886-3f73-4ad5-bf5f-a06cec8380a7][System Summary Tools]]
 
 * Memory Tools
 :PROPERTIES:

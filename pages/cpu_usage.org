@@ -2,7 +2,7 @@
 :ID:       5d671286-647d-4870-90d9-fe6553a36af8
 :END:
 #+TITLE: CPU Usage
-- tags :: [[id:62fc5391-28b6-4842-bfb1-9bf404691fba][Performance Metrics]], [[id:60cfb15c-18c7-479a-b489-b14ce161f4bf][Process]], [[id:23a06886-3f73-4ad5-bf5f-a06cec8380a7][System Summary Tools]]
+- tags :: [[id:60cfb15c-18c7-479a-b489-b14ce161f4bf][Process]], [[id:23a06886-3f73-4ad5-bf5f-a06cec8380a7][System Summary Tools]]
 
 
 CPU 使用率，就是除了空闲时间外的其他时间占总 CPU 时间的百分比。

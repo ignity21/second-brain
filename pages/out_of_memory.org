@@ -4,7 +4,7 @@
 #+TITLE: Out of Memory
 #+OPTIONS: ^:nil
 
-- tags :: [[id:93b21b03-7448-4354-aa69-5ca40122d659][Memory Management]], [[id:db279878-fa0b-4a05-892b-c5539097d59b][Memory Leak]], [[id:33973869-8b9b-4458-8507-be5b14ebd339][Memory]], [[id:9eb7595a-bf63-4a94-9a41-30442f6be45a][Memory Allocation]]
+- tags ::  [[id:db279878-fa0b-4a05-892b-c5539097d59b][Memory Leak]], [[id:33973869-8b9b-4458-8507-be5b14ebd339][Memory]], [[id:9eb7595a-bf63-4a94-9a41-30442f6be45a][Memory Allocation]]
 
 
 内核监控进程的内存使用情况，并且使用 =oom_score= 为每个进程的内存使用情况进行评分:

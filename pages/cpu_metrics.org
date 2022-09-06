@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       ccce23de-3815-4d70-9a57-85848e139470
+:END:
+#+TITLE: CPU Metrics
+#+filetags: :OS:Metric:
+
+- [[id:bf436bad-fbd5-4e75-bc5d-542e3ae26000][平均负载]]
+- [[id:5d671286-647d-4870-90d9-fe6553a36af8][CPU 使用率]]
+- [[id:56a403ce-211d-4c6e-8901-d37954b22d45][上下文切换]]
+- CPU 缓存命中率

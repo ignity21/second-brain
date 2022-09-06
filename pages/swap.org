@@ -2,6 +2,7 @@
 :ID:       fbf5ab03-e642-4aab-97db-37c8a2b53f58
 :END:
 #+TITLE: Swap
+#+filetags: :Memory:OS:
 
 - tags :: [[id:25e1e331-29f7-42fd-908d-48cf563db181][Garbage Collection]],  [[id:a4d6ea49-ad7b-48f8-8f5d-f5510e7ef392][Out of Memory]], [[id:3c6d61f8-9ddf-429f-80d1-db89a0fd857c][Memory Metrics]], [[id:33973869-8b9b-4458-8507-be5b14ebd339][Memory]]
 

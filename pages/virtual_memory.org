@@ -2,6 +2,7 @@
 :ID:       b5af4cc2-911f-4c91-a5bc-09aeccb43f87
 :END:
 #+TITLE: Virtual Memory
+#+filetags: :Memory:OS:
 
 - tags :: [[id:9eb7595a-bf63-4a94-9a41-30442f6be45a][Memory Allocation]], [[id:33973869-8b9b-4458-8507-be5b14ebd339][Memory]]
 

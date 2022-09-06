@@ -2,9 +2,7 @@
 :ID:       a4ca7e8c-82e2-42c5-b20e-dc3ab62bd42f
 :END:
 #+TITLE: ~sysstat~
-
-- tags :: [[id:2c4b9bb4-7806-4d8f-b08e-58001408a8e5][Troubleshooting]], [[id:23a06886-3f73-4ad5-bf5f-a06cec8380a7][System Summary]], [[id:b27e906e-c09a-4ff8-800c-5059e64595f0][Performance Tools]]
-
+#+filetags: :Tool:
 
 The sysstat package contains various utilities, common to many commercial Unixes,
 to monitor system performance and usage activity

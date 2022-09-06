@@ -2,8 +2,9 @@
 :ID:       33973869-8b9b-4458-8507-be5b14ebd339
 :END:
 #+TITLE: Memory
+#+filetags: :Memory:OS:
 
-- tags :: [[id:9eb7595a-bf63-4a94-9a41-30442f6be45a][Memory Allocation]], [[id:b5af4cc2-911f-4c91-a5bc-09aeccb43f87][Virtual Memory]], [[id:3c6d61f8-9ddf-429f-80d1-db89a0fd857c][Memory Metrics]], [[id:93b21b03-7448-4354-aa69-5ca40122d659][Memory Management]], [[id:fbf5ab03-e642-4aab-97db-37c8a2b53f58][Swap]], [[id:e76d853c-e289-457a-b0ae-203f49977675][System Cache]]
+- tags :: [[id:9eb7595a-bf63-4a94-9a41-30442f6be45a][Memory Allocation]], [[id:b5af4cc2-911f-4c91-a5bc-09aeccb43f87][Virtual Memory]], [[id:3c6d61f8-9ddf-429f-80d1-db89a0fd857c][Memory Metrics]], [[id:fbf5ab03-e642-4aab-97db-37c8a2b53f58][Swap]], [[id:e76d853c-e289-457a-b0ae-203f49977675][System Cache]]
 
 - 虚拟内存 :: 包括了进程代码段、数据段、共享内存、已经申请的堆内存和已经换出的内存等。
 - 常驻内存 :: 进程实际使用的物理内存，不包括 Swap 和共享内存。

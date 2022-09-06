@@ -2,4 +2,4 @@
 :ID:       991853b2-8e30-43ac-a772-77cbde4b659b
 :END:
 #+TITLE: Cache Hit Ratio
-- tags :: [[id:62289ff0-f3b6-402f-b6bc-6fd33cd8ca44][Page Cache]], [[id:65ffd8bc-fcb7-4875-9b70-69b0f24979cb][Profiling]], [[id:5b542c10-2485-4379-a2c0-5f7fdb1b5dad][bcc-tools]], [[id:62fc5391-28b6-4842-bfb1-9bf404691fba][Performance Metrics]]
+- tags :: [[id:62289ff0-f3b6-402f-b6bc-6fd33cd8ca44][Page Cache]], [[id:65ffd8bc-fcb7-4875-9b70-69b0f24979cb][Profiling]], [[id:5b542c10-2485-4379-a2c0-5f7fdb1b5dad][bcc-tools]]

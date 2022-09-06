@@ -2,6 +2,7 @@
 :ID:       73d4c48e-1c1b-4d80-b7ba-116d5dedbf49
 :END:
 #+TITLE: Memory Troubleshooting
+#+filetags: :OS:
 
 - tags :: [[id:2c4b9bb4-7806-4d8f-b08e-58001408a8e5][Troubleshooting]], [[id:3c6d61f8-9ddf-429f-80d1-db89a0fd857c][Memory Metrics]], [[id:991853b2-8e30-43ac-a772-77cbde4b659b][Cache Hit Ratio]], [[id:33973869-8b9b-4458-8507-be5b14ebd339][Memory]]
 

@@ -2,6 +2,7 @@
 :ID:       23a06886-3f73-4ad5-bf5f-a06cec8380a7
 :END:
 #+TITLE: System Summary Tools
+#+filetags: :Tool:
 
 * 输出字段说明
 - cs（context switch）是每秒上下文切换的次数

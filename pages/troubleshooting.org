@@ -2,9 +2,10 @@
 :ID:       2c4b9bb4-7806-4d8f-b08e-58001408a8e5
 :END:
 #+TITLE: Troubleshooting
+#+filetags: :OS:
 
 * 一般排查流程
-1. [[id:23a06886-3f73-4ad5-bf5f-a06cec8380a7][综合指标类工具]]
+1. 看系统整体指标 [[id:23a06886-3f73-4ad5-bf5f-a06cec8380a7][综合指标类工具]]
 2. 保持复现问题，例如： ~while true; do curl http://127.0.0.1; done~
 3. 找到问题进程，排查原因 [[id:e9875a58-6b12-42d4-92f8-7be72b1fef4b][Process Troubleshooting]]
 4. 分析进程系统调用，找到问题点 [[id:a1e19193-14f8-4ce9-b161-67f323133064][~strace~]]

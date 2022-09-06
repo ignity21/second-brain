@@ -3,7 +3,7 @@
 :END:
 #+TITLE: Dirty Pages
 
-- tags :: [[id:62289ff0-f3b6-402f-b6bc-6fd33cd8ca44][Page Cache]], [[id:a4d6ea49-ad7b-48f8-8f5d-f5510e7ef392][Out of Memory]], [[id:93b21b03-7448-4354-aa69-5ca40122d659][Memory Management]]
+- tags :: [[id:62289ff0-f3b6-402f-b6bc-6fd33cd8ca44][Page Cache]], [[id:a4d6ea49-ad7b-48f8-8f5d-f5510e7ef392][Out of Memory]]
 
 
 
