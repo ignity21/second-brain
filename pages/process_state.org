@@ -3,7 +3,7 @@
 :END:
 #+TITLE: Process State
 
-- tags :: [[id:60cfb15c-18c7-479a-b489-b14ce161f4bf][Process]], [[id:3c6d61f8-9ddf-429f-80d1-db89a0fd857c][Memory Measure]]
+- tags :: [[id:60cfb15c-18c7-479a-b489-b14ce161f4bf][Process]], [[id:3c6d61f8-9ddf-429f-80d1-db89a0fd857c][Memory Metrics]]
 
 #+caption: Process State
 [[../assets/Linux/ProcessState_1.png]]

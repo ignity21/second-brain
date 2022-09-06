@@ -11,9 +11,10 @@
 * Memory Related
 - ~cachestat~: 提供了整个操作系统缓存的读写命中情况
 - ~cachetop~: 提供了每个进程的缓存命中情况(单位是页)
-- ~memleak~: 内存泄漏
-
 ** ~memleak~
+:PROPERTIES:
+:ID:       0cdff663-6468-41cc-9b2a-3c2a540ff53c
+:END:
 - ~memleak -p $(pidof app) -a~
 
 * IO Related

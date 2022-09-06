@@ -1,7 +1,0 @@
-:PROPERTIES:
-:ID:       0cdff663-6468-41cc-9b2a-3c2a540ff53c
-:END:
-#+TITLE: ~memleak~
-- tags :: [[id:db279878-fa0b-4a05-892b-c5539097d59b][Memory Leak]], [[id:60cfb15c-18c7-479a-b489-b14ce161f4bf][Process]], [[id:5b542c10-2485-4379-a2c0-5f7fdb1b5dad][bcc-tools]]
-
-~memleak -p $(pidof app) -a~

@@ -8,7 +8,7 @@
 #+caption: Linux Performance Tools
 [[../assets/Linux/LinuxTools_1.png]]
 
-* 工具总结
+* 常规工具总结
 | 指标              | 工具                              |
 |-------------------+-----------------------------------|
 | Process CPU Usage | ~top~, ~pidstat~, ~ps~, ~pstree~  |
@@ -22,8 +22,28 @@
 | Profile           | ~perf~, ~execsnoop~               |
 
 - [[id:a4ca7e8c-82e2-42c5-b20e-dc3ab62bd42f][~sysstat~]]: 包含 mpstat, sar, pidstat
-
-* 其他工具
-- ~dstat~ ::
-- ~strace~ :: 进程的系统调用
+- ~strace~ :: 记录进程系统调用
 - ~watch~ :: 辅助监控用
+
+* Memory Tools
+:PROPERTIES:
+:ID:       4b50561b-7cb6-4299-8906-00c128dd9a0c
+:END:
+| 指标               | 工具                                 |
+|--------------------+--------------------------------------|
+| System Memory Info | ~free~, =/proc/meminfo=              |
+| VIRT, RES, SHR     | ~top~, ~ps~                          |
+| 进程内存分布       | ~pmap~                               |
+| Swap换出内存       | ~top~, =/proc/[pid]/status=          |
+| 进程缺页异常       | ~ps~, ~top~                          |
+| 系统换页情况       | ~sar~                                |
+| Buffer/Cache       | ~free~, ~vmstat~, ~sar~, ~cachestat~ |
+| 缓存命中率         | ~cachetop~                           |
+| SWAP已用/剩余      | ~free~, ~sar~                        |
+| SWAP换入/换出      | ~vmstat~                             |
+| 内存泄露           | ~memleak~, ~valgrind~                |
+| 指定文件的缓存大小 | ~pcstat~                             |
+
+- ~slabtop~: Display kernel *slab* cache information in real time.
+- ~pmap~: Report memory map of a process or processes.
+- ~pcstat~: 用来指定文件的缓存大小

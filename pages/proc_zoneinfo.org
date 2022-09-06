@@ -3,7 +3,7 @@
 :END:
 #+TITLE: =/proc/zoneinfo=
 
-- tags :: [[id:aafc265a-67a8-49e0-9e11-4615ae4fe19d][NUMA]], [[id:3c6d61f8-9ddf-429f-80d1-db89a0fd857c][Memory Measure]], [[id:25e1e331-29f7-42fd-908d-48cf563db181][Garbage Collection]]
+- tags :: [[id:aafc265a-67a8-49e0-9e11-4615ae4fe19d][NUMA]], [[id:3c6d61f8-9ddf-429f-80d1-db89a0fd857c][Memory Metrics]], [[id:25e1e331-29f7-42fd-908d-48cf563db181][Garbage Collection]]
 
 
 - =pages_min=, =pages_low=, =pages_high= 参考 [[id:25e1e331-29f7-42fd-908d-48cf563db181][Garbage Collection]]
