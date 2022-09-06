@@ -3,7 +3,7 @@
 :END:
 #+TITLE: ~perf~
 
-- tags :: [[id:d3bd3cd6-c056-4093-8abd-b682fecafebd][CPU Troubleshooting]], [[id:60cfb15c-18c7-479a-b489-b14ce161f4bf][Process]], [[id:65ffd8bc-fcb7-4875-9b70-69b0f24979cb][Profiling]], [[id:f1007cd2-4672-4b18-ab36-503a6bbe45dd][System Calls]]
+- tags :: [[id:60cfb15c-18c7-479a-b489-b14ce161f4bf][Process]], [[id:65ffd8bc-fcb7-4875-9b70-69b0f24979cb][Profiling]], [[id:f1007cd2-4672-4b18-ab36-503a6bbe45dd][System Calls]]
 
 基于事件记录的动态追踪工具
 

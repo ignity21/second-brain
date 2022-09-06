@@ -2,7 +2,7 @@
 :ID:       bf436bad-fbd5-4e75-bc5d-542e3ae26000
 :END:
 #+TITLE: Load Average
-- tags :: [[id:76560a4a-b518-478a-8cd2-64473fd2c3aa][Performance Measure]]
+- tags :: [[id:62fc5391-28b6-4842-bfb1-9bf404691fba][Performance Metrics]]
 
 平均负载是指单位时间内，系统处于可运行状态和不可中断状态的平均进程数，也就是平均活跃进程数。
 - running or runnable (on run queue): 可运行状态的进程是指正在使用 CPU 或者正在等待 CPU 的进程，状态码 R

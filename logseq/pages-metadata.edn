@@ -85,12 +85,9 @@
  {:block/name "black magic",
   :block/created-at 1658059295291,
   :block/updated-at 1658059295291}
- {:block/name "block i",
-  :block/created-at 1658059295282,
-  :block/updated-at 1658059295282}
- {:block/name "block i/o",
-  :block/created-at 1658059295281,
-  :block/updated-at 1658059295281}
+ {:block/name "block io",
+  :block/created-at 1662444300201,
+  :block/updated-at 1662444300201}
  {:block/name "block layer",
   :block/created-at 1658059295313,
   :block/updated-at 1658059295313}
@@ -121,9 +118,6 @@
  {:block/name "cancelled",
   :block/created-at 1661052035715,
   :block/updated-at 1661052035715}
- {:block/name "caption",
-  :block/created-at 1661049271098,
-  :block/updated-at 1661049271098}
  {:block/name "card",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
@@ -319,27 +313,6 @@
  {:block/name "http protocol",
   :block/created-at 1658059300696,
   :block/updated-at 1658059300696}
- {:block/name "i",
-  :block/created-at 1658058338812,
-  :block/updated-at 1658058338812}
- {:block/name "i/o",
-  :block/created-at 1658058393320,
-  :block/updated-at 1658058393320}
- {:block/name "i/o measure",
-  :block/created-at 1658059300680,
-  :block/updated-at 1658059300680}
- {:block/name "i/o multiplexing",
-  :block/created-at 1661931667284,
-  :block/updated-at 1661931667284}
- {:block/name "i/o optimization",
-  :block/created-at 1658059300663,
-  :block/updated-at 1658059300663}
- {:block/name "i/o system calls",
-  :block/created-at 1658059300718,
-  :block/updated-at 1658059300718}
- {:block/name "i/o troubleshooting",
-  :block/created-at 1658058393356,
-  :block/updated-at 1658058393356}
  {:block/name "id",
   :block/created-at 1658059300733,
   :block/updated-at 1658059300733}
@@ -361,6 +334,24 @@
  {:block/name "interview expressions",
   :block/created-at 1658059301746,
   :block/updated-at 1658059301746}
+ {:block/name "io",
+  :block/created-at 1662444300303,
+  :block/updated-at 1662444300303}
+ {:block/name "io measure",
+  :block/created-at 1662444300330,
+  :block/updated-at 1662444300330}
+ {:block/name "io multiplexing",
+  :block/created-at 1662444300349,
+  :block/updated-at 1662444300349}
+ {:block/name "io optimization",
+  :block/created-at 1662444300396,
+  :block/updated-at 1662444300396}
+ {:block/name "io system calls",
+  :block/created-at 1662444300454,
+  :block/updated-at 1662444300454}
+ {:block/name "io troubleshooting",
+  :block/created-at 1662444300498,
+  :block/updated-at 1662444300498}
  {:block/name "job hunting",
   :block/created-at 1658059301893,
   :block/updated-at 1658059301893}
@@ -586,6 +577,9 @@
  {:block/name "process time",
   :block/created-at 1658059306278,
   :block/updated-at 1658059306278}
+ {:block/name "process troubleshooting",
+  :block/created-at 1662444300553,
+  :block/updated-at 1662444300553}
  {:block/name "profiling",
   :block/created-at 1658059305077,
   :block/updated-at 1658059305077}
@@ -883,6 +877,9 @@
  {:block/name "~poetry~",
   :block/created-at 1656430156599,
   :block/updated-at 1656430156599}
+ {:block/name "~pstree~",
+  :block/created-at 1662444300564,
+  :block/updated-at 1662444300564}
  {:block/name "~pyenv~",
   :block/created-at 1656430048857,
   :block/updated-at 1656430048857}
@@ -916,9 +913,6 @@
  {:block/name "~tcpdump~",
   :block/created-at 1658059307302,
   :block/updated-at 1658059307302}
- {:block/name "~top~",
-  :block/created-at 1661931667384,
-  :block/updated-at 1661931667384}
  {:block/name "~valgrind~",
   :block/created-at 1658059308381,
   :block/updated-at 1658059308381}

@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       e32bc522-3987-4ba7-a27d-71569e07a9e2
-:END:
-#+TITLE: CPU Time

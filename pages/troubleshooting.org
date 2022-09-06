@@ -3,9 +3,7 @@
 :END:
 #+TITLE: Troubleshooting
 
-- [[id:d3bd3cd6-c056-4093-8abd-b682fecafebd][CPU Troubleshooting]]
 - [[id:73d4c48e-1c1b-4d80-b7ba-116d5dedbf49][Memory Troubleshooting]]
--
 
 * 一般排查流程
 1. [[id:23a06886-3f73-4ad5-bf5f-a06cec8380a7][综合指标类工具]]

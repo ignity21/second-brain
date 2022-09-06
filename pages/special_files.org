@@ -3,8 +3,7 @@
 :END:
 #+TITLE: Special Files
 
-- tags :: [[id:87236eae-a3ef-4227-a905-b0c2a7c77a20][Linux]], [[id:76560a4a-b518-478a-8cd2-64473fd2c3aa][Performance Measure]]
-
+- tags :: [[id:87236eae-a3ef-4227-a905-b0c2a7c77a20][Linux]], [[id:62fc5391-28b6-4842-bfb1-9bf404691fba][Performance Metrics]]
 
 - =/proc/interrupts=: 硬中断运行情况
 - =/proc/stat=: CPU和任务统计信息 ~cat /proc/stat | grep ^cpu~

@@ -3,8 +3,6 @@
 :END:
 #+TITLE: CPU
 
-- tags :: [[id:d3bd3cd6-c056-4093-8abd-b682fecafebd][CPU Troubleshooting]]
-
 * Terms
 
 - *SIMD*: Single instruction, multiple data. Efficient with high IPC. (CPU vectorization instruction)

@@ -3,4 +3,4 @@
 :END:
 #+TITLE: eBPF
 
-- tags :: [[id:76560a4a-b518-478a-8cd2-64473fd2c3aa][Performance Measure]], [[id:65ffd8bc-fcb7-4875-9b70-69b0f24979cb][Profiling]]
+- tags :: [[id:65ffd8bc-fcb7-4875-9b70-69b0f24979cb][Profiling]]

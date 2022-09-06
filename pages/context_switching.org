@@ -3,7 +3,7 @@
 :END:
 #+TITLE: Context Switching
 
-- tags :: [[id:87236eae-a3ef-4227-a905-b0c2a7c77a20][Linux]], [[id:76560a4a-b518-478a-8cd2-64473fd2c3aa][Performance Measure]], [[id:eee45e41-6b08-46a9-846e-11edb0e99e6c][CPU]], [[id:c097845d-e6f5-4d04-a5d2-858fa859d76c][Interupt]], [[id:60cfb15c-18c7-479a-b489-b14ce161f4bf][Process]], [[id:ae66035d-5880-46c8-b836-517f0fd08dae][Thread]]
+- tags :: [[id:87236eae-a3ef-4227-a905-b0c2a7c77a20][Linux]], [[id:62fc5391-28b6-4842-bfb1-9bf404691fba][Performance Metrics]], [[id:eee45e41-6b08-46a9-846e-11edb0e99e6c][CPU]], [[id:c097845d-e6f5-4d04-a5d2-858fa859d76c][Interupt]], [[id:60cfb15c-18c7-479a-b489-b14ce161f4bf][Process]], [[id:ae66035d-5880-46c8-b836-517f0fd08dae][Thread]]
 
 * 特权模式切换
 系统调用过程通常称为特权模式切换。需保存和恢复寄存器、PC的状态。
@@ -17,8 +17,8 @@
 Linux 为每个 CPU 都维护了一个就绪队列，将活跃进程（即正在运行和正在等待 CPU 的进程）按照优先级和等待 CPU 的时间排序，
 然后选择最需要 CPU 的进程，也就是优先级最高和等待 CPU 时间最长的进程来运行。
 
-- 自愿上下文切换：无法获取资源而导致
-- 非自愿上下文切换：被系统强制调度而导致
+- *自愿上下文切换* ：无法获取资源而导致
+- *非自愿上下文切换* ：被系统强制调度而导致
 
 * 线程上下文切换
 线程是调度的基本单位，而进程则是资源拥有的基本单位。进程只是给线程提供了共享的虚拟内存、全局变量等资源。

@@ -9,17 +9,17 @@
 [[../assets/Linux/LinuxTools_1.png]]
 
 * 工具总结
-| 指标              | 工具                                          |
-|-------------------+-----------------------------------------------|
-| Process CPU Usage | ~top~, ~pidstat~, ~ps~, ~pstree~    |
-| Context Switch    | ~vmstat~, ~dstat~, ~sar~                      |
-| Process CS        | ~pidstat~                                     |
-| Soft Interrupts   | ~top~, =/proc/softirqs=, ~mpstat~             |
-| Hard Interrupts   | ~vmstat~, =/proc/interrupts=                  |
-| Network           | ~dstat~, ~sar~, ~tcpdump~       |
-| IO               | ~dstat~, ~sar~                                |
-| CPU Info          | =/proc/cpuinfo=, ~lscpu~                      |
-| Profile           | ~perf~, ~execsnoop~                    |
+| 指标              | 工具                              |
+|-------------------+-----------------------------------|
+| Process CPU Usage | ~top~, ~pidstat~, ~ps~, ~pstree~  |
+| Context Switch    | ~vmstat~, ~dstat~, ~sar~          |
+| Process CS        | ~pidstat~                         |
+| Soft Interrupts   | ~top~, =/proc/softirqs=, ~mpstat~ |
+| Hard Interrupts   | ~vmstat~, =/proc/interrupts=      |
+| Network           | ~dstat~, ~sar~, ~tcpdump~         |
+| IO                | ~dstat~, ~sar~                    |
+| CPU Info          | =/proc/cpuinfo=, ~lscpu~          |
+| Profile           | ~perf~, ~execsnoop~               |
 
 - [[id:a4ca7e8c-82e2-42c5-b20e-dc3ab62bd42f][~sysstat~]]: 包含 mpstat, sar, pidstat
 

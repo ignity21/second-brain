@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       76560a4a-b518-478a-8cd2-64473fd2c3aa
-:END:
-#+TITLE: Performance Measure

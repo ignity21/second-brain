@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       62fc5391-28b6-4842-bfb1-9bf404691fba
+:END:
+#+TITLE: Performance Metrics
+
+* 计算资源相关
+- [[id:bf436bad-fbd5-4e75-bc5d-542e3ae26000][平均负载]]
+- [[id:5d671286-647d-4870-90d9-fe6553a36af8][CPU 使用率]]
+- [[id:56a403ce-211d-4c6e-8901-d37954b22d45][上下文切换]]
+- CPU 缓存命中率
