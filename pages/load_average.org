@@ -8,7 +8,3 @@
 - running or runnable (on run queue): 可运行状态的进程是指正在使用 CPU 或者正在等待 CPU 的进程，状态码 R
 - uninterruptible sleep (usually IO): 不可中断状态的进程则是正处于内核态关键流程中的进程，状态码 D
 - top计测值：1分钟，5分钟，15分钟
-
-* 相关工具
-- ~uptime~
-- [[id:d28a2474-63d6-413f-b362-f550f5101a98][~top~]], ~htop~

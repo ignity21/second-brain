@@ -15,7 +15,7 @@ Sharing of open files among different processes.
   - the current file offset
   - status flags specified when opening the file
   - the file access mode (read-only, read-write, etc.)
-  - setting relating to signal-driven I/O
+  - setting relating to signal-driven IO
   - a reference to the i-node object for this file
 - The file system i-node table
   - file type (regular file, socket, or FIFO) and permissions

@@ -31,6 +31,6 @@
   #include <unistd.h> // POSIX.1
   void _exit(int status);
 #+end_src
-- ~exit~ performed a clean shutdown of the standard I/O library.
+- ~exit~ performed a clean shutdown of the standard IO library.
   - ~fclose~ function is called for all open streams.
   -

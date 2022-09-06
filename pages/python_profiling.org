@@ -20,7 +20,7 @@
 ** 基础常用工具
 *** ~/usr/bin/time~
    - Using ~--verbose~ flag to get more details.
-   - Most useful indicator is ~Major (requiring I/O) page faults~, as it indicates cache misses.
+   - Most useful indicator is ~Major (requiring IO) page faults~, as it indicates cache misses.
 *** ~timefn~ decorator
    #+BEGIN_SRC python
      def timefn(fn):

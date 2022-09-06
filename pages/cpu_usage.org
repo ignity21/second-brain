@@ -22,7 +22,7 @@ CPU 使用率，就是除了空闲时间外的其他时间占总 CPU 时间的�
 - ~man proc~ 查找 =/proc/stat= 查看每列所表示的含义
 - user, nice, system, idle, iowait, irq(interrupts), softirq, steal, guest, guest_nice
   - nice: 代表低优先级用户态 CPU 时间，也就是进程的 nice 值被调整为 1-19 之间时的 CPU 时间； nice 可取值范围是 -20 到 19，数值越大，优先级反而越低
-  - iowait: 代表等待 I/O 的 CPU 时间
+  - iowait: 代表等待 IO 的 CPU 时间
   - irq: 代表处理硬中断的 CPU 时间
   - steal: 代表当系统运行在虚拟机中的时候，被其他虚拟机占用的 CPU 时间
   - guest: 运行虚拟机的 CPU 时间
@@ -32,9 +32,7 @@ CPU 使用率，就是除了空闲时间外的其他时间占总 CPU 时间的�
 $$usage=1 - \frac{idle_t-idle_{t-1}}{total_t-total_{t-1}}$$
 
 * 相关工具
-- ~vmstat~
-- ~mpstat~: 多核
-- [[id:d28a2474-63d6-413f-b362-f550f5101a98][~top~]], ~htop~
+- [[id:23a06886-3f73-4ad5-bf5f-a06cec8380a7][System Summary Tools]]
 - ~sar~
 - =proc/stat=
 
@@ -44,5 +42,5 @@ $$usage=1 - \frac{idle_t-idle_{t-1}}{total_t-total_{t-1}}$$
 * 总结
 - 用户 CPU 和 Nice CPU 高，应着重排查进程的性能问题。
 - 系统 CPU 高，应着重排查内核线程或者系统调用的性能问题。
-- I/O 等待 CPU 高，应该着重排查系统存储是不是出现了 I/O 问题。
+- IO 等待 CPU 高，应该着重排查系统存储是不是出现了 IO 问题。
 - 软中断和硬中断高，说明软中断或硬中断的处理程序占用了较多的 CPU，所以应该着重排查内核中的中断服务程序。

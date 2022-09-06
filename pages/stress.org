@@ -11,7 +11,7 @@
   # CPU密集型模拟
   stress --cpu 1 --timeout 600
 
-  # I/O密集型模拟
+  # IO密集型模拟
   stress -i 1 --timeout 600
 
   # 模拟大量进程，等待CPU调度
@@ -19,8 +19,8 @@
 #+end_src
 
 * ~stress-ng~
-~stress~ 的问题： ~stress -i~ 通过系统调用 ~sync()~ 来模拟 I/O 的问题，但这种方法实际上并不可靠。
+~stress~ 的问题： ~stress -i~ 通过系统调用 ~sync()~ 来模拟 IO 的问题，但这种方法实际上并不可靠。
 因为 ~sync()~ 的本意是刷新内存缓冲区的数据到磁盘中，以确保同步。如果缓冲区内本来就没多少数据，那读写到
-磁盘中的数据也就不多，也就没法产生 I/O 压力，在使用 SSD 磁盘的环境中尤为明显。
+磁盘中的数据也就不多，也就没法产生 IO 压力，在使用 SSD 磁盘的环境中尤为明显。
 
 使用 ~stress-ng~ 来模拟 ~stress-ng -i 1 --hdd 1 --timeout 600~

@@ -3,4 +3,4 @@
 :END:
 #+TITLE: System Calls
 
-- tags :: [[id:e1760304-292f-463c-a774-0338f5c7ba4c][I/O System Calls]]
+- tags :: [[id:e1760304-292f-463c-a774-0338f5c7ba4c][IO System Calls]]

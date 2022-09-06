@@ -8,5 +8,5 @@
 
 - =dirent.h=: directory manipulation
 - =unistd.h=: constants. e.g. STDIN_FILENO
-- =stdio.h=: standard I/O
+- =stdio.h=: standard IO
 - =errno.h=

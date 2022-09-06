@@ -1,7 +1,0 @@
-:PROPERTIES:
-:ID:       d28a2474-63d6-413f-b362-f550f5101a98
-:END:
-#+TITLE: ~top~
-
-* Tips
-- Filter by field "o/O" -> "COMMAND=emacs"

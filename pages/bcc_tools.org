@@ -16,7 +16,7 @@
 ** ~memleak~
 - ~memleak -p $(pidof app) -a~
 
-* I/O Related
+* IO Related
 - ~biosnoop~
 - ~biotop~
 - ~filetop~: File reads and writes by filename and process. Top for files.

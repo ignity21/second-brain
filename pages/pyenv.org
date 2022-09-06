@@ -2,3 +2,8 @@
 :ID:       d2ed7b60-76b6-4311-b624-aad2f629ae2b
 :END:
 #+TITLE: ~pyenv~
+
+* 国内安装加速
+1. [[https://registry.npmmirror.com/binary.html?path=python/][国内镜像]] 找到对应版本
+2. 下载 tar.xz 到 =$HOME/.pyenv/cache=
+3. ~pyenv install x.x.x~

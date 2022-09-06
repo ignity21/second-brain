@@ -3,13 +3,35 @@
 :END:
 #+TITLE: System Summary Tools
 
-* ~vmstat~
-查看系统整体指标
-#+begin_src bash
-  # 每隔5秒输出1组数据 --unit=M 可用于对齐输出
-  vmstat --unit=M 5
-#+end_src
+* 输出字段说明
 - cs（context switch）是每秒上下文切换的次数
 - in（interrupt）则是每秒中断的次数
 - r（Running or Runnable）是就绪队列的长度，也就是正在运行和等待 CPU 的进程数
 - b（Blocked）则是处于不可中断睡眠状态的进程数
+
+* ~vmstat~
+:PROPERTIES:
+:ID:       d306ebaa-b12b-4b58-bbb9-12b19caf9d3c
+:END:
+#+begin_src bash
+  # 每隔5秒输出1组数据 --unit=M 可用于对齐输出
+  vmstat --unit=M 5
+#+end_src
+
+* ~dstat~
+:PROPERTIES:
+:ID:       af377178-afff-4e44-853e-c009f4539266
+:END:
+增强版 vmstat, iostat, ifstat，查看系统整体情况
+
+* ~top~
+:PROPERTIES:
+:ID:       d28a2474-63d6-413f-b362-f550f5101a98
+:END:
+
+** Tips
+- Filter by field "o/O" -> "COMMAND=emacs"
+- ~sudo atop~: 系统指标分类分组统计
+- ~htop~: just fancy top
+
+* [[id:d12363f8-9b79-4e54-a2ce-a671cf7f806f][~mpstat~]]

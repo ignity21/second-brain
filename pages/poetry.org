@@ -15,3 +15,20 @@
 #+end_src
 
 * Basic Usage
+#+begin_src bash
+  poetry new # Creating new project
+  poetry install # Initialising a pre-existing project
+
+  poetry add dependency
+
+  poetry update # Updating dependencies
+
+  poetry run python your_script.py
+  poetry run pytest
+#+end_src
+
+* Specify Python Version
+#+begin_src bash
+  pyenv local x.x.x
+  poetry env use x.x.x
+#+end_src

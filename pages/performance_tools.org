@@ -3,34 +3,27 @@
 :END:
 #+TITLE: Performance Tools
 
+- tags :: [[id:2c4b9bb4-7806-4d8f-b08e-58001408a8e5][Troubleshooting]], [[id:87236eae-a3ef-4227-a905-b0c2a7c77a20][Linux]], [[id:23a06886-3f73-4ad5-bf5f-a06cec8380a7][System Summary Tools]]
+
 #+caption: Linux Performance Tools
 [[../assets/Linux/LinuxTools_1.png]]
 
 * 工具总结
 | 指标              | 工具                                          |
 |-------------------+-----------------------------------------------|
-| Process CPU Usage | ~top~, ~pidstat~, ~ps~, ~pstree~, ~htop~      |
+| Process CPU Usage | ~top~, ~pidstat~, ~ps~, ~pstree~    |
 | Context Switch    | ~vmstat~, ~dstat~, ~sar~                      |
 | Process CS        | ~pidstat~                                     |
 | Soft Interrupts   | ~top~, =/proc/softirqs=, ~mpstat~             |
 | Hard Interrupts   | ~vmstat~, =/proc/interrupts=                  |
-| Network           | ~dstat~, ~sar~, [[id:084f01f9-318e-4c51-860e-a73bc878b855][~tcpdump~]]                     |
-| I/O               | ~dstat~, ~sar~                                |
+| Network           | ~dstat~, ~sar~, ~tcpdump~       |
+| IO               | ~dstat~, ~sar~                                |
 | CPU Info          | =/proc/cpuinfo=, ~lscpu~                      |
-| Profile           | [[id:79477b25-96d0-4de6-87b7-eb0be0740763][~perf~]], ~execsnoop~                           |
+| Profile           | ~perf~, ~execsnoop~                    |
 
 - [[id:a4ca7e8c-82e2-42c5-b20e-dc3ab62bd42f][~sysstat~]]: 包含 mpstat, sar, pidstat
 
 * 其他工具
-- ~dstat~ :: 增强版 vmstat, iostat, ifstat，查看系统整体情况
-- ~atop~ :: CPU、内存、磁盘和网络等资源的全面监控
-- [[id:a1e19193-14f8-4ce9-b161-67f323133064][~strace~]] :: 进程的系统调用
-
-** ~watch~
-持续执行指定命令输出，并标注出变化
-#+begin_src bash
-  watch -d uptime
-  watch -d cat /proc/interrupts
-  watch -d grep "Rescheduling interrupts" /proc/interrupts
-  watch -d grep -A 15 'Normal' /proc/zoneinfo # grep -A 表示仅显示Normal行以及之后的15行输出
-#+end_src
+- ~dstat~ ::
+- ~strace~ :: 进程的系统调用
+- ~watch~ :: 辅助监控用

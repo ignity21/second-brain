@@ -31,7 +31,7 @@ Performance Counter Descriptions:
 - =task-clock= tells us how many clock cycles our task. (all CPUs)
 - The difference between =instructions= and =cycles= gives us an indication of how well our code is vectorizing and pipelining.
 - =cs=: context switches
-- =migrations=: tell us about how the program is halted in order to wait for a kernel operation to finish (such as I/O).
+- =migrations=: tell us about how the program is halted in order to wait for a kernel operation to finish (such as IO).
   - =migrations= happen when the program is halted and resumed on a different CPU than the one it was on before
 - =faults=: page-fault.
 - =cache-references= increases whenever we reference data that is in our cache(L1/L2/L3). If we do not already have this data in the cache and need to fetch it from RAM, this counts as a =cache-miss=

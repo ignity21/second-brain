@@ -1,0 +1,5 @@
+:PROPERTIES:
+:ID:       9690fbcc-d61f-49c8-ade7-563c96a7ad6e
+:END:
+#+TITLE: ~pstree~
+- ~pstree -aps 3084~: -a 表示输出命令行选项，p表示PID s表示指定进程的父进程

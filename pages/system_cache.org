@@ -7,6 +7,6 @@
 
 
 - Prior to Linux kernel version 2.4
-  - Page Cache: caches pages of files to optimize file I/O.
-  - Buffer Cache: caches disk blocks to optimize block I/O.
+  - Page Cache: caches pages of files to optimize file IO.
+  - Buffer Cache: caches disk blocks to optimize block IO.
 - As of the 2.4 kernel, two caches have been combined, now there is only one cache, the Page Cache

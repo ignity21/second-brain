@@ -1,12 +1,12 @@
 :PROPERTIES:
 :ID:       e1760304-292f-463c-a774-0338f5c7ba4c
 :END:
-#+TITLE: I/O System Calls
+#+TITLE: IO System Calls
 #+OPTIONS: ^:nil
 
-- tags :: [[id:62289ff0-f3b6-402f-b6bc-6fd33cd8ca44][Page Cache]], [[id:d5f8c354-df83-45fa-bb36-c8a0b81d0fe9][I/O]]
+- tags :: [[id:62289ff0-f3b6-402f-b6bc-6fd33cd8ca44][Page Cache]], [[id:d5f8c354-df83-45fa-bb36-c8a0b81d0fe9][IO]]
 
-* 基本 I/O
+* 基本 IO
 - ~open~: ~fd = open(pathname, oflags, mode)~
 - ~read~: ~numread = read(fd, buffer, count)~
 - ~write~: ~numwrite = write(fd, buffer, count)~
@@ -20,8 +20,8 @@
   - 等价于 ~fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, mode)~0
 - 特殊的 flag:
   - *O_DIRECT*: 无缓冲输入输出
-  - *O_ASYNC*: 当 I/O 操作可行时，产生信号通知进程
-  - *O_DSYNC*: 提供同步的 I/O 数据完整性
+  - *O_ASYNC*: 当 IO 操作可行时，产生信号通知进程
+  - *O_DSYNC*: 提供同步的 IO 数据完整性
   - *O_NONBLOCK*: 以非阻塞方式打开
   - *O_SYNC*: 以同步方式写入文件
 
@@ -48,7 +48,7 @@
   }
 #+end_src
 
-* 高级 I/O
+* 高级 IO
 ** 原子操作
 - *O_APPEND* 打开的文件，每次写都会执行原子操作 1. seek to EOF 2. write
 - ~pread~, ~pwrite~ 同理，都是先 seek 后 read/write，都是一次系统调用，保证是原子操作。
@@ -56,9 +56,9 @@
   - *O_CREAT*: 文件不存在则创建
   - *O_EXCL*: 如文件已存在， ~open()~ 会返回错误。使得“测试和创建”两步骤成为一个原子操作
 
-* 其他 I/O 调用
+* 其他 IO 调用
 ** ~ioctl()~
-对于非标准 I/O 模型的设备和文件操作， ~ioctl~ 是系统提供的万能接口。
+对于非标准 IO 模型的设备和文件操作， ~ioctl~ 是系统提供的万能接口。
 
 ** ~sync~, ~fsync~, and ~fdatasync~
 - ~void sync(void)~: simply queues all the modified block buffers for writing and returns.
@@ -71,7 +71,7 @@ Features
 1. Duplicate an existing descriptor (cmd =F_DUPFD= or =F_DUPFD_CLOEXEC=)
 2. Get/set file descriptor flags (cmd =F_GETFD= or =F_SETFD=)
 3. Get/set file status flags (cmd =F_GETEL= or =F_SETFL=)
-4. Get/set asynchronous I/O ownership (cmd =F_GETOWN= or =F_SETOWN=)
+4. Get/set asynchronous IO ownership (cmd =F_GETOWN= or =F_SETOWN=)
 5. Get/set record locks (cmd =F_GETLK=, =F_SETLK=, or ~F_SETLKW~)
 *** 适用场景
 常用用途：修改 *file status flags*
