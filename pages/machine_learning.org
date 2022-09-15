@@ -2,6 +2,7 @@
 :ID:       9d343f34-3ee6-4737-8612-6718f77dba03
 :END:
 #+TITLE: Machine Learning
+#+filetags: :ML:
 
 - tags :: [[id:3d4eba1c-0c07-42fb-94e6-57fc011cc90e][Data Science]], [[id:eb9214d7-7c4d-4fd2-8836-b0f40f6ca466][ML Algorithms]]
 

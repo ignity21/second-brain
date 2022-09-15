@@ -2,3 +2,7 @@
 ltximg/
 logseq/bak
 logseq/.recycle/
+
+# python
+.venv/
+.ipynb_checkpoints/

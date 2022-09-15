@@ -2,3 +2,45 @@
 :ID:       ffb77b30-9edd-4c1b-af88-0171c342111b
 :END:
 #+TITLE: Linear Algebra
+#+filetags: :Math:
+
+* Concepts
+  - Linear Combinations :: $a\bm{v}+b\bm{w}$ is the linear combination of $\bm{v}$ and $\bm{w}$, $a$ and $b$ are scalars.
+  - Span :: The "span" of $\bm{v}$ and $\bm{w}$ is the set of *all* their linear combinations.
+  - Linearly Dependent :: one of the vectors can be expressed as a linear combination of the others since it's already in the span of the others. i.e. $\exists{a}\exists{b} | \bm{u} = a\bm{v} + b\bm{w}$
+  - Linearly Independent :: $\forall{a}\forall{b} | \bm{u}\ne a\bm{v}+b\bm{w}$
+    - Definitions treats all vectors equally: $a\bm{v}+b\bm{w}+c\bm{u}=\bm{0}$ if the only solution is $a=b=c=0$
+  - Basis :: The *basis* of a vector space is a set of *linearly independent* vectors that *span* the full space.
+  - Rank :: The number of dimensions in the output of a linear transformation. i.e. in the column space.
+  - Column Space :: "Column Space" of $A$ is the set of all possible outputs $A\bm{v}$
+  - Null Space / Kernel :: The set of vectors that lands on *the origin* in a linear transformation is called the "null space" or the "kernel".
+  - Eigenvectors :: Eigenvector is a vector that changes *at most* by a *scalar* factor when that linear transformation is applied to it.
+  - Eigenvalues :: Eigenvalue is the factor by which the eigenvector is scaled, denoted by $\lambda$
+
+* Vector
+
+** Addition
+- Commutative
+- Associativity
+- Additive Identity: There exists an element $\bm{0}$ such that $\bm{a}+\bm{0}=\bm{a}$
+- Additive Inverse: $\forall{\bm{a}}\exists{\bm{b}}\bm{a}+\bm{b}=\bm{0}$
+- Geometric Translation :: Add a vector $\bm{v}$ to all other vectors, then the whole shape gets shifted by $\bm{v}$
+
+** Scale Multiplication
+- Commutative
+- Associativity
+- Distributive: $s(\bm{a}+\bm{b})=s\bm{a}+s\bm{b}$
+
+** Norm(Magnitudes)
+$$\left\|\bm{u}\right\|=\sqrt{\sum_i u_i^2}$$
+- The norm of $\bm{u}$ is the length of $\bm{u}$
+- A *unit vector* is a vector with a norm equal to 1.
+- *Normalized Vector* $\bm{\hat{u}}=\frac{\bm{u}}{\left\|\bm{u}\right\|}$
+*** Code
+#+begin_src python
+  from numpy import linalg as LA
+  LA.norm(u)
+#+end_src
+
+** Dot Product
+- $\bm{x}\cdot \bm{x} = \left\| \bm{x} \right\|^2$

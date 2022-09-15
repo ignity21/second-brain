@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "notebooks"
+version = "0.1.0"
+description = "Notebooks"
+authors = ["chrischen <chrischen3121@gmail.com>"]
+
+[[tool.poetry.source]]
+name = "aliyun"
+default = true
+url = "https://mirrors.aliyun.com/pypi/simple/"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "^1.4.4"
+jupyterlab = "^3.4.6"
+debugpy = "1.6.2" # Invalid hashes for 1.6.3
+scikit-learn = "^1.1.2"
+seaborn = "^0.12.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

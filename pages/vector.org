@@ -2,3 +2,45 @@
 :ID:       32edc9b1-2dd2-4e6c-8f50-d53a2d4202e4
 :END:
 #+TITLE: Vector
+#+filetags: :Math:
+
+- tags :: [[id:ffb77b30-9edd-4c1b-af88-0171c342111b][Linear Algebra]]
+
+* Addition
+- Commutative
+- Associativity
+- Additive Identity: There exists an element $\bm{0}$ such that $\bm{a}+\bm{0}=\bm{a}$
+- Additive Inverse: $\forall{\bm{a}}\exists{\bm{b}}\bm{a}+\bm{b}=\bm{0}$
+- Geometric Translation :: Add a vector $\bm{v}$ to all other vectors, then the whole shape gets shifted by $\bm{v}$
+
+* Scale Multiplication
+- Commutative
+- Associativity
+- Distributive: $s(\bm{a}+\bm{b})=s\bm{a}+s\bm{b}$
+
+* Norm(Magnitudes)
+$$\left\|\bm{u}\right\|=\sqrt{\sum_{i=1} u_i^2}$$
+- The norm of $\bm{u}$ is the length of $\bm{u}$
+- A *unit vector* is a vector with a norm equal to 1.
+- *Normalized Vector* $\bm{\hat{u}}=\frac{\bm{u}}{\left\|\bm{u}\right\|}$
+*** Code
+#+begin_src python
+  from numpy import linalg as LA
+  LA.norm(u)
+#+end_src
+
+* Dot Product
+** Geometric Meaning
+- Cosine Rule: $c^2=a^2+b^2-2ab\cos{\theta}$
+- $\bm{v}\cdot\bm{v}=\left\|\bm{v}\right\|=\sum_{i=1}v_i$
+- $\left\|\bm{x}-\bm{y}\right\|^2=\left\|\bm{x}\right\|^2+\left\|\bm{y}\right\|^2-2\left\|\bm{x}\right\|\left\|\bm{y}\right\|\cos\theta$
+  - where $\theta$ is the angle between $\bm{x}$ and $\bm{y}$.
+
+$$\begin{align*}
+\left\|\bm{x}-\bm{y}\right\|^2 & = (\bm{x}-\bm{y})\cdot(\bm{x}-\bm{y}) \\
+& = \sum_{i=1}(x_i-y_i)(x_i-y_i) \\
+& = \sum_{i=1}(x_i^2+y_i^2-2 x_i y_i) \\
+& = \bm{x}\cdot\bm{x} + \bm{y}\cdot\bm{yq} - 2\bm{x}\cdot\bm{y}
+\end{align*}$$
+
+- $\bm{x}\cdot\bm{y} = \left\|\bm{x}\right\|\left\|\bm{y}\right\|\cos\theta$

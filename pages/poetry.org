@@ -32,3 +32,14 @@
   pyenv local x.x.x
   poetry env use x.x.x
 #+end_src
+
+* Issues
+** Too Slow
+- [Recommended] ~poetry config repositories.pypi "https://mirrors.aliyun.com/pypi/simple/"~
+- In =pyproject.toml=
+#+begin_src conf
+  [[tool.poetry.source]]
+  name = "aliyun"
+  default = true
+  url = "https://mirrors.aliyun.com/pypi/simple/"
+#+end_src
