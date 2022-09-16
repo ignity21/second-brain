@@ -60,9 +60,29 @@
   - $\frac{\bm{x}}{\|\bm{x}\|}$ or $\bm{\hat{x}}$ is the unit vector of *x* (aka normalized vector)
 
 ** Properties
-- Commutative
-- Distributive over Addition: $\bm{a}\cdot(\bm{b}+\bm{c})=\bm{a}\cdot\bm{b}+\bm{a}\cdot\bm{c}$
-- $\bm{a}\cdot(s\bm{b})=s(\bm{a}\cdot\bm{b})$
+- Commutative: $\bm{u}\cdot\bm{v}=\bm{v}\cdot\bm{u}$
+- NOT associative: $(\bm{u}\cdot\bm{v})\cdot \bm{w}$ is not defined.($\text{scalar }\cdot\bm{w}$)
+- Distributive over Addition: $\bm{u}\cdot(\bm{v}+\bm{w})=\bm{u}\cdot\bm{v}+\bm{u}\cdot\bm{w}$
+- Associative with regards to scalar multiplication
+  - $\lambda\times(\bm{u}\cdot\bm{v})=(\lambda\times\bm{u})\cdot\bm{v}=\bm{u}\cdot(\lambda\times\bm{v})$
+
+** Calculating the angle between vectors
+\[\theta=\arccos(\frac{\bm{x}\cdot\bm{y}}{\|\bm{x}\|\times\|\bm{y}\|})\]
+#+begin_src python
+  # in radians
+  cos_theta = np.dot(x, y) / LA.norm(x) / LA.norm(y)
+  theta = np.arccos(np.clip(cos_theta, -1, 1))
+  # Due to small floating point errors, cos_theta may be very slightly outside of the [-1, 1]
+  # Should clips the value first
+#+end_src
+
+** Projecting a point onto an axis
+The projection of vector *v* onto *u*:
+- \[\bm{proj_u v}=\frac{\bm{u}\cdot \bm{v}}{\|\bm{u}\|^2}\times\bm{u}=(\bm{v}\cdot\bm{\hat{u}})\times \bm{\hat{u}}\]
+#+begin_src python
+  u_normalized = u / LA.norm(u)
+  proj = v.dot(u_normalized) * u_normalized
+#+end_src
 
 ** Code
 #+begin_src python
