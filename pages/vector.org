@@ -10,7 +10,7 @@
 - Commutative
 - Associativity
 - Additive Identity: There exists an element $\bm{0}$ such that $\bm{a}+\bm{0}=\bm{a}$
-- Additive Inverse: $\forall{\bm{a}}\exists{\bm{b}}\bm{a}+\bm{b}=\bm{0}$
+- Additive Inverse: $\forall{\bm{a}}\exists{\bm{b}}\|\bm{a}+\bm{b}=\bm{0}$
 - Geometric Translation :: Add a vector $\bm{v}$ to all other vectors, then the whole shape gets shifted by $\bm{v}$
 
 * Scale Multiplication
@@ -19,10 +19,10 @@
 - Distributive: $s(\bm{a}+\bm{b})=s\bm{a}+s\bm{b}$
 
 * Norm(Magnitudes)
-$$\left\|\bm{u}\right\|=\sqrt{\sum_{i=1} u_i^2}$$
+\[\|\bm{u}\|=\sqrt{\sum_{i=1} u_i^2}\]
 - The norm of $\bm{u}$ is the length of $\bm{u}$
 - A *unit vector* is a vector with a norm equal to 1.
-- *Normalized Vector* $\bm{\hat{u}}=\frac{\bm{u}}{\left\|\bm{u}\right\|}$
+- *Normalized Vector* $\bm{\hat{u}}=\frac{\bm{u}}{\|\bm{u}\|}$
 *** Code
 #+begin_src python
   from numpy import linalg as LA
@@ -30,17 +30,47 @@ $$\left\|\bm{u}\right\|=\sqrt{\sum_{i=1} u_i^2}$$
 #+end_src
 
 * Dot Product
+** Definition
+\[\bm{x}\cdot\bm{y}=\sum_{i=1}^n x_i y_i\]
+
 ** Geometric Meaning
 - Cosine Rule: $c^2=a^2+b^2-2ab\cos{\theta}$
-- $\bm{v}\cdot\bm{v}=\left\|\bm{v}\right\|=\sum_{i=1}v_i$
-- $\left\|\bm{x}-\bm{y}\right\|^2=\left\|\bm{x}\right\|^2+\left\|\bm{y}\right\|^2-2\left\|\bm{x}\right\|\left\|\bm{y}\right\|\cos\theta$
+- $\bm{v}\cdot\bm{v}=\|\bm{v}\|=\sum_{i=1}v_i$
+- $\|\bm{x}-\bm{y}\|^2=\|\bm{x}\|^2+\|\bm{y}\|^2-2\|\bm{x}\|\|\bm{y}\|\cos\theta$
   - where $\theta$ is the angle between $\bm{x}$ and $\bm{y}$.
 
-$$\begin{align*}
-\left\|\bm{x}-\bm{y}\right\|^2 & = (\bm{x}-\bm{y})\cdot(\bm{x}-\bm{y}) \\
+\begin{align*}
+\|\bm{x}-\bm{y}\|^2 & = (\bm{x}-\bm{y})\cdot(\bm{x}-\bm{y}) \\
 & = \sum_{i=1}(x_i-y_i)(x_i-y_i) \\
 & = \sum_{i=1}(x_i^2+y_i^2-2 x_i y_i) \\
-& = \bm{x}\cdot\bm{x} + \bm{y}\cdot\bm{yq} - 2\bm{x}\cdot\bm{y}
-\end{align*}$$
+& = \bm{x}\cdot\bm{x} + \bm{y}\cdot\bm{y} - 2\bm{x}\cdot\bm{y}
+\end{align*}
 
-- $\bm{x}\cdot\bm{y} = \left\|\bm{x}\right\|\left\|\bm{y}\right\|\cos\theta$
+- $\bm{x}\cdot\bm{y} = \|\bm{x}\|\|\bm{y}\|\cos\theta$
+
+** Scalar Projection
+- $\|\bm{y}\|\cos\theta$ is the scalar *projection of y on x*. $=\frac{\bm{x}\cdot\bm{y}}{\|\bm{x}\|}$
+- \(\text{Dot product } = (\text{scalar projection } \bm{y} \text{ on } \bm{x}) \times (\text{length of } \bm{x})\)
+- When the vectors are Perpendicular, meaning dot product is 0. (scalar projection is 0)
+
+** Vector Projection
+- Scalar Projection is the length of the projection *y* on *x*
+- Vector Projection it the vector or that projection
+  - $\text{vector projection}=\text{scalar projection}\times\frac{\bm{x}}{\|\bm{x}\|}=\frac{\bm{y}\cdot\bm{x}}{\|\bm{x}\|}\times\frac{\bm{x}}{\|\bm{x}\|}=\frac{\bm{y}\cdot\bm{x}}{\bm{x}\cdot\bm{x}}\cdot \bm{x}$
+  - $\frac{\bm{x}}{\|\bm{x}\|}$ or $\bm{\hat{x}}$ is the unit vector of *x* (aka normalized vector)
+
+** Properties
+- Commutative
+- Distributive over Addition: $\bm{a}\cdot(\bm{b}+\bm{c})=\bm{a}\cdot\bm{b}+\bm{a}\cdot\bm{c}$
+- $\bm{a}\cdot(s\bm{b})=s(\bm{a}\cdot\bm{b})$
+
+** Code
+#+begin_src python
+  # dot product of x and y
+  np.dot(x, y)
+  x.dot(y)
+  x @ y
+
+  # element-wise product, not a dot product
+  x * y
+#+end_src
