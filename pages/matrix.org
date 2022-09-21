@@ -1,0 +1,97 @@
+:PROPERTIES:
+:ID:       098b9a70-c6ee-49c3-94b9-8523f64d0193
+:END:
+#+TITLE: Matrix
+#+filetags: :Math:
+
+- tags :: [[id:32edc9b1-2dd2-4e6c-8f50-d53a2d4202e4][Vector]], [[id:ffb77b30-9edd-4c1b-af88-0171c342111b][Linear Algebra]]
+
+* Concept
+Matrices make transformations on vectors, potentially changing their magnitude and direction.
+- Square matrix: a $n\times n$ matrix
+- Diagonal matrix
+
+\[\begin{bmatrix}
+4 & 0 & 0 \\
+0 & 5 & 0 \\
+0 & 0 & 6
+\end{bmatrix}\]
+#+begin_src python
+  np.diag([4, 5, 6])
+  M = ... # a matrix
+  np.diag(M) # extract the diagonal values e.g. [4, 5, 6]
+#+end_src
+
+* Addition
+- Commutative
+- Associative
+
+* Scale Multiplication
+- Commutative
+- Associative
+- Distributive: $s(\bm{A}+\bm{B})=s\bm{A}+s\bm{B}$
+
+* Matrix multiplication
+- Not Commutative $\bm{A}\cdot \bm{B}\neq \bm{B}\cdot \bm{A}$
+- Associative: $(\bm{A}\cdot\bm{B})\cdot \bm{C}=\bm{A}\cdot(\bm{B}\cdot\bm{C})$
+** Geometric Application
+*** Projection onto an axis
+- The dot product of a unit vector and a matrix basically performs a projection on an axis
+#+begin_src python
+  unit_x = np.array[[1, 0]]
+  unit_x.dot(M) # result => horizontal coordinates
+
+
+  angle30 = 30 * np.pi
+  unit_30 = np.array([[np.cos(angle30), np.sin(angle30)]])
+  unit_30.dot(M) # result => projection onto angle 30 Line
+#+end_src
+
+* Determinant
+The determinant of a transformation represents the scale factor by which *areas* are transformed by the Matrix.
+- To measure how much are areas scaled.
+- [[https://youtu.be/Ip3X9LOh2dk?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab][Youtube]], [[https://www.bilibili.com/video/BV1ys411472E?p=7&vd_source=7540f00c721dbab673058cc445db02a0][bilibili]]
+- $det(M)=5$: The transformation increases the area of a region by a factor of 5.
+- $det(M)=0$: squishes areas into a *smaller dimension*.
+  - Columns of the matrix must be *linearly dependent*.
+- $det(M)=-2$: flips space over. [[https://www.bilibili.com/video/BV1ys411472E?p=7&vd_source=7540f00c721dbab673058cc445db02a0&t=228.8][Video]]
+
+** 2D
+#+caption: 2D Determinant
+[[../assets/Math/2D_determinant.png]]
+\[A=\begin{bmatrix} a & b \\
+c & d
+\end{bmatrix}\]
+
+The determinant is the area $det(A)=(a+b)(c+d)-ac-bd-2bc=ad-bc$
+
+** 3D
+\[A=\begin{bmatrix} a & b & c \\
+d & e & f \\
+g & h & i \end{bmatrix}\]
+
+\[det(A)=a\cdot det(\begin{bmatrix}e & f \\ h & i\end{bmatrix})-b\cdot det(\begin{bmatrix}d & f \\ g & i\end{bmatrix})+c\cdot det(\begin{bmatrix}d & e \\ g & h\end{bmatrix})\]
+
+** Properties
+- $det(AB)=det(A)det(B)$
+
+* Inverse
+- $A^{-1}\cdot A = I$
+- $A^{-1}\cdot A = I$
+
+* Special Matrices
+** Rotation Matrix
+- 2D
+
+\[\begin{bmatrix}
+\cos\theta & \sin\theta \\
+-\sin\theta & \cos\theta
+\end{bmatrix}\]
+
+- 3D
+
+\[\begin{bmatrix}
+\cos\theta & \sin\theta & 0 \\
+-\sin\theta & \cos\theta & 0 \\
+0 & 0 & 1
+\end{bmatrix}\]

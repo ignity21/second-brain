@@ -4,18 +4,18 @@
 #+TITLE: Vector
 #+filetags: :Math:
 
-- tags :: [[id:ffb77b30-9edd-4c1b-af88-0171c342111b][Linear Algebra]]
+- tags :: [[id:ffb77b30-9edd-4c1b-af88-0171c342111b][Linear Algebra]], [[id:098b9a70-c6ee-49c3-94b9-8523f64d0193][Matrix]]
 
 * Addition
 - Commutative
-- Associativity
+- Associative
 - Additive Identity: There exists an element $\bm{0}$ such that $\bm{a}+\bm{0}=\bm{a}$
 - Additive Inverse: $\forall{\bm{a}}\exists{\bm{b}}\|\bm{a}+\bm{b}=\bm{0}$
 - Geometric Translation :: Add a vector $\bm{v}$ to all other vectors, then the whole shape gets shifted by $\bm{v}$
 
 * Scale Multiplication
 - Commutative
-- Associativity
+- Associative
 - Distributive: $s(\bm{a}+\bm{b})=s\bm{a}+s\bm{b}$
 
 * Norm(Magnitudes)
@@ -87,6 +87,7 @@
 - Scalar Projection is the length of the projection *y* on *x*
 - Vector Projection $\bm{proj_x y}$
   - $proj_x y=\text{scalar projection}\times\frac{\bm{x}}{\|\bm{x}\|}=\frac{\bm{y}\cdot\bm{x}}{\|\bm{x}\|}\times\frac{\bm{x}}{\|\bm{x}\|}=\frac{\bm{y}\cdot\bm{x}}{\bm{x}\cdot\bm{x}}\cdot \bm{x}$
+  - $proj_x y=(\bm{y}\cdot\bm{\hat{x}})\times\bm{\hat{x}}$
   - $\frac{\bm{x}}{\|\bm{x}\|}$ or $\bm{\hat{x}}$ is the unit vector of *x* (aka normalized vector)
   - The dot product is also very useful to project points onto an axis
 #+begin_src python
