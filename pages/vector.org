@@ -35,7 +35,7 @@
 
 ** Geometric Meaning
 - Cosine Rule: $c^2=a^2+b^2-2ab\cos{\theta}$
-- $\bm{v}\cdot\bm{v}=\|\bm{v}\|=\sum_{i=1}v_i$
+- $\bm{v}\cdot\bm{v}=\|\bm{v}\|^2=\sum_{i=1}v_i^2$
 - $\|\bm{x}-\bm{y}\|^2=\|\bm{x}\|^2+\|\bm{y}\|^2-2\|\bm{x}\|\|\bm{y}\|\cos\theta$
   - where $\theta$ is the angle between $\bm{x}$ and $\bm{y}$.
 
@@ -47,17 +47,16 @@
 \end{align*}
 
 - $\bm{x}\cdot\bm{y} = \|\bm{x}\|\|\bm{y}\|\cos\theta$
+** Code
+#+begin_src python
+  # dot product of x and y
+  np.dot(x, y)
+  x.dot(y)
+  x @ y
 
-** Scalar Projection
-- $\|\bm{y}\|\cos\theta$ is the scalar *projection of y on x*. $=\frac{\bm{x}\cdot\bm{y}}{\|\bm{x}\|}$
-- \(\text{Dot product } = (\text{scalar projection } \bm{y} \text{ on } \bm{x}) \times (\text{length of } \bm{x})\)
-- When the vectors are Perpendicular, meaning dot product is 0. (scalar projection is 0)
-
-** Vector Projection
-- Scalar Projection is the length of the projection *y* on *x*
-- Vector Projection it the vector or that projection
-  - $\text{vector projection}=\text{scalar projection}\times\frac{\bm{x}}{\|\bm{x}\|}=\frac{\bm{y}\cdot\bm{x}}{\|\bm{x}\|}\times\frac{\bm{x}}{\|\bm{x}\|}=\frac{\bm{y}\cdot\bm{x}}{\bm{x}\cdot\bm{x}}\cdot \bm{x}$
-  - $\frac{\bm{x}}{\|\bm{x}\|}$ or $\bm{\hat{x}}$ is the unit vector of *x* (aka normalized vector)
+  # element-wise product, not a dot product
+  x * y
+#+end_src
 
 ** Properties
 - Commutative: $\bm{u}\cdot\bm{v}=\bm{v}\cdot\bm{u}$
@@ -76,21 +75,21 @@
   # Should clips the value first
 #+end_src
 
-** Projecting a point onto an axis
-The projection of vector *v* onto *u*:
-- \[\bm{proj_u v}=\frac{\bm{u}\cdot \bm{v}}{\|\bm{u}\|^2}\times\bm{u}=(\bm{v}\cdot\bm{\hat{u}})\times \bm{\hat{u}}\]
+
+* Projection
+** Scalar Projection
+- $\|\bm{y}\|\cos\theta$ is the scalar *projection of y on x*.
+- $\text{Scale Projection }=\frac{\bm{x}\cdot\bm{y}}{\|\bm{x}\|}$
+- \(\text{Dot product } = (\text{scalar projection } \bm{y} \text{ on } \bm{x}) \times (\text{length of } \bm{x})\)
+- When the vectors are Perpendicular, meaning dot product is 0. (scalar projection is 0)
+
+** Vector Projection
+- Scalar Projection is the length of the projection *y* on *x*
+- Vector Projection $\bm{proj_x y}$
+  - $proj_x y=\text{scalar projection}\times\frac{\bm{x}}{\|\bm{x}\|}=\frac{\bm{y}\cdot\bm{x}}{\|\bm{x}\|}\times\frac{\bm{x}}{\|\bm{x}\|}=\frac{\bm{y}\cdot\bm{x}}{\bm{x}\cdot\bm{x}}\cdot \bm{x}$
+  - $\frac{\bm{x}}{\|\bm{x}\|}$ or $\bm{\hat{x}}$ is the unit vector of *x* (aka normalized vector)
+  - The dot product is also very useful to project points onto an axis
 #+begin_src python
   u_normalized = u / LA.norm(u)
   proj = v.dot(u_normalized) * u_normalized
-#+end_src
-
-** Code
-#+begin_src python
-  # dot product of x and y
-  np.dot(x, y)
-  x.dot(y)
-  x @ y
-
-  # element-wise product, not a dot product
-  x * y
 #+end_src
