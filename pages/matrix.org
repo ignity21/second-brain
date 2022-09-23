@@ -76,12 +76,44 @@ The determinant of a transformation represents the scale factor by which *areas*
   - Columns of the matrix must be *linearly dependent*.
 - $det(M)=-2$: flips space over. [[https://www.bilibili.com/video/BV1ys411472E?p=7&vd_source=7540f00c721dbab673058cc445db02a0&t=228.8][Video]]
 
+#+begin_src python
+  LA.det(M)
+#+end_src
+
 
 ** Properties
 - $det(AB)=det(A)\times det(B)$
 
 * Inverse
 - $A^{-1}\cdot A = I$
+- Only square matrices can be inversed.
+  - e.g. A transformation matrix performs projection onto an axis.
+- *Singular matrix*: a square matrix that cannot be inversed.
+#+begin_src python
+  A_inv = LA.inv(A)
+  # may raise "LinAlgError: Singular matrix"
+#+end_src
+- A matrix that is its own inverse is called an *involution*.
+  - e.g. reflection matrices, or a rotation by 180°
+- Test if a matrix can be inversed ~assert LA.inv(M) != 0~
+  - If the determinant is equal to 0, then the matrix cannot be inversed. (it is a singular matrix)
+
+* Composing Linear Transformation
+#+begin_src python
+  P_squeezed_then_sheared = F_shear.dot(F_squeeze.dot(P))
+  P_squeezed_then_sheared = (F_shear.dot(F_squeeze)).dot(P) # associative
+
+  # Perform dot product on transformation matrices first
+  # lead to a very significant performance boost.
+  F_squeeze_then_shear = F_shear.dot(F_squeeze)
+  P_squeezed_then_sheared = F_squeeze_then_shear.dot(P)
+#+end_src
+
+** Inverse
+- $(Q\cdot R)^{-1}=R^{-1}\cdot Q^{-1}$
+#+begin_src python
+  LA.inv(F_shear.dot(F_squeeze)) == LA.inv(F_squeeze).dot(LA.inv(F_shear)) # reversed order
+#+end_src
 
 * Special Matrices
 ** Rotation Matrix
