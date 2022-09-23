@@ -22,6 +22,9 @@ Matrices make transformations on vectors, potentially changing their magnitude a
   np.diag(M) # extract the diagonal values e.g. [4, 5, 6]
 #+end_src
 
+** Linear Transformation
+- Any linear transformation $f$ that maps n-dimensional vectors to m-dimensional vectors can be represented as an $\bm{m\times n}$ matrix.
+
 * Addition
 - Commutative
 - Associative
@@ -37,15 +40,32 @@ Matrices make transformations on vectors, potentially changing their magnitude a
 ** Geometric Application
 *** Projection onto an axis
 - The dot product of a unit vector and a matrix basically performs a projection on an axis
+  - gives us the *coordinates* of the resulting points on that axis.
 #+begin_src python
-  unit_x = np.array[[1, 0]]
+  unit_x = np.array[[1, 0]] #  matrix 1x2
   unit_x.dot(M) # result => horizontal coordinates
-
+  # just projected  onto the horizontal axis
 
   angle30 = 30 * np.pi
   unit_30 = np.array([[np.cos(angle30), np.sin(angle30)]])
   unit_30.dot(M) # result => projection onto angle 30 Line
 #+end_src
+
+*** Rotation
+** 2D
+#+caption: 2D Determinant
+[[../assets/Math/2D_determinant.png]]
+\[A=\begin{bmatrix} a & b \\
+c & d
+\end{bmatrix}\]
+
+The determinant is the area $det(A)=(a+b)(c+d)-ac-bd-2bc=ad-bc$
+** 3D
+\[A=\begin{bmatrix} a & b & c \\
+d & e & f \\
+g & h & i \end{bmatrix}\]
+
+\[det(A)=a\cdot det(\begin{bmatrix}e & f \\ h & i\end{bmatrix})-b\cdot det(\begin{bmatrix}d & f \\ g & i\end{bmatrix})+c\cdot det(\begin{bmatrix}d & e \\ g & h\end{bmatrix})\]
 
 * Determinant
 The determinant of a transformation represents the scale factor by which *areas* are transformed by the Matrix.
@@ -56,27 +76,11 @@ The determinant of a transformation represents the scale factor by which *areas*
   - Columns of the matrix must be *linearly dependent*.
 - $det(M)=-2$: flips space over. [[https://www.bilibili.com/video/BV1ys411472E?p=7&vd_source=7540f00c721dbab673058cc445db02a0&t=228.8][Video]]
 
-** 2D
-#+caption: 2D Determinant
-[[../assets/Math/2D_determinant.png]]
-\[A=\begin{bmatrix} a & b \\
-c & d
-\end{bmatrix}\]
-
-The determinant is the area $det(A)=(a+b)(c+d)-ac-bd-2bc=ad-bc$
-
-** 3D
-\[A=\begin{bmatrix} a & b & c \\
-d & e & f \\
-g & h & i \end{bmatrix}\]
-
-\[det(A)=a\cdot det(\begin{bmatrix}e & f \\ h & i\end{bmatrix})-b\cdot det(\begin{bmatrix}d & f \\ g & i\end{bmatrix})+c\cdot det(\begin{bmatrix}d & e \\ g & h\end{bmatrix})\]
 
 ** Properties
-- $det(AB)=det(A)det(B)$
+- $det(AB)=det(A)\times det(B)$
 
 * Inverse
-- $A^{-1}\cdot A = I$
 - $A^{-1}\cdot A = I$
 
 * Special Matrices
