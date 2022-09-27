@@ -2,7 +2,7 @@
 :ID:       d5fe0989-3068-4638-8a1c-03cda4c8028f
 :END:
 #+TITLE: Identity Matrix
-#+filetags: :Math:
+#+filetags: :Linear Algebra
 - tags :: [[id:098b9a70-c6ee-49c3-94b9-8523f64d0193][Matrix]]
 
 * Definition

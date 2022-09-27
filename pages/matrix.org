@@ -2,7 +2,7 @@
 :ID:       098b9a70-c6ee-49c3-94b9-8523f64d0193
 :END:
 #+TITLE: Matrix
-#+filetags: :Math:
+#+filetags: :Linear Algebra
 
 - tags :: [[id:32edc9b1-2dd2-4e6c-8f50-d53a2d4202e4][Vector]], [[id:ffb77b30-9edd-4c1b-af88-0171c342111b][Linear Algebra]]
 
@@ -35,6 +35,10 @@ Matrices make transformations on vectors, potentially changing their magnitude a
 - Distributive: $s\times(A+B)=s\times A+s\times B$
 
 * Matrix multiplication
+#+begin_src python
+  assert A @ B == A.dot(B)
+  assert A @ A @ A == scipy.linalg.fractional_matrix_power(A, 3)
+#+end_src
 ** Geometric Application
 *** Projection onto an axis
 - The dot product of a unit vector and a matrix basically performs a projection on an axis
