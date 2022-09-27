@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       d5fe0989-3068-4638-8a1c-03cda4c8028f
+:END:
+#+TITLE: Identity Matrix
+#+filetags: :Math:
+- tags :: [[id:098b9a70-c6ee-49c3-94b9-8523f64d0193][Matrix]]
+
+* Definition
+The identity matrix is the $n\times n$ square matrix with ones on the main diagonal and zeros elsewhere.
+#+begin_src python
+  np.diag([1,1,1,...])
+  np.identity(n=5)
+#+end_src
+
+* Properties
+When $A$ is an $m\times n$ matrix,
+\[I_m\cdot A=A \cdot I_n=A\]

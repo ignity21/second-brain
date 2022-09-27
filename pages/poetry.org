@@ -16,6 +16,7 @@
 
 * Basic Usage
 #+begin_src bash
+  poetry env use x.x.x
   poetry new # Creating new project
   poetry install # Initialising a pre-existing project
 

@@ -13,11 +13,13 @@ url = "https://mirrors.aliyun.com/pypi/simple/"
 python = "^3.10"
 pandas = "^1.4.4"
 jupyterlab = "^3.4.6"
-debugpy = "1.6.2" # Invalid hashes for 1.6.3
 scikit-learn = "^1.1.2"
 seaborn = "^0.12.0"
+debugpy = "1.6.2" # Invalid hashes for 1.6.3
+numpy = "^1.23.3"
 
 [tool.poetry.dev-dependencies]
+ipython = "^8.5.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

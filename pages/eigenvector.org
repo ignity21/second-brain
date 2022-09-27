@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       c40efb51-a880-4fbe-8800-d54fb811fa33
+:END:
+#+TITLE: Eigenvector
+#+filetags: :Math:
+
+- tags :: [[id:ffb77b30-9edd-4c1b-af88-0171c342111b][Linear Algebra]], [[id:098b9a70-c6ee-49c3-94b9-8523f64d0193][Matrix]]
+
+* Definition
+An *eigenvector* of a *square matrix* $M$ is a non-zero vector that remains on the same line after transformation by the linear transformation
+\[M\cdot\bm{v}=\lambda \times \bm{v}\]
+Where $\lambda$ is a scalar value called the eigenvalue associated to the vector $\bm{v}$.
+
+* Finding Eigenvalues
+\[M\cdot\bm{v}=\lambda \times (I\cdot \bm{v})\]
+\[M\cdot\bm{v}-(\lambda\times I)\cdot \bm{v}=0\]
+\[(M-\lambda\times I)\cdot \bm{v}=0\]
+- $det((M-\lambda\times I))$ should be 0 to transform a non-zero $\bm{v}$ into $\vec{0}$

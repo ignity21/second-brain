@@ -30,13 +30,11 @@ Matrices make transformations on vectors, potentially changing their magnitude a
 - Associative
 
 * Scale Multiplication
-- Commutative
-- Associative
-- Distributive: $s(\bm{A}+\bm{B})=s\bm{A}+s\bm{B}$
+- Commutative: $s\times A=A\times s$
+- Associative: $s_1\times(s_2\times A)=(s_1\times s_2)\times A$
+- Distributive: $s\times(A+B)=s\times A+s\times B$
 
 * Matrix multiplication
-- Not Commutative $\bm{A}\cdot \bm{B}\neq \bm{B}\cdot \bm{A}$
-- Associative: $(\bm{A}\cdot\bm{B})\cdot \bm{C}=\bm{A}\cdot(\bm{B}\cdot\bm{C})$
 ** Geometric Application
 *** Projection onto an axis
 - The dot product of a unit vector and a matrix basically performs a projection on an axis
@@ -66,6 +64,13 @@ d & e & f \\
 g & h & i \end{bmatrix}\]
 
 \[det(A)=a\cdot det(\begin{bmatrix}e & f \\ h & i\end{bmatrix})-b\cdot det(\begin{bmatrix}d & f \\ g & i\end{bmatrix})+c\cdot det(\begin{bmatrix}d & e \\ g & h\end{bmatrix})\]
+
+** Properties
+- Not Commutative: $A\cdot B \neq B \cdot A$
+- Associative: $(A\cdot B)\cdot C=A\cdot(B\cdot C)$
+- Distributive: $A\cdot(B+C)=A\cdot B + A\cdot C$ and $(B+C)\cdot A=B\cdot A + C\cdot A$
+- Identity: $I\cdot A=A$ and $A\cdot I=A$
+- Property of zero: $O\cdot A=O$ and $A\cdot O=O$
 
 * Determinant
 The determinant of a transformation represents the scale factor by which *areas* are transformed by the Matrix.
@@ -115,6 +120,18 @@ The determinant of a transformation represents the scale factor by which *areas*
   LA.inv(F_shear.dot(F_squeeze)) == LA.inv(F_squeeze).dot(LA.inv(F_shear)) # reversed order
 #+end_src
 
+** Singular Value Decomposition
+It turns out that any $m\times n$ matrix M can be decomposed into the dot product of three simple matrices:
+- a rotation matrix $U$ (an $m\times n$ orthogonal matrix)
+- a scaling & projecting matrix $\Sigma$ (an $m\times n$ diagonal matrix)
+- and another rotation matrix $V^T$ (an $n\times n$ orthogonal matrix)
+#+begin_src python
+  U, Σ_diag, V_T = LA.svd(F_shear)
+  # S_diag is just a 1D array containing the diagonal values of Σ
+  Σ = np.diag(S_diag) # now Σ is m x n diagonal matrix
+  assert F_shear == U.dot(np.diag(S_diag)).dot(V_T)
+#+end_src
+
 * Special Matrices
 ** Rotation Matrix
 - 2D
@@ -131,3 +148,6 @@ The determinant of a transformation represents the scale factor by which *areas*
 -\sin\theta & \cos\theta & 0 \\
 0 & 0 & 1
 \end{bmatrix}\]
+
+* References
+- [[https://github.com/ageron/handson-ml2/blob/master/math_linear_algebra.ipynb][Linear Algegra Notebook]]

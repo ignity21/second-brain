@@ -1669,7 +1669,7 @@ reference = "aliyun"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "8ac585e7ced2269248b0c226a9abd18932eeb930e66d4df4ff4e51051e13752f"
+content-hash = "7709fee7c05615e025ca7eab4bd50930cea1ca2570f6062fcb97ef31a5553944"
 
 [metadata.files]
 anyio = [
