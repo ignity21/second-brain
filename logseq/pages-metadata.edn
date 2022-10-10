@@ -43,6 +43,9 @@
  {:block/name "an ml simple example",
   :block/created-at 1658059295097,
   :block/updated-at 1658059295097}
+ {:block/name "anomaly_detection",
+  :block/created-at 1665197757304,
+  :block/updated-at 1665197757304}
  {:block/name "ansible",
   :block/created-at 1656774920552,
   :block/updated-at 1656774920552}
@@ -67,12 +70,18 @@
  {:block/name "basic html example",
   :block/created-at 1658059295255,
   :block/updated-at 1658059295255}
+ {:block/name "basis_transformation",
+  :block/created-at 1665197757348,
+  :block/updated-at 1665197757348}
  {:block/name "batch processing",
   :block/created-at 1658059295123,
   :block/updated-at 1658059295123}
  {:block/name "bcc-tools",
   :block/created-at 1658059295146,
   :block/updated-at 1658059295146}
+ {:block/name "bcc_tools",
+  :block/created-at 1665197757882,
+  :block/updated-at 1665197757882}
  {:block/name "bfgs",
   :block/created-at 1658059295300,
   :block/updated-at 1658059295300}
@@ -109,6 +118,9 @@
  {:block/name "cache hit ratio",
   :block/created-at 1658058392953,
   :block/updated-at 1658058392953}
+ {:block/name "cache_hit_ratio",
+  :block/created-at 1665197757901,
+  :block/updated-at 1665197757901}
  {:block/name "calculus",
   :block/created-at 1658059296487,
   :block/updated-at 1658059296487}
@@ -118,6 +130,9 @@
  {:block/name "cancelled",
   :block/created-at 1661052035715,
   :block/updated-at 1661052035715}
+ {:block/name "caption",
+  :block/created-at 1665197757684,
+  :block/updated-at 1665197757684}
  {:block/name "card",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
@@ -145,6 +160,9 @@
  {:block/name "context switching",
   :block/created-at 1658059296534,
   :block/updated-at 1658059296534}
+ {:block/name "context_switching",
+  :block/created-at 1665197757924,
+  :block/updated-at 1665197757924}
  {:block/name "cost function",
   :block/created-at 1658059296555,
   :block/updated-at 1658059296555}
@@ -163,6 +181,15 @@
  {:block/name "cpu usage",
   :block/created-at 1658059300080,
   :block/updated-at 1658059300080}
+ {:block/name "cpu_metrics",
+  :block/created-at 1665197757406,
+  :block/updated-at 1665197757406}
+ {:block/name "cpu_usage",
+  :block/created-at 1665197757997,
+  :block/updated-at 1665197757997}
+ {:block/name "cross_product",
+  :block/created-at 1665197757433,
+  :block/updated-at 1665197757433}
  {:block/name "css",
   :block/created-at 1658059300117,
   :block/updated-at 1658059300117}
@@ -187,9 +214,15 @@
  {:block/name "database",
   :block/created-at 1658059300127,
   :block/updated-at 1658059300127}
+ {:block/name "dbscan",
+  :block/created-at 1665197757452,
+  :block/updated-at 1665197757452}
  {:block/name "deadlock",
   :block/created-at 1658059300212,
   :block/updated-at 1658059300212}
+ {:block/name "decision_trees",
+  :block/created-at 1665197757461,
+  :block/updated-at 1665197757461}
  {:block/name "delayed write",
   :block/created-at 1658059300249,
   :block/updated-at 1658059300249}
@@ -202,6 +235,9 @@
  {:block/name "dirty pages",
   :block/created-at 1658059300284,
   :block/updated-at 1658059300284}
+ {:block/name "dirty_pages",
+  :block/created-at 1665197758015,
+  :block/updated-at 1665197758015}
  {:block/name "distributed system",
   :block/created-at 1658059300340,
   :block/updated-at 1658059300340}
@@ -226,6 +262,9 @@
  {:block/name "ebpf",
   :block/created-at 1658059300292,
   :block/updated-at 1658059300292}
+ {:block/name "eigenvectors",
+  :block/created-at 1665197757509,
+  :block/updated-at 1665197757509}
  {:block/name "elasticsearch",
   :block/created-at 1658059300364,
   :block/updated-at 1658059300364}
@@ -256,6 +295,9 @@
  {:block/name "financial terminology",
   :block/created-at 1657608669364,
   :block/updated-at 1657608669364}
+ {:block/name "floyd_s_cycle_finding_algorithm",
+  :block/created-at 1665197757552,
+  :block/updated-at 1665197757552}
  {:block/name "fork()",
   :block/created-at 1658059300415,
   :block/updated-at 1658059300415}
@@ -292,6 +334,9 @@
  {:block/name "hashing",
   :block/created-at 1658058393260,
   :block/updated-at 1658058393260}
+ {:block/name "hca_hierarchical_cluster_analysis",
+  :block/created-at 1665197757566,
+  :block/updated-at 1665197757566}
  {:block/name "heap",
   :block/created-at 1658058393286,
   :block/updated-at 1658058393286}
@@ -316,6 +361,9 @@
  {:block/name "id",
   :block/created-at 1658059300733,
   :block/updated-at 1658059300733}
+ {:block/name "identity_matrix",
+  :block/created-at 1665197757581,
+  :block/updated-at 1665197757581}
  {:block/name "in-progress",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
@@ -361,6 +409,9 @@
  {:block/name "k-neighbors regression",
   :block/created-at 1658059301883,
   :block/updated-at 1658059301883}
+ {:block/name "k_means",
+  :block/created-at 1665197757595,
+  :block/updated-at 1665197757595}
  {:block/name "kafka",
   :block/created-at 1658059301951,
   :block/updated-at 1658059301951}
@@ -385,6 +436,12 @@
  {:block/name "linear sort",
   :block/created-at 1658058393412,
   :block/updated-at 1658058393412}
+ {:block/name "linear_algebra",
+  :block/created-at 1665197758052,
+  :block/updated-at 1665197758052}
+ {:block/name "linear_regression",
+  :block/created-at 1665197758082,
+  :block/updated-at 1665197758082}
  {:block/name "linked list",
   :block/created-at 1658058393437,
   :block/updated-at 1658058393437}
@@ -403,6 +460,9 @@
  {:block/name "load balancing",
   :block/created-at 1658058393482,
   :block/updated-at 1658058393482}
+ {:block/name "load_average",
+  :block/created-at 1665197758133,
+  :block/updated-at 1665197758133}
  {:block/name "logistic regression",
   :block/created-at 1658058393514,
   :block/updated-at 1658058393514}
@@ -412,6 +472,9 @@
  {:block/name "machine learning",
   :block/created-at 1656252381663,
   :block/updated-at 1656252630263}
+ {:block/name "machine_learning",
+  :block/created-at 1665197758171,
+  :block/updated-at 1665197758171}
  {:block/name "maintainability",
   :block/created-at 1658058393588,
   :block/updated-at 1658058393588}
@@ -424,6 +487,9 @@
  {:block/name "match the device size",
   :block/created-at 1658059303498,
   :block/updated-at 1658059303498}
+ {:block/name "matrix",
+  :block/created-at 1665197757685,
+  :block/updated-at 1665197757685}
  {:block/name "measuring success",
   :block/created-at 1658059303395,
   :block/updated-at 1658059303395}
@@ -448,6 +514,18 @@
  {:block/name "memory troubleshooting",
   :block/created-at 1658058393659,
   :block/updated-at 1658058393659}
+ {:block/name "memory_allocation",
+  :block/created-at 1665197758216,
+  :block/updated-at 1665197758216}
+ {:block/name "memory_leak",
+  :block/created-at 1665197758229,
+  :block/updated-at 1665197758229}
+ {:block/name "memory_metrics",
+  :block/created-at 1665197757722,
+  :block/updated-at 1665197757722}
+ {:block/name "memory_troubleshooting",
+  :block/created-at 1665197758268,
+  :block/updated-at 1665197758268}
  {:block/name "message queue",
   :block/created-at 1658059303527,
   :block/updated-at 1658059303527}
@@ -460,6 +538,9 @@
  {:block/name "ml models",
   :block/created-at 1658059303540,
   :block/updated-at 1658059303540}
+ {:block/name "ml_system",
+  :block/created-at 1665197757761,
+  :block/updated-at 1665197757761}
  {:block/name "model selection",
   :block/created-at 1658059303758,
   :block/updated-at 1658059303758}
@@ -535,6 +616,9 @@
  {:block/name "out of memory",
   :block/created-at 1658059303856,
   :block/updated-at 1658059303856}
+ {:block/name "out_of_memory",
+  :block/created-at 1665197758287,
+  :block/updated-at 1665197758287}
  {:block/name "overfitting",
   :block/created-at 1658059303912,
   :block/updated-at 1658059303912}
@@ -553,18 +637,36 @@
  {:block/name "partial derivative",
   :block/created-at 1658059303923,
   :block/updated-at 1658059303923}
+ {:block/name "pca",
+  :block/created-at 1665197757778,
+  :block/updated-at 1665197757778}
+ {:block/name "perf",
+  :block/created-at 1665197758307,
+  :block/updated-at 1665197758307}
  {:block/name "performance measure",
   :block/created-at 1658059303938,
   :block/updated-at 1658059303938}
  {:block/name "performance tools",
   :block/created-at 1658059303982,
   :block/updated-at 1658059303982}
+ {:block/name "performance_tools",
+  :block/created-at 1665197758329,
+  :block/updated-at 1665197758329}
+ {:block/name "pktgen",
+  :block/created-at 1665197758341,
+  :block/updated-at 1665197758341}
+ {:block/name "poetry",
+  :block/created-at 1665197758354,
+  :block/updated-at 1665197758354}
  {:block/name "polynomial regression",
   :block/created-at 1658059303995,
   :block/updated-at 1658059303995}
  {:block/name "postgresql",
   :block/created-at 1658059305048,
   :block/updated-at 1658059305048}
+ {:block/name "proc_zoneinfo",
+  :block/created-at 1665197758395,
+  :block/updated-at 1665197758395}
  {:block/name "process",
   :block/created-at 1658059305038,
   :block/updated-at 1658059305038}
@@ -580,6 +682,12 @@
  {:block/name "process troubleshooting",
   :block/created-at 1662444300553,
   :block/updated-at 1662444300553}
+ {:block/name "process_state",
+  :block/created-at 1665197758410,
+  :block/updated-at 1665197758410}
+ {:block/name "process_troubleshooting",
+  :block/created-at 1665197758420,
+  :block/updated-at 1665197758420}
  {:block/name "profiling",
   :block/created-at 1658059305077,
   :block/updated-at 1658059305077}
@@ -637,6 +745,9 @@
  {:block/name "raii",
   :block/created-at 1658059306722,
   :block/updated-at 1658059306722}
+ {:block/name "random_forests",
+  :block/created-at 1665197757830,
+  :block/updated-at 1665197757830}
  {:block/name "rate limiting",
   :block/created-at 1658059306740,
   :block/updated-at 1658059306740}
@@ -703,6 +814,9 @@
  {:block/name "short period process",
   :block/created-at 1658059306972,
   :block/updated-at 1658059306972}
+ {:block/name "short_period_process",
+  :block/created-at 1665197758431,
+  :block/updated-at 1665197758431}
  {:block/name "sml language",
   :block/created-at 1658059306987,
   :block/updated-at 1658059306987}
@@ -715,6 +829,9 @@
  {:block/name "special files",
   :block/created-at 1658059307007,
   :block/updated-at 1658059307007}
+ {:block/name "special_files",
+  :block/created-at 1665197758442,
+  :block/updated-at 1665197758442}
  {:block/name "sql databases",
   :block/created-at 1658059307018,
   :block/updated-at 1658059307018}
@@ -727,18 +844,33 @@
  {:block/name "stl",
   :block/created-at 1658059307061,
   :block/updated-at 1658059307061}
+ {:block/name "strace",
+  :block/created-at 1665197758455,
+  :block/updated-at 1665197758455}
  {:block/name "stream processing",
   :block/created-at 1658058394095,
   :block/updated-at 1658058394095}
+ {:block/name "stress",
+  :block/created-at 1665197758465,
+  :block/updated-at 1665197758465}
  {:block/name "stress test",
   :block/created-at 1658059307124,
   :block/updated-at 1658059307124}
  {:block/name "supervised learning",
   :block/created-at 1658059307134,
   :block/updated-at 1658059307134}
+ {:block/name "supervised_learning",
+  :block/created-at 1665197758482,
+  :block/updated-at 1665197758482}
+ {:block/name "svms",
+  :block/created-at 1665197757850,
+  :block/updated-at 1665197757850}
  {:block/name "swap",
   :block/created-at 1658059307159,
   :block/updated-at 1658059307159}
+ {:block/name "sysstat",
+  :block/created-at 1665197758548,
+  :block/updated-at 1665197758548}
  {:block/name "system cache",
   :block/created-at 1658059307190,
   :block/updated-at 1658059307190}
@@ -754,6 +886,9 @@
  {:block/name "system summary tools",
   :block/created-at 1658059307277,
   :block/updated-at 1658059307277}
+ {:block/name "system_summary",
+  :block/created-at 1665197758569,
+  :block/updated-at 1665197758569}
  {:block/name "t-test",
   :block/created-at 1658059307288,
   :block/updated-at 1658059307288}
@@ -811,6 +946,9 @@
  {:block/name "unsupervised learning",
   :block/created-at 1658059308373,
   :block/updated-at 1658059308373}
+ {:block/name "unsupervised_learning",
+  :block/created-at 1665197758609,
+  :block/updated-at 1665197758609}
  {:block/name "vector",
   :block/created-at 1658059308390,
   :block/updated-at 1658059308390}
@@ -820,6 +958,9 @@
  {:block/name "virtual memory",
   :block/created-at 1658059308434,
   :block/updated-at 1658059308434}
+ {:block/name "virtual_memory",
+  :block/created-at 1665197758686,
+  :block/updated-at 1665197758686}
  {:block/name "viztracer",
   :block/created-at 1658059308414,
   :block/updated-at 1658059308414}

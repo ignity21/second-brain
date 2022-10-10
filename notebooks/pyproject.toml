@@ -18,6 +18,10 @@ seaborn = "^0.12.0"
 debugpy = "1.6.2" # Invalid hashes for 1.6.3
 numpy = "^1.23.3"
 jupyterthemes = "^0.20.0"
+akshare = "^1.7.43"
+matplotlib = "^3.6.0"
+plotly = "^5.10.0"
+dash = "^2.6.2"
 
 [tool.poetry.dev-dependencies]
 ipython = "^8.5.0"
