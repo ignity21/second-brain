@@ -2,6 +2,8 @@
 :ID:       5626c1ab-da73-45e6-aa86-4ef5fd498033
 :END:
 #+TITLE: Financial Terminology
+#+filetags: :Trading:
+
 
 - Stock :: An asset that represents ownership in a company. A claim on part of a corportation's
   assets and earnings. There are two main types, common and preferred.
@@ -24,3 +26,6 @@
   or sell an underlying asset at a specified price on or by a specified date
 - Futures Contract :: A contract that obligates the buyer to buy or the seller to sell an asset
   at a predetermined price at a specified time in the future
+- American Depository Receipts(ADR) :: Foreign stocks are sometimes allowed to trade on a local
+  stock exchange via an indirect method such as American Depository Receipts (ADR).
+  These are instruments that represent the original stock in a different market.
