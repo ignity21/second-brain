@@ -1966,6 +1966,22 @@ url = "https://mirrors.aliyun.com/pypi/simple"
 reference = "aliyun"
 
 [[package]]
+name = "ta-lib"
+version = "0.4.25"
+description = "Python wrapper for TA-Lib"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+numpy = "*"
+
+[package.source]
+type = "legacy"
+url = "https://mirrors.aliyun.com/pypi/simple"
+reference = "aliyun"
+
+[[package]]
 name = "tabulate"
 version = "0.9.0"
 description = "Pretty-print tabular data"
@@ -2246,7 +2262,7 @@ reference = "aliyun"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "47d2a991419b5dfef35a45ec26469349f45b088e244694443a7f646558202998"
+content-hash = "08d492f8ae6166383c01472b83d79a6bc33743f675eecf478c032ab08cc1b271"
 
 [metadata.files]
 akshare = [
@@ -3394,6 +3410,9 @@ soupsieve = [
 stack-data = [
     {file = "stack_data-0.5.0-py3-none-any.whl", hash = "sha256:66d2ebd3d7f29047612ead465b6cae5371006a71f45037c7e2507d01367bce3b"},
     {file = "stack_data-0.5.0.tar.gz", hash = "sha256:715c8855fbf5c43587b141e46cc9d9339cc0d1f8d6e0f98ed0d01c6cb974e29f"},
+]
+ta-lib = [
+    {file = "TA-Lib-0.4.25.tar.gz", hash = "sha256:6c51c09fcc138367483bcce6db81329ae6851e6ca1a8ac1e50732e443d15602b"},
 ]
 tabulate = [
     {file = "tabulate-0.9.0-py3-none-any.whl", hash = "sha256:024ca478df22e9340661486f85298cff5f6dcdba14f3813e8830015b9ed1948f"},
