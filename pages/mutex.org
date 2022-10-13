@@ -37,3 +37,6 @@ This ensures that all threads see a *self-consistent* view of the shared data.
 #+end_src
 - ~std::scoped_lock guard{a_mutex}~: *template argument deduction*
 - ~std::scoped_lock~: the enhanced version of ~std::lock_guard~
+
+* ~std::recursive_mutex~
+Most of the time, if you want a recursive mutex, you probably need to change your design instead.

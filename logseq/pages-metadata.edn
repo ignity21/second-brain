@@ -55,6 +55,9 @@
  {:block/name "array",
   :block/created-at 1658059295113,
   :block/updated-at 1658059295113}
+ {:block/name "auto",
+  :block/created-at 1665627197207,
+  :block/updated-at 1665627197207}
  {:block/name "availability",
   :block/created-at 1658059295158,
   :block/updated-at 1658059295158}
@@ -115,6 +118,9 @@
  {:block/name "c++ template",
   :block/created-at 1658059299977,
   :block/updated-at 1658059299977}
+ {:block/name "c_compilation",
+  :block/created-at 1665627197308,
+  :block/updated-at 1665627197308}
  {:block/name "cache hit ratio",
   :block/created-at 1658058392953,
   :block/updated-at 1658058392953}
@@ -169,6 +175,9 @@
  {:block/name "counting sort",
   :block/created-at 1658058392987,
   :block/updated-at 1658058392987}
+ {:block/name "cpp_template",
+  :block/created-at 1665627197342,
+  :block/updated-at 1665627197342}
  {:block/name "cpu",
   :block/created-at 1658059300103,
   :block/updated-at 1658059300103}
@@ -223,6 +232,9 @@
  {:block/name "decision_trees",
   :block/created-at 1665197757461,
   :block/updated-at 1665197757461}
+ {:block/name "decltype",
+  :block/created-at 1665627197432,
+  :block/updated-at 1665627197432}
  {:block/name "delayed write",
   :block/created-at 1658059300249,
   :block/updated-at 1658059300249}
@@ -268,6 +280,9 @@
  {:block/name "elasticsearch",
   :block/created-at 1658059300364,
   :block/updated-at 1658059300364}
+ {:block/name "enum_class",
+  :block/created-at 1665627197500,
+  :block/updated-at 1665627197500}
  {:block/name "error handling",
   :block/created-at 1658059300403,
   :block/updated-at 1658059300403}
@@ -295,6 +310,9 @@
  {:block/name "financial terminology",
   :block/created-at 1657608669364,
   :block/updated-at 1657608669364}
+ {:block/name "financial_terminology",
+  :block/created-at 1665627197561,
+  :block/updated-at 1665627197561}
  {:block/name "floyd_s_cycle_finding_algorithm",
   :block/created-at 1665197757552,
   :block/updated-at 1665197757552}
@@ -484,6 +502,12 @@
  {:block/name "mapreduce",
   :block/created-at 1658059303548,
   :block/updated-at 1658059303548}
+ {:block/name "market",
+  :block/created-at 1665627197049,
+  :block/updated-at 1665627197049}
+ {:block/name "market_data",
+  :block/created-at 1665627197109,
+  :block/updated-at 1665627197109}
  {:block/name "match the device size",
   :block/created-at 1658059303498,
   :block/updated-at 1658059303498}
@@ -634,6 +658,9 @@
  {:block/name "parallel computation",
   :block/created-at 1658059303969,
   :block/updated-at 1658059303969}
+ {:block/name "parallel_computation",
+  :block/created-at 1665627197748,
+  :block/updated-at 1665627197748}
  {:block/name "partial derivative",
   :block/created-at 1658059303923,
   :block/updated-at 1658059303923}
@@ -739,6 +766,9 @@
  {:block/name "race condition",
   :block/created-at 1658059306715,
   :block/updated-at 1658059306715}
+ {:block/name "race_condition",
+  :block/created-at 1665627197766,
+  :block/updated-at 1665627197766}
  {:block/name "radix sort",
   :block/created-at 1658058393861,
   :block/updated-at 1658058393861}
@@ -841,6 +871,21 @@
  {:block/name "statistics",
   :block/created-at 1658059307033,
   :block/updated-at 1658059307033}
+ {:block/name "std_function",
+  :block/created-at 1665627197792,
+  :block/updated-at 1665627197792}
+ {:block/name "std_initializer_list",
+  :block/created-at 1665627197813,
+  :block/updated-at 1665627197813}
+ {:block/name "std_thread",
+  :block/created-at 1665627197860,
+  :block/updated-at 1665627197860}
+ {:block/name "std_underlying_type",
+  :block/created-at 1665627197874,
+  :block/updated-at 1665627197874}
+ {:block/name "std_unordered_map",
+  :block/created-at 1665627197884,
+  :block/updated-at 1665627197884}
  {:block/name "stl",
   :block/created-at 1658059307061,
   :block/updated-at 1658059307061}
@@ -868,6 +913,9 @@
  {:block/name "swap",
   :block/created-at 1658059307159,
   :block/updated-at 1658059307159}
+ {:block/name "synchronization",
+  :block/created-at 1665627197148,
+  :block/updated-at 1665627197148}
  {:block/name "sysstat",
   :block/created-at 1665197758548,
   :block/updated-at 1665197758548}
@@ -919,6 +967,9 @@
  {:block/name "thread management",
   :block/created-at 1658059307361,
   :block/updated-at 1658059307361}
+ {:block/name "thread_management",
+  :block/created-at 1665627197924,
+  :block/updated-at 1665627197924}
  {:block/name "tls handshake",
   :block/created-at 1658059307379,
   :block/updated-at 1658059307379}
@@ -943,6 +994,15 @@
  {:block/name "type deduction diagnostics",
   :block/created-at 1658058394169,
   :block/updated-at 1658058394169}
+ {:block/name "type_alias",
+  :block/created-at 1665627197947,
+  :block/updated-at 1665627197947}
+ {:block/name "type_deduction",
+  :block/created-at 1665627197981,
+  :block/updated-at 1665627197981}
+ {:block/name "type_deduction_diagnostics",
+  :block/created-at 1665627197995,
+  :block/updated-at 1665627197995}
  {:block/name "unsupervised learning",
   :block/created-at 1658059308373,
   :block/updated-at 1658059308373}

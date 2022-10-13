@@ -27,3 +27,47 @@ series of indivisible changes, each of which preserves the invariants.
 *STM(software transactional memory)* - Handle the updates to the data structure as a *transaction*. The required series
 of data modifications and reads are stored in a transaction log and then committed in a single step. If a commit can't proceed
 because the data structure has been modified by another thread, the transaction is restarted.
+
+* Inherent in Interfaces
+[[../assets/CPP/race-condition-in-interface.png]]
+- ~top()~ and ~pop()~ shows, problematic race conditions in interfaces arise because of locking at too small a granularity.
+- Need to merge ~top()~ and ~pop()~, let ~pop()~ return the copied value.
+  - the process of copying the data to return to the caller might throw an exception.
+** Option 1
+Pass in a reference.
+#+begin_src c++
+  std::vector<int> result;
+  some_stack.pop(result);
+#+end_src
+
+** Option 2
+Require a no-throw copy constructor or move constructor.
+
+** Option 3
+Return a pointer to the popped item.
+
+** Option 4
+Provide both =Option 1= and either =Option 3=
+- Flexibility should never be ruled out in *generic* code.
+
+** Well-designed Thread-safe Stack Interface
+#+begin_src c++
+  #include <exception>
+  #include <memory>
+
+  struct empty_stack : std::exception {
+    const char * what() const noexcept;
+  };
+
+  template<typename T>
+  class threadsafe_stack {
+  public:
+    threadsafe_stack();
+    threadsafe_stack(const threadsafe_stack&);
+    threadsafe_stack& operator=(const threadsafe_stack&) = delete;
+    void push(T new_value);
+    std::shared_ptr<T> pop();
+    void pop(T& value);
+    bool empty() const;
+  };
+#+end_src
