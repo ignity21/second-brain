@@ -2,8 +2,9 @@
 :ID:       eaa3e2a9-7427-4838-85e2-e3e196d7ccff
 :END:
 #+TITLE: ~enum class~
+#+filetags: :C++:
 
-- tags :: [[id:f670bcb9-d35a-449e-9b40-682471392631][Modern C++]], [[id:e31f5313-c3aa-4062-af1e-32adbc0f90ba][~std::underlying_type~]]
+- tags :: [[id:e31f5313-c3aa-4062-af1e-32adbc0f90ba][~std::underlying_type~]]
 
 
 

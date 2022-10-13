@@ -2,8 +2,9 @@
 :ID:       597c7ffb-ebaa-4c37-b5e7-ee7fca486d05
 :END:
 #+TITLE: ~std::initializer_list~
+#+filetags: :C++:
 
-- tags :: [[id:f670bcb9-d35a-449e-9b40-682471392631][Modern C++]], [[id:f89b0a9e-d3b9-45eb-ac4b-044b4a0cd709][~auto~]]
+- tags :: [[id:f89b0a9e-d3b9-45eb-ac4b-044b4a0cd709][~auto~]]
 
 
 * Initialization Ways

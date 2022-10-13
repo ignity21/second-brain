@@ -2,8 +2,9 @@
 :ID:       4453b464-8e6a-452b-9c2d-9021f7c129d6
 :END:
 #+TITLE: Mutex
+#+filetags: :Multithreading:C++:
 
-- tags :: [[id:5b97c50c-88a5-477d-a92c-57b375341fe3][Race Condition]], [[id:b343ed4d-c06d-41d1-838a-a603d8d6f80f][Multi-thread Data Sharing]], [[id:78432732-16ee-4d1a-badc-ca6518876abf][Deadlock]]
+- tags :: [[id:5b97c50c-88a5-477d-a92c-57b375341fe3][Race Condition]], [[id:78432732-16ee-4d1a-badc-ca6518876abf][Deadlock]], [[id:0e3126ff-4237-42af-b779-64f121a25688][Synchronization]]
 
 Mark all the pieces of code that access the data structure as *mutually exclusive*, i.e. *mutex*.
 /Lock/ the mutex *associated with* that data, and when you finished accessing the data structure, you /unlock/ the mutex.

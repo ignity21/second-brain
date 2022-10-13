@@ -2,6 +2,7 @@
 :ID:       fa63f51e-59a5-4a0a-8a51-b04aeae9122e
 :END:
 #+TITLE: Thread Management
+#+filetags: :Multithreading:C++:
 
 - tags :: [[id:da56581d-ffc5-412f-8173-ce8d40341b32][~std::thread~]]
 

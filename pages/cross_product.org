@@ -2,7 +2,7 @@
 :ID:       50757a7d-4096-46ce-86bf-5b71794cca35
 :END:
 #+TITLE: Cross Product
-#+filetags: :Linear Algebra
+#+filetags: :LinearAlgebra:
 - tags :: [[id:32edc9b1-2dd2-4e6c-8f50-d53a2d4202e4][Vector]]
 
 * Definition

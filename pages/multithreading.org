@@ -3,4 +3,4 @@
 :END:
 #+TITLE: Multithreading
 
-- tags :: [[id:56a403ce-211d-4c6e-8901-d37954b22d45][Context Switching]], [[id:b343ed4d-c06d-41d1-838a-a603d8d6f80f][Multi-thread Data Sharing]]
+- tags :: [[id:56a403ce-211d-4c6e-8901-d37954b22d45][Context Switching]]

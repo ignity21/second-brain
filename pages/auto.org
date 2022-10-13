@@ -2,8 +2,9 @@
 :ID:       f89b0a9e-d3b9-45eb-ac4b-044b4a0cd709
 :END:
 #+TITLE: ~auto~
+#+filetags: :C++:
 
-- tags :: [[id:f670bcb9-d35a-449e-9b40-682471392631][Modern C++]], [[id:3b2b0e4b-eb38-4d97-ac27-795377571449][Type Deduction]], [[id:1997e919-796c-4aac-b621-2f692feab38b][Template Type Deduction]]
+- tags :: [[id:3b2b0e4b-eb38-4d97-ac27-795377571449][Type Deduction]], [[id:1997e919-796c-4aac-b621-2f692feab38b][Template Type Deduction]]
 
 
 auto deduction just like template type deduction.

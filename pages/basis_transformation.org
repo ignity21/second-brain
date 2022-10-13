@@ -2,7 +2,7 @@
 :ID:       aa84047e-8418-4c3d-a4b0-455f5a8395d7
 :END:
 #+TITLE: Basis Transformation
-#+filetags: :Linear Algebra
+#+filetags: :LinearAlgebra:
 
 - tags :: [[id:098b9a70-c6ee-49c3-94b9-8523f64d0193][Matrix]]
 

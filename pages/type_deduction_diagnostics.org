@@ -2,8 +2,9 @@
 :ID:       716b4497-9385-4306-a75e-3d3781b64e4f
 :END:
 #+TITLE: Type Deduction Diagnostics
+#+filetags: :C++:
 
-- tags :: [[id:3b2b0e4b-eb38-4d97-ac27-795377571449][Type Deduction]], [[id:1997e919-796c-4aac-b621-2f692feab38b][Template Type Deduction]], [[id:f89b0a9e-d3b9-45eb-ac4b-044b4a0cd709][~auto~]], [[id:f670bcb9-d35a-449e-9b40-682471392631][Modern C++]], [[id:788c8684-9602-4ec8-b99a-df91521b9062][C++ Template]]
+- tags :: [[id:3b2b0e4b-eb38-4d97-ac27-795377571449][Type Deduction]], [[id:1997e919-796c-4aac-b621-2f692feab38b][Template Type Deduction]], [[id:f89b0a9e-d3b9-45eb-ac4b-044b4a0cd709][~auto~]], [[id:788c8684-9602-4ec8-b99a-df91521b9062][C++ Template]]
 
 
 * Compile Time

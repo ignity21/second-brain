@@ -2,5 +2,4 @@
 :ID:       788c8684-9602-4ec8-b99a-df91521b9062
 :END:
 #+TITLE: C++ Template
-
-- tags :: [[id:06e89bdb-d919-4a77-8649-dc6d525f8bf5][C++]]
+#+filetags: :C++:

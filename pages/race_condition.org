@@ -2,8 +2,9 @@
 :ID:       5b97c50c-88a5-477d-a92c-57b375341fe3
 :END:
 #+TITLE: Race Condition
+#+filetags: :Multithreading:
 
-- tags :: [[id:d8d60df7-d4d4-4e0e-8d82-2521cc9bac97][Multithreading]], [[id:fb9bdd74-144c-4638-a873-b7a7cc29e843][Concurrency]], [[id:b343ed4d-c06d-41d1-838a-a603d8d6f80f][Multi-thread Data Sharing]]
+- tags :: [[id:d8d60df7-d4d4-4e0e-8d82-2521cc9bac97][Multithreading]], [[id:fb9bdd74-144c-4638-a873-b7a7cc29e843][Concurrency]], [[id:0e3126ff-4237-42af-b779-64f121a25688][Synchronization]]
 
 
 Race Condition is where the outcome depends on the relative ordering of execution of operations on two or more threads.

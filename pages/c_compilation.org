@@ -2,8 +2,7 @@
 :ID:       e197c941-ab2e-4504-9f82-9c24dc7d0b16
 :END:
 #+TITLE: C++ Compilation
-
-- tags :: [[id:06e89bdb-d919-4a77-8649-dc6d525f8bf5][C++]]
+#+filetags: :C++:
 
 * Compilation Process
 #+caption: C++ Compilation Process

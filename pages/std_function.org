@@ -2,8 +2,9 @@
 :ID:       0285aeab-e30e-4d33-b94b-49713950aaeb
 :END:
 #+TITLE: ~std::function~
+#+filetags: :STL:C++:
 
-- tags :: [[id:06e89bdb-d919-4a77-8649-dc6d525f8bf5][C++]], [[id:788c8684-9602-4ec8-b99a-df91521b9062][Template]], [[id:d0a21243-4315-47c6-b07a-558f557f6837][STL]], [[id:b2aac42a-051d-4649-9ebe-be1275eab5bf][Functional Programming]]
+- tags :: [[id:788c8684-9602-4ec8-b99a-df91521b9062][Template]], [[id:b2aac42a-051d-4649-9ebe-be1275eab5bf][Functional Programming]]
 
 
 ~std::function~ is a *template* in the STL.

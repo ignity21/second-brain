@@ -2,8 +2,9 @@
 :ID:       1c1348ff-ffa6-4a27-99da-b4405e173500
 :END:
 #+TITLE: ~decltype~
+#+filetags: :C++:
 
-- tags :: [[id:3b2b0e4b-eb38-4d97-ac27-795377571449][Type Deduction]], [[id:f670bcb9-d35a-449e-9b40-682471392631][Modern C++]]
+- tags :: [[id:3b2b0e4b-eb38-4d97-ac27-795377571449][Type Deduction]]
 
 
 - ~decltype~ almost always yields the type of a variable or expression without any modifications.

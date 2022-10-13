@@ -2,7 +2,7 @@
 :ID:       c40efb51-a880-4fbe-8800-d54fb811fa33
 :END:
 #+TITLE: Eigenvectors
-#+filetags: :Linear Algebra
+#+filetags: :LinearAlgebra:
 
 - tags :: [[id:ffb77b30-9edd-4c1b-af88-0171c342111b][Linear Algebra]], [[id:098b9a70-c6ee-49c3-94b9-8523f64d0193][Matrix]]
 

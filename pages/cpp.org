@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       06e89bdb-d919-4a77-8649-dc6d525f8bf5
-:END:
-#+TITLE: C++
-
-- tags :: [[id:db1d7375-5df4-4f5c-99bb-58f9977fa6f5][Programming Languages]]

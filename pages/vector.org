@@ -2,7 +2,7 @@
 :ID:       32edc9b1-2dd2-4e6c-8f50-d53a2d4202e4
 :END:
 #+TITLE: Vector
-#+filetags: ::Linear Algebra:
+#+filetags: :LinearAlgebra:
 
 - tags :: [[id:ffb77b30-9edd-4c1b-af88-0171c342111b][Linear Algebra]], [[id:098b9a70-c6ee-49c3-94b9-8523f64d0193][Matrix]]
 

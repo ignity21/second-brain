@@ -2,8 +2,9 @@
 :ID:       aec7fabd-9572-4067-94fb-b48f2d8c57aa
 :END:
 #+TITLE: Type Alias
+#+filetags: :C++:
 
-- tags :: [[id:f670bcb9-d35a-449e-9b40-682471392631][Modern C++]], [[id:788c8684-9602-4ec8-b99a-df91521b9062][C++ Template]], [[id:53f550ed-95bf-42ac-a954-d8a0b7892273][Template Metaprogramming]]
+- tags :: [[id:788c8684-9602-4ec8-b99a-df91521b9062][C++ Template]], [[id:53f550ed-95bf-42ac-a954-d8a0b7892273][Template Metaprogramming]]
 
 
 #+begin_src cpp

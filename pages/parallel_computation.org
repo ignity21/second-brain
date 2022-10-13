@@ -2,8 +2,9 @@
 :ID:       ceda8de0-12cd-464e-8864-407748927109
 :END:
 #+TITLE: Parallel Computation
+#+filetags: :Multithreading:C++:
 
-- tags :: [[id:da56581d-ffc5-412f-8173-ce8d40341b32][~std::thread~]], [[id:d8d60df7-d4d4-4e0e-8d82-2521cc9bac97][Multithreading]], [[id:f670bcb9-d35a-449e-9b40-682471392631][Modern C++]], [[id:fb9bdd74-144c-4638-a873-b7a7cc29e843][Concurrency]]
+- tags :: [[id:da56581d-ffc5-412f-8173-ce8d40341b32][~std::thread~]], [[id:d8d60df7-d4d4-4e0e-8d82-2521cc9bac97][Multithreading]], [[id:fb9bdd74-144c-4638-a873-b7a7cc29e843][Concurrency]]
 
 
 * C++ Example

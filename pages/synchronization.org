@@ -1,0 +1,4 @@
+:PROPERTIES:
+:ID:       0e3126ff-4237-42af-b779-64f121a25688
+:END:
+#+TITLE: Synchronization

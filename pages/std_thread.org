@@ -2,6 +2,7 @@
 :ID:       da56581d-ffc5-412f-8173-ce8d40341b32
 :END:
 #+TITLE: ~std::thread~
+#+filetags: :Multithreading:STL:C++:
 
 - tags :: [[id:fa63f51e-59a5-4a0a-8a51-b04aeae9122e][Thread Management]], [[id:fb9bdd74-144c-4638-a873-b7a7cc29e843][Concurrency]]
 

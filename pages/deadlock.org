@@ -2,3 +2,6 @@
 :ID:       78432732-16ee-4d1a-badc-ca6518876abf
 :END:
 #+TITLE: Deadlock
+#+filetags: :Multithreading:C++:
+
+- tags :: [[id:4453b464-8e6a-452b-9c2d-9021f7c129d6][Mutex]], [[id:5b97c50c-88a5-477d-a92c-57b375341fe3][Race Condition]], [[id:0e3126ff-4237-42af-b779-64f121a25688][Synchronization]]

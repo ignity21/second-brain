@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       b343ed4d-c06d-41d1-838a-a603d8d6f80f
-:END:
-#+TITLE: Multi-thread Data Sharing
-
-- [[id:4453b464-8e6a-452b-9c2d-9021f7c129d6][Mutex]]
