@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       1870ce0e-8c80-44a1-96be-486ac39554cb
+:END:
+#+TITLE: ~std::async~
+#+filetags: :Multithreading:Event:C++:STL:
+
+- tags :: [[id:ab10f19a-6051-4601-b737-61fb56aebb2b][~std::future~]]
+
+Use ~std::async~ to start an asynchronous task (potentially in a separate thread which might be
+a part of a *thread pool*) and returns a ~std::future~ that will eventually hold the result of that
+function call.
+
+* Parameters
+Parameter ~policy~:
+- ~std::launch::deferred~: to indicate that the function call is to be deferred until either
+  ~wait()~ or ~get()~ is called on the future.
+- ~std::launch::async~: to indicate that the function must be run on *its own thread*.
+- ~std::launch::deferred | std::launch::async~: to indicate that the implementation may choose.

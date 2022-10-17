@@ -1,0 +1,66 @@
+:PROPERTIES:
+:ID:       a0853534-30ed-477a-8745-343360392cfc
+:END:
+#+TITLE: Condition Variable
+#+filetags: :Multithreading:STL:Event:C++:
+
+- tags :: [[id:0e3126ff-4237-42af-b779-64f121a25688][Synchronization]]
+
+
+A condition variable is associated with an event or other condition,
+and one or more threads can wait for that condition to be satisfied.
+
+* Code Example
+#+begin_src c++
+  std::mutex mut;
+  std::queue<data_chunk> data_queue;
+  std::condition_variable data_cond;
+
+  // Preparation Thread
+  void data_preparation_thread() {
+    while (more_data_to_prepare()) {
+      data_chunk const data = prepare_date();
+      {
+        // 1. acquire a std::mutex (typically via std::lock_guard)
+        std::lock_guard<std::mutex> lk(mut);
+        // 2. perform the modification while the lock is held
+        data_queue.push(data);
+      }
+      // 3. execute notify_one or notify_all on the std::condition_variable
+      // (the lock does not need to be held for notification)
+      data_cond.notify_one();
+    }
+  }
+
+
+  // Waiting Thread
+  void data_processing_thread() {
+    while (true) {
+      //1. acquire a std::unique_lock<std::mutex> on the same mutex as used to protect the shared variable
+      std::unique_lock<std::mutex> lk(mut);
+      // The wait operations atomically release the mutex and suspend the execution of the thread.
+      data_cond.wait(lk, []{return !data_queue.empty();});
+      // After waiting, the mutex is atomically reacquired.
+      data_chunk data = data_queue.front();
+      data_queue.pop();
+      lk.unlock();
+      process(data);
+      if(is_last_chunk(data))
+        break;
+    }
+  }
+#+end_src
+- ~std::condition_variable::wait~ is *an optimization over a busy-wait*.
+  - mutex still locked if the condition is satisfied.
+  - unlocks the mutex and resumes waiting if the condition isn't satisfied.
+
+** A conforming ~minimal_wait~
+#+begin_src c++
+  template<typename Predicate>
+  void minimal_wait(std::unique_lock<std::mutex> &lk, Predicate pred) {
+    while (!pred()) {
+      lk.unlock();
+      lk.lock();
+    }
+  }
+#+end_src
