@@ -2,4 +2,4 @@
 :ID:       788c8684-9602-4ec8-b99a-df91521b9062
 :END:
 #+TITLE: C++ Template
-#+filetags: :C++:
+#+filetags: :Template:C++:

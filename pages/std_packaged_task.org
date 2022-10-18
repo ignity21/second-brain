@@ -1,0 +1,63 @@
+:PROPERTIES:
+:ID:       dbab769a-6557-4248-a590-8c65ddd8c2d8
+:END:
+#+TITLE: std::packaged_task
+#+filetags: :STL:Multithreading:C++:
+
+
+- tags :: [[id:ab10f19a-6051-4601-b737-61fb56aebb2b][~std::future~]]
+
+
+- ~std::packaged_task~ ties a future to a function/callable object.
+  - when it is invoked, it calls the function and makes the future ready.
+
+* Use Case
+- Can be used as a building block for thread pools or other task management schemes.
+- The scheduler just deals with ~std::packaged_task<>~ instances rather than individual functions.
+
+* Code Example
+#+begin_src c++
+  std::mutex m;
+  std::deque<std::packaged_task<void()>> tasks;
+
+  // Producing tasks to gui thread
+  template<typename Func>
+  std::future<void> post_task_for_gui_thread(Func f) {
+    std::packaged_task<void()> task(f);
+    std::future<void> res = task.get_future();
+    std::lock_guard<std::mutex> lk(m);
+    tasks.push_back(std::move(task));
+    return res;
+  }
+
+  // GUI Thread
+  bool gui_shutdown_message_received();
+  void get_and_process_gui_message();
+  void gui_thread() {
+    while (!gui_shutdown_message_received()) {
+      get_and_process_gui_message();
+      std::packaged_task<void()> task;
+      {
+        std::lock_guard<std::mutex> lk(m);
+        if (tasks.empty())
+          continue;
+        task = std::move(tasks.front());
+        tasks.pop_front();
+      }
+      tasks();
+    }
+  }
+  std::thread gui_bg_thread(gui_thread);
+#+end_src
+
+* Specialization Example
+#+begin_src c++
+  template<>
+  class packaged_task<std::string(std::vector<char> *, int)> {
+  public:
+    template<typename Callable>
+    explicit packaged_task(Callable &&f);
+    std::future<std::string> get_future();
+    void operator() (std::vector<char> *, int);
+  };
+#+end_src

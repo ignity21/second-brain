@@ -1,8 +1,8 @@
 :PROPERTIES:
 :ID:       ab9a868a-c806-4346-907e-cf25507df6f7
 :END:
-#+TITLE: mutable
-#+filetags: :C++:
+#+TITLE: ~mutable~
+#+filetags: :Keyword:C++:
 
 To modify one or more data members of class/struct through *const function* even though
 you don't want the function to update other members of class/struct.

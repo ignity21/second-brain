@@ -1,0 +1,5 @@
+:PROPERTIES:
+:ID:       0bef9cf2-8c4d-49b1-81cc-69599ab5eaae
+:END:
+#+TITLE: Constructor
+#+filetags: :C++:

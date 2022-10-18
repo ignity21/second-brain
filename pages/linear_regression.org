@@ -8,87 +8,99 @@
 
 
 * Concept
-** TODO Parameters
-$$\theta_0, \theta_1, \theta_2, \cdots, \theta_n$$
-- $\theta_0$
+** Parameters
+- $\bm{w}$: $w_1, w_2, \cdots, w_n$
+- $b$
 
-** Hypothesis
-$$h_\theta(\vec{x})=\theta_0 x_0 + \theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_n x_n=\vec{\theta}^T\vec{x}$$
-- $x_0=1$
+** Model
+$$f_{\bm{w}, b}(\bm{x})= w_1 x_1 + w_2 x_2 + \cdots + w_n x_n + b=\bm{w}^T\cdot\bm{x} + b$$
+- ~f = np.dot(w, x) + b~
 
 ** Cost Function
+$$J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^m Cost(f_{\bm{w}, b}(\bm{x^{(i)}}), \bm{y^{(i)}})$$
 - Squared Error Function(or "Mean squared error")
+- The mean is halved $\frac{1}{2}$ as a convenience for the computation of the gradient descent
+$$Cost(f_{\bm{w},b}(\bm{x^{(i)}}), \bm{y^{(i)}}))=\frac{1}{2}(f_{\bm{w},b}(\bm{x^{(i)}})-\bm{y^{(i)}})^2$$
 
-$$J(\vec{\theta})=\frac{1}{m}\sum_{i=1}^m Cost(h_\theta(\vec{x_i}), \vec{y_i})$$
+$$J(\bm{w}, b)=\frac{1}{2m}\sum_{i=1}^m(\bm{w}^T\bm{x^{(i)}}+b-\bm{y^{(i)}})^2$$
 
--  The mean is halved $\frac{1}{2}$ as a convenience for the computation of the gradient descent
+** Goal: Minimize $J(\bm{w}, b)$
+*** Gradient Descent Algorithm
+- $\alpha$: Learning rate
+- repeat until convergence (no longer change much with each additional step)
+- Simultaneously update $w_1$ to $w_j$ and $b$
+$$w_j=w_j-\alpha\frac{\partial}{\partial w_j}J(\bm{w}, b)$$
 
-$$Cost(h_\theta(\vec{x_i}), \vec{y_i}))=\frac{1}{2}(h_\theta(\vec{x_i})-\vec{y_i})^2$$
+$$b=b-\alpha\frac{\partial}{\partial b}J(\bm{w}, b)$$
 
-$$J(\vec{\theta})=\frac{1}{2m}\sum_{i=1}^m (h_\theta{(x_i)}-{y_i})^2=\frac{1}{2m}\sum_{i=1}^m(\vec{\theta}^T\vec{x_i}-\vec{y_i})^2$$
+**** Details
+$$\frac{\partial{J(\bm{w}, b)}}{\partial{w_j}}=\frac{1}{m}\sum_{i=1}^{m} (f_{\bm{w}, b}(\bm{x}^{(i)}) -\bm{y^{(i)}})x_{j}^{(i)}$$
 
+$$\frac{\partial{J(\bm{w}, b)}}{\partial{b}}=\frac{1}{m}\sum_{i=1}^{m} (f_{\bm{w}, b}(\bm{x}^{(i)}) -\bm{y^{(i)}})$$
+
+
+$$w_j=w_j-\alpha\frac{1}{m}\sum_{i=1}^{m} (\bm{w}^T\bm{x^{(i)}}+b-\bm{y^{(i)}})x_{j}^{(i)}$$
+
+$$b=b-\alpha\frac{1}{m}\sum_{i=1}^{m} (\bm{w}^T\bm{x^{(i)}}+b-\bm{y^{(i)}})$$
+*** [[id:04c99717-5839-4808-ab6b-116a0839b9f6][Normal Equation Algorithm]]
+
+* TODO Vectorized Summary
+
+
+* Vectorized Summary $\theta_0$ and $x_0=1$ Version
+** Parameters
+$$\bm{\theta}=\begin{bmatrix}
+\theta_0 \\ \theta_1 \\ \vdots \\ \theta_n
+\end{bmatrix}$$
+
+$$\bm{\theta}^T=\begin{bmatrix}
+\theta_0 &
+\theta_1 & \cdots &
+\theta_n
+\end{bmatrix}$$
+
+** Model
+$$\bm{X}=\begin{bmatrix}
+x_0^{(1)}\bm{(1)} & x_1^{(1)} & x_2^{(1)} & \cdots & x_n^{(1)} \\
+x_0^{(2)}\bm{(1)} & x_1^{(2)} & x_2^{(2)} & \cdots & x_n^{(2)} \\
+\vdots & \vdots & \vdots & \ddots & \vdots  \\
+x_0^{(m)}\bm{(1)} & x_1^{(m)} & x_2^{(m)} & \cdots & x_n^{(m)}
+\end{bmatrix}$$
+
+$$f(\bm{x})=\bm{\theta}^T\bm{x}$$
+
+$$f_{\bm{\theta}}(\bm{X})=\bm{X}\bm{\theta}$$
+- $f_{\bm{\theta}}(\bm{X})$ is a vector of hypotheses
+
+** Cost Function
+$$J(\bm{\theta})=\frac{1}{2m}\sum_{i=1}^{m}(\bm{\theta}^T \bm{x^{(i)}}-\bm{y}^{(i)})^2$$
 - Vectorized
 
-$$J(\vec{\theta})=\frac{1}{2m}(\mathbf{X}\vec{\theta}-\vec{y})^T(\mathbf{X}\vec{\theta}-\vec{y})$$
+$$J(\bm{\theta})=\frac{1}{2m}(\bm{X}\bm{\theta}-\bm{y})^T(\bm{X}\bm{\theta}-\bm{y})$$
 
 Python code:
 #+begin_src python
-  J = (1/2*m) * ((X @ theta.T - y) ** 2).sum()
+  J = (1/2*m) * ((X @ theta - y) ** 2).sum()
 #+end_src
 
-- Goal: Minimize $J(\vec{\theta})$
-
-** TODO Gradient Descent Approach
-- /n/ features /m/ samples
-- repeat until convergence
-
-$$\frac{\partial{J(\vec{\theta})}}{\partial{\theta_0}}=\frac{1}{m}\sum_{i=1}^{m} (\theta^T\vec{x_i}-y_i)x_{i0}$$
-
-$$\theta_0=\theta_0-\alpha\frac{\partial{J(\vec{\theta})}}{\partial{\theta_0}}=\theta_0-\alpha\frac{1}{m}\sum_{i=1}^{m} (\theta^T\vec{x_i}-y_i)x_{i0}$$
-
-$$\theta_1=\theta_1-\alpha\frac{1}{m}\sum_{i=1}^{m} (\theta^T\vec{x_i}-y_i)x_{i1}$$
-
-$$\theta_j=\theta_j-\alpha\frac{1}{m}\sum_{i=1}^{m} (\theta^T\vec{x_i}-y_i)x_{ij}$$
-
-** Normal Equation Approach
-$$\theta=(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\vec{y}$$
-
-* Vectorized Summary
-** Hypothesis
-$$\vec{\theta}^T=\begin{bmatrix}
-\theta_0 & \theta_1& \cdots & \theta_n
-\end{bmatrix}$$
-
-$$\vec{x}=\begin{bmatrix}
-1 \\ x_1 \\ \vdots \\ x_n
-\end{bmatrix}$$
-
-$$h(\vec{x})=\vec{\theta}^T\vec{x}$$
-
-$$h_\theta(\mathbf{X})=\mathbf{X}\vec{\theta}$$
-- $h_\theta(\mathbf{X})$ is a vector of hypotheses
-
-** Cost Function
-$$J(\vec{\theta})=\frac{1}{2m}(\mathbf{X}\vec{\theta}-\vec{y})^T(\mathbf{X}\vec{\theta}-\vec{y})$$
-
 ** Gradient Descent
 - repeat until convergence
-$$\vec\theta=\vec\theta-\alpha\frac{1}{m}\mathbf{X}^T(\mathbf{X}\vec{\theta}-\vec{y})$$
+$$\bm{\theta}=\bm{\theta}-\alpha\frac{1}{m}\mathbf{X}^T(\mathbf{X}\bm{\theta}-\bm{y})$$
 
-* Regularized Linear Regression
+* TODO Regularized Linear Regression
 ** Cost Function
-$$J(\vec{\theta})=\frac{1}{2m}\sum_{i=1}^m (h_\theta{(x_i)}-{y_i})^2+\lambda\sum_{j=1}^n\theta_j^2$$
+$$J(\bm{w})=\frac{1}{2m}\sum_{i=1}^m (f_{\bm{w},b}{(x_i)}-{y_i})^2+\lambda\sum_{j=1}^nw_j^2$$
 - $\lambda$ is the regularization parameter. It determines how much the costs of our theta parameters are inflated.
-- $\theta_0$ should not be penalized
+- $w_0$ should not be penalized
 
 ** Gradient Descent
-$$\theta_0=\theta_0-\alpha\frac{1}{m}\sum_{i=1}^{m} (\theta^T\vec{x_i}-y_i)x_{i0}$$
+$$w_0=w_0-\alpha\frac{1}{m}\sum_{i=1}^{m} (w^T\bm{x_i}-y_i)x_{i0}$$
 
-$$\theta_j=\theta_j-\alpha[\frac{1}{m}\sum_{i=1}^{m} (\theta^T\vec{x_i}-y_i)x_{ij}+\frac{\lambda}{m}\theta_j]$$
+$$w_j=w_j-\alpha[\frac{1}{m}\sum_{i=1}^{m} (w^T\bm{x_i}-y_i)x_{ij}+\frac{\lambda}{m}w_j]$$
 - can also be represented as:
 
-$$\theta_j=\theta_j(1-\alpha\frac{\lambda}{m})-\frac{\alpha}{m}\sum_{i=1}^m(h_\theta(x_i)-y_i)x_{ij}$$
+$$w_j=w_j(1-\alpha\frac{\lambda}{m})-\frac{\alpha}{m}\sum_{i=1}^m(f_{\bm{w},b}(x_i)-y_i)x_{ij}$$
 
 ** Normal Equation
-$$\theta=(\mathbf{X}^T\mathbf{X}+\lambda\cdot \mathbf{L})^{-1}\mathbf{X}^T\vec{y}$$
+$$w=(\mathbf{X}^T\mathbf{X}+\lambda\cdot \mathbf{L})^{-1}\mathbf{X}^T\bm{y}$$
 - $L$ is a matrix with 0 at the top left and 1's down the diagonal, with 0's everywhere else.
