@@ -21,25 +21,39 @@ or Logistic Function
 
 ** Model
 - \(z_{w,b}(\bm{x})=\bm{w}^T\cdot \bm{x} + b\)
-- \(f_{w,b}(\bm{x})=g(z_{w,b}(\bm{x}))\)
-- Probability: \(P(y=1|\bm{x},\bm{w}, b)=f_{w,b}(\bm{x})\)
-
-** TODO Decision Boundary
-The decision boundary is the line that separates the area where y = 0 and where y = 1.
-It is determined by $\theta$.
 
 
-* Cost Function
-$$J(\vec{\theta})=\frac{1}{m}\sum_{i=1}^m Cost(h_\theta(\vec{x_i}), \vec{y_i})$$
+\[f_{w,b}(\bm{x})=g((z_{w,b}(\bm{x}))=g(\bm{w}^T\cdot \bm{x} + b)=\frac{1}{1+e^{-(\bm{w}^T\cdot \bm{x} + b)}}\]
 
-$$Cost(h_\theta(x), y)=\begin{cases}
--\log(h_\theta(x)), & \text{if }y=1\\
--\log(1-h_\theta(x)), & \text{if }y=0
-\end{cases}$$
-[[../assets/ML/LogisticRegression_1.jpg]]
+*** For Binary Classification
+- Probability(for binary classification): \(P(\hat y=1|\bm{x}; \bm{w}, b)=f_{w,b}(\bm{x})\)
+- \(\hat y = 1\)
+  - when \(f_{\bm{w},b}(\bm{x})\ge 0.5\), which means \(z\ge 0(\bm{w}\cdot\bm{x}+b\ge 0)\)
+- Decision Boundary: \(\bm{w}\cdot\bm{x}+b=0\)
+  - Non-linear Decision Boundary Example: Let \(z\) be \(w_1 x_1^2 + w_2 x_1 + w_3 x_2^2 + b\)
 
-- Simplified Compact Version
-$$Cost(h_\theta(x), y)=-y\log(h_\theta(x))-(1-y)\log(1-h_\theta(x))$$
+** Cost Function
+*** Loss Function
+\[L(f_{\bm{w}, b}(\bm{x}^{(i)}), y^{(i)})=\begin{cases}
+-\log(f_{\bm{w}, b}(\bm{x}^{(i)})), & \text{if }y^{(i)}=1 \\
+-\log(1-f_{\bm{w}, b}(\bm{x}^{(i)})), & \text{if }y^{(i)}=0
+\end{cases}\]
+
+- \(y=1\)
+
+[[file:../assets/ML/LogisticLossFunction_1.png]]
+
+- \(y=0\)
+
+[[file:../assets/ML/LogisticLossFunction_2.png]]
+
+*** Cost Function J
+\[J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^{m}L(f_{\bm{w}, b}(\bm{x}^{(i)}), y^{(i)})\]
+
+*** Simplified Cost Function
+\[L(f_{\bm{w}, b}(\bm{x}^{(i)})=-y^{(i)}\log(f_{\bm{w}, b}(\bm{x}^{(i)}))-(1-y^{(i)})\log(1-f_{\bm{w}, b}(\bm{x}^{(i)}))\]
+- TODO Cost Function
+
 
 * Gradient Descent Approach
 $$\theta_j=\theta_j-\alpha\frac{\partial}{\partial\theta_j}J(\theta)$$
