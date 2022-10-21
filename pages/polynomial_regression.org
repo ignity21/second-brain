@@ -4,7 +4,7 @@
 #+TITLE: Polynomial Regression
 #+filetags: :ML:
 
-- tags :: [[id:4d9aa428-be23-4297-b24f-6f5d05f565f4][Regression Problem]], [[id:46646008-096b-4086-beab-62c2dd5f5825][Linear Regression]]
+- tags :: [[id:4d9aa428-be23-4297-b24f-6f5d05f565f4][Regression Problem]]
 
 
 * Hypothesis

@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       0ab07614-da61-4bd0-81be-08e294355ce5
-:END:
-#+TITLE: Binary Classification
-
-- tags :: [[id:e0e88d4d-69d2-4e20-be4c-5aa8b849e968][Classification Problem]]

@@ -2,22 +2,29 @@
 :ID:       c4114af3-a40b-422b-af14-077d4a0cfed6
 :END:
 #+TITLE: Logistic Regression
+#+filetags: :ML:
 
-- tags :: [[id:e0e88d4d-69d2-4e20-be4c-5aa8b849e968][Classification Problem]], [[id:985a47ab-36b7-458b-b45b-a4abb934e8d9][Supervised Learning]], [[id:0ab07614-da61-4bd0-81be-08e294355ce5][Binary Classification]], [[id:89f66c7d-3d49-4308-91ae-1bb844fcbbec][Gradient Descent]]
+- tags :: [[id:e0e88d4d-69d2-4e20-be4c-5aa8b849e968][Classification Problem]], [[id:89f66c7d-3d49-4308-91ae-1bb844fcbbec][Gradient Descent]]
 
 
-* Hypothesis
-$$h_\theta(\vec{x})=g(\theta^T\vec{x})=\frac{1}{1+e^{-\theta^T\vec{x}}}$$
+* Concept
+** Parameters
+- $\bm{w}$: $w_1, w_2, \cdots, w_n$
+- $b$
 
-$$h_\theta(\vec{x})=P(y=1|\vec{x},\theta)$$
+** Sigmoid Function
+or Logistic Function
+[[file:../assets/ML/SigmoidFunction.png]]
+\[g(z)=\frac{1}{1+e^{-z}}\]
+- \(0 < g(z) < 1\)
+- \(g(z)\ge 0.5\) when \(z\ge 0\)
 
-** Logistic Function
-or Sigmoid Function
-$$g(z)=\frac{1}{1+e^{-z}}$$
+** Model
+- \(z_{w,b}(\bm{x})=\bm{w}^T\cdot \bm{x} + b\)
+- \(f_{w,b}(\bm{x})=g(z_{w,b}(\bm{x}))\)
+- Probability: \(P(y=1|\bm{x},\bm{w}, b)=f_{w,b}(\bm{x})\)
 
-- $g(z)\ge 0.5$ when $z\ge 0$ i.e. $\theta^T\vec{x}\ge0$
-
-** Decision Boundary
+** TODO Decision Boundary
 The decision boundary is the line that separates the area where y = 0 and where y = 1.
 It is determined by $\theta$.
 
