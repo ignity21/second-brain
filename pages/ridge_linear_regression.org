@@ -2,8 +2,9 @@
 :ID:       2345ac0f-e2ff-4562-9ef4-be441fc59cd5
 :END:
 #+TITLE: Ridge Linear Regression
+#+filetags: :ML:
 
-- tags :: [[id:46646008-096b-4086-beab-62c2dd5f5825][Linear Regression]], [[id:3b3cfd5f-2a7d-4353-a6f3-5bd25519c067][ML Models]], [[id:4d9aa428-be23-4297-b24f-6f5d05f565f4][Regression Problem]], [[id:86af7a0e-4143-4e90-8500-1266133203fc][Lasso Linear Regression]]
+- tags :: [[id:46646008-096b-4086-beab-62c2dd5f5825][Linear Regression]]
 
 
 The formula to make predictions is the same one used for [[id:5a859956-25b8-42cb-9faf-5a67e61061b4][OLS Linear Regression]].

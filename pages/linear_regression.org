@@ -4,7 +4,8 @@
 #+TITLE: Linear Regression
 #+filetags: :ML:
 
-- tags :: [[id:985a47ab-36b7-458b-b45b-a4abb934e8d9][Supervised Learning]], [[id:4d9aa428-be23-4297-b24f-6f5d05f565f4][Regression Problem]], [[id:89f66c7d-3d49-4308-91ae-1bb844fcbbec][Gradient Descent]], [[id:04c99717-5839-4808-ab6b-116a0839b9f6][Normal Equation]]
+- tags :: [[id:985a47ab-36b7-458b-b45b-a4abb934e8d9][Supervised Learning]], [[id:4d9aa428-be23-4297-b24f-6f5d05f565f4][Regression Problem]], [[id:89f66c7d-3d49-4308-91ae-1bb844fcbbec][Gradient Descent]],
+  [[id:04c99717-5839-4808-ab6b-116a0839b9f6][Normal Equation]], [[id:ecfac9bf-146f-4df7-b1c8-2078207b8dd7][Feature Scaling]], [[id:aaa8a68b-c3f7-40bb-92dc-8db2f48292c8][Learning Rate]]
 
 
 * Concept
@@ -13,35 +14,35 @@
 - $b$
 
 ** Model
-$$f_{\bm{w}, b}(\bm{x})= w_1 x_1 + w_2 x_2 + \cdots + w_n x_n + b=\bm{w}^T\cdot\bm{x} + b$$
+\[f_{\bm{w}, b}(\bm{x})= w_1 x_1 + w_2 x_2 + \cdots + w_n x_n + b=\bm{w}^T\cdot\bm{x} + b\]
 - ~f = np.dot(w, x) + b~
 
 ** Cost Function
-$$J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^m Cost(f_{\bm{w}, b}(\bm{x^{(i)}}), \bm{y^{(i)}})$$
+\[J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^m Cost(f_{\bm{w}, b}(\bm{x^{(i)}}), \bm{y^{(i)}})\]
 - Squared Error Function(or "Mean squared error")
 - The mean is halved $\frac{1}{2}$ as a convenience for the computation of the gradient descent
-$$Cost(f_{\bm{w},b}(\bm{x^{(i)}}), \bm{y^{(i)}}))=\frac{1}{2}(f_{\bm{w},b}(\bm{x^{(i)}})-\bm{y^{(i)}})^2$$
+\[Cost(f_{\bm{w},b}(\bm{x^{(i)}}), \bm{y^{(i)}}))=\frac{1}{2}(f_{\bm{w},b}(\bm{x^{(i)}})-\bm{y^{(i)}})^2\]
 
-$$J(\bm{w}, b)=\frac{1}{2m}\sum_{i=1}^m(\bm{w}^T\bm{x^{(i)}}+b-\bm{y^{(i)}})^2$$
+\[J(\bm{w}, b)=\frac{1}{2m}\sum_{i=1}^m(\bm{w}^T\bm{x^{(i)}}+b-\bm{y^{(i)}})^2\]
 
 ** Goal: Minimize $J(\bm{w}, b)$
 *** Gradient Descent Algorithm
 - $\alpha$: Learning rate
 - repeat until convergence (no longer change much with each additional step)
 - Simultaneously update $w_1$ to $w_j$ and $b$
-$$w_j=w_j-\alpha\frac{\partial}{\partial w_j}J(\bm{w}, b)$$
+\[w_j=w_j-\alpha\frac{\partial}{\partial w_j}J(\bm{w}, b)\]
 
-$$b=b-\alpha\frac{\partial}{\partial b}J(\bm{w}, b)$$
+\[b=b-\alpha\frac{\partial}{\partial b}J(\bm{w}, b)\]
 
 **** Details
-$$\frac{\partial{J(\bm{w}, b)}}{\partial{w_j}}=\frac{1}{m}\sum_{i=1}^{m} (f_{\bm{w}, b}(\bm{x}^{(i)}) -\bm{y^{(i)}})x_{j}^{(i)}$$
+\[\frac{\partial{J(\bm{w}, b)}}{\partial{w_j}}=\frac{1}{m}\sum_{i=1}^{m} (f_{\bm{w}, b}(\bm{x}^{(i)}) -\bm{y^{(i)}})x_{j}^{(i)}\]
 
-$$\frac{\partial{J(\bm{w}, b)}}{\partial{b}}=\frac{1}{m}\sum_{i=1}^{m} (f_{\bm{w}, b}(\bm{x}^{(i)}) -\bm{y^{(i)}})$$
+\[\frac{\partial{J(\bm{w}, b)}}{\partial{b}}=\frac{1}{m}\sum_{i=1}^{m} (f_{\bm{w}, b}(\bm{x}^{(i)}) -\bm{y^{(i)}})\]
 
 
-$$w_j=w_j-\alpha\frac{1}{m}\sum_{i=1}^{m} (\bm{w}^T\bm{x^{(i)}}+b-\bm{y^{(i)}})x_{j}^{(i)}$$
+\[w_j=w_j-\alpha\frac{1}{m}\sum_{i=1}^{m} (\bm{w}^T\bm{x^{(i)}}+b-\bm{y^{(i)}})x_{j}^{(i)}\]
 
-$$b=b-\alpha\frac{1}{m}\sum_{i=1}^{m} (\bm{w}^T\bm{x^{(i)}}+b-\bm{y^{(i)}})$$
+\[b=b-\alpha\frac{1}{m}\sum_{i=1}^{m} (\bm{w}^T\bm{x^{(i)}}+b-\bm{y^{(i)}})\]
 *** [[id:04c99717-5839-4808-ab6b-116a0839b9f6][Normal Equation Algorithm]]
 
 * TODO Vectorized Summary
@@ -49,34 +50,34 @@ $$b=b-\alpha\frac{1}{m}\sum_{i=1}^{m} (\bm{w}^T\bm{x^{(i)}}+b-\bm{y^{(i)}})$$
 
 * Vectorized Summary $\theta_0$ and $x_0=1$ Version
 ** Parameters
-$$\bm{\theta}=\begin{bmatrix}
+\[\bm{\theta}=\begin{bmatrix}
 \theta_0 \\ \theta_1 \\ \vdots \\ \theta_n
-\end{bmatrix}$$
+\end{bmatrix}\]
 
-$$\bm{\theta}^T=\begin{bmatrix}
+\[\bm{\theta}^T=\begin{bmatrix}
 \theta_0 &
 \theta_1 & \cdots &
 \theta_n
-\end{bmatrix}$$
+\end{bmatrix}\]
 
 ** Model
-$$\bm{X}=\begin{bmatrix}
+\[\bm{X}=\begin{bmatrix}
 x_0^{(1)}\bm{(1)} & x_1^{(1)} & x_2^{(1)} & \cdots & x_n^{(1)} \\
 x_0^{(2)}\bm{(1)} & x_1^{(2)} & x_2^{(2)} & \cdots & x_n^{(2)} \\
 \vdots & \vdots & \vdots & \ddots & \vdots  \\
 x_0^{(m)}\bm{(1)} & x_1^{(m)} & x_2^{(m)} & \cdots & x_n^{(m)}
-\end{bmatrix}$$
+\end{bmatrix}\]
 
-$$f(\bm{x})=\bm{\theta}^T\bm{x}$$
+\[f(\bm{x})=\bm{\theta}^T\bm{x}\]
 
-$$f_{\bm{\theta}}(\bm{X})=\bm{X}\bm{\theta}$$
+\[f_{\bm{\theta}}(\bm{X})=\bm{X}\bm{\theta}\]
 - $f_{\bm{\theta}}(\bm{X})$ is a vector of hypotheses
 
 ** Cost Function
-$$J(\bm{\theta})=\frac{1}{2m}\sum_{i=1}^{m}(\bm{\theta}^T \bm{x^{(i)}}-\bm{y}^{(i)})^2$$
+\[J(\bm{\theta})=\frac{1}{2m}\sum_{i=1}^{m}(\bm{\theta}^T \bm{x^{(i)}}-\bm{y}^{(i)})^2\]
 - Vectorized
 
-$$J(\bm{\theta})=\frac{1}{2m}(\bm{X}\bm{\theta}-\bm{y})^T(\bm{X}\bm{\theta}-\bm{y})$$
+\[J(\bm{\theta})=\frac{1}{2m}(\bm{X}\bm{\theta}-\bm{y})^T(\bm{X}\bm{\theta}-\bm{y})\]
 
 Python code:
 #+begin_src python
@@ -85,22 +86,22 @@ Python code:
 
 ** Gradient Descent
 - repeat until convergence
-$$\bm{\theta}=\bm{\theta}-\alpha\frac{1}{m}\mathbf{X}^T(\mathbf{X}\bm{\theta}-\bm{y})$$
+\[\bm{\theta}=\bm{\theta}-\alpha\frac{1}{m}\mathbf{X}^T(\mathbf{X}\bm{\theta}-\bm{y})\]
 
 * TODO Regularized Linear Regression
 ** Cost Function
-$$J(\bm{w})=\frac{1}{2m}\sum_{i=1}^m (f_{\bm{w},b}{(x_i)}-{y_i})^2+\lambda\sum_{j=1}^nw_j^2$$
+\[J(\bm{w})=\frac{1}{2m}\sum_{i=1}^m (f_{\bm{w},b}{(x_i)}-{y_i})^2+\lambda\sum_{j=1}^nw_j^2\]
 - $\lambda$ is the regularization parameter. It determines how much the costs of our theta parameters are inflated.
 - $w_0$ should not be penalized
 
 ** Gradient Descent
-$$w_0=w_0-\alpha\frac{1}{m}\sum_{i=1}^{m} (w^T\bm{x_i}-y_i)x_{i0}$$
+\[w_0=w_0-\alpha\frac{1}{m}\sum_{i=1}^{m} (w^T\bm{x_i}-y_i)x_{i0}\]
 
-$$w_j=w_j-\alpha[\frac{1}{m}\sum_{i=1}^{m} (w^T\bm{x_i}-y_i)x_{ij}+\frac{\lambda}{m}w_j]$$
+\[w_j=w_j-\alpha[\frac{1}{m}\sum_{i=1}^{m} (w^T\bm{x_i}-y_i)x_{ij}+\frac{\lambda}{m}w_j]\]
 - can also be represented as:
 
-$$w_j=w_j(1-\alpha\frac{\lambda}{m})-\frac{\alpha}{m}\sum_{i=1}^m(f_{\bm{w},b}(x_i)-y_i)x_{ij}$$
+\[w_j=w_j(1-\alpha\frac{\lambda}{m})-\frac{\alpha}{m}\sum_{i=1}^m(f_{\bm{w},b}(x_i)-y_i)x_{ij}\]
 
 ** Normal Equation
-$$w=(\mathbf{X}^T\mathbf{X}+\lambda\cdot \mathbf{L})^{-1}\mathbf{X}^T\bm{y}$$
+\[w=(\mathbf{X}^T\mathbf{X}+\lambda\cdot \mathbf{L})^{-1}\mathbf{X}^T\bm{y}\]
 - $L$ is a matrix with 0 at the top left and 1's down the diagonal, with 0's everywhere else.

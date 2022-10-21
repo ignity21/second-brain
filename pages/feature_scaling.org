@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       ecfac9bf-146f-4df7-b1c8-2078207b8dd7
+:END:
+#+TITLE: Feature Scaling
+#+filetags: :ML:
+
+* Why?
+[[file:../assets/ML/FeatureScaling.png]]
+
+* Methods
+** Min-Max Scaling
+\[x_{scaled}^{(j)}=\frac{x^{(j)}-min(\bm{x})}{max(\bm{x})-min(\bm{x})}\]
+
+** Mean Normalization
+\[x_{scaled}^{(j)}=\frac{x^{(j)}-\mu_x}{max(\bm{x})-min(\bm{x})}\]
+
+** Z-score Normalization
+\[x_{scaled}^{(j)}=\frac{x^{(j)}-\mu_x}{\sigma_x}\]

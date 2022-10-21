@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       aaa8a68b-c3f7-40bb-92dc-8db2f48292c8
+:END:
+#+TITLE: Learning Rate
+#+filetags: :ML:
+
+- tags :: [[id:89f66c7d-3d49-4308-91ae-1bb844fcbbec][Gradient Descent]], [[id:807f0a93-ac07-434f-a71b-33e011a87f9e][Learning Curve]]
+
+
+- Cost function J should *decrease* after *every* iteration.
+   - If J increases, that means the learning rate $\alpha$ is too large.
+   - If $\alpha$ is too small, the learning process will run very slowly.
+- Checking if learning is done by using automatic convergence test
+   - Let $\epsilon$ be $10^{-3}$, if J decreases by $\le\epsilon$, declare convergence.
+- Could plot the learning curve to determine $\alpha$ and $\epsilon$
+- Values of $\alpha$ to try:
+  - 0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1
