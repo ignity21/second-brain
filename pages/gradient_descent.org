@@ -4,17 +4,18 @@
 #+TITLE: Gradient Descent
 #+filetags: :ML:
 
-- tags :: [[id:46646008-096b-4086-beab-62c2dd5f5825][Linear Regression]], [[id:f05e4c45-31d8-47d0-bac8-183f1bc7447b][Cost Function]], [[id:c4114af3-a40b-422b-af14-077d4a0cfed6][Logistic Regression]], [[id:aaa8a68b-c3f7-40bb-92dc-8db2f48292c8][Learning Rate]], [[id:ecfac9bf-146f-4df7-b1c8-2078207b8dd7][Feature Scaling]]
+- tags :: [[id:f05e4c45-31d8-47d0-bac8-183f1bc7447b][Cost Function]], [[id:aaa8a68b-c3f7-40bb-92dc-8db2f48292c8][Learning Rate]], [[id:ecfac9bf-146f-4df7-b1c8-2078207b8dd7][Feature Scaling]]
 
-- How to choose [[id:aaa8a68b-c3f7-40bb-92dc-8db2f48292c8][Learning Rate]]
 
-* TODO Regularization
-- To penalize for large values of $\theta_j$
+* Gradient Descent
+- Simultaneously update $w_1$ to $w_j$ and $b$
+\[w_j=w_j-\alpha\frac{\partial}{\partial w_j}J(\bm{w}, b)\]
 
-$$J(\vec{\theta})=\frac{1}{2n}\sum_{i=1}^n(h_\theta(\vec{x}^{(i)})-y^{(i)})^2+\frac{\lambda}{2}\sum_{j=1}^d\vec{\theta_j^2}$$
+\[b=b-\alpha\frac{\partial}{\partial b}J(\bm{w}, b)\]
 
-- $\lambda$ is the regularization paramenter ($\lambda\ge 0$)
-- No regularization on $\theta_0$
+* How to choose [[id:aaa8a68b-c3f7-40bb-92dc-8db2f48292c8][Learning Rate]]
+
+* [[id:483b6d38-f2bc-4879-84ab-27e0a76561fa][Regularization]]
 
 ** Gradient Update
 $$\theta_0=\theta_0-\frac{\alpha}{n}\sum_{i=1}^n(h_\theta(x^{(i)})-y^{(i)})$$
@@ -24,7 +25,8 @@ $$\theta_j=\theta_j-\frac{\alpha}{n}\sum_{i=1}^n(h_\theta(x^{(i)})-y^{(i)})x_j^{
 - rewrite as:
 $$\theta_j=\theta_j(1-\alpha\lambda)-\frac{\alpha}{n}\sum_{i=1}^n(h_\theta(x^{(i)})-y^{(i)})x_j^{(i)}$$
 
-* Alternative Approaches
+
+* TODO Alternative Approaches
 - [[id:46e75b6c-6a72-4e8d-86e9-07e7ec44ffed][Conjugate Gradient]]
 - [[id:365e1146-5084-4ba1-afdc-f358e8ba6661][BFGS]]
 - [[id:4023b6c4-20c4-4a29-8f93-43c88101442c][L-BFGS]]

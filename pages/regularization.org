@@ -2,8 +2,24 @@
 :ID:       483b6d38-f2bc-4879-84ab-27e0a76561fa
 :END:
 #+TITLE: Regularization
+#+filetags: :ML:
 
 - tags :: [[id:d6364077-06d1-4de4-9a0e-3c7a7337e8ad][Overfitting/Underfitting]]
 
 Regularization means explicitly restricting a model to avoid [[id:d6364077-06d1-4de4-9a0e-3c7a7337e8ad][Overfitting]].
 - with enough training data, regularization becomes less important.
+
+* Goal
+- Less prone to overfitting
+- To penalize for large values of $\bm{w}$
+
+* Cost Function
+\[J(\bm{w}, b)=\frac{1}{2m}\sum_{i=1}^m(f_{\bm{w}, b}(\bm{x^{(i)}}-y^{i}))+\frac{\lambda}{2m}\sum_{j=1}^n w_j^2\]
+
+- \(\lambda\) is the regularization paramenter \(\lambda\ge 0\)
+- [Optional Term]: regularization for b \(\frac{\lambda}{2m}b^2\) makes very little difference in practice.
+
+** Minimize J
+- Minimizing *mean squared error* term encourages the algorithm to fit training data well.
+- Minimizing *regularization* term encourages the algorithm to keep the parameters \(w_j\) small.
+- Trade off: \(\lambda\) balances both goals.

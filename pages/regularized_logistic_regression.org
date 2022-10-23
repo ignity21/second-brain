@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       dd0f767f-94a7-487f-bce0-c6c2e2cbf03c
+:END:
+#+TITLE: Regularized Logistic Regression
+#+filetags: :ML:
+
+- tags :: [[id:c4114af3-a40b-422b-af14-077d4a0cfed6][Logistic Regression]], [[id:483b6d38-f2bc-4879-84ab-27e0a76561fa][Regularization]], [[id:d6364077-06d1-4de4-9a0e-3c7a7337e8ad][Overfitting/Underfitting]]
+
+* Cost Function
+\[J(\bm{w}, b)=-\frac{1}{m}\sum_{i=1}^m[y^{(i)}\log(f_{\bm{w},b}(\bm{x^{(i)}}))+(1-y^{(i)})\log(1-f_{\bm{w},b}(\bm{x^{(i)}}))]+\frac{\lambda}{2m}\sum_{j=1}^n w_j^2\]
+
+* Gradient Descent
+- Repeat
+\[w_j=w_j-\alpha\frac{\partial}{\partial w_j}J(\bm{w}, b)\]
+
+\[b=b-\alpha\frac{\partial}{\partial b}J(\bm{w}, b)\]
+
+** Derivative Terms
+\[\frac{\partial{J(\bm{w}, b)}}{\partial{w_j}}=\frac{1}{m}\sum_{i=1}^{m} (f_{\bm{w}, b}(\bm{x^{(i)}}) -y^{(i)})x_{j}^{(i)}+\frac{\lambda}{m}w_j\]
+
+\[\frac{\partial{J(\bm{w}, b)}}{\partial{b}}=\frac{1}{m}\sum_{i=1}^{m} (f_{\bm{w}, b}(\bm{x^{(i)}}) -y^{(i)})\]

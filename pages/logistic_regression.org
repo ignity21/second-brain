@@ -34,9 +34,9 @@ or Logistic Function
 
 ** Cost Function
 *** Loss Function
-\[L(f_{\bm{w}, b}(\bm{x}^{(i)}), y^{(i)})=\begin{cases}
--\log(f_{\bm{w}, b}(\bm{x}^{(i)})), & \text{if }y^{(i)}=1 \\
--\log(1-f_{\bm{w}, b}(\bm{x}^{(i)})), & \text{if }y^{(i)}=0
+\[L(f_{\bm{w}, b}(\bm{x^{(i)}}), y^{(i)})=\begin{cases}
+-\log(f_{\bm{w}, b}(\bm{x^{(i)}})), & \text{if }y^{(i)}=1 \\
+-\log(1-f_{\bm{w}, b}(\bm{x^{(i)}})), & \text{if }y^{(i)}=0
 \end{cases}\]
 
 - \(y=1\)
@@ -48,34 +48,33 @@ or Logistic Function
 [[file:../assets/ML/LogisticLossFunction_2.png]]
 
 *** Cost Function J
-\[J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^{m}L(f_{\bm{w}, b}(\bm{x}^{(i)}), y^{(i)})\]
+\[J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^{m}L(f_{\bm{w}, b}(\bm{x^{(i)}}), y^{(i)})\]
 
 *** Simplified Cost Function
-\[L(f_{\bm{w}, b}(\bm{x}^{(i)})=-y^{(i)}\log(f_{\bm{w}, b}(\bm{x}^{(i)}))-(1-y^{(i)})\log(1-f_{\bm{w}, b}(\bm{x}^{(i)}))\]
-- TODO Cost Function
+- Loss Function
+\[L(f_{\bm{w}, b}(\bm{x^{(i)}})=-y^{(i)}\log(f_{\bm{w}, b}(\bm{x^{(i)}}))-(1-y^{(i)})\log(1-f_{\bm{w}, b}(\bm{x^{(i)}}))\]
+
+- Cost Function
+\begin{align*}
+J(\bm{w}, b) & = \frac{1}{m}\sum_{i=1}^m [L(f_{\bm{w}, b}(\bm{x^{(i)}}), y^{(i)})] \\
+& = -\frac{1}{m}\sum_{i=1}^m[y^{(i)}\log(f_{\bm{w},b}(\bm{x^{(i)}}))+(1-y^{(i)})\log(1-f_{\bm{w},b}(\bm{x^{(i)}}))]
+\end{align*}
+
+* Gradient Descent
+- Repeat:
+\[w_j=w_j-\alpha\frac{\partial}{\partial w_j}J(\bm{w}, b)\]
+
+\[b=b-\alpha\frac{\partial}{\partial b}J(\bm{w}, b)\]
 
 
-* Gradient Descent Approach
-$$\theta_j=\theta_j-\alpha\frac{\partial}{\partial\theta_j}J(\theta)$$
+- \(\frac{\partial}{\partial w_j}J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^{m}(f_{\bm{w},b}(\bm{x^{(i)}})-y^{(i)})x_j^{(i)}\)
 
-$$Gradient=\frac{\partial}{\partial\theta_j}J(\theta)=\frac{1}{m}\sum_{i=1}^m(h_\theta(x_i)-y_i)x_{ij}$$
+- \(\frac{\partial}{\partial w_j}J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^{m}(f_{\bm{w},b}(\bm{x^{(i)}})-y^{(i)})\)
 
-* Vectorized Summary
+* [[id:dd0f767f-94a7-487f-bce0-c6c2e2cbf03c][Regularized Logistic Regression]]
+
+* TODO Vectorized Summary
 - Hypothesis: $h=g(\mathbf{X}\theta)$
 - Cost Function: $J(\theta)=-\frac{1}{m}\cdot(y^T\log(h)+(1-y)^T\log(1-h))$
 ** Gradient Descent
 - Repeat until convergence: $\theta=\theta-\alpha\frac{1}{m}\mathbf{X}^T(g(\mathbf{X}\theta)-y)$
-
-* Regularized Logistic Regression
-** Cost Function
-$$J(\theta)=-\frac{1}{m}\cdot(y^T\log(h)+(1-y)^T\log(1-h))+\frac{\lambda}{2m}\sum_{j=1}^n\theta_j^2$$
-- $\theta_0$ should not be penalized
-
-** Gradient Descent
-- Repeat until convergence
-$$\theta_0=\theta_0-\alpha\frac{1}{m}\sum_{i=1}^m(h_\theta(x_i)-y_i)x_{i0}$$
-
-$$\theta_j=\theta_j-\alpha[\frac{1}{m}\sum_{i=1}^m(h_\theta(x_i)-y_i)x_{ij}+\frac{\lambda}{m}\theta_j]$$
-
-- Vectorized(except $\theta_0$)
-$$\theta=\theta-\alpha\frac{1}{m}[\mathbf{X}^T(g(\mathbf{X}\theta)-y)-\lambda\theta]$$

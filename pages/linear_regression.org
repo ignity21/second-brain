@@ -18,12 +18,12 @@
 - ~f = np.dot(w, x) + b~
 
 ** Cost Function
-\[J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^m Cost(f_{\bm{w}, b}(\bm{x^{(i)}}), \bm{y^{(i)}})\]
+\[J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^m Cost(f_{\bm{w}, b}(\bm{x^{(i)}}), y^{(i)})\]
 - Squared Error Function(or "Mean squared error")
 - The mean is halved $\frac{1}{2}$ as a convenience for the computation of the gradient descent
-\[Cost(f_{\bm{w},b}(\bm{x^{(i)}}), \bm{y^{(i)}}))=\frac{1}{2}(f_{\bm{w},b}(\bm{x^{(i)}})-\bm{y^{(i)}})^2\]
+\[Cost(f_{\bm{w},b}(\bm{x^{(i)}}), y^{(i)}))=\frac{1}{2}(f_{\bm{w},b}(\bm{x^{(i)}})-y^{(i)})^2\]
 
-\[J(\bm{w}, b)=\frac{1}{2m}\sum_{i=1}^m(\bm{w}^T\bm{x^{(i)}}+b-\bm{y^{(i)}})^2\]
+\[J(\bm{w}, b)=\frac{1}{2m}\sum_{i=1}^m(\bm{w}^T\bm{x^{(i)}}+b-y^{(i)})^2\]
 
 ** Goal: Minimize $J(\bm{w}, b)$
 *** Gradient Descent Algorithm
@@ -35,19 +35,20 @@
 \[b=b-\alpha\frac{\partial}{\partial b}J(\bm{w}, b)\]
 
 **** Details
-\[\frac{\partial{J(\bm{w}, b)}}{\partial{w_j}}=\frac{1}{m}\sum_{i=1}^{m} (f_{\bm{w}, b}(\bm{x}^{(i)}) -\bm{y^{(i)}})x_{j}^{(i)}\]
+\[\frac{\partial{J(\bm{w}, b)}}{\partial{w_j}}=\frac{1}{m}\sum_{i=1}^{m} (f_{\bm{w}, b}(\bm{x^{(i)}}) -y^{(i)})x_{j}^{(i)}\]
 
-\[\frac{\partial{J(\bm{w}, b)}}{\partial{b}}=\frac{1}{m}\sum_{i=1}^{m} (f_{\bm{w}, b}(\bm{x}^{(i)}) -\bm{y^{(i)}})\]
+\[\frac{\partial{J(\bm{w}, b)}}{\partial{b}}=\frac{1}{m}\sum_{i=1}^{m} (f_{\bm{w}, b}(\bm{x^{(i)}}) -y^{(i)})\]
+
+\[w_j=w_j-\alpha\frac{1}{m}\sum_{i=1}^{m} (\bm{w}^T\bm{x^{(i)}}+b-y^{(i)})x_{j}^{(i)}\]
+
+\[b=b-\alpha\frac{1}{m}\sum_{i=1}^{m} (\bm{w}^T\bm{x^{(i)}}+b-y^{(i)})\]
 
 
-\[w_j=w_j-\alpha\frac{1}{m}\sum_{i=1}^{m} (\bm{w}^T\bm{x^{(i)}}+b-\bm{y^{(i)}})x_{j}^{(i)}\]
-
-\[b=b-\alpha\frac{1}{m}\sum_{i=1}^{m} (\bm{w}^T\bm{x^{(i)}}+b-\bm{y^{(i)}})\]
 *** [[id:04c99717-5839-4808-ab6b-116a0839b9f6][Normal Equation Algorithm]]
 
+* [[id:5153c267-4f26-471e-84aa-a6719af4874e][Regularized Linear Regression]]
+
 * TODO Vectorized Summary
-
-
 * Vectorized Summary $\theta_0$ and $x_0=1$ Version
 ** Parameters
 \[\bm{\theta}=\begin{bmatrix}
@@ -74,7 +75,7 @@ x_0^{(m)}\bm{(1)} & x_1^{(m)} & x_2^{(m)} & \cdots & x_n^{(m)}
 - $f_{\bm{\theta}}(\bm{X})$ is a vector of hypotheses
 
 ** Cost Function
-\[J(\bm{\theta})=\frac{1}{2m}\sum_{i=1}^{m}(\bm{\theta}^T \bm{x^{(i)}}-\bm{y}^{(i)})^2\]
+\[J(\bm{\theta})=\frac{1}{2m}\sum_{i=1}^{m}(\bm{\theta}^T \bm{x}^{(i)}-\bm{y}^{(i)})^2\]
 - Vectorized
 
 \[J(\bm{\theta})=\frac{1}{2m}(\bm{X}\bm{\theta}-\bm{y})^T(\bm{X}\bm{\theta}-\bm{y})\]
