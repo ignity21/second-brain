@@ -2,42 +2,53 @@
 :ID:       024e4a3a-3268-45c8-90f6-24674638af0d
 :END:
 #+TITLE: Neural Networks
-
-- tags :: [[id:e0e88d4d-69d2-4e20-be4c-5aa8b849e968][Classification Problem]]
-
-
-used for Non-linear Hypotheses
-
-* Activation Units
-- $\frac{1}{1+e^{\theta^Tx}}$ -- sigmoid logistic activation function
-- $a_i^j$: "activation" of unit /i/ in layer /j/
-
-* Parameters
-- $\mathbf{\theta^j}$: matrix of weights controlling function mapping from layer /j/ to layer /j+1/
-
-* An 3-layer Example
-$$[x_0 x_1 x_2 x_3]\Longrightarrow[a_1^2 a_2^2 a_3^2]\Longrightarrow h_\theta(\vec{x})$$
+#+filetags: :ML:DL:
 
 
-$$a_1^2=g(\theta_{10}^1 x_0+\theta_{11}^1 x_1+\theta_{12}^1 x_2+\theta_{13}^1 x_3)$$
-
-$$a_2^2=g(\theta_{20}^1 x_0+\theta_{21}^1 x_1+\theta_{22}^1 x_2+\theta_{23}^1 x_3)$$
-
-$$a_3^2=g(\theta_{30}^1 x_0+\theta_{31}^1 x_1+\theta_{32}^1 x_2+\theta_{33}^1 x_3)$$
-
-$$h_\theta(\vec{x})=g(\theta_{10}^2 a_0^2 + \theta_{11}^2 a_1^2 + \theta_{12}^2 a_2^2 + \theta_{13}^2 a_3^2)$$
-
-- $x_0$ and $a_0$ are bias variables equal to 1.
-
-* Vectorized Implementation
-$$z_k^2=\theta_{k0}^1 x_0 + \theta_{k1}^1 x_1 + \cdots + \theta_{kn}^1 x_n$$
-
-$$a^j=g(z^j)$$
-
-$$z^{j+1}=\theta^j a^j$$
-
-$$h_\theta(x)=a^{j+1}=g(z^{z+1})$$
+- tags :: [[id:c4114af3-a40b-422b-af14-077d4a0cfed6][Logistic Regression]]
 
 
-* Multiclass Classification
-- Multiple output units: One-vs-all. e.g. n output: [$h_\theat(x)_1$, $h_\theat(x)_2$, ..., $h_\theat(x)_n$]
+Used for Non-linear Hypotheses
+
+* Notations
+- \(\bm{w_j^{(l)}}, b_i^{(l)}\): the parameters of /jth/ unit/activation in layer /l/
+- \(\bm{a^{[l]}}\): the outputs of layer /l/
+  - A 3-layer example: \(\bm{x}(\bm{a^{[0]}})\Longrightarrow\bm{a^{[1]}}\Longrightarrow\bm{a^{[2]}}\Longrightarrow y(a^{[3]})\)
+  - \(a_j^{[l]}\): the /jth/ output of layer /l/
+
+* Activation Value
+#+CAPTION: Layer Computation
+[[../assets/ML/NNLayerComputation.png]]
+- Activation Function(sigmoid): \(a_j^{[l]}=g(\bm{w_j^{[l]}}\cdot\bm{a^{[l-1]}} + b_j^{[l]})\)
+  - example: \(a_2^{[3]}=g(\bm{w_2^{[3]}}\cdot\bm{a^{[2]}}+b_2^{[3]})\)
+** Forward Propagation (Inference)
+*** Tensorflow
+#+begin_src python
+  import tensorflow as tf
+  training_x = np.array([[...]])
+  training_y = np.array([...])
+  model = tf.Sequencial([tf.Dense(units=5, activation='sigmoid'),
+                         tf.Dense(units=3, activation='sigmoid'),
+                         tf.Dense(units=1, activation='sigmoid')])
+  model.compile(...)
+  model.fit(x, y)
+  model.predict(x_new)
+#+end_src
+**** Verbose
+#+begin_src python
+  import tensorflow as tf
+  x = np.array([[...]])
+  layer_1 = tf.Dense(units=5, activation='sigmoid')
+  a1 = layer_1(x) # a1 -> tf.Tensor  [[...]]; a1.numpy() -> numpy.array
+  layer_2 = tf.Dense(units=3, activation='sigmoid')
+  a2 = layer_d(a1)
+  layer_3 = tf.Dense(units=1, activation='sigmoid')
+  a3 = layer_d(a2)
+  if a3 >= 0.5:
+      yhat = 1
+  else:
+      yhat = 0
+#+end_src
+
+** Backward Propagation
+For learning process

@@ -16,3 +16,5 @@
 - If curve not decreases after every iteration
   1. Choose a much smaller learning rate $\alpha$ to see if there is a bug. (debug process)
   2. Choose a appropriate $\alpha$.
+
+* TODO Code

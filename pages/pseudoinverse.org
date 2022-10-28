@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       408efae5-8e91-43d8-a7ed-4aca2a7d7cac
+:END:
+#+TITLE: Pseudoinverse
+#+filetags: :LinearAlgebra:
+
+Pseudoinverse is computed using a standard matrix factorization technique
+called /Singular Value Decomposition/ (SVD) that can decompose the training set
+matrix *X* into the matrix multiplication of three matrices \(\bm{U} \bm{\Sigma} \bm{V}^T\)
+- see ~numpy.linalg.svd()~
+- The Pseudoinverse is computed as $\bm{X}^{+}=\bm{V}\bm{\Sigma}^{+}\bm{U}^T$
+- To compute \(\bm{\Sigma}^+\), the algorithm sets to zero all values smaller
+  than a tiny threshold value, then it replaces all the nonzero values with their inverse.

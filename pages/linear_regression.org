@@ -47,21 +47,22 @@
 *** [[id:04c99717-5839-4808-ab6b-116a0839b9f6][Normal Equation Algorithm]]
 
 * [[id:5153c267-4f26-471e-84aa-a6719af4874e][Regularized Linear Regression]]
+* Vectorized Summary
+** \(\bm{\theta}\) Version
+\[\hat{y}=h_{\bm{\theta}}(\bm{x})=\bm{\theta}^T\cdot\bm{x}\]
 
-* TODO Vectorized Summary
-* Vectorized Summary $\theta_0$ and $x_0=1$ Version
-** Parameters
-\[\bm{\theta}=\begin{bmatrix}
-\theta_0 \\ \theta_1 \\ \vdots \\ \theta_n
-\end{bmatrix}\]
-
+*** Parameters
 \[\bm{\theta}^T=\begin{bmatrix}
 \theta_0 &
 \theta_1 & \cdots &
 \theta_n
 \end{bmatrix}\]
+- \(\theta_1\cdots\theta_n\) are weights.
+- \(\theta_0\) is bias.
 
-** Model
+*** Model
+\[h_{\bm{\theta}}(\bm{x})=\bm{\theta}^T\bm{x}\]
+
 \[\bm{X}=\begin{bmatrix}
 x_0^{(1)}\bm{(1)} & x_1^{(1)} & x_2^{(1)} & \cdots & x_n^{(1)} \\
 x_0^{(2)}\bm{(1)} & x_1^{(2)} & x_2^{(2)} & \cdots & x_n^{(2)} \\
@@ -69,40 +70,46 @@ x_0^{(2)}\bm{(1)} & x_1^{(2)} & x_2^{(2)} & \cdots & x_n^{(2)} \\
 x_0^{(m)}\bm{(1)} & x_1^{(m)} & x_2^{(m)} & \cdots & x_n^{(m)}
 \end{bmatrix}\]
 
-\[f(\bm{x})=\bm{\theta}^T\bm{x}\]
-
-\[f_{\bm{\theta}}(\bm{X})=\bm{X}\bm{\theta}\]
-- $f_{\bm{\theta}}(\bm{X})$ is a vector of hypotheses
+\[h_{\bm{\theta}}(\bm{X})=\bm{X}\bm{\theta}\]
 
 ** Cost Function
-\[J(\bm{\theta})=\frac{1}{2m}\sum_{i=1}^{m}(\bm{\theta}^T \bm{x}^{(i)}-\bm{y}^{(i)})^2\]
-- Vectorized
+- MSE(Mean Squared Error)
+\[J(\bm{\theta})=\frac{1}{m}\sum_{i=1}^{m}(\bm{\theta}^T \bm{x}^{(i)}-\bm{y}^{(i)})^2\]
 
-\[J(\bm{\theta})=\frac{1}{2m}(\bm{X}\bm{\theta}-\bm{y})^T(\bm{X}\bm{\theta}-\bm{y})\]
+- Vectorized
+\[J(\bm{\theta})=\frac{1}{m}(\bm{X}\bm{\theta}-\bm{y})^T(\bm{X}\bm{\theta}-\bm{y})\]
 
 Python code:
 #+begin_src python
-  J = (1/2*m) * ((X @ theta - y) ** 2).sum()
+  error = X @ theta - y
+  J = (1/2*m) * (error.T @ error)
 #+end_src
 
 ** Gradient Descent
+- Gradient (partial derivatives)
+
+\[\frac{\partial}{\theta_j}J(\bm{\theta})=\frac{2}{m}\sum_{i=1}^m(\bm{\theta}^T\cdot\bm{x^{(i)}}-y^{(i)})x_j^{(i)}\]
+
+- Gradient Vector
+
+\[\frac{2}{m}\bm{X}^T(\bm{X\theta}-\bm{y})\]
+
 - repeat until convergence
-\[\bm{\theta}=\bm{\theta}-\alpha\frac{1}{m}\mathbf{X}^T(\mathbf{X}\bm{\theta}-\bm{y})\]
-
-* TODO Regularized Linear Regression
-** Cost Function
-\[J(\bm{w})=\frac{1}{2m}\sum_{i=1}^m (f_{\bm{w},b}{(x_i)}-{y_i})^2+\lambda\sum_{j=1}^nw_j^2\]
-- $\lambda$ is the regularization parameter. It determines how much the costs of our theta parameters are inflated.
-- $w_0$ should not be penalized
-
-** Gradient Descent
-\[w_0=w_0-\alpha\frac{1}{m}\sum_{i=1}^{m} (w^T\bm{x_i}-y_i)x_{i0}\]
-
-\[w_j=w_j-\alpha[\frac{1}{m}\sum_{i=1}^{m} (w^T\bm{x_i}-y_i)x_{ij}+\frac{\lambda}{m}w_j]\]
-- can also be represented as:
-
-\[w_j=w_j(1-\alpha\frac{\lambda}{m})-\frac{\alpha}{m}\sum_{i=1}^m(f_{\bm{w},b}(x_i)-y_i)x_{ij}\]
+\[\bm{\theta}=\bm{\theta}-\alpha\frac{2}{m}\bm{X}^T(\bm{X}\bm{\theta}-\bm{y})\]
 
 ** Normal Equation
-\[w=(\mathbf{X}^T\mathbf{X}+\lambda\cdot \mathbf{L})^{-1}\mathbf{X}^T\bm{y}\]
-- $L$ is a matrix with 0 at the top left and 1's down the diagonal, with 0's everywhere else.
+\[\hat{\theta}=(\bm{X}^T\bm{X})^{-1}\bm{X}^T\bm{y}\]
+#+begin_src python
+  theta_best = np.linalg.pinv(X_b.T.dot(X_b)).dot(X_b.T).dot(y) # pseudoinverse
+  y_predict = X_new_b.dot(theta_best)
+#+end_src
+- [[file:../notebooks/ML/linear_regression.ipynb][Code]]
+
+* Comparison of algorithms for Linear Regression
+| Algorithm       | Large m | Out-of-core support | Large n | Hyperparams | Scaling required | Scikit-Learn     |
+|-----------------+---------+---------------------+---------+-------------+------------------+------------------|
+| Normal Equation | Fast    | No                  | Slow    |           0 | No               | N/A              |
+| SVD             | Fast    | No                  | Slow    |           0 | No               | LinearRegression |
+| Batch GD        | Slow    | No                  | Fast    |           2 | Yes              | SGDRegressor     |
+| Stochastic GD   | Fast    | Yes                 | Fast    |     $\ge 2$ | Yes              | SGDRegressor     |
+| Mini-batch GD   | Fast    | Yes                 | Fast    |     $\ge 2$ | Yes              | SGDRegressor     |

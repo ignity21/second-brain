@@ -13,7 +13,10 @@
 
 \[b=b-\alpha\frac{\partial}{\partial b}J(\bm{w}, b)\]
 
-* How to choose [[id:aaa8a68b-c3f7-40bb-92dc-8db2f48292c8][Learning Rate]]
+* Pitfalls
+[[../assets/ML/GradientDescentPitfalls.png]]
+- Random initialization
+- How to choose [[id:aaa8a68b-c3f7-40bb-92dc-8db2f48292c8][Learning Rate]]
 
 * [[id:483b6d38-f2bc-4879-84ab-27e0a76561fa][Regularization]]
 

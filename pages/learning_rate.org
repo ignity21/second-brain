@@ -15,3 +15,6 @@
 - Could plot the learning curve to determine $\alpha$ and $\epsilon$
 - Values of $\alpha$ to try:
   - 0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1
+
+* Finding a Good Learning Rate
+- Grid Search

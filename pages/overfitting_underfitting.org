@@ -6,7 +6,6 @@
 - tags :: [[id:9d343f34-3ee6-4737-8612-6718f77dba03][Machine Learning]], [[id:eb9214d7-7c4d-4fd2-8836-b0f40f6ca466][ML Algorithms]], [[id:e92991a2-8dd2-4816-82e3-66d09d410a78][Measuring Success]]
 
 
-
 #+caption: The trade-off between overfitting and underfitting
 [[../assets/ML/Overfitting_1.png]]
 
@@ -14,12 +13,19 @@
 A model is able to make accurate predictions on unseen data.
 - It is able to generalize from the training set to the test set.
 
+** Estimate of Generalization Performance
+*** Cross-validation
+- If a model performs well on the training data but generalizes poorly
+  according to the cross-validation metrics, then your model is overfitting.
+- If it performs poorly on both, then it is underfitting.
+
+*** [[id:807f0a93-ac07-434f-a71b-33e011a87f9e][Learning Curve]]
+
 * Overfitting/Underfitting
 - Choosing too simple a model is called underfitting
 - Overfitting occurs when you fit a model too closely to the particularities of the training set.
 - If dataset is large enough, it becomes harder for a model to overfit, or memorize the data.
 - Too many features will cause overfitting
-
 
 * Reducing Overfitting
 1. Reduce number of features

@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       51b97279-435d-4999-b6ba-81eea4654e65
+:END:
+#+TITLE: Mini-batch Gradient Descent
+#+filetags: :ML:
+- tags :: [[id:89f66c7d-3d49-4308-91ae-1bb844fcbbec][Gradient Descent]]
+
+At each step, instead of computing the gradients based on the full training set
+(as in Batch GD) or based on just one instance (as in Stochastic GD), Mini-batch GD
+computes the gradients on small random sets of instances called mini-batches.
+- The main advantage of Mini-batch GD over Stochastic GD is that you can
+  get a *performance boost* from *hardware optimization* of matrix operations,
+  especially when using GPUs.
+
+#+CAPTION: Gradient Descent paths in parameter space
+[[file:~/second-brain/assets/ML/GradientDescentPath.png]]

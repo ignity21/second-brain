@@ -4,6 +4,9 @@
  {:block/name "* ~auto~ deduces undesired types",
   :block/created-at 1658059295193,
   :block/updated-at 1658059295193}
+ {:block/name "*hierarchical_mutex",
+  :block/created-at 1666743879716,
+  :block/updated-at 1666743879716}
  {:block/name "+begin_src",
   :block/created-at 1658059300553,
   :block/updated-at 1658059300553}
@@ -148,18 +151,27 @@
  {:block/name "classification problem",
   :block/created-at 1658059296548,
   :block/updated-at 1658059296548}
+ {:block/name "classification_problem",
+  :block/created-at 1666743879665,
+  :block/updated-at 1666743879665}
  {:block/name "clustering",
   :block/created-at 1658059296463,
   :block/updated-at 1658059296463}
  {:block/name "concurrency",
   :block/created-at 1658059296477,
   :block/updated-at 1658059296477}
+ {:block/name "condition_variable",
+  :block/created-at 1666743878965,
+  :block/updated-at 1666743878965}
  {:block/name "conjugate gradient",
   :block/created-at 1658059296501,
   :block/updated-at 1658059296501}
  {:block/name "consistent hashing",
   :block/created-at 1658059296511,
   :block/updated-at 1658059296511}
+ {:block/name "constructor",
+  :block/created-at 1666743879015,
+  :block/updated-at 1666743879015}
  {:block/name "contents",
   :block/created-at 1656252684330,
   :block/updated-at 1656252684330}
@@ -289,12 +301,21 @@
  {:block/name "exception handling",
   :block/created-at 1658059300391,
   :block/updated-at 1658059300391}
+ {:block/name "explicit",
+  :block/created-at 1666743879278,
+  :block/updated-at 1666743879278}
  {:block/name "favorites",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
  {:block/name "feature engineering",
   :block/created-at 1658059300346,
   :block/updated-at 1658059300346}
+ {:block/name "feature_engineering",
+  :block/created-at 1666743879737,
+  :block/updated-at 1666743879737}
+ {:block/name "feature_scaling",
+  :block/created-at 1666743879335,
+  :block/updated-at 1666743879335}
  {:block/name "file descriptor",
   :block/created-at 1658059300378,
   :block/updated-at 1658059300378}
@@ -307,6 +328,21 @@
  {:block/name "file:.../resources/python/pythonimport_1.png",
   :block/created-at 1658059306561,
   :block/updated-at 1658059306561}
+ {:block/name "file:../assets/ml/featurescaling.png",
+  :block/created-at 1666743879330,
+  :block/updated-at 1666743879330}
+ {:block/name "file:../assets/ml/learningcurve.png",
+  :block/created-at 1666743879409,
+  :block/updated-at 1666743879409}
+ {:block/name "file:../assets/ml/logisticlossfunction_1.png",
+  :block/created-at 1666743879939,
+  :block/updated-at 1666743879939}
+ {:block/name "file:../assets/ml/logisticlossfunction_2.png",
+  :block/created-at 1666743879939,
+  :block/updated-at 1666743879939}
+ {:block/name "file:../assets/ml/sigmoidfunction.png",
+  :block/created-at 1666743879938,
+  :block/updated-at 1666743879938}
  {:block/name "financial terminology",
   :block/created-at 1657608669364,
   :block/updated-at 1657608669364}
@@ -334,6 +370,9 @@
  {:block/name "gradient descent",
   :block/created-at 1658058393179,
   :block/updated-at 1658058393179}
+ {:block/name "gradient_descent",
+  :block/created-at 1666743879795,
+  :block/updated-at 1666743879795}
  {:block/name "graph-like data model",
   :block/created-at 1658059300571,
   :block/updated-at 1658059300571}
@@ -439,12 +478,21 @@
  {:block/name "lasso linear regression",
   :block/created-at 1658059301959,
   :block/updated-at 1658059301959}
+ {:block/name "lasso_linear_regression",
+  :block/created-at 1666743879827,
+  :block/updated-at 1666743879827}
  {:block/name "later",
   :block/created-at 1655950355029,
   :block/updated-at 1655950355029}
  {:block/name "leader election",
   :block/created-at 1658058393386,
   :block/updated-at 1658058393386}
+ {:block/name "learning_curve",
+  :block/created-at 1666743879410,
+  :block/updated-at 1666743879410}
+ {:block/name "learning_rate",
+  :block/created-at 1666743879433,
+  :block/updated-at 1666743879433}
  {:block/name "linear algebra",
   :block/created-at 1658059301902,
   :block/updated-at 1658059301902}
@@ -484,6 +532,9 @@
  {:block/name "logistic regression",
   :block/created-at 1658058393514,
   :block/updated-at 1658058393514}
+ {:block/name "logistic_regression",
+  :block/created-at 1666743879942,
+  :block/updated-at 1666743879942}
  {:block/name "lsm-trees",
   :block/created-at 1658059302356,
   :block/updated-at 1658059302356}
@@ -592,6 +643,9 @@
  {:block/name "multivariate derivative",
   :block/created-at 1658059303682,
   :block/updated-at 1658059303682}
+ {:block/name "mutable",
+  :block/created-at 1666743879454,
+  :block/updated-at 1666743879454}
  {:block/name "mutex",
   :block/created-at 1658059303672,
   :block/updated-at 1658059303672}
@@ -610,12 +664,18 @@
  {:block/name "neural networks",
   :block/created-at 1658059303773,
   :block/updated-at 1658059303773}
+ {:block/name "neural_networks",
+  :block/created-at 1666743879999,
+  :block/updated-at 1666743879999}
  {:block/name "non-clustering",
   :block/created-at 1658059303802,
   :block/updated-at 1658059303802}
  {:block/name "normal equation",
   :block/created-at 1658059303793,
   :block/updated-at 1658059303793}
+ {:block/name "normal_equation",
+  :block/created-at 1666743880026,
+  :block/updated-at 1666743880026}
  {:block/name "nosql",
   :block/created-at 1658059303807,
   :block/updated-at 1658059303807}
@@ -688,6 +748,9 @@
  {:block/name "polynomial regression",
   :block/created-at 1658059303995,
   :block/updated-at 1658059303995}
+ {:block/name "polynomial_regression",
+  :block/created-at 1666743880067,
+  :block/updated-at 1666743880067}
  {:block/name "postgresql",
   :block/created-at 1658059305048,
   :block/updated-at 1658059305048}
@@ -793,9 +856,18 @@
  {:block/name "regression problem",
   :block/created-at 1658059306810,
   :block/updated-at 1658059306810}
+ {:block/name "regression_problem",
+  :block/created-at 1666743880108,
+  :block/updated-at 1666743880108}
  {:block/name "regularization",
   :block/created-at 1658059306841,
   :block/updated-at 1658059306841}
+ {:block/name "regularized_linear_regression",
+  :block/created-at 1666743879483,
+  :block/updated-at 1666743879483}
+ {:block/name "regularized_logistic_regression",
+  :block/created-at 1666743879527,
+  :block/updated-at 1666743879527}
  {:block/name "reinforcement learning",
   :block/created-at 1658059306826,
   :block/updated-at 1658059306826}
@@ -814,6 +886,9 @@
  {:block/name "ridge linear regression",
   :block/created-at 1658059306873,
   :block/updated-at 1658059306873}
+ {:block/name "ridge_linear_regression",
+  :block/created-at 1666743880142,
+  :block/updated-at 1666743880142}
  {:block/name "roam-aliases",
   :block/created-at 1661049273030,
   :block/updated-at 1661049273030}
@@ -871,12 +946,24 @@
  {:block/name "statistics",
   :block/created-at 1658059307033,
   :block/updated-at 1658059307033}
+ {:block/name "std_async",
+  :block/created-at 1666743879556,
+  :block/updated-at 1666743879556}
  {:block/name "std_function",
   :block/created-at 1665627197792,
   :block/updated-at 1665627197792}
+ {:block/name "std_future",
+  :block/created-at 1666743879573,
+  :block/updated-at 1666743879573}
  {:block/name "std_initializer_list",
   :block/created-at 1665627197813,
   :block/updated-at 1665627197813}
+ {:block/name "std_packaged_task",
+  :block/created-at 1666743879599,
+  :block/updated-at 1666743879599}
+ {:block/name "std_promise",
+  :block/created-at 1666743879611,
+  :block/updated-at 1666743879611}
  {:block/name "std_thread",
   :block/created-at 1665627197860,
   :block/updated-at 1665627197860}
@@ -970,6 +1057,9 @@
  {:block/name "thread_management",
   :block/created-at 1665627197924,
   :block/updated-at 1665627197924}
+ {:block/name "thread_safe_queue",
+  :block/created-at 1666743879651,
+  :block/updated-at 1666743879651}
  {:block/name "tls handshake",
   :block/created-at 1658059307379,
   :block/updated-at 1658059307379}
