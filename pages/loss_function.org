@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       e58f6702-79c4-4e2c-9799-187b452ef6d0
+:END:
+#+TITLE: Loss Function
+#+filetags: :ML:
+
+
+* Regression
+** Mean Squared Error
+\[MSE(f_{\bm{w}, b}(\bm{x}), y)=(f_{\bm{w}, b}(\bm{x})-y)^2\]
+
+** Root Mean Square Error
+
+* Classification
+** BinaryCrossentropy

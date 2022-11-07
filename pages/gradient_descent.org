@@ -8,6 +8,7 @@
 
 
 * Gradient Descent
+- [[id:aaa8a68b-c3f7-40bb-92dc-8db2f48292c8][Learning Rate]]: $\alpha$
 - Simultaneously update $w_1$ to $w_j$ and $b$
 \[w_j=w_j-\alpha\frac{\partial}{\partial w_j}J(\bm{w}, b)\]
 

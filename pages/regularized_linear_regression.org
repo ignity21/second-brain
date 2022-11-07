@@ -7,10 +7,9 @@
 - tags :: [[id:46646008-096b-4086-beab-62c2dd5f5825][Linear Regression]], [[id:483b6d38-f2bc-4879-84ab-27e0a76561fa][Regularization]], [[id:d6364077-06d1-4de4-9a0e-3c7a7337e8ad][Overfitting/Underfitting]]
 
 * Cost Function
-\begin{align*}
-J(\bm{w}, b) & = \frac{1}{2m}\sum_{i=1}^m(f_{\bm{w}, b}(\bm{x^{(i)}})-y^{(i)})^2+\frac{\lambda}{2m}\sum_{j=1}^n w_j^2 \\
-& = \frac{1}{2m}\sum_{i=1}^m(\bm{w^T}\bm{x^{(i)}}+b-y^{(i)})^2+\frac{\lambda}{2m}\sum_{j=1}^n w_j^2
-\end{align*}
+- For mean squared error loss function
+
+\[J(\bm{w}, b) = \frac{1}{2m}\sum_{i=1}^m(f_{\bm{w}, b}(\bm{x^{(i)}})-y^{(i)})^2+\frac{\lambda}{2m}\sum_{j=1}^n w_j^2\]
 
 * Gradient Descent
 - Repeat

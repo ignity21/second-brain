@@ -20,10 +20,10 @@ or Logistic Function
 - \(g(z)\ge 0.5\) when \(z\ge 0\)
 
 ** Model
-- \(z_{w,b}(\bm{x})=\bm{w}^T\cdot \bm{x} + b\)
+- \(z_{w,b}(\bm{x})=\bm{w}^T\bm{x} + b\)
 
 
-\[f_{w,b}(\bm{x})=g((z_{w,b}(\bm{x}))=g(\bm{w}^T\cdot \bm{x} + b)=\frac{1}{1+e^{-(\bm{w}^T\cdot \bm{x} + b)}}\]
+\[f_{w,b}(\bm{x})=g((z_{w,b}(\bm{x}))=g(\bm{w}^T\bm{x} + b)=\frac{1}{1+e^{-(\bm{w}^T\bm{x} + b)}}\]
 
 *** For Binary Classification
 - Probability(for binary classification): \(P(\hat y=1|\bm{x}; \bm{w}, b)=f_{w,b}(\bm{x})\)

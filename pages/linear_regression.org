@@ -4,107 +4,76 @@
 #+TITLE: Linear Regression
 #+filetags: :ML:
 
-- tags :: [[id:4d9aa428-be23-4297-b24f-6f5d05f565f4][Regression Problem]], [[id:89f66c7d-3d49-4308-91ae-1bb844fcbbec][Gradient Descent]],
-  [[id:04c99717-5839-4808-ab6b-116a0839b9f6][Normal Equation]], [[id:ecfac9bf-146f-4df7-b1c8-2078207b8dd7][Feature Scaling]], [[id:aaa8a68b-c3f7-40bb-92dc-8db2f48292c8][Learning Rate]]
-
+- tags :: [[id:4d9aa428-be23-4297-b24f-6f5d05f565f4][Regression Problem]]
 
 * Concept
 ** Parameters
-- $\bm{w}$: $w_1, w_2, \cdots, w_n$
-- $b$
+- Weights: $\bm{w}$: $w_1, w_2, \cdots, w_n$
+- Bias: $b$
 
 ** Model
-\[f_{\bm{w}, b}(\bm{x})= w_1 x_1 + w_2 x_2 + \cdots + w_n x_n + b=\bm{w}^T\cdot\bm{x} + b\]
-- ~f = np.dot(w, x) + b~
+\[f_{\bm{w}, b}(\bm{x})= w_1 x_1 + w_2 x_2 + \cdots + w_n x_n + b=\bm{w}\cdot\bm{x}+b=\bm{w}^T\bm{x} + b\]
+- Vector dot product: ~f = np.dot(w, x) + b~
+- Matrix product: ~f = w.T @ x + b~
+  - ~w.T~ is $1\times n$ matrix
+  - ~x~ is $n\times 1$ matrix
 
-** Cost Function
-\[J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^m Cost(f_{\bm{w}, b}(\bm{x^{(i)}}), y^{(i)})\]
-- Squared Error Function(or "Mean squared error")
-- The mean is halved $\frac{1}{2}$ as a convenience for the computation of the gradient descent
-\[Cost(f_{\bm{w},b}(\bm{x^{(i)}}), y^{(i)}))=\frac{1}{2}(f_{\bm{w},b}(\bm{x^{(i)}})-y^{(i)})^2\]
-
-\[J(\bm{w}, b)=\frac{1}{2m}\sum_{i=1}^m(\bm{w}^T\bm{x^{(i)}}+b-y^{(i)})^2\]
+** [[id:f05e4c45-31d8-47d0-bac8-183f1bc7447b][Cost Function]]
+- Loss Function: [[id:e58f6702-79c4-4e2c-9799-187b452ef6d0][MSE]]
+\[J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^m(\bm{w}^T\bm{x^{(i)}}+b-y^{(i)})^2\]
 
 ** Goal: Minimize $J(\bm{w}, b)$
-*** Gradient Descent Algorithm
-- $\alpha$: Learning rate
-- repeat until convergence (no longer change much with each additional step)
-- Simultaneously update $w_1$ to $w_j$ and $b$
+*** [[id:89f66c7d-3d49-4308-91ae-1bb844fcbbec][Gradient Descent]]
 \[w_j=w_j-\alpha\frac{\partial}{\partial w_j}J(\bm{w}, b)\]
 
 \[b=b-\alpha\frac{\partial}{\partial b}J(\bm{w}, b)\]
 
 **** Details
-\[\frac{\partial{J(\bm{w}, b)}}{\partial{w_j}}=\frac{1}{m}\sum_{i=1}^{m} (f_{\bm{w}, b}(\bm{x^{(i)}}) -y^{(i)})x_{j}^{(i)}\]
+\[\frac{\partial}{\partial{w_j}}J(\bm{w}, b)=\frac{2}{m}\sum_{i=1}^{m} (f_{\bm{w}, b}(\bm{x^{(i)}}) -y^{(i)})x_{j}^{(i)}\]
 
-\[\frac{\partial{J(\bm{w}, b)}}{\partial{b}}=\frac{1}{m}\sum_{i=1}^{m} (f_{\bm{w}, b}(\bm{x^{(i)}}) -y^{(i)})\]
+\[\frac{\partial}{\partial{b}}J(\bm{w}, b)=\frac{2}{m}\sum_{i=1}^{m} (f_{\bm{w}, b}(\bm{x^{(i)}}) -y^{(i)})\]
 
-\[w_j=w_j-\alpha\frac{1}{m}\sum_{i=1}^{m} (\bm{w}^T\bm{x^{(i)}}+b-y^{(i)})x_{j}^{(i)}\]
+*** [[id:04c99717-5839-4808-ab6b-116a0839b9f6][Normal Equation]]
 
-\[b=b-\alpha\frac{1}{m}\sum_{i=1}^{m} (\bm{w}^T\bm{x^{(i)}}+b-y^{(i)})\]
-
-
-*** [[id:04c99717-5839-4808-ab6b-116a0839b9f6][Normal Equation Algorithm]]
-
-* [[id:5153c267-4f26-471e-84aa-a6719af4874e][Regularized Linear Regression]]
-* Vectorized Summary
-** \(\bm{\theta}\) Version
-\[\hat{y}=h_{\bm{\theta}}(\bm{x})=\bm{\theta}^T\cdot\bm{x}\]
-
-*** Parameters
-\[\bm{\theta}^T=\begin{bmatrix}
-\theta_0 &
-\theta_1 & \cdots &
-\theta_n
-\end{bmatrix}\]
-- \(\theta_1\cdots\theta_n\) are weights.
-- \(\theta_0\) is bias.
-
-*** Model
-\[h_{\bm{\theta}}(\bm{x})=\bm{\theta}^T\bm{x}\]
-
-\[\bm{X}=\begin{bmatrix}
-x_0^{(1)}\bm{(1)} & x_1^{(1)} & x_2^{(1)} & \cdots & x_n^{(1)} \\
-x_0^{(2)}\bm{(1)} & x_1^{(2)} & x_2^{(2)} & \cdots & x_n^{(2)} \\
-\vdots & \vdots & \vdots & \ddots & \vdots  \\
-x_0^{(m)}\bm{(1)} & x_1^{(m)} & x_2^{(m)} & \cdots & x_n^{(m)}
-\end{bmatrix}\]
-
-\[h_{\bm{\theta}}(\bm{X})=\bm{X}\bm{\theta}\]
-
+* Vectorized
+- Hypothesis vector $\bm{\hat{y}} = \bm{Xw} + \bm{b}$
 ** Cost Function
-- MSE(Mean Squared Error)
-\[J(\bm{\theta})=\frac{1}{m}\sum_{i=1}^{m}(\bm{\theta}^T \bm{x}^{(i)}-\bm{y}^{(i)})^2\]
-
-- Vectorized
-\[J(\bm{\theta})=\frac{1}{m}(\bm{X}\bm{\theta}-\bm{y})^T(\bm{X}\bm{\theta}-\bm{y})\]
-
-Python code:
+- $J = \frac{1}{m}(\bm{Xw}+\bm{b}-y)^T(\bm{Xw}+\bm{b}-y)$
 #+begin_src python
-  error = X @ theta - y
-  J = (1/2*m) * (error.T @ error)
+  import numpy as np
+  J = (1/m) * np.matmul(error.T, error)
 #+end_src
-
 ** Gradient Descent
 - Gradient (partial derivatives)
 
-\[\frac{\partial}{\theta_j}J(\bm{\theta})=\frac{2}{m}\sum_{i=1}^m(\bm{\theta}^T\cdot\bm{x^{(i)}}-y^{(i)})x_j^{(i)}\]
+\[\frac{\partial}{\partial{w_j}}J(\bm{w}, b)=\frac{2}{m}\sum_{i=1}^m(\bm{w}^T\bm{x^{(i)}}+b-y^{(i)})x_j^{(i)}\]
 
-- Gradient Vector
+\[\frac{\partial}{\partial{b}}J(\bm{w}, b)=\frac{2}{m}\sum_{i=1}^m(\bm{w}^T\bm{x^{(i)}}+b-y^{(i)})\]
 
-\[\frac{2}{m}\bm{X}^T(\bm{X\theta}-\bm{y})\]
+
+- Gradient Vector for *w*
+
+\[\frac{2}{m} \bm{X}^T(\bm{Xw}+\bm{b}-\bm{y})\]
+
+- Gradient for b
+
+\[\frac{2}{m} \vec{1}(\bm{Xw}+\bm{b}-\bm{y})\]
+
 
 - repeat until convergence
-\[\bm{\theta}=\bm{\theta}-\alpha\frac{2}{m}\bm{X}^T(\bm{X}\bm{\theta}-\bm{y})\]
+\[\bm{w}=\bm{w}-\alpha\frac{2}{m}\bm{X}^T(\bm{X}\bm{w} +\bm{b}-\bm{y})\]
 
-** Normal Equation
+\[b = b - \alpha\frac{2}{m}\vec{1}(\bm{X}\bm{w} +\bm{b}-\bm{y})\]
+
+** Normal Equation($\theta$ version)
 \[\hat{\theta}=(\bm{X}^T\bm{X})^{-1}\bm{X}^T\bm{y}\]
 #+begin_src python
-  theta_best = np.linalg.pinv(X_b.T.dot(X_b)).dot(X_b.T).dot(y) # pseudoinverse
-  y_predict = X_new_b.dot(theta_best)
+  # X.T @ X calls np.matmul(X.T, X)
+  theta_best = (np.linalg.pinv(X.T @ X) @ X.T).dot(y) # pseudoinverse
+  y_predict = np.dot(X_test, theta_best)
 #+end_src
 - [[file:../notebooks/ML/linear_regression.ipynb][Code]]
-
+* [[id:5153c267-4f26-471e-84aa-a6719af4874e][Regularized Linear Regression]]
 * Comparison of algorithms for Linear Regression
 | Algorithm       | Large m | Out-of-core support | Large n | Hyperparams | Scaling required | Scikit-Learn     |
 |-----------------+---------+---------------------+---------+-------------+------------------+------------------|
