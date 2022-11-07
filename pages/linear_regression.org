@@ -8,7 +8,7 @@
 
 * Concept
 ** Parameters
-- Weights: $\bm{w}$: $w_1, w_2, \cdots, w_n$
+- Weights $\bm{w}$: $w_1, w_2, \cdots, w_n$
 - Bias: $b$
 
 ** Model
@@ -35,7 +35,7 @@
 
 *** [[id:04c99717-5839-4808-ab6b-116a0839b9f6][Normal Equation]]
 
-* Vectorized
+* Vectorization
 - Hypothesis vector $\bm{\hat{y}} = \bm{Xw} + \bm{b}$
 ** Cost Function
 - $J = \frac{1}{m}(\bm{Xw}+\bm{b}-y)^T(\bm{Xw}+\bm{b}-y)$

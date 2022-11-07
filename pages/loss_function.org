@@ -12,4 +12,4 @@
 ** Root Mean Square Error
 
 * Classification
-** BinaryCrossentropy
+** Binary Crossentropy

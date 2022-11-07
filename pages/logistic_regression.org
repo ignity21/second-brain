@@ -4,13 +4,13 @@
 #+TITLE: Logistic Regression
 #+filetags: :ML:
 
-- tags :: [[id:e0e88d4d-69d2-4e20-be4c-5aa8b849e968][Classification Problem]], [[id:89f66c7d-3d49-4308-91ae-1bb844fcbbec][Gradient Descent]]
+- tags :: [[id:e0e88d4d-69d2-4e20-be4c-5aa8b849e968][Classification Problem]]
 
 
 * Concept
 ** Parameters
-- $\bm{w}$: $w_1, w_2, \cdots, w_n$
-- $b$
+- Weights $\bm{w}$: $w_1, w_2, \cdots, w_n$
+- Bias: $b$
 
 ** Sigmoid Function
 or Logistic Function
@@ -20,47 +20,42 @@ or Logistic Function
 - \(g(z)\ge 0.5\) when \(z\ge 0\)
 
 ** Model
-- \(z_{w,b}(\bm{x})=\bm{w}^T\bm{x} + b\)
+- \(z_{\bm{w},b}(\bm{x})=\bm{w}^T\bm{x} + b\)
 
 
-\[f_{w,b}(\bm{x})=g((z_{w,b}(\bm{x}))=g(\bm{w}^T\bm{x} + b)=\frac{1}{1+e^{-(\bm{w}^T\bm{x} + b)}}\]
+\[f_{\bm{w},b}(\bm{x})=g((z_{w,b}(\bm{x}))=g(\bm{w}^T\bm{x} + b)=\frac{1}{1+e^{-(\bm{w}^T\bm{x} + b)}}\]
 
 *** For Binary Classification
 - Probability(for binary classification): \(P(\hat y=1|\bm{x}; \bm{w}, b)=f_{w,b}(\bm{x})\)
-- \(\hat y = 1\)
-  - when \(f_{\bm{w},b}(\bm{x})\ge 0.5\), which means \(z\ge 0(\bm{w}\cdot\bm{x}+b\ge 0)\)
-- Decision Boundary: \(\bm{w}\cdot\bm{x}+b=0\)
+- $\hat{y} = 1$ when \(f_{\bm{w},b}(\bm{x})\ge 0.5\), which means $z\ge 0$
+- Decision Boundary: \(z_{\bm{w},b}(\bm{x})=\bm{w}\cdot\bm{x}+b=0\)
   - Non-linear Decision Boundary Example: Let \(z\) be \(w_1 x_1^2 + w_2 x_1 + w_3 x_2^2 + b\)
 
 ** Cost Function
-*** Loss Function
+*** Loss Function (Binary Crossentropy)
 \[L(f_{\bm{w}, b}(\bm{x^{(i)}}), y^{(i)})=\begin{cases}
 -\log(f_{\bm{w}, b}(\bm{x^{(i)}})), & \text{if }y^{(i)}=1 \\
 -\log(1-f_{\bm{w}, b}(\bm{x^{(i)}})), & \text{if }y^{(i)}=0
 \end{cases}\]
 
-- \(y=1\)
+- \(y^{(i)}=1\)
 
 [[file:../assets/ML/LogisticLossFunction_1.png]]
 
-- \(y=0\)
+- \(y^{(i)}=0\)
 
 [[file:../assets/ML/LogisticLossFunction_2.png]]
 
-*** Cost Function J
-\[J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^{m}L(f_{\bm{w}, b}(\bm{x^{(i)}}), y^{(i)})\]
+*** Simplified Loss Function
+\[L(f_{\bm{w}, b}(\bm{x^{(i)}}), y^{(i)})=-y^{(i)}\log(f_{\bm{w}, b}(\bm{x^{(i)}}))-(1-y^{(i)})\log(1-f_{\bm{w}, b}(\bm{x^{(i)}}))\]
 
-*** Simplified Cost Function
-- Loss Function
-\[L(f_{\bm{w}, b}(\bm{x^{(i)}})=-y^{(i)}\log(f_{\bm{w}, b}(\bm{x^{(i)}}))-(1-y^{(i)})\log(1-f_{\bm{w}, b}(\bm{x^{(i)}}))\]
-
-- Cost Function
+*** [[id:f05e4c45-31d8-47d0-bac8-183f1bc7447b][Cost Function]]
 \begin{align*}
 J(\bm{w}, b) & = \frac{1}{m}\sum_{i=1}^m [L(f_{\bm{w}, b}(\bm{x^{(i)}}), y^{(i)})] \\
 & = -\frac{1}{m}\sum_{i=1}^m[y^{(i)}\log(f_{\bm{w},b}(\bm{x^{(i)}}))+(1-y^{(i)})\log(1-f_{\bm{w},b}(\bm{x^{(i)}}))]
 \end{align*}
 
-* Gradient Descent
+* [[id:89f66c7d-3d49-4308-91ae-1bb844fcbbec][Gradient Descent]]
 - Repeat:
 \[w_j=w_j-\alpha\frac{\partial}{\partial w_j}J(\bm{w}, b)\]
 
@@ -69,12 +64,6 @@ J(\bm{w}, b) & = \frac{1}{m}\sum_{i=1}^m [L(f_{\bm{w}, b}(\bm{x^{(i)}}), y^{(i)}
 
 - \(\frac{\partial}{\partial w_j}J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^{m}(f_{\bm{w},b}(\bm{x^{(i)}})-y^{(i)})x_j^{(i)}\)
 
-- \(\frac{\partial}{\partial w_j}J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^{m}(f_{\bm{w},b}(\bm{x^{(i)}})-y^{(i)})\)
+- \(\frac{\partial}{\partial b}J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^{m}(f_{\bm{w},b}(\bm{x^{(i)}})-y^{(i)})\)
 
 * [[id:dd0f767f-94a7-487f-bce0-c6c2e2cbf03c][Regularized Logistic Regression]]
-
-* TODO Vectorized Summary
-- Hypothesis: $h=g(\mathbf{X}\theta)$
-- Cost Function: $J(\theta)=-\frac{1}{m}\cdot(y^T\log(h)+(1-y)^T\log(1-h))$
-** Gradient Descent
-- Repeat until convergence: $\theta=\theta-\alpha\frac{1}{m}\mathbf{X}^T(g(\mathbf{X}\theta)-y)$
