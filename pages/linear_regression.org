@@ -19,7 +19,7 @@
   - ~x~ is $n\times 1$ matrix
 
 ** [[id:f05e4c45-31d8-47d0-bac8-183f1bc7447b][Cost Function]]
-- Loss Function: [[id:e58f6702-79c4-4e2c-9799-187b452ef6d0][MSE]]
+- Loss Function: Mean Squared Error
 \[J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^m(\bm{w}^T\bm{x^{(i)}}+b-y^{(i)})^2\]
 
 ** Goal: Minimize $J(\bm{w}, b)$
