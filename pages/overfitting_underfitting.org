@@ -13,13 +13,13 @@
 A model is able to make accurate predictions on unseen data.
 - It is able to generalize from the training set to the test set.
 
-** Estimate of Generalization Performance
+** Generalization Performance
 *** Cross-validation
 - If a model performs well on the training data but generalizes poorly
   according to the cross-validation metrics, then your model is overfitting.
 - If it performs poorly on both, then it is underfitting.
 
-*** [[id:807f0a93-ac07-434f-a71b-33e011a87f9e][Learning Curve]]
+*** See [[id:807f0a93-ac07-434f-a71b-33e011a87f9e][Learning Curves]]
 
 * Overfitting/Underfitting
 - Choosing too simple a model is called underfitting
