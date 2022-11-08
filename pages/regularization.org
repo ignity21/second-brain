@@ -6,6 +6,8 @@
 
 - tags :: [[id:d6364077-06d1-4de4-9a0e-3c7a7337e8ad][Overfitting/Underfitting]]
 
+* TODO
+
 Regularization means explicitly restricting a model to avoid [[id:d6364077-06d1-4de4-9a0e-3c7a7337e8ad][Overfitting]].
 - with enough training data, regularization becomes less important.
 
