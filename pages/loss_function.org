@@ -8,8 +8,14 @@
 * Regression
 ** Mean Squared Error
 \[MSE(f_{\bm{w}, b}(\bm{x}), y)=(f_{\bm{w}, b}(\bm{x})-y)^2\]
+- ~tensorflow.keras.losses.MeanSquaredError()~
 
 ** Root Mean Square Error
 
 * Classification
-** Binary Crossentropy
+** Binary classification
+*** Binary Cross Entropy
+\[L(f_{\bm{w}, b}(\bm{x^{(i)}}), y^{(i)})=
+-\log(f_{\bm{w}, b}(\bm{x^{(i)}}))
+-(1-y)\log(1-f_{\bm{w}, b}(\bm{x^{(i)}}))\]
+- ~tensorflow.keras.losses.BinaryCrossentropy()~

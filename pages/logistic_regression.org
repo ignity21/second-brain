@@ -31,8 +31,14 @@ or Logistic Function
 - Decision Boundary: \(z_{\bm{w},b}(\bm{x})=\bm{w}\cdot\bm{x}+b=0\)
   - Non-linear Decision Boundary Example: Let \(z\) be \(w_1 x_1^2 + w_2 x_1 + w_3 x_2^2 + b\)
 
+*** Code
+#+begin_src python
+  z = np.dot(w, x) + b
+  f_x = 1/(1+np.exp(-z))
+#+end_src
+
 ** Cost Function
-*** Loss Function (Binary Crossentropy)
+*** Loss Function (Binary Cross Entropy)
 \[L(f_{\bm{w}, b}(\bm{x^{(i)}}), y^{(i)})=\begin{cases}
 -\log(f_{\bm{w}, b}(\bm{x^{(i)}})), & \text{if }y^{(i)}=1 \\
 -\log(1-f_{\bm{w}, b}(\bm{x^{(i)}})), & \text{if }y^{(i)}=0
@@ -48,6 +54,9 @@ or Logistic Function
 
 *** Simplified Loss Function
 \[L(f_{\bm{w}, b}(\bm{x^{(i)}}), y^{(i)})=-y^{(i)}\log(f_{\bm{w}, b}(\bm{x^{(i)}}))-(1-y^{(i)})\log(1-f_{\bm{w}, b}(\bm{x^{(i)}}))\]
+#+begin_src python
+  loss = -y * np.log(f_x) - (1-y) * np.log(1-f_x)
+#+end_src
 
 *** [[id:f05e4c45-31d8-47d0-bac8-183f1bc7447b][Cost Function]]
 \begin{align*}
