@@ -34,7 +34,7 @@ then roll back the model parameters to the point where the validation error was 
   best_epoch = None
   best_model = None
   for epoch in range(1000):
-      sgd_reg.fit(X_train_poly_scaled, y_train) # continues where it left off
+      sgd_reg.fit(X_train_poly_scaled, y_train.ravel()) # continues where it left off
       y_val_predict = sgd_reg.predict(X_val_poly_scaled)
       val_error = mean_squared_error(y_val, y_val_predict)
       if val_error < minimum_val_error:
