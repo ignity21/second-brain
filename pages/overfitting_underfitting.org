@@ -11,7 +11,7 @@
 A model is able to make accurate predictions on unseen data.
 - It is able to generalize from the training set to the test set.
 
-** Generalization Error Causalities
+** Generalization Error Causes
 *** Bias
 This part of the generalization error is due to *wrong assumptions*.
 A high-bias model is most likely to underfit the training data.
@@ -43,7 +43,7 @@ part of the error is to clean up the data.
 To generate the plots, train the model several times on different sized subsets of the training set.
 - [[file:~/second-brain/notebooks/ML/plot_learning_curves.ipynb][Plotting Learning Curves]]
 
-* Overfitting/Underfitting Causalities
+* Overfitting/Underfitting Causes
 - Choosing too simple a model is called underfitting
 - Overfitting occurs when you fit a model too closely to the particularities of the training set.
 - If dataset is large enough, it becomes harder for a model to overfit, or memorize the data.
