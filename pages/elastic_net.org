@@ -1,0 +1,30 @@
+:PROPERTIES:
+:ID:       4da07d91-61f1-4571-89aa-16b6ece7dc9a
+:END:
+#+TITLE: Elastic Net
+#+filetags: :ML:
+
+- tags :: [[id:2345ac0f-e2ff-4562-9ef4-be441fc59cd5][Ridge Linear Regression]], [[id:86af7a0e-4143-4e90-8500-1266133203fc][Lasso Linear Regression]]
+
+Elastic Net is a middle ground between Ridge Regression and Lasso Regression.
+- The regularization term is a simple mix of both Ridge and Lasso's regularization terms
+
+* Cost Function
+\[J(\bm{w}, b)=MSE(\bm{w}, b)+r\lambda\sum_{i=1}^n|w_i|+\frac{1-r}{2}\lambda\sum_{i=1}^n w_i^2\]
+- r is the mix ratio (hyperparameter).
+
+* Ridge, Lasso, or Elastic Net?
+- Ridge is a good default.
+- If you suspect that only a few features are useful, you should prefer Lasso or Elastic Net.
+- In general, Elastic Net is preferred over Lasso.
+- Lasso may behave erratically.
+  - when the number of features is greater than the number of training instances.
+  - when several features are strongly correlated.
+
+* Code
+#+begin_src python
+  from sklearn.linear_model import ElasticNet
+  elastic_net = ElasticNet(alpha=0.1, l1_ratio=0.5)
+  elastic_net.fit(X, y)
+  elastic_net.predict([[1.5]])
+#+end_src
