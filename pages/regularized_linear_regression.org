@@ -8,6 +8,7 @@
 
 * Cost Function
 - For mean squared error loss function
+- The hyperparameter $\lambda$ controls how much you want to regularize the model.
 
 \[J(\bm{w}, b) = \frac{1}{2m}\sum_{i=1}^m(f_{\bm{w}, b}(\bm{x^{(i)}})-y^{(i)})^2+\frac{\lambda}{2m}\sum_{j=1}^n w_j^2\]
 

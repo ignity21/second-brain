@@ -2,5 +2,45 @@
 :ID:       86af7a0e-4143-4e90-8500-1266133203fc
 :END:
 #+TITLE: Lasso Linear Regression
+#+filetags: :ML:
 
-- tags :: [[id:46646008-096b-4086-beab-62c2dd5f5825][Linear Regression]], [[id:2345ac0f-e2ff-4562-9ef4-be441fc59cd5][Ridge Linear Regression]]
+- tags :: [[id:46646008-096b-4086-beab-62c2dd5f5825][Linear Regression]], [[id:5153c267-4f26-471e-84aa-a6719af4874e][Regularized Linear Regression]]
+
+Least Absolute Shrinkage and Selection Operator Regression
+- uses the L1 norm of the weight vector
+
+* Cost Function
+\[J(\bm{w}, b)=MSE(\bm{w}, b) + \lambda\sum_{i=1}^{n}|w_i|\]
+- Important characteristic: it tends to *eliminate* the weights of the least important features.
+  - In other words, lasso Regression automatically performs feature selection.
+  - It outputs a sparse model (i.e., with few nonzero feature weights).
+
+** Difference with Ridge
+- Example: \(\theta_1=2\) and \(\theta_2=0.5\)
+#+CAPTION: Lasso versus Ridge regularization
+[[file:../assets/ML/LassoVsRidge.png]]
+- \(\theta_2\) will reach 0 soon for L1 norm.
+  - Ends up bouncing around the global optimum
+  - To avoid bouncing around, you need to gradually reduce the learning rate during training.
+- Ridge
+  - Gradient Descent naturally slows down, which helps convergence.
+  - the optimal parameters(represented by the red square) get closer and closer to
+    the origin when you increase \(\lambda\).
+
+** Not Differentiable at \(w_i=0\)
+- Use a subgradient vector when any \(w_i=0\).
+
+* Code
+#+begin_src python
+  from sklearn.linear_model import Lasso
+  lasso_reg = Lasso(alpha=0.1)
+  lasso_reg.fit(X, y)
+  lasso_reg.predict([[1.5]])
+#+end_src
+
+** Gradient Descent
+#+begin_src python
+  sgd_reg = SGDRegressor(penalty="l1")
+  sgd_reg.fit(X, y.ravel())
+  sgd_reg.predict([[1.5]])
+#+end_src
