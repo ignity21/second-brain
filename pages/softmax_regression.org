@@ -50,7 +50,7 @@ The softmax regression model is a generalization of logistic regression to suppo
   model = Sequential([
       Dense(units=25, activation="relu"),
       Dense(units=15, activation="relu"),
-      Dense(units=10, activation="linear")
+      Dense(units=10, activation="linear") # output => z
   ])
 
   # 2. specify loss and cost
@@ -61,6 +61,6 @@ The softmax regression model is a generalization of logistic regression to suppo
   model.fit(X, Y, epochs=100)
 
   # 4. Predict
-  logits = model(X)
+  logits = model(X) # output => z1...z10
   f_x == tf.nn.softmax(logits)
 #+end_src

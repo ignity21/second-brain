@@ -4,7 +4,7 @@
 #+TITLE: Gradient Descent
 #+filetags: :ML:
 
-- tags :: [[id:f05e4c45-31d8-47d0-bac8-183f1bc7447b][Cost Function]], [[id:aaa8a68b-c3f7-40bb-92dc-8db2f48292c8][Learning Rate]], [[id:ecfac9bf-146f-4df7-b1c8-2078207b8dd7][Feature Scaling]]
+- tags :: [[id:f05e4c45-31d8-47d0-bac8-183f1bc7447b][Cost Function]], [[id:aaa8a68b-c3f7-40bb-92dc-8db2f48292c8][Learning Rate]], [[id:ecfac9bf-146f-4df7-b1c8-2078207b8dd7][Feature Scaling]], [[id:a14aae7c-868f-4724-8a0d-9ab233d01264][Optimization Algorithm]]
 
 
 * Gradient Descent

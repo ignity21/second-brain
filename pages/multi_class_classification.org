@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       04f7ea6d-c429-4ff0-a378-6c2313b98506
+:END:
+#+TITLE: Multi-class Classification
+#+filetags: :ML:
+
+- tags :: [[id:c25737ef-4bc3-43d2-9f91-8b483d456812][Softmax Regression]]
