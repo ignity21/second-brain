@@ -8,7 +8,9 @@
 - tags :: [[id:c4114af3-a40b-422b-af14-077d4a0cfed6][Logistic Regression]]
 
 
+* Concept
 Used for Non-linear Hypotheses
+[[../assets/ML/NeuralNetworkIdea.png]]
 
 * Notations
 - \(\bm{w_j^{(l)}}, b_i^{(l)}\): the parameters of /jth/ unit/activation in layer /l/

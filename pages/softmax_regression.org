@@ -4,10 +4,63 @@
 #+TITLE: Softmax Regression
 #+filetags: :ML:
 
-- tags :: [[id:c4114af3-a40b-422b-af14-077d4a0cfed6][Logistic Regression]]
+- tags :: [[id:c4114af3-a40b-422b-af14-077d4a0cfed6][Logistic Regression]], [[id:e0e88d4d-69d2-4e20-be4c-5aa8b849e968][Classification Problem]], [[id:efc18c0e-1e96-46d6-91c8-39bc2f3a7101][Activation Functions]], [[id:024e4a3a-3268-45c8-90f6-24674638af0d][Neural Networks]]
 
+The softmax regression model is a generalization of logistic regression to support multiclass classification.
 
-The Logistic Regression model can be generalized to support multiple classes directly.
+* Idea
+[[../assets/ML/SoftmaxIdea.png]]
+** Cost Function
+[[../assets/ML/SoftmaxCostIdea.png]]
 
-Multinomial Logistic Regression
-* TODO
+* Softmax Output Layer in Neural Network
+[[../assets/ML/SoftmaxLayer.png]]
+
+** Code
+*** Basic Implementation
+- Note: Use Improved version instead
+#+begin_src python
+  import tensorflow as tf
+  from tensorflow.keras import Sequential
+  from tensorflow.keras.layers import Dense
+
+  # 1. specify the model
+  model = Sequential([
+      Dense(units=25, activation="relu"),
+      Dense(units=15, activation="relu"),
+      Dense(units=10, activation="softmax") # 10 classes
+  ])
+
+  # 2. specify loss and cost
+  from tensorflow.keras.losses import SparseCategoricalCrossentropy
+  model.compile(loss=SparseCategoricalCrossentropy())
+
+  # 3. Training: minimize J
+  model.fit(X, Y, epochs=100)
+#+end_src
+
+*** Improved implementation
+- More numerically accurate
+#+begin_src python
+  import tensorflow as tf
+  from tensorflow.keras import Sequential
+  from tensorflow.keras.layers import Dense
+
+  # 1. specify the model
+  model = Sequential([
+      Dense(units=25, activation="relu"),
+      Dense(units=15, activation="relu"),
+      Dense(units=10, activation="linear")
+  ])
+
+  # 2. specify loss and cost
+  from tensorflow.keras.losses import SparseCategoricalCrossentropy
+  model.compile(loss=SparseCategoricalCrossentropy(from_logits=True)) # logits ~ z
+
+  # 3. Training: minimize J
+  model.fit(X, Y, epochs=100)
+
+  # 4. Predict
+  logits = model(X)
+  f_x == tf.nn.softmax(logits)
+#+end_src
