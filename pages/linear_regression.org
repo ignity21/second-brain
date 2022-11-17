@@ -8,8 +8,9 @@
 
 * Concept
 ** Parameters
-- Weights $\bm{w}$: $w_1, w_2, \cdots, w_n$
-- Bias: $b$
+- Weights $\bm{w}$: $w_1, w_2, \cdots, w_n$ (slope)
+- Bias: $b$ (intercept)
+  - The bias enables the model to modify the output independently of its inputs.
 
 ** Model
 \[f_{\bm{w}, b}(\bm{x})= w_1 x_1 + w_2 x_2 + \cdots + w_n x_n + b=\bm{w}\cdot\bm{x}+b=\bm{w}^T\bm{x} + b\]
