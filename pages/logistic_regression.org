@@ -75,9 +75,4 @@ J(\bm{w}, b) & = \frac{1}{m}\sum_{i=1}^m [L(f_{\bm{w}, b}(\bm{x^{(i)}}), y^{(i)}
 
 - \(\frac{\partial}{\partial b}J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^{m}(f_{\bm{w},b}(\bm{x^{(i)}})-y^{(i)})\)
 
-* Code
-#+begin_src python
-
-#+end_src
-
 * [[id:dd0f767f-94a7-487f-bce0-c6c2e2cbf03c][Regularized Logistic Regression]]

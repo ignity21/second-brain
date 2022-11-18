@@ -40,7 +40,7 @@ The softmax regression model is a generalization of logistic regression to suppo
 #+end_src
 
 *** Improved implementation
-- More numerically accurate
+- More numerically accurate [[id:57ed1b38-3c4a-43aa-ab3f-de277ae87d14][Roundoff Errors]]
 #+begin_src python
   import tensorflow as tf
   from tensorflow.keras import Sequential
