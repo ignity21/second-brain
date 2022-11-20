@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       af9dc91a-d381-4fe4-bb99-00c0664c906a
+:END:
+#+TITLE: DL Layer Type
+#+filetags: :ML:DL:
+
+- tags :: [[id:024e4a3a-3268-45c8-90f6-24674638af0d][Neural Networks]]
+
+* Dense Layer
+Each neuron output is a function of *all* the activation outputs of the previous layer.
+
+* Convolutional Layer
+Each neuron only looks at part of the previous layer's inputs.
+- Faster computation
+- Need less training data (less prone to overfitting)
+[[../assets/ML/ConvolutionalNN.png]]

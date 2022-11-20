@@ -8,3 +8,5 @@
 
 
 [[file:../assets/ML/MultilabelClassification.png]]
+
+- Reuses hidden layer 1, 2
