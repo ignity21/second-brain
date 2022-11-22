@@ -17,4 +17,14 @@
   1. Choose a much smaller learning rate $\alpha$ to see if there is a bug. (debug process)
   2. Choose a appropriate $\alpha$.
 
-* TODO Code
+* Troubleshooting [[id:d6364077-06d1-4de4-9a0e-3c7a7337e8ad][Overfitting/Underfitting]]
+** Normal
+[[../assets/ML/NormalLearningCurve.png]]
+
+** High Bias
+[[../assets/ML/HighBiasLearningCurve.png]]
+- Note: Getting more training data will not help much.
+
+** High Variance
+[[../assets/ML/HighVarianceLearningCurve.png]]
+- Note: Getting more training data is likely to help.
