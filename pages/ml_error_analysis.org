@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       0279c89e-2fc1-48f2-970c-ede1728500e7
+:END:
+#+TITLE: ML Error Analysis
+#+filetags: :ML:
+
+- tags :: [[id:8fbe5c79-7353-448a-aff9-1f3a6bbfb382][Machine Learning Diagnostic]]
+
+
+* Scenario
+- $m_{cv}=500$ examples in cross validation set.
+- Algorithm misclassifies 1000 of them.
+- Manually choose(random) and examine 100 examples and categorize them
+  - Pharma: 21
+  - Deliberate misspellings: 3
+  - Unusual email routing: 7
+  - Steal passwords (phishing): 18
+  - Spam message in embedded image: 5
+- Solve the most frequent traits first
