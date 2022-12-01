@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       08667c5b-c298-4a81-8ce7-93273a7dfbb2
+:END:
+#+TITLE: Data Sources
+#+filetags: :ML:
+
+- tags :: [[id:9d343f34-3ee6-4737-8612-6718f77dba03][Machine Learning]]
+
+- Popular open data repositories
+  - [[http://archive.ics.uci.edu/ml/][UC Irvine Machine Learning Repository]]
+  - [[https://www.kaggle.com/datasets][Kaggle datasets]]
+  - [[https://registry.opendata.aws/][Amazon's AWS datasets]]
+- Meta portals [they list open data repositories]
+  - [[http://dataportals.org/]]
+  - [[http://opendatamonitor.eu/]]
+  - [[http://quandl.com/]]
+- Other pages listing many popular open data repositories
+  - [[https://homl.info/9][Wikipedia's list of Machine Learning datasets]]
+  - [[https://homl.info/10][Quora.com question]]
+  - [[https://www.reddit.com/r/datasets][Datasets subreddit]]

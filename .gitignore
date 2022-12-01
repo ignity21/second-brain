@@ -6,3 +6,6 @@ logseq/.recycle/
 # python
 .venv/
 .ipynb_checkpoints/
+
+# datasets
+datasets/

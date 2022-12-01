@@ -5,9 +5,12 @@ description = "Notebooks"
 authors = ["chrischen <chrischen3121@gmail.com>"]
 
 [[tool.poetry.source]]
-name = "tsinghua"
+name = "china-mirror"
 default = true
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+# url = "https://pypi.doubanio.com/simple/"
+# url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+# url = "https://mirrors.ustc.edu.cn/pypi/web/simple"
+url = "https://mirrors.bfsu.edu.cn/pypi/web/simple/"
 
 [tool.poetry.dependencies]
 python = "^3.10"
