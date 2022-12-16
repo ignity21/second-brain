@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       2a6275d2-d59c-44e9-8292-e8e7f011b945
+:END:
+#+TITLE: Array as HashMap
+#+filetags: :Algorithm:
+
+- LeetCode: [[https://leetcode.com/problems/find-the-duplicate-number][287]]

@@ -12,3 +12,5 @@ other one is called the slow pointer.
 
 - The Fast pointer may reach the end (NULL) this shows that there is no loop in the linked list.
 - The Fast pointer again catches the slow pointer at some time therefore a loop exists in the linked list.
+- Slow pointer name: ~tortoise~
+- Fast pointer name: ~hare~
