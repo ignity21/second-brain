@@ -1,0 +1,40 @@
+:PROPERTIES:
+:ID:       f97958ba-9cb6-4528-b721-f68bfd992556
+:END:
+#+TITLE: Precision and Recall
+#+filetags: :ML:
+
+- tags :: [[id:f05e4c45-31d8-47d0-bac8-183f1bc7447b][Cost Function]]
+
+
+* Skewed Dataset
+- Rare Disease Classification Example
+- $y=1$ in presence of *rare* class we want to detect. (e.g. $P(y=1)=1%$)
+- 100 examples:
+|              | Actual(1)      | Actual(0)      |
+|--------------+----------------+----------------|
+| Predicted(1) | True Positive  | False Positive |
+| Predicted(0) | False Negative | True Negative  |
+- Precision :: What fraction actually have the rare disease?
+
+$$\frac{TruePositive}{PredictedPositive}$$
+
+- Recall :: What fraction did we correctly detect as having it?
+
+$$\frac{TruePositive}{ActualPositive}$$
+
+* Trading Off Precision and Recall
+- Increasing logistic regression threshold, say 0.5 to 0.7.
+  - Meaning: we want to predict $y=1$ (rare disease) only if very confident.
+  - Resulting in higher precision and lower recall.
+- Decreasing threshold
+  - Meaning: we what to avoid missing too many possible cases of rare disease.
+- Plotting the curve and balancing precision and recall
+  - Pick threshold manually
+
+[[file:../assets/ML/PrecisionAndRecall.png]]
+
+- If you want to automatically trade-off precision and recall,
+  - use *F1 score* metric, Combing precision and recall into a single score.
+  - $F1=(\frac{1}{2}(\frac{1}{P}+\frac{1}{R}))^{-1}=2\frac{PR}{P+R}$ (harmonic mean)
+  - Harmonic Mean: the average that emphasizes the smaller values more.
