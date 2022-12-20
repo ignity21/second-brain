@@ -19,7 +19,11 @@ having the idea that there is a *relationship* between the input and the output.
 - Regression Problem: Given data about the size of houses on the real estate market, try to predict their price.
 - Classification Problem: Given a patient with a tumor, we have to predict whether the tumor is malignant or benign.
 
-* TODO Important Algorithms
+* Important Algorithms
+- [[id:46646008-096b-4086-beab-62c2dd5f5825][Linear Regression]]
+- [[id:c4114af3-a40b-422b-af14-077d4a0cfed6][Logistic Regression]]
+- [[id:1078d6e9-f0bd-4898-90cb-78280e087426][Decision Tree]]
+
 # - [[id:ef7033b4-2788-4166-9958-f7b48dfb8098][K-Nearest Neighbors]]
 # - [[id:46646008-096b-4086-beab-62c2dd5f5825][Linear Regression]]
 # - [[id:c4114af3-a40b-422b-af14-077d4a0cfed6][Logistic Regression]]

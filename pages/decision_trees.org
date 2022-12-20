@@ -1,4 +1,7 @@
 :PROPERTIES:
 :ID:       1078d6e9-f0bd-4898-90cb-78280e087426
 :END:
-#+TITLE: Decision Trees
+#+TITLE: Decision Tree
+#+filetags: :ML:
+
+- How to choose root node? Maximize purity.

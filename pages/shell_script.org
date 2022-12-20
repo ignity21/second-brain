@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       0a11addf-3cae-4779-8e46-fa2a462dc59e
+:END:
+#+TITLE: Shell Script
+#+filetags: :Linux:Bash:
+
+- tags :: [[id:3cee8e70-ad02-48c7-8948-b1d588985442][Shell]]
+
+* 基础语法
+** 引号
+- 不带引号：无法在要显示的文本中使用分号；分号被用作命令分隔符
+  - ~echo hello; world~: "command not found: world"
+- 双引号：无法使用 ~!~ 号，需要转义 ~\!~
+  - ~echo "hello world\!"~ -> =hello world!=
+- 单引号：Bash 不会对单引号中的变量 ~$var~ 求值
+  - ~echo '$var'~ -> =$var=
+
+** 彩色输出
+- 重置=0，黑=30，红=31，绿=32，黄=33，蓝=34，……
+- 设置颜色 ~\e[1;31]~ 还原 ~\e[0m~
+  - ~echo "\e[1;31m This is red.\e[0m"~
+
+** 变量 / 环境变量
