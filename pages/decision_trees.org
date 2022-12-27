@@ -23,7 +23,7 @@
 
 ** Example
 [[file:../assets/ML/ChoosingASplit.png]]
-- Combining left and right entropy  into a single measure by taking the weighted average
+- Combining left and right entropy into a single measure by taking the weighted average
 - *Parent node entropy* is $H(0.5)=1$ The Reduction in entropy is:
   - $H(0.5)-\text{weighted entropy of sub-trees}$
 - Splitting on ear shape results in the biggest *reduction in entropy*. (0.28)
@@ -43,7 +43,15 @@
   - If a categorical feature can take on /k/ values, create /k/ binary features (0 or 1 valued).
 
 ** Continuous Feature
-
 [[file:../assets/ML/SplitContinuousFeature.png]]
+1. Plotting
+2. Trying different thresholds
+2. Calculating left and right entropy
+3. Calculating the *information gain* (reduction in entropy)
 
 * Generalizing to *Regression Problem*
+- Taking an average at the leaf node.
+- Choosing a split
+  - Reduce the variance instead of entropy(impurity)
+
+[[file:../assets/ML/ChooseASplitRegressionTree.png]]

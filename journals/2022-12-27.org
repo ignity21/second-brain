@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       a89a0a08-0aa1-4401-8951-69eca98f71ce
+:END:
+#+title: 2022-12-27
+
+- One decision tree is highly sensitive to small changes of the data.
+
+- Tree ensembles
+  - Constructing training sets using *sampling with replacement* techniques.
