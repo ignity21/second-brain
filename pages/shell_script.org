@@ -130,6 +130,32 @@
   # 追加模式，用 4>>output.txt
   echo "hello world\!" >&4
 #+end_src
+* 数组
+#+begin_src bash
+  array=(1 2 3 4 5 6)
+  # or
+  array_test[0] = "a"
+  array_test[1] = "b"
+
+  # print
+  echo ${array[0]}
+  echo ${array_test[*]} # or ${array_test[@]}
+  echo ${#array_test[*]} # 元素个数
+#+end_src
+** 关联数组
+#+begin_src bash
+  declare -A ass_array # 声明关联数组
+
+  # add values
+  ass_array=([index1]=val1 [index2]=val2)
+  # or
+  ass_array[index1]=val1
+  ass_array[index2]=val2
+
+  # print
+  echo ${ass_array[index1]}
+  echo ${!ass_array[*]} # 列出索引列表 or ${!ass_array[@]}
+#+end_src
 
 * Tricks
 - 获取字符串长度： ~${#var}~
