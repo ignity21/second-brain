@@ -2,8 +2,9 @@
 :ID:       9d7310b1-f2e8-444a-b1cf-ce3de9cef1c2
 :END:
 #+TITLE: ~poetry~
+#+filetags: :Python:
 
-- tags :: [[id:87849bbc-e437-41aa-b44d-db9ffa63e633][Python]], [[id:8fca7cca-e1d9-42ab-ac5f-acc9ee3f1e8b][Package Manager]], [[id:1af0f1ec-512b-4edc-8978-fc92e5e0d6dd][~pipenv~]]
+- tags :: [[id:8fca7cca-e1d9-42ab-ac5f-acc9ee3f1e8b][Package Manager]], [[id:cb11f532-22d1-42a2-8a2f-35950c5292d9][~pipx~]]
 
 * Installation
 - ~pipx install poetry~
@@ -16,8 +17,8 @@
 
 * Basic Usage
 #+begin_src bash
-  poetry env use x.x.x
-  poetry new # Creating new project
+  poetry new [project] # Creating new project
+  # Modify pyproject.toml
   poetry install # Initialising a pre-existing project
 
   poetry add dependency
@@ -34,10 +35,24 @@
   poetry env use x.x.x
 #+end_src
 
+* Configuration
+- =$HOME/.config/pypoetry/config.toml=
+#+begin_src conf-toml
+  [virtualenvs]
+  in-project = true
+  prefer-active-python = true
+
+  [repositories.pypi]
+  url = "https://mirrors.aliyun.com/pypi/simple/"
+#+end_src
+
 * Issues
 ** Too Slow
-- [Recommended] ~poetry config repositories.pypi "https://mirrors.aliyun.com/pypi/simple/"~
-- In =pyproject.toml=
+- Global[Recommended]:
+  - ~poetry config repositories.pypi "https://mirrors.aliyun.com/pypi/simple/"~
+  - or in config file: =$HOME/.config/pypoetry/config.toml=
+
+- In Project: =pyproject.toml=
 #+begin_src conf
   [[tool.poetry.source]]
   name = "aliyun"

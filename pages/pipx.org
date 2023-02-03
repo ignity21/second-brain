@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       cb11f532-22d1-42a2-8a2f-35950c5292d9
+:END:
+#+TITLE: ~pipx~
+#+filetags: :Python:
+
+
+* Installation
+1. May remove system pipx: ~sudo pacman -Rns python-pipx~
+2. [Optional] Specify python version: ~pyenv local x.x.x~
+3. ~pip install --user -U pipx~
+4. Make sure ~pipx~ in the ~$PATH~
+
+* Configuration
+** TODO Check if pipx uses index-url
+** Completion
+- ~pipx completions~ to get instruction on enabling completions.
