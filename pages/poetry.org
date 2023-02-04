@@ -36,26 +36,34 @@
 #+end_src
 
 * Configuration
-- =$HOME/.config/pypoetry/config.toml=
+- Config File: =$HOME/.config/pypoetry/config.toml=
+
 #+begin_src conf-toml
   [virtualenvs]
   in-project = true
   prefer-active-python = true
-
-  [repositories.pypi]
-  url = "https://mirrors.aliyun.com/pypi/simple/"
 #+end_src
 
-* Issues
-** Too Slow
-- Global[Recommended]:
-  - ~poetry config repositories.pypi "https://mirrors.aliyun.com/pypi/simple/"~
-  - or in config file: =$HOME/.config/pypoetry/config.toml=
+** Project Package Source
+- ~poetry source add --default aliyun https://mirrors.aliyun.com/pypi/simple/~
+- ~poetry source add --secondary douban https://pypi.doubanio.com/simple/~
 
-- In Project: =pyproject.toml=
-#+begin_src conf
-  [[tool.poetry.source]]
-  name = "aliyun"
-  default = true
-  url = "https://mirrors.aliyun.com/pypi/simple/"
-#+end_src
+** Publishing to a Private Repository
+- ~poetry config repositories.pypi~ https://mirrors.aliyun.com/pypi/simple/
+- ~poetry publish --build --repository pypi~
+
+
+* IDE Integration
+1. ~pipx install "python-lsp-server[all]"~
+2. Use =poetry.el=
+   #+begin_src emacs-lisp
+	 (use-package poetry
+	   :ensure t
+	   :init
+	   (poetry-tracking-mode 1)
+	   :custom
+	   (poetry-tracking-strategy 'projectile))
+   #+end_src
+
+** In-project Dev Dependencies
+- ~poetry add --group dev "python-lsp-server[all]"~
