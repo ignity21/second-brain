@@ -2,9 +2,10 @@
 :ID:       51c04df0-8946-4320-8e07-1de3f18340b2
 :END:
 #+TITLE: Recursion
+#+filetags: :Algorithm:
 
 
-- tags :: [[id:43e3d72c-1b4a-4ce0-a844-25348fe594ce][Algorithm]]
+- tags :: [[id:d1ce3f74-a595-4c43-8da1-042f5ff8dc3b][Dynamic Programming]]
 
 
 * 可采用递归算法的三个条件

@@ -2,11 +2,19 @@
 :ID:       d1ce3f74-a595-4c43-8da1-042f5ff8dc3b
 :END:
 #+TITLE: Dynamic Programming
+#+filetags: :Algorithm:
 
-- tags :: [[id:43e3d72c-1b4a-4ce0-a844-25348fe594ce][Algorithm]], [[id:f05540cb-bdaf-46cc-887f-dd4a88c57ca9][Greedy Algorithm]], [[id:9550b852-7e5d-47fe-8d75-2fa347a7f36a][Backtracing Algorithm]]
-
+- tags :: [[id:f05540cb-bdaf-46cc-887f-dd4a88c57ca9][Greedy Algorithm]], [[id:9550b852-7e5d-47fe-8d75-2fa347a7f36a][Backtracing Algorithm]]
 
 * 解题思路
+*动态规划简单归纳就是 递推+记忆*
+1. 定义子问题
+2. 递推方程
+3. 子问题的解合并
+4. 递归和记忆（DP状态表，存储中间状态）
+
+- *递归思想是自上而下，改写成循环需要自下而上*
+
 ** 状态转移表法
 1. 先用回溯算法解决
 2. 定义状态
