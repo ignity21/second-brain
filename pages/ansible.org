@@ -8,6 +8,9 @@
 * Installation
 #+begin_src bash
   pip install --user ansible
+  # or using pipx
+  pipx install --include-deps ansible
+
   # Generating a sample ansible.cfg file
   ansible-config init --disabled -t all > ansible.cfg
   sudo chmod 644 ansible.cfg
@@ -17,20 +20,20 @@
 ** Inventory
 #+begin_src yaml
   group1:
-    hosts: # keyword
-      host_local: # alias
-        ansible_host: localhost
-        ansible_connection: local
-        proxy: test.sock5 # host variable
-      host_remote:
-        ansible_host: foo.remote
-        ansible_connection: ssh
-        ansible_user: testuser
-    vars: # group vars
-      ntp_server: ntp.example.com
+	hosts: # keyword
+	  host_local: xxx # alias
+	  ansible_host: localhost
+	  ansible_connection: local
+	  proxy: test.sock5 # host variable
+	host_remote:
+	  ansible_host: foo.remote
+	  ansible_connection: ssh
+	  ansible_user: testuser
+	vars: # group vars
+	  ntp_server: ntp.example.com
   group_all:
-    children:
-      group1:
+	children:
+	  group1:
 #+end_src
 
 ** Ad hoc Commands
