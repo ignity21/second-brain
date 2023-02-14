@@ -2,7 +2,7 @@
 :ID:       354acfb6-83ed-4d81-90df-cc0a19dbc6ba
 :END:
 #+TITLE: ~explicit~
-#+filetags: :C++:Keyword:
+#+filetags: :C++:
 
 - tags :: [[id:0bef9cf2-8c4d-49b1-81cc-69599ab5eaae][Constructor]]
 
