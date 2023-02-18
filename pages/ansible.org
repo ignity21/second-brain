@@ -7,17 +7,28 @@
 - tags :: [[id:87236eae-a3ef-4227-a905-b0c2a7c77a20][Linux]], [[id:22b1058b-649a-4824-9ca5-14ad3f9e6798][Deployment]]
 
 * Installation
+** ~pip~
 #+begin_src bash
   pip install --user ansible
   # or using pipx
   pipx install --include-deps ansible
+#+end_src
 
+** ubuntu
+#+begin_src bash
+  sudo apt-add-repository ppa:ansible/ansible
+  sudo apt update
+  sudo apt install ansible
+#+end_src
+
+* Usage
+** Configuration File
+#+begin_src bash
   # Generating a sample ansible.cfg file
   ansible-config init --disabled > ansible.cfg
   sudo chmod 644 ansible.cfg
 #+end_src
 
-* Usage
 ** Inventory
 #+begin_src yaml
   group1:
