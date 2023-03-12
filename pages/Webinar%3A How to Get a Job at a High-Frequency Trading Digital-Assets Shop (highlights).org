@@ -1,0 +1,10 @@
+:PROPERTIES:
+:title: Webinar: How to Get a Job at a High-Frequency Trading Digital-Assets Shop (highlights)
+:END:
+author:: [[Modernes C++ - ModernesCpp.com]]
+full-title:: "Webinar: How to Get a Job at a High-Frequency Trading Digital-Assets Shop"
+category:: #articles
+url:: https://www.modernescpp.com/index.php/webinar-how-to-get-a-job-at-a-high-frequency-trading-digital-assets-shop
+
+* Highlights first synced by [[Readwise]] [[2023-03-11]]
+** [Sign-up](https://profitview.net/events/getting-job-offer-high-frequency-trading-firm) for [ProfitView](https://profitview.net/)’s webinar on getting hired at an HFT firm. ([View Highlight](https://read.readwise.io/read/01gt6xzwyq3q7f8zj1epm130rb))

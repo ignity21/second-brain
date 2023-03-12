@@ -1,0 +1,11 @@
+:PROPERTIES:
+:title: Subsets II (highlights)
+:END:
+author:: [[LeetCode]]
+full-title:: "Subsets II"
+category:: #articles
+url:: https://leetcode.com/problems/subsets-ii/solutions/1304408/subsets-ii/?envType=study-plan&id=level-3
+
+* Highlights first synced by [[Readwise]] [[2023-03-11]]
+** In a subset, each number could be present or absent. Thus, for `n` numbers, the power set will consist of no more than 2n2^n2n subsets. ([View Highlight](https://read.readwise.io/read/01gseh76krw8cqskvkvsbnygb0))
+** Since we may need to generate 2n2^n2n subsets, no solution can achieve better than exponential time complexity. However, when the value of `n` is small (between 1 and 10 in this case), exponential time complexity is acceptable. As such, in each of the following solutions, we'll focus our attention on generating all unique subsets while efficiently omitting all duplicate subsets. ([View Highlight](https://read.readwise.io/read/01gseh2pvv493fn2b4c84rm7v6))

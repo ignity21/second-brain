@@ -19,14 +19,21 @@
 #+begin_src bash
   poetry new [project] # Creating new project
   # Modify pyproject.toml
+
+  portry lock # check dependencies
   poetry install # Initialising a pre-existing project
 
   poetry add dependency
 
   poetry update # Updating dependencies
 
+  poetry shell # Activating virtual environment
   poetry run python your_script.py
   poetry run pytest
+
+  # editable mode
+  poetry build
+  pip install -e .
 #+end_src
 
 * Specify Python Version
@@ -40,9 +47,10 @@
 
 #+begin_src conf-toml
   [virtualenvs]
-  in-project = true
-  prefer-active-python = true
+  in-project = false
 #+end_src
+- in-project is inconvenient for multiple virturlenvs.
+
 
 ** Project Package Source
 - ~poetry source add --default aliyun https://mirrors.aliyun.com/pypi/simple/~
@@ -57,12 +65,12 @@
 1. ~pipx install "python-lsp-server[all]"~
 2. Use =poetry.el=
    #+begin_src emacs-lisp
-	 (use-package poetry
-	   :ensure t
-	   :init
-	   (poetry-tracking-mode 1)
-	   :custom
-	   (poetry-tracking-strategy 'projectile))
+     (use-package poetry
+       :ensure t
+       :init
+       (poetry-tracking-mode 1)
+       :custom
+       (poetry-tracking-strategy 'projectile))
    #+end_src
 
 ** In-project Dev Dependencies

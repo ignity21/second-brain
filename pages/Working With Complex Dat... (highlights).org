@@ -1,0 +1,82 @@
+#+title: Working With Complex Dat... (highlights)
+author:: [[@levikul09 on Twitter]]
+full-title:: "Working With Complex Dat..."
+category:: #tweets
+url:: https://twitter.com/levikul09/status/1629787121358868480
+
+* Highlights first synced by [[Readwise]] [[2023-03-11]]
+** Working with complex data is hard.
+
+But there is a way to ease the pain.
+
+Principal Component Analysis (PCA) can simplify complex data.
+
+I will explain the basics now.
+
+1/7 
+
+![](https://pbs.twimg.com/media/Fp4qvynaEAAcEZO.jpg) ([View Tweet](https://twitter.com/levikul09/status/1629787121358868480))
+** In real life, many datasets have high dimensionality.
+
+What does that mean?
+
+They have a lot of features.
+
+But the more feature the harder our work is.
+
+Simplicity is good.
+
+But how can we simplify complex datasets?
+
+2/7 
+
+![](https://pbs.twimg.com/media/Fp4qwS3aYAABPuR.jpg) ([View Tweet](https://twitter.com/levikul09/status/1629787130187661313))
+** The technique is called dimensionality reduction.
+
+Principal Component Analysis (PCA) is one of these techniques.
+
+PCA can reduce the number of features in a dataset.
+
+During the process, PCA tries to retain as much information as possible.
+
+3/7 
+
+![](https://pbs.twimg.com/media/Fp4qw0vaMAIxDa6.jpg) ([View Tweet](https://twitter.com/levikul09/status/1629787140023283715))
+** Let's consider this example:
+
+You are on the beach at the ocean.
+
+It is a hot summer day, you are drinking a cocktail and enjoying the vibe when the sun goes down.
+
+You want to take this vibe with you, so you take a picture.
+
+4/7 ([View Tweet](https://twitter.com/levikul09/status/1629787144549199872))
+** Of course, the picture will never give back the full experience.
+
+But when you look at it, you may get a little back from the vibe.
+
+What did you do with the picture?
+
+Reduced dimensionality.
+
+From the 3D world, you created a 2D image.
+
+5/7 ([View Tweet](https://twitter.com/levikul09/status/1629787147333951488))
+** Why do we use PCA?
+
+- With fewer features, we can decrease the training time of a model.
+
+- We remove the unnecessary features
+
+- We can reduce overfitting.
+
+6/7 ([View Tweet](https://twitter.com/levikul09/status/1629787150316187650))
+** That's it for today.
+
+I hope you've found this thread helpful.
+
+Like/Retweet the first tweet below for support and follow @levikul09 for more Data Science threads.
+
+Thanks 😉
+
+7/7 https://t.co/zIIZgnBUMi ([View Tweet](https://twitter.com/levikul09/status/1629787153105555457))

@@ -1,0 +1,11 @@
+:PROPERTIES:
+:title: The Null Object Pattern (highlights)
+:END:
+author:: [[Modernes C++ - ModernesCpp.com]]
+full-title:: "The Null Object Pattern"
+category:: #articles
+url:: https://www.modernescpp.com/index.php/the-null-object-pattern
+
+* Highlights first synced by [[Readwise]] [[2023-03-11]]
+** Strategized locking is the idea of the [Strategy Pattern](https://en.wikipedia.org/wiki/Strategy_pattern) applied to locking. This means putting your locking strategy into an object and making it into a pluggable component of your system. ([View Highlight](https://read.readwise.io/read/01gs6qtvtfw5j6eyvdvwdgzabs))
+** two typical ways to implement strategized locking: run-time polymorphism (object orientation) or compile-time polymorphism (templates). ([View Highlight](https://read.readwise.io/read/01gs6qvd35we26dn1dx1aeqjqj))
