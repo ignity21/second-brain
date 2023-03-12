@@ -4,7 +4,7 @@
 #+TITLE: ~poetry~
 #+filetags: :Python:
 
-- tags :: [[id:8fca7cca-e1d9-42ab-ac5f-acc9ee3f1e8b][Package Manager]], [[id:cb11f532-22d1-42a2-8a2f-35950c5292d9][~pipx~]]
+- tags :: [[id:cb11f532-22d1-42a2-8a2f-35950c5292d9][~pipx~]]
 
 * Installation
 - ~pipx install poetry~
