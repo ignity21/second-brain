@@ -6,6 +6,8 @@
 - tags :: [[id:d1ce3f74-a595-4c43-8da1-042f5ff8dc3b][Dynamic Programming]], [[id:43e3d72c-1b4a-4ce0-a844-25348fe594ce][Algorithm]]
 
 
+
+* 简述
 类似枚举思想，穷举所有路径，例如：深度优先遍历
 
 - 优化重复子问题
@@ -15,3 +17,13 @@
 - 经典案例
 
 数独、八皇后、0-1背包问题、图的着色、旅行商问题、全排列，正则表达式等
+
+* Concept
+Backtracking is a general algorithm for finding all (or some) solutions to some computational problems, which incrementally builds candidates to the solution and abandons a candidate ("backtracks") as soon as it determines that the candidate cannot lead to a valid solution.
+- The backtracking way of solving this problem would stop going down a path when the path doesn't seem right.
+
+** Classic Examples
+*** N-Queen Puzzle
+The N-queens puzzle is the problem of placing *N* queens on an $N\times N$
+chessboard such that no two queens can attack each other. One is asked to
+count the number of solutions to place the N queens on the board.

@@ -46,8 +46,10 @@
 - Config File: =$HOME/.config/pypoetry/config.toml=
 
 #+begin_src conf-toml
+  # default is OK
   [virtualenvs]
   in-project = false
+  prefer-active-python = true
 #+end_src
 - in-project is inconvenient for multiple virturlenvs.
 
@@ -59,7 +61,6 @@
 ** Publishing to a Private Repository
 - ~poetry config repositories.pypi~ https://mirrors.aliyun.com/pypi/simple/
 - ~poetry publish --build --repository pypi~
-
 
 * IDE Integration
 1. ~pipx install "python-lsp-server[all]"~
@@ -75,3 +76,12 @@
 
 ** In-project Dev Dependencies
 - ~poetry add --group dev "python-lsp-server[all]"~
+
+* Editable Dependency
+- When you poetry install, the root package are installed as editable into your venv.
+- Path dependencies with develop = true in pyproject.toml are installed as editable.
+- ~poetry add --editable~ that sets the develop flag in =pyproject.toml=.
+#+begin_src conf-toml
+  [tool.poetry.dependencies]
+  basic-lib = { path = "/path/to/basic-lib", develop = true}
+#+end_src
