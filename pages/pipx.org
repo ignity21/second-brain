@@ -16,3 +16,10 @@
 ** TODO Check if pipx uses index-url
 ** Completion
 - ~pipx completions~ to get instruction on enabling completions.
+
+* Dependency Recommendation
+#+begin_src bash
+  pipx install --include-deps python-lsp-server
+  pipx install --include-deps poetry
+  pipx install --include-deps ansible
+#+end_src

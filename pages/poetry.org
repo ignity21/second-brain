@@ -79,7 +79,7 @@
 
 * Editable Dependency
 - When you poetry install, the root package are installed as editable into your venv.
-- Path dependencies with develop = true in pyproject.toml are installed as editable.
+- Path dependencies with ~develop = true~ in =pyproject.toml= are installed as editable.
 - ~poetry add --editable~ that sets the develop flag in =pyproject.toml=.
 #+begin_src conf-toml
   [tool.poetry.dependencies]
