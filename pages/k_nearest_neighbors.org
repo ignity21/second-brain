@@ -3,7 +3,7 @@
 :END:
 #+TITLE: K-Nearest Neighbors
 
-- tags :: [[id:eb9214d7-7c4d-4fd2-8836-b0f40f6ca466][ML Algorithms]], [[id:b6d81516-bed4-407f-a551-1b33c1753781][K-Neighbors Regression]], [[id:e0e88d4d-69d2-4e20-be4c-5aa8b849e968][Classification Problem]]
+- tags :: [[id:b6d81516-bed4-407f-a551-1b33c1753781][K-Neighbors Regression]], [[id:e0e88d4d-69d2-4e20-be4c-5aa8b849e968][Classification Problem]]
 
 
 The algorithm finds the closest data points in the training dataset.
