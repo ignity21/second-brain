@@ -2,7 +2,7 @@
 :ID:       ffb77b30-9edd-4c1b-af88-0171c342111b
 :END:
 #+TITLE: Linear Algebra
-#+filetags: :LinearAlgebra
+#+filetags: :LinearAlgebra:
 
 * Concepts
   - Linear Combinations :: $a\bm{v}+b\bm{w}$ is the linear combination of $\bm{v}$ and $\bm{w}$, $a$ and $b$ are scalars.

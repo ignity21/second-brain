@@ -3,7 +3,7 @@
 :END:
 #+TITLE: Context Switching
 
-- tags :: [[id:87236eae-a3ef-4227-a905-b0c2a7c77a20][Linux]], [[id:62fc5391-28b6-4842-bfb1-9bf404691fba][Performance Metrics]], [[id:eee45e41-6b08-46a9-846e-11edb0e99e6c][CPU]], [[id:c097845d-e6f5-4d04-a5d2-858fa859d76c][Interupt]], [[id:60cfb15c-18c7-479a-b489-b14ce161f4bf][Process]], [[id:ae66035d-5880-46c8-b836-517f0fd08dae][Thread]]
+- tags :: [[id:87236eae-a3ef-4227-a905-b0c2a7c77a20][Linux]], [[id:eee45e41-6b08-46a9-846e-11edb0e99e6c][CPU]], [[id:c097845d-e6f5-4d04-a5d2-858fa859d76c][Interupt]], [[id:60cfb15c-18c7-479a-b489-b14ce161f4bf][Process]], [[id:ae66035d-5880-46c8-b836-517f0fd08dae][Thread]]
 
 * 特权模式切换
 系统调用过程通常称为特权模式切换。需保存和恢复寄存器、PC的状态。

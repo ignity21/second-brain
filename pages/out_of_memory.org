@@ -2,7 +2,6 @@
 :ID:       a4d6ea49-ad7b-48f8-8f5d-f5510e7ef392
 :END:
 #+TITLE: Out of Memory
-#+OPTIONS: ^:nil
 
 - tags ::  [[id:db279878-fa0b-4a05-892b-c5539097d59b][Memory Leak]], [[id:33973869-8b9b-4458-8507-be5b14ebd339][Memory]], [[id:9eb7595a-bf63-4a94-9a41-30442f6be45a][Memory Allocation]]
 

@@ -4,8 +4,6 @@
 #+TITLE: ~pipx~
 #+filetags: :Python:
 
-- tags :: [[id:d2ed7b60-76b6-4311-b624-aad2f629ae2b][~pyenv~]]
-
 * Installation
 1. May remove system pipx: ~sudo pacman -Rns python-pipx~
 2. [Optional] Specify python version: ~pyenv local x.x.x~
