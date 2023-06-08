@@ -75,6 +75,9 @@ buffering of disk I/O in order to reduce disk activity and expedite write() call
 Furthermore, file descriptors are a consumable resource, so failure to close a file descriptor could result in a process running out of descriptors. This is a particularly important issue when writing long-lived programs
 #+END_QUOTE
 *** ~lseek()~
+:PROPERTIES:
+:NOTER_PAGE: 124
+:END:
 Interpreting the whence argument of ~lseek()~
 #+DOWNLOADED: screenshot @ 2023-06-08 18:28:03
 [[file:images/The_Linux_programming_interface/2023-06-08_18-28-03_screenshot.png]]
