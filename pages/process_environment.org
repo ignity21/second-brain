@@ -3,7 +3,7 @@
 :END:
 #+TITLE: Process Environment
 
-- tags :: [[id:c1f37cbc-7715-4e0e-a443-29e7a7ba8afe][Linux Programming]], [[id:60cfb15c-18c7-479a-b489-b14ce161f4bf][Process]], [[id:f1007cd2-4672-4b18-ab36-503a6bbe45dd][System Calls]]
+- tags :: [[id:c1f37cbc-7715-4e0e-a443-29e7a7ba8afe][Linux Programming]], [[id:60cfb15c-18c7-479a-b489-b14ce161f4bf][Process]]
 
 * Start-up Routine
 - Take values from command-line arguments and the environment

@@ -1,7 +1,8 @@
 :PROPERTIES:
 :ID:       e1760304-292f-463c-a774-0338f5c7ba4c
 :END:
-#+TITLE: IO System Calls
+#+TITLE: File I/O
+#+filetags: :SystemCalls:
 
 - tags :: [[id:62289ff0-f3b6-402f-b6bc-6fd33cd8ca44][Page Cache]], [[id:d5f8c354-df83-45fa-bb36-c8a0b81d0fe9][IO]]
 
@@ -10,11 +11,11 @@
 - ~read~: ~numread = read(fd, buffer, count)~
 - ~write~: ~numwrite = write(fd, buffer, count)~
 - ~close~: ~status = close(fd)~
-- ~lseek~: 设置文件偏移量 ~offset = lseek(fd, offset, whence)~
+- ~lseek~: ~offset = lseek(fd, offset, whence)~
 
 ** ~open~, ~openat~, ~creat~
 - ~fd = open(pathname, oflags, mode)~
-- ~fd = openat(fd, pathname, oflags, mode)~: 在指定目录或当前工作目录使用相对路0径打开文件
+- ~fd = openat(fd, pathname, oflags, mode)~: 在指定目录或当前工作目录使用相对路径打开文件
 - ~fd = creat(path, mode)~: 早期 Linux ~open~ 无法创建新文件时使用
   - 等价于 ~fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, mode)~
 - 特殊的 flag:
@@ -71,7 +72,8 @@ Features
 2. Get/set file descriptor flags (cmd =F_GETFD= or =F_SETFD=)
 3. Get/set file status flags (cmd =F_GETEL= or =F_SETFL=)
 4. Get/set asynchronous IO ownership (cmd =F_GETOWN= or =F_SETOWN=)
-5. Get/set record locks (cmd =F_GETLK=, =F_SETLK=, or ~F_SETLKW~)
+5. Get/set record locks (cmd =F_GETLK=, =F_SETLK=, or =F_SETLKW=)
+
 *** 适用场景
 常用用途：修改 *file status flags*
 - 文件不是由调用程序打开的，比如标准输入输出

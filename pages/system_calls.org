@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       f1007cd2-4672-4b18-ab36-503a6bbe45dd
-:END:
-#+TITLE: System Calls
-
-- tags :: [[id:e1760304-292f-463c-a774-0338f5c7ba4c][IO System Calls]]

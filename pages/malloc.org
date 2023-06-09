@@ -3,7 +3,7 @@
 :END:
 #+TITLE: malloc()
 
-- tags :: [[id:9eb7595a-bf63-4a94-9a41-30442f6be45a][Memory Allocation]], [[id:537d8db0-3ca9-4d7e-8378-01ea7d474a96][sbrk()]], [[id:f1007cd2-4672-4b18-ab36-503a6bbe45dd][System Calls]]
+- tags :: [[id:9eb7595a-bf63-4a94-9a41-30442f6be45a][Memory Allocation]], [[id:537d8db0-3ca9-4d7e-8378-01ea7d474a96][sbrk()]]
 
 ~malloc~ library function manages the space from user level.
 - Numerous software packages implement their own memory allocation algorithms with the ~sbrk~ system call.
