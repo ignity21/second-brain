@@ -1,9 +1,9 @@
 :PROPERTIES:
-:ID:       3452cc2e-08e5-48cb-b7ff-5dcfc30455dd
 :ROAM_REFS: cite:LinuxProgrammingInterface2010Ker
+:ID:       72e5a3ff-5f2e-4e04-862e-029f445f14cd
 :END:
-#+FILETAGS: :Book:
 #+TITLE: The Linux Programming Interface
+#+filetags: :Book:SystemCall:
 - tags :: Linux,Operating systems (Computers),UNIX (Computer file)
 
 * The Linux programming interface
@@ -15,25 +15,10 @@
 :NOTER_PAGE: 574
 :END:
 ** File I/O
-*** Summary
-#+begin_src cpp
-  #include <sys/stat.h>
-  #include <fcntl.h>
-  int open(const char *pathname, int flags, ... /* mode_t mode */);
-  int creat(const char *pathname, mode_t mode);
-
-  #include <unistd.h>
-  ssize_t read(int fd, void *buffer, size_t count);
-  ssize_t write(int fd, const void *buffer, size_t count);
-  int close(int fd);
-  off_t lseek(int fd, off_t offset, int whence);
-
-  // Operations Outside the Universal I/O Model
-  #include <sys/ioctl.h>
-  int ioctl(int fd, int request, ...);
-
-#+end_src
 *** ~open()~
+:PROPERTIES:
+:ID:       09438262-8709-48d4-a816-cb1ec8411b29
+:END:
 - ~open~: ~fd = open(pathname, oflags, mode)~
 - flags of ~open()~
 #+DOWNLOADED: screenshot @ 2023-06-08 17:58:50
@@ -43,7 +28,7 @@
 :NOTER_PAGE: 119
 :HIGHLIGHT: #s(pdf-highlight 119 ((0.1839323467230444 0.7080000000000001 0.8308668076109937 0.8032)))
 :END:
-#+BEGIN_QUO
+#+BEGIN_QUOTE
 ~O_CLOEXEC~ (since Linux 2.6.23)
 Enable the ~close-on-exec~ flag (~FD_CLOEXEC~) for the new file descriptor. We
 describe the ~FD_CLOEXEC~ flag in Section 27.4. Using the ~O_CLOEXEC~ flag allows a
@@ -51,14 +36,13 @@ program to avoid additional ~fcntl()~ ~F_SETFD~ and ~F_SETFD~ operations to set 
 ~close-on-exec~ flag. It is also necessary in multithreaded programs to avoid
 the race conditions that could occur using the latter technique.
 #+END_QUOTE
-*** ~read()~
-- ~read~: ~numread = read(fd, buffer, count)~
 *** ~write()~
-- ~write~: ~numwrite = write(fd, buffer, count)~
 :PROPERTIES:
+:ID:       5bc6840b-3a05-4a2b-9530-4b9446e2aa9f
 :NOTER_PAGE: 124
 :HIGHLIGHT: #s(pdf-highlight 124 ((0.22392086330935254 0.6460176991150443 0.8111510791366907 0.685500340367597)))
 :END:
+- ~write~: ~numwrite = write(fd, buffer, count)~
 #+BEGIN_QUOTE
 On success, write() returns the number of bytes actually written; this may be
 less than count. For a disk file, possible reasons for such a partial write are that the
@@ -71,17 +55,19 @@ guarantee that the data has been transferred to disk, because the kernel perform
 buffering of disk I/O in order to reduce disk activity and expedite write() calls.
 #+END_QUOTE
 *** ~close()~
-- ~close~: ~status = close(fd)~
 :PROPERTIES:
 :NOTER_PAGE: 125
 :HIGHLIGHT: #s(pdf-highlight 125 ((0.6913319238900635 0.25120000000000003 0.25898520084566595 0.22080000000000002)))
+:ID:       6d663861-8478-40da-bdd1-68c4276302f5
 :END:
+- ~close~: ~status = close(fd)~
 #+BEGIN_QUOTE
 Furthermore, file descriptors are a consumable resource, so failure to close a file descriptor could result in a process running out of descriptors. This is a particularly important issue when writing long-lived programs
 #+END_QUOTE
 *** ~lseek()~
 :PROPERTIES:
 :NOTER_PAGE: 124
+:ID:       4a043d9e-8eb0-4c60-80e4-b9e7da314812
 :END:
 - ~lseek~: ~offset = lseek(fd, offset, whence)~
 

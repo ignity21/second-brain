@@ -1,18 +1,33 @@
 :PROPERTIES:
-:ID:       e1760304-292f-463c-a774-0338f5c7ba4c
+:ID:       e4d0dc97-d33f-4aca-b8f0-d6e4f0c2250e
 :END:
-#+TITLE: File I/O
-#+filetags: :SystemCalls:
+#+TITLE: [SC] File I/O
+#+filetags: :SystemCall:
 
-- tags :: [[id:62289ff0-f3b6-402f-b6bc-6fd33cd8ca44][Page Cache]], [[id:d5f8c354-df83-45fa-bb36-c8a0b81d0fe9][IO]]
+* Basic I/O
+** Overview
+- [[id:09438262-8709-48d4-a816-cb1ec8411b29][~open()~]]: ~fd = open(pathname, oflags, mode)~
+- ~read()~: ~numread = read(fd, buffer, count)~
+- [[id:5bc6840b-3a05-4a2b-9530-4b9446e2aa9f][~write()~]]: ~numwrite = write(fd, buffer, count)~
+- [[id:6d663861-8478-40da-bdd1-68c4276302f5][~close()~]]: ~status = close(fd)~
+- [[id:4a043d9e-8eb0-4c60-80e4-b9e7da314812][~lseek()~]]: ~offset = lseek(fd, offset, whence)~
+** Declaration
+#+begin_src cpp
+  #include <sys/stat.h>
+  #include <fcntl.h>
+  int open(const char *pathname, int flags, ... /* mode_t mode */);
+  int creat(const char *pathname, mode_t mode);
 
-* 基本 IO
-- ~open~: ~fd = open(pathname, oflags, mode)~
-- ~read~: ~numread = read(fd, buffer, count)~
-- ~write~: ~numwrite = write(fd, buffer, count)~
-- ~close~: ~status = close(fd)~
-- ~lseek~: ~offset = lseek(fd, offset, whence)~
+  #include <unistd.h>
+  ssize_t read(int fd, void *buffer, size_t count);
+  ssize_t write(int fd, const void *buffer, size_t count);
+  int close(int fd);
+  off_t lseek(int fd, off_t offset, int whence);
 
+  // Operations Outside the Universal I/O Model
+  #include <sys/ioctl.h>
+  int ioctl(int fd, int request, ...);
+#+end_src
 ** ~open~, ~openat~, ~creat~
 - ~fd = open(pathname, oflags, mode)~
 - ~fd = openat(fd, pathname, oflags, mode)~: 在指定目录或当前工作目录使用相对路径打开文件
@@ -24,7 +39,6 @@
   - =O_DSYNC=: 提供同步的 IO 数据完整性
   - =O_NONBLOCK=: 以非阻塞方式打开
   - =O_SYNC=: 以同步方式写入文件
-
 ** An Example
 #+begin_src cpp
   #define BUFFSIZE 4096
@@ -47,7 +61,6 @@
     return 0;
   }
 #+end_src
-
 * 高级 IO
 ** 原子操作
 - ==O_APPEND= 打开的文件，每次写都会执行原子操作 1. seek to EOF 2. write
@@ -55,17 +68,14 @@
 - =O_CREAT | O_EXCL=: 以独占方式创建一个文件
   - =O_CREAT=: 文件不存在则创建
   - =O_EXCL=: 如文件已存在， ~open()~ 会返回错误。使得“测试和创建”两步骤成为一个原子操作
-
 * 其他 IO 调用
 ** ~ioctl()~
 对于非标准 IO 模型的设备和文件操作， ~ioctl~ 是系统提供的万能接口。
-
 ** ~sync~, ~fsync~, and ~fdatasync~
 - ~void sync(void)~: simply queues all the modified block buffers for writing and returns.
 - ~int fsync(int fd)~: waits for the disk writes to complete before returning
   - is used when an application needs to be sure that the modified blocks have been written to the disk.
 - ~int fdatasync(int fd)~: is similar to ~fsync~, but it doesn't affect the file's attributes.
-
 ** ~fcntl~
 Features
 1. Duplicate an existing descriptor (cmd =F_DUPFD= or =F_DUPFD_CLOEXEC=)
@@ -73,7 +83,6 @@ Features
 3. Get/set file status flags (cmd =F_GETEL= or =F_SETFL=)
 4. Get/set asynchronous IO ownership (cmd =F_GETOWN= or =F_SETOWN=)
 5. Get/set record locks (cmd =F_GETLK=, =F_SETLK=, or =F_SETLKW=)
-
 *** 适用场景
 常用用途：修改 *file status flags*
 - 文件不是由调用程序打开的，比如标准输入输出
