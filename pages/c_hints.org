@@ -5,6 +5,10 @@
 #+filetags: :C++:
 
 * Data Type
+** array
+#+begin_src cpp
+  int array[26] = {0};
+#+end_src
 ** ~std::vector~
 #+begin_src cpp
   vector<int> v1{1, 2, 3};
