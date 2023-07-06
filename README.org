@@ -1,0 +1,16 @@
+* 问题
+
+** 优势
+- 熟悉 org-mode
+- 数学公式记录方便
+
+** 如何组织？
+- 读书笔记是否使用 org-noter 记录？
+  - 能否在 org-roam 中方便引用
+- 多大程度能兼容 logseq ，以便能在移动端浏览笔记
+- 如何运用 filetag 来组织同一大类笔记？方便在 org-roam-ui 中浏览
+- 笔记 Node 以文件为单位，文头 ~- tags:~ 记录与其它笔记间的联系?
+- 找到最佳实践
+
+** org-roam-ui
+- 子节点会出现在 Linked references 中
