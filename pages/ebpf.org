@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       6635fea0-9e64-432a-8c02-57df8290640f
-:END:
-#+TITLE: eBPF
-
-- tags :: [[id:65ffd8bc-fcb7-4875-9b70-69b0f24979cb][Profiling]]

@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       b1b056b2-880a-4bbc-a2f3-de1e0bd52a9f
-:END:
-#+TITLE: NoSQL
-
-- tags :: [[id:b897cdf3-cf75-4ad7-915d-12a5e987e9b5][MongoDB]]

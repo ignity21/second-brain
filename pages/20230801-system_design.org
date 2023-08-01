@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       882501dd-d927-4a30-a8c3-b1bc8121f9b0
+:END:
+#+title: System Design
+#+filetags: SystemDesign
+
+- [[id:bf48570b-0bc2-41a6-aefc-94eb7f28b4ba][Availability]]

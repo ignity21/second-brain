@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       da9a45cf-d6b1-4dea-8e9e-bf1dd330bb05
-:END:
-#+TITLE: Data Structure

@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       b897cdf3-cf75-4ad7-915d-12a5e987e9b5
-:END:
-#+TITLE: MongoDB

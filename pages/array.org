@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       ed998f5a-fd0d-4011-a95f-2f5776564e52
-:END:
-#+TITLE: Array

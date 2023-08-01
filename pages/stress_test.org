@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       509ed1f0-12fd-4ff1-8fe1-686cf1fa94c9
-:END:
-#+TITLE: Stress Test

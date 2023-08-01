@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       8fb9a2df-915a-4637-b6b0-92ffb60b255d
-:END:
-#+TITLE: SHA

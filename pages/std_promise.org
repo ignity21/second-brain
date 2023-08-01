@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       ad15a94f-61eb-4e7e-b4a0-21c7ce403fae
-:END:
-#+TITLE: ~std::promise~

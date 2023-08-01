@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       1fffe00d-b848-43ae-9711-8a6a136991b4
-:END:
-#+TITLE: HTML Header
-
-- tags :: [[id:0d1b56b2-563d-4222-9196-0b00a3ae48c3][HTML]]

@@ -1,0 +1,33 @@
+:PROPERTIES:
+:ID:       31b71a06-0592-444b-b410-916ee717b488
+:END:
+#+title: Neural Network
+#+filetags: ML
+
+* Activation Functions
+:PROPERTIES:
+:ID:       e2e9fce5-ea0b-440c-9a88-5c3bf7032634
+:END:
+** Sigmoid
+[[../assets/ML/SigmoidFunction.png]]
+
+** ReLU
+Rectified Linear Unit
+- $g(z)=max(0, z)$
+[[../assets/ML/ReLUFunction.png]]
+
+** Linear Activation Function
+- "No activation function"
+- If all nodes uses linear activation function, then it's equivalent to linear regression.
+[[../assets/ML/LinearActivationFunction.png]]
+
+** Choosing for Output Layer
+- Binary Classification: Sigmoid
+- Regression(Non-negative Output): ReLU
+- Regression: Linear Activation Function
+
+** Choosing for Hidden Layer
+- RelU is by far the most common choice.
+  - faster to compute ~max(0, z)~
+  - flat only in one part, gradient descent would be faster than sigmoid (flat in two places)
+    - \(\frac{\partial}{\partial w}J(\bm{W}, \bm{B})\approx 0\) when g(z) is flat

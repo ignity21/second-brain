@@ -1,5 +1,0 @@
-:PROPERTIES:
-:ID:       120aa70a-cf31-4e7f-83ae-bf902cc09618
-:END:
-#+TITLE: Gini Criteria
-#+filetags: :ML:

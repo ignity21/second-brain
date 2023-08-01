@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       46630a3d-6221-412b-aaae-d4aa8ff8dad4
-:END:
-#+TITLE: Optimization

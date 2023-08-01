@@ -1,9 +1,0 @@
-:PROPERTIES:
-:ID:       88fd14ad-d04f-4890-ba3c-0b37d4fd1827
-:END:
-#+TITLE: Market Data
-#+filetags: :Trading:
-
-- Volume
-- Tick Data :: Tick data is sometimes referred to as heterogeneous data, since it is not sampled
-  at regular time intervals, whereas Minute-level or End-of-Day data is called homogeneous.

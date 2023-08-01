@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       88f195cc-a133-4d74-8977-99d47474f3ce
-:END:
-#+TITLE: Block IO

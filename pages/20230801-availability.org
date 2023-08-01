@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       bf48570b-0bc2-41a6-aefc-94eb7f28b4ba
+:END:
+#+title: Availability
+#+filetags: SystemDesign
+
+* Nines
+| Availability % | Downtime Per Year |
+|----------------+-------------------|
+|            90% | 36.53 days        |
+|            95% | 18.26 days        |
+|            99% | 3.65 days         |
+|          99.9% | 8.77 hours        |
+|         99.95% | 4.38 hours        |
+|         99.99% | 52.60 minutes     |
+|      *99.999%* | 5.26 minutes      |
+
+* Terms
+- SLA/SLO: Service-level agreement(objective).
+- Active Redundancy
+- Passive Redundancy

@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       d98b349c-896a-4c89-923d-0a19e86f38f1
-:END:
-#+TITLE: Recommender System

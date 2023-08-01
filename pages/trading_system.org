@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       c062ecf7-f941-4d12-8f4e-3eb1132c0a2f
-:END:
-#+TITLE: Trading System

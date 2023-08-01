@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       d8d60df7-d4d4-4e0e-8d82-2521cc9bac97
-:END:
-#+TITLE: Multithreading
-
-- tags :: [[id:56a403ce-211d-4c6e-8901-d37954b22d45][Context Switching]]

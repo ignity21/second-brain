@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       ae66035d-5880-46c8-b836-517f0fd08dae
-:END:
-#+TITLE: Thread

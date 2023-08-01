@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       f58a6340-cc46-484f-be96-0778cbc37db6
-:END:
-#+TITLE: Query Optimization

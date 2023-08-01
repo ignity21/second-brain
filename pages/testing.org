@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       10238dbb-e053-409b-9ee2-32df8af4d748
-:END:
-#+TITLE: Testing

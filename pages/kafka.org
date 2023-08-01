@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       8f9d6bdc-d40a-4c73-9ce8-69bfcd3baf0f
-:END:
-#+TITLE: Kafka
-
-- tags :: [[id:771b6307-49a9-4487-9873-cf0df092a318][Pub/Sub Pattern]], [[id:65c82e61-9de1-4152-82da-a14df396e880][Message Queue]], [[id:0db40b4e-ad32-4901-8702-025c94252c1f][Stream Processing]]

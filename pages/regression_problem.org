@@ -1,7 +1,0 @@
-:PROPERTIES:
-:ID:       4d9aa428-be23-4297-b24f-6f5d05f565f4
-:END:
-#+TITLE: Regression Problem
-#+filetags: :ML:
-
-- tags :: [[id:985a47ab-36b7-458b-b45b-a4abb934e8d9][Supervised Learning]]

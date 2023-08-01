@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       be333873-c3e2-42c9-87be-b61e49fc544a
-:END:
-#+TITLE: Tree

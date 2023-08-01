@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       83cc37e0-fe7f-4cc3-a442-d08e6c635d34
-:END:
-#+TITLE: PCA

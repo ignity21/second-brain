@@ -1,7 +1,0 @@
-:PROPERTIES:
-:ID:       35e3bb90-f11d-4af6-9784-9bbc7f061a14
-:END:
-#+TITLE: 2023-03-29
-
-* C++ CTP
-* Python use C++ Library

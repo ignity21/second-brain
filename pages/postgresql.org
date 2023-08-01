@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       2f6dc468-d230-4a8f-9322-432faf9a7fd7
-:END:
-#+TITLE: PostgreSQL

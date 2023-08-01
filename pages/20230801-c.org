@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       ddb27e15-ec35-4242-b274-c76d904c80f9
+:END:
+#+title: C++
+#+filetags: C++
+
+* Type Deduction
+:PROPERTIES:
+:ID:       6394bf0c-5bd8-4490-bc5c-91f1aebedbce
+:END:
+- [[id:c264e461-9c95-4d7c-917e-762cb8ec52e7][Template Type Deduction]]
+- [[id:c19b4842-be7b-4a29-a85b-462cbad2c6c1][~auto~]]

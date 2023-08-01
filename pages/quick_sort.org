@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       7b5ae466-c2aa-47b1-8ea1-fd7a01997bb8
-:END:
-#+TITLE: Quick Sort

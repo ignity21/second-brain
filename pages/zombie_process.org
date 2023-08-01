@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       a9b1598b-108f-414a-a3e4-ac29310b1481
-:END:
-#+TITLE: Zombie Process

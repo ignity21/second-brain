@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       55601c93-c17f-4448-bf68-7b4769a39e36
-:END:
-#+TITLE: Anomaly Detection

@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       646571a4-292f-499c-a7fb-afead1cb33ed
-:END:
-#+TITLE: Multiprocessing
-
-- tags :: [[id:56a403ce-211d-4c6e-8901-d37954b22d45][Context Switching]]

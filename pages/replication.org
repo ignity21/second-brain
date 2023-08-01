@@ -1,9 +1,0 @@
-:PROPERTIES:
-:ID:       22dbe3a6-5c09-48cc-b1f9-69be4024dc8b
-:END:
-#+TITLE: Replication
-
-The act of duplicating the data from one database server to others.
-
-- to increase the redundancy of your system and tolerate regional failures for instance.
-- to move data closer to your clients, thus decreasing the latency.

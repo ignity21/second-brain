@@ -1,5 +1,0 @@
-:PROPERTIES:
-:ID:       642577bf-1c0e-4177-b6a7-0c9678a81d51
-:END:
-#+TITLE: RAII
-#+filetags: :Pattern:C++:

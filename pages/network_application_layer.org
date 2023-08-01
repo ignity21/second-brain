@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       14741faa-6dce-4975-a065-c11c424b875c
-:END:
-#+TITLE: Network Application Layer
-
-- tags :: [[id:25688f58-fa67-4322-bc3d-d43fbf3176d7][TCP/IP]]

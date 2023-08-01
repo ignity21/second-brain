@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       0db40b4e-ad32-4901-8702-025c94252c1f
-:END:
-#+TITLE: Stream Processing
-
-- tags :: [[id:d78c8783-4063-4d92-8d8c-c23cee74de4b][System Design]], [[id:50b298d4-52e0-4f74-bf8c-09886bd2ae84][Architecture]], [[id:f7be9f53-d9bb-4149-839e-7ee44f69f7ce][Big Data]], [[id:90290142-8c00-4e76-b2fd-6bfc17150cf0][Data System]], [[id:771b6307-49a9-4487-9873-cf0df092a318][Pub/Sub Pattern]]

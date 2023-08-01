@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       87236eae-a3ef-4227-a905-b0c2a7c77a20
-:END:
-#+TITLE: Linux
-
-- tags :: [[id:3cee8e70-ad02-48c7-8948-b1d588985442][Shell]], [[id:c1f37cbc-7715-4e0e-a443-29e7a7ba8afe][Linux Programming]], [[id:ed1a8a51-ec7f-42fb-9ee5-606f855ff529][Linux Error Handling]]

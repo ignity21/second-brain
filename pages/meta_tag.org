@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       461cd1e9-bf22-4616-a61e-85fb0899f211
-:END:
-#+TITLE: Meta Tag

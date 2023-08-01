@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       3cee8e70-ad02-48c7-8948-b1d588985442
-:END:
-#+TITLE: Shell
-
-- tags :: [[id:e532675a-9906-4cfc-91b7-736d0e26c4a9][Shell Tips]]

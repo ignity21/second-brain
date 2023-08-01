@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       3bd300af-88ec-4735-ad5c-ea674ba980f4
-:END:
-#+TITLE: K-Means

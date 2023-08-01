@@ -1,8 +1,0 @@
-:PROPERTIES:
-:ID:       65101f14-36e0-4e95-bde5-6cc407038241
-:END:
-#+TITLE: ~pktgen~
-
-- tags :: [[id:01e8f374-352d-411f-9e20-64b0983aa6ab][Network Troubleshooting]]
-
-Linux 内核自带的高性能网络测试工具

@@ -1,4 +1,0 @@
-:PROPERTIES:
-:ID:       084f01f9-318e-4c51-860e-a73bc878b855
-:END:
-#+TITLE: ~tcpdump~

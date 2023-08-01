@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       49b1d0cc-0ea8-478d-8b29-f6006472c028
+:END:
+#+title: ~ab~
+
+Web服务器性能测试工具，Apache HTTP server benchmarking tool
+
+#+begin_src bash
+  # 并发10个请求测试Web服务器性能，总共测试100个请求
+  ab -c 10 -n 100 http://192.168.0.10:10000/
+#+end_src

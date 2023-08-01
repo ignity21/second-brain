@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       b0008138-5a1c-42f1-a246-71dbd05945f2
-:END:
-#+TITLE: Full-Text Search
-
-- tags :: [[id:e045c3b1-85cf-4ee3-8db1-d66004751d28][Elasticsearch]]

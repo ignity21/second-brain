@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       7a4c6439-2e32-46dd-ae01-3ed4465e19cd
-:END:
-#+TITLE: Batch Processing
-
-- tags :: [[id:90290142-8c00-4e76-b2fd-6bfc17150cf0][Data System]], [[id:50b298d4-52e0-4f74-bf8c-09886bd2ae84][Architecture]], [[id:f7be9f53-d9bb-4149-839e-7ee44f69f7ce][Big Data]], [[id:d78c8783-4063-4d92-8d8c-c23cee74de4b][System Design]]

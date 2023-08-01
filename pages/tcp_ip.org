@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       25688f58-fa67-4322-bc3d-d43fbf3176d7
-:END:
-#+TITLE: TCP/IP
-
-- tags :: [[id:022fc90e-eac3-48d4-a305-fbf6d88969e4][Network]]

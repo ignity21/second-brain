@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       62289ff0-f3b6-402f-b6bc-6fd33cd8ca44
-:END:
-#+TITLE: Page Cache
-
-- tags :: [[id:e76d853c-e289-457a-b0ae-203f49977675][System Cache]], [[id:d5f8c354-df83-45fa-bb36-c8a0b81d0fe9][IO]], [[id:88f195cc-a133-4d74-8977-99d47474f3ce][Block IO]], [[id:b8b9ce75-3fbd-4005-a2f5-89ff6f7b29eb][Delayed Write]]

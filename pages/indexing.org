@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       14f13f85-3cb8-424f-9d37-4c375b8bc29c
-:END:
-#+TITLE: Indexing
-
-- tags :: [[id:90290142-8c00-4e76-b2fd-6bfc17150cf0][Data System]], [[id:93bc8c31-ee23-43c7-b4e2-c6938d54e09b][SQL]], [[id:b1b056b2-880a-4bbc-a2f3-de1e0bd52a9f][NoSQL]], [[id:5cdcdf52-63a9-4f93-86f1-1a4c1f3f9792][Database]], [[id:f58a6340-cc46-484f-be96-0778cbc37db6][Query Optimization]]

@@ -1,8 +1,0 @@
-:PROPERTIES:
-:ID:       db8d1d17-deae-4a07-87ed-da7159e953b4
-:END:
-#+TITLE: Cron
-#+filetags: :OS:Linux:
-
-* Cheetsheet
-[[../assets/Linux/CronCheetsheet.png]]
