@@ -1,0 +1,63 @@
+:PROPERTIES:
+:ID:       51e7a901-ae41-4de7-8081-cc09e4f8dd2d
+:END:
+#+title: CSS
+#+filetags: :Frontend:
+
+* Stylesheet Link
+#+begin_src html
+  <link rel="stylesheet" herf="style.css">
+#+end_src
+
+* Selectors
+:PROPERTIES:
+:ID:       76b61ac8-ed69-4daf-8fbc-761c591fbdb1
+:ROAM_ALIASES: "CSS Selectors"
+:END:
+#+begin_src css
+  h1 {}
+  .class {}
+  #id {}
+  a[attr] {}
+  a[attr="abc"] {}
+  a:hover {}
+  p::first-line {}
+
+  /* selects paragraphs that are direct children of <article> elements */
+  article > p {}
+#+end_src
+
+* Units
+:PROPERTIES:
+:ID:       d316f84a-156e-4513-a799-d0a11b05de51
+:ROAM_ALIASES: "CSS Units"
+:END:
+** Absolute Units
+- px, in, mm, cm
+#+begin_src css
+  .sidebar {
+      width: 400px;
+  }
+#+end_src
+
+** Relative Units
+- %, em, vw, vh
+
+*** em
+1.5em is equivalent to 1.5 times the font size of the current element.
+
+** Pixel
+- Physical Hardware Pixels
+- Device Independent Pixels(DIP): relates pixels to a real distance.
+- Device Pixel Ratio(DPR): Physical / DIP
+
+*** Example
+A browser has a *viewport* width of 1280 dips. The device pixel ratio is 2.
+The 1280 dips get scaled up to the 2560 hardware pixels.
+
+
+** Viewport
+#+begin_src html
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+#+end_src
+https://developer.mozilla.org/en-US/docs/Web/HTML/Viewport_meta_tag

@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       96dbc600-8ca2-44a2-a638-80ef0bc0a5cc
+:END:
+#+title: Shell Tips
+#+filetags: Linux
+
+- ~watch [command]~
+- ~while true; do [command]; sleep 5; done~
+- ~[command] 2>&1 > grep keyword~
+- ~echo $?~: 输出上一条命令退出时的返回值
+- ~-~: The special meaning of ~-~ as a command-line argument to refer to the standard input/output

@@ -1,0 +1,39 @@
+:PROPERTIES:
+:ID:       499faa16-204e-40a9-9792-63107b2cdb08
+:END:
+#+title: SML
+
+* Code Examples
+#+begin_src sml
+  (* This is a comment *)
+
+  (* Declare a variable *)
+  val x = 8;
+
+  (* Define a function *)
+  fun pow(x : int, y : int) =
+      if y=0
+      then 1
+      else x * pow(x, y - 1)
+
+
+  fun cube(x : int) =
+      pow(x, 3)
+
+  val y = cube(x);
+#+end_src
+
+* Functions
+** Step1: Function Binding
+- Syntax: ~fun x0 (x1 : t1, ..., xn : tn) = e~
+- Evaluation: *A function is a value* (No evaluation for the body yet)
+- Type-checking
+  - The type checker will find out the return type of the function.
+  - The body of the function is not evaluated.
+** Step2: Function Calls
+- Syntax: ~e0 (e1,...,en)~
+- Type-checking
+  - ~e0~ has some function  type ~(t1 *...* tn) -> t~
+  - check arguments ~e1: t1 ...~
+  - Then ~e0(e1,...,en)~ has type ~t0  ~
+- Evaluation: Evaluate ~e0~ to a function ~fun x0 (x1: t1, ..., xn: tn) = e~

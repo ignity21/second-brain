@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       72a0721e-9ec0-457d-8c9a-d8aab593e3ec
+:END:
+#+title: HTML Layout
+#+filetags: Frontend
+
+* Tips
+** CSS max-width
+To make sure the content fits within the viewport to prevent horizontal scrolling. i.e avoid *content overflow*
+#+begin_src css
+  img, embed, object, video {
+      max-width: 100%;
+  }
+#+end_src
+
+** Fit the Finger Size
+- 40~48 CSS pixels for tap targets
+#+begin_src css
+  nav a, button {
+      min-height: 48px;
+      min-width: 48px;
+  }
+#+end_src
+
+** CSS =inherit= keyword
+- The property inherit its value from its container.
+#+begin_src css
+  /*set the top and bottom padding*/
+  /*inherit the left and right padding*/
+  padding: 1.5em inherit;
+#+end_src

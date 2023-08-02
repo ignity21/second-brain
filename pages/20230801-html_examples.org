@@ -1,0 +1,38 @@
+:PROPERTIES:
+:ID:       8009f6d2-d2b9-4a6b-ad73-b9d704fe57b1
+:END:
+#+title: HTML Examples
+#+filetags: :Frontend:
+
+* Simple Example
+#+begin_src html
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title>Test</title>
+      <style>
+        p {
+            color: blue;
+        }
+      </style>
+    </head>
+    <body>
+      <h1>H1</h1>
+      <a href="https://www.google.com">Google</a>
+      <ul>
+        <li>A</li>
+        <li>B</li>
+        <li>C</li>
+      </ul>
+      <p>A paragraph</p>
+      <span>abcdefg</span>
+      <span>1234567</span>
+      <br>
+      <figure>
+        <img src="http://udacity.github.io/fend/images/udacity.png" alt="Udacity">
+        <figcaption>Udacity Logo</figcaption>
+      </figure>
+    </body>
+  </html>
+#+end_src

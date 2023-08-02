@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       0dd5ff39-6278-468b-a6da-650bd6269a45
+:END:
+#+title: Languages
+
+- [[id:ddb27e15-ec35-4242-b274-c76d904c80f9][C++]]
+- [[id:7b56b4a1-ea45-415e-81c3-7230a31c6957][Python]]
+- [[id:499faa16-204e-40a9-9792-63107b2cdb08][SML]]: Cousera Course 'Programming Language'

@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       c6b1f5e6-3c35-4db3-987a-c6b6c252d887
+:END:
+#+title: Document Model
+#+filetags: DB
+
+- Support *self-contained* document
+- Many-to-one and many-to-many relationships don't fit nicely into document model
+- Better performance due to *locality*
+- The application need to do additional work to keep the denormalized data consistent and emulate the join operation.
+- Schema-on-read (the structure of the data is implicit, and only interpreted when the data is read)
+
+* When to Use
+- There are many different types of objects, and it is not practical to put each type of object in its own table.
+- The structure of the data is determined by external systems over which you have no control and which may change at any time.
+- When your application has mostly one-to-many relationships (tree-structured data) or no relationships between records
+- *Document databases target use cases where data comes in self-contained documents and relationships between one document and another are rare*.

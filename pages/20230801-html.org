@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       0dba51d3-139a-4f79-b878-a662c2c34b6e
+:END:
+#+title: HTML
+#+filetags: Frontend
+
+- [[id:72a0721e-9ec0-457d-8c9a-d8aab593e3ec][HTML Layout]]
+- [[id:f052c7d3-fe7b-4c6c-9bee-507fcb77d491][HTML Header]]
+- [[id:8009f6d2-d2b9-4a6b-ad73-b9d704fe57b1][HTML Examples]]

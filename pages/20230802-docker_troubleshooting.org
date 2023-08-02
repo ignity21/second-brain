@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       eab9fb9a-8249-4537-9434-9dab4c4436ee
+:END:
+#+title: Docker Troubleshooting
+#+filetags: DevOps
+
+* 进入容器命名空间
+- ~docker run --rm -v /usr/local/bin:/target jpetazzo/nsenter~
+- ~nsenter~:run program in different namespaces

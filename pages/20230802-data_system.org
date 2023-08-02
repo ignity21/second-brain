@@ -1,0 +1,30 @@
+:PROPERTIES:
+:ID:       665b238c-f8ea-41f7-904d-3d2c64fcf362
+:END:
+#+title: Data System
+#+filetags: SystemDesign
+
+Many applications today are data-intensive, as opposed to compute-intensive.
+
+* Questions
+- How do you ensure that the data remains correct and complete?
+- How do you provide consistently good performance to clients?
+- How do you scale to handle an increase in load?
+- What does a good API for the service look like?
+
+* Factors Influence the Design
+- Skills and experience of the people involved
+- Legacy system dependencies
+- The timescale for delivery
+- *Organization's tolerance of different kinds of risk*
+- Regulatory constraints
+
+* Functionalities
+- Store data (databases)
+- Remember the result of an expensive operation (caches)
+- Allow users to search data by filter (search indexes)
+- Send a message to another process, to be handled asynchronously (stream processing)
+- Periodically crunch a large amount of accumulated data (batch processing)
+
+* A Simple Architecture
+[[../assets/Data/data_system_1.png]]

@@ -1,0 +1,44 @@
+:PROPERTIES:
+:ID:       8426d96d-fa58-4775-9500-c44546b37266
+:END:
+#+title: Sorting Algorithm
+#+filetags: Algorithm
+
+* 总结表
+| 算法      | 时间                 | 稳定？ | 原地？ |
+|-----------+----------------------+--------+--------|
+| Bubble    | $O(n^2)$             | 是     | 是     |
+| Insertion | $O(n^2)$             | 是     | 是     |
+| Selection | $O(n^2)$             | 否     | 是     |
+| Quick     | $O(n\log(n))$        | 否     | 是     |
+| Merge     | $O(n\log(n))$        | 是     | 否     |
+| Bucket    | $O(n)$               | 是     | 否     |
+| Counting  | $O(n+k)$ k为数据范围 | 是     | 是     |
+| Radix     | $O(dn)$ d为维度      | 是     | 是     |
+
+* Bubble Sort
+:PROPERTIES:
+:ID:       a7cea3ae-1bc5-427f-9f09-e42bfac1e28f
+:END:
+- 优化：一次冒泡过程没有元素交换则已排序完毕
+
+* Insertion Sort
+:PROPERTIES:
+:ID:       553a8e95-9b74-411b-9fc2-7760ba33f10a
+:END:
+- 排序已经排好序的集合，复杂度 $O(n)$
+
+* Selection Sort
+:PROPERTIES:
+:ID:       1fc3f569-5863-4614-9617-9bcf50ba40ef
+:END:
+与插入排序类似，区别在于从未排序区间找到最小元素放到已排序区间的末端
+
+* TODO 多文件大小堆?
+- 对多个已排序好的大文件合并（内存限制）：使用最小堆实现，取出的记录从该条记录所属的文件中补进新记录。
+* Advanced
+:PROPERTIES:
+:ID:       07558a3f-9e70-4640-80bd-54bd2d491380
+:END:
+- [[id:7e5829ad-f60e-41ce-8fb8-98a56592aa81][Bucket Sort]]
+- [[id:1776ad9d-bc42-4d0c-b49d-e24f32bff80d][Counting Sort]]

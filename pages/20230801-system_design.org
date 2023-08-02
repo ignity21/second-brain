@@ -5,3 +5,6 @@
 #+filetags: SystemDesign
 
 - [[id:bf48570b-0bc2-41a6-aefc-94eb7f28b4ba][Availability]]
+- Design [[id:665b238c-f8ea-41f7-904d-3d2c64fcf362][Data System]]
+- [[id:b4fd80ae-26fe-4fe4-9095-b1fe0b371440][Error Handling]]
+- [[id:6de26b38-0e0a-4142-a2ad-5437b2263305][Database]]

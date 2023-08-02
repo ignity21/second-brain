@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       17daaa09-1802-44ad-8c03-df1433858f5e
+:END:
+#+title: ~dd~
+#+filetags: Tools
+
+* 复制文件
+- ~dd if=/dev/urandom of=/tmp/file bs=1M count=500~: 读取随机设备，生成一个 500MB 大小的文件

@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       c336c653-61a7-4c15-a43e-7f76644e2b75
+:END:
+#+title: Frontend
+#+filetags: Frontend
+
+- [[id:0dba51d3-139a-4f79-b878-a662c2c34b6e][HTML]]
+- [[id:51e7a901-ae41-4de7-8081-cc09e4f8dd2d][CSS]]

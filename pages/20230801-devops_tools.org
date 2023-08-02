@@ -1,7 +1,0 @@
-:PROPERTIES:
-:ID:       e708b66d-158b-4b48-9c75-fa45055375e3
-:END:
-#+title: DevOps Tools
-#+filetags: :Tools:DevOps:
-
-- [[id:183ad4d8-6a07-43b3-80b0-dd2f321f3c2d][Ansible]]

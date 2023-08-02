@@ -2,6 +2,7 @@
 :ID:       49b1d0cc-0ea8-478d-8b29-f6006472c028
 :END:
 #+title: ~ab~
+#+filetags: :Tools:
 
 Web服务器性能测试工具，Apache HTTP server benchmarking tool
 

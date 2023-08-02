@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       8e0d2181-f0e0-4e39-94ae-94df96168095
+:END:
+#+title: B-Trees
+#+filetags: :DB:DataStructure:
+
+* Optimizations
+- For crash recovery, some databases(like LMDB)  use a copy-on-write scheme.
+  - copy-on-write scheme is also useful for concurrency control.
+- Leaf page may have references to its sibling pages, which allows scanning
+  keys without jumping back to parent pages
+- B-Tree variants such as fractal trees borrow some log-structured ideas to reduce disk seeks.

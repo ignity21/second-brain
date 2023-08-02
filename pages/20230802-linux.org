@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       4f8f2615-daed-4737-99f4-80bca15e7e73
+:END:
+#+title: Linux
+#+filetags: Linux
+
+* File System
+:PROPERTIES:
+:ID:       bd220da0-f129-45c5-be02-67d870159425
+:END:
+- [[id:937b44b4-497a-466a-924d-0a01a2228266][File Descriptor]]
+
+* [[id:3eb94d17-33dd-4314-afb4-ee194cb82acd][Testing Tools]]
+
+* Shell
+:PROPERTIES:
+:ID:       bb18c4e2-ad63-4a7c-bd8a-ee37c0079acf
+:END:
+
+- [[id:96dbc600-8ca2-44a2-a638-80ef0bc0a5cc][Tips]]
