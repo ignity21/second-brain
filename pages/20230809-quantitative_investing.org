@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       6e4ae290-6a89-4208-8559-a97fd08e356e
+:END:
+#+title: Quantitative Investing
+#+filetags: Quant
+
+* [[id:77055920-d7f4-49a5-82b2-23cb35698f0b][Quantitative Libs]]

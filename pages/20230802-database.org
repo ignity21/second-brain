@@ -41,3 +41,11 @@ The *advantage* of using an *ID* is that because it has no meaning to humans, it
 :ID:       f1098231-2b4c-49dc-8a92-657b055e6475
 :END:
 - [[id:27cf033e-b508-4f3e-a8ef-59206ebe58a3][MongoDB]]
+
+* Query Language
+:PROPERTIES:
+:ID:       b676c7bf-200d-4137-ba88-c594898403b1
+:END:
+- Declarative
+  - Hides implementation details of the database engine
+- Imperative

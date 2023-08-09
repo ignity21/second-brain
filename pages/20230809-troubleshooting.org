@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       949864f8-e572-43ae-b269-92bfd62d3605
+:ROAM_ALIASES: "Python Troubleshooting"
+:END:
+#+title: Troubleshooting
+#+filetags: Python
+
+* 加强版print()
+- [[https://github.com/gruns/icecream][icecream]]: ~ic~
+- [[https://github.com/cool-RR/PySnooper][PySnooper]]: ~@pysnooper.snoop()~
+- [[https://github.com/ionelmc/python-hunter][hunter]]: ~hunter.trace(module='posixpath', action=hunter.CallPrinter)~ [[https://python-hunter.readthedocs.io/en/latest/][doc]]
+
+* Bytecode ~dis~
+~dis.dis(func)~

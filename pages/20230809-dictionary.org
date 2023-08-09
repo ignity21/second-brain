@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       6694ff04-abaf-4585-ac60-7960360f1158
+:ROAM_ALIASES: "Python Dictionary"
+:END:
+#+title: Dictionary
+#+filetags: Python
+
+* Underlying Implementation
+Python first appends the key/value data into a standard array and then stores only the
+index into this array in the hash table. The array also helps keep the insertion order of items.
+
+* Rehashing
+By default, the smallest size of a dictionary or set is 8, and it will resize by 3x if the dictionary is more than two-thirds full. (possible sizes: 8->18->39->81->165->...)
+
+* Optimization
+- Load Factor :: How well distributed the data throughout the hash table is called the *load factor* and is related to the *entropy* of the hash function

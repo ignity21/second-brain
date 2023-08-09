@@ -21,3 +21,9 @@
 :END:
 - [[id:1d92f19c-ff18-4006-904d-146a3ce03878][Load Balancing]]
 - [[id:8f34f2a8-55bc-4870-b2fc-05ec5ab7f80e][MapReduce]]
+
+* Message Queue
+:PROPERTIES:
+:ID:       5a52c5a5-0bc7-4b65-8b47-bcb61c19909b
+:END:
+- [[id:5561dbba-1542-4b9a-8cdc-334ca6501990][Pub/Sub Pattern]]

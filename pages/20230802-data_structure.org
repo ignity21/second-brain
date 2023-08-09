@@ -2,7 +2,8 @@
 :ID:       92ec20d3-96c9-40c5-b80c-de0379733dc3
 :END:
 #+title: Data Structure
-#+filetags: Algorithm
+#+filetags: :DataStructure:Algorithm:
 
 - [[id:f40d4fa6-6687-44ec-8a73-22fcbb2e352f][Linked List]]
 - [[id:6bda11af-ed0f-4606-af75-7e11a4224199][Heap]]
+- [[id:571dac23-2ea4-40fe-8db0-7bf30a28d871][Queue]]

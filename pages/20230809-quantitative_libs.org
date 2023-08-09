@@ -1,0 +1,49 @@
+:PROPERTIES:
+:ID:       77055920-d7f4-49a5-82b2-23cb35698f0b
+:END:
+#+title: Quantitative Libs
+#+filetags: :Quant:
+
+* [[https://github.com/wilsonfreitas/awesome-quant][awesome-quant]]
+
+* 数据获取
+  - 爬虫类免费数据： *AKShare*, tushare
+  - 收费云端数据： rqdata(米筐), hs_udata
+  - 数据终端： WindPy, pyTSL,
+
+* 存储方案
+  - 数据文件： h5py, pytables
+  - SQL类： peewee, sqlalchemy
+  - NoSQL类： dolphindb, arctic
+
+* 建模分析
+  - 数据处理： numpy, pandas
+  - 模型构建： scipy, statsmodels
+  - 交互绘图： matplotlib, *plotly*
+
+* 策略开发相关
+  - Zipline
+  - RQAlpha: 米筐
+  - Qlib: 微软与大型公募合作项目
+  - QUANTAXIS: 国内量化私募自用，面向大型量化平台
+  - Backtrader: 德国开源社区开发，文档清晰上手容易
+  - VeighNa
+
+* 交易 API 接口
+  - 恒生 ~py_t2sdk~
+  - 中泰 ~xtp_api_python~
+  - 华鑫 ~TORA_API_PYTHON~
+
+* 量化策略平台/框架
+  - [[https://openbb.co/][OpenBB Terminal]]
+  - 恒生 ~PTrade~
+  - 迅投 ~QMT~
+  - 丽海弘金 ~CS~
+  - 微软 ~Qlib~
+
+* 风险管理
+  - 组合风险分析： pyfolio, Riskfolio-Lib （巴西开源社区，项目质量高）
+  - 衍生品定价： QuantLib (Python 封装)
+
+* 策略混淆加密
+  - Nuitka: 生成 =pyd= 二进制文件
