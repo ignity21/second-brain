@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       27cf033e-b508-4f3e-a8ef-59206ebe58a3
+:END:
+#+title: MongoDB
+#+filetags: Database
+
+- [[id:da5d484d-a67b-4b47-b0c3-786c761542bb][MongoDB MapReduce]]

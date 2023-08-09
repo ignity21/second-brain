@@ -1,0 +1,5 @@
+:PROPERTIES:
+:ID:       653cc996-052d-4aa3-a325-6d9191a43fe9
+:END:
+#+title: Partial Derivative
+#+filetags: :Calculus:Math:

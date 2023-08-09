@@ -4,7 +4,10 @@
 #+title: HTML Layout
 #+filetags: Frontend
 
-* Tips
+* CSS Tips
+:PROPERTIES:
+:ID:       ff39ce70-c6c5-428e-963a-8a75cefd3c6f
+:END:
 ** CSS max-width
 To make sure the content fits within the viewport to prevent horizontal scrolling. i.e avoid *content overflow*
 #+begin_src css

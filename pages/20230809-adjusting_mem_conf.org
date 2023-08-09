@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       5e8af621-8028-458e-8f7b-04bf8d561512
+:END:
+#+title: Adjusting Memory Configuration
+#+filetags: Linux
+
+* =/proc/sys/vm/drop_caches=
+- ~echo 3 > /proc/sys/vm/drop_caches~ 清理文件页、目录项、Inodes　等各种缓存
+
+* =/proc/sys/vm/min_free_kbytes=
+
+* =/proc/sys/vm/swappiness=
+swappiness 的范围是 0-100
+
+- 数值越大，越积极使用 Swap，也就是更倾向于回收匿名页
+- 数值越小，越消极使用 Swap，也就是更倾向于回收文件页

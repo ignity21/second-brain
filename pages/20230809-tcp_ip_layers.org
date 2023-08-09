@@ -1,0 +1,35 @@
+:PROPERTIES:
+:ID:       c9141191-34a2-4935-9959-43532b947a03
+:END:
+#+title: TCP/IP Layers
+#+filetags: :Linux:Network:
+
+* Data link layer
+:PROPERTIES:
+:ID:       5091bdbd-c716-49ad-82f0-1fef96c3646d
+:END:
+Provides *MAC routing*, *error detection* and *error correction*, and *flow control*.
+
+* Network layer
+:PROPERTIES:
+:ID:       6a28873a-d9b7-4a8c-b2de-3a4da88d26ad
+:END:
+Routes data packets between different networks.
+
+- [[id:3b7e1fae-01cb-4c83-adf1-ea97c3fb2946][MTU]]
+
+* Transport layer
+:PROPERTIES:
+:ID:       df842644-7897-41ce-8d36-865a60c65bb2
+:END:
+Provides reliable end-to-end communication.
+
+* Application layer
+Provides services to applications that need to communicate over the network. HTTP, FTP, SMTP, etc.
+
+* TODO ...
+
+
+- 内核通过中断跟网卡进行交互
+  - 网卡硬中断只处理最核心的网卡数据读取或发送
+  - 协议栈中的大部分逻辑都放到软中断中处理

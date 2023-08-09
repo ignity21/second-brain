@@ -1,0 +1,5 @@
+:PROPERTIES:
+:ID:       e3904eb5-1fd0-4b3a-9bdb-e269f85573bf
+:END:
+#+title: Full-text Search Data Model
+#+filetags: :DB:

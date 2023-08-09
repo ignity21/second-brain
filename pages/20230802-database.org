@@ -19,6 +19,11 @@
 :END:
 - [[id:c6b1f5e6-3c35-4db3-987a-c6b6c252d887][Document Model]]
 - [[id:36556ce5-9027-4fb4-b673-14a6257156e1][Graph-Like Data Model]]
+- [[id:e3904eb5-1fd0-4b3a-9bdb-e269f85573bf][Full-text Search Data Model]]
+
+** Others
+- GenBank for genome data
+- Large Hadron Collider (LHC) for particle physicists
 
 * Indexing
 :PROPERTIES:
@@ -30,3 +35,9 @@
 
 ** ID
 The *advantage* of using an *ID* is that because it has no meaning to humans, it *never needs to change*.
+
+* No SQL
+:PROPERTIES:
+:ID:       f1098231-2b4c-49dc-8a92-657b055e6475
+:END:
+- [[id:27cf033e-b508-4f3e-a8ef-59206ebe58a3][MongoDB]]

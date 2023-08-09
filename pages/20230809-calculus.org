@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       fc70dfaa-fbe9-4c89-a23b-72ac83d6d917
+:END:
+#+title: Calculus
+#+filetags: :Calculus:Math:
+
+- [[id:a6bfbb45-954c-4d78-9c0b-dd582340a181][Multivariate Derivative]]

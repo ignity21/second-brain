@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       605b3e38-79ba-45f3-9241-c7d223af8e94
+:END:
+#+title: ~perf-tools~
+#+filetags: :Tools:Linux:
+
+* Introduction
+A miscellaneous collection of in-development and unsupported performance
+analysis tools for Linux ~ftrace~ and ~perf_events~
+
+[[https://github.com/brendangregg/perf-tools][Github]]
+
+#+caption: perf-tools
+[[../assets/Linux/perf-tools_1.png]]
+
+* Tools
+** ~execsnoop~
+:PROPERTIES:
+:ID:       54850633-3a61-4c0a-b53f-a3bc97c53218
+:END:
+~execsnoop~ 是一个专为短时进程设计的工具，它通过 ~ftrace~ 实时监控进程的 ~exec()~

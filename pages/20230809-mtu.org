@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       3b7e1fae-01cb-4c83-adf1-ea97c3fb2946
+:END:
+#+title: MTU
+#+filetags: Network
+
+*MTU* 网络接口配置的最大传输单元，规定了最大的 *IP* 包大小。

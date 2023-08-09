@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       a6bfbb45-954c-4d78-9c0b-dd582340a181
+:END:
+#+title: Multivariate Derivative
+#+filetags: :Calculus:Math:
+
+- [[id:653cc996-052d-4aa3-a325-6d9191a43fe9][Partial Derivative]]
+- [[id:5015719f-bf35-4ed3-8dcd-d42a77be29b4][Multivariate Chain Rule]]

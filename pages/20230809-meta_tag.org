@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       8081a5ae-68b6-4f6b-8850-11de37c7e3d0
+:END:
+#+title: Meta Tag
+#+filetags: Frontend
+
+* Match the Device Size
+:PROPERTIES:
+:ID:       8df7e87e-d3ba-472f-8cdd-c3fb0f2dbedf
+:END:
+Add viewport tag to the head element of the page
+
+#+begin_src html
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+#+end_src
+- ~width=device-width~: to match the screen's width in device independent pixels(DIP).
+- ~initial-scale=1~: 1 to 1 relationship between device independent pixels(DIP) and CSS pixels.
