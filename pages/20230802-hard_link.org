@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       537013df-12ee-47e1-9e1f-babe976d26fa
+:END:
+#+title: Hard Link
+#+filetags: Linux
+
+硬链接：与普通文件没什么不同，硬链接创建的目录项指向的 inode 一致，说明都是指向同一个文件在硬盘中的区块。内核维护 inode 的引用。

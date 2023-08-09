@@ -1,0 +1,52 @@
+:PROPERTIES:
+:ID:       a7b6885c-42f7-476c-9642-8f0d06149e95
+:END:
+#+title: System Error
+#+filetags: Linux
+
+* Error Severity
+** Fatal
+  - *fatal* error has no recovery action.
+  - The best we can do is print an error message on the user's
+    screen or to a log file, and then exit.
+
+** Nonfatal
+  - Resource-related: EAGAUN, ENFILE, ENOBUFS, ENOLCK, ENOSPC, EWOULDBLOCK
+  - The typical recovery action for a resource-related nonfatal error is to delay and retry later.
+
+* Linux Error Handling
+:PROPERTIES:
+:ID:       510e4c03-d240-4821-ad4a-300c9e4ea31a
+:END:
+** C++ Code to Print Errors
+#+begin_src cpp
+  extern in errno; // historical definition
+  extern int *__errno_location(void); // supports multithreaded access to errno
+
+  #include <string.h>
+  char *strerror(int errnum); // C statndard to help with printing error messages
+
+  #include <stdio.h>
+  void perror(const char *msg); // print to stderr based on the value of errno
+  // Output -> "{msg}: {sys error msg}"
+#+end_src
+
+*** An Error Handling Example
+通常，函数返回 -1 表示出错，之后再检查错误码
+#+begin_src cpp
+  #include <error.h> // errno
+  #include <fcntl.h> // open()
+  #include <stdio.h> // perror()
+  #include <string.h> //strerror()
+  #include <iostream>
+
+  int main(int argc, char *argv[]) {
+    auto fd = open("/notexisted", O_RDONLY);
+    if (fd == -1) {
+      std::cout << "errno: " << errno << "; errmsg: " << strerror(errno) << "\n";
+      perror("open() failed"); // open() failed: No such file or directory
+      exit(EXIT_FAILURE);
+    }
+    exit(EXIT_SUCCESS);
+  }
+#+end_src

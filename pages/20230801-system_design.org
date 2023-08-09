@@ -4,7 +4,20 @@
 #+title: System Design
 #+filetags: SystemDesign
 
-- [[id:bf48570b-0bc2-41a6-aefc-94eb7f28b4ba][Availability]]
 - Design [[id:665b238c-f8ea-41f7-904d-3d2c64fcf362][Data System]]
 - [[id:b4fd80ae-26fe-4fe4-9095-b1fe0b371440][Error Handling]]
 - [[id:6de26b38-0e0a-4142-a2ad-5437b2263305][Database]]
+
+* Goals
+:PROPERTIES:
+:ID:       d361eb50-812c-4dba-8473-72a2de4a6ca9
+:END:
+- [[id:bf48570b-0bc2-41a6-aefc-94eb7f28b4ba][Availability]]
+- [[id:b5ea1dbf-519e-439f-aa26-af2dc166955b][Maintainability]]
+
+* Distributed System
+:PROPERTIES:
+:ID:       9a5e0c54-9aab-46ca-9199-2e9917f58c4c
+:END:
+- [[id:1d92f19c-ff18-4006-904d-146a3ce03878][Load Balancing]]
+- [[id:8f34f2a8-55bc-4870-b2fc-05ec5ab7f80e][MapReduce]]

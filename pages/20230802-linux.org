@@ -9,6 +9,15 @@
 :ID:       bd220da0-f129-45c5-be02-67d870159425
 :END:
 - [[id:937b44b4-497a-466a-924d-0a01a2228266][File Descriptor]]
+- [[id:537013df-12ee-47e1-9e1f-babe976d26fa][Hard Link]]
+- [[id:d81b6ab9-c4fc-4ed3-85f7-dd239e60dcc9][inode]]
+- [[id:3876fd6e-5f00-449c-bd49-6cdde0e05ab0][dentry]]
+
+* Process
+:PROPERTIES:
+:ID:       7eb367ff-5e7c-4bed-a0db-603fef36df2e
+:END:
+- [[id:18ebf2c0-c945-4bbc-ad58-9477849c7bbb][Interupt]]
 
 * [[id:3eb94d17-33dd-4314-afb4-ee194cb82acd][Testing Tools]]
 
@@ -18,3 +27,6 @@
 :END:
 
 - [[id:96dbc600-8ca2-44a2-a638-80ef0bc0a5cc][Tips]]
+
+* [[id:3d49b6d9-9bc1-422e-86ac-de4b2c24eaaf][Standard C Library]]
+* [[id:a7b6885c-42f7-476c-9642-8f0d06149e95][System Error]]

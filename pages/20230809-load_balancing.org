@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       1d92f19c-ff18-4006-904d-146a3ce03878
+:END:
+#+title: Load Balancing
+#+filetags: SystemDesign
+
+A type of reverse proxy that distributes traffic cross servers.
+
+* Load Balancing Strategies
+- Round-robin
+- Weighted Round-robin
+- Random Selection
+- Performance-based Selection: Load balancer performs health checks on servers.
+- IP-based Routing: helps maximized cache hits.
+- Path-based Routing

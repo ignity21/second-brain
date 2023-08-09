@@ -18,6 +18,7 @@
 :ID:       c05edc08-d83f-4260-9481-1c97088385cb
 :END:
 - [[id:c6b1f5e6-3c35-4db3-987a-c6b6c252d887][Document Model]]
+- [[id:36556ce5-9027-4fb4-b673-14a6257156e1][Graph-Like Data Model]]
 
 * Indexing
 :PROPERTIES:
@@ -25,3 +26,7 @@
 :END:
 
 - [[id:8e0d2181-f0e0-4e39-94ae-94df96168095][B-Trees]]
+- [[id:26bfc8e3-ad4e-4a11-886e-e898680fbbca][Hash Indexes]]
+
+** ID
+The *advantage* of using an *ID* is that because it has no meaning to humans, it *never needs to change*.

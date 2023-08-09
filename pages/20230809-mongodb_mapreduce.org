@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       da5d484d-a67b-4b47-b0c3-786c761542bb
+:END:
+#+title: MongoDB MapReduce
+#+filetags: :Database:
+
+* MongoDB Example
+  #+begin_src js
+    db.users.mapReduce(
+        function map() {
+            var age = this.age;
+            emit(age, this.height); // emit(key, value)
+        },
+        function reduce(key, values) {
+            return Array.avg(values);
+        },
+        {
+            query: { gender: "male"},
+            out: "AvgHeightReport"
+        }
+    );
+  #+end_src
+- ~map~ and ~reduce~ functions should be pure functions (no side effect). This allow the database to run the functions anywhere, in any order, and rerun them on failure.

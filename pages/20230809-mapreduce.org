@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       8f34f2a8-55bc-4870-b2fc-05ec5ab7f80e
+:END:
+#+title: MapReduce
+#+filetags: SystemDesign
+
+* Examples
+- [[id:da5d484d-a67b-4b47-b0c3-786c761542bb][MongoDB MapReduce]]

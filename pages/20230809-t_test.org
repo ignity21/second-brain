@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       7c802e9e-8fc0-41fd-8078-1e09ee72378f
+:END:
+#+title: T-Test
+#+filetags: :Statistics:Math:
+
+Compare two groups/categories of numeric variables with small sample size
+
+[[../assets/Statistics/TTest_1.png]]
+
+* Types
+- One sample t-test :: test the mean of one group against a constant value.
+- Two sample t-test :: test the difference of means between two groups.
+- Paired sample t-test :: test the difference of means between two measurements of the same subject.

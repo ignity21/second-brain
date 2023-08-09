@@ -1,0 +1,5 @@
+:PROPERTIES:
+:ID:       cb0bae70-cb35-4b8d-b6ed-6a00ca472f68
+:END:
+#+title: Shell Sort
+#+filetags: Algorithm

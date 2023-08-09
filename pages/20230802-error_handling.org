@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       b4fd80ae-26fe-4fe4-9095-b1fe0b371440
 :END:
-#+title: Error Handling
+#+title: Error Handling Design
 #+filetags: SystemDesign
 
 * 两种方式

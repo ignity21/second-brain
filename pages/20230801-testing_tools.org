@@ -8,4 +8,10 @@
 - [[id:17daaa09-1802-44ad-8c03-df1433858f5e][~dd~]]: Convert and copy a file.
 
 * Stress Testing
+:PROPERTIES:
+:ID:       6ead6128-5866-4dcc-abc6-4cbc1fa2a8a3
+:END:
 - [[id:49b1d0cc-0ea8-478d-8b29-f6006472c028][~ab~]]: Apache HTTP server benchmarking tool.
+
+* Network
+- [[id:a07e73bd-8235-461d-aba9-18929611a815][~hping3~]]: Advanced ping utility which supports protocols such TCP, UDP, and raw IP.

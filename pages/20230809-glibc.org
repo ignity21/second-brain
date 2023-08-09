@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       3d49b6d9-9bc1-422e-86ac-de4b2c24eaaf
+:ROAM_ALIASES: "Standard C Library"
+:END:
+#+title: glibc
+#+filetags: Linux
+
+
+* The GNU C Library
+It is a collection of functions that provide basic functionality to programs running on Unix-like systems.
+
+* Check glibc Version
+- ~/lib/libc.so.6~ or ~ldd --version~

@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       b5ea1dbf-519e-439f-aa26-af2dc166955b
+:END:
+#+title: Maintainability
+#+filetags: SystemDesign
+
+Over time, many different people will work on the system (engineering and operations,
+both maintaining current behavior and adapting the system to new use cases), and
+they should all be able to work on it productively.
+
+* Operability
+Make it easy for operations teams to keep the system running smoothly.
+- Monitoring the health of the system and quickly restoring service if it goes into a bad state
+- Tracking down the cause of problems
+- Keeping software and platforms up to date, including security patches
+- Establishing good practices and tools for deployment, configuration management, and more
+- Defining processes that make operations predictable and help keep the production environment stable
+- Preserving the organization's knowledge about the system, even as individual people come and go
+
+* Simplicity
+Make it easy for new engineers to understand the system, by removing as much complexity as possible from the system.
+
+* Complexities
+- Explosion of the state space
+- Tight coupling of modules
+- Tangled dependencies
+- Inconsistent naming and terminology
+- etc...
+
+* Evolvability
+Make it easy for engineers to make changes to the system in the future, adapting it for unanticipated use cases as requirements change.

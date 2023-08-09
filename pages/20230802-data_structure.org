@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       92ec20d3-96c9-40c5-b80c-de0379733dc3
+:END:
+#+title: Data Structure
+#+filetags: Algorithm
+
+- [[id:f40d4fa6-6687-44ec-8a73-22fcbb2e352f][Linked List]]
+- [[id:6bda11af-ed0f-4606-af75-7e11a4224199][Heap]]

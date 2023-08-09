@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       e2798f28-aac5-428b-ab1f-7adcd67cef3a
+:END:
+#+title: Leader Election
+#+filetags: SystemDesign
+
+* Consensus Algorithm
+A type of complex algorithms used to have multiple entities agree on a single data value, like who the leader is.
+- *Paxos*
+- *Raft*
+
+* Tools
+- [[https://etcd.io][Etcd]]
+- [[https://zookeeper.apache.org][ZooKeeper]]

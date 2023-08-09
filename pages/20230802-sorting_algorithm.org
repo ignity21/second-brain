@@ -12,9 +12,6 @@
 | Selection | $O(n^2)$             | 否     | 是     |
 | Quick     | $O(n\log(n))$        | 否     | 是     |
 | Merge     | $O(n\log(n))$        | 是     | 否     |
-| Bucket    | $O(n)$               | 是     | 否     |
-| Counting  | $O(n+k)$ k为数据范围 | 是     | 是     |
-| Radix     | $O(dn)$ d为维度      | 是     | 是     |
 
 * Bubble Sort
 :PROPERTIES:
@@ -34,11 +31,19 @@
 :END:
 与插入排序类似，区别在于从未排序区间找到最小元素放到已排序区间的末端
 
+* Linear Sort
+:PROPERTIES:
+:ID:       402f4800-7f49-45eb-9a69-4337b220928e
+:END:
+不涉及比较操作，对排序数据有要求。线性排序有三种：
+
+| Algorithm     | Time     | Space    | Stability | Description                            |
+|---------------+----------+----------+-----------+----------------------------------------|
+| [[id:7e5829ad-f60e-41ce-8fb8-98a56592aa81][Bucket Sort]]   | $O(n+m)$ | $O(n+m)$ | Yes       | m is the number of buckets             |
+| [[id:1776ad9d-bc42-4d0c-b49d-e24f32bff80d][Counting Sort]] | $O(n+k)$ | $O(n+k)$ | Yes       | k is the max value                     |
+| [[id:e5eaf675-c0eb-4d75-b2e8-4768f1fa5642][Radix Sort]]    | $O(dn)$  | $O(d)$   | Yes       | d is the number of digits of max value |
+| [[id:cb0bae70-cb35-4b8d-b6ed-6a00ca472f68][Shell Sort]]    | $O(nh)$  | $O(1)$   | No        | h is the increment sequence            |
+
+
 * TODO 多文件大小堆?
 - 对多个已排序好的大文件合并（内存限制）：使用最小堆实现，取出的记录从该条记录所属的文件中补进新记录。
-* Advanced
-:PROPERTIES:
-:ID:       07558a3f-9e70-4640-80bd-54bd2d491380
-:END:
-- [[id:7e5829ad-f60e-41ce-8fb8-98a56592aa81][Bucket Sort]]
-- [[id:1776ad9d-bc42-4d0c-b49d-e24f32bff80d][Counting Sort]]

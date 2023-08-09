@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       36556ce5-9027-4fb4-b673-14a6257156e1
+:END:
+#+title: Graph-Like Data Model
+#+filetags: DB
+
+Graph databases target use cases where anything is potentially related to everything.
+- Graphs are good for *evolvability*.
+- Property Graph Model (Neo4j, Titan and InfiniteGraph)
+- Triple-Store Model (Datomic, AllegroGraph)
+- Query Lanaguages (Cypher, SPARQL, and Datalog)

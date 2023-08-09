@@ -4,12 +4,15 @@
 #+title: Algorithm
 #+filetags: Algorithm
 
+* [[id:92ec20d3-96c9-40c5-b80c-de0379733dc3][Data Structure]]
+
 * [[id:8426d96d-fa58-4775-9500-c44546b37266][Sorting]]
 
 * Advanced
 :PROPERTIES:
 :ID:       8cdb3ab1-2096-406c-b5c0-41aceca82465
 :END:
+- [[id:c2cf012a-4f1d-4d6a-993b-721e20cee9dc][Recursion]]
 - [[id:3c0f22b4-1dd8-433c-aec4-13eda95dffea][Backtracing]]
 - [[id:836f3c49-46ec-4e5d-9047-6e051c9ad763][Greedy Algorithm]]
 - [[id:0361445c-3228-4f6c-b0da-89fc49337c78][Dynamic Programming]]

@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       3876fd6e-5f00-449c-bd49-6cdde0e05ab0
+:END:
+#+title: dentry
+#+filetags: Linux
+
+记录文件的名字、索引节点([[id:d81b6ab9-c4fc-4ed3-85f7-dd239e60dcc9][inode]])指针以及与其他目录项的关联关系。
+- 目录项是由内核维护的一个 *内存数据结构* ，通常被叫做目录项缓存。
