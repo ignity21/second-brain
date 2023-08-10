@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       5a4eceee-3c7b-4eb8-937b-94e439bbf33e
+:END:
+#+title: VizTracer
+#+filetags: :Python:Performance:
+
+VizTracer is a low-overhead logging/debugging/profiling tool that can trace and visualize your python code execution.
+
+- [[https://github.com/gaogaotiantian/viztracer][Github]]
+- [[https://viztracer.readthedocs.io/][Doc]]
+- [[https://www.bilibili.com/video/BV1Ni4y1578q][Video]]
+#+begin_src bash
+  viztracer --log_func_args --log_func_retval xxx.py
+  viztracer --log_var data -- xxx.py
+#+end_src

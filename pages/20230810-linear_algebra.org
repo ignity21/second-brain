@@ -4,5 +4,20 @@
 #+title: Linear Algebra
 #+filetags: :LinearAlgebra:Math:
 
+
 - [[id:661e1889-ce72-4cbe-a0ca-7a88944a72e5][The Jacobian]]
 - [[id:87392b85-d13e-4923-ab0f-938e1c50a18f][The Hessian]]
+
+* Basis Transformation
+:PROPERTIES:
+:ID:       5c7bcdaf-de3b-47e5-9096-454320881693
+:END:
+
+- $B$ is the new basis written in old basis language.
+- $B^{-1}$ is the old basis written in new basis language.
+
+\[B\cdot\begin{bmatrix} x_{new} \\ y_{new} \end{bmatrix}=\begin{bmatrix} x_{old} \\ y_{old} \end{bmatrix}\]
+
+\[B^{-1}\cdot \begin{bmatrix} x_{old} \\ y_{old} \end{bmatrix}=\begin{bmatrix} x_{new} \\ y_{new} \end{bmatrix}\]
+
+** [[id:500581c8-ecbd-4fcb-b503-f2f405e6b262][Orthonormal Basis]]

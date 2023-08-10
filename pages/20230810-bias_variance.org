@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       c333e044-3b51-4604-b7f9-0295cd412189
+:END:
+#+title: Bias/Variance
+#+filetags: ML
+
+- Establishing a baseline level of performance.
+  - e.g. Human level performance, or just 0
+
+- $Bias = J_{train}-J_{base}$
+- $Variance = j_{cv}-J_{train}$
+
+* Problems
+- High Bias: Underfitting
+- High Variance: Overfitting
+- High Bias and High variance
+  - Some parts are overfitting, some are underfitting
+
+* Application
+- Choosing the degree of polynomial
+
+[[../assets/ML/BiasVariance_1.png]]
+
+- Choosing the regularization parameter $\lambda$
+
+[[../assets/ML/BiasVariance_2.png]]
+
+* Neural Networks and Bias/Variance
+[[../assets/ML/NNBiasVariance.png]]
+- Larger Neural Networks will usually do better than a smaller one
+  so long as regularization is chosen appropriately.

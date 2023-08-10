@@ -6,3 +6,4 @@
 #+filetags: :Performance:Python:
 
 - [[id:90997365-011f-4c2a-a795-418740c503c2][Sampling Profiler]]
+- [[id:5a4eceee-3c7b-4eb8-937b-94e439bbf33e][VizTracer]]

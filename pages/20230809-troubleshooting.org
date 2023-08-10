@@ -12,3 +12,5 @@
 
 * Bytecode ~dis~
 ~dis.dis(func)~
+
+* [[id:5a4eceee-3c7b-4eb8-937b-94e439bbf33e][VizTracer]]

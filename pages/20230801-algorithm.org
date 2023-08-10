@@ -8,7 +8,7 @@
 
 * [[id:8426d96d-fa58-4775-9500-c44546b37266][Sorting]]
 
-* Advanced
+* Advanced Algos
 :PROPERTIES:
 :ID:       8cdb3ab1-2096-406c-b5c0-41aceca82465
 :END:

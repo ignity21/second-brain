@@ -6,3 +6,11 @@
 
 - [[id:3eb94d17-33dd-4314-afb4-ee194cb82acd][Testing Tools]]
 - [[id:a416cc1c-53f2-4028-a95a-12cdd6314f91][Performance Tools]]
+- [[id:aae692ca-c5aa-4a73-8b55-b3fbf3e2e7ee][Monitoring Tools]]
+- [[id:53273a0c-81a0-4f31-b3ce-10046b797462][Network Tools]]
+
+* Linux Toolkit
+:PROPERTIES:
+:ID:       bf0a7313-d565-4aa2-9dd7-b760eab6d50e
+:END:
+- [[id:4c9b7236-d322-4877-a67a-6638718fa4e3][bcc-tools]]

@@ -5,3 +5,5 @@
 #+filetags: :Linux:Network:
 
 - [[id:c9141191-34a2-4935-9959-43532b947a03][TCP/IP Layers]]
+
+* [[id:d53d47ee-d164-4b4e-b7a5-b981e8d9c4ce][Network Troubleshooting]]

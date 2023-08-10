@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       aae692ca-c5aa-4a73-8b55-b3fbf3e2e7ee
+:END:
+#+title: Monitoring Tools
+#+filetags: :Tools:Linux:
+
+* ~watch~
+:PROPERTIES:
+:ID:       d5abaaa5-4638-4ae4-8bba-65645a26ef60
+:END:
+持续执行指定命令输出，并标注出变化
+#+begin_src bash
+  watch -d uptime
+  watch -d cat /proc/interrupts
+  watch -d grep "Rescheduling interrupts" /proc/interrupts
+  watch -d grep -A 15 'Normal' /proc/zoneinfo # grep -A 表示仅显示Normal行以及之后的15行输出
+#+end_src

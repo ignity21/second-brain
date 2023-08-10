@@ -7,3 +7,21 @@
 A digital certificate granted to a server by a *certificate authority*.
 - contains the server's public key
 - are a crucial defense against *man-in-the-middle attack*
+
+* CA Certificate Application
+:PROPERTIES:
+:ID:       e6f70860-1c15-4c6f-90d7-3776a0e180e9
+:END:
+** Create a certificate signing request (CSR)
+#+begin_src bash
+  openssl req -new -newkey rsa:2048 -nodes -keyout example.com.key -out example.com.csr
+#+end_src
+- =example.com.key=: contains the private key for your certificate.
+- =example.com.csr=: contains the information that you will submit to the CA.
+
+** Submit the CSR to the CA
+
+** CA generate your certificate
+- =example.com.crt=: contains your certificate.
+
+** Configure your applications to use the certificate
