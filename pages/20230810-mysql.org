@@ -1,0 +1,5 @@
+:PROPERTIES:
+:ID:       5dbd7d9a-087c-4ef7-abfb-f27fecd1357c
+:END:
+#+title: MySQL
+#+filetags: Database

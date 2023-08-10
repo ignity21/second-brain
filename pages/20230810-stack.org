@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       4b726816-d357-47d6-a932-2783ec6b1bf6
+:END:
+#+title: Stack
+#+filetags: :Algorithm:DataStructure:
+
+* 应用场景
+先进后出
+- 浏览器前进、后退
+- 函数调用
+- 表达式求值：操作符优先级高则入栈
+- 括号匹配
+
+* 实现
+底层可用动态扩容的数组或链表

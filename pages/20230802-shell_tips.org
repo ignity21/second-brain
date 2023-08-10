@@ -8,4 +8,4 @@
 - ~while true; do [command]; sleep 5; done~
 - ~[command] 2>&1 > grep keyword~
 - ~echo $?~: 输出上一条命令退出时的返回值
-- ~-~: The special meaning of ~-~ as a command-line argument to refer to the standard input/output
+- The special meaning of ~-~ as a command-line argument to refer to the standard input/output

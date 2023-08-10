@@ -36,11 +36,9 @@
 ** ID
 The *advantage* of using an *ID* is that because it has no meaning to humans, it *never needs to change*.
 
-* No SQL
-:PROPERTIES:
-:ID:       f1098231-2b4c-49dc-8a92-657b055e6475
-:END:
-- [[id:27cf033e-b508-4f3e-a8ef-59206ebe58a3][MongoDB]]
+* [[id:33927767-d660-4b2c-9297-3167aa7531e5][SQL]]
+
+* [[id:120fbaa8-64e6-4272-8ccc-6ca023191890][No SQL]]
 
 * Query Language
 :PROPERTIES:
@@ -49,3 +47,6 @@ The *advantage* of using an *ID* is that because it has no meaning to humans, it
 - Declarative
   - Hides implementation details of the database engine
 - Imperative
+
+* [[id:54f046db-4dda-4c76-a56a-299945f8da25][Replication]]
+* [[id:3f815adf-8a11-42cd-8eed-94ee7d2b46b9][Sharding]]

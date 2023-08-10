@@ -4,6 +4,8 @@
 #+title: Error Handling Design
 #+filetags: SystemDesign
 
+- links :: [[id:28a88260-5abb-48a9-bf27-5678acd7be3b][Reliability]]
+
 * 两种方式
 - 错误码返回值
 - 异常处理

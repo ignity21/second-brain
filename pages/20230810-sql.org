@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       33927767-d660-4b2c-9297-3167aa7531e5
+:END:
+#+title: SQL
+#+filetags: Database
+
+* ACID
+:PROPERTIES:
+:ID:       e7dab7ae-0a3c-4bb7-b892-3eb96f819a3d
+:END:
+- Atomicity :: The operations that constitute the transaction will either all succeed or all fail.
+- Consistency :: The Transaction cannot bring the database to an invalid state.
+- Isolation :: The execution of multiple transactions concurrently will have the same effect as if they had been executed sequentially.
+- Durability :: Any committed transaction is written to non-volatile storage.
+
+** Eventual Consistency
+Reads might return a view of the system that is stale, but the state of the database will eventually reflect writes within a time period.
+
+* Databases
+:PROPERTIES:
+:ID:       f299dd30-0ee8-4bc9-ae81-bf14423b7f93
+:END:
+- [[id:5dbd7d9a-087c-4ef7-abfb-f27fecd1357c][MySQL]]

@@ -14,6 +14,8 @@
 :END:
 - [[id:bf48570b-0bc2-41a6-aefc-94eb7f28b4ba][Availability]]
 - [[id:b5ea1dbf-519e-439f-aa26-af2dc166955b][Maintainability]]
+- [[id:28a88260-5abb-48a9-bf27-5678acd7be3b][Reliability]]
+- [[id:45f0ae67-48c3-4879-95ef-ebbf67ab3d12][Scalability]]
 
 * Distributed System
 :PROPERTIES:
@@ -27,3 +29,5 @@
 :ID:       5a52c5a5-0bc7-4b65-8b47-bcb61c19909b
 :END:
 - [[id:5561dbba-1542-4b9a-8cdc-334ca6501990][Pub/Sub Pattern]]
+- [[id:6e803f5c-a87d-4130-90fa-36d321d8f960][Polling]]
+- [[id:c009f066-8c97-484c-be46-0673caec8027][Streaming]]

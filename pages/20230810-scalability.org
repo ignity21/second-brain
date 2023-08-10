@@ -1,0 +1,39 @@
+:PROPERTIES:
+:ID:       45f0ae67-48c3-4879-95ef-ebbf67ab3d12
+:END:
+#+title: Scalability
+#+filetags: SystemDesign
+
+As the system grows (in data volume, traffic volume, or complexity), there should be reasonable ways of dealing with that growth.
+
+* Describing Load
+Load parameter Example:
+- Requests per second
+- The ratio of reads to writes in a database
+- The hit rate on a cache
+- The number of simultaneously active users in a chat room
+- Twitter: The distribution of followers per user (maybe weighted by how often those users tweet) is a key load parameter
+  for discussing scalability, since it determines the fan-out load.
+
+* Describing Performance
+** Look at it in two ways
+- When you increase a load parameter and keep the system resources unchanged, how is the performance of your system affected?
+- When you increase a load parameter, how much do you need to increase the resources if you want to keep performance unchanged?
+
+** Performance Examples
+- Throughput :: The number of records we can process per second, or the total time it takes to run a job on a dataset of a certain size. (Important for batch processing system)
+- Response Time :: The time between a client sending a request and receiving a response. (Important for online systems)
+- Latency :: Latency is the duration that a request is waiting to be handled—during which it is latent, awaiting service.
+  - The causes of outliers: context switch, the loss of a network packet, a garbage collection pause, a page fault forcing a read from disk, etc.
+  - Amazon describes response time requirements for internal services in terms of the 99.9th percentile,
+    even though it only affects 1 in 1,000 requests. This is because the customers with the slowest requests
+    are often those who have the most data on their accounts
+  - Reducing response times at very high percentiles is difficult because they are easily affected by random
+    events outside of your control, and the benefits are diminishing.
+
+* Coping with Load
+Recommended Practices
+- keep your database on a single node (scale up) until scaling cost or high-availability
+  requirements forced you to make it distributed.
+- An architecture that scales well for a particular application is built around assumptions
+  of which operations will be common and which will be rare—the load parameters.

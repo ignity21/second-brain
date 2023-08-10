@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       eeb31a4c-cd8a-4a6f-bb56-28b68c8add1c
+:END:
+#+title: SSL Certificate
+#+filetags: Network
+
+A digital certificate granted to a server by a *certificate authority*.
+- contains the server's public key
+- are a crucial defense against *man-in-the-middle attack*

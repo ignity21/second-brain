@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       43ec7535-1986-4729-b30f-8613b1f43550
+:END:
+#+title: ~sysbench~
+#+filetags: :Linux:Tools:
+
+~sysbench~ 是一个多线程的基准测试工具，一般用来评估不同系统参数下的数据库负载情况。可用来模拟上下文切换过多的问题。
+
+安装： ~sudo apt install sysbench~
+
+#+begin_src bash
+  sysbench --threads=10 --max-time=300 threads run
+#+end_src

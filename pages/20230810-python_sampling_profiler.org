@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       90997365-011f-4c2a-a795-418740c503c2
+:ROAM_ALIASES: "Python Sampling Profiler"
+:END:
+#+title: Sampling Profiler
+#+filetags: :Performance:Python:
+
+* ~PySpy~
+- ~pip install py-spy~
+- ~sudo py-spy top --pid 2046~: top-like view.
+- ~py-spy record -o profile.svg python test.py~
+
+* ~scalene~
+
+* ~vmperf~
+vmperf is a lightweight sampling profiler supports a web-based user interface.
+1. ~sudo apt install libunwind-dev~
+2. ~pip install vmprof~
+3. ~python -m vmprof <your program> <your program args>~

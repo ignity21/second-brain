@@ -25,11 +25,7 @@ Routes data packets between different networks.
 Provides reliable end-to-end communication.
 
 * Application layer
-Provides services to applications that need to communicate over the network. HTTP, FTP, SMTP, etc.
-
-* TODO ...
-
-
-- 内核通过中断跟网卡进行交互
-  - 网卡硬中断只处理最核心的网卡数据读取或发送
-  - 协议栈中的大部分逻辑都放到软中断中处理
+:PROPERTIES:
+:ID:       a06c9f51-94f4-4718-b472-c4e9c9b50121
+:END:
+Provides services to applications that need to communicate over the network. HTTP, FTP, SMTP, [[id:176c3083-6489-4b3e-a17e-41eaebc62bee][TLS]] etc.
