@@ -4,9 +4,37 @@
 #+title: C++
 #+filetags: C++
 
+* Compilation Process
+:PROPERTIES:
+:ID:       3a4fc48c-70dd-42e2-85fe-b0e2bd712a06
+:END:
+#+caption: C++ Compilation Process
+[[../assets/CPP/c-compilation-process.svg]]
+
+* C++ Data Structure
+:PROPERTIES:
+:ID:       6a38542d-4e16-425f-935f-6b2e4e922f55
+:END:
+
+** Array
+#+begin_src cpp
+  int array[26] = {0};
+#+end_src
+
+** [[id:a2807e14-ea95-4d42-aa97-eebdc0798c95][~std::vector~]]
+** [[id:b85e6082-de0c-4f33-826d-cb9e6e7e3ae3][~enum~]]
+
+* C++ I/O Stream
+:PROPERTIES:
+:ID:       eece5040-a066-4932-8ce8-16c8cbe24ab6
+:END:
+- [[id:2eb32af4-4617-48c6-a5cb-d945ff3e494d][~istringstream~]]
+
 * Type Deduction
 :PROPERTIES:
 :ID:       6394bf0c-5bd8-4490-bc5c-91f1aebedbce
 :END:
 - [[id:c264e461-9c95-4d7c-917e-762cb8ec52e7][Template Type Deduction]]
 - [[id:c19b4842-be7b-4a29-a85b-462cbad2c6c1][~auto~]]
+
+* [[id:5a856fd8-e1ec-4964-8862-17e7d48f906c][Concurrency]]

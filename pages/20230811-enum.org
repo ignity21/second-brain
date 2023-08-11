@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       b85e6082-de0c-4f33-826d-cb9e6e7e3ae3
+:END:
+#+title: ~enum~
+#+filetags: C++
+* Scoped Enums
+~enum + class/structure + name {items}~
+#+begin_src cpp
+  enum class Color {red, blue, yellow};
+  Color my_color = Color::blue;
+#+end_src
+
+* Unscoped Enums
+~enum + name {items}~
+#+begin_src cpp
+  enum Color {red=0, blue, yellow};
+  Color my_color = blue;
+#+end_src

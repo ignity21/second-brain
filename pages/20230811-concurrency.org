@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       5a856fd8-e1ec-4964-8862-17e7d48f906c
+:END:
+#+title: Concurrency
+#+filetags: C++
+
+* Purpose
+Two main reasons:
+
+- Separation of concerns
+  - Based on the conceptual design rather than an attempt to increase throughput
+  - The number of threads is *independent* of the number of CPU cores available.
+- Performance
+  - Task parallelism: Divide a single task into parts and run each in parallel.
+  - Data parallelism: Each thread performs the same operation on different parts of the data.
+
+* [[id:890f2b58-21c3-48b7-a975-c532eedc01ec][Condition Variable]]

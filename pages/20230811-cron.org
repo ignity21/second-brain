@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       61298d1f-75b7-445d-aab3-cd796dc1bee7
+:END:
+#+title: Cron
+#+filetags: Linux
+
+[[../assets/Linux/CronCheatsheet.png]]

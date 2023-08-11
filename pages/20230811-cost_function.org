@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       e1a528d4-0948-4f04-b114-48dd128863a1
+:END:
+#+title: Cost Function
+#+filetags: ML
+
+\[J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^m Loss(f_{\bm{w},b}(\bm{x^{(i)}}), y^{(i)})\]
+
+- [[id:f9f93acb-54e3-4702-9ba4-8233e4606e9d][Loss Function]]

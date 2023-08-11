@@ -4,6 +4,15 @@
 #+title: Machine Learning
 #+filetags: ML
 
-- [[id:31b71a06-0592-444b-b410-916ee717b488][Neural Network]]
+* Supervised Learning
+** Classification
+:PROPERTIES:
+:ID:       a902b34d-1553-4c18-99b6-04d7e47c6a4f
+:END:
+- [[id:9db494ed-d782-4bfe-b9d2-52c768251490][Binary Classification]]
+- [[id:91264f10-9a71-4d15-9b63-09c2a6566d75][Multi-class Classification]]
+- [[id:a3f7682e-3cde-4879-b314-f6220f8cc3c7][Multi-label Classification]]
 
+* [[id:e1a528d4-0948-4f04-b114-48dd128863a1][Cost Function]]
+* [[id:31b71a06-0592-444b-b410-916ee717b488][Neural Network]]
 * [[id:b85eccee-c059-4184-b30b-b61075cf838e][ML Troubleshooting]]

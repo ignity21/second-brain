@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       5dc17fb2-544c-433d-bd94-394a0c37457f
+:END:
+#+title: CPU Hardware
+#+filetags: :OS:Hardware:
+
+* SIMD
+Single instruction, multiple data. Efficient with high IPC. (CPU vectorization instruction)
+
+* Hyperthreading
+presents a virtual second CPU to the host OS, and clever hardware logic tries to interleave two threads of instructions into the execution units on a single CPU. When successful, gains of up to 30% over a single thread can be achieved.
+
+* Pipelining
+With pipelining, the CPU is able to run the current operation while fetching and preparing the next one.

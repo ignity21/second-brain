@@ -433,7 +433,7 @@
  {:block/name "inode",
   :block/created-at 1658059301706,
   :block/updated-at 1658059301706}
- {:block/name "interupt",
+ {:block/name "interrupt",
   :block/created-at 1658059301762,
   :block/updated-at 1658059301762}
  {:block/name "interview expressions",

@@ -1,0 +1,27 @@
+:PROPERTIES:
+:ID:       2eb32af4-4617-48c6-a5cb-d945ff3e494d
+:END:
+#+title: ~istringstream~
+#+filetags: C++
+Streaming data from a string
+#+begin_src cpp
+  string a("1 2 3");
+  istringstream my_stream(a);
+
+  int n;
+  // The extraction operator will read until whitespace is reached
+  my_stream >> n;
+  // Testing to see if the stream was successful
+  if (my_stream) {...};
+
+  // mixed type
+  string b("1,2,3");
+  istringstream mix_stream(b);
+  char c;
+  int n;
+
+  // ! notice that the 3 was not printed
+  while (mix_stream >> n >> c) {
+    cout << n << " " << c << ", ";
+  }
+#+end_src
