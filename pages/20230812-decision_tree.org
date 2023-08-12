@@ -1,0 +1,56 @@
+:PROPERTIES:
+:ID:       e0a49219-943c-4fba-b790-0b3e365b5e3d
+:END:
+#+title: Decision Tree
+#+filetags: ML
+* Estimate Impurity (Entropy)
+- Entropy Function is a measure of the impurity of a set of data.
+  - $p_0=1-p_1$
+  - $H(p_1)=-p_1 \log_2(p_1)-p_0\log_2(p_0)$
+
+[[file:../assets/ML/EntropyFunction.png]]
+
+** Alternative Function
+- [[id:120aa70a-cf31-4e7f-83ae-bf902cc09618][Gini Criteria]]
+
+* How to Choose a Split?
+*Key idea*: Choose the feature that reduces impurity(entropy) the most.
+
+- *Information Gain*
+
+[[file:../assets/ML/InformationGain.png]]
+
+** Example
+[[file:../assets/ML/ChoosingASplit.png]]
+- Combining left and right entropy into a single measure by taking the weighted average
+- *Parent node entropy* is $H(0.5)=1$ The Reduction in entropy is:
+  - $H(0.5)-\text{weighted entropy of sub-trees}$
+- Splitting on ear shape results in the biggest *reduction in entropy*. (0.28)
+
+* Learning Steps
+1. Start with all examples at the root node.
+2. Calculate information gain for all possible features, and pick the one with the *highest information gain*.
+3. Split dataset according to selected feature, and create left and right branches of the tree.
+4. Keep repeating splitting process until stopping criteria is met.
+  - When a node is 100% one class
+  - When splitting a node will result in the tree exceeding a maximum depth
+  - When improvement in purity score are below a threshold. See [[Estimate Impurity (Entropy)][Measure impurity]].
+  - When number of examples in a node is below a threshold
+* Non-binary Features
+** Categorical Feature
+- Use *one hot encoding*
+  - If a categorical feature can take on /k/ values, create /k/ binary features (0 or 1 valued).
+
+** Continuous Feature
+[[file:../assets/ML/SplitContinuousFeature.png]]
+1. Plotting
+2. Trying different thresholds
+2. Calculating left and right entropy
+3. Calculating the *information gain* (reduction in entropy)
+
+* Generalizing to *Regression Problem*
+- Taking an average at the leaf node.
+- Choosing a split
+  - Reduce the variance instead of entropy(impurity)
+
+[[file:../assets/ML/ChooseASplitRegressionTree.png]]

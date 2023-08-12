@@ -4,9 +4,9 @@
 #+title: Linear Algebra
 #+filetags: :LinearAlgebra:Math:
 
+* [[id:f8567531-6fee-42d1-a78b-c085a3ff4978][Vector]]
 
-- [[id:661e1889-ce72-4cbe-a0ca-7a88944a72e5][The Jacobian]]
-- [[id:87392b85-d13e-4923-ab0f-938e1c50a18f][The Hessian]]
+* [[id:e6dd9e1a-e20b-4bdc-98e7-49565d33db98][Cross Product]]
 
 * Basis Transformation
 :PROPERTIES:
@@ -20,4 +20,9 @@
 
 \[B^{-1}\cdot \begin{bmatrix} x_{old} \\ y_{old} \end{bmatrix}=\begin{bmatrix} x_{new} \\ y_{new} \end{bmatrix}\]
 
+** [[id:a20a85ad-d459-477f-bbcc-1df064e9720c][Eigenvectors]]
 ** [[id:500581c8-ecbd-4fcb-b503-f2f405e6b262][Orthonormal Basis]]
+
+* TODO
+- [[id:661e1889-ce72-4cbe-a0ca-7a88944a72e5][The Jacobian]]
+- [[id:87392b85-d13e-4923-ab0f-938e1c50a18f][The Hessian]]

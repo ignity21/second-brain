@@ -1,0 +1,36 @@
+:PROPERTIES:
+:ID:       8b7a21ee-1fc3-4566-9cd9-1865de8b6e46
+:END:
+#+title: Unsupervised Learning
+#+filetags: ML
+Unsupervised learning allows us to approach problems with little or no idea what our results should look like.
+- With unsupervised learning there is *no feedback* based on the prediction results.
+
+* Examples
+- Clustering :: Take a collection of 1,000,000 different genes, and find a way to
+  automatically group these genes into groups that are somehow similar or related
+  by different variables, such as lifespan, location, roles, and so on.
+
+- Non-Clustering :: The "Cocktail Party Algorithm", allows you to find structure in a
+  chaotic environment. (i.e. identifying individual voices and music from a mesh of
+  sounds at a cocktail party).
+
+* Important Algorithms
+** Clustering
+- [[id:0c0f78bc-53e0-44da-b701-3a008d764419][K-Means]]
+- [[id:7b9b389c-bf69-49a3-896f-980192a4b2cb][DBSCAN]]
+- [[id:62502553-cdae-40d6-9a60-6b3df79e82d1][HCA(Hierarchical Cluster Analysis)]]
+
+** [[id:22c1b331-5a7f-43ab-918f-b5385c85275c][Anomaly Detection and Novelty Detection]]
+- One-class SVM
+- Isolation Forest
+
+** Visualization and Dimensionality Reduction
+- [[id:cc4b1014-d178-4065-a2d6-1738068f5d25][PCA(Principal Component Analysis)]]
+- Kernel PCA
+- Locally Linear Embedding (LLE)
+- t-Distributed Stochastic Neighbor Embedding (t-SNE)
+
+** Association Rule Learning
+- Apriori
+- Eclat

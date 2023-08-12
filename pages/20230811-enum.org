@@ -3,6 +3,25 @@
 :END:
 #+title: ~enum~
 #+filetags: C++
+
+* Features
+- Scoped enums
+- They convert to other types only with a cast
+- Support foward declaration
+
+#+begin_src cpp
+  // forward declaration
+  enum class Status;
+
+  // specify underlying type
+  enum class Status: std::uint32_t;
+
+  enum class Status: std::uint32_t {
+    good = 0,
+    failed = 1
+  };
+#+end_src
+
 * Scoped Enums
 ~enum + class/structure + name {items}~
 #+begin_src cpp
@@ -15,4 +34,38 @@
 #+begin_src cpp
   enum Color {red=0, blue, yellow};
   Color my_color = blue;
+#+end_src
+
+* Work with ~std::tuple~
+- Downside
+  #+begin_src cpp
+    using UserInfo = std::tuple<std::string, // name
+                                std::string, // email
+                                std::size_t>; // reputation
+    UserInfo uInfo;
+    auto val = std::get<1>(uInfo);
+
+    // to replace hard coded 1
+    enum class UserInfoFields {uiName, uiEmail, uiReputation}; // default starts with 0
+    val = std::get<static_cast<std::size_t>(UserInfoFields::uiEmail)>(uInfo);
+
+    // old enum is simple.
+    enum UserInfoFields2 {uiName, uiEmail, uiReputation};
+    auto var2 = std::get<uiName>(uInfo); // no namespace, no implicit conversion
+  #+end_src
+- Helper Function
+#+begin_src cpp
+  template<typename E>
+  constexpr typename std::underlying_type<E>::type toUType(E enumerator) noexcept {
+    return static_cast<typename std::underlying_type<E>::type>(enumerator);
+  }
+
+  // C++14
+  template<typename E>
+  constexpr auto toUTypeC14(E enumerator) noexcept {
+    return static_cast<std::underlying_type<E>>(enumerator);
+  }
+
+  // client code
+  auto val = std::get<toUType(UserInfoFields::uiEmail)>(uInfo);
 #+end_src

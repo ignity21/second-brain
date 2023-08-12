@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       a20a85ad-d459-477f-bbcc-1df064e9720c
+:END:
+#+title: Eigenvectors
+#+filetags: LinearAlgebra
+
+* Definition
+An *eigenvector* of a *square matrix* $M$ is a non-zero vector that remains on the same line after transformation by the linear transformation
+\[M\cdot\bm{v}=\lambda \times \bm{v}\]
+Where $\lambda$ is a scalar value called the eigenvalue associated to the vector $\bm{v}$.
+
+* Finding Eigenvalues
+\[M\cdot\bm{v}=\lambda \times (I\cdot \bm{v})\]
+
+\[M\cdot\bm{v}-(\lambda\times I)\cdot \bm{v}=0\]
+
+\[(M-\lambda\times I)\cdot \bm{v}=0\]
+
+- $det(M-\lambda\times I)$ should be 0 to transform a non-zero $\bm{v}$ into $\vec{0}$
+** Application
+- To calculate $M^{10}$
+
+\[M=\begin{bmatrix}3 & 1 \\ 0 & 2\end{bmatrix}\]
+
+\[M-\lambda\times I=\begin{bmatrix} 3-\lambda & 1 \\ 0 & 2-\lambda\end{bmatrix}\]
+*** Finding Eigenvalues
+\[det(M-\lambda\times I)=(3-\lambda)(2-\lambda)-1\times 0=0\]
+
+- The eigenvalues are (3, 2)
+
+*** Finding Eigenvectors
+- $@\lambda_1=3$

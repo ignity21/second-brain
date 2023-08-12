@@ -15,3 +15,4 @@ Two main reasons:
   - Data parallelism: Each thread performs the same operation on different parts of the data.
 
 * [[id:890f2b58-21c3-48b7-a975-c532eedc01ec][Condition Variable]]
+* [[id:7475eede-346a-403e-9aac-91cab1e71a1f][Deadlock Issue]]

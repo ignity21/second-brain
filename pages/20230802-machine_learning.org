@@ -13,6 +13,8 @@
 - [[id:91264f10-9a71-4d15-9b63-09c2a6566d75][Multi-class Classification]]
 - [[id:a3f7682e-3cde-4879-b314-f6220f8cc3c7][Multi-label Classification]]
 
+* [[id:8b7a21ee-1fc3-4566-9cd9-1865de8b6e46][Unsupervised Learning]]
 * [[id:e1a528d4-0948-4f04-b114-48dd128863a1][Cost Function]]
 * [[id:31b71a06-0592-444b-b410-916ee717b488][Neural Network]]
+* [[id:e0a49219-943c-4fba-b790-0b3e365b5e3d][Decision Tree]]
 * [[id:b85eccee-c059-4184-b30b-b61075cf838e][ML Troubleshooting]]
