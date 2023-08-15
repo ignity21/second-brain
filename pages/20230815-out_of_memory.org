@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       0b2a6ecf-9f28-473c-8d25-912115ac2e60
+:END:
+#+title: OOM(Out of Memory)
+#+filetags: Linux
+
+内核监控进程的内存使用情况，并且使用 =oom_score= 为每个进程的内存使用情况进行评分:
+- 一个进程消耗的内存越大， =oom_score= 就越大
+- 一个进程运行占用的 CPU 越多， =oom_score= 就越小
+
+管理员可以通过 =/proc= 文件系统，手动设置进程的 =oom_adj= ，从而调整进程的 =oom_score= 。
+=oom_adj= 的范围是 [-17, 15]，数值越大，表示进程越容易被 OOM 杀死；数值越小，表示进程越不容易被 OOM 杀死，其中 -17 表示禁止 OOM。
+#+begin_src bash
+  echo -16 > /proc/$(pidof sshd)/oom_adj
+#+end_src

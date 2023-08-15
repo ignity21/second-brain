@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       b3b36188-2dde-4850-b0b5-37c2a8a3db62
+:END:
+#+title: Floyd's Cycle Finding Algorithm
+#+filetags: :Algorithm:
+
+This algorithm is used to find a loop in a linked list. It uses two pointers one moving
+twice as fast as the other one. The faster one is called the faster pointer and the
+other one is called the slow pointer.
+
+- The Fast pointer may reach the end (NULL) this shows that there is no loop in the linked list.
+- The Fast pointer again catches the slow pointer at some time therefore a loop exists in the linked list.
+- Slow pointer name: ~tortoise~
+- Fast pointer name: ~hare~

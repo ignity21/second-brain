@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       be6c0364-12d4-4602-aaee-c1db280685a4
+:END:
+#+title: Sharing Files Between Processes
+#+filetags: Linux
+
+Sharing of open files among different processes.
+
+[[../assets/Linux/FileSharing_1.png]]
+- Open file description 23 可能通过系统调用 ~dup()~, ~fcntl()~ 形成的
+- Open file description 73 可能通过 ~fork()~ 造成的，或者通过 Unix Domain socket 将文件描述符从一个进程传递给另一个进程
+- i-node 1976 通过两个进程分别指向两个 Open file description 再指向到同一个 i-node
+  - 每个进程各自对这个文件发起了 ~open()~ 调用

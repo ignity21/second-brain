@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       6f1e5033-7e68-4eb1-a7d7-d5fd9db8b863
+:END:
+#+title: ~fork()~
+#+filetags: Linux
+
+~fork~ creates child process.
+- ~fork~ is *called once* by the parent but *returns twice* in the parent and in the child
+- returns the non-negative process ID to the parent
+- returns pid 0 to the child
+  - ~waitpid~ in parent process to avoid zombie process

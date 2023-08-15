@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       1e83db6b-6955-4f9f-a107-da4af74f9071
+:END:
+#+title: C++ Keywords
+#+filetags: C++
+
+* ~explicit~
+:PROPERTIES:
+:ID:       9d619af5-360c-424e-9e84-7cb81268bbad
+:END:
+Specifies that a constructor or conversion function (since C++11) or deduction guide (since C++17) is explicit, that is, it cannot be used for *implicit conversions* and *copy-initialization*.

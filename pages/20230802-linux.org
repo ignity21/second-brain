@@ -8,12 +8,43 @@
 :PROPERTIES:
 :ID:       bd220da0-f129-45c5-be02-67d870159425
 :END:
+
+#+caption: File System
+[[../assets/Linux/FileSystem_1.png]]
+
+** Important Data Structures
+- *The per-process file descriptor table*
+  - file descriptor flags: there is just one such flag, the ~close-on-exec~ flag
+  - a reference to the open file description
+- *The system-wide table of open file descriptions*
+  - the current file offset
+  - status flags specified when opening the file
+  - the file access mode (read-only, read-write, etc.)
+  - setting relating to signal-driven IO
+  - a reference to the i-node object for this file
+- *The file system i-node table*
+  - file type (regular file, socket, or FIFO) and permissions
+  - a pointer to a list of locks held on this file
+  - properties of the file, such as size, timestamps etc.
+
+** 磁盘块
+- 逻辑块 :: 磁盘读写的最小单位是扇区，扇区为 512B 大小，最小的数据管理单位为逻辑块，常见大小为 4KB，由8个扇区组成。
+- 超级块 :: 存储整个文件系统的状态。
+
+*** 格式化
+磁盘执行格式化时，会被分成三个存储区域
+- 超级块：存储整个文件系统的状态
+- 索引节点区
+- 数据块区
+
+** Details
 - [[id:808b8114-6d48-4268-815f-270a9e3640f8][Virtual File System]]
 - [[id:937b44b4-497a-466a-924d-0a01a2228266][File Descriptor]]
 - [[id:537013df-12ee-47e1-9e1f-babe976d26fa][Hard Link]]
 - [[id:d81b6ab9-c4fc-4ed3-85f7-dd239e60dcc9][inode]]
 - [[id:3876fd6e-5f00-449c-bd49-6cdde0e05ab0][dentry]]
 - [[id:7910f1b4-5228-4da4-97df-282313e576ac][Dirty Pages]]
+- [[id:be6c0364-12d4-4602-aaee-c1db280685a4][Sharing Files Between Processes]]
 
 * CPU
 :PROPERTIES:
@@ -28,6 +59,8 @@
 :END:
 - [[id:5e8af621-8028-458e-8f7b-04bf8d561512][Adjusting Memory Configuration]]
 - [[id:4dc805d4-c007-4526-bd64-c9ca9af200a4][Virtual Memory]]
+- [[id:065d6f74-0113-4308-b158-b2333a6f7339][Garbage Collection]]
+- [[id:0b2a6ecf-9f28-473c-8d25-912115ac2e60][OOM(Out of Memory)]]
 
 * [[id:603a0f71-fd7e-4c20-8607-9a2998fc3d4c][I/O]]
 
@@ -44,6 +77,8 @@
 :END:
 - [[id:18ebf2c0-c945-4bbc-ad58-9477849c7bbb][Interrupt]]
 - [[id:706d7e91-8a8f-466f-b871-602e2efcd187][Context Switching]]
+- [[id:be6c0364-12d4-4602-aaee-c1db280685a4][Sharing Files Between Processes]]
+- [[id:6f1e5033-7e68-4eb1-a7d7-d5fd9db8b863][~fork()~]]
 
 * [[id:3d49b6d9-9bc1-422e-86ac-de4b2c24eaaf][Standard C Library]]
 * [[id:a7b6885c-42f7-476c-9642-8f0d06149e95][System Error]]

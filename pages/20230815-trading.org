@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       7a671aa8-b668-4ca4-95df-31659052d9c3
+:END:
+#+title: Trading
+#+filetags: Trading
+
+- [[id:09ea9033-4067-4a2f-b442-b7da136fa5be][Financial Terminology]]
+- [[id:6e4ae290-6a89-4208-8559-a97fd08e356e][Quantitative Trading]]

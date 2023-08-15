@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       663df4ec-af67-416f-b04c-c96780ca4056
+:END:
+#+title: IO Tools
+#+filetags: :Tools:Linux:
+
+- [[id:afdc900d-fe5a-420e-8c41-87b7be99af15][~fio~]]

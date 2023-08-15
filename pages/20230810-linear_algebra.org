@@ -4,6 +4,23 @@
 #+title: Linear Algebra
 #+filetags: :LinearAlgebra:Math:
 
+* Concepts
+:PROPERTIES:
+:ID:       fb5f5003-ae0b-4241-a17d-2dd827c6a320
+:ROAM_ALIASES: "Linear Algebra Concepts"
+:END:
+  - Linear Combinations :: $a\bm{v}+b\bm{w}$ is the linear combination of $\bm{v}$ and $\bm{w}$, $a$ and $b$ are scalars.
+  - Span :: The "span" of $\bm{v}$ and $\bm{w}$ is the set of *all* their linear combinations.
+  - Linearly Dependent :: one of the vectors can be expressed as a linear combination of the others since it's already in the span of the others. i.e. $\exists{a}\exists{b} | \bm{u} = a\bm{v} + b\bm{w}$
+  - Linearly Independent :: $\forall{a}\forall{b} | \bm{u}\ne a\bm{v}+b\bm{w}$
+    - Definitions treats all vectors equally: $a\bm{v}+b\bm{w}+c\bm{u}=\bm{0}$ if the only solution is $a=b=c=0$
+  - Basis :: The *basis* of a vector space is a set of *linearly independent* vectors that *span* the full space.
+  - Rank :: The number of dimensions in the output of a linear transformation. i.e. in the column space.
+  - Column Space :: "Column Space" of $A$ is the set of all possible outputs $A\bm{v}$
+  - Null Space / Kernel :: The set of vectors that lands on *the origin* in a linear transformation is called the "null space" or the "kernel".
+  - Eigenvectors :: Eigenvector is a vector that changes *at most* by a *scalar* factor when that linear transformation is applied to it.
+  - Eigenvalues :: Eigenvalue is the factor by which the eigenvector is scaled, denoted by $\lambda$
+
 * [[id:f8567531-6fee-42d1-a78b-c085a3ff4978][Vector]]
 
 * [[id:e6dd9e1a-e20b-4bdc-98e7-49565d33db98][Cross Product]]

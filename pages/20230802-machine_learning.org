@@ -4,16 +4,67 @@
 #+title: Machine Learning
 #+filetags: ML
 
-* Supervised Learning
-** Classification
-:PROPERTIES:
-:ID:       a902b34d-1553-4c18-99b6-04d7e47c6a4f
-:END:
-- [[id:9db494ed-d782-4bfe-b9d2-52c768251490][Binary Classification]]
-- [[id:91264f10-9a71-4d15-9b63-09c2a6566d75][Multi-class Classification]]
-- [[id:a3f7682e-3cde-4879-b314-f6220f8cc3c7][Multi-label Classification]]
+* Definition
+A computer program is said to learn from experience /E/ with respect to some class
+of tasks /T/ and performance measure /P/, if its performance at tasks in /T/, as
+measured by /P/, improves with experience /E/.
 
-* [[id:8b7a21ee-1fc3-4566-9cd9-1865de8b6e46][Unsupervised Learning]]
+- E = the experience of playing many games of checkers
+- T = the task of playing checkers.
+- P = the probability that the program will win the next game.
+
+** Terminology
+- Task :: Classifying emails as spam or not spam.
+- Experience :: Watching you label emails as span or not spam.
+- Performance Measure :: The number of emails correctly classified as spam/not spam.
+
+*** Spam Filter Example
+Your spam filter is a Machine Learning program that, given examples of spam emails
+(e.g., flagged by users) and examples of regular emails, can learn to flag spam.
+
+- The examples that the system uses to learn are called the *training set*.
+- Each training example is called a *training instance* (or *sample*).
+- The task *T* is to flag spam for new emails.
+- The experience *E* is the training data.
+- The performance measure *P* needs to be defined
+  - For example, the ratio of correctly classified emails.
+  - This performance measure is called accuracy, and it is often used in classification tasks.
+
+* ML Terminology
+:PROPERTIES:
+:ID:       e5d68507-2640-44b2-b5a3-01b63b663bfb
+:END:
+- Training Set: $X$
+- $i^{th}$ (Input) Feature: $\bm{x_i}$
+- $i^{th}$ (Output) Target: $\bm{y_i}$
+- $m$: number of training examples
+  - $(\bm{x^{(i)}}, \bm{y^{(i)}})$: $i^{th}$ training example
+- $X_2^{(5)}$: 2nd feature of 5th training example
+
+* Questions Before Building a ML Solution
+:PROPERTIES:
+:ID:       977f1eda-b853-41e7-bc16-50b13ded041a
+:END:
+- What question am I trying to answer?
+  - Do I think the data collected can answer that question?
+- What is the best way to phrase my question as a machine learning problem?
+- Have I collected *enough data* to represent the problem I want to solve?
+- What *features* of the data did I extract, and will these enable the right predictions? [[id:e7223a85-4a76-47c2-94a3-b2d0dac4c2a4][Feature Engineering]]
+- How will I *measure success* in my application?
+  - [[id:e92991a2-8dd2-4816-82e3-66d09d410a78][Measuring Success]]
+- How will the machine learning solution interact with other parts of my research or business product?
+
+* ML Algorithms
+:PROPERTIES:
+:ID:       37c8c5f6-96a0-430b-bd25-c8c9c20c2942
+:END:
+
+- [[id:3978b220-72e3-49a4-aecb-c9ca5ecdc547][Supervised Learning]]
+- [[id:8b7a21ee-1fc3-4566-9cd9-1865de8b6e46][Unsupervised Learning]]
+- [[id:01741dd5-e612-4c76-832c-3760642b34ea][Reinforcement Learning]]
+- [[id:18561ec5-17e3-4b2f-bb7d-66cd033a203b][Recommender System]]
+
+* [[id:e7223a85-4a76-47c2-94a3-b2d0dac4c2a4][Feature Engineering]]
 * [[id:e1a528d4-0948-4f04-b114-48dd128863a1][Cost Function]]
 * [[id:31b71a06-0592-444b-b410-916ee717b488][Neural Network]]
 * [[id:e0a49219-943c-4fba-b790-0b3e365b5e3d][Decision Tree]]

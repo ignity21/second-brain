@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       f18a6318-7818-4860-bc8b-bd7b5b9701f5
+:END:
+#+title: C++ Data Structure
+#+filetags: C++
+* C++ Array
+:PROPERTIES:
+:ID:       9f92fda6-cd29-4239-bb34-11329a1b9d9d
+:END:
+#+begin_src cpp
+  int array[26] = {0};
+#+end_src
+
+* [[id:a2807e14-ea95-4d42-aa97-eebdc0798c95][~std::vector~]]
+* [[id:b85e6082-de0c-4f33-826d-cb9e6e7e3ae3][~enum~]]

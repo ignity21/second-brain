@@ -11,18 +11,10 @@
 #+caption: C++ Compilation Process
 [[../assets/CPP/c-compilation-process.svg]]
 
-* C++ Data Structure
-:PROPERTIES:
-:ID:       6a38542d-4e16-425f-935f-6b2e4e922f55
-:END:
+* [[id:1e83db6b-6955-4f9f-a107-da4af74f9071][C++ Keywords]]
 
-** Array
-#+begin_src cpp
-  int array[26] = {0};
-#+end_src
 
-** [[id:a2807e14-ea95-4d42-aa97-eebdc0798c95][~std::vector~]]
-** [[id:b85e6082-de0c-4f33-826d-cb9e6e7e3ae3][~enum~]]
+* [[id:f18a6318-7818-4860-bc8b-bd7b5b9701f5][C++ Data Structure]]
 
 * C++ I/O Stream
 :PROPERTIES:
