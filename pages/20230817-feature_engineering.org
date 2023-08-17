@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       f8088283-0154-4050-9cef-911f5ae69ef4
+:END:
+#+title: Feature Engineering
+#+filetags: ML
+
+* Concept
+Using intuition to design new features, by transforming or combining original features.
+ - Example: Area may be more predictive. $area = frontage \times depth$

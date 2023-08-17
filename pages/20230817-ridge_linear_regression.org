@@ -1,0 +1,39 @@
+:PROPERTIES:
+:ID:       f6fb8e17-c115-4aba-91ec-894cca2f3106
+:END:
+#+title: Ridge Linear Regression
+#+filetags: ML
+
+* Cost Function
+
+\[J(\bm{w}, b)=MSE(\bm{w}, b) + \frac{\lambda}{2}\sum_{i=1}^{n}w_i^2\]
+
+- regularization term: $\frac{1}{2}(\|\bm{w}\|_{2})^2$
+  - $\|\bm{w}\|_{2}$ represents the L2 norm of the weight vector.
+- It is important to *scale the data* before performing Ridge Regression
+- Given enough data, ridge and linear regression will have the same performance
+
+* Close-form Equation
+\[\hat\theta=(\bm{X}^T \bm{X}+\lambda \bm{I})^{-1} \bm{X}^T \bm{y}\]
+- where $\bm{I}$ is the \((n+1)\times(n+1)\) identity matrix
+
+#+begin_src python
+  from sklearn.linear_model import Ridge
+  ridge_reg = Ridge(alpha=1, solver="cholesky")
+  ridge_reg.fit(X, y)
+  ridge_reg.predict([[1.5]])
+#+end_src
+- /alpha/ is the \(\lambda\) in the formula
+- A higher alpha means a more restricted model.
+- /solver/: uses a matrix factorization technique by André-Louis Cholesky
+
+* Gradient Descent
+#+begin_src python
+  sgd_reg = SGDRegressor(penalty="l2")
+  sgd_reg.fit(X, y.ravel())
+  sgd_reg.predict([[1.5]])
+#+end_src
+- /penalty/ sets the type of regularization term to use
+
+* Comparison with Linear Regression
+[[../assets/ML/Ridge_1.png]]

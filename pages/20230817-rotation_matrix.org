@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       aab9cba4-722a-457c-82b1-931e9a4fc0dd
+:END:
+#+title: Rotation Matrix
+#+filetags: :LinearAlgebra:Math:
+
+* 2D
+
+\[\begin{bmatrix}
+\cos\theta & \sin\theta \\
+-\sin\theta & \cos\theta
+\end{bmatrix}\]
+
+* 3D
+
+\[\begin{bmatrix}
+\cos\theta & \sin\theta & 0 \\
+-\sin\theta & \cos\theta & 0 \\
+0 & 0 & 1
+\end{bmatrix}\]

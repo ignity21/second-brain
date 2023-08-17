@@ -11,7 +11,7 @@
 [[file:../assets/ML/EntropyFunction.png]]
 
 ** Alternative Function
-- [[id:120aa70a-cf31-4e7f-83ae-bf902cc09618][Gini Criteria]]
+- [[id:45ae2e59-a5f5-4d4e-bdb2-42c4c81a5d40][Gini Criteria]]
 
 * How to Choose a Split?
 *Key idea*: Choose the feature that reduces impurity(entropy) the most.
@@ -34,7 +34,7 @@
 4. Keep repeating splitting process until stopping criteria is met.
   - When a node is 100% one class
   - When splitting a node will result in the tree exceeding a maximum depth
-  - When improvement in purity score are below a threshold. See [[Estimate Impurity (Entropy)][Measure impurity]].
+  - When improvement in purity score are below a threshold. See [[Estimate Impurity (Entropy)][Measure Impurity]].
   - When number of examples in a node is below a threshold
 * Non-binary Features
 ** Categorical Feature

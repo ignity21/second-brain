@@ -1,0 +1,60 @@
+:PROPERTIES:
+:ID:       4a034a17-5a7f-4003-a2fb-4c833e76cc98
+:END:
+#+title: Overfitting/Underfitting
+#+filetags: ML
+
+#+caption: The trade-off between overfitting and underfitting
+[[../assets/ML/Overfitting_1.png]]
+
+* Generalization
+A model is able to make accurate predictions on unseen data.
+- It is able to generalize from the training set to the test set.
+
+** Generalization Error Causes
+*** Bias
+This part of the generalization error is due to *wrong assumptions*.
+A high-bias model is most likely to underfit the training data.
+
+*** Variance
+This part is due to the model's excessive sensitivity to small
+variations in the training data.
+
+A model with *many degrees of freedom* (such as a high-degree polynomial model)
+is likely to have high variance and thus overfit the training data.
+
+- Solution: [[id:6503d65e-a254-4599-8985-bad245a553a8][Regularization]]
+
+*** Irreducible Error
+This part is due to the *noisiness of the data itself*. The only way to reduce this
+part of the error is to clean up the data.
+
+*** *Trade-off*
+- Increasing a model's complexity will typically increase its variance and reduce its bias.
+- Reducing a model's complexity increases its bias and reduces its variance.
+
+** Generalization Performance
+*** Cross-validation
+- If a model performs well on the training data but generalizes poorly
+  according to the cross-validation metrics, then your model is overfitting.
+- If it performs poorly on both, then it is underfitting.
+
+*** See [[id:1c60f0fb-302d-4a1c-b95e-a89d533afbe7][Learning Curves]]
+To generate the plots, train the model several times on different sized subsets of the training set.
+- [[file:~/second-brain/notebooks/ML/plot_learning_curves.ipynb][Plotting Learning Curves]]
+
+* Overfitting/Underfitting Causes
+- Choosing too simple a model is called underfitting
+- Overfitting occurs when you fit a model too closely to the particularities of the training set.
+- If dataset is large enough, it becomes harder for a model to overfit, or memorize the data.
+- Too many features will cause overfitting
+
+* Fixing Underfitting(High Bias)
+1. use a more complex model(e.g. linear -> polynomial)
+2. come up with better features(additional features)
+3. decreasing regularization parameter $\lambda$
+
+* Reducing Overfitting(High Variance)
+1. simplify the model(e.g. reduce number of features)
+2. feed *more training data* until the *validation error* reaches the *training error*.
+3. increasing regularization parameter $\lambda$

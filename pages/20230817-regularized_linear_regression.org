@@ -1,0 +1,35 @@
+:PROPERTIES:
+:ID:       7ac9ccb4-374e-4c58-b932-7704b3c86381
+:END:
+#+title: Regularized Linear Regression
+#+filetags: ML
+
+* Cost Function
+- For mean squared error loss function
+- The hyperparameter $\lambda$ controls how much you want to regularize the model.
+
+\[J(\bm{w}, b) = \frac{1}{2m}\sum_{i=1}^m(f_{\bm{w}, b}(\bm{x^{(i)}})-y^{(i)})^2+\frac{\lambda}{2m}\sum_{j=1}^n w_j^2\]
+
+* Gradient Descent
+- Repeat
+\[w_j=w_j-\alpha\frac{\partial}{\partial w_j}J(\bm{w}, b)\]
+
+\[b=b-\alpha\frac{\partial}{\partial b}J(\bm{w}, b)\]
+
+** Derivative Terms
+\[\frac{\partial{J(\bm{w}, b)}}{\partial{w_j}}=\frac{1}{m}\sum_{i=1}^{m} (f_{\bm{w}, b}(\bm{x^{(i)}}) -y^{(i)})x_{j}^{(i)}+\frac{\lambda}{m}w_j\]
+
+\[\frac{\partial{J(\bm{w}, b)}}{\partial{b}}=\frac{1}{m}\sum_{i=1}^{m} (f_{\bm{w}, b}(\bm{x^{(i)}}) -y^{(i)})\]
+
+** Details
+\begin{align*}
+w_j & = w_j-\alpha\frac{\partial}{\partial w_j}J(\bm{w}, b) \\
+    & = w_j-\alpha[\frac{1}{m}\sum_{i=1}^{m} (f_{\bm{w}, b}(\bm{x^{(i)}}) -y^{(i)})x_{j}^{(i)}+\frac{\lambda}{m}w_j] \\
+    & = w_j(1-\alpha\frac{\lambda}{m})-\alpha\frac{1}{m}\sum_{i=1}^{m} (f_{\bm{w}, b}(\bm{x^{(i)}}) -y^{(i)})x_{j}^{(i)}
+\end{align*}
+- Term \((1-\alpha\frac{\lambda}{m})\) slightly less than 1 and shrinks \(w_j\) a little bit.
+
+* Implementations
+- [[id:f6fb8e17-c115-4aba-91ec-894cca2f3106][Ridge Linear Regression]]
+- [[id:28980177-1875-4360-8ea8-6800da4fe576][Elastic Net]]
+- [[id:a5a11c25-1ea0-4f97-a1c2-ebae8a524c61][Lasso Linear Regression]]

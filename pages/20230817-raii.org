@@ -1,0 +1,5 @@
+:PROPERTIES:
+:ID:       474df27e-ed1f-42f0-997f-633339b91cb5
+:END:
+#+title: RAII
+#+filetags: C++

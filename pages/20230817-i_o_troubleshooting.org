@@ -1,0 +1,34 @@
+:PROPERTIES:
+:ID:       ed3469d5-b6ce-4a97-b374-c99b29bc06b2
+:END:
+#+title: I/O Troubleshooting
+#+filetags: Linux
+
+* IO 问题排查点
+1. 存储空间使用情况，包括 inode 空间 ~df~, ~df -i~
+2. 文件缓存使用情况
+   - 页缓存
+     - =/proc/meminfo=
+     - ~sar~
+   - 目录项缓存、索引节点缓存
+     - ~slabtop~
+3. 排查 [[id:f44727ab-e7c3-42cf-8d66-d0c595a352d6][I/O 指标]]
+   - 整体： ~iostat -d -x device 1~
+   - 进程： ~pidstat -d 1~
+4. 检查进程系统调用：[[id:a1819374-b1e5-49b4-93b6-5dafff01832b][~strace -P [PID]~]], ~lsof -p [PID]~
+5. 块设备 IO 事件追踪： ~blktrace~
+6. 进程块设备 IO 事件追踪： ~biosnoop~, ~biotop~
+7. 其他因素：读写类型、读写比例、读写大小、存储类型（RAID级别）
+
+* 其他工具
+- ~filetop~
+- ~opensnoop~
+- ~fio~: 测试磁盘的 IOPS、吞吐量以及响应时间等核心指标。
+- ~iostat~: 观测每块磁盘的使用情况。
+- ~iotop~
+
+* 工具 Tips
+** ~lsof~
+用来查看进程打开文件列表，包括了目录、块设备、动态库、网络套接字等。
+- ~lsof -p [PID]~
+- 输出结果说明： FD 表示文件描述符号, =3w= 表示文件描述符3, w 表示写方式打开。

@@ -41,7 +41,7 @@
 |---------------+----------+----------+-----------+----------------------------------------|
 | [[id:7e5829ad-f60e-41ce-8fb8-98a56592aa81][Bucket Sort]]   | $O(n+m)$ | $O(n+m)$ | Yes       | m is the number of buckets             |
 | [[id:1776ad9d-bc42-4d0c-b49d-e24f32bff80d][Counting Sort]] | $O(n+k)$ | $O(n+k)$ | Yes       | k is the max value                     |
-| [[id:e5eaf675-c0eb-4d75-b2e8-4768f1fa5642][Radix Sort]]    | $O(dn)$  | $O(d)$   | Yes       | d is the number of digits of max value |
+| [[id:4fd9dbf1-7420-4b4e-86ee-d73bd2055497][Radix Sort]]    | $O(dn)$  | $O(d)$   | Yes       | d is the number of digits of max value |
 | [[id:cb0bae70-cb35-4b8d-b6ed-6a00ca472f68][Shell Sort]]    | $O(nh)$  | $O(1)$   | No        | h is the increment sequence            |
 
 

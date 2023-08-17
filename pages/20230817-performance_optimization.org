@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       9386e730-dadd-4191-9d4f-22341af1fd98
+:END:
+#+title: Performance Optimization
+#+filetags: :Performance:Linux:OS:
+
+
+* [[id:f593c3a7-e6ce-4cdb-bf19-ec4f9f2107c7][I/O Optimization]]

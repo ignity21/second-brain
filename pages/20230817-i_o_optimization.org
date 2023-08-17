@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       f593c3a7-e6ce-4cdb-bf19-ec4f9f2107c7
+:END:
+#+title: I/O Optimization
+#+filetags: :Performance:Linux:
+
+* 程序优化方向
+- 顺序读写代替随机读写
+- 尽可能借助缓存 IO
+- 程序内部构建内存缓存，或用 Redis
+- 频繁读写同一块磁盘时，可用 ~mmap~ 代替 ~read/write~ ，减少内存拷贝次数
+- 使用 同步写 场景下，尽量将写请求合并， ~fsync()~ 取代 ~O_SYNC~
+- 多个应用程序共享相同磁盘时，为了保证 IO 不被某个应用完全占用，可使用 cgroups 的 IO 子系统，来限制进程 / 进程组的 IOPS 以及吞吐量。
+- CFQ 调度器时，可以用 ionice 来调整进程的 IO 调度优先级，特别是提高核心应用的 IO 优先级。
+
+* 文件系统优化
+- 选择合适的文件系统
+  - 相比于 ext4 ，xfs 支持更大的磁盘分区和更大的文件数量
+  - xfs 文件系统的缺点在于无法收缩，而 ext4 则可以
+- 优化文件系统配置
+  - 文件系统的特性（如 ext_attr、dir_index） ~tune2fs~
+  - 日志模式（如 journal、ordered、writeback） ~/etc/fstab~
+  - 挂载选项（如 noatime） ~mount~
+- 可以优化文件系统的缓存

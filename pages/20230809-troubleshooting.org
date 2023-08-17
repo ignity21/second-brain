@@ -1,8 +1,7 @@
 :PROPERTIES:
 :ID:       949864f8-e572-43ae-b269-92bfd62d3605
-:ROAM_ALIASES: "Python Troubleshooting"
 :END:
-#+title: Troubleshooting
+#+title: Python Troubleshooting
 #+filetags: Python
 
 * 加强版print()

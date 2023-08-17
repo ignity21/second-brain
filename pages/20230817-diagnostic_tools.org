@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       aa8a566c-4a05-42db-9a8a-2ec4f4846798
+:END:
+#+title: Diagnostic Tools
+#+filetags: :Tools:Linux:
+
+- [[id:a1819374-b1e5-49b4-93b6-5dafff01832b][~strace~]] :: Troubleshooting tool for tracing system calls.

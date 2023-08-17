@@ -80,6 +80,11 @@
 - [[id:be6c0364-12d4-4602-aaee-c1db280685a4][Sharing Files Between Processes]]
 - [[id:6f1e5033-7e68-4eb1-a7d7-d5fd9db8b863][~fork()~]]
 
+* System Call
+:PROPERTIES:
+:ID:       58c36f85-b1d6-42b5-b06c-0db05ec2db6b
+:END:
+
 * [[id:3d49b6d9-9bc1-422e-86ac-de4b2c24eaaf][Standard C Library]]
 * [[id:a7b6885c-42f7-476c-9642-8f0d06149e95][System Error]]
 * [[id:8c7cfc98-33d2-45d2-8bac-01e5c13dc4f9][Linux Tools]]

@@ -15,7 +15,7 @@
 - 条件限制下，只能用一种方式；比如  RPC 只能用返回码
 
 * 资源清理问题
-- [[id:642577bf-1c0e-4177-b6a7-0c9678a81d51][C++ RAII]]
+- [[id:474df27e-ed1f-42f0-997f-633339b91cb5][RAII]]
 - ~finally~ 块
 - Go 的 defer 模式
 - C 的 goto fail 模式

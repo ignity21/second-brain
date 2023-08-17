@@ -4,34 +4,31 @@
 #+title: Vector
 #+filetags: :LinearAlgebra:
 
-* Addition
+* Vector Laws
+:PROPERTIES:
+:ID:       98741aab-f1a6-47a0-8079-366eb158a770
+:END:
+
+** Addition
 - Commutative
 - Associative
 - Additive Identity: There exists an element $\bm{0}$ such that $\bm{a}+\bm{0}=\bm{a}$
 - Additive Inverse: $\forall{\bm{a}}\exists{\bm{b}}\|\bm{a}+\bm{b}=\bm{0}$
 - Geometric Translation :: Add a vector $\bm{v}$ to all other vectors, then the whole shape gets shifted by $\bm{v}$
 
-* Scale Multiplication
+** Scale Multiplication
 - Commutative
 - Associative
 - Distributive: $s(\bm{a}+\bm{b})=s\bm{a}+s\bm{b}$
 
-* Norm(Magnitudes)
-\[\|\bm{u}\|=\sqrt{\sum_{i=1} u_i^2}\]
-- The norm of $\bm{u}$ is the length of $\bm{u}$
-- A *unit vector* is a vector with a norm equal to 1.
-- *Normalized Vector* $\bm{\hat{u}}=\frac{\bm{u}}{\|\bm{u}\|}$
-*** Code
-#+begin_src python
-  from numpy import linalg as LA
-  LA.norm(u)
-#+end_src
-
-* Dot Product
-** Definition
+** Dot Product
+:PROPERTIES:
+:ID:       cf7d5ccb-6bda-4d50-9a97-660f3de88709
+:END:
+*** Definition
 \[\bm{x}\cdot\bm{y}=\sum_{i=1}^n x_i y_i\]
 
-** Geometric Meaning
+*** Geometric Meaning
 - Cosine Rule: $c^2=a^2+b^2-2ab\cos{\theta}$
 - $\bm{v}\cdot\bm{v}=\|\bm{v}\|^2=\sum_{i=1}v_i^2$
 - $\|\bm{x}-\bm{y}\|^2=\|\bm{x}\|^2+\|\bm{y}\|^2-2\|\bm{x}\|\|\bm{y}\|\cos\theta$
@@ -45,7 +42,7 @@
 \end{align*}
 
 - $\bm{x}\cdot\bm{y} = \|\bm{x}\|\|\bm{y}\|\cos\theta$
-** Code
+*** Code
 #+begin_src python
   # dot product of x and y
   np.dot(x, y)
@@ -56,14 +53,14 @@
   x * y
 #+end_src
 
-** Properties
+*** Properties
 - Commutative: $\bm{u}\cdot\bm{v}=\bm{v}\cdot\bm{u}$
 - NOT associative: $(\bm{u}\cdot\bm{v})\cdot \bm{w}$ is not defined.($\text{scalar }\cdot\bm{w}$)
 - Distributive over Addition: $\bm{u}\cdot(\bm{v}+\bm{w})=\bm{u}\cdot\bm{v}+\bm{u}\cdot\bm{w}$
 - Associative with regards to scalar multiplication
   - $\lambda\times(\bm{u}\cdot\bm{v})=(\lambda\times\bm{u})\cdot\bm{v}=\bm{u}\cdot(\lambda\times\bm{v})$
 
-** Calculating the angle between vectors
+*** Calculating the angle between vectors
 \[\theta=\arccos(\frac{\bm{x}\cdot\bm{y}}{\|\bm{x}\|\times\|\bm{y}\|})\]
 #+begin_src python
   # in radians
@@ -73,8 +70,24 @@
   # Should clips the value first
 #+end_src
 
+* Norm(Magnitudes)
+:PROPERTIES:
+:ID:       2963e2dc-7b96-47f1-aa18-26960815fc4a
+:END:
+\[\|\bm{u}\|=\sqrt{\sum_{i=1} u_i^2}\]
+- The norm of $\bm{u}$ is the length of $\bm{u}$
+- A *unit vector* is a vector with a norm equal to 1.
+- *Normalized Vector* $\bm{\hat{u}}=\frac{\bm{u}}{\|\bm{u}\|}$
+*** Code
+#+begin_src python
+  from numpy import linalg as LA
+  LA.norm(u)
+#+end_src
 
 * Projection
+:PROPERTIES:
+:ID:       a4782b65-f01d-48a9-8937-608fb2dd9de9
+:END:
 ** Scalar Projection
 - $\|\bm{y}\|\cos\theta$ is the scalar *projection of y on x*.
 - $\text{Scale Projection }=\frac{\bm{x}\cdot\bm{y}}{\|\bm{x}\|}$

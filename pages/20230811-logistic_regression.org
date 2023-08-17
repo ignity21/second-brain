@@ -3,3 +3,73 @@
 :END:
 #+title: Logistic Regression
 #+filetags: ML
+
+* Concept
+** Parameters
+- Weights $\bm{w}$: $w_1, w_2, \cdots, w_n$
+- Bias: $b$
+
+** Sigmoid Function
+or Logistic Function
+[[file:../assets/ML/SigmoidFunction.png]]
+\[g(z)=\frac{1}{1+e^{-z}}\]
+- \(0 < g(z) < 1\)
+- \(g(z)\ge 0.5\) when \(z\ge 0\)
+
+** Model
+- \(z_{\bm{w},b}(\bm{x})=\bm{w}^T\bm{x} + b\)
+
+
+\[f_{\bm{w},b}(\bm{x})=g((z_{w,b}(\bm{x}))=g(\bm{w}^T\bm{x} + b)=\frac{1}{1+e^{-(\bm{w}^T\bm{x} + b)}}\]
+
+*** For Binary Classification
+- Probability(for binary classification): \(P(\hat y=1|\bm{x}; \bm{w}, b)=f_{w,b}(\bm{x})\)
+- $\hat{y} = 1$ when \(f_{\bm{w},b}(\bm{x})\ge 0.5\), which means $z\ge 0$
+- Decision Boundary: \(z_{\bm{w},b}(\bm{x})=\bm{w}\cdot\bm{x}+b=0\)
+  - Non-linear Decision Boundary Example: Let \(z\) be \(w_1 x_1^2 + w_2 x_1 + w_3 x_2^2 + b\)
+
+*** Code
+#+begin_src python
+  z = np.dot(w, x) + b
+  f_x = 1/(1+np.exp(-z))
+#+end_src
+
+** Cost Function
+*** Loss Function (Binary Cross Entropy)
+\[L(f_{\bm{w}, b}(\bm{x^{(i)}}), y^{(i)})=\begin{cases}
+-\log(f_{\bm{w}, b}(\bm{x^{(i)}})), & \text{if }y^{(i)}=1 \\
+-\log(1-f_{\bm{w}, b}(\bm{x^{(i)}})), & \text{if }y^{(i)}=0
+\end{cases}\]
+
+- \(y^{(i)}=1\)
+
+[[file:../assets/ML/LogisticLossFunction_1.png]]
+
+- \(y^{(i)}=0\)
+
+[[file:../assets/ML/LogisticLossFunction_2.png]]
+
+*** Simplified Loss Function
+\[L(f_{\bm{w}, b}(\bm{x^{(i)}}), y^{(i)})=-y^{(i)}\log(f_{\bm{w}, b}(\bm{x^{(i)}}))-(1-y^{(i)})\log(1-f_{\bm{w}, b}(\bm{x^{(i)}}))\]
+#+begin_src python
+  loss = -y * np.log(f_x) - (1-y) * np.log(1-f_x)
+#+end_src
+
+*** [[id:e1a528d4-0948-4f04-b114-48dd128863a1][Cost Function]]
+\begin{align*}
+J(\bm{w}, b) & = \frac{1}{m}\sum_{i=1}^m [L(f_{\bm{w}, b}(\bm{x^{(i)}}), y^{(i)})] \\
+& = -\frac{1}{m}\sum_{i=1}^m[y^{(i)}\log(f_{\bm{w},b}(\bm{x^{(i)}}))+(1-y^{(i)})\log(1-f_{\bm{w},b}(\bm{x^{(i)}}))]
+\end{align*}
+
+* [[id:bffd4dcf-0fb1-4480-9338-956d156b97b9][Gradient Descent]]
+- Repeat:
+\[w_j=w_j-\alpha\frac{\partial}{\partial w_j}J(\bm{w}, b)\]
+
+\[b=b-\alpha\frac{\partial}{\partial b}J(\bm{w}, b)\]
+
+
+- \(\frac{\partial}{\partial w_j}J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^{m}(f_{\bm{w},b}(\bm{x^{(i)}})-y^{(i)})x_j^{(i)}\)
+
+- \(\frac{\partial}{\partial b}J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^{m}(f_{\bm{w},b}(\bm{x^{(i)}})-y^{(i)})\)
+
+* [[id:5c390dc6-4c36-4f33-8a41-0b8dba9cee79][Regularized Logistic Regression]]
