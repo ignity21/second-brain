@@ -55,35 +55,17 @@ Your spam filter is a Machine Learning program that, given examples of spam emai
   - [[id:e92991a2-8dd2-4816-82e3-66d09d410a78][Measuring Success]]
 - How will the machine learning solution interact with other parts of my research or business product?
 
-* Supervised Learning
-** Regression
-:PROPERTIES:
-:ID:       a4e26a90-9ab4-4bf6-a996-e4c2f2546049
-:END:
-- [[id:b6f03e6b-8850-4f2d-8d2d-f337029fe1e7][Linear Regression]]
-- [[id:4e603b85-7e9e-47ca-b3f4-b7747cd6019a][K-Neighbors Regression]]
-
-** Classification
-:PROPERTIES:
-:ID:       a902b34d-1553-4c18-99b6-04d7e47c6a4f
-:END:
-- [[id:9db494ed-d782-4bfe-b9d2-52c768251490][Binary Classification]]
-- [[id:91264f10-9a71-4d15-9b63-09c2a6566d75][Multi-class Classification]]
-- [[id:a3f7682e-3cde-4879-b314-f6220f8cc3c7][Multi-label Classification]]
-
-*** [[id:4dec577e-c1d9-4b01-9a95-63e3413b42a9][K-Nearest Neighbors]]
-
+* [[id:79bd8eb3-154b-470d-bbcb-ff6ae9c507db][Supervised Learning]]
 * [[id:8b7a21ee-1fc3-4566-9cd9-1865de8b6e46][Unsupervised Learning]]
 * [[id:31b71a06-0592-444b-b410-916ee717b488][Neural Network]]
-
 * [[id:e0a49219-943c-4fba-b790-0b3e365b5e3d][Decision Tree]]
-
 * [[id:b85eccee-c059-4184-b30b-b61075cf838e][ML Troubleshooting]]
+* [[id:e1a528d4-0948-4f04-b114-48dd128863a1][Cost Function]]
+
 * ML Optimization Algorithms
 :PROPERTIES:
 :ID:       15f60bb8-a576-43bd-a00a-233449bffb6a
 :END:
-** [[id:e1a528d4-0948-4f04-b114-48dd128863a1][Cost Function]]
 ** [[id:bffd4dcf-0fb1-4480-9338-956d156b97b9][Gradient Descent]]
 ** [[id:1800f8d6-afdd-48f6-a680-fd8460bd1f2e][Normal Equation]]
 

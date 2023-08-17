@@ -17,7 +17,7 @@
   - ~w.T~ is $1\times n$ matrix
   - ~x~ is $n\times 1$ matrix
 
-** [[id:e1a528d4-0948-4f04-b114-48dd128863a1][Cost Function]]
+** Cost Function
 - Loss Function: Mean Squared Error
 \[J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^m(\bm{w}^T\bm{x^{(i)}}+b-y^{(i)})^2\]
 

@@ -4,8 +4,6 @@
 #+title: Normal Equation
 #+filetags: ML
 
-- links :: [[id:e1a528d4-0948-4f04-b114-48dd128863a1][Cost Function]]
-
 * Properties
 - Only for [[id:b6f03e6b-8850-4f2d-8d2d-f337029fe1e7][Linear Regression]]
 - Solve for $\bm{w}, b$ without iterations
