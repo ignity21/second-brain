@@ -2,7 +2,7 @@
 :ID:       f44727ab-e7c3-42cf-8d66-d0c595a352d6
 :END:
 #+title: I/O Metrics
-#+filetags: :OS:Linux:
+#+filetags: :Linux:Metric:OS:
 
 - 使用率: 是指磁盘处理 IO 的时间百分比。过高的使用率（比如超过 80%），通常意味着磁盘 IO 存在性能瓶颈。
   - 使用率只考虑有没有 IO，而不考虑 IO 的大小。使用率是 100% 的时候，磁盘依然有可能接受新的 IO 请求。

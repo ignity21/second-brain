@@ -57,10 +57,19 @@
 :PROPERTIES:
 :ID:       bcae4642-79f1-421a-bc69-38da37d1b0dd
 :END:
+- [[id:f659b32b-4b09-46a7-818e-791ca3855765][Memory Allocation]]
 - [[id:5e8af621-8028-458e-8f7b-04bf8d561512][Adjusting Memory Configuration]]
 - [[id:4dc805d4-c007-4526-bd64-c9ca9af200a4][Virtual Memory]]
 - [[id:065d6f74-0113-4308-b158-b2333a6f7339][Garbage Collection]]
 - [[id:0b2a6ecf-9f28-473c-8d25-912115ac2e60][OOM(Out of Memory)]]
+- [[id:0696af2e-fb7a-49a4-a88a-8d32ba0e7c43][Memory Metrics]]
+- [[id:b21233f1-2529-4fa8-8602-e4c7c36fc780][Memory Troubleshooting]]
+
+** Types
+- 虚拟内存 :: 包括了进程代码段、数据段、共享内存、已经申请的堆内存和已经换出的内存等。
+- 常驻内存 :: 进程实际使用的物理内存，不包括 Swap 和共享内存。
+- 共享内存 :: 包括与其他进程共同使用的真实的共享内存，还包括了加载的动态链接库以及程序的代码段等。
+- Swap 内存 :: 通过 Swap 换出到磁盘的内存。
 
 * [[id:603a0f71-fd7e-4c20-8607-9a2998fc3d4c][I/O]]
 

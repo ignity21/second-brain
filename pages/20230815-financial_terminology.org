@@ -4,6 +4,7 @@
 #+title: Financial Terminology
 #+filetags: :Quant:Trading:
 
+* Terminologies
 - Stock :: An asset that represents ownership in a company. A claim on part of a corportation's
   assets and earnings. There are two main types, common and preferred.
 - Share :: A single share represents partial ownership of a company relative to the total number
@@ -28,3 +29,18 @@
 - American Depository Receipts(ADR) :: Foreign stocks are sometimes allowed to trade on a local
   stock exchange via an indirect method such as American Depository Receipts (ADR).
   These are instruments that represent the original stock in a different market.
+
+* Market
+:PROPERTIES:
+:ID:       968a4e81-2072-4fe4-b713-2ebd0e7c8487
+:END:
+- Pre-market :: Market participants often use pre-market session to gauge the strength and direction of the market.
+- Post-market :: are often used by traders who want to trade on corporate announcements made after market closes, or for brokers to make whole of an incomplete client order.
+
+* Market Data
+:PROPERTIES:
+:ID:       93cd33e9-64f3-4f7d-b132-5b0c11e49cd3
+:END:
+- Volume :: Volume refers to the number of shares, contracts, or units of a particular asset that are traded within a specific period of time.
+- Tick Data :: Tick data is sometimes referred to as heterogeneous data, since it is not sampled
+  at regular time intervals, whereas Minute-level or End-of-Day data is called homogeneous.

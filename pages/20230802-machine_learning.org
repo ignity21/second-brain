@@ -52,14 +52,12 @@ Your spam filter is a Machine Learning program that, given examples of spam emai
 - Have I collected *enough data* to represent the problem I want to solve?
 - What *features* of the data did I extract, and will these enable the right predictions? [[id:f8088283-0154-4050-9cef-911f5ae69ef4][Feature Engineering]]
 - How will I *measure success* in my application?
-  - [[id:e92991a2-8dd2-4816-82e3-66d09d410a78][Measuring Success]]
 - How will the machine learning solution interact with other parts of my research or business product?
 
 * [[id:79bd8eb3-154b-470d-bbcb-ff6ae9c507db][Supervised Learning]]
 * [[id:8b7a21ee-1fc3-4566-9cd9-1865de8b6e46][Unsupervised Learning]]
 * [[id:31b71a06-0592-444b-b410-916ee717b488][Neural Network]]
 * [[id:e0a49219-943c-4fba-b790-0b3e365b5e3d][Decision Tree]]
-* [[id:b85eccee-c059-4184-b30b-b61075cf838e][ML Troubleshooting]]
 * [[id:e1a528d4-0948-4f04-b114-48dd128863a1][Cost Function]]
 
 * ML Optimization Algorithms
@@ -75,3 +73,4 @@ Your spam filter is a Machine Learning program that, given examples of spam emai
 :END:
 ** [[id:8dc25af2-f3bd-4ec4-b949-40958e167e75][Feature Scaling]]
 ** [[id:f8088283-0154-4050-9cef-911f5ae69ef4][Feature Engineering]]
+* [[id:62150352-f6f0-466e-a59d-0874064ddb74][ML Development]]

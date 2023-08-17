@@ -3,3 +3,9 @@
 :END:
 #+title: Multi-label Classification
 #+filetags: ML
+
+- links :: [[id:31b71a06-0592-444b-b410-916ee717b488][Neural Network]]
+
+[[file:../assets/ML/MultilabelClassification.png]]
+
+- Reuses hidden layer 1, 2

@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       00d69c0f-8b27-4696-9f62-971ffdec48f2
+:END:
+#+title: Negative Marking
+#+filetags: :Algorithm:
+
+- links :: [[id:0c1da306-b004-447c-a019-81266ded6c23][Array as Hashmap]]
+
+- LeetCode: [[https://leetcode.com/problems/first-missing-positive/][41]], [[https://leetcode.com/problems/find-the-duplicate-number][287]]
+
+* [[https://leetcode.com/problems/find-the-duplicate-number][287]]
+** Intuition
+There are $n+1$ positive numbers in the array (numsnumsnums) (all in the range [1, n]).
+Since the array only contains *positive integers*, we can track each number ~num~ that
+has been seen before by flipping the sign of the number located at index ~|num|~, where
+~||~ denotes absolute value.
+
+If the ~nums[|num|]~ is already negative, indicating that ~num~ has been seen before and
+hence is the duplicate number.

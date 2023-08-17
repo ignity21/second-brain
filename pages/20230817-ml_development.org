@@ -1,0 +1,34 @@
+:PROPERTIES:
+:ID:       62150352-f6f0-466e-a59d-0874064ddb74
+:END:
+#+title: ML Development
+#+filetags: ML
+
+* Cycle of Development Process
+[[../assets/ML/MLDevelopment.png]]
+
+* Span Classifier Example
+- Supervised Learning
+- Features: $\bm{x}$ *list the top 10000 words* to compute *counts*.
+- Target:y= spam (1) or not spam (0)
+
+** Improving Tips
+- Collect more data.
+- Develop sophisticated features based on email (from email header).
+- Define sophisticated features from email body.
+  - should "discounting" and "discount" be treated as the same word
+- Design algorithms to detect misspelling.
+  - e.g. w4tches, med1cine, m0rtgage.
+
+* Engineering Steps
+1. Problem formulation
+2. Data collection
+3. Data preparation
+4. Model training
+5. Model evaluation
+6. Model deployment
+7. Model monitoring
+[[../assets/ML/BuildingMLModel.jpeg]]
+
+* [[id:4f76535d-cab2-4465-bb8a-3abbc3dadfe5][ML Diagnostic]]
+* [[id:33846b1e-3e19-46a2-9158-6c9b3c06743b][ML System]]

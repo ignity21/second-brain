@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       f659b32b-4b09-46a7-818e-791ca3855765
+:END:
+#+title: Memory Allocation
+#+filetags: ML
+
+- [[id:53b16537-9008-46a6-b958-d15f14896b78][~malloc()~]]
+
+* System Calls
+** ~brk()~
+:PROPERTIES:
+:ID:       3aed7004-c2b3-48f4-99cd-a9f1d540aaad
+:END:
+
+~brk()~ 方式分配的缓存，可以减少缺页异常的发生，提高内存访问效率。不过，由于这些内存没有归还系统，在内存工作繁忙时，频繁的内存分配和释放会造成内存碎片。
+
+** ~mmap()~
+:PROPERTIES:
+:ID:       5a01f28f-2c4c-4cc5-bd0b-e8ba3579365d
+:END:
+
+~mmap()~ 方式分配的内存，会在释放时直接归还系统，所以每次 mmap 都会发生缺页异常。在内存工作繁忙时，频繁的内存分配会导致大量的缺页异常，使内核的管理负担增大。这也是 malloc 只对大块内存使用 mmap 的原因。

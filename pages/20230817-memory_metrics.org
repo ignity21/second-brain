@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       0696af2e-fb7a-49a4-a88a-8d32ba0e7c43
+:END:
+#+title: Memory Metrics
+#+filetags: :OS:Metric:Linux:
+
+- total: 总内存大小
+- used: 已使用内存（包括共享内存）大小
+- free: 是未使用内存大小
+- shared: 是共享内存大小
+- buff/cache: 是缓存和缓冲区大小
+- available: 新进程可用内存大小
+
+- VIRT 进程虚拟内存的大小，只要是进程申请过的内存，即便还没有真正分配物理内存，也会计算在内。
+- RES 是常驻内存的大小，也就是进程实际使用的物理内存大小，但不包括 Swap 和共享内存。
+- SHR 是共享内存的大小，比如与其他进程共同使用的共享内存、加载的动态链接库以及程序的代码段等。
+- %MEM 是进程使用物理内存占系统总内存的百分比。
+
+* man 查询
+#+begin_src bash
+  man 5 proc # search meminfo
+#+end_src

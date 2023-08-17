@@ -3,3 +3,6 @@
 :END:
 #+title: Multi-class Classification
 #+filetags: ML
+
+* Algorithms
+- [[id:a3762245-595d-4b5e-b317-4eafd2a45c7f][Softmax Regression]]

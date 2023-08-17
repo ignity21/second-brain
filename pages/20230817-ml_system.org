@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       33846b1e-3e19-46a2-9158-6c9b3c06743b
+:END:
+#+title: ML System
+#+filetags: ML
+
+* Batch Versus Online
+- Batch Learning: general tasks
+- Online Learning: incremental learning
+
+* Instance-Based Versus Model-Based

@@ -1,0 +1,39 @@
+:PROPERTIES:
+:ID:       4f76535d-cab2-4465-bb8a-3abbc3dadfe5
+:END:
+#+title: ML Diagnostic
+#+filetags: ML
+
+- Diagnostic :: A test that you run to gain inside into what is/isn't working with a learning algorithm, to gain guidance into improving its performance.
+
+* Evaluating Models
+** Train/test Error
+*** Linear Regression Example
+- Cost Function
+
+\[J(\bm{w}, b) = \frac{1}{m}\sum_{i=1}^m(f_{\bm{w}, b}(\bm{x^{(i)}})-y^{(i)})^2+\frac{\lambda}{m}\sum_{j=1}^n w_j^2\]
+
+- Training Error
+
+\[J_{train}(\bm{w}, b)=\frac{1}{m_{train}}[\sum_{i=1}^{m_{train}}(f_{\bm{w}, b}(\bm{x^{(i)}_{train}}) - y^{(i)}_{train})^2]\]
+
+- Test Error
+
+\[J_{test}(\bm{w}, b)=\frac{1}{m_{test}}[\sum_{i=1}^{m_{test}}(f_{\bm{w}, b}(\bm{x^{(i)}_{test}}) - y^{(i)}_{test})^2]\]
+
+- Note: regularization term is not included.
+- Overfitting(High Variance): $J_{test}$ is high, $J_{train}$ is low.
+- Underfitting(High Bias): Both $J_{train}$ and $J_{test}$ are high.
+
+*** Logistic Regression Example
+- Alternative Error Computation: count $\hat{y}\ne y$
+  - J_{train} is the fraction of the train set that has been misclassified.
+  - J_{test} is the fraction of the test set that has been misclassified.
+
+* Model Selection
+- Cross Validation Set (dev set)
+  - Computing cross validation error (validation error, dev error)
+  - Evaluating models on the cross validation set (Finding lowest $J_cv$)
+
+** [[id:c333e044-3b51-4604-b7f9-0295cd412189][Bias/Variance]]
+** [[id:a8235139-b692-4dff-8576-a3b822eb2851][ML Error Analysis]]

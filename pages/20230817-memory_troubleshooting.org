@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       b21233f1-2529-4fa8-8602-e4c7c36fc780
+:END:
+#+title: Memory Troubleshooting
+#+filetags: :OS:Linux:
+
+* 内存性能问题排查
+1. 查看系统整体内存使用情况 ~free~, ~top~
+2. 跟踪内存使用趋势 ~vmstat~, ~pidstat~
+3. 详细分析
+   - 内存分配分析: ~memleak~, [[id:a1819374-b1e5-49b4-93b6-5dafff01832b][~strace~]], ~valgrind~, ~slabtop~, =/proc/buddyinfo=
+   - Buffer/Cache 使用情况: ~cachetop~, ~cachestat~ ~slabtop~, ~pcstat~
+   - 具体进程的内存使用分析: ~pipstat~, ~pmap~, =/proc/[pid]/status=, =/proc/[pid]/smaps=

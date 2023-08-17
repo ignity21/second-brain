@@ -11,3 +11,7 @@ It is a collection of functions that provide basic functionality to programs run
 
 * Check glibc Version
 - ~/lib/libc.so.6~ or ~ldd --version~
+
+* functions
+- [[id:53b16537-9008-46a6-b958-d15f14896b78][~malloc()~]]: manages the space from user level.
+- ~sbrk()~: Numerous software packages implement their own memory allocation algorithms with the ~sbrk~ system call.

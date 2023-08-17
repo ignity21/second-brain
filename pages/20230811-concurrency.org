@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       5a856fd8-e1ec-4964-8862-17e7d48f906c
 :END:
-#+title: Concurrency
+#+title: C++ Concurrency
 #+filetags: C++
 
 * Purpose
@@ -14,5 +14,6 @@ Two main reasons:
   - Task parallelism: Divide a single task into parts and run each in parallel.
   - Data parallelism: Each thread performs the same operation on different parts of the data.
 
+* [[id:d0df6e46-ba6c-4edc-9105-01a8d7692d68][Mutex]]
 * [[id:890f2b58-21c3-48b7-a975-c532eedc01ec][Condition Variable]]
 * [[id:7475eede-346a-403e-9aac-91cab1e71a1f][Deadlock Issue]]

@@ -2,7 +2,7 @@
 :ID:       00e92d55-5469-4d5d-9566-e889d0b86ab3
 :END:
 #+title: CPU Metrics
-#+filetags: :Metric:OS:
+#+filetags: :Linux:Metric:OS:
 
 * Load Average
 :PROPERTIES:
