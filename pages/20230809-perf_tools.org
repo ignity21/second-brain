@@ -1,8 +1,8 @@
 :PROPERTIES:
 :ID:       605b3e38-79ba-45f3-9241-c7d223af8e94
 :END:
-#+title: ~perf-tools~
-#+filetags: :Tools:Linux:
+#+title: perf-tools
+#+filetags: :Performance:Tools:Linux:
 
 * Introduction
 A miscellaneous collection of in-development and unsupported performance

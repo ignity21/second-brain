@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       611eaef4-a96b-4835-b3d3-7e1e6910fbe2
+:END:
+#+title: ~pipx~
+#+filetags: Python
+
+* Installation
+1. May remove system pipx: ~sudo pacman -Rns python-pipx~
+2. [Optional] Specify python version: ~pyenv local x.x.x~
+3. ~pip install --user -U pipx~
+4. Make sure ~pipx~ in the ~$PATH~
+
+* Configuration
+** TODO Check if pipx uses index-url
+** Completion
+- ~pipx completions~ to get instruction on enabling completions.
+
+* Dependency Recommendation
+#+begin_src bash
+  pipx install --include-deps python-lsp-server
+  pipx install --include-deps poetry
+  pipx install --include-deps ansible
+#+end_src

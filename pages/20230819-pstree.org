@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       80483dbf-4175-4d6e-873c-7813641ab0ae
+:END:
+#+title: ~pstree~
+#+filetags: :Tools:Linux:
+
+- ~pstree -aps 3084~: -a 表示输出命令行选项，p表示PID s表示指定进程的父进程

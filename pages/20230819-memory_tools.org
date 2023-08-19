@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       2818abfe-207d-48bc-9572-dd6e3b7caea4
+:END:
+#+title: Memory Tools
+#+filetags: :Tools:Linux:
+
+| 指标               | 工具                                 |
+|--------------------+--------------------------------------|
+| System Memory Info | ~free~, =/proc/meminfo=              |
+| VIRT, RES, SHR     | ~top~, ~ps~                          |
+| 进程内存分布       | ~pmap~                               |
+| Swap换出内存       | ~top~, =/proc/[pid]/status=          |
+| 进程缺页异常       | ~ps~, ~top~                          |
+| 系统换页情况       | ~sar~                                |
+| Buffer/Cache       | ~free~, ~vmstat~, ~sar~, ~cachestat~ |
+| 缓存命中率         | ~cachetop~                           |
+| SWAP已用/剩余      | ~free~, ~sar~                        |
+| SWAP换入/换出      | ~vmstat~                             |
+| 内存泄露           | ~memleak~, ~valgrind~                |
+| 指定文件的缓存大小 | ~pcstat~                             |
+
+- ~slabtop~: Display kernel *slab* cache information in real time.
+- ~pmap~: Report memory map of a process or processes.
+- ~pcstat~: 用来指定文件的缓存大小
+- [[id:2f3bee9b-214b-47a6-9c72-6c7d0a5e30e2][BCC Memory Tools]]

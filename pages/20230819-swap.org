@@ -1,0 +1,5 @@
+:PROPERTIES:
+:ID:       0bff214a-a662-4ede-b114-26c968f9ceda
+:END:
+#+title: Swap
+#+filetags: :Linux:

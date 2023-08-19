@@ -1,0 +1,85 @@
+:PROPERTIES:
+:ID:       c7646c59-10f8-42c0-b181-d476019efe95
+:END:
+#+title: ~poetry~
+#+filetags: Python
+
+* Installation
+- ~pipx install poetry~
+
+** Oh-My-Zsh
+#+begin_src bash
+  mkdir $ZSH_CUSTOM/plugins/poetry
+  poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
+#+end_src
+
+* Basic Usage
+#+begin_src bash
+  poetry new [project] # Creating new project
+  # Modify pyproject.toml
+
+  portry lock # check dependencies
+  poetry install # Initialising a pre-existing project
+
+  poetry add dependency
+
+  poetry update # Updating dependencies
+
+  poetry shell # Activating virtual environment
+  poetry run python your_script.py
+  poetry run pytest
+
+  # editable mode
+  poetry build
+  pip install -e .
+#+end_src
+
+* Specify Python Version
+#+begin_src bash
+  pyenv local x.x.x
+  poetry env use x.x.x
+#+end_src
+
+* Configuration
+- Config File: =$HOME/.config/pypoetry/config.toml=
+
+#+begin_src conf-toml
+  # default is OK
+  [virtualenvs]
+  in-project = false
+  prefer-active-python = true
+#+end_src
+- in-project is inconvenient for multiple virturlenvs.
+
+
+** Project Package Source
+- ~poetry source add --default aliyun https://mirrors.aliyun.com/pypi/simple/~
+- ~poetry source add --secondary douban https://pypi.doubanio.com/simple/~
+
+** Publishing to a Private Repository
+- ~poetry config repositories.pypi~ https://mirrors.aliyun.com/pypi/simple/
+- ~poetry publish --build --repository pypi~
+
+* IDE Integration
+1. ~pipx install "python-lsp-server[all]"~
+2. Use =poetry.el=
+   #+begin_src emacs-lisp
+     (use-package poetry
+       :ensure t
+       :init
+       (poetry-tracking-mode 1)
+       :custom
+       (poetry-tracking-strategy 'projectile))
+   #+end_src
+
+** In-project Dev Dependencies
+- ~poetry add --group dev "python-lsp-server[all]"~
+
+* Editable Dependency
+- When you poetry install, the root package are installed as editable into your venv.
+- Path dependencies with ~develop = true~ in =pyproject.toml= are installed as editable.
+- ~poetry add --editable~ that sets the develop flag in =pyproject.toml=.
+#+begin_src conf-toml
+  [tool.poetry.dependencies]
+  basic-lib = { path = "/path/to/basic-lib", develop = true}
+#+end_src

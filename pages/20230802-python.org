@@ -4,6 +4,13 @@
 #+title: Python
 #+filetags: :Python:
 
+* Package Management
+:PROPERTIES:
+:ID:       cc31d6aa-8d48-4e7e-8257-80baa98b1e8d
+:END:
+- [[id:611eaef4-a96b-4835-b3d3-7e1e6910fbe2][~pipx~]]
+- [[id:c7646c59-10f8-42c0-b181-d476019efe95][~poetry~]]
+
 * Python Data Structure
 :PROPERTIES:
 :ID:       30f419eb-94da-4eb8-845c-26d1f3e77fdd

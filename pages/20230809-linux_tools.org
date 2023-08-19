@@ -4,15 +4,42 @@
 #+title: Linux Tools
 #+filetags: :Tools:Linux:
 
+* Big Picture
+#+caption: Linux Tools
+[[../assets/Linux/LinuxTools_1.png]]
+
+* Categories
 - [[id:3eb94d17-33dd-4314-afb4-ee194cb82acd][Testing Tools]]
 - [[id:a416cc1c-53f2-4028-a95a-12cdd6314f91][Performance Tools]]
 - [[id:aae692ca-c5aa-4a73-8b55-b3fbf3e2e7ee][Monitoring Tools]]
+- [[id:2818abfe-207d-48bc-9572-dd6e3b7caea4][Memory Tools]]
 - [[id:53273a0c-81a0-4f31-b3ce-10046b797462][Network Tools]]
 - [[id:663df4ec-af67-416f-b04c-c96780ca4056][IO Tools]]
 - [[id:aa8a566c-4a05-42db-9a8a-2ec4f4846798][Diagnostic Tools]]
+
+* Common Tools
+:PROPERTIES:
+:ID:       0064e354-1d31-4056-801c-500be1fe0f01
+:END:
+| Metrics           | Commands                          |
+|-------------------+-----------------------------------|
+| Process CPU Usage | ~top~, ~pidstat~, ~ps~, ~pstree~  |
+| Context Switch    | ~vmstat~, ~dstat~, ~sar~          |
+| Process CS        | ~pidstat~                         |
+| Soft Interrupts   | ~top~, =/proc/softirqs=, ~mpstat~ |
+| Hard Interrupts   | ~vmstat~, =/proc/interrupts=      |
+| Network           | ~dstat~, ~sar~, ~tcpdump~         |
+| IO                | ~dstat~, ~sar~                    |
+| CPU Info          | =/proc/cpuinfo=, ~lscpu~          |
+| Profile           | ~perf~, ~execsnoop~               |
+
+- [[id:febe7777-65eb-4a98-b7ea-3790b4e7245c][sysstat]] :: 包含 mpstat, sar, pidstat
+- [[id:a1819374-b1e5-49b4-93b6-5dafff01832b][~strace~]] :: 记录进程系统调用
+- [[id:d5abaaa5-4638-4ae4-8bba-65645a26ef60][~watch~]] :: 辅助监控用
 
 * Linux Toolkit
 :PROPERTIES:
 :ID:       bf0a7313-d565-4aa2-9dd7-b760eab6d50e
 :END:
 - [[id:4c9b7236-d322-4877-a67a-6638718fa4e3][bcc-tools]]
+- [[id:605b3e38-79ba-45f3-9241-c7d223af8e94][perf-tools]]

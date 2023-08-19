@@ -1,0 +1,39 @@
+:PROPERTIES:
+:ID:       894e26d6-8bae-49ab-ac0c-e9812dd08d9b
+:END:
+#+title: ~perf~
+#+filetags: :Linux:Tools:
+
+基于事件记录的动态追踪工具
+
+- ~perf top~ 能够实时显示占用 CPU 时钟最多的函数或者指令，因此可以用来查找热点函数
+  - Overhead 该符号的性能事件在所有采样中的比例，用百分比来表示。
+  - Shared Object 是该函数或指令所在的动态共享对象（Dynamic Shared Object），如内核、进程名、动态链接库名、内核模块名等。
+  - [ ] 是动态共享对象的类型； [.] 表示用户空间的可执行程序、或者动态链接库，而 [k] 则表示内核空间。
+  - Symbol 是符号名，也就是函数名。当函数名未知时，用十六进制的地址来表示。
+- ~perf record/report~
+  - ~-g~ 开启调用关系的采样，方便我们根据调用链来分析性能问题。
+  - ~-p~ 指定pid
+
+* 容器内进程symbol不显示问题
+1. 宿主机执行 ~perf record -g -p [pid]~
+2. ~docker cp perf.data [image]:/tmp~
+3. 容器内执行 ~perf report~
+
+* ~perf stat~
+- Tweeking ~/proc/sys/kernel/perf_event_paranoid~ to -1 (Allow use of almost all events by all users Ignore mlock limit)
+- ~perf stat -e cycles,instructions,cache-references,cache-misses,... python test.py~
+
+
+Performance Counter Descriptions:
+- =task-clock= tells us how many clock cycles our task. (all CPUs)
+- The difference between =instructions= and =cycles= gives us an indication of how well our code is vectorizing and pipelining.
+- =cs=: context switches
+- =migrations=: tell us about how the program is halted in order to wait for a kernel operation to finish (such as IO).
+  - =migrations= happen when the program is halted and resumed on a different CPU than the one it was on before
+- =faults=: page-fault.
+- =cache-references= increases whenever we reference data that is in our cache(L1/L2/L3). If we do not already have this data in the cache and need to fetch it from RAM, this counts as a =cache-miss=
+- A =branch= is a time in the code where the execution flow changes.
+- =branch-misses=: the CPU tries to guess which direction the branch will take and preload the relevant instructions.
+- =instructions per cycle= tells us the total speed boost from pipelining, out-of-order execution, and hyperthreading.
+- run ~perf list~ to get the list of currently supported metrics on your system

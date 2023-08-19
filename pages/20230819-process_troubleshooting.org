@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       9b389f92-25a2-4d87-ab70-70572a7a23fc
+:END:
+#+title: Process Troubleshooting
+#+filetags: :Tools:Linux:
+
+- [[id:4baf76c7-7bd5-4bf4-b573-86b0dabd4869][~pidstat~]]: 进程各项指标查询
+- [[id:80483dbf-4175-4d6e-873c-7813641ab0ae][~pstree~]]: 进程树，查找子进程
+- [[id:54850633-3a61-4c0a-b53f-a3bc97c53218][Short Period Process]]: 短时进程问题追踪
+- [[id:a1819374-b1e5-49b4-93b6-5dafff01832b][~strace~]]: 追踪系统调用

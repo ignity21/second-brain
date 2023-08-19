@@ -66,6 +66,7 @@ Your spam filter is a Machine Learning program that, given examples of spam emai
 :END:
 ** [[id:bffd4dcf-0fb1-4480-9338-956d156b97b9][Gradient Descent]]
 ** [[id:1800f8d6-afdd-48f6-a680-fd8460bd1f2e][Normal Equation]]
+** [[id:5765135f-eb1d-46f7-ac0d-627582a02b8e][Adam Algorithm]]
 
 * ML Preparation
 :PROPERTIES:

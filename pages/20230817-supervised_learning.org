@@ -17,6 +17,7 @@ Predict a *continuous* output.
 
 ** Algorithms
 - [[id:b6f03e6b-8850-4f2d-8d2d-f337029fe1e7][Linear Regression]]
+- [[id:10b0fc16-06fe-4725-ac6a-738f6842ce84][Polynomial Regression]]
 - [[id:4e603b85-7e9e-47ca-b3f4-b7747cd6019a][K-Neighbors Regression]]
 
 * Classification
@@ -31,6 +32,7 @@ Predict a *discrete* output.
 ** Algorithms
 - [[id:9db494ed-d782-4bfe-b9d2-52c768251490][Logistic Regression]]
 - [[id:4dec577e-c1d9-4b01-9a95-63e3413b42a9][K-Nearest Neighbors]]
+- [[id:31b71a06-0592-444b-b410-916ee717b488][Neural Network]]
 
 * Examples
 - Regression Problem: Given data about the size of houses on the real estate market, try to predict their price.

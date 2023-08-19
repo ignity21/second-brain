@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       10b0fc16-06fe-4725-ac6a-738f6842ce84
+:END:
+#+title: Polynomial Regression
+#+filetags: ML
+
+* Hypothesis
+
+A hypothesis function could be
+- Quadratic: $w_1 x + w_2 x^2 + b$
+- Cubic: $w_1 x + w_2 x^2 + w_3 x^3 + b$
+- Square Root: $w_1 x + w_2 \sqrt x + b$

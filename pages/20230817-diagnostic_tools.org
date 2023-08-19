@@ -5,3 +5,4 @@
 #+filetags: :Tools:Linux:
 
 - [[id:a1819374-b1e5-49b4-93b6-5dafff01832b][~strace~]] :: Troubleshooting tool for tracing system calls.
+- [[id:894e26d6-8bae-49ab-ac0c-e9812dd08d9b][~perf~]] :: Profiling tool.
