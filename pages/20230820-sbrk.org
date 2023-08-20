@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       409ebbc5-50be-4035-912e-2d12d89ddf67
+:END:
+#+title: ~sbrk()~
+#+filetags: :SystemCall:Linux:
+
+~sbrk~ is the UNIX system call that increases or decreases the address space of the process b-y- a specified number of bytes.
+- Numerous software packages implement their own memory allocation algorithms with the ~sbrk~ system call.

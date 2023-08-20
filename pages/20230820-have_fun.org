@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       b4a3d870-9446-4fb2-8cd3-12d57bbf056e
+:END:
+#+title: Have Fun
+#+filetags: Fun
+
+- [[id:35ca03c6-3482-48e7-9577-3bc2a218ff26][Warhammer3]]

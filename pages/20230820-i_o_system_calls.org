@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       203da24b-3369-456a-bff6-2dabd33ed858
+:END:
+#+title: I/O System Calls
+#+filetags: :SystemCall:Linux:
+
+* [[id:dfdba3bb-da7c-4630-93e1-a82b5462795c][File I/O]]

@@ -1,0 +1,41 @@
+:PROPERTIES:
+:ID:       2b884159-5c23-4eb5-bc76-c15dd508adef
+:END:
+#+title: Roundoff Errors
+#+filetags: ML
+
+* Logistic Regression
+- Sigmoid
+
+\[a=g(z)=\frac{1}{1+e^{-z}}\]
+
+- Original loss
+  - Explicitly computes $a$ as an intermediate value
+\[loss=-y\log(a) - (1-y)\log(1-a)\]
+
+- More accurate loss
+  - no intermediate value $a$
+  - gives TensorFlow more flexibility in terms of more accurate rearrangement.
+\[loss=-y\log(\frac{1}{1+e^{-z}})-(1-y)\log(1-\frac{1}{1+e^{-z}})\]
+
+* Code
+- Original Loss
+#+begin_src python
+  model = Sequential([
+      Dense(units=25, activation="relu"),
+      Dense(units=15, activation="relu"),
+      Dense(units=10, activation="sigmoid")
+  ])
+  model.compile(loss=BinaryCrossEntropy())
+#+end_src
+
+- More accurate loss
+#+begin_src python
+  model = Sequential([
+      Dense(units=25, activation="relu"),
+      Dense(units=15, activation="relu"),
+      # => only compute z as an intermediate value
+      Dense(units=10, activation="linear")
+  ])
+  model.compile(loss=BinaryCrossEntropy(from_logits=True))
+#+end_src

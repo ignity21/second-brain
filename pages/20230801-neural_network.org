@@ -103,3 +103,4 @@ Each neuron only looks at part of the previous layer's inputs.
 [[../assets/ML/ConvolutionalNN.png]]
 
 * [[id:bbe0d8aa-27a7-4833-9d54-1fa917b96c2d][Activation Functions]]
+* [[id:2b884159-5c23-4eb5-bc76-c15dd508adef][Roundoff Errors]]

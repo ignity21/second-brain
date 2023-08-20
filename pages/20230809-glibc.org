@@ -14,4 +14,4 @@ It is a collection of functions that provide basic functionality to programs run
 
 * functions
 - [[id:53b16537-9008-46a6-b958-d15f14896b78][~malloc()~]]: manages the space from user level.
-- ~sbrk()~: Numerous software packages implement their own memory allocation algorithms with the ~sbrk~ system call.
+- [[id:409ebbc5-50be-4035-912e-2d12d89ddf67][~sbrk()~]]: increases or decreases the address space of the process b-y- a specified number of bytes.
