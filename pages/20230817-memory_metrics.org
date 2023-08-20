@@ -20,3 +20,6 @@
 #+begin_src bash
   man 5 proc # search meminfo
 #+end_src
+
+* [[id:b879e051-9bf6-48d5-a135-0da0ee8ee2d4][=/proc/zoneinfo=]]
+=/proc/zoneinfo= is a pseudo-file that provides information about the memory zones on the system.

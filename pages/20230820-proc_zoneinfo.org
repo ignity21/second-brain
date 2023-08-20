@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       b879e051-9bf6-48d5-a135-0da0ee8ee2d4
+:END:
+#+title: =/proc/zoneinfo=
+#+filetags: Linux
+
+- =pages_min=, =pages_low=, =pages_high= 参考 [[id:065d6f74-0113-4308-b158-b2333a6f7339][Garbage Collection]]
+- =nr_zone_active_anon= 和 =nr_zone_inactive_anon= ，分别是活跃和非活跃的匿名页数。
+- =nr_zone_active_file= 和 =nr_zone_inactive_file= ，分别是活跃和非活跃的文件页数。
