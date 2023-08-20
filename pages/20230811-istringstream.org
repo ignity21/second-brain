@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       2eb32af4-4617-48c6-a5cb-d945ff3e494d
 :END:
-#+title: ~istringstream~
+#+title: ~std::istringstream~
 #+filetags: C++
 Streaming data from a string
 #+begin_src cpp

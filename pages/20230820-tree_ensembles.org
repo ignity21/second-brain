@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       6f6fe3d6-daff-4dde-94fb-1ce36dc43af3
+:END:
+#+title: Tree Ensembles
+#+filetags: ML
+
+* Bagged Decision Tree
+- Given training set of size /m/
+- For /b=1/ to /B/
+  - Use sampling with replacement to create a new training set of size /m/
+- All trees vote for the final prediction
+
+* [[id:aa44b41e-2505-47ef-9b6a-c4f78a33af41][Random Forest]]
+
+* XGBoost(eXtreme Gradient Boosting)
+** Idea
+- Given training set of size /m/
+- For /b=1/ to /B/
+  - Use sampling with replacement to create a new training set of size /m/
+  - Instead of picking from all examples with equal probability, make it more
+    likely to pick examples that the previously trained trees *misclassify*.
+  - Idea: Deliberate practice
+
+** Library
+- ~from xgboost import XGBClassifier~
+- ~from xgboost import XGBRegressor~

@@ -1,0 +1,36 @@
+:PROPERTIES:
+:ID:       f1e9eb0e-735e-451c-85dd-eb355d661549
+:END:
+#+title: Type Deduction Diagnosis
+#+filetags: C++
+
+* Compilation Time
+#+begin_src cpp
+  template <typename T>
+  class TypeDisplayer;
+
+  int x = 0;
+  const int *y = &x;
+
+  TypeDisplayer<decltype(x)> xType; // aggregate ‘TypeDisplayer<int> yType’ has incomplete type ...
+  TypeDisplayer<decltype(y)> yType; // aggregate ‘TypeDisplayer<const int*> yType’ has incomplete type ...
+#+end_src
+
+* Runtime
+#+begin_src cpp
+  int x = 0;
+  const int &y = x;
+
+  std::cout << typeid(x).name() << "\n"; // not reliable
+  std::cout << typeid(y).name() << "\n";
+
+  // instead, use boost
+  #include <boost/type_index.hpp>
+  template<typename T>
+  void f(const T& param) {
+    using boost::typeindex::type_id_with_cvr;
+    std::cout << type_id_with_cvr<T>().pretty_name() << "\n";
+    std::cout << type_id_with_cvr<decltyp(param)>().pretty_name() << "\n";
+  }
+  // "with_cvr", cvr means const, volatile, reference
+#+end_src

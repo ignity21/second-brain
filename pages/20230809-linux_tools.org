@@ -17,14 +17,20 @@
 - [[id:663df4ec-af67-416f-b04c-c96780ca4056][IO Tools]]
 - [[id:aa8a566c-4a05-42db-9a8a-2ec4f4846798][Diagnostic Tools]]
 
+* 常见输出字段说明
+- cs（context switch）是每秒上下文切换的次数
+- in（interrupt）则是每秒中断的次数
+- r（Running or Runnable）是就绪队列的长度，也就是正在运行和等待 CPU 的进程数
+- b（Blocked）则是处于不可中断睡眠状态的进程数
+
 * Common Tools
 :PROPERTIES:
 :ID:       0064e354-1d31-4056-801c-500be1fe0f01
 :END:
 | Metrics           | Commands                          |
 |-------------------+-----------------------------------|
-| Process CPU Usage | ~top~, ~pidstat~, ~ps~, ~pstree~  |
-| Context Switch    | ~vmstat~, ~dstat~, ~sar~          |
+| Process CPU Usage | [[id:14101e01-aaa1-4a4c-af6d-c4738cdbeb93][~top~]], ~pidstat~, ~ps~, ~pstree~       |
+| Context Switch    | [[id:23925da8-c185-47a2-bc40-9e94f9fdaf8e][~vmstat~]], [[id:ddd59b03-0e84-403f-85e0-0591ef8f699b][~dstat~]], ~sar~          |
 | Process CS        | ~pidstat~                         |
 | Soft Interrupts   | ~top~, =/proc/softirqs=, ~mpstat~ |
 | Hard Interrupts   | ~vmstat~, =/proc/interrupts=      |

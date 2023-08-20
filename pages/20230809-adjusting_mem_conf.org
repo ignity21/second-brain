@@ -10,6 +10,10 @@
 * =/proc/sys/vm/min_free_kbytes=
 
 * =/proc/sys/vm/swappiness=
+:PROPERTIES:
+:ID:       e6a25528-6006-440d-aa72-86beb98ca9c3
+:END:
+
 swappiness 的范围是 0-100
 
 - 数值越大，越积极使用 Swap，也就是更倾向于回收匿名页

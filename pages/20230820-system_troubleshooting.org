@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       fa3e0959-819d-4d3e-abcd-e4bdc1cea072
+:END:
+#+title: System Troubleshooting
+#+filetags: Linux
+
+* Checking Flow
+1. 看系统整体指标 [[id:0064e354-1d31-4056-801c-500be1fe0f01][Common Tools]]
+2. 保持问题复现，例如： ~while true; do curl http://127.0.0.1; done~
+3. 找到问题进程，排查原因 [[id:9b389f92-25a2-4d87-ab70-70572a7a23fc][Process Troubleshooting]]
+4. 分析进程系统调用，找到问题点 [[id:a1819374-b1e5-49b4-93b6-5dafff01832b][~strace~]]
+5. 内存问题排查 [[id:b21233f1-2529-4fa8-8602-e4c7c36fc780][Memory Troubleshooting]]

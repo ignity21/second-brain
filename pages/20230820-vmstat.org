@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       23925da8-c185-47a2-bc40-9e94f9fdaf8e
+:END:
+#+title: ~vmstat~
+#+filetags: :Tools:Linux:
+
+#+begin_src bash
+  # 每隔5秒输出1组数据 --unit=M 可用于对齐输出
+  vmstat --unit=M 5
+#+end_src

@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       93b82365-7404-4643-9263-062fb3ee3bd3
+:END:
+#+title: System Caches
+#+filetags: Linux
+
+- Prior to Linux kernel version 2.4
+  - Page Cache: caches pages of files to optimize file IO.
+  - Buffer Cache: caches disk blocks to optimize block IO.
+
+- As of the 2.4 kernel, two caches have been combined, now there is only one cache, the [[id:a20150eb-3731-4848-8a33-c55c4a318b7b][Page Cache]]

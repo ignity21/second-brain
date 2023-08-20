@@ -1,0 +1,29 @@
+:PROPERTIES:
+:ID:       d63fa413-e271-4951-b208-b9c832cbf9b7
+:END:
+#+title: ~stress~
+#+filetags: :Tools:Linux:
+
+压力测试工具，模拟异常进程 ~sudo apt install stress~
+#+begin_src bash
+  # CPU 密集型模拟
+  stress --cpu 1 --timeout 600
+
+  # IO 密集型模拟
+  stress -i 1 --timeout 600
+
+  # 模拟大量进程，等待CPU调度
+  stress -c 16 -- timeout 600
+#+end_src
+
+- [[https://manned.org/stress][Documentation]]
+
+* ~stress-ng~
+:PROPERTIES:
+:ID:       846d35f4-1050-4b63-bf19-a5b590b5878b
+:END:
+~stress~ 的问题： ~stress -i~ 通过系统调用 ~sync()~ 来模拟 IO 的问题，但这种方法实际上并不可靠。
+因为 ~sync()~ 的本意是刷新内存缓冲区的数据到磁盘中，以确保同步。如果缓冲区内本来就没多少数据，那读写到
+磁盘中的数据也就不多，也就没法产生 IO 压力，在使用 SSD 磁盘的环境中尤为明显。
+
+使用 ~stress-ng~ 来模拟 ~stress-ng -i 1 --hdd 1 --timeout 600~

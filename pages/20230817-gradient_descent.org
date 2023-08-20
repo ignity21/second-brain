@@ -37,6 +37,7 @@ $$\theta_j=\theta_j(1-\alpha\lambda)-\frac{\alpha}{n}\sum_{i=1}^n(h_\theta(x^{(i
 :PROPERTIES:
 :ID:       ff5cd1f3-47e9-41e1-8a40-b1440865b627
 :END:
+- [[id:e011fb83-ee66-4913-a4d8-9f5bbca3d863][Stochastic Gradient Descent]]
 - [[id:bb10d8b3-f42c-4541-96b6-8024f9a840e5][Mini-batch Gradient Descent]]
 - [[id:19d770b1-8772-4e7f-b068-ab083ad03baa][Conjugate Gradient]]
 - [[id:7935b98b-7aab-49bf-b118-c342c17b04a4][BFGS]]

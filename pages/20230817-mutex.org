@@ -15,7 +15,6 @@ This ensures that all threads see a *self-consistent* view of the shared data.
   - Don't pass pointers and references to protected data outside the scope of the lock.
 
 * Cons
-
 - may cause *deadlock*
 - protecting too much or too little data
 
@@ -37,4 +36,21 @@ This ensures that all threads see a *self-consistent* view of the shared data.
 - ~std::scoped_lock~: the enhanced version of ~std::lock_guard~
 
 * ~std::recursive_mutex~
+:PROPERTIES:
+:ID:       50dcf366-a8c5-462d-9249-5f83cdbf1aa1
+:END:
 Most of the time, if you want a recursive mutex, you probably need to change your design instead.
+
+* ~std::shared_mutex~
+:PROPERTIES:
+:ID:       13775fe9-1e49-48d0-9c77-4cd7eeca9d4b
+:ROAM_ALIASES: "Reader-writer Mutex"
+:END:
+Used for rarely updated data.
+- exclusive access by a single "writer" thread
+- concurrent access by multiple "reader" threads
+*** Implementation
+- C++17 provides ~std::shared_mutex~ and ~std::shared_timed_mutex~
+- C++14 only features ~std::shared_time_mutex~
+- ~std::lock_guard~ and ~std::unique_lock~ for "writer"
+- ~std::shared_lock~ for "readers"

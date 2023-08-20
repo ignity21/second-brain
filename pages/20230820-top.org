@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       14101e01-aaa1-4a4c-af6d-c4738cdbeb93
+:END:
+#+title: ~top~
+#+filetags: :Tools:Linux:
+
+* 常用技巧
+- Filter by field "o/O" -> "COMMAND=emacs"
+- ~top~ 过滤显示Running状态进程 -> "o" -> "S=R"
+
+* Alternatives
+- ~sudo atop~: 系统指标分类分组统计
+- ~htop~: just fancy top
+- [[https://github.com/aristocratos/btop][~btop~]]

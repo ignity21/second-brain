@@ -1,0 +1,38 @@
+:PROPERTIES:
+:ID:       956bf88a-baa4-459c-aebc-a1a29260efb5
+:END:
+#+title: Startup Scripts
+#+filetags: :Shell:Linux:
+
+* System
+- =/etc/profile= :: System-wide environment variables, and startup programs.
+- =/etc/profile.d= :: =/etc/profile= calls small, single purpose scripts in the =/etc/profile.d= directory.
+- =~/.profile= :: Personal environment variables and startup programs.
+
+* Bash
+- =/etc/bashrc= :: System-wide aliases and functions.
+- =~/.bash_profile= :: Personal environment variables and startup programs.
+- =~/.bashrc= :: Personal aliases and functions
+- =~/.bash_logout= :: Personal items to perform on logout.
+
+* Zsh
+- =~/.zshenv=
+  - =~/.zshenv= set the command search paths, plus other important environment variables.
+  - =~/.zshenv= should not contain commands that produce output or assume the shell is attached to a tty.
+- =~/.zshrc= is sourced in *interactive* shells.
+  - It should contain commands to set up aliases, functions, options, key bindings, etc.
+- =~/.zlogin= is sourced in login shells.
+  - Personal environment variables and startup programs.
+  - =~/.zprofile= is similar to =~/.zlogin=
+- =~/.zlogout= is sourced when login shells exit.
+
+* GUI
+** =.xinitrc=
+=~/.xinitrc= is handy to run programs depending on X and set environment variables on X server startup.
+
+** =.xprofile=
+=~/.xprofile= allows you to execute commands at the beginning of the X user session.
+
+* References
+- [[https://www.linuxfromscratch.org/blfs/view/svn/postlfs/profile.html][The Bash Shell Startup Files]]
+- [[https://zsh.sourceforge.io/Intro/intro_3.html#SEC3][Zsh Startup Files]]

@@ -1,0 +1,27 @@
+:PROPERTIES:
+:ID:       e011fb83-ee66-4913-a4d8-9f5bbca3d863
+:END:
+#+title: Stochastic Gradient Descent
+#+filetags: ML
+
+/Stochastic Gradient Descent/ picks a random instance in the training set at every step and
+computes the gradients based only on that single instance.
+- The training instances must be *independent* and *identically distributed*.
+
+- Pros
+  - much faster
+  - can easily escape from local optima.
+- Cons
+  - can never settle at the minimum.
+
+* Solution for Cons
+Gradually reduce the learning rate. The steps start out large, then get
+smaller and smaller, allowing the algorithm to settle at the global minimum.
+
+* Implementation
+The function that determines the learning rate at each iteration is
+called the *learning schedule*.
+- If the learning rate is reduced too quickly, you may get stuck in a local minimum.
+- If the learning rate is reduced too slowly, you may jump around the minimum for a long time.
+
+- [[file:../notebooks/ML/linear_regression.ipynb][Code]]

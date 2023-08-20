@@ -1,0 +1,5 @@
+:PROPERTIES:
+:ID:       bbada0a0-359b-4614-be1a-94751359c9f4
+:END:
+#+title: ~std::promise~
+#+filetags: :Concurrency:STL:C++:

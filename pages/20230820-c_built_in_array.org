@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       cecdb0e0-82ac-467f-8585-56c966db4551
+:END:
+#+title: C++ Built-in Array
+#+filetags: :STL:C++:
+
+#+begin_src cpp
+  int array[26] = {0};
+#+end_src

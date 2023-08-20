@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       2d29f137-6278-4364-b0dc-2307410589a1
+:END:
+#+title: ~std::unordered_map~
+#+filetags: :C++:STL:
+
+- the *key part* of a ~std::unordered_map~ is *const*.
+  - for ~std::unordered_map<int, int>~, the type of pair is ~std::pair<const int, int>~

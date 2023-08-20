@@ -1,0 +1,135 @@
+:PROPERTIES:
+:ID:       c400a8cc-46b7-4afb-a0e1-29bde365fe36
+:END:
+#+title: ~std::thread~
+#+filetags: :STL:Concurrency:C++:
+
+* Definitions
+#+begin_src cpp
+  #include <thread>
+  #include <iostream>
+  #include <chrono>
+
+  std::thread::id main_thread_id = std::this_thread::get_id();
+
+  void print_thread_id() {
+    auto thread_id = std::this_thread::get_id();
+    if (thread_id == main_thread_id) {
+      std::cout << "This is main thread." << "\n";
+    } else {
+      std::cout << "This is sub thread, id: " << std::this_thread::get_id() << "\n";
+    }
+  }
+
+  void do_some_work() {
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    print_thread_id();
+    std::cout << "go go go..." << "\n";
+  }
+#+end_src
+
+* Launching a Thread
+Need to ensure that you've called either ~join()~ or ~detach()~ before a ~std::thread~ object is destroyed.
+** ~join()~
+#+begin_src cpp
+  int main(int argc, char *argv[]) {
+    std::thread t{do_some_work};
+    do_some_work_in_main_thread(); // might throw exceptions, then t.join() won't be invoked.
+    t.join();
+    return 0;
+  }
+#+end_src
+- Problem: The call to ~join()~ is liable to be skipped if an exception is thrown *after* the thread has been started but *before* the call to ~join()~.
+- Solution: RAII
+#+begin_src cpp
+  #include <thread>
+
+  class thread_guard {
+    std::thread &t;
+   public:
+    explicit thread_guard(std::thread &t_): t(t_) {}
+    ~thread_guard() {
+      if (t.joinable()) {
+        t.join();
+      }
+    }
+    thread_guard(thread_guard const &)=delete;
+    thread_guard& operator=(thread_guard const &)=delete;
+  };
+#+end_src
+#+begin_src cpp
+  int main(int argc, char *argv[]) {
+    std::thread t{do_some_work};
+    thread_guard g{t};
+    do_some_work_in_main_thread();
+    return 0;
+  }
+#+end_src
+
+** ~detach()~
+#+begin_src cpp
+  int main(int argc, char *argv[]) {
+    std::thread t{do_some_work}; // 线程代码已开始执行
+    if (t.joinable()) {
+      t.detach(); // 转变为后台线程，即 daemon thread
+    }
+    std::this_thread::sleep_for(std::chrono::milliseconds(2000)); // 主线程如果直接退出，后台线程也会退出
+    return 0;
+  }
+#+end_src
+- Need to ensure that the data accessed by the thread is valid until the thread has finished with it.
+
+* Passing Arguments
+- Important: The arguments are copied into internal storage of ~std::thread~.
+  - The ~std::thread~ constructor copies the supplied values *as is*, without converting to the expected argument type.
+  - The ~std::thread~ then passed to the callable object or function as rvalues as if they were temporaries.
+#+begin_src cpp
+  void fc(std::string const &cs);
+  void fr(std::string &rs);
+  void fp(std::string *ps);
+
+  void oops1() {
+    char buffer[] = "little bird";
+    std::thread t{fc, buffer}; // undefined behavior
+    // std::thread 对象创建时只复制 char[]
+    // 传给线程入口函数时进行隐式转换，但本地对象buffer已经被释放
+    // 解决方法：
+    // std::thread t{fc, std::string(buffer)};
+    t.detach();
+  }
+
+  void oops2() {
+    std::string s = "little bird";
+    std::thread t{fr, s}; // 编译错误
+    // std::thread 复制 s 对象，并在传参给线程入口函数时会转成右值传入
+    // 转成右值是为了兼容 move-only types
+    // 最终会因为 不能给 non-const reference 参数传入 ravlue 而编译失败
+    // 解决方法:
+    // std::thread t{fc, std::ref(s)};
+    t.join();
+  }
+#+end_src
+
+* Scoped Thread Pattern
+:PROPERTIES:
+:ID:       b8a1584e-b00a-47e4-9c14-8d6550773666
+:END:
+#+begin_src cpp
+  #include <thread>
+  #include <system_error>
+
+  class scoped_thread {
+    std::thread t;
+   public:
+    explicit scoped_thread(std::thread t_): t(std::move(t_)) {
+      if (!t.joinable())
+        throw std::logic_error("No thread");
+    }
+    ~scoped_thread() {
+      t.join();
+    }
+    scoped_thread(const scoped_thread &)=delete;
+    scoped_thread& operator=(const scoped_thread &)=delete;
+  };
+#+end_src
+- Production-grade class ~std::jthread~ in C++20

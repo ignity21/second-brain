@@ -54,3 +54,4 @@
   - Reduce the variance instead of entropy(impurity)
 
 [[file:../assets/ML/ChooseASplitRegressionTree.png]]
+* [[id:6f6fe3d6-daff-4dde-94fb-1ce36dc43af3][Tree Ensembles]]

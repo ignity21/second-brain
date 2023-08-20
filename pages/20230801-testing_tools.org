@@ -13,6 +13,7 @@
 :END:
 - [[id:49b1d0cc-0ea8-478d-8b29-f6006472c028][~ab~]]: Apache HTTP server benchmarking tool.
 - TODO [[id:43ec7535-1986-4729-b30f-8613b1f43550][~sysbench~]]
+- [[id:d63fa413-e271-4951-b208-b9c832cbf9b7][~stress~]]: A tool to stress test CPU, memory, and IO on a Linux system.
 
 * Network
 - [[id:a07e73bd-8235-461d-aba9-18929611a815][~hping3~]]: Advanced ping utility which supports protocols such TCP, UDP, and raw IP.

@@ -15,3 +15,5 @@
   watch -d grep "Rescheduling interrupts" /proc/interrupts
   watch -d grep -A 15 'Normal' /proc/zoneinfo # grep -A 表示仅显示Normal行以及之后的15行输出
 #+end_src
+
+* [[id:14101e01-aaa1-4a4c-af6d-c4738cdbeb93][~top~]]

@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       35d07be4-8f74-4aac-857d-ea4d36738f70
+:END:
+#+title: Short Period Process
+#+filetags: Linux
+
+1 和 2 用于发现短时进程
+1. ~top~ 过滤显示Running状态进程 -> "o" -> "S=R"
+2. ~sar -w 1~ 显示每秒新建任务数和上下文切换数 =proc/s   cswch/s=
+3. [[id:54850633-3a61-4c0a-b53f-a3bc97c53218][~execsnoop~]]

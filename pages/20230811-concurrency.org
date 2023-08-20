@@ -20,3 +20,5 @@ Two main reasons:
 * [[id:7475eede-346a-403e-9aac-91cab1e71a1f][Deadlock Issue]]
 * Examples
 ** [[id:f31b1ca4-bcd9-466a-af90-1484e8b28684][Parallel Computation]]
+** [[id:7f7c8750-1a2d-4a09-b008-e999dd17784d][Thread-safe Queue]]
+** [[id:0874134e-082a-4f60-8c94-cc0ed6e4001b][Thread-safe Lazy Initialization]]

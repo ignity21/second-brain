@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       ddd59b03-0e84-403f-85e0-0591ef8f699b
+:END:
+#+title: ~dstat~
+#+filetags: :Tools:Linux:
+
+增强版 vmstat, iostat, ifstat，查看系统整体情况
