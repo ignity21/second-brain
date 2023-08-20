@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       796f0cbe-2619-47ee-895d-e2a76129f20f
+:END:
+#+title: LeetCode
+#+filetags: :Algorithm:
+
+* Array
+:PROPERTIES:
+:ID:       742a3de0-d9f5-42b1-a119-315b9cd7d04c
+:END:
+- [[id:37465830-0330-4187-8744-0f5bedc989e8][LT287]]

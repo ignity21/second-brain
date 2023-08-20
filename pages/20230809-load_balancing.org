@@ -4,6 +4,8 @@
 #+title: Load Balancing
 #+filetags: SystemDesign
 
+- links :: [[id:87987610-9f0a-44ee-9a7f-64666000c92a][Hashing]]
+
 A type of reverse proxy that distributes traffic cross servers.
 
 * Load Balancing Strategies
@@ -13,9 +15,3 @@ A type of reverse proxy that distributes traffic cross servers.
 - Performance-based Selection: Load balancer performs health checks on servers.
 - IP-based Routing: helps maximized cache hits.
 - Path-based Routing
-
-* Hashing
-:PROPERTIES:
-:ID:       853fe44f-85f4-44c1-b4d0-72e277edc3c1
-:END:
-- [[id:9fe0a1a4-8f10-4cc9-af31-e57bca080575][Rendezvous Hashing]]

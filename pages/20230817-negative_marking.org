@@ -4,11 +4,9 @@
 #+title: Negative Marking
 #+filetags: :Algorithm:
 
-- links :: [[id:0c1da306-b004-447c-a019-81266ded6c23][Array as Hashmap]]
-
 - LeetCode: [[https://leetcode.com/problems/first-missing-positive/][41]], [[https://leetcode.com/problems/find-the-duplicate-number][287]]
 
-* [[https://leetcode.com/problems/find-the-duplicate-number][287]]
+* [[id:37465830-0330-4187-8744-0f5bedc989e8][LT287]]
 ** Intuition
 There are $n+1$ positive numbers in the array (numsnumsnums) (all in the range [1, n]).
 Since the array only contains *positive integers*, we can track each number ~num~ that

@@ -1,0 +1,36 @@
+:PROPERTIES:
+:ID:       37465830-0330-4187-8744-0f5bedc989e8
+:END:
+#+title: LT287
+#+filetags: :Algorithm:
+
+- [[https://leetcode.com/problems/find-the-duplicate-number/solutions/127594/find-the-duplicate-number/][Solution]]
+
+- Sort
+  - Modification required
+  - Time Complexity: $O(n\log n)$
+  - Space Complexity: $O(\log n)$ for Quick Sort, $O(n)$ for Timsort
+- Hash Table
+  - Time Complexity: $O(n)$
+  - Space Complexity: $O(n)$
+- [[id:00d69c0f-8b27-4696-9f62-971ffdec48f2][Negative Marking]]
+  - Modification required
+  - Time Complexity: $O(n)$
+  - Space Complexity: $O(1)$
+- Array as Hashmap
+  - Modification required
+  - Time Complexity: $O(n)$
+  - Space Complexity: $O(1)$
+- Binary Search
+  - Time Complexity: $O(n\log n)$
+  - Space Complexity: $O(1)$
+- [ ] Sum of Set Bits
+  - Time Complexity: $O(n\log n)$
+  - Space Complexity: $O(1)$
+  - Hint 1: How does this work if the duplicate number appears more than twice?
+  - Hint 2: Why does only including the bits with a positive count result in the duplicate number?
+- Cycle Detection
+  - Time Complexity: $O(n)$
+  - Space Complexity: $O(1)$
+  - [[id:b3b36188-2dde-4850-b0b5-37c2a8a3db62][Floyd's Cycle Finding Algorithm]]
+  - [[https://leetcode.com/problems/linked-list-cycle-ii/solution/#approach-2-floyds-tortoise-and-hare-accepted][Linked List Cycle II]]

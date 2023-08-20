@@ -73,8 +73,14 @@
   - =O_EXCL=: 如文件已存在， ~open()~ 会返回错误。使得“测试和创建”两步骤成为一个原子操作
 
 * 其他 IO 调用
+** ~dup~ and ~dup2~
+Duplicate a [[id:937b44b4-497a-466a-924d-0a01a2228266][File Descriptor]].
+- ~dup(fd)~ is equivalent to ~fcntl(fd, F_DUPFD, 0)~
+- ~dup2(fd, fd2)~ is equivalent to ~close(fd2); fcntl(fd, F_DUPFD, fd2)~. (*atomic* operation)
+
 ** ~ioctl()~
 对于非标准 IO 模型的设备和文件操作， ~ioctl~ 是系统提供的万能接口。
+
 ** ~sync~, ~fsync~, and ~fdatasync~
 - ~void sync(void)~: simply queues all the modified block buffers for writing and returns.
 - ~int fsync(int fd)~: waits for the disk writes to complete before returning

@@ -8,6 +8,8 @@
 
 * [[id:8426d96d-fa58-4775-9500-c44546b37266][Sorting]]
 
+* [[id:87987610-9f0a-44ee-9a7f-64666000c92a][Hashing]]
+
 * Advanced Algos
 :PROPERTIES:
 :ID:       8cdb3ab1-2096-406c-b5c0-41aceca82465
@@ -23,3 +25,5 @@
 :END:
 - [[id:b3b36188-2dde-4850-b0b5-37c2a8a3db62][Floyd's Cycle Finding Algorithm]]
 - [[id:00d69c0f-8b27-4696-9f62-971ffdec48f2][Negative Marking]]
+
+* [[id:796f0cbe-2619-47ee-895d-e2a76129f20f][LeetCode]]

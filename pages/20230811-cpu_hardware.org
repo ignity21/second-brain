@@ -5,10 +5,29 @@
 #+filetags: :OS:Hardware:
 
 * SIMD
+:PROPERTIES:
+:ID:       b361f3ec-476f-4587-997e-2ae4ee647859
+:END:
 Single instruction, multiple data. Efficient with high IPC. (CPU vectorization instruction)
 
 * Hyperthreading
+:PROPERTIES:
+:ID:       f1faaf48-7274-4270-a3e5-66380e0034ee
+:END:
 presents a virtual second CPU to the host OS, and clever hardware logic tries to interleave two threads of instructions into the execution units on a single CPU. When successful, gains of up to 30% over a single thread can be achieved.
 
-* Pipelining
+* CPU Pipelining
 With pipelining, the CPU is able to run the current operation while fetching and preparing the next one.
+
+* NUMA Architecture
+:PROPERTIES:
+:ID:       29001a4b-0d21-4602-b9b5-535c0f8ee122
+:END:
+** Node
+在 NUMA 架构下，多个处理器被划分到不同 Node 上，且每个 Node 都拥有自己的本地内存空间。
+
+同一个 Node 内部的内存空间，实际上又可以进一步分为不同的内存域（Zone），比如直接内存访问区（DMA）、普通内存区（NORMAL）、伪内存区（MOVABLE）等
+- ~numactl --hardware~ 查看 Node 情况
+
+** Zone
+- [[id:b879e051-9bf6-48d5-a135-0da0ee8ee2d4][=/proc/zoneinfo=]]

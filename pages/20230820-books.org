@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       ce0a94cd-1c99-4a35-ac22-bd6ee5bf848e
+:END:
+#+title: Books
+#+filetags: :Book:
+
+* Life Hack
+- [[id:ee0201ca-ae34-4fea-b3bc-b19882a836b3][Atomic Habits]]

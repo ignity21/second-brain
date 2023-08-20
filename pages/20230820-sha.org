@@ -1,0 +1,5 @@
+:PROPERTIES:
+:ID:       ba11a9a3-76d5-49c8-b814-27fc6467f7b1
+:END:
+#+title: SHA
+#+filetags: :Algorithm:
