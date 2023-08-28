@@ -8,4 +8,23 @@
 :PROPERTIES:
 :ID:       742a3de0-d9f5-42b1-a119-315b9cd7d04c
 :END:
+** 经典题
 - [[id:37465830-0330-4187-8744-0f5bedc989e8][LT287]]
+- [[https://leetcode.com/problems/ransom-note/][LT383]]
+
+** 技巧：数组作为哈希表
+- 数组的大小是 *受限* 的，题目包含字母就是暗示可以使用数组作为哈希表
+
+* swap function
+:PROPERTIES:
+:ID:       16f95a05-f56f-447a-9f6c-7330b8134571
+:END:
+#+begin_src cpp
+  void swap(int& a, int& b) {
+    a ^= b; // a: bit位为1的位置表示a和b在该位上不同，bit位为0则表示相同位
+    b ^= a;
+    // b: ab相同位为0 b与相同位0异或原bit位值不变 1^0=1 0^0=0
+    // b: ab不同位为1 b与不同位1异或原bit位反转 1^1=0 0^1=1
+    a ^= b; // 与第二步同理
+  }
+#+end_src

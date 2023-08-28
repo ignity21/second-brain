@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       960a00b2-a9ee-4008-b5e9-ede784e33395
+:END:
+#+title: Zotero
+#+filetags: :SecondBrain:
+
+* Add-ons
+** ZotFile
+- Tools -> ZotFile Preferences
+- General Settings -> Custom Location
+- Renaming Format -> Format for all Item Types except Patents: ~%b~
+- Automatically Rename: Advanced Settings -> ~Always rename~
+- Remove special characters from filename: ~true~
+
+** Better BibTeX
+- Edit -> Preferences -> Better BibTeX
+- Citation Key Format: ~shorttitle(3,3)+year+authorsAlpha~
+  - [[https://retorque.re/zotero-better-bibtex/citing/]]
+- Keep keys unique: ~across all libraries~
+- Automatic Export: ~On Change~
+
+** Zotero GPT
+- [[https://github.com/MuiseDestiny/zotero-gpt][Download]]
+- Edit -> Preferences -> Advanced -> Config Editor
+- Search gpt -> fill in secret key
