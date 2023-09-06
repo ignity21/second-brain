@@ -4,7 +4,8 @@
 #+title: ~sysbench~
 #+filetags: :Linux:Tools:
 
-~sysbench~ 是一个多线程的基准测试工具，一般用来评估不同系统参数下的数据库负载情况。可用来模拟上下文切换过多的问题。
+~sysbench~
+是一个多线程的基准测试工具，可模拟系统多线程调度切换的情况。一般用来评估不同系统参数下的数据库负载情况。可用来模拟上下文切换过多的问题。
 
 安装： ~sudo apt install sysbench~
 

@@ -13,6 +13,10 @@
 - uninterruptible sleep (usually IO): 不可中断状态的进程则是正处于内核态关键流程中的进程，状态码 D
 - top计测值：1分钟，5分钟，15分钟
 
+** 高平均负载的几种情况
+1. 高 CPU 使用率 -> 计算密集
+2. 高 iowait -> IO 密集
+
 * CPU Usage
 :PROPERTIES:
 :ID:       bf6dd008-dd56-4b67-9b78-cc6af75e9249

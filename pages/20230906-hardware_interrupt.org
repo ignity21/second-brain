@@ -1,0 +1,5 @@
+:PROPERTIES:
+:ID:       d959170b-6b5b-44fd-af42-5d274c83780b
+:END:
+#+title: Hardware Interrupt
+#+filetags: :Linux:
