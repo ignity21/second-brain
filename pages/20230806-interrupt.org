@@ -4,7 +4,7 @@
 #+title: Interrupt
 #+filetags: Linux
 
-* 硬中断
+* TODO 硬中断
 :PROPERTIES:
 :ID:       2e165f86-7e8b-4544-a620-7c06f9670338
 :END:
@@ -19,3 +19,11 @@
 内核通过中断跟网卡进行交互，网卡硬中断只处理最核心的网卡数据读取或发送，协议栈中的大部分逻辑都放到软中断中处理。
 - 硬中断：要做到快速处理，所以只需把网卡的数据读到内存中，然后更新一下硬件寄存器的状态即可。
 - 软中断：处理比较耗时且复杂的事情。如从内存中找到网络数据，再按照网络协议栈，对网络数据进行逐层解析和处理，最后把数据送给应用程序。
+
+* =/proc/interrupts=
+:PROPERTIES:
+:ID:       3158f50d-42bd-46d5-8862-2801f343fe72  :Linux:
+:END:
+中断详细信息
+- ~watch -d cat /proc/interrupts~
+  - RES 行: Rescheduling interrupts
