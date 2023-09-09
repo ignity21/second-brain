@@ -53,6 +53,7 @@
 :END:
 - [[id:5dc17fb2-544c-433d-bd94-394a0c37457f][CPU Hardware]]
 - [[id:00e92d55-5469-4d5d-9566-e889d0b86ab3][CPU Metrics]]
+- [[id:3c55f112-a84c-46da-b872-3253ac8ad948][CPU Troubleshooting]]
 
 * Memory
 :PROPERTIES:

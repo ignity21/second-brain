@@ -23,9 +23,9 @@
 :END:
 CPU 使用率，就是除了空闲时间外的其他时间占总 CPU 时间的百分比。
 
-- =/proc/stat= 提供 CPU 和任务统计信息。
+- =/proc/stat= 提供 CPU 和任务统计信息。CPU 使用率基于此数据算出。
 #+begin_verse
-  单位 10ms
+  单位 10ms 即 100 USER_HZ
 
   cpu  100898 490 31309 2195013 10269 0 9757 0 0 0
   cpu0 13066 99 4666 273267 1044 0 4636 0 0 0
@@ -37,7 +37,7 @@ CPU 使用率，就是除了空闲时间外的其他时间占总 CPU 时间的�
   cpu6 12547 55 3753 274612 1438 0 147 0 0 0
   cpu7 12395 63 3629 273926 1915 0 114 0 0 0
 #+end_verse
-- ~man proc~ 查找 =/proc/stat= 查看每列所表示的含义
+- ~man 5 proc~ 查找 =/proc/stat= 查看每列所表示的含义
 - user, nice, system, idle, iowait, irq(interrupts), softirq, steal, guest, guest_nice
   - nice: 代表低优先级用户态 CPU 时间，也就是进程的 nice 值被调整为 1-19 之间时的 CPU 时间； nice 可取值范围是 -20 到 19，数值越大，优先级反而越低
   - iowait: 代表等待 IO 的 CPU 时间
@@ -46,17 +46,14 @@ CPU 使用率，就是除了空闲时间外的其他时间占总 CPU 时间的�
   - guest: 运行虚拟机的 CPU 时间
 
 ** 计算公式
-=/proc/stat= 统计的是开机以来的平均 CPU 使用率。为了计算 CPU 使用率，性能工具一般都会取间隔一段时间（比如 3 秒）的两次值，作差后，再计算出这段时间内的平均 CPU 使用率。
+=/proc/stat= 统计的是开机以来的时间片数。为了计算 CPU 使用率，性能工具一般都会取间隔一段时间（比如 3 秒）的两次值，作差后，再计算出这段时间内的平均 CPU 使用率。
 $$usage=1 - \frac{idle_t-idle_{t-1}}{total_t-total_{t-1}}$$
 
-** 进程相关
-=/proc/[pid]/stat=
-
-** 总结
-- 用户 CPU 和 Nice CPU 高，应着重排查进程的性能问题。
-- 系统 CPU 高，应着重排查内核线程或者系统调用的性能问题。
-- IO 等待 CPU 高，表示 IO 交互时间过长，应该着重排查系统存储是不是出现了 IO 问题。
-- [[id:18ebf2c0-c945-4bbc-ad58-9477849c7bbb][软中断和硬中断]] 高，说明软中断或硬中断的处理程序占用了较多的 CPU，所以应该着重排查内核中的中断服务程序。
+** 常用工具
+- [[id:14101e01-aaa1-4a4c-af6d-c4738cdbeb93][~top~]]
+- [[id:4baf76c7-7bd5-4bf4-b573-86b0dabd4869][~pidstat~]]
+  - ~pidstat 1 5~: 采样间隔1秒，采样5次
+- [[id:894e26d6-8bae-49ab-ac0c-e9812dd08d9b][~perf~]]: 定位导致 CPU 使用率高的工具
 
 * [[id:706d7e91-8a8f-466f-b871-602e2efcd187][Context Switching]]
 * Cache Hit Rate

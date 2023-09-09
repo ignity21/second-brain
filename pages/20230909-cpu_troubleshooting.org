@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       3c55f112-a84c-46da-b872-3253ac8ad948
+:END:
+#+title: CPU Troubleshooting
+#+filetags: :OS:Linux:
+
+* 进程相关数据
+- =/proc/[pid]/stat=
+
+* CPU使用率高排查经验
+- 用户 CPU 和 Nice CPU 高，应着重排查进程的性能问题。
+- 系统 CPU 高，应着重排查内核线程或者系统调用的性能问题。
+- IO 等待 CPU 高，表示 IO 交互时间过长，应该着重排查系统存储是不是出现了 IO 问题。
+- [[id:18ebf2c0-c945-4bbc-ad58-9477849c7bbb][软中断和硬中断]] 高，说明软中断或硬中断的处理程序占用了较多的 CPU，所以应该着重排查内核中的中断服务程序。

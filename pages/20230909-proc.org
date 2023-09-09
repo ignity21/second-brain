@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       8e974bc1-a02f-4567-8e13-5e8b37b5babb
+:END:
+#+title: =/proc=
+#+filetags: Linux
+
+=/proc= 目录是一个特殊的虚拟文件系统，用于在Linux系统中提供对内核和系统信息的访问。它不包含实际的文件，而是提供文件方式来查看和操作正在运行的内核和系统状态的信息。
+
+* 帮助
+~man 5 proc~
+
+* 常用虚拟文件
+- =/proc/cpuinfo=
+- =/proc/meminfo=
+- =/proc/[PID]=
+  - =/proc/[PID]/stat=
+- =/proc/mounts=: 文件系统挂载信息
+- [[id:b879e051-9bf6-48d5-a135-0da0ee8ee2d4][=/proc/zoneinfo=]]
+- [[id:3158f50d-42bd-46d5-8862-2801f343fe72  :Linux:][=/proc/interrupts=]]: 查看中断情况
+- =/proc/sys/=: 内核参数设置
+  - =/proc/sys/net/ipv4/ip_forward=: 启用或禁用 IP 转发功能
+  - [[id:e6a25528-6006-440d-aa72-86beb98ca9c3][=/proc/sys/vm/swappiness=]]
+- =/proc/net/=: 网络信息
