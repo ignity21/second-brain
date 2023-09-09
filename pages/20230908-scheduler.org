@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       d525dfda-0943-4e82-b4a8-cad648ad48b5
+:END:
+#+title: Scheduler
+#+filetags: Linux
+
+* Linux 节拍率
+Linux 通过定义节拍率（内核中表示为 HZ ），触发时间中断，并使用全局变量 Jiffies 记录了开机以来的节拍数。
+- 节拍率 HZ 是内核的可配选项，可以设置为 100、250、1000 等
+  - ~grep 'CONFIG_HZ=' /boot/config-$(uname -r)~ 查看设置值，250 指每秒钟触发250次时间中断
