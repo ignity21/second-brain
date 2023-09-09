@@ -4,16 +4,21 @@
 #+title: Interrupt
 #+filetags: Linux
 
-* TODO 硬中断
+* Hardware Interrupt
 :PROPERTIES:
 :ID:       2e165f86-7e8b-4544-a620-7c06f9670338
 :END:
 硬中断主要是负责耗时短的工作，特点是快速执行；通常直接处理硬件请求。
 
-* 软中断
+* Soft Interrupt
+:PROPERTIES:
+:ID:       7f05fbc8-63c6-4ee1-9401-b8e6b88c1225
+:END:
 软中断由内核触发；主要负责上半部未完成的工作，通常都是耗时比较长的事情，特点是延迟执行。
 - 软中断通常以内核线程的方式运行，每个 CPU 都对应一个软中断内核线程。ksoftirqd/0 即为 0 号 CPU 对应的软中断内核线程的名字。 ~ps aux | grep softirq~ 查看
 - 软中断不仅包括了硬件设备中断处理程序的下半部，一些内核自定义的事件也属于软中断，比如内核调度和 RCU 锁（Read-Copy Update）等。
+
+* [[id:b912c69b-292a-4a54-b221-a073f1957de5][Interupt Context Switch]]
 
 * 网络包例子
 内核通过中断跟网卡进行交互，网卡硬中断只处理最核心的网卡数据读取或发送，协议栈中的大部分逻辑都放到软中断中处理。
