@@ -11,6 +11,7 @@
 - Renaming Format -> Format for all Item Types except Patents: ~%b~
 - Automatically Rename: Advanced Settings -> ~Always rename~
 - Remove special characters from filename: ~true~
+- Tablet Settings
 
 ** Better BibTeX
 - Edit -> Preferences -> Better BibTeX

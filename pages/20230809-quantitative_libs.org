@@ -7,6 +7,8 @@
 * [[https://github.com/wilsonfreitas/awesome-quant][awesome-quant]]
 
 * 数据获取
+  - *yfinance*
+  - *alpha_vantage*: real time financial data and most used finance indicators
   - 爬虫类免费数据： *AKShare*, tushare
   - 收费云端数据： rqdata(米筐), hs_udata
   - 数据终端： WindPy, pyTSL,
@@ -19,14 +21,16 @@
 * 建模分析
   - 数据处理： numpy, pandas
   - 模型构建： scipy, statsmodels
-  - 交互绘图： matplotlib, *plotly*
+  - 交互绘图： matplotlib, *plotly*, *seaborn*
 
 * 策略开发相关
+  - Backtrader: 策略回测，德国开源社区开发，文档清晰上手容易
   - Zipline
+  - *Blankly*: 回测、模拟交易、实盘交易
+
   - RQAlpha: 米筐
   - Qlib: 微软与大型公募合作项目
   - QUANTAXIS: 国内量化私募自用，面向大型量化平台
-  - Backtrader: 德国开源社区开发，文档清晰上手容易
   - VeighNa
 
 * 交易 API 接口
@@ -41,9 +45,14 @@
   - 丽海弘金 ~CS~
   - 微软 ~Qlib~
 
+* 定价
+  - 衍生品定价： QuantLib -> *pyql* (Python 封装)
+  - 期权定价： *vollib* (隐含波动率、希腊字母)
+
 * 风险管理
-  - 组合风险分析： pyfolio, Riskfolio-Lib （巴西开源社区，项目质量高）
-  - 衍生品定价： QuantLib (Python 封装)
+  - 组合风险分析： *pyfolio*, *Riskfolio-Lib* （巴西开源社区，项目质量高）
+  - 因子表现分析： *Alphalens*
+  - Common financial risk and performance metrics: empyrical (used by pyfolio)
 
 * 策略混淆加密
   - Nuitka: 生成 =pyd= 二进制文件
