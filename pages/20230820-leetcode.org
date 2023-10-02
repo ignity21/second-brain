@@ -4,6 +4,9 @@
 #+title: LeetCode
 #+filetags: :Algorithm:
 
+* 复习必刷
+- LT151
+
 * Array
 :PROPERTIES:
 :ID:       742a3de0-d9f5-42b1-a119-315b9cd7d04c
@@ -16,9 +19,17 @@
 - 数组的大小是 *受限* 的，题目包含字母就是暗示可以使用数组作为哈希表
 
 * String
+** 字符串重点
+- 工具类函数实现
+  - 移除元素
+  - 反转字符串
+- [[id:be7a4b6e-7291-4f17-b485-285144e4bf1b][KMP]]
+
 ** 经典题
 - LT151 反转单词
   - LT27 移除元素
+- [[https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description/][LT28]] [[id:be7a4b6e-7291-4f17-b485-285144e4bf1b][KMP]]
+- [[https://leetcode.com/problems/repeated-substring-pattern/editorial/][LT459 Approach 2]] 是否由重复字符串组成
 
 * swap function
 :PROPERTIES:

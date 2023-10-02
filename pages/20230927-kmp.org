@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       be7a4b6e-7291-4f17-b485-285144e4bf1b
+:END:
+#+title: KMP
+#+filetags: Algorithm
+
+- [[https://www.bilibili.com/video/BV1AY4y157yL/?spm_id_from=333.337.search-card.all.click&vd_source=7540f00c721dbab673058cc445db02a0][讲解视频]]
