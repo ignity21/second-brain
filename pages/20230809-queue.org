@@ -2,7 +2,7 @@
 :ID:       571dac23-2ea4-40fe-8db0-7bf30a28d871
 :END:
 #+title: Queue
-#+filetags: :DataStructure:Algorithm:
+#+filetags: :DataStructure:
 
 * 应用场景
 先进先出，应用在任何有限资源池中，用于排队请求，比如数据库连接池等。

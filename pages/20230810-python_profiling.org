@@ -33,10 +33,12 @@
 
          return measure_time
    #+END_SRC
+
 *** bulit-in ~timeit~ module
    - [[https://docs.python.org/3/library/timeit.html][Documentation]]
    - The ~timeit~ module temporarily disables the garbage collector.
    - More useful approach: IPython magic ~%timeit~
+
 *** CProfile
    #+BEGIN_SRC sh
      python -m cProfile -s cumulative test.py

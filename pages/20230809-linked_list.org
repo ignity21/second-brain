@@ -2,7 +2,7 @@
 :ID:       f40d4fa6-6687-44ec-8a73-22fcbb2e352f
 :END:
 #+title: Linked List
-#+filetags: :Algorithm:DataStructure:
+#+filetags: :DataStructure:
 
 * 算法技巧
 - 快行指针

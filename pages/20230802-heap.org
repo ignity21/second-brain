@@ -2,7 +2,7 @@
 :ID:       6bda11af-ed0f-4606-af75-7e11a4224199
 :END:
 #+title: Heap
-#+filetags: :Algorithm:DataStructure:
+#+filetags: :DataStructure:
 
 - 堆是完全二叉树
 - 插入数据放数组最后，之后从下往上交换到合适位置

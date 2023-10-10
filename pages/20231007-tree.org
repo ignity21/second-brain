@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       1f50f329-98a5-480a-9415-a1ab9f87ceaa
+:END:
+#+title: Tree
+#+filetags: :DataStructure:
+
+* [[id:d1d44f25-6889-4c33-a970-2ab35e6e20fd][Tree Traversal]]

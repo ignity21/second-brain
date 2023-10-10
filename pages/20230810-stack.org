@@ -2,7 +2,7 @@
 :ID:       4b726816-d357-47d6-a932-2783ec6b1bf6
 :END:
 #+title: Stack
-#+filetags: :Algorithm:DataStructure:
+#+filetags: :DataStructure:
 
 * 应用场景
 先进后出

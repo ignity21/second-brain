@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       d1d44f25-6889-4c33-a970-2ab35e6e20fd
+:END:
+#+title: Tree Traversal
+#+filetags: Algorithm
+
+
+* Overview
+
+#+DOWNLOADED: screenshot @ 2023-10-07 17:41:31
+[[file:images/Tree_Traversing/2023-10-07_17-41-31_screenshot.png]]
+
+- [[id:9e22e9d1-2beb-4e17-9d2d-6a747af51ae3][Preorder Traversal]]
