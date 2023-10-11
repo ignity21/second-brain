@@ -1,0 +1,61 @@
+:PROPERTIES:
+:ID:       cb25d06b-0d2f-434d-b017-4fc1875750dd
+:END:
+#+title: Postorder Traversal
+#+filetags: :Algorithm:
+
+- [[https://leetcode.com/problems/binary-tree-postorder-traversal][LeetCode 145]]
+
+* 思路
+先实现前序遍历，再在代码上稍加改动即可：
+
+- Preorder 是中左右、 Postorder 是左右中
+  - 前序中左右 -> 中右左 -> 左右中
+  - 先变左右入栈顺序，变为中右左，再整个结果 reverse
+
+* Approach: Iteration
+#+begin_src python
+  class Solution:
+      def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+          res = []
+          stack = [root]
+          while stack:
+              curr_node = stack.pop()
+              if curr_node:
+                  res.append(curr_node.val)
+
+                  # 与前序遍历顺序相反
+                  stack.append(curr_node.left)
+                  stack.append(curr_node.right)
+          return list(reversed(res))
+#+end_src
+- alternative return ~res[::-1]~
+
+* Approach: Iteration 2
+- 类似中序遍历，区别在于处理当前节点的顺序要放在处理右子树之后
+#+begin_src python
+  class Solution:
+      def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+          res = []
+          stack = []
+          pnode = root
+
+          while pnode or stack:
+              if pnode:
+                  # 左子树入栈，如为空，下一次循环从栈上取出处理
+                  stack.append(pnode)
+                  pnode = pnode.left
+              else:
+                  poped = stack.pop()
+                  if poped.right:
+                      pnode = poped.right
+                      # need deepcopy it, then pop and insert copied one, otherwise the tree will be modified
+                      copied_poped = deepcopy(poped)
+                      copied_poped.right = None
+                      stack.append(copied_poped)
+                  else:
+                      res.append(poped.val)
+          return res
+#+end_src
+
+* [[id:60aec15c-8186-4888-b84d-abef37f01d8b][Morris Traversal]]

@@ -11,3 +11,5 @@
 [[file:images/Tree_Traversing/2023-10-07_17-41-31_screenshot.png]]
 
 - [[id:9e22e9d1-2beb-4e17-9d2d-6a747af51ae3][Preorder Traversal]]
+- [[id:c38e1fa9-f03c-4654-bc79-b149456f40a9][Inorder Traversal]]
+- [[id:cb25d06b-0d2f-434d-b017-4fc1875750dd][Postorder Traversal]]

@@ -1,0 +1,36 @@
+:PROPERTIES:
+:ID:       c38e1fa9-f03c-4654-bc79-b149456f40a9
+:END:
+#+title: Inorder Traversal
+#+filetags: Algorithm
+
+- [[https://leetcode.com/problems/binary-tree-inorder-traversal][LeetCode 94]]
+
+* Solution
+- 与前序遍历的区别： *访问顺序* 和 *处理顺序* 不一致
+- 思路：有左子树则入栈，无处理栈顶元素（加入结果数组），处理完右子树入栈
+- [[https://www.bilibili.com/video/BV1Zf4y1a77g][讲解]]
+
+* Implementation
+#+begin_src python
+  class Solution:
+      def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+          res = []
+          stack = []
+          pnode = root
+
+          while pnode or stack:
+              if pnode:
+                  # 左子树入栈，如为空，下一次循环从栈上取出处理
+                  stack.append(pnode)
+                  pnode = pnode.left
+              else:
+                  # pnode 节点为空时，从栈上 pop 下一个节点进行处理
+                  poped = stack.pop()
+                  res.append(poped.val)
+
+                  # pnode 指向右子树根节点，处理右子树
+                  if poped.right:
+                      pnode = poped.right
+          return res
+#+end_src
