@@ -4,9 +4,6 @@
 #+title: LeetCode
 #+filetags: :Algorithm:
 
-* 复习必刷
-- LT151
-
 * Array
 :PROPERTIES:
 :ID:       742a3de0-d9f5-42b1-a119-315b9cd7d04c
@@ -14,6 +11,7 @@
 ** 经典题
 - [[id:37465830-0330-4187-8744-0f5bedc989e8][LT287]]
 - [[https://leetcode.com/problems/ransom-note/][LT383]]
+- [[https://leetcode.com/problems/majority-element][LT169]]: *Boyer-Moore Voting Algorithm* 面试想不到
 
 ** 技巧：数组作为哈希表
 - 数组的大小是 *受限* 的，题目包含字母就是暗示可以使用数组作为哈希表
@@ -30,6 +28,10 @@
   - LT27 移除元素
 - [[https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description/][LT28]] [[id:be7a4b6e-7291-4f17-b485-285144e4bf1b][KMP]]
 - [[https://leetcode.com/problems/repeated-substring-pattern/editorial/][LT459 Approach 2]] 是否由重复字符串组成
+
+* Two Pointers
+- 已排序数组删除重复元素: 技巧 pfast 用于找有效元素， pslow 为新数组待更新位置
+  -  [[https://leetcode.com/problems/remove-duplicates-from-sorted-array][LT26]], [[https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii][LT80]]
 
 * swap function
 :PROPERTIES:
