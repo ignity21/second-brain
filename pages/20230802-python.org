@@ -30,4 +30,7 @@
 - ~aiohttp~ ::
 - ~aiodns~ ::
 
+** Project Template
+- ~cookiecutter~ ::
+
 * [[id:021750fa-d093-477f-a572-a5a24538e103][Profiling]]
