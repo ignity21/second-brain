@@ -2,7 +2,7 @@
 :ID:       09ea9033-4067-4a2f-b442-b7da136fa5be
 :END:
 #+title: Financial Terminology
-#+filetags: :Quant:Trading:
+#+filetags: :Trading:
 
 * Terminologies
 - Stock :: An asset that represents ownership in a company. A claim on part of a corportation's
@@ -44,3 +44,23 @@
 - Volume :: Volume refers to the number of shares, contracts, or units of a particular asset that are traded within a specific period of time.
 - Tick Data :: Tick data is sometimes referred to as heterogeneous data, since it is not sampled
   at regular time intervals, whereas Minute-level or End-of-Day data is called homogeneous.
+
+* 中文名词
+- 股权工具 (Equity) :: 股权工具是其持有者按份额拥有的对企业净收益（扣除费用和税收后的收入）和资产的剩余求偿权。
+- 一级市场 (Primary Market) :: 是筹集资金的公司或者政府机构将新发行的债券或者股票等出售给最初购买者的金融市场。
+- 投资银行 (Investment Bank) :: 在一级市场协助实施首次销售的金融机构，它为公司证券提供了一个承诺的价格，继而向公众发售。
+- [[id:4132e7b9-067d-4f97-b937-7c61dc744ad2][二级市场]] (Secondary Market) :: 是已经发行的证券进行转售交易的金融市场。
+- 经纪人 (Brokers) :: 是投资者的代理人，负责实现证券买卖双方的匹配。
+- 交易商 (Dealers) :: 是通过按照报价买卖证券的活动将证券的买卖双方联系起来。
+- 场外交易市场 (OTC) :: over-the-counter market
+- 可转让定期存单 :: Negotiable Certificates of Deposit, CD
+- 货币市场 (Monkey Market) :: 是短期债务工具进行交易的金融市场。
+- 资本市场 (Capital Market) :: 是长期债务工具和股权工具进行交易的金融市场。
+
+** 货币市场名词
+- 优惠利率 (Prime Rate) :: 企业银行贷款的基准利率，标识企业从银行借款的成本指标。
+- 联邦基金利率 (Federal Funds Rate) :: 联邦基金市场中隔夜贷款的利率，标识银行间借款成本和货币政策立场的敏感指标。
+- [[id:167c14ef-51ed-4a7c-9cb6-b6906fee366d][国库券]]利率 (Treasure Bill Rate) :: 它是美国国库券的利率，标识基本利率活动的指标。
+- 伦敦同业拆放利率 (Libor Rate) :: 英国银行协会给出的伦敦市场中美元存款的银行间平均利率。
+- 商业票据 (Commercial Paper) :: 它是大型银行和著名企业发行的短期债务工具。
+- 回购协议 (Repurchase Agreement, repos) :: 是一种有效的短期贷款（短于2周），回购协议是借钱者将国库券作为抵押品。
