@@ -23,6 +23,7 @@
 :PROPERTIES:
 :ID:       547c9873-c3a6-45ff-8d39-460815aa7bd6
 :END:
+- [[id:2b951be4-acf8-4778-97e4-111695cb414e][A* Search]]
 - [[id:b3b36188-2dde-4850-b0b5-37c2a8a3db62][Floyd's Cycle Finding Algorithm]]
 - [[id:00d69c0f-8b27-4696-9f62-971ffdec48f2][Negative Marking]]
 

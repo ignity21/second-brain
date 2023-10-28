@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       2b951be4-acf8-4778-97e4-111695cb414e
+:END:
+#+title: A* Search
+#+filetags: Algorithm
+
+* A* Search
+
+#+DOWNLOADED: screenshot @ 2023-10-28 12:09:53
+[[file:images/A*_Search/2023-10-28_12-09-53_screenshot.png]]
