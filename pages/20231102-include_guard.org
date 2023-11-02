@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       1c06b333-7aae-484c-af97-74d8009a6aa2
+:END:
+#+title: Include Guard
+#+filetags: C++
+
+#+begin_src cpp
+  #ifndef TEST_H
+  #define TEST_H
+
+  // code
+
+  #endif /* TEST_H */
+#+end_src
+
+- ~#include~ just pastes contents into a file
+- *Include guard* prevents the same file from being pasted multiple times into another file.
+- Another common way: ~#pragma once~
+  - This is a non-standard but widely supported preprocessor directive
