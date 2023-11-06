@@ -1,0 +1,78 @@
+:PROPERTIES:
+:ID:       dae7eefe-f83e-4426-8440-676d382c28b9
+:END:
+#+title: Log Returns
+#+filetags: Quant
+* Why Log Returns?
+  1. Log returns can be interpreted as *continuously compounded returns*.
+  2. Log returns are time-additive. The multi-period log return is simply the sum of single period log returns.
+  3. The use of log returns prevents security prices from becoming negative in models of security returns.
+  4. log returns of a security can be reasonably modeled as distributed according to a normal distribution. ?
+  5. When returns and log returns are small, their values are approximately equal.
+  6. Logarithms can help make an algorithm more *numerically stable*.
+
+  [[https://quantivity.wordpress.com/2011/02/21/why-log-returns/][More details]]
+
+** Compare with Simple Returns
+   Arithmetic or the simple return allows for an easier *cross-sectional* returns understanding
+   while log returns allow for easier returns understanding *across time* which are *volatile*.
+
+
+* Continuous Compounding
+  - Compounding Formula
+  $$p_t=p_{t-1}(1+\frac{r}{n})^n$$
+  - Now make *n* bigger and bigger
+  $$\lim_{n \to \infty}(1+\frac{r}{n})^n=e^r$$
+  - Compounding infinitely often is called *continuous compounding*
+  $$100\times e^{0.04}=104.08$$
+  - Reverse the previous calculation
+  $$104.08/100=e^r$$
+
+  $$r=ln(104.08/100)=0.04$$
+  - r is the *continuously compounded return*. It is just the *log return*
+
+** Additivity
+   Annual rate of *continuous compounding* is simply the sum of the monthly rates.
+   - invest $100 for two years with a monthly  continuously compounded interest rate was 2%
+   $$100\times{e^{0.02}}\times{e^{0.02}}... = 100\times{e^{(0.02+0.02+...)}}=100\times{e^{0.24}}=127.12$$
+   - Time Additivity of Log Returns. *log return for Jan and Feb = log return for Jan + log return for Feb*
+   $$ln(\frac{p_{Mar 1}}{p_{Jan 1}}) = ln(\frac{p_{Mar 1}}{p_{Feb 1}}) + ln(\frac{p_{Feb 1}}{p_{Jan 1}})$$
+
+** Annualized Rate of Return
+   If we just had a single monthly rate, but we assumed that the rates for all the months of the year were the same,
+   we could /extrapolate/ the monthly rate to an annual rate by multiplying by 12. This is called *annualizing the
+   rate of continuous compounding*.
+   $$LogReturn(Y)=\sum_{M=1}^{12} LogReturn(M)=MeanOfLogReturn(M)\times 12$$
+
+   $$RawReturn(Y)=e^{LogReturn(Y)}-1$$
+
+** Compounding Example Table
+   - rate of interest of 4%
+   | Compounding Frequency | Value of $100 after 1 year |
+   |-----------------------+----------------------------|
+   | Annually(n=1)         | $104.00                    |
+   | Quarterly(n=4)        | $104.06                    |
+   | Weekly(n=52)          | $104.08                    |
+   | Daily(n=252)          | $104.08                    |
+
+
+* Calculation
+  $$RawReturn(r) = \frac{p_t - p_{t-1}}{p_{t-1}}$$
+
+  $$LogReturn(R) = ln(p_t/p_{t-1}) = ln(p_t) - ln(p_{t-1})$$
+
+  $$LogReturn=ln(RawReturn+1)$$
+
+  $$RawReturn=e^{LogReturn}-1$$
+
+
+* Distribution of Returns
+  The conversation about the best model for the distribution of returns has been going on for at least the past century.
+  The best model will depend on exactly what your analysis seeks to achieve.
+  [[../../resources/MOOC/Trading/returns_distributions.png]]
+
+
+* Reference
+  - Lesson 7
+    - [[https://youtu.be/62fZN1QnGjc][3. Log Returns]]
+    - 5. Distributions of Returns and Prices [[https://youtu.be/cGoXGiO1DYk][Video]]

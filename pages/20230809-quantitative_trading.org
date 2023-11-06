@@ -4,4 +4,17 @@
 #+title: Quantitative Trading
 #+filetags: Quant
 
+* Quant Workflow
+  1. An initial hypothesis: an idea for a way to profit from trading.
+     - How? The more you know about the markets, the more likely you are able to come up with a potentially profitable idea.
+
+  2. Preliminary research and testing: in a fairly basic way, quickly test, determine:
+     - *Signal* or *Alpha*
+     - What assets to buy/sell at what time
+  3. Detailed research and testing, and *backtesting*, to determine:
+     - How to spend money
+     - How to make trades
+     - What conditions to exit positions
+     - Risk constraints
+* [[id:dae7eefe-f83e-4426-8440-676d382c28b9][Log Returns]]
 * [[id:77055920-d7f4-49a5-82b2-23cb35698f0b][Quantitative Libs]]
