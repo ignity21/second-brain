@@ -9,7 +9,11 @@
 * Installation
 ** Arch Linux
 - ~sudo pacman -S bcc bcc-tools python-bcc~
-- Location: =/usr/share/bcc=
+- bin file location: =/usr/share/bcc/tools=
+
+** Debian
+1. ~sudo apt install bpfcc-tools~
+2. ~sudo [toolname]-bpfcc~ e.g. ~sudo execsnoop-bpfcc~
 
 * BCC Memory Tools
 :PROPERTIES:
