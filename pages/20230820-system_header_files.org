@@ -2,7 +2,7 @@
 :ID:       f56bc413-0cd6-4465-9f37-6c32b671126f
 :END:
 #+title: System Header Files
-#+filetags: :SystemCall:Linux:
+#+filetags: :SystemCall:
 
 - =dirent.h=: directory manipulation
 - =unistd.h=: constants. e.g. ~STDIN_FILENO~

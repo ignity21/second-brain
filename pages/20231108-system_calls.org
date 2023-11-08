@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       b740640d-e1b6-4d3e-a151-44653e269df7
+:END:
+#+title: System Calls
+#+filetags: :SystemCall:
+
+- [[id:f56bc413-0cd6-4465-9f37-6c32b671126f][System Header Files]]
+- [[id:dfdba3bb-da7c-4630-93e1-a82b5462795c][I/O]]

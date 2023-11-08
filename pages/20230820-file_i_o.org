@@ -1,16 +1,16 @@
 :PROPERTIES:
 :ID:       dfdba3bb-da7c-4630-93e1-a82b5462795c
 :END:
-#+title: [SC] File I/O
-#+filetags: :SystemCall:Linux:
+#+title: [SC] I/O
+#+filetags: :SystemCall:
 
 * Basic I/O
 ** Overview
-- [[id:09438262-8709-48d4-a816-cb1ec8411b29][~open()~]]: ~fd = open(pathname, oflags, mode)~
+- ~open()~: ~fd = open(pathname, oflags, mode)~
 - ~read()~: ~numread = read(fd, buffer, count)~
-- [[id:5bc6840b-3a05-4a2b-9530-4b9446e2aa9f][~write()~]]: ~numwrite = write(fd, buffer, count)~
-- [[id:6d663861-8478-40da-bdd1-68c4276302f5][~close()~]]: ~status = close(fd)~
-- [[id:4a043d9e-8eb0-4c60-80e4-b9e7da314812][~lseek()~]]: ~offset = lseek(fd, offset, whence)~
+- ~write()~: ~numwrite = write(fd, buffer, count)~
+- ~close()~: ~status = close(fd)~
+- ~lseek()~: ~offset = lseek(fd, offset, whence)~
 
 ** Declaration
 #+begin_src cpp
@@ -29,6 +29,7 @@
   #include <sys/ioctl.h>
   int ioctl(int fd, int request, ...);
 #+end_src
+
 ** ~open~, ~openat~, ~creat~
 - ~fd = open(pathname, oflags, mode)~
 - ~fd = openat(fd, pathname, oflags, mode)~: 在指定目录或当前工作目录使用相对路径打开文件
@@ -64,6 +65,12 @@
   }
 #+end_src
 
+** File Holes
+:PROPERTIES:
+:ID:       9b30020e-1062-4d79-8b00-f5fa49d0eb01
+:END:
+
+
 * 高级 IO
 ** 原子操作
 - ==O_APPEND= 打开的文件，每次写都会执行原子操作 1. seek to EOF 2. write
@@ -93,6 +100,7 @@ Features
 3. Get/set file status flags (cmd =F_GETEL= or =F_SETFL=)
 4. Get/set asynchronous IO ownership (cmd =F_GETOWN= or =F_SETOWN=)
 5. Get/set record locks (cmd =F_GETLK=, =F_SETLK=, or =F_SETLKW=)
+
 *** 适用场景
 常用用途：修改 *file status flags*
 - 文件不是由调用程序打开的，比如标准输入输出
