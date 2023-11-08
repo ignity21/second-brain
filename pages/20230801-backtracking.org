@@ -10,6 +10,7 @@
 * 适合解决的问题
 - 组合问题：N 个数里面按一定规则找出 k 个数的集合
   - [[https://leetcode.com/problems/combinations/description/][LT77]]
+  - [[https://leetcode.com/problems/combination-sum-ii/description/https://leetcode.com/problems/combination-sum-ii/description/][*LT40*]] 去重问题，需回看
 - 切割问题：一个字符串按一定规则有几种切割方式
 - 子集问题：一个 N 个数的集合里有多少符合条件的子集
 - 排列问题：N 个数按一定规则全排列，有几种排列方式
