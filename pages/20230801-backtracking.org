@@ -48,12 +48,6 @@
 - 剪枝
 - 重复子问题：缓存子问题结果，避免重复计算
 
-* Concept
-Backtracking is a general algorithm for finding all (or some) solutions to some computational problems, which incrementally builds candidates to the solution and abandons a candidate ("backtracks") as soon as it determines that the candidate cannot lead to a valid solution.
-- The backtracking way of solving this problem would stop going down a path when the path doesn't seem right.
-
-** Classic Examples
-*** N-Queen Puzzle
-The N-queens puzzle is the problem of placing *N* queens on an $N\times N$
-chessboard such that no two queens can attack each other. One is asked to
-count the number of solutions to place the N queens on the board.
+* 去重套路 *Important*
+1. 先对输入进行排序
+2. 使用 ~used~ 数组
