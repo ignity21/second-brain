@@ -11,6 +11,10 @@
 - [[id:611eaef4-a96b-4835-b3d3-7e1e6910fbe2][~pipx~]]
 - [[id:c7646c59-10f8-42c0-b181-d476019efe95][~poetry~]]
 
+** Practical Hints
+1. ~pyenv global [interpreter]~
+2. ~pip install pipx~
+
 * Python Data Structure
 :PROPERTIES:
 :ID:       30f419eb-94da-4eb8-845c-26d1f3e77fdd

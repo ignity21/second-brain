@@ -51,3 +51,5 @@
 * 去重套路 *Important*
 1. 先对输入进行排序
 2. 使用 ~used~ 数组
+   - ~used[i-1]==true~ 说明同一树枝 ~candidates[i-1]~ 使用过
+   - ~used[i-1]==false~ 说明同一树层 ~candidates[i-1]~ 使用过
