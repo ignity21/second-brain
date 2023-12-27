@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       6e803f5c-a87d-4130-90fa-36d321d8f960
+:END:
+#+title: Polling
+#+filetags: SystemDesign
+
+The act of fetching a resource or piece of data regularlyat an interval to make sure your data is not too stale.
