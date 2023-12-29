@@ -1,1 +1,38 @@
-*
+* Math
+** [[id:fc70dfaa-fbe9-4c89-a23b-72ac83d6d917][Calculus]]
+** [[id:8ff66d66-2df2-4dad-b09a-9ba4e42736d9][Linear Algebra]]
+
+* CS
+** [[id:09857801-cb29-4168-b4fb-537ccc83ab0f][Algorithm]]
+*** [[id:3c0f22b4-1dd8-433c-aec4-13eda95dffea][Backtracking]]
+*** [[id:836f3c49-46ec-4e5d-9047-6e051c9ad763][Greedy Algorithm]]
+*** [[id:0361445c-3228-4f6c-b0da-89fc49337c78][Dynamic Programming]]
+*** [[id:796f0cbe-2619-47ee-895d-e2a76129f20f][LeetCode]]
+
+** [[id:4f8f2615-daed-4737-99f4-80bca15e7e73][Linux]]
+*** [[id:072ce693-72be-47fe-9d07-126a0d339be1][CPU]]
+*** [[id:bcae4642-79f1-421a-bc69-38da37d1b0dd][Memory]]
+*** [[id:7d47a7bc-c1f8-41ae-96b4-cd01950cd21b][Process]]
+*** [[id:706d7e91-8a8f-466f-b871-602e2efcd187][Context Switching]]
+*** [[id:d39a009f-739c-491f-9251-d3b9688db6ea][Special Files]]
+*** [[id:a7b6885c-42f7-476c-9642-8f0d06149e95][System Error]]
+
+** [[id:665b238c-f8ea-41f7-904d-3d2c64fcf362][Data System]]
+*** [[id:6de26b38-0e0a-4142-a2ad-5437b2263305][Database]]
+
+* Data Science
+** [[id:100afd1e-d695-4a89-b583-12bbad2e1733][Machine Learning]]
+*** [[id:b6f03e6b-8850-4f2d-8d2d-f337029fe1e7][Linear Regression]]
+*** [[id:9db494ed-d782-4bfe-b9d2-52c768251490][Logistic Regression]]
+*** [[id:31b71a06-0592-444b-b410-916ee717b488][Neural Network]]
+*** [[id:aa44b41e-2505-47ef-9b6a-c4f78a33af41][Random Forest]]
+
+** [[id:33846b1e-3e19-46a2-9158-6c9b3c06743b][ML System]]
+
+* Finance
+** [[id:1241ce9f-84ca-479b-865a-05f1f1ba21d8][Stock Market]]
+** [[id:7a671aa8-b668-4ca4-95df-31659052d9c3][Trading]]
+** [[id:09ea9033-4067-4a2f-b442-b7da136fa5be][Financial Terminology]]
+
+* Having Fun
+** [[id:35ca03c6-3482-48e7-9577-3bc2a218ff26][Warhammer3]]
