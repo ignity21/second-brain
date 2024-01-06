@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       5e72dbf9-f281-4f99-9d26-c5a663e4c8a2
+:END:
+#+title: Pointers
+#+filetags: C++
+
+| Variable | Type | Memory | Value |
+|----------+------+--------+-------|
+| pointer  | int* |    111 |   222 |
+| value    | int  |    222 |  1234 |
+
+- &pointer: 111
+- pointer: 222
+- *pointer: 1234
+- &value: 222
+- value: 1234

@@ -1,4 +1,8 @@
 :PROPERTIES:
-:ID:       fa055bcf-66fe-4506-9e7f-b69b03024edc
+:ID:       07e15180-37e1-423e-9b67-c0ca22f4e49c
 :END:
 #+title: Udacity C++
+#+filetags: :C++:
+
+- [[id:2b951be4-acf8-4778-97e4-111695cb414e][A* Search]]
+- [[id:5e72dbf9-f281-4f99-9d26-c5a663e4c8a2][Pointers]]
