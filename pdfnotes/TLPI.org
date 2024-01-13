@@ -1,6 +1,0 @@
-* The Linux programming interface a Linux und UNIX system programming handbook
-:PROPERTIES:
-:NOTER_DOCUMENT: ../../Documents/The Linux programming interface a Linux und UNIX system programming handbook (Kerrisk, Michael) (z-lib.org).pdf
-:NOTER_PAGE: 87
-:END:
-
