@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       5d31ac8b-58a8-4926-b328-3cf408f898b2
+:END:
+#+title: C++ OOP
+#+filetags: C++
+
+* Struct or Class
+[[https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#c2-use-class-if-the-class-has-an-invariant-use-struct-if-the-data-members-can-vary-independently][Core Guidelines]]
+- use structures when member variables are *independent* of each other
+- use classes when member variables are related by an "invariant"
+
+* Scope Resolution
+#+begin_src c++
+Date::Date(int year, int month, int day) {
+    Date::year = year; // instead of coding "this->year = year;""
+    Date::month = month;
+    Date::day = day;
+}
+#+end_src
+
+* Initialization List
+- Prefer initialization to assignment :: In fact, initialization lists ensure that member variables are initialized *before the object is created*.
+
+- Read-only Variables :: class member variables can be declared *const*, *but only if the member variable is initialized through an initialization list*.

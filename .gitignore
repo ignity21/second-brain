@@ -6,6 +6,7 @@ logseq/.recycle/
 # python
 .venv/
 .ipynb_checkpoints/
+.python-version
 
 # datasets
 datasets/
