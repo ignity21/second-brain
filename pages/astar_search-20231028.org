@@ -5,6 +5,18 @@
 #+filetags: Algorithm
 
 * A* Search
+A* search is a best-first search algorithm. It is an extension of Dijkstra's
+shortest path algorithm. It's often used for path finding in combinatorial search.
+
+[[file:images/A*_Search/A_Algorithm.png]]
+
+** Heuristic Function
+
+#+DOWNLOADED: screenshot @ 2024-01-17 10:34:45
+[[file:images/Heuristic_Function/2024-01-17_10-34-45_screenshot.png]]
+
+
+* Implementation
 
 #+DOWNLOADED: screenshot @ 2023-10-28 12:09:53
 [[file:images/A*_Search/2023-10-28_12-09-53_screenshot.png]]
