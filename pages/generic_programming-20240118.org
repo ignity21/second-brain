@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       890890f1-4c08-4f5f-8250-7eb8fdad015f
+:END:
+#+title: Generic Programming
+#+filetags: C++
+
+* Templates
+- Pros: efficiency
+- Cons: lousy interface
+  - We couldn't say what are the requirements of the elements of a vector.
+  - [[concepts]]
+
+* C++20 Concepts
+<<concepts>>
+- Can specify a template requirements on its argument.

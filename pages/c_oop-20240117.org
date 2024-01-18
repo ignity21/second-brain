@@ -20,5 +20,8 @@ Date::Date(int year, int month, int day) {
 
 * Initialization List
 - Prefer initialization to assignment :: In fact, initialization lists ensure that member variables are initialized *before the object is created*.
-
 - Read-only Variables :: class member variables can be declared *const*, *but only if the member variable is initialized through an initialization list*.
+
+* Hints
+- Don't forget the *override* keyword to override a virtual function.
+- ~int& operator(int row, int col)~: use ~int&~ to modified location of matrix data.
