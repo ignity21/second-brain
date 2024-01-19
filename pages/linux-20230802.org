@@ -4,6 +4,31 @@
 #+title: Linux
 #+filetags: Linux
 
+* Bootstrap
+:PROPERTIES:
+:ID:       0c22cdd9-543f-41ef-b070-0cbee5f0bb7b
+:END:
+1. After switching on the computer, it loads data from its read-only memory (ROM) and performs a power-on
+   self-test (POST) to ensure that all major components are working properly. Additionally, the computer
+   memory controller checks all of the memory addresses with a simple read/write operation to ensure that
+   memory is functioning correctly.
+
+2. After performing the self-test, the computer loads the basic input/output system (BIOS) from ROM. The
+   major task of the BIOS is to make the computer functional by providing basic information about such
+   things as storage devices, boot sequence, security or auto device recognition capability.
+
+3. The process of activating a more complex system on a simple system is called "bootstrapping": It is a
+   solution for the chicken-egg-problem of starting a software-driven system by itself using software.
+   During bootstrapping, the computer loads the operating system (OS) from the hard drive into random
+   access memory (RAM). RAM is considered "random access" because any memory cell can be accessed
+   directly by intersecting the respective row and column in the matrix-like memory layout. For
+   performance reasons, many parts of the OS are kept in RAM as long as the computer is powered on.
+
+4. When an application is started, it is loaded into RAM. However, several application components are
+   only loaded into RAM on demand to preserve memory. Files that are opened during runtime are also
+   loaded into RAM. When a file is saved, it is written to the specified storage device. After closing
+   the application, it is deleted from RAM.
+
 * [[id:956bf88a-baa4-459c-aebc-a1a29260efb5][Startup Scripts]]
 * File System
 :PROPERTIES:
@@ -59,6 +84,7 @@
 :PROPERTIES:
 :ID:       bcae4642-79f1-421a-bc69-38da37d1b0dd
 :END:
+- [[id:d734bb0e-c8fc-4cd7-a1d9-5432aed0c7d0][Memory Hierarchy]]
 - [[id:f659b32b-4b09-46a7-818e-791ca3855765][Memory Allocation]]
 - [[id:5e8af621-8028-458e-8f7b-04bf8d561512][Adjusting Memory Configuration]]
 - [[id:4dc805d4-c007-4526-bd64-c9ca9af200a4][Virtual Memory]]
