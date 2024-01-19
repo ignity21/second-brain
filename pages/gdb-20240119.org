@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       55c7e05b-9c7a-447e-8245-33f568b777d7
+:END:
+#+title: GDB
+#+filetags: C++
+
+* Analyzing Memory
+For code ~char str[]="Udacity"~, use
+- ~x\7tb~: print memory (binary).
+- ~x\7tx~: print memory (hex).
