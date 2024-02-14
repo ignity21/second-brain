@@ -6,6 +6,11 @@
 
 - 只有内核才可以直接访问物理内存。
 
+* Idea
+The basic idea of virtual memory is to separate the addresses a program may use from the addresses in physical computer memory.
+By using a mapping function, an access to (virtual) program memory can be redirected to a real address which is guaranteed to
+be protected from other programs.
+
 * 虚拟地址空间
 Linux 内核给每个进程都提供了一个独立的虚拟地址空间，并且这个地址空间是连续的。这样，进程就可以很方便地访问内存，更确切地说是访问虚拟内存。
 所有进程的虚拟内存加起来要比实际的物理内存大得多。所以，并不是所有的虚拟内存都会分配物理内存，只有那些实际使用的虚拟内存才分配物理内存。

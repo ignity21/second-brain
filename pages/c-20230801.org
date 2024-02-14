@@ -15,7 +15,7 @@
 
 * [[id:1e83db6b-6955-4f9f-a107-da4af74f9071][C++ Keywords]]
 * [[id:de67ad04-b348-4367-9a6f-88404e0f38b0][STL]]
-* [[id:f18a6318-7818-4860-bc8b-bd7b5b9701f5][C++ Data Structures]]
+* [[id:f18a6318-7818-4860-bc8b-bd7b5b9701f5][Data Structures]]
 * Type Deduction
 :PROPERTIES:
 :ID:       6394bf0c-5bd8-4490-bc5c-91f1aebedbce
@@ -25,5 +25,10 @@
 - [[id:5bdcb00b-4ded-4b55-a41e-2750838325c0][~decltype~]]
 - [[id:f1e9eb0e-735e-451c-85dd-eb355d661549][Type Deduction Diagnosis]]
 
-* [[id:5a856fd8-e1ec-4964-8862-17e7d48f906c][C++ Concurrency]]
-* [[id:5efa3691-4464-4a11-9d52-1e83016d8bc1][C++ Memory Allocation]]
+* [[id:5a856fd8-e1ec-4964-8862-17e7d48f906c][Concurrency]]
+* Memory Management
+** [[id:5efa3691-4464-4a11-9d52-1e83016d8bc1][Memory Allocation]]
+** [[id:eb744df4-2d27-40d7-bb9a-607ad22b63e3][Copy Semantics]]
+** [[id:83aa38f7-a6de-42f0-bf0e-b4e2c9114869][Move Semantics]]
+** TODO RAII
+** TODO Smart Pointers

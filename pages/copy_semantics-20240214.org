@@ -1,0 +1,37 @@
+:PROPERTIES:
+:ID:       eb744df4-2d27-40d7-bb9a-607ad22b63e3
+:END:
+#+title: Copying Semantics
+#+filetags: C++
+
+- links :: [[id:83aa38f7-a6de-42f0-bf0e-b4e2c9114869][Move Semantics]]
+
+* Copying Policies
+1. Default copying
+2. No copying
+3. Exclusive ownership
+4. Deep copying
+5. Shared ownership
+
+#+begin_src c++
+  // int **XXXCopy::_myInt;
+
+  ExclusiveCopy(ExclusiveCopy &source) {
+    _myInt = source._myInt;
+    source._myInt = nullptr;
+  }
+
+  DeepCopy(DeepCopy &source) {
+    _myInt = (int *)malloc(sizeof(int));
+    ,*_myInt = *source._myInt;
+  }
+
+  int SharedCopy::_cnt = 0;
+  SharedCopy::SharedCopy(SharedCopy &source) {
+    _myInt = source._myInt;
+    ++_cnt;
+  }
+#+end_src
+
+* Rule of Three
+If a class needs to have an overloaded *copy constructor*, *copy assignment operator*, or *destructor*, then it must also implement the other two as well to ensure that memory is managed consistently.
