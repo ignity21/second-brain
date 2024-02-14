@@ -49,7 +49,7 @@
   in-project = false
   prefer-active-python = true
 #+end_src
-- in-project is inconvenient for multiple virturlenvs.
+- in-project is inconvenient for multiple virtualenvs.
 
 
 ** Project Package Source
@@ -57,7 +57,7 @@
 - ~poetry source add --secondary douban https://pypi.doubanio.com/simple/~
 
 ** Publishing to a Private Repository
-- ~poetry config repositories.pypi~ https://mirrors.aliyun.com/pypi/simple/
+- ~poetry config repositories.pypi https://mirrors.aliyun.com/pypi/simple/~
 - ~poetry publish --build --repository pypi~
 
 * IDE Integration
