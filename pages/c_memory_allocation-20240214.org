@@ -13,7 +13,114 @@
 #+DOWNLOADED: screenshot @ 2024-02-14 11:33:03
 [[file:images/On_Stack/2024-02-14_11-33-03_screenshot.png]]
 
-* Call by Pointer
+** Call by Pointer
 vs. call by reference
 - can be nullptr
 - can be initialized within the function
+- can be reassigned to another memory block on the heap
+
+In order to benefit from call-by-reference/pointer, the size of the data type passed to the function has to surpass the size of the pointer on the respective architecture (i.e. 32 bit or 64 bit).
+
+* Allocating Dynamic Memory
+** ~malloc~ and ~free~
+*** Allocation
+- header file: =stdlib.h= or =malloc.h=
+- ~malloc~ is used to dynamically allocate a single large block of memory with the specified size. It returns a pointer of type *void* which can be cast into a pointer of any form.
+- ~calloc~ (Cleared Memory Allocation) is used to dynamically allocate the specified number of blocks of memory of the specified type. *It initializes each block with a default value '0'.*
+- ~realloc~ is used to increase/decrease the size.
+
+#+begin_src c
+int numElements = 10;
+int *p = (int *)malloc(sizeof(int));
+int *p2 = (int *)calloc(1, sizeof(int)); // ensure 0x00000000 for 32-bit
+int *pArr = (int *)malloc(numElements * sizeof(int));
+int *pArr2 = (int *)calloc(numElements, sizeof(int));
+
+int *pResizedArray = (int*)realloc(pArr, 6 * sizeof(int));
+pResizedArray[5] = 1;
+
+
+struct MyStruct {
+    int i;
+    double d;
+    char a[5];
+};
+MyStruct *pStruct = (MyStruct*)calloc(4,sizeof(MyStruct));
+
+#+end_src
+
+- *If the space for the allocation is insufficient, a NULL pointer is returned.*
+
+*** De-allocation
+~free~ can only release memory that has not been released before. Releasing the same block of memory twice will result in an error.
+#+begin_src c
+free(p)
+free(p2)
+free(pArr)
+free(pArr2)
+free(pResizedArray)
+#+end_src
+
+** ~new~ and ~delete~
+- C++ introduces the operators ~new/delete~ to call *constructor/destructor*
+- ~malloc~ is not type safe because it returns *a void pointer* which needs to be cast into the appropriate data type.
+- The ~new~ and ~delete~ operators can be overloaded by a class in order to *include optional proprietary behavior*.
+
+*** ~new~
+1. Memory is allocated to hold a new object of type ~MyClass~.
+2. A new object of type ~MyClass~ is constructed within the allocated memory by calling the constructor of ~MyClass~.
+
+*** ~placement new~
+~placement new~ is used to separating allocation from construction for performance optimization. With ~placement new~, we can pass a preallocated memory and construct an object at that memory location.
+- no ~delete~ equivalent to ~placement new~
+#+begin_src c++
+void *memory = malloc(sizeof(MyClass));
+MyClass *object = new (memory) MyClass;
+
+//no `delete` equivalent to `placement new`
+object->~MyClass(); // we have to call the destructor explicitly
+free(memory);
+#+end_src
+
+
+*** ~delete~
+1. The object of type ~MyClass~ is destroyed by calling its destructor.
+2. The memory which the object was placed in is deallocated.
+
+*** Overloading ~new~ and ~delete~
+**** Syntax
+#+begin_src c++
+// syntax
+void* operator new(size_t size);
+void operator delete(void*);
+
+// 8-bytes overhead to keep track of the allocated blocks of memory
+void* operator new[](size_t size);
+void operator delete[](void*);
+#+end_src
+
+**** Reasons for overloading new and delete:
+1. The overloaded new operator function allows to *add additional parameters*. Therefore, a class can have multiple overloaded new operator functions.
+2. Overloaded the new and delete operators provides an easy way to integrate a mechanism similar to garbage collection capabilities. (such as in Java)
+3. By adding *exception handling* capabilities into new and delete.
+
+* Memory Management Problems
+** Memory Leaks
+- Tool: *Valgrind*, useful parameters:
+  - ~--leak-check~: Controls the search for memory leaks when the client program finishes.
+  - ~--show-leak-kinds~: controls the set of leak kinds to show. Options are ~definite~, ~indirect~, ~possible reachable~, ~all~ and ~none~.
+  - ~--track-origins~: can be used to see where uninitialized values come from.
+  - example: ~valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind-out.txt ./a.out~
+** Buffer Overruns
+#+begin_src c++
+char str[5];
+strcpy(str,"BufferOverrun");
+printf("%s",str);
+#+end_src
+** Uninitialized Memory
+** Invalid Memory Access
+#+begin_src c++
+char *pStr=new char[25];
+delete[] pStr;
+strcpy(pStr, "Invalid Access");
+#+end_src

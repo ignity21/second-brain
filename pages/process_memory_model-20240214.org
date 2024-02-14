@@ -21,7 +21,7 @@ The *stack* is a contiguous memory block with a *fixed maximum size*. If a progr
   - Each thread has its own stack memory - which can be considered thread-safe.
   - It will *not become fragmented*. (as opposed to the heap)
 - Cons:
-  - limited size. When the maximum size of the stack memory is exceeded, a program will *crash*.
+  - limited size. When the maximum size of the stack memory is exceeded, a program will *crash*. It can be checked using ~ulimit -s~
   - limited flexibility with regard to de-allocations.
 
 * Heap Memory
@@ -29,6 +29,10 @@ The *stack* is a contiguous memory block with a *fixed maximum size*. If a progr
 :ID:       e3867163-ee86-4209-9bb2-07af0d5fbb7e
 :END:
 The *heap* (also called "free store" in C++) is where data with dynamic storage lives. It is shared among multiple threads in a program, which means that memory management for the heap needs to take concurrency into account. This makes memory allocations in the heap more complicated than stack allocations. In general, managing memory on the heap is more (computationally) expensive for the operating system, which makes it slower than stack memory. Contrary to the stack, the heap is not managed automatically by the system, but by the programmer. If memory is allocated on the heap, it is the programmer's responsibility to free it again when it is no longer needed. If the programmer manages the heap poorly or not at all, there will be trouble.
+
+- Unlike the stack, the heap is shared among multiple threads
+- can result in fragmented memory over time
+- Memory leak issue:  It is important that the reserved memory areas are released again at the *"appropriate point"* to avoid memory leaks.
 
 * BSS
 The *BSS* (Block Started by Symbol) segment is used in many compilers and linkers for a segment that contains global and static variables that are initialized with zero values. This memory area is suitable, for example, for arrays that are not initialized with predefined values.
