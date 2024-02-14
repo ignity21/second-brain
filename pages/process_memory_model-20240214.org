@@ -1,0 +1,39 @@
+:PROPERTIES:
+:ID:       c864c39e-2dd7-4c4d-ad24-9b541abc2f30
+:END:
+#+title: Process Memory Model
+#+filetags: :Linux:
+
+- links :: [[id:5efa3691-4464-4a11-9d52-1e83016d8bc1][C++ Memory Allocation]]
+
+* Overview
+[[file:images/虚拟内存空间分布/2024-01-30_12-21-32_screenshot.png]]
+
+* Stack Memory
+:PROPERTIES:
+:ID:       683abe49-555b-4a0a-b50e-118f403bb3d8
+:END:
+The *stack* is a contiguous memory block with a *fixed maximum size*. If a program exceeds this size, it will crash. The stack is used for storing automatically allocated variables such as local variables or function parameters. If there are multiple threads in a program, then *each thread has its own stack memory*. New memory on the stack is allocated when the path of execution enters a scope and freed again once the scope is left. It is important to know that the stack is managed "automatically" by the compiler, which means we do not have to concern ourselves with allocation and deallocation.
+
+- The stack should be the default choice for memory allocations.
+- Pros:
+  - Faster than the heap because the operating system has much less managing overhead. Allocating and deallocating memory is fast on the stack
+  - Each thread has its own stack memory - which can be considered thread-safe.
+  - It will *not become fragmented*. (as opposed to the heap)
+- Cons:
+  - limited size. When the maximum size of the stack memory is exceeded, a program will *crash*.
+  - limited flexibility with regard to de-allocations.
+
+* Heap Memory
+:PROPERTIES:
+:ID:       e3867163-ee86-4209-9bb2-07af0d5fbb7e
+:END:
+The *heap* (also called "free store" in C++) is where data with dynamic storage lives. It is shared among multiple threads in a program, which means that memory management for the heap needs to take concurrency into account. This makes memory allocations in the heap more complicated than stack allocations. In general, managing memory on the heap is more (computationally) expensive for the operating system, which makes it slower than stack memory. Contrary to the stack, the heap is not managed automatically by the system, but by the programmer. If memory is allocated on the heap, it is the programmer's responsibility to free it again when it is no longer needed. If the programmer manages the heap poorly or not at all, there will be trouble.
+
+* BSS
+The *BSS* (Block Started by Symbol) segment is used in many compilers and linkers for a segment that contains global and static variables that are initialized with zero values. This memory area is suitable, for example, for arrays that are not initialized with predefined values.
+
+* Data Segment
+The *Data* segment serves the same purpose as the BSS segment with the major difference being that variables in the Data segment have been initialized with a value other than zero. Memory for variables in the Data segment (and in BSS) is allocated once when a program is run and persists throughout its lifetime.
+
+* TODO may be merge from [[id:4dc805d4-c007-4526-bd64-c9ca9af200a4][Virtual Memory]]

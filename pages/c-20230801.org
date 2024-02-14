@@ -26,3 +26,4 @@
 - [[id:f1e9eb0e-735e-451c-85dd-eb355d661549][Type Deduction Diagnosis]]
 
 * [[id:5a856fd8-e1ec-4964-8862-17e7d48f906c][C++ Concurrency]]
+* [[id:5efa3691-4464-4a11-9d52-1e83016d8bc1][C++ Memory Allocation]]

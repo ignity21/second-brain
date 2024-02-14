@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       5efa3691-4464-4a11-9d52-1e83016d8bc1
+:END:
+#+title: C++ Memory Allocation
+#+filetags: C++
+
+* Basic Types of Memory Allocation
+- Static memory allocation :: is performed for *static* and *global* variables, which are stored in the *BSS and Data segment*. Memory for these types of variables is *allocated once* when your program is run and persists throughout the life of your program.
+- Automatic memory allocation :: is performed for *function parameters* as well as *local variables*, which are *stored on the stack*. Memory for these types of variables is allocated when the path of execution enters a scope and freed again once the scope is left.
+- Dynamic memory allocation :: is a possibility for programs to request memory from the operating system at runtime when needed. This is the major difference to automatic and static allocation, where the size of the variable must be known at compile time. Dynamic memory allocation is not performed on the limited stack but *on the heap* and is thus (almost) *only limited by the size of the address space*.
+
+* Memory Allocation On Stack
+#+DOWNLOADED: screenshot @ 2024-02-14 11:33:03
+[[file:images/On_Stack/2024-02-14_11-33-03_screenshot.png]]
+
+* Call by Pointer
+vs. call by reference
+- can be nullptr
+- can be initialized within the function
