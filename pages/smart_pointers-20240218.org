@@ -40,7 +40,8 @@ This smart pointer type is useful for cases where you require access to a memory
 ~reset()~ will destruct the previous internal resource(~delete~ obj), then ~new~ with a new resource.
 
 ** Pitfalls
-May produce *circular references*. Use ~std::weak_ptr~ to avoid it.
+- May produce *circular references*. Use ~std::weak_ptr~ to avoid it.
+- When using raw pointers retrieved from the ~get()~ function, you should take special care not to delete them or to create new smart pointers from them.
 
 * Weak Pointers
 ~~std::weak_ptr~ behaves similar to the shared pointer but does not increase the reference counter. There can be multiple weak pointers to the same resource.
@@ -55,6 +56,34 @@ We can check the validity of its resource with ~expired()~ function.
 * Converting Between Smart Pointers
 - unique to shared: ~std::move~
 - weak to shared: ~weak_ptr.lock()~
+- shared to raw: ~shared_ptr.get()~
+
+* Passing Smart Pointers
+** Passing to Functions
+- A function that does not manipulate the lifetime or ownership should use *raw pointers or references* instead.
+- A function should take smart pointers as parameter only if it *examines or manipulates the smart pointer itself*.
+
+** Pass-by-value
+Pass-by-value is used to *lend the ownership* of smart pointers.
+
+** Pass-by-reference
+*** ~unique_ptr~
+We pass a non-const reference to a ~unique_ptr~ to a function if it might modify it in any way, including deletion and reassignment to a different resource.
+
+Passing a ~unique_ptr~ as ~const~ is not useful as the function will not be able to do anything with it.
+
+*** ~shared_ptr~
+A ~shared_ptr~ can either be passed as const or non-const reference.
+
+The ~const~ should be used when you want to express that the function will only read from the pointer or it might create a local copy and share ownership.
+
+* Returning Smart Pointers
+Return a smart pointer, both unique or shared, if the caller needs to manipulate or access the pointer properties. In case the caller just needs the underlying object, a raw pointer should be returned.
+
+Smart pointers should always be returned by value. This is not only simpler but also has the following advantages:
+1. The overhead is small due to the move semantics of smart pointers.
+2. Compiler uses *Return Value Optimization* (ROV)
+3. When returning a *shared_ptr* by value, the internal reference counter is guaranteed to be properly incremented.
 
 * Core Guildlines
 - [[https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#r-resource-management][Resource Management]]
