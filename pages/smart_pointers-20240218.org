@@ -1,0 +1,49 @@
+:PROPERTIES:
+:ID:       9dada7ef-84e8-44f7-b068-4837411eda69
+:END:
+#+title: Smart Pointers
+#+filetags: C++
+
+* Overview
+Smart pointers ensure that programs are free of memory leaks while also remaining exception-safe.
+
+* Raw Pointers
+In modern C++, raw pointers managed with ~new~ and ~delete~ should only be used *in small blocks of code with limited scope*, where *performance is critical* and *ownership rights of the memory resource are clear*.
+
+* Unique Pointers
+~std::unique_ptr~ is a smart pointer which *exclusively owns* a dynamically allocated resource on the heap.
+
+** When to Use?
+Unique pointers are useful when working with *a temporary heap resource* that is no longer needed once it goes out of scope.
+
+Unique pointers should be the *default choice* unless you know for certain that sharing is required at a later stage.
+
+A *key feature* of a unique pointer, which makes it so well-suited as a *return type for many functions*, *is the possibility to convert it to a shared pointer*.
+
+** Transferring Ownership
+#+begin_src c++
+auto src_ptr = std::make_unique<MyObject>();
+auto dest_ptr = std::move(src_ptr);
+#+end_src
+
+* Shared Pointer
+~std::shared_ptr~ points to a heap resource but does not explicitly own it.
+
+** When to Use?
+This smart pointer type is useful for cases where you require access to a memory location on the heap in multiple parts of your program and you want to make sure that whoever owns a shared pointer to the memory can rely on the fact that it will be accessible throughout the lifetime of that pointer.
+
+** Use ~reset()~ to Redirect
+~reset()~ will destruct the previous internal resource(~delete~ obj), then ~new~ with a new resource.
+
+** Pitfalls
+May produce *circular references*. Use ~std::weak_ptr~ to avoid it.
+
+* Weak Pointer
+~~std::weak_ptr~ behaves similar to the shared pointer but does not increase the reference counter. There can be multiple weak pointers to the same resource.
+
+Weak pointers hold a *non-owning reference* to an object that is *managed by another shared pointer*.
+
+*The important rule*: You can only create weak pointers out of shared pointers or out of another weak pointer.
+
+** Compare with Raw Pointer
+We can check the validity of its resource with ~expired()~ function.

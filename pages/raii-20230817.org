@@ -3,3 +3,10 @@
 :END:
 #+title: RAII
 #+filetags: C++
+
+* Why RAII is important?
+The program might throw an exception during resource use and thus the point of release might never be reached.
+
+*The important rule*: If a programmer has not directly allocated a resource, he will not need to directly deallocate it - *whoever owns a resource deals with it*.
+
+The major idea of RAII revolves around object ownership and information hiding: Allocation and deallocation are hidden within the management class, so a programmer using the class does not have to worry about memory management responsibilities.
