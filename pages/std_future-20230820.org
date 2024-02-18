@@ -2,7 +2,7 @@
 :ID:       affca3ee-0c2d-4a19-a268-e1ab078e9117
 :END:
 #+title: ~std::future~
-#+filetags: :STL:Concurrency:C++:
+#+filetags: C++
 
 * Usage
 #+begin_src c++

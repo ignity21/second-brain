@@ -2,7 +2,7 @@
 :ID:       7f7c8750-1a2d-4a09-b008-e999dd17784d
 :END:
 #+title: Thread-safe Queue
-#+filetags: :Concurrency:C++:
+#+filetags: C++
 
 - links :: [[id:890f2b58-21c3-48b7-a975-c532eedc01ec][Condition Variable]]
 

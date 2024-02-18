@@ -2,7 +2,7 @@
 :ID:       9dd5fcd3-584a-410d-8aed-16eadfd19ccc
 :END:
 #+title: ~std::function~
-#+filetags: :STL:C++:
+#+filetags: :C++:
 
 ~std::function~ is a *template* in the STL.
 - ~std::function~ can refer to *any callable object*.

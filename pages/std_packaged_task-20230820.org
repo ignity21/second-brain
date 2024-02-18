@@ -2,7 +2,7 @@
 :ID:       d9aa699d-1dc0-416e-bd59-00c97e7b9e2b
 :END:
 #+title: ~std::packaged_task~
-#+filetags: :Concurrency:STL:C++:
+#+filetags: C++
 
 - ~std::packaged_task~ ties a [[id:affca3ee-0c2d-4a19-a268-e1ab078e9117][~std::future~]] to a function/callable object.
   - when it is invoked, it calls the function and makes the future ready.

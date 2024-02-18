@@ -2,7 +2,7 @@
 :ID:       fb10c09a-372d-4137-ad09-0a535508822f
 :END:
 #+title: ~std::async~
-#+filetags: :Concurrency:C++:STL:
+#+filetags: C++
 
 Use ~std::async~ to start an asynchronous task (potentially in a separate thread which might be
 a part of a *thread pool*) and returns a ~std::future~ that will eventually hold the result of that function call.

@@ -2,7 +2,7 @@
 :ID:       5a856fd8-e1ec-4964-8862-17e7d48f906c
 :END:
 #+title: C++ Concurrency
-#+filetags: :Concurrency:C++:
+#+filetags: C++
 
 * Purpose
 Two main reasons:
@@ -22,3 +22,4 @@ Two main reasons:
 ** [[id:f31b1ca4-bcd9-466a-af90-1484e8b28684][Parallel Computation]]
 ** [[id:7f7c8750-1a2d-4a09-b008-e999dd17784d][Thread-safe Queue]]
 ** [[id:0874134e-082a-4f60-8c94-cc0ed6e4001b][Thread-safe Lazy Initialization]]
+* [[id:bfb36506-4b84-4171-b209-b7b155bf75fb][STL Concurrency]]

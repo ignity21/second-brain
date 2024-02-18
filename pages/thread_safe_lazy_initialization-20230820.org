@@ -2,7 +2,7 @@
 :ID:       0874134e-082a-4f60-8c94-cc0ed6e4001b
 :END:
 #+title: Thread-safe Lazy Initialization
-#+filetags: :Concurrency:C++:
+#+filetags: C++
 
 #+begin_src c++
   std::shared_ptr<some_resource> resource_ptr;

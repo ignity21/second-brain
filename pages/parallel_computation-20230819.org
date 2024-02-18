@@ -2,7 +2,7 @@
 :ID:       f31b1ca4-bcd9-466a-af90-1484e8b28684
 :END:
 #+title: Parallel Computation
-#+filetags: :Concurrency:C++:
+#+filetags: C++
 
 - Production-grade library function ~std::reduce~
 - Naive parallel ~std::accumulate~ without exception handling

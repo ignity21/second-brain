@@ -15,7 +15,6 @@
 
 * [[id:1e83db6b-6955-4f9f-a107-da4af74f9071][C++ Keywords]]
 * [[id:de67ad04-b348-4367-9a6f-88404e0f38b0][STL]]
-* [[id:f18a6318-7818-4860-bc8b-bd7b5b9701f5][Data Structures]]
 * Type Deduction
 :PROPERTIES:
 :ID:       6394bf0c-5bd8-4490-bc5c-91f1aebedbce

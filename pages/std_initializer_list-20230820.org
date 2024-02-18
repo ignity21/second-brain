@@ -2,7 +2,7 @@
 :ID:       02e09a1c-a8c8-4102-a444-0498e8dfb993
 :END:
 #+title: ~std::initializer_list~
-#+filetags: :STL:C++:
+#+filetags: :C++:
 
 * Initialization Ways
   #+begin_src cpp

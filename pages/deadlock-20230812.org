@@ -2,7 +2,7 @@
 :ID:       7475eede-346a-403e-9aac-91cab1e71a1f
 :END:
 #+title: Deadlock
-#+filetags: :Concurrency:C++:
+#+filetags: C++
 
 * Guidelines for Avoiding Deadlock
 - Common Advice: Acquire locks in a *fixed order*

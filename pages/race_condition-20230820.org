@@ -2,7 +2,7 @@
 :ID:       7f6ffc9c-dc1c-410c-b81e-36e8fdff065e
 :END:
 #+title: Race Condition
-#+filetags: :Concurrency:C++:
+#+filetags: C++
 
 Race Condition is where the outcome depends on the relative ordering of execution of operations on two or more threads.
 

@@ -2,7 +2,7 @@
 :ID:       c400a8cc-46b7-4afb-a0e1-29bde365fe36
 :END:
 #+title: ~std::thread~
-#+filetags: :STL:Concurrency:C++:
+#+filetags: C++
 
 * Definitions
 #+begin_src cpp

@@ -2,7 +2,7 @@
 :ID:       de67ad04-b348-4367-9a6f-88404e0f38b0
 :END:
 #+title: STL
-#+filetags: :STL:C++:
+#+filetags: C++
 
 * STL General
 :PROPERTIES:
