@@ -10,6 +10,10 @@ Smart pointers ensure that programs are free of memory leaks while also remainin
 * Raw Pointers
 In modern C++, raw pointers managed with ~new~ and ~delete~ should only be used *in small blocks of code with limited scope*, where *performance is critical* and *ownership rights of the memory resource are clear*.
 
+** Some Rules of Using Raw Pointer
+- A call to ~new~ should not be located too far away from the corresponding ~delete~.
+- Calls to ~new~ and ~delete~ should always be hidden from third parties.
+
 * Unique Pointers
 ~std::unique_ptr~ is a smart pointer which *exclusively owns* a dynamically allocated resource on the heap.
 
@@ -26,7 +30,7 @@ auto src_ptr = std::make_unique<MyObject>();
 auto dest_ptr = std::move(src_ptr);
 #+end_src
 
-* Shared Pointer
+* Shared Pointers
 ~std::shared_ptr~ points to a heap resource but does not explicitly own it.
 
 ** When to Use?
@@ -38,7 +42,7 @@ This smart pointer type is useful for cases where you require access to a memory
 ** Pitfalls
 May produce *circular references*. Use ~std::weak_ptr~ to avoid it.
 
-* Weak Pointer
+* Weak Pointers
 ~~std::weak_ptr~ behaves similar to the shared pointer but does not increase the reference counter. There can be multiple weak pointers to the same resource.
 
 Weak pointers hold a *non-owning reference* to an object that is *managed by another shared pointer*.
@@ -47,3 +51,16 @@ Weak pointers hold a *non-owning reference* to an object that is *managed by ano
 
 ** Compare with Raw Pointer
 We can check the validity of its resource with ~expired()~ function.
+
+* Converting Between Smart Pointers
+- unique to shared: ~std::move~
+- weak to shared: ~weak_ptr.lock()~
+
+* Core Guildlines
+- [[https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#r-resource-management][Resource Management]]
+- [[http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#rsmart-smart-pointers][Smart Pointers]]
+
+** Some Rules
+- Use ~unique_ptr~ or ~shared_ptr~ to represent ownership
+- Prefer ~unique_ptr~ over ~shared_ptr~ unless you need to share ownership
+- Use ~weak_ptr~ to break cycles of ~shared_ptr~
