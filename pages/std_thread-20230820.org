@@ -4,7 +4,61 @@
 #+title: ~std::thread~
 #+filetags: C++
 
-* Definitions
+* Starting a Thread
+Ways to create a thread:
+1. Functional Object
+2. Function Pointer
+3. Lambda Function
+4. Member Function
+5. [[id:ae725222-41d6-4eb6-bbd4-96fcc3ff80af][Variadic Templates]]
+
+** Variadic Template Example
+#+begin_src c++
+void printName(std::string &name, int waitTime) {}
+void printName2(std::string name, int waitTime) {}
+
+int main() {
+  std::string name1("MyThread1");
+  std::thread t(printName, std::ref(name1), 50); // need to use std::ref
+
+  std::string name2("MyThread2");
+  std::thread t2(printName2, std::move(name), 50);
+  std::thread t3(printName2, "MyThread3", 50);
+  // all.join()
+}
+#+end_src
+
+** Member Function Example
+#+begin_src c++
+class Vehicle {
+ private:
+  int _id;
+
+ public:
+  Vehicle() : _id(0) {}
+  void addID(int id) { _id = id; }
+  void printID() { std::cout << "Vehicle ID = " << _id << "\n"; }
+};
+
+int main() {
+  // create thread
+  Vehicle v1, v2;
+
+  std::thread t1 = std::thread(&Vehicle::addID, v1, 1); // a copy of v1 is made
+
+  // have to ensure the existence of 'v2' outlives the completion of the thread t2
+  std::thread t2 = std::thread(&Vehicle::addID, &v2, 2);
+
+  // use smart pointers to ensure the existence of the object
+  std::shared_ptr<Vehicle> v3(new Vehicle);
+  std::thread t3 = std::thread(&Vehicle::addID, v3, 1); 
+
+  // all.join()
+}
+#+end_src
+
+* Examples
+** Definitions
 #+begin_src cpp
   #include <thread>
   #include <iostream>
@@ -28,9 +82,9 @@
   }
 #+end_src
 
-* Launching a Thread
+** Launching a Thread
 Need to ensure that you've called either ~join()~ or ~detach()~ before a ~std::thread~ object is destroyed.
-** ~join()~
+*** ~join()~
 #+begin_src cpp
   int main(int argc, char *argv[]) {
     std::thread t{do_some_work};
@@ -66,7 +120,7 @@ Need to ensure that you've called either ~join()~ or ~detach()~ before a ~std::t
   }
 #+end_src
 
-** ~detach()~
+*** ~detach()~
 #+begin_src cpp
   int main(int argc, char *argv[]) {
     std::thread t{do_some_work}; // 线程代码已开始执行
@@ -79,7 +133,7 @@ Need to ensure that you've called either ~join()~ or ~detach()~ before a ~std::t
 #+end_src
 - Need to ensure that the data accessed by the thread is valid until the thread has finished with it.
 
-* Passing Arguments
+** Passing Arguments
 - Important: The arguments are copied into internal storage of ~std::thread~.
   - The ~std::thread~ constructor copies the supplied values *as is*, without converting to the expected argument type.
   - The ~std::thread~ then passed to the callable object or function as rvalues as if they were temporaries.
@@ -110,7 +164,7 @@ Need to ensure that you've called either ~join()~ or ~detach()~ before a ~std::t
   }
 #+end_src
 
-* Scoped Thread Pattern
+** Scoped Thread Pattern
 :PROPERTIES:
 :ID:       b8a1584e-b00a-47e4-9c14-8d6550773666
 :END:

@@ -1,10 +1,22 @@
 :PROPERTIES:
 :ID:       925ecbf4-455e-437d-a1bb-432542685263
 :END:
-#+title: Process State
+#+title: Process States
 #+filetags: Linux
 
-#+caption: Process State
+* States Diagram
+#+DOWNLOADED: screenshot @ 2024-02-19 08:39:38
+[[file:images/States_Diagram/2024-02-19_08-39-38_screenshot.png]]
+
+- Ready :: After its creation, a process enters the ready state and is loaded into main memory. The process now is ready to run and is waiting for CPU time to be executed. Processes that are ready for execution by the CPU are stored in a queue managed by the OS.
+- Running :: The operating system has selected the process for execution and the instructions within the process are executed on one or more of the available CPU cores.
+- Blocked :: A process that is blocked is one that is waiting for an event (such as a system resource becoming available) or the completion of an I/O operation.
+- Terminated :: When a process completes its execution or when it is being explicitly killed, it changes to the "terminated" state. The underlying program is no longer executing, but the process remains in the process table as a "zombie process". When it is finally removed from the process table, its lifetime ends.
+- Ready suspended :: A process that was initially in ready state but has been *swapped out of main memory* and placed onto external storage is said to be in suspend ready state. The process will transition back to ready state whenever it is moved to main memory again.
+- Blocked suspended :: A process that is blocked may also be *swapped out of main memory*. It may be swapped back in again under the same conditions as a "ready suspended" process. In such a case, the process will move to the blocked state, and may still be waiting for a resource to become available.
+
+* OS State Code
+#+caption: Process States
 [[../assets/Linux/ProcessState_1.png]]
 
 - R 是 Running 或 Runnable 的缩写，表示进程在 CPU 的就绪队列中，正在运行或者正在等待运行。
@@ -20,3 +32,4 @@
   - 暂停恢复：SIGSTOP暂停，SIGCONT恢复
   - GDB进断点中断时，变为跟踪状态
 - X，也就是 Dead 的缩写，表示进程已经消亡，所以你不会在 top 或者 ps 命令中看到它。
+

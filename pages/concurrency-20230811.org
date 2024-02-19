@@ -10,6 +10,7 @@ Two main reasons:
 - Separation of concerns
   - Based on the conceptual design rather than an attempt to increase throughput
   - The number of threads is *independent* of the number of CPU cores available.
+
 - Performance
   - Task parallelism: Divide a single task into parts and run each in parallel.
   - Data parallelism: Each thread performs the same operation on different parts of the data.

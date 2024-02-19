@@ -14,6 +14,9 @@
 - [[id:1c06b333-7aae-484c-af97-74d8009a6aa2][Include Guard]]
 
 * [[id:1e83db6b-6955-4f9f-a107-da4af74f9071][C++ Keywords]]
+* Functions
+** [[id:76959270-4bbe-4a53-ab41-942a492f734b][C++ Lambda]]
+** [[id:ae725222-41d6-4eb6-bbd4-96fcc3ff80af][Variadic Templates]]
 * [[id:de67ad04-b348-4367-9a6f-88404e0f38b0][STL]]
 * Type Deduction
 :PROPERTIES:

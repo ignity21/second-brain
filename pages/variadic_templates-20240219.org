@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       ae725222-41d6-4eb6-bbd4-96fcc3ff80af
+:END:
+#+title: Variadic Templates
+#+filetags: C++
+* ~std::thread~ Example
+** Definition
+#+begin_src c++
+template< class Function, class... Args >
+explicit thread( Function&& f, Args&&... args );
+#+end_src
+
+** Usage
+#+begin_src c++
+void printID(int id) {
+  std::this_thread::sleep_for(std::chrono::milliseconds(50));
+  std::cout << "ID = " << id << std::endl;
+}
+
+void printIDAndName(int id, std::string name) {
+  std::this_thread::sleep_for(std::chrono::milliseconds(50));
+  std::cout << "ID = " << id << ", name = " << name << std::endl;
+}
+
+int main(int argc, char *argv[]) {
+  std::thread t1(printID, id);
+  std::thread t2(printIDAndName, ++id, "My String");
+  t1.join();
+  t2.join();
+  return 0;
+}
+#+end_src

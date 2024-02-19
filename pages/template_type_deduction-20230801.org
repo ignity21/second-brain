@@ -4,6 +4,7 @@
 #+title: Template Type Deduction
 #+filetags: C++
 
+* Declaration
 #+begin_src cpp
   template<typename T>
   void f(ParamType param); // ParamType often contains adornments, such as const/& ...

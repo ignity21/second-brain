@@ -109,7 +109,7 @@
 - [[id:96dbc600-8ca2-44a2-a638-80ef0bc0a5cc][Tips]]
 - [[id:08fd1b02-968d-42e0-851f-f6b33c58e281][Shell Script]]
 
-* Process
+* Processes
 :PROPERTIES:
 :ID:       7d47a7bc-c1f8-41ae-96b4-cd01950cd21b
 :END:
@@ -122,9 +122,9 @@
 - [[id:be6c0364-12d4-4602-aaee-c1db280685a4][Sharing Files Between Processes]]
 - [[id:6f1e5033-7e68-4eb1-a7d7-d5fd9db8b863][~fork()~]]
 - [[id:9b389f92-25a2-4d87-ab70-70572a7a23fc][Process Troubleshooting]]
+- [[id:d63d5c4d-c88c-426b-8166-ff39e8bf15d9][Threads]]
 
 * [[id:b740640d-e1b6-4d3e-a151-44653e269df7][System Calls]]
-
 ** [[id:f56bc413-0cd6-4465-9f37-6c32b671126f][System Header Files]]
 ** [[id:203da24b-3369-456a-bff6-2dabd33ed858][I/O System Calls]]
 
