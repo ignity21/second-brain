@@ -7,9 +7,29 @@
 Use ~std::async~ to start an asynchronous task (potentially in a separate thread which might be
 a part of a *thread pool*) and returns a ~std::future~ that will eventually hold the result of that function call.
 
+Internally, ~std::async~ creates a promise, gets a future from it and runs a template function that takes the promise, calls our function and then either sets the value or the exception of that promise.
+
 * Parameters
-Parameter ~policy~:
-- ~std::launch::deferred~: to indicate that the function call is to be deferred until either
+Parameter ~std::launch::~ policy:
+- ~std::launch::deferred~
+  - Enforces an *synchronous* execution
+  - to indicate that the function call is to be deferred until either
   ~wait()~ or ~get()~ is called on the future.
-- ~std::launch::async~: to indicate that the function must be run on *its own thread*.
-- ~std::launch::deferred | std::launch::async~: to indicate that the implementation may choose.
+- ~std::launch::async~
+  - Enforces an *asynchronous* execution
+  - to indicate that the function must be run on *its own thread*.
+- *Default* is ~std::launch::deferred | std::launch::async~: to indicate that the implementation may choose.
+
+** Default Benefits
+~std::async~ makes it possible to control the amount of concurrency by passing an optional launch parameter, which enforces either synchronous or asynchronous behavior. This ability, *especially when left to the system*, allows us to prevent an overload of threads, which would eventually slow down the system as threads consume resources for both management and communication.
+
+By leaving the decision to the system, we can ensure that the number of threads is chosen in a carefully balanced way that optimizes runtime performance by *looking at the current workload of the system and the multi-core architecture of the system.*
+
+Internally, this is achieved by using *thread-pools* which represent the number of available threads *based on the cores/processors* as well as by *using work-stealing queues*.
+
+*The idea of a work-stealing queue is to have a watchdog program running in the background that regularly monitors the amount of work performed by each processor and redistributes it as needed.*
+
+* Compare to [[id:b07d9886-dc9c-47f2-916e-536e16bde143][Promises and Futures]]
+- A promise, as with ~std::thread~, is no longer needed.
+- We do not need to call ~join()~ any more
+- With ~async()~, the thread destructor will be called automatically

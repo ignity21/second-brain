@@ -15,6 +15,90 @@ Two main reasons:
   - Task parallelism: Divide a single task into parts and run each in parallel.
   - Data parallelism: Each thread performs the same operation on different parts of the data.
 
+* Promises and Futures
+:PROPERTIES:
+:ID:       b07d9886-dc9c-47f2-916e-536e16bde143
+:END:
+The mechanism acts as a single-use channel between the threads.
+The sending end of the channel is called *"promise"* while the receiving end is called *"future"*.
+
+** Promises
+The class template ~std::promise~ provides a convenient way to store a value or an exception that will acquired asynchronously at a later time via a ~std::future~ object. Each ~std::promise~ object is meant to be used *only a single time*.
+
+Promises *can not be copied*, because the promise-future concept is a two-point communication channel for one-time use. *Therefore, we must pass the promise to the thread function using ~std::move~.*
+
+** Futures
+- [[id:affca3ee-0c2d-4a19-a268-e1ab078e9117][STL Futures]]
+- get future object by calling ~promise.get_future()~
+- use ~future.get()~ to receive data from child thread
+  - This method will block until data is available
+  - If the result is movable, it will be moved. Otherwise it will be copied instead.
+- After ~future.get()~ has been called once, the future is *no longer usable*. (data in future is moved)
+- Futures also provide ~wait()~ and ~wait_for(timeout)~ methods.
+
+#+begin_src c++
+auto status = ftr.wait_for(std::chrono::milliseconds(1000));
+if (status == std::future_status::ready) {
+  std::cout << "Result = " << ftr.get() << std::endl;
+} else if (status == std::future_status::timeout || status == std::future_status::deferred) {
+  std::cout << "Result unavailable" << std::endl;
+}
+#+end_src
+** Drawbacks
+1. Information can only be passed from the worker thread to the parent.
+2. Promises and future are meant for one-time use only.
+
+** Examples
+#+begin_src c++
+// promise can not be copied
+void divideByNumber(std::promise<double> &&prms, double num, double denom) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(500)); // simulate work
+    try {
+        if (denom == 0)
+            throw std::runtime_error("Exception from thread: Division by zero!");
+        else
+            prms.set_value(num / denom);
+    }
+    catch (...) {
+        prms.set_exception(std::current_exception());
+    }
+}
+
+int main() {
+    // create promise and future
+    std::promise<double> prms;
+    std::future<double> ftr = prms.get_future();
+
+    // start thread and pass promise as argument
+    double num = 42.0, denom = 0.0;
+    std::thread t(divideByNumber, std::move(prms), num, denom);
+
+    // retrieve result within try-catch-block
+    try {
+        double result = ftr.get();
+        std::cout << "Result = " << result << std::endl;
+    }
+    catch (std::runtime_error e) {
+        std::cout << e.what() << std::endl;
+    }
+
+    // thread barrier
+    t.join();
+
+    return 0;
+}
+
+#+end_src
+
+** Alternative Simple [[id:fb10c09a-372d-4137-ad09-0a535508822f][~std::async~]]
+
+* Task-based Concurrency
+The use of ~std::async~ (and thus *tasks*) take the burden of this decision away from the user and let the system decide whether to execute the code sequentially or as a thread.
+- With tasks, the system takes care of many details (e.g. join). With threads, the programmer is responsible for many details.
+- Threads and tasks are used for different problems.
+  - Threads have more to do with *latency*. When you have functions that can block (e.g. file input, server connection), threads can avoid the program to be blocked
+  - Tasks on the other hand focus on *throughput*, where many operations are executed in parallel.
+
 * [[id:7f6ffc9c-dc1c-410c-b81e-36e8fdff065e][Race Condition]]
 * [[id:d0df6e46-ba6c-4edc-9105-01a8d7692d68][Mutex]]
 * [[id:890f2b58-21c3-48b7-a975-c532eedc01ec][Condition Variable]]

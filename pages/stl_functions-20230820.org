@@ -34,6 +34,6 @@
 :END:
 - [[id:c400a8cc-46b7-4afb-a0e1-29bde365fe36][~std::thread~]]
 - [[id:affca3ee-0c2d-4a19-a268-e1ab078e9117][~std::future~]]
-- [[id:bbada0a0-359b-4614-be1a-94751359c9f4][~std::promise~]]
+- [[id:0ef56589-d45f-45d9-99f9-851a16a65692][~std::shared_future~]]
 - [[id:d9aa699d-1dc0-416e-bd59-00c97e7b9e2b][~std::packaged_task~]]
 - [[id:fb10c09a-372d-4137-ad09-0a535508822f][~std::async~]]
