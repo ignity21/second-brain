@@ -1,0 +1,33 @@
+:PROPERTIES:
+:ID:       bd28f916-60e2-481f-b536-112e0181a1da
+:END:
+#+title: Locks
+#+filetags: :C++:
+* Lock Guard
+:PROPERTIES:
+:ID:       61c7140d-2f02-4c09-a462-a89f8dcb312a
+:ROAM_ALIASES: ~std::lock_guard~
+:END:
+Use RAII idiom to ensures that the mutex is always released, even if an exception is thrown or program flow changes unexpectedly.
+
+* Unique Lock
+:PROPERTIES:
+:ID:       035c601a-5a9e-46a5-bdb4-96e474dfa61f
+:ROAM_ALIASES: ~std::unique_lock~
+:END:
+- unlocking in its destructor as well
+
+Provides support for more advanced locking mechanisms:
+- deferred locking
+- time locking
+- recursive locking
+- transfer of lock ownership
+- use of condition variables
+
+** Advantages over Lock Guard
+1. Offers flexibility to engage and disengage the lock *as needed*. This ability can greatly improve the performance.
+2. Construct an instance *without an associated mutex* using the default constructor
+3. defer_lock_t option
+4. try_to_lock_t option
+5. adopt_lock_t option allows us to use ~unique_lock~ on an already locked mutex
+6. with ~chrono::duration~ or ~chrono::time_point~ option

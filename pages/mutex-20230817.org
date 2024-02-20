@@ -4,13 +4,25 @@
 #+title: Mutex
 #+filetags: C++
 
-Mark all the pieces of code that access the data structure as *mutually exclusive*, i.e. *mutex*.
+* Overview
+Mark all the pieces of code that access the data structure as *mutually exclusive*, i.e. *mutex*. It is important to understand that *a mutex is bound to the memory it protects*.
+
 /Lock/ the mutex *associated with* that data, and when you finished accessing the data structure, you /unlock/ the mutex.
+
 This ensures that all threads see a *self-consistent* view of the shared data.
+
+#+DOWNLOADED: screenshot @ 2024-02-20 12:58:12
+[[file:images/Overview/2024-02-20_12-58-12_screenshot.png]]
+
+* Usage
+1.  Include the ~<mutex>~ header
+2.  Create an ~std::mutex~
+3.  Lock the mutex using ~lock()~ *before read/write is called*
+4.  Unlock the mutex *after the read/write operation* is finished using ~unlock()~
 
 * Practical Suggestion
 
-- It's common to group the mutex and the protected data together in a class.
+- It's common to *group the mutex and the protected data together in a class*.
 - Protecting data with a mutex requires careful interface design.
   - Don't pass pointers and references to protected data outside the scope of the lock.
 
@@ -35,16 +47,15 @@ This ensures that all threads see a *self-consistent* view of the shared data.
 - ~std::scoped_lock guard{a_mutex}~: *template argument deduction*
 - ~std::scoped_lock~: the enhanced version of ~std::lock_guard~
 
-* ~std::recursive_mutex~
+* ~std::timed_mutex~
 :PROPERTIES:
-:ID:       50dcf366-a8c5-462d-9249-5f83cdbf1aa1
+:ID:       46aa6368-ee91-44a8-937a-9c625b6334dc
 :END:
-Most of the time, if you want a recursive mutex, you probably need to change your design instead.
+Similar to mutex, but it comes with two more methods ~try_lock_for()~ and ~try_lock_until()~ that try to acquire the mutex for a period of time or until a moment in time is reached.
 
 * ~std::shared_mutex~
 :PROPERTIES:
 :ID:       13775fe9-1e49-48d0-9c77-4cd7eeca9d4b
-:ROAM_ALIASES: "Reader-writer Mutex"
 :END:
 Used for rarely updated data.
 - exclusive access by a single "writer" thread
@@ -54,3 +65,9 @@ Used for rarely updated data.
 - C++14 only features ~std::shared_time_mutex~
 - ~std::lock_guard~ and ~std::unique_lock~ for "writer"
 - ~std::shared_lock~ for "readers"
+
+* ~std::recursive_mutex~
+:PROPERTIES:
+:ID:       50dcf366-a8c5-462d-9249-5f83cdbf1aa1
+:END:
+Most of the time, if you want a recursive mutex, you probably need to change your design instead.

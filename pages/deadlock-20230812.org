@@ -2,9 +2,10 @@
 :ID:       7475eede-346a-403e-9aac-91cab1e71a1f
 :END:
 #+title: Deadlock
-#+filetags: C++
+#+filetags: :C++:
 
 * Guidelines for Avoiding Deadlock
+- *As a rule of thumb*, programmers should try to avoid using several mutexes at once.
 - Common Advice: Acquire locks in a *fixed order*
   - If you can't acquire them as a single operation with ~std::lock~, the next thing is to use [[*hierarchical_mutex]].
 - Avoid nested locks
@@ -12,17 +13,20 @@
 
 * ~std::lock~
 - ~std::lock~ can help you avoid deadlock in those cases where you need to acquire two or more locks together.
-- it doesn't help if they're acquired *separately*. In that case, you have to rely on disciplines.
   #+begin_src c++
     friend void swap(X& lhs, X& rhs) {
       if (&lhs == &rhs)
         return;
+      // Ensure that locks are always executed in the same order
+      // 1) lhs.m 2) rhs.m
       std::lock(lhs.m, rhs.m);
+      // use lock_guard to release lhs.m&rhs.m
       std::lock_guard<std::mutex> lock_a(lhs.m, std::adopt_lock);
       std::lock_guard<std::mutex> lock_b(rhs.m, std::adopt_lock);
       swap(lhs.some_detail, rhs.some_detail);
     }
   #+end_src
+- it doesn't help if they're acquired *separately*. In that case, you have to rely on disciplines.
 
 ** ~std::defer_lock~
 - [Optimization]: You can optionally release a lock in a specific code branch if it's apparent that the lock is no longer required. This can be important for the performance.
