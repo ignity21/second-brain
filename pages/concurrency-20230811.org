@@ -101,6 +101,7 @@ The use of ~std::async~ (and thus *tasks*) take the burden of this decision away
 
 * [[id:7f6ffc9c-dc1c-410c-b81e-36e8fdff065e][Race Condition]]
 * [[id:d0df6e46-ba6c-4edc-9105-01a8d7692d68][Mutex]]
+* [[id:bd28f916-60e2-481f-b536-112e0181a1da][Locks]]
 * [[id:890f2b58-21c3-48b7-a975-c532eedc01ec][Condition Variable]]
 * [[id:7475eede-346a-403e-9aac-91cab1e71a1f][Deadlock Issue]]
 * Examples
