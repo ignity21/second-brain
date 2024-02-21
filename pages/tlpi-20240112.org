@@ -1,7 +1,0 @@
-:PROPERTIES:
-:ID:       8f9194e6-fa7d-407c-9a60-b7bc8012686a
-:END:
-#+title: TLPI
-#+filetags: :TLPI:
-
-- [[id:dfdba3bb-da7c-4630-93e1-a82b5462795c][[SC] I/O]]

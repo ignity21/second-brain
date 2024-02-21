@@ -43,7 +43,7 @@
   - =O_SYNC=: 以同步方式写入文件
 
 ** An Example
-#+begin_src cpp
+#+begin_src c++
   #define BUFFSIZE 4096
   #include <fcntl.h>
   #include <stdio.h>
@@ -65,42 +65,35 @@
   }
 #+end_src
 
-** File Holes
-:PROPERTIES:
-:ID:       9b30020e-1062-4d79-8b00-f5fa49d0eb01
-:END:
+* More I/O Operations
+| Operation          | Description                                               |
+|--------------------+-----------------------------------------------------------|
+| ioctl              | Operations outside the universal I/O                      |
+| dup/dup2           | Duplicate a file descriptor                               |
+| fcntl              | File control operations                                   |
+| pread/pwrite       | File I/O at a specified offset                            |
+| readv/writev       | Transfer multiple buffers of data in a single system call |
+| truncate/ftruncate | Truncate a File                                           |
+| mkstemp/tmpfile    | Create temporary files                                    |
 
-
-* 高级 IO
-** 原子操作
-- ==O_APPEND= 打开的文件，每次写都会执行原子操作 1. seek to EOF 2. write
-- ~pread~, ~pwrite~ 同理，都是先 seek 后 read/write，都是一次系统调用，保证是原子操作。
-- =O_CREAT | O_EXCL=: 以独占方式创建一个文件
-  - =O_CREAT=: 文件不存在则创建
-  - =O_EXCL=: 如文件已存在， ~open()~ 会返回错误。使得“测试和创建”两步骤成为一个原子操作
-
-* 其他 IO 调用
 ** ~dup~ and ~dup2~
 Duplicate a [[id:937b44b4-497a-466a-924d-0a01a2228266][File Descriptor]].
 - ~dup(fd)~ is equivalent to ~fcntl(fd, F_DUPFD, 0)~
 - ~dup2(fd, fd2)~ is equivalent to ~close(fd2); fcntl(fd, F_DUPFD, fd2)~. (*atomic* operation)
-
-** ~ioctl()~
-对于非标准 IO 模型的设备和文件操作， ~ioctl~ 是系统提供的万能接口。
 
 ** ~sync~, ~fsync~, and ~fdatasync~
 - ~void sync(void)~: simply queues all the modified block buffers for writing and returns.
 - ~int fsync(int fd)~: waits for the disk writes to complete before returning
   - is used when an application needs to be sure that the modified blocks have been written to the disk.
 - ~int fdatasync(int fd)~: is similar to ~fsync~, but it doesn't affect the file's attributes.
-** ~fcntl~
+
+** ~fcntl()~
 Features
 1. Duplicate an existing descriptor (cmd =F_DUPFD= or =F_DUPFD_CLOEXEC=)
 2. Get/set file descriptor flags (cmd =F_GETFD= or =F_SETFD=)
 3. Get/set file status flags (cmd =F_GETEL= or =F_SETFL=)
 4. Get/set asynchronous IO ownership (cmd =F_GETOWN= or =F_SETOWN=)
 5. Get/set record locks (cmd =F_GETLK=, =F_SETLK=, or =F_SETLKW=)
-
 *** 适用场景
 常用用途：修改 *file status flags*
 - 文件不是由调用程序打开的，比如标准输入输出
@@ -114,4 +107,47 @@ Features
   flags |= O_APPEND;
   if (fcntl(fd, F_SETFL, flags) == -1)
     perror("set flags error");
+#+end_src
+
+
+* I/O Details
+** Open File Table
+:PROPERTIES:
+:ID:       cdcabfaf-31e1-4a52-865a-f65eea108602
+:END:
+Three data structures involves:
+- the per-process *file descriptor table*;
+- the system-wide table of *open file descriptions*
+- the file system *i-node table*.
+
+#+DOWNLOADED: screenshot @ 2024-02-21 14:17:25
+[[file:images/Open_File_Table/2024-02-21_14-17-25_screenshot.png]]
+
+
+
+** Nonblocking I/O
+:PROPERTIES:
+:ID:       2fff5bbd-ea0a-46ec-9353-f9f133786ae4
+:END:
+~O_NONBLOCK~ flag details:
+- If the file can't be opened immediately, then ~open()~ returns an error instead of
+blocking.
+- After a successful ~open()~, subsequent I/O operations *are also nonblocking*.
+- Can be used with devices, pipes, FIFOs, and sockets.
+- ~O_NONBLOCK~ is generally ignored for regular files
+  - because the kernel buffer cache ensures that I/O on regular files does not block.
+
+* =/dev/fd=
+:PROPERTIES:
+:ID:       02b1924c-8757-4514-b903-c78f7ccbb83b
+:END:
+For each process, the kernel provides the special virtual directory ~/dev/fd~.
+- =/dev/fd/n=: n is a number corresponding to one of the open file descriptors for the process.
+  - =/dev/fd/0= is standard input for the process.
+- =/dev/fd= -> =/proc/self/fd= -> =/proc/PID/fd=
+- The most common use of files in the =/dev/fd= is in the shell not in programs.
+  - =/dev/stdin=, =/dev/stdout=, and =/dev/stderr= are provided as symbolic links.
+
+#+begin_src c
+fd = open("/dev/fd/1", O_WRONLY); // standard output
 #+end_src

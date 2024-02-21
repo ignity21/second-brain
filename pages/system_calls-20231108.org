@@ -4,5 +4,11 @@
 #+title: System Calls
 #+filetags: :SystemCall:
 
+* Overview
+- All system calls are executed *atomically*.
+  - All of the steps in a system call are completed as a single
+operation, without being interrupted by another process or thread.
+
+* Categories
 - [[id:f56bc413-0cd6-4465-9f37-6c32b671126f][System Header Files]]
 - [[id:dfdba3bb-da7c-4630-93e1-a82b5462795c][I/O]]
