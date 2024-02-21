@@ -1,16 +1,108 @@
 :PROPERTIES:
 :ID:       890f2b58-21c3-48b7-a975-c532eedc01ec
 :END:
-#+title: Condition Variable
+#+title: Condition Variables
 #+filetags: C++
 
 
+* Overview
 A condition variable is associated with an event or other condition, and one or more threads can wait for that condition to be satisfied.
-
+- provides *signaling mechanism*
 - The preparation thread both modifies a shared variable (the condition), and notifies the condition_variable.
 - If waiting the condition variable is a one-shot operation, a future might be more appropriate.
+- ~std::condition_variable::wait~ is *an optimization over a busy-wait*.
+  - it unlocks the mutex and resumes waiting if the condition isn't satisfied.
+  - mutex still locked if the condition is satisfied.
+
+* Usage
+A ~std::condition_variable~ has a method ~wait()~, which blocks, when it is called by a thread. The condition variable is kept blocked until it is released by another thread.
+
+The release works via the method ~notify_one()~ or the ~notify_all~ method.
+
+A condition variable is a *low-level* building block, It neither has a memory of its own nor does it remember notifications. ~notify()~ is called before ~wait()~, the notification will be lost. So in more sophisticated communication protocols a condition variable should always be used *in conjunction with another shared state* that can be checked independently (i.e. ~vec.empty()~).
 
 * Code Example
+** Example 1
+*** Declaration
+#+begin_src c++
+private:
+  std::mutex _mutex;
+  std::condition_variable _cv;
+#+end_src
+
+*** Producer
+#+begin_src c++
+_messages.emplace_back(std::move(msg));
+_cv.notify_one();
+#+end_src
+
+*** Consumer
+#+begin_src c++
+std::unique_lock<std::mutex> lock(_mutex);
+// this while loop is for "spurious wake-ups" issue:
+// Once in a while, the system will - for no obvious reason - wake up a thread.
+while (_messages.empty()) {
+    // Now we can enter the wait state while at same time releasing the lock.
+    // It is only inside wait, that the mutex is temporarily unlocked.
+    _cv.wait(lock);
+}
+
+// optimized simple check:
+// this is equivalent to the while loop above
+_cv.wait(lock, [this] {_messages.empty(); });
+
+// pop front and process
+#+end_src
+- ~_cv.wait(lock)~ *release the lock and enter the wait state in one atomic step*.
+- We are holding the lock *before AND after* our call to ~_cv.wait()~.
+
+*** Complete Code
+#+begin_src c++
+#include <iostream>
+#include <thread>
+#include <queue>
+#include <future>
+#include <mutex>
+
+template <class T>
+class MessageQueue
+{
+public:
+    T receive()
+    {
+        // perform queue modification under the lock
+        std::unique_lock<std::mutex> uLock(_mutex);
+        _cond.wait(uLock, [this] { return !_messages.empty(); }); // pass unique lock to condition variable
+
+        // remove last vector element from queue
+        T msg = std::move(_messages.back());
+        _messages.pop_back();
+
+        return msg; // will not be copied due to return value optimization (RVO) in C++
+    }
+
+    void send(T &&msg)
+    {
+        // simulate some work
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+        // perform vector modification under the lock
+        std::lock_guard<std::mutex> uLock(_mutex);
+
+        // add vector to queue
+        std::cout << "   Message " << msg << " has been sent to the queue" << std::endl;
+        _messages.push_back(std::move(msg));
+        _cond.notify_one(); // notify client after pushing new Vehicle into vector
+    }
+
+private:
+    std::mutex _mutex;
+    std::condition_variable _cond;
+    std::deque<T> _messages;
+};
+#+end_src
+
+** Example 2
 #+begin_src c++
   std::mutex mut;
   std::queue<data_chunk> data_queue;
@@ -53,6 +145,3 @@ A condition variable is associated with an event or other condition, and one or 
     }
   }
 #+end_src
-- ~std::condition_variable::wait~ is *an optimization over a busy-wait*.
-  - mutex still locked if the condition is satisfied.
-  - unlocks the mutex and resumes waiting if the condition isn't satisfied.
