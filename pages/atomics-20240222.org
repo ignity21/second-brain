@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       9fb084bb-ba72-4136-8e91-60f0b7ba216f
+:END:
+#+title: Atomics
+#+filetags: C++
+
+* Atomic Operation
+Atomic operation is guaranteed to execute as a single transaction:
+- At the low level, atomic operations are *special hardware instructions*. (hardware guarantees at)
+
+** Overview
+#+begin_src c++
+#include <atomic>
+std::atomic<int> x{0};
+// multi-thread ++x;
+#+end_src
+
+#+DOWNLOADED: screenshot @ 2024-02-22 19:40:49
+[[file:images/Overview/2024-02-22_19-40-49_screenshot.png]]
+
+*** Atomic Operations
+- Atomic: ~++x~, ~x++~, ~x += 1~, ~x |= 2~, ~int y = x * 2~, ~x = y + 1~
+- Not atomic: ~x *= 2~, ~x = x + 1~, ~x = x * 2~
+  - ~x *= 2~ does not compile
+  - ~x = x + 1~ two separate atomic operations
+
+** What types can be made atomic?
+- Any _trivially copyable_ type
+  - Continuous chunk of memory
+  - Copying the object means copying all bits (memcpy)
+  - No virtual functions, noexcept constructor
