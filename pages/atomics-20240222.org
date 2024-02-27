@@ -121,3 +121,5 @@ Things to know about cache line:
 - The fact is that the *atomic variable is an _index_ to (non-atomic) memory*.
 
 * [[id:c0942ec7-3b9f-4292-bad3-43f88f026881][Lock-free]]
+* References
+- [[https://www.youtube.com/watch?v=ZQFzMfHIxng][cppcon 2017]]

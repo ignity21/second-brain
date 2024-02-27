@@ -56,6 +56,9 @@ bool compare_exchange_strong(T& expected, T desired,
 
 * Sequential Consistency
 It establishes single total modification order of atomic variables.
+- Sequential Consistency is not a memory barrier, it's a memory order.
+- Sequential Consistency makes your program slow
+  - Lock implementation does not need ~seq_cst~, only *acquire and release*.
 - ~std::memory_order_seq_cst~
   - The strongest order
   - *Default* order

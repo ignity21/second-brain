@@ -4,10 +4,43 @@
 #+title: Lock-free
 #+filetags: C++
 * Overview
+- [[id:89931198-0b9b-486a-880e-2029569ed6cc][Memory Barriers]]
 - *Memory order specification* is important to express why the atomic operations are used
   - Clarity the programmer's intent
 
-* [[id:89931198-0b9b-486a-880e-2029569ed6cc][Memory Barriers]]
+** Expressing Intent
+*** relaxed
+#+begin_src c++
+std::atomic<size_t> count;
+count.fetch_add(1, std::memory_order_relaxed);
+#+end_src
+count is not used to index any memory or as a reference count.(no other memory access depends on it) - it's just a counter.
+
+*** release
+#+begin_src c++
+std::atomic<size_t> count;
+T data[max_count];
+initialize(data[count.load(std::memory_order_relaxed)]); // nobody can see this yet
+count.fetch_add(1, std::memory_order_release); // make it visible, now they can see it
+// in reader thread, it should load with std::memory_order_acquire
+#+end_src
+count indexes some memory that was prepared by this thread and now is release to other threads.
+
+*** increment operator
+#+begin_src c++
+std::atomic<size_t> count;
+++count;
+#+end_src
+- What you meant:
+  - there are more than one atomic variable here, so sequential consistency is needed.
+  - I have no idea what I am doing but it seems to work lol.
+    - use ~fetch_add~ with ~memory_order_relaxed~ instead.
+
+* When to Use?
+- High-performance concurrent lock-free data structures
+- When drawback of locks are important (deadlocks, priority conflicts, latency problems)
+- Data structures that are difficult or expensive to implement with lock
+- When concurrent synchronization can be achieved by the cheapest atomic operations (RCU)
 
 * Simple Lock-free Examples
 ** Atomic Queue
@@ -15,9 +48,13 @@
 int q[N];
 std::atomic<size_t> front{0};
 void push(int x) {
-    size_t pos = front.fetch_add(1);
-    q[pos] = x; // exclusive slot
-    // ignoring the synchronization with the reads in the example
+    size_t pos = front.fetch_add(1, std::memory_order_release);
+    q[pos] = x;
+}
+
+int pop() {
+    size_t pos = front.fetch_sub(1, std::memory_order_acquire) - 1;
+    return q[pos];
 }
 #+end_src
 
@@ -32,7 +69,7 @@ void push_front(int x) {
     do { new_node->next = old_head; }
     while (!head.compare_exchange_strong(old_head, new_node));
     // if head == old_head, head = new_node
-    // else old_head = head, then new_node->next = old_head
+    // else old_head = head, then continue
 }
 #+end_src
 
