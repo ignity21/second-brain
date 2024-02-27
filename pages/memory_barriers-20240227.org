@@ -1,0 +1,67 @@
+:PROPERTIES:
+:ID:       89931198-0b9b-486a-880e-2029569ed6cc
+:END:
+#+title: Memory Barriers
+#+filetags: C++
+* Overview
+- What guarantees that other threads see this memory in the desired state
+  - For acquiring exclusive access: data may be prepared by other threads, must be completed.
+  - For releasing into shared access: data is prepared by the owner threads, must become visible to every one.
+- Memory barriers are *implemented by the hardware*.
+- Barriers ensure the *specified order* of reads and writes.
+- C++ Memory barriers are *modifiers on atomic operations*
+
+* No Barriers
+
+#+DOWNLOADED: screenshot @ 2024-02-27 10:32:42
+[[file:images/No_Barriers/2024-02-27_10-32-42_screenshot.png]]
+
+* Acquire Barriers
+It guarantees that *all memory operations* scheduled after the barrier in the program order *become visible after the barrier*.
+
+#+DOWNLOADED: screenshot @ 2024-02-27 10:38:18
+[[file:images/Acquire_Barriers/2024-02-27_10-38-18_screenshot.png]]
+- It ensures that the last three operations become visible after the barrier
+
+* Release Barriers
+It guarantees that *all memory operations* scheduled before the barrier in the program order *become visible before the barrier*.
+
+#+DOWNLOADED: screenshot @ 2024-02-27 10:44:07
+[[file:images/Release_Barriers/2024-02-27_10-44-07_screenshot.png]]
+
+* Acquire-release Order
+- Acquire and release barriers are often used together
+  - Thread1 *writes* atomic variable x with *release barrier*
+  - Thread2 *reads the same* atomic variable x with *acquire barrier*
+- All memory writes that happen in Thread1 before the barrier become visible in Thread2 after the barrier
+  - Thread1 *prepares data then releases*(*publishes*) it by updating atomic variable
+  - Thread2 *acquires atomic variable and data is guaranteed to be visible*
+- ~std::memory_order_acq_rel~
+
+** CAS Example
+#+begin_src c++
+atomic<T> value;
+bool compare_exchange_strong(T& expected, T desired,
+                             memory_order on_success, memory_order on_failure) {
+    T tmp = value.load(on_failure);
+    if (tmp != expected) { expected = tmp; return false; }
+    tmp = value;
+    // read is faster than write, no need to lock all
+    Lock L; // get exclusive access
+    if (tmp != expected) { expected = tmp; return false; }
+    value.store(desired, on_success);
+    return true;
+}
+#+end_src
+
+* Sequential Consistency
+It establishes single total modification order of atomic variables.
+- ~std::memory_order_seq_cst~
+  - The strongest order
+  - *Default* order
+
+* On x86
+- All loads are acquire-loads, all stores are release-stores
+- Adding the other barrier is expensive
+- All *read-modify-write* operations are acquire-release
+- ~acq_rel~ and ~seq_cst~ *are the same thing* on x86
