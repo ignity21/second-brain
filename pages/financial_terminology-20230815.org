@@ -1,10 +1,11 @@
-:PROPERTIES:
+:PROPERTIES
 :ID:       09ea9033-4067-4a2f-b442-b7da136fa5be
 :END:
 #+title: Financial Terminology
 #+filetags: :Trading:
 
 * Terminologies
+- Ticker *Symbol* :: AAPL for Apple, TSLA for Tesla
 - Stock :: An asset that represents ownership in a company. A claim on part of a corportation's
   assets and earnings. There are two main types, common and preferred.
 - Share :: A single share represents partial ownership of a company relative to the total number
