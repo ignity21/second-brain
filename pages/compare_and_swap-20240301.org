@@ -1,0 +1,72 @@
+:PROPERTIES:
+:ID:       586d0e68-2c85-408b-b0d1-968262b43804
+:END:
+#+title: Compare and Swap
+#+filetags: C++
+
+* Overview
+- compare-exchange operation is the *cornerstone* of programming with atomic types.
+#+begin_src c++
+bool success = x.compare_exchange_strong(expected, desired);
+// if x == expected, make x = desired and return true
+// Otherwise, set expected = x and return false
+#+end_src
+
+- Atomic increment with CAS
+#+begin_src c++
+std::atomic<int> x{0};
+int x0 = x;
+while (!x.compare_exchange_strong(x0 /* pass by reference */, x0 + 1)) {}
+// If return false, x0 will be updated to the current value of x
+// otherwise, x will be updated to x0 + 1
+#+end_src
+- CAS can be used to increment doubles, multiply integers, ...
+
+* ~compare_exchange_weak~
+:PROPERTIES:
+:ID:       a099c858-2e64-4cdb-9ef2-fef7bcaad6c9
+:END:
+- The ~store()~ might not be successful even if the original value was equal to the expected value.
+  - most likely to happen on machines that *lack a single compare-and-exchange instruction*
+- The reason to use weak: *read is faster than write*
+#+begin_src c++
+success = x.compare_exchange_weak(expected, desired);
+// Same thing but can "spuriously fail" and return false even if x == expected
+// If you can't get the answer from the other core in some timeout, you just return false.
+#+end_src
+
+- pseudo-code
+#+begin_src c++
+bool compare_exchange_strong(T& expected, T desired) {
+    Lock L; // get exclusive access
+    T tmp = value; // current value of the atomic (read)
+    if (tmp != expected) { expected = tmp; return false; }
+    value = desired;
+    return true;
+}
+
+bool compare_exchange_weak(T& expected, T desired) {
+    T tmp = value; // current value of the atomic
+    if (tmp != expected) { expected = tmp; return false; }
+    TimedLock L; // get exclusive access or fail
+    if (!L.locked()) return false;
+    tmp = value; // value could have changed!
+    if (tmp != expected) { expected = tmp; return false; }
+    value = desired;
+    return true;
+}
+#+end_src
+- The idea: *Exclusive write* on particular platform might be hard to get, *but the read isn't*.
+- Similar to singleton ~get_instance~ double-check pattern.
+- A read before lock is really fast.
+
+** Usage
+Because ~compare_exchange_weak()~ can fail *spuriously*, it must typically be used in a loop.
+#+begin_src c++
+bool expected = false;
+extern atomic<bool> b;
+while (!b.compare_exchange_weak(expected, true) && !expected);
+// you keep looping as long as expected is still false
+// indicating that the compare_exchange_weak() call failed spuriously.
+#+end_src
+- Compare to ~~compare_exchange_strong()~: strong guarantees to return false only if the value wasn't equal to the expected value.

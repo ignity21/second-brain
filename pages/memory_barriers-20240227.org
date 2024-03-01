@@ -1,5 +1,6 @@
 :PROPERTIES:
 :ID:       89931198-0b9b-486a-880e-2029569ed6cc
+:ROAM_ALIASES: "Memory Order"
 :END:
 #+title: Memory Barriers
 #+filetags: C++

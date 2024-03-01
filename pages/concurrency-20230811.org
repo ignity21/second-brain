@@ -15,19 +15,22 @@ Two main reasons:
   - Task parallelism: Divide a single task into parts and run each in parallel.
   - Data parallelism: Each thread performs the same operation on different parts of the data.
 
-* Promises and Futures
+* Lock-based
+** [[id:7f6ffc9c-dc1c-410c-b81e-36e8fdff065e][Race Condition]]
+
+** Promises and Futures
 :PROPERTIES:
 :ID:       b07d9886-dc9c-47f2-916e-536e16bde143
 :END:
 The mechanism acts as a single-use channel between the threads.
 The sending end of the channel is called *"promise"* while the receiving end is called *"future"*.
 
-** Promises
+*** Promises
 The class template ~std::promise~ provides a convenient way to store a value or an exception that will acquired asynchronously at a later time via a ~std::future~ object. Each ~std::promise~ object is meant to be used *only a single time*.
 
 Promises *can not be copied*, because the promise-future concept is a two-point communication channel for one-time use. *Therefore, we must pass the promise to the thread function using ~std::move~.*
 
-** Futures
+*** Futures
 - [[id:affca3ee-0c2d-4a19-a268-e1ab078e9117][STL Futures]]
 - get future object by calling ~promise.get_future()~
 - use ~future.get()~ to receive data from child thread
@@ -44,11 +47,11 @@ if (status == std::future_status::ready) {
   std::cout << "Result unavailable" << std::endl;
 }
 #+end_src
-** Drawbacks
+*** Drawbacks
 1. Information can only be passed from the worker thread to the parent.
 2. Promises and future are meant for one-time use only.
 
-** Examples
+*** Examples
 #+begin_src c++
 // promise can not be copied
 void divideByNumber(std::promise<double> &&prms, double num, double denom) {
@@ -90,21 +93,24 @@ int main() {
 
 #+end_src
 
-** Alternative Simple [[id:fb10c09a-372d-4137-ad09-0a535508822f][~std::async~]]
+*** Alternative Simple [[id:fb10c09a-372d-4137-ad09-0a535508822f][~std::async~]]
 
-* Task-based Concurrency
+** Task-based Concurrency
 The use of ~std::async~ (and thus *tasks*) take the burden of this decision away from the user and let the system decide whether to execute the code sequentially or as a thread.
 - With tasks, the system takes care of many details (e.g. join). With threads, the programmer is responsible for many details.
 - Threads and tasks are used for different problems.
   - Threads have more to do with *latency*. When you have functions that can block (e.g. file input, server connection), threads can avoid the program to be blocked
   - Tasks on the other hand focus on *throughput*, where many operations are executed in parallel.
 
-* [[id:7f6ffc9c-dc1c-410c-b81e-36e8fdff065e][Race Condition]]
-* [[id:d0df6e46-ba6c-4edc-9105-01a8d7692d68][Mutex]]
-* [[id:bd28f916-60e2-481f-b536-112e0181a1da][Locks]]
-* [[id:890f2b58-21c3-48b7-a975-c532eedc01ec][Condition Variables]]
-* [[id:7475eede-346a-403e-9aac-91cab1e71a1f][Deadlock Issue]]
-* [[id:9fb084bb-ba72-4136-8e91-60f0b7ba216f][Atomics]]
+** [[id:d0df6e46-ba6c-4edc-9105-01a8d7692d68][Mutex]]
+** [[id:bd28f916-60e2-481f-b536-112e0181a1da][Locks]]
+** [[id:890f2b58-21c3-48b7-a975-c532eedc01ec][Condition Variables]]
+** [[id:7475eede-346a-403e-9aac-91cab1e71a1f][Deadlock Issue]]
+
+* Lock-free
+** [[id:c47f4f7a-d15b-4c9a-8ccb-d00d473059cd][Memory Model]]
+** [[id:9fb084bb-ba72-4136-8e91-60f0b7ba216f][Atomics]]
+
 * Examples
 ** [[id:f31b1ca4-bcd9-466a-af90-1484e8b28684][Parallel Computation]]
 ** [[id:7f7c8750-1a2d-4a09-b008-e999dd17784d][Thread-safe Queue]]

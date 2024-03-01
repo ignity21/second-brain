@@ -5,8 +5,9 @@
 #+filetags: C++
 
 * Atomic Operation
-Atomic operation is guaranteed to execute as a single transaction:
+Atomic operation is guaranteed to execute as a single transaction: (indivisible)
 - At the low level, atomic operations are *special hardware instructions*. (hardware guarantees at)
+- ~is_lock_free()~ member function determines whether the atomic type uses atomic instructions or locks.
 
 ** Overview
 #+begin_src c++
@@ -36,57 +37,7 @@ std::atomic<int> x{0};
 - ~++, +=(fetch_add), --, -= , |=, &=, ^==~ for integers
 - Explicit reads and writes: ~T y = x.load()~, ~x.store(y)~
 - Atomic exchange: ~T z = x.exchange(y) // Atomically: z=x; x=y;~
-- *Compare-and-swap (conditional exchange)*
-*** Compare-and-swap (CAS)
-:PROPERTIES:
-:ID:       5b145d8a-330f-4b7a-a1a3-9fa8ebb3564d
-:END:
-#+begin_src c++
-bool success = x.compare_exchange_strong(expected, desired);
-// if x == expected, make x = desired and return true
-// Otherwise, set expected = x and return false
-#+end_src
-
-- Atomic increment with CAS
-#+begin_src c++
-std::atomic<int> x{0};
-int x0 = x;
-while (!x.compare_exchange_strong(x0 /* pass by reference */, x0 + 1)) {}
-// If return false, x0 will be updated to the current value of x
-// otherwise, x will be updated to x0 + 1
-#+end_src
-- CAS can be used to increment doubles, multiply integers, ...
-*** ~compare_exchange_weak~
-- The reason to use weak: *read is faster than write*
-#+begin_src c++
-success = x.compare_exchange_weak(expected, desired);
-// Same thing but can "spuriously fail" and return false even if x == expected
-// If you can't get the answer from the other core in some timeout, you just return false.
-#+end_src
-- pseudo-code
-#+begin_src c++
-bool compare_exchange_strong(T& expected, T desired) {
-    Lock L; // get exclusive access
-    T tmp = value; // current value of the atomic (read)
-    if (tmp != expected) { expected = tmp; return false; }
-    value = desired;
-    return true;
-}
-
-bool compare_exchange_weak(T& expected, T desired) {
-    T tmp = value; // current value of the atomic
-    if (tmp != expected) { expected = tmp; return false; }
-    TimedLock L; // get exclusive access or fail
-    if (!L.locked()) return false;
-    tmp = value; // value could have changed!
-    if (tmp != expected) { expected = tmp; return false; }
-    value = desired;
-    return true;
-}
-#+end_src
-- The idea: *Exclusive write* on particular platform might be hard to get, *but the read isn't*.
-- Similar to singleton ~get_instance~ double-check pattern.
-- A read before lock is really fast.
+- [[id:586d0e68-2c85-408b-b0d1-968262b43804][Compare and Swap]]
 
 ** Is atomic lock-free?
 | std::atomic<T> Type T               | run-time is_lock_free() |
@@ -119,6 +70,42 @@ Things to know about cache line:
 * Atomic Variables
 - *Atomic variables are rarely used by themselves*
 - The fact is that the *atomic variable is an _index_ to (non-atomic) memory*.
+** ~std::atomic_flag~
+:PROPERTIES:
+:ID:       e6f4c9ad-2997-47d4-a46c-f5d7eea1641b
+:END:
+It is a simple Boolean flag, and operations on this type *are required to be lock-free*.
+- Objects of the ~std::atomic_flag~ type are initialized to /clear/
+- They can then either be queried and set (~test_and_set()~) or cleared (~clear()~).
+*** Operations
+- Objects of the ~std::atomic_flag~ type must be initialized with ~ATOMIC_FLAG_INIT~ (*clear* state).
+  - ~std::atomic_flag f=ATOMIC_FLAG_INIT~
+  - It's guaranteed to be statically initialized, which means that there are no initialization-order issues
+- There are only three things you can do with it
+  - destroy it (destructor)
+  - clear it ~clear()~: a store operation
+  - set it ~test_and_set()~: a read-modify-write operation
+
+*** Implement a Spin-lock Mutex
+#+begin_src c++
+class spinlock_mutex {
+  std::atomic_flag _flag = ATOMIC_FLAG_INIT;
+
+public:
+  spinlock_mutex() = default;
+
+  void lock() {
+    while (condition) {
+
+    } (_flag.test_and_set(std::memory_order_acquire)) {}
+  }
+
+  void unlock() {
+    _flag.clear(std::memory_order_release);
+  }
+};
+
+#+end_src
 
 * [[id:c0942ec7-3b9f-4292-bad3-43f88f026881][Lock-free]]
 * References
