@@ -107,6 +107,58 @@ public:
 
 #+end_src
 
+** ~std::atomic<UDT>~
+- criteria for UDT
+  - UDTs must have a /trivial/ copy-assignment operator(use compiler-generated copy-assignment)
+  - must not have any *virtual functions* or *virtual base classes*
+  - every base class and non-static data member must also have a trivial copy-assignment operator
+- The criteria permits the compiler to use ~memcpy()~ (no user-written code to run)
+
+*** Operations
+In general, the compiler isn't going to be able to generate lock-free code for std::atomic<UDT>, so it will have to *use an internal lock for all the operations*.
+
+** Operations on Atomic Types
+| Operation       | ~atomic_flag~ | ~bool~ | ~T*~ | ~int-type~ | ~other-type~ |
+|-----------------+---------------+--------+------+------------+--------------|
+| ~test_and_set~  | Y             |        |      |            |              |
+| ~clear~         | Y             |        |      |            |              |
+| ~is_lock_free~  |               | Y      | Y    | Y          | Y            |
+| ~load~          |               | Y      | Y    | Y          | Y            |
+| ~store~         |               | Y      | Y    | Y          | Y            |
+| ~exchange~      |               | Y      | Y    | Y          | Y            |
+| ~CAS~           |               | Y      | Y    | Y          | Y            |
+| ~fetch_add, +=~ |               |        | Y    | Y          |              |
+| ~fetch_sub, -=~ |               |        | Y    | Y          |              |
+| ~fetch_or~      |               |        |      | Y          |              |
+| ~fetch_and, &=~ |               |        |      | Y          |              |
+| ~fetch_xor, ^=~ |               |        |      | Y          |              |
+| ~++, --~        |               |        | Y    | Y          |              |
+
+** Free Functions
+- i.e. ~std::atomic_store~, ~std::atomic_load_explicit~
+- The free functions are designed to be C-compatible.
+** ~std::atomic<shared_ptr<T>>~
+- ~std::atomic<shared_ptr<T>>~ since C++20
+- ~std::experimental::atomic_shared_ptr~ for C++11,14,17
+*** Free Atomic Functions on Shared ptr
+- Operations ~load~, ~store~, ~exchange~ and ~compare_exchange~
+  - takes an ~std::shared_ptr<>*~ as the first argument
+
+#+begin_src c++
+std::shared_ptr<mydata> p;
+
+void process_global_data() {
+    std::shared_ptr<mydata> local = std::atomic_load(&p);
+    process_data(local);
+}
+
+void update_global_data() {
+    std::shared_ptr<mydata> local(new mydata);
+    std::atomic_store(&p, local);
+}
+#+end_src
+
+
 * [[id:c0942ec7-3b9f-4292-bad3-43f88f026881][Lock-free]]
 * References
 - [[https://www.youtube.com/watch?v=ZQFzMfHIxng][cppcon 2017]]
