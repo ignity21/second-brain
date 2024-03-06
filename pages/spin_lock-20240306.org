@@ -1,0 +1,27 @@
+:PROPERTIES:
+:ID:       247aac50-7fb9-4e63-ba23-cd1a025d5008
+:END:
+#+title: Spin-Lock
+#+filetags: C++
+
+* Implementation using ~atomic_flag~
+#+begin_src c++
+class spinlock_mutex {
+  std::atomic_flag _flag = ATOMIC_FLAG_INIT;
+
+public:
+  spinlock_mutex() = default;
+
+  void lock() {
+    while (_flag.test_and_set(std::memory_order_acquire)) {}
+    // the first call to test_and_set() will set the flag and return false
+  }
+
+  void unlock() {
+    _flag.clear(std::memory_order_release);
+  }
+};
+
+#+end_src
+- ~lock()~ is an acquire operation on an internal memory location
+- ~unlock()~ is a release operation on that same memory location

@@ -86,26 +86,7 @@ It is a simple Boolean flag, and operations on this type *are required to be loc
   - clear it ~clear()~: a store operation
   - set it ~test_and_set()~: a read-modify-write operation
 
-*** Implement a Spin-lock Mutex
-#+begin_src c++
-class spinlock_mutex {
-  std::atomic_flag _flag = ATOMIC_FLAG_INIT;
-
-public:
-  spinlock_mutex() = default;
-
-  void lock() {
-    while (condition) {
-
-    } (_flag.test_and_set(std::memory_order_acquire)) {}
-  }
-
-  void unlock() {
-    _flag.clear(std::memory_order_release);
-  }
-};
-
-#+end_src
+*** [[id:247aac50-7fb9-4e63-ba23-cd1a025d5008][Implementing a Spin-lock]]
 
 ** ~std::atomic<UDT>~
 - criteria for UDT

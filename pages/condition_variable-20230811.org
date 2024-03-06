@@ -4,7 +4,6 @@
 #+title: Condition Variables
 #+filetags: C++
 
-
 * Overview
 A condition variable is associated with an event or other condition, and one or more threads can wait for that condition to be satisfied.
 - provides *signaling mechanism*

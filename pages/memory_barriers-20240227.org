@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       89931198-0b9b-486a-880e-2029569ed6cc
-:ROAM_ALIASES: "Memory Order"
+:ROAM_ALIASES: Fences "Memory Orders"
 :END:
 #+title: Memory Barriers
 #+filetags: C++
@@ -12,10 +12,17 @@
 - Barriers ensure the *specified order* of reads and writes.
 - C++ Memory barriers are *modifiers on atomic operations*
 
+- Three memory-ordering models:
+  - /sequentially consistent/ ordering (~memory_order_seq_cst~)
+  - /acquire-release/ ordering (~acquire, release, acq_rel~)
+  - /relaxed/ ordering (~memory_order_relaxed~)
+
 * No Barriers
 
 #+DOWNLOADED: screenshot @ 2024-02-27 10:32:42
 [[file:images/No_Barriers/2024-02-27_10-32-42_screenshot.png]]
+- The compiler can reorder the instructions
+- The different CPU caches can hold different values for the same memory
 
 * Acquire Barriers
 It guarantees that *all memory operations* scheduled after the barrier in the program order *become visible after the barrier*.
@@ -39,30 +46,35 @@ It guarantees that *all memory operations* scheduled before the barrier in the p
   - Thread2 *acquires atomic variable and data is guaranteed to be visible*
 - ~std::memory_order_acq_rel~
 
-** CAS Example
+** Example
 #+begin_src c++
-atomic<T> value;
-bool compare_exchange_strong(T& expected, T desired,
-                             memory_order on_success, memory_order on_failure) {
-    T tmp = value.load(on_failure);
-    if (tmp != expected) { expected = tmp; return false; }
-    tmp = value;
-    // read is faster than write, no need to lock all
-    Lock L; // get exclusive access
-    if (tmp != expected) { expected = tmp; return false; }
-    value.store(desired, on_success);
-    return true;
+bool x = false;
+std::atomic<bool> y;
+void write_x_then_y() {
+    x = true;
+
+    // same as y.store(true, std::memory_order_release);
+    std::atomic_thread_fence(std::memory_order_release);
+    y.store(true, std::memory_order_relaxed);
+}
+
+void read_y_then_x() {
+    while (!y.load(std::memory_order_relaxed));
+    std::atomic_thread_fence(std::memory_order_acquire);
+    cassert(x == true);
 }
 #+end_src
+
+
 
 * Sequential Consistency
 It establishes single total modification order of atomic variables.
 - Sequential Consistency is not a memory barrier, it's a memory order.
 - Sequential Consistency makes your program slow
+  - It requires *global synchronization* between all threads.
+  - The strongest and default ordering model
   - Lock implementation does not need ~seq_cst~, only *acquire and release*.
 - ~std::memory_order_seq_cst~
-  - The strongest order
-  - *Default* order
 
 * On x86
 - All loads are acquire-loads, all stores are release-stores

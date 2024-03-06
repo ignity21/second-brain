@@ -31,3 +31,5 @@ Provides support for more advanced locking mechanisms:
 4. try_to_lock_t option
 5. adopt_lock_t option allows us to use ~unique_lock~ on an already locked mutex
 6. with ~chrono::duration~ or ~chrono::time_point~ option
+
+* [[id:247aac50-7fb9-4e63-ba23-cd1a025d5008][Spin-Lock]]
