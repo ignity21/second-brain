@@ -18,6 +18,7 @@
     resource_ptr->do_something();
   }
 #+end_src
+
 - using ~std::once_flag~ and ~std::call_once~ *Recommended*
 #+begin_src c++
   std::shared_ptr<some_resource> resource_ptr;

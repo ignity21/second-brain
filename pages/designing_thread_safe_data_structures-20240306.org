@@ -1,0 +1,45 @@
+:PROPERTIES:
+:ID:       f8a4353c-d3ec-4439-824a-23c454a71a31
+:END:
+#+title: Designing Thread-safe Data Structures
+#+filetags: C++
+
+* Guidelines
+- Ensuring that the accesses are /safe/
+- Enabling /genuine/ concurrent access
+  - The smaller the protected region, the fewer operations are serialized, the greater the potential for concurrency.
+
+* Common Errors
+** Inappropriate Interface
+- Providing ~T pop()~ instead of separate ~T top()~ and ~void pop()~
+
+** Paying Attention to Exception-safe
+#+begin_src c++
+void pop(T &value) {
+    std::lock_guard<std::mutex> lock(mutex);
+    if (data.empty()) { throw empty_stack(); }
+    value = std::move(data.top());
+    data.pop() // may never be called when exception is thrown in move constructor
+}
+
+// exception-safe pop
+std::shared_ptr<T> pop() {
+    std::lock_guard<std::mutex> lock(mutex);
+    if (data.empty()) { throw empty_stack(); }
+    std::shared_ptr<T> const res(std::make_shared<T>(std::move(data.top())));
+    data.pop();
+    return res;
+}
+#+end_src
+
+** Deadlocks
+- Restricting the scope of locks
+- Avoiding nested locks when possible
+- Never call user code while holding a lock
+  - potentially *copy/move* constructors, assignment operators, as well as *operator new*
+  - but it's sensible to require that users be responsible for ensuring this
+
+* Genuine Concurrency
+- Restricting the scope of locks
+- Fine-grained mutexes
+  - Do all operations require the same level of protection?
