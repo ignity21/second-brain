@@ -15,22 +15,19 @@
 
 ** Paying Attention to Exception-safe
 #+begin_src c++
-void pop(T &value) {
-    std::lock_guard<std::mutex> lock(mutex);
-    if (data.empty()) { throw empty_stack(); }
-    value = std::move(data.top());
-    data.pop() // may never be called when exception is thrown in move constructor
-}
+// data_cond.notify_one(); in push function
 
-// exception-safe pop
-std::shared_ptr<T> pop() {
-    std::lock_guard<std::mutex> lock(mutex);
-    if (data.empty()) { throw empty_stack(); }
-    std::shared_ptr<T> const res(std::make_shared<T>(std::move(data.top())));
-    data.pop();
-    return res;
+std::shared_ptr<T> wait_and_pop() {
+  std::unique_lock<std::mutex> lk(mut);
+  data_cond.wait(lk,[this]{return !data_queue.empty();});
+  std::shared_ptr<T> res(
+    std::make_shared<T>(std::move(data_queue.front())));
+  data_queue.pop();
+  return res;
 }
 #+end_src
+- If one thread throws an exception as when the new ~std::shared_ptr<>~ is constructed, other threads will not be woken. (~notify_one~ in push)
+  - may use ~notify_all~
 
 ** Deadlocks
 - Restricting the scope of locks
