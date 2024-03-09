@@ -39,6 +39,12 @@ This smart pointer type is useful for cases where you require access to a memory
 ** Use ~reset()~ to Redirect
 ~reset()~ will destruct the previous internal resource(~delete~ obj), then ~new~ with a new resource.
 
+** Use ~make_shared~
+The use of ~std::make_shared~ to avoid the overhead of a second memory allocation for the reference count
+
+In C++, when you create a shared pointer using ~std::shared_ptr~, the memory for the object and the reference count is allocated separately.
+
+~std::make_shared~ allocates memory for both the object and the reference count in a single memory block.
 ** Pitfalls
 - May produce *circular references*. Use ~std::weak_ptr~ to avoid it.
 - When using raw pointers retrieved from the ~get()~ function, you should take special care not to delete them or to create new smart pointers from them.
@@ -85,7 +91,7 @@ Smart pointers should always be returned by value. This is not only simpler but 
 2. Compiler uses *Return Value Optimization* (ROV)
 3. When returning a *shared_ptr* by value, the internal reference counter is guaranteed to be properly incremented.
 
-* Core Guildlines
+* Core Guidelines
 - [[https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#r-resource-management][Resource Management]]
 - [[http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#rsmart-smart-pointers][Smart Pointers]]
 
