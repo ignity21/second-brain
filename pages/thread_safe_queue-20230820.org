@@ -6,8 +6,7 @@
 
 - links :: [[id:890f2b58-21c3-48b7-a975-c532eedc01ec][Condition Variable]]
 * Lock-based
-** Queue
-*** Using Locks and Condition Variables
+** Using Locks and Condition Variables
 
 #+begin_src c++
   #include <condition_variable>
@@ -24,7 +23,7 @@
 
   public:
     threadsafe_queue() {}
-          
+
     threadsafe_queue(threadsafe_queue const &) = delete;
 
     void push(T new_value) {
@@ -73,7 +72,7 @@
   };
 #+end_src
 
-*** Holding ~std::shared_ptr<>~ instances
+** Holding ~std::shared_ptr<>~ instances
 #+begin_src c++
 template<typename T>
 class threadsafe_queue {
@@ -135,17 +134,58 @@ public:
 - If the data is held by ~std::shared_ptr<>~, *the allocation of the new instance* can now be done *outside the lock* in ~push()~
   - allocation is typically an expensive operation
 
-*** Using Fine-grained Locks
-#+begin_src plantuml
+** Using Fine-grained Locks
+#+begin_src plantuml :file images/Thread-Safe_Queue/no_elem.png
 @startuml
+circle nullptr
 rectangle head
-rectangle dummy_node
+rectangle dummy
 rectangle tail
-head -> dummy_node
-tail -> dummy_node
-dummy_node.next -> nullptr
+
+head -> dummy
+tail -> dummy
+dummy -> nullptr
 @enduml
 #+end_src
+
+#+RESULTS:
+[[file:images/Thread-Safe_Queue/no_elem.png]]
+
+#+begin_src plantuml :file images/Thread-Safe_Queue/one_elem.png
+circle nullptr
+
+rectangle head
+rectangle node1
+rectangle dummy
+rectangle tail
+
+head -> node1
+node1 -> dummy
+tail -> dummy
+dummy -> nullptr
+#+end_src
+
+#+RESULTS:
+[[file:images/Thread-Safe_Queue/one_elem.png]]
+
+#+begin_src plantuml :file images/Thread-Safe_Queue/two_elem.png
+circle nullptr
+
+rectangle head
+rectangle node1
+rectangle node2
+rectangle dummy
+rectangle tail
+
+head -> node1
+node1 -> node2
+node2 -> dummy
+tail -> dummy
+dummy -> nullptr
+#+end_src
+
+#+RESULTS:
+[[file:images/Thread-Safe_Queue/two_elem.png]]
 
 #+begin_src c++
 #include <mutex>
@@ -176,7 +216,7 @@ private:
     std::lock_guard<std::mutex> head_lock(head_mutex);
     // check if the queue is empty
     // by comparing head with tail, rather than checking for nullptr
-    
+
     // also note, the head_lock is held and the tail_lock is also held in get_tail()
     if (head.get() == get_tail()) {
       return nullptr;
@@ -186,8 +226,8 @@ private:
     return old_head;
   }
 public:
-  // Initially, head is a dummy node, tail points to the dummy head
-  threadsafe_queue() : head(new node), tail(head.get()) {} 
+  // Initially, head -> dummy, tail -> dummy
+  threadsafe_queue() : head(new node), tail(head.get()) {}
   threadsafe_queue(const threadsafe_queue &other) = delete;
   threadsafe_queue &operator=(const threadsafe_queue &other) = delete;
 
@@ -199,14 +239,20 @@ public:
 
   void push(T new_value) {
     std::shared_ptr<T> new_data(std::make_shared<T>(std::move(new_value)));
-    std::unique_ptr<node> p(new node);
-    node *const new_tail = p.get();
+
+    // new dummy
+    std::unique_ptr<node> new_dummy(new node);
+    node *const new_tail = new_dummy.get();
+
     // push() accesses only tail
     std::lock_guard<std::mutex> tail_lock(tail_mutex);
-    tail->data = new_data;
-    tail->next = std::move(p);
-    tail = new_tail;
+    // Data moves to old dummy, tail is the old dummy
+    // So that there's no need to change the previous tail node
+    auto old_dummy = tail; // just for readability
+    old_dummy->data = new_data;
+    old_dummy->next = std::move(new_dummy); // point to new dummy
+    tail = new_tail; // update tail -> new dummy
   }
-        
+
 };
 #+end_src
