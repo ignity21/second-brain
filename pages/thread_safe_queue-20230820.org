@@ -138,9 +138,9 @@ public:
 #+begin_src plantuml :file images/Thread-Safe_Queue/no_elem.png
 @startuml
 circle nullptr
-rectangle head
+circle head
 rectangle dummy
-rectangle tail
+circle tail
 
 head -> dummy
 tail -> dummy
@@ -154,10 +154,10 @@ dummy -> nullptr
 #+begin_src plantuml :file images/Thread-Safe_Queue/one_elem.png
 circle nullptr
 
-rectangle head
+circle head
 rectangle node1
 rectangle dummy
-rectangle tail
+circle tail
 
 head -> node1
 node1 -> dummy
@@ -171,11 +171,11 @@ dummy -> nullptr
 #+begin_src plantuml :file images/Thread-Safe_Queue/two_elem.png
 circle nullptr
 
-rectangle head
+circle head
 rectangle node1
 rectangle node2
 rectangle dummy
-rectangle tail
+circle tail
 
 head -> node1
 node1 -> node2
