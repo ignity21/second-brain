@@ -9,67 +9,72 @@
 ** Using Locks and Condition Variables
 
 #+begin_src c++
-  #include <condition_variable>
-  #include <memory>
-  #include <mutex>
-  #include <queue>
+#include <condition_variable>
+#include <memory>
+#include <mutex>
+#include <queue>
 
-  template <typename T>
-  class threadsafe_queue {
-  private:
-    mutable std::mutex mut; // locking mutex in 'bool empty() const' is a mutating operation.
-    std::queue<T> data_queue;
-    std::condition_variable data_cond;
+template <typename T> class threadsafe_queue {
+private:
+  mutable std::mutex
+      mut; // locking mutex in 'bool empty() const' is a mutating operation.
+  std::queue<T> data_queue;
+  std::condition_variable data_cond;
 
-  public:
-    threadsafe_queue() {}
+public:
+  threadsafe_queue() {}
 
-    threadsafe_queue(threadsafe_queue const &) = delete;
+  threadsafe_queue(threadsafe_queue const &) = delete;
 
-    void push(T new_value) {
+  void push(T new_value) {
+    {
       std::lock_guard<std::mutex> lk(mut);
       data_queue.push(std::move(new_value));
-      data_cond.notify_one();
     }
 
-    void wait_and_pop(T &value) {
-      std::unique_lock<std::mutex> lk(mut);
-      data_cond.wait(lk, [this] { return !data_queue.empty(); });
-      value = std::move(data_queue.front());
-      data_queue.pop();
-    }
+    data_cond.notify_one();
+    // the mutex is available for the waiting thread to acquire
+    // when it wakes up (assuming no other thread locks it first)
+  }
 
-    std::shared_ptr<T> wait_and_pop() {
-      std::unique_lock<std::mutex> lk(mut);
-      data_cond.wait(lk, [this] { return !data_queue.empty(); });
-      std::shared_ptr<T> res(std::make_shared<T>(data_queue.front()));
-      data_queue.pop();
-      return res;
-    }
+  void wait_and_pop(T &value) {
+    std::unique_lock<std::mutex> lk(mut);
+    data_cond.wait(lk, [this] { return !data_queue.empty(); });
+    value = std::move(data_queue.front());
+    data_queue.pop();
+  }
 
-    bool try_pop(T &value) {
-      std::lock_guard<std::mutex> lk(mut);
-      if (data_queue.empty())
-        return false;
-      value = std::move(data_queue.front());
-      data_queue.pop();
-      return true;
-    }
+  std::shared_ptr<T> wait_and_pop() {
+    std::unique_lock<std::mutex> lk(mut);
+    data_cond.wait(lk, [this] { return !data_queue.empty(); });
+    std::shared_ptr<T> res(std::make_shared<T>(data_queue.front()));
+    data_queue.pop();
+    return res;
+  }
 
-    std::shared_ptr<T> try_pop() {
-      std::lock_guard<std::mutex> lk(mut);
-      if (data_queue.empty())
-        return std::shared_ptr<T>();
-      std::shared_ptr<T> res(std::make_shared<T>(data_queue.front()));
-      data_queue.pop();
-      return res;
-    }
+  bool try_pop(T &value) {
+    std::lock_guard<std::mutex> lk(mut);
+    if (data_queue.empty())
+      return false;
+    value = std::move(data_queue.front());
+    data_queue.pop();
+    return true;
+  }
 
-    bool empty() const {
-      std::lock_guard<std::mutex> lk(mut);
-      return data_queue.empty();
-    }
-  };
+  std::shared_ptr<T> try_pop() {
+    std::lock_guard<std::mutex> lk(mut);
+    if (data_queue.empty())
+      return std::shared_ptr<T>();
+    std::shared_ptr<T> res(std::make_shared<T>(data_queue.front()));
+    data_queue.pop();
+    return res;
+  }
+
+  bool empty() const {
+    std::lock_guard<std::mutex> lk(mut);
+    return data_queue.empty();
+  }
+};
 #+end_src
 
 ** Holding ~std::shared_ptr<>~ instances
@@ -134,7 +139,7 @@ public:
 - If the data is held by ~std::shared_ptr<>~, *the allocation of the new instance* can now be done *outside the lock* in ~push()~
   - allocation is typically an expensive operation
 
-** Using Fine-grained Locks
+** *Using Fine-grained Locks*
 #+begin_src plantuml :file images/Thread-Safe_Queue/no_elem.png
 @startuml
 circle nullptr
@@ -187,10 +192,20 @@ dummy -> nullptr
 #+RESULTS:
 [[file:images/Thread-Safe_Queue/two_elem.png]]
 
+- Interface
+  - delete copy constructor and assignment operator
+  - ~std::shared_ptr<T> try_pop()~
+  - ~bool try_pop(T &value);~
+  - ~std::shared_ptr<T> wait_and_pop()~
+  - ~void wait_and_pop(T &value)~
+  - ~void push(T new_value)~
+  - ~bool empty()~
+
 #+begin_src c++
 #include <mutex>
 #include <queue>
 #include <memory>
+#include <condition_variable>
 
 // head==tail implies an empty list
 // A single element list has head->next==tail
@@ -205,6 +220,8 @@ private:
   std::unique_ptr<node> head;
   std::mutex tail_mutex;
   node *tail;
+
+  std::condition_variable data_cond;        
 
   node *get_tail() {
     std::lock_guard<std::mutex> tail_lock(tail_mutex);
@@ -254,15 +271,15 @@ public:
     old_dummy->data = new_data;
     old_dummy->next = std::move(new_dummy); // point to new dummy
     tail = new_tail; // update tail -> new dummy
+    
+    data_cond.notify_one();
   }
-
 };
 #+end_src
 - The call to ~get_tail()~ locks the same mutex as the call to ~push()~,
 there's a defined order between the two calls.
 - It's important that the call to ~get_tail()~ occurs inside the lock on ~head_
 mutex~.
-
 
 *** Exceptions Handling
 - In ~try_pop()~
@@ -273,3 +290,97 @@ mutex~.
   - But once the lock is acquired, none of the remaining operations can throw an exception.
   - ~push()~ is exception-safe
   - But the value
+- Deadlock analysis
+  - the only place that two locks are acquired is in ~pop_head()~
+  - which always acquires the ~head_mutex~, and then the ~tail_mutex~, so this will never deadlock.
+
+*** [Important] Implementing ~wait_and_pop()~
+- In ~push()~
+  - add the ~data_cond.notify_one()~ call at the end of ~push()~ function
+  - unlock the tail_mutex before you call ~notify_one()~
+- In ~wait_and_pop()~
+  - The condition you are waiting for is "queue not empty" (head != tail)
+  - It would require both ~head_mutex~ and ~tail_mutex~ to be locked
+#+begin_src c++
+// helper functions
+private:
+node *get_tail() {
+  std::lock_guard<std::mutex> tail_lock(tail_mutex);
+  return tail;
+}
+
+std::unique_ptr<node> pop_head() {
+  std::unique_ptr<node> old_head = std::move(head);
+  head=std::move(old_head->next);
+  return old_head;
+}
+
+std::unique_lock<std::mutex> wait_for_data() {
+  // waits for the queue to have some data to pop
+  std::unique_lock<std::mutex> head_lock(head_mutex);
+  data_cond.wait(head_lock, [&]{return head.get()!=get_tail();});
+  // returns the lock instance to ther caller
+  // ensures that the same lock is held
+  return std::move(head_lock);
+}
+
+std::unique_ptr<node> wait_pop_head() {
+  std::unique_lock<std::mutex> head_lock(wait_for_data());
+  return pop_head();
+}
+
+std::unique_ptr<node> wait_pop_head(T& value) {
+  std::unique_lock<std::mutex> head_lock(wait_for_data());
+  value=std::move(*head->data);
+  return pop_head();
+}
+
+public:
+std::shared_ptr<T> wait_and_pop() {
+  std::unique_ptr<node> const old_head=wait_pop_head();
+  return old_head->data;
+}
+
+void wait_and_pop(T& value) {
+  std::unique_ptr<node> const old_head=wait_pop_head(value);
+}
+#+end_src
+
+*** ~try_pop()~ and ~empty~
+#+begin_src c++
+private:
+std::unique_potr<node> try_pop_head() {
+  std::lock_guard<std::mutex> head_lock(head_mutex);
+  if(head.get() == get_tail()) {
+    return std::unique_ptr<node>(); 
+  }
+  return pop_head();
+}
+
+std::unique_ptr<node> try_pop_head(T &value) {
+  std::lock_guard<std::mutex> head_lock(head_mutex);
+  if(head.get() == get_tail()) {
+    return std::unique_ptr<node>();
+  }
+  value = std::move(*head->data);
+  return pop_head();
+}
+
+public:
+std::shared_ptr<T> try_pop() {
+  std::unique_ptr<node> old_head = try_pop_head();
+  return old_head ? old_head->data : std::shared_ptr<T>();
+}
+
+bool try_pop(T &value) {
+  std::unique_ptr<node> const old_head = try_pop_head(value);
+  return old_head;
+}
+
+bool empty() {
+  std::lock_guard<std::mutex> head_lock(head_mutex);
+  return (head.get() == get_tail());
+}
+#+end_src
+** Unbounded Queue
+/unbounded queue/ can easily be extended to limit the length of the queue by waiting on the condition variable in push(). Rather than waiting for the queue to have items.
