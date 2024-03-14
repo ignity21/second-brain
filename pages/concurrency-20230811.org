@@ -112,8 +112,13 @@ The use of ~std::async~ (and thus *tasks*) take the burden of this decision away
 ** [[id:9fb084bb-ba72-4136-8e91-60f0b7ba216f][Atomics]]
 
 * [[id:f8a4353c-d3ec-4439-824a-23c454a71a31][Designing Thread-safe Data Structures]]
+
+
+* Lock-based Data Structure
+- [[id:7f7c8750-1a2d-4a09-b008-e999dd17784d][Thread-safe Queue]]
+- [[id:3b561763-85db-44bd-8b50-236e935dd169][Thread-safe Lookup Table]]
+
 * Examples
 ** [[id:f31b1ca4-bcd9-466a-af90-1484e8b28684][Parallel Computation]]
-** [[id:7f7c8750-1a2d-4a09-b008-e999dd17784d][Thread-safe Queue]]
 ** [[id:0874134e-082a-4f60-8c94-cc0ed6e4001b][Thread-safe Lazy Initialization]]
 * [[id:bfb36506-4b84-4171-b209-b7b155bf75fb][STL Concurrency]]

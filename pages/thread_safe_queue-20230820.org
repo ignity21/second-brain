@@ -382,5 +382,6 @@ bool empty() {
   return (head.get() == get_tail());
 }
 #+end_src
+
 ** Unbounded Queue
 /unbounded queue/ can easily be extended to limit the length of the queue by waiting on the condition variable in push(). Rather than waiting for the queue to have items.
