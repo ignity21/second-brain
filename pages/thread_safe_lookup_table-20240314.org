@@ -47,6 +47,8 @@ such as red-black tree
 template <typename Key, typename Value, typename Hash = std::hash<Key>>
 class threadsafe_lookup_table {
 private:
+  // could increase the potential for concurrency by even finer-grained locking
+  // by using fine-grained thread-safe list
   class bucket_type {
   private:
     using bucket_value = std::pair<Key, Value>;
@@ -131,3 +133,6 @@ public:
   void remove_mapping(Key const &key) { get_bucket(key).remove_mapping(key); }
 };
 #+end_src
+
+* Bucket Type Optimization
+- [[id:4756b244-4ab3-4e55-ba64-4dd25ae847f0][Thread-safe List]]

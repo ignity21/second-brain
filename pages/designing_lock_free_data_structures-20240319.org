@@ -1,0 +1,39 @@
+:PROPERTIES:
+:ID:       2569c73d-2087-4aad-89db-809f0ac3619a
+:END:
+#+title: Designing Lock-free Data Structures
+#+filetags: C++
+
+
+* non-blocking
+- blocking
+  - Algorithms that use mutexes, condition variables, and futures to synchronize the data are called *blocking* algorithms
+  - Library functions that will suspend the execution of a thread until another thread performs an action, are called *blocking* calls.
+    - Typically, the OS will suspend a blocked thread completely
+- nonblocking: algorithms that *don't use blocking library functions*
+  - [[id:247aac50-7fb9-4e63-ba23-cd1a025d5008][Example: Spin-Lock]]: it's *non-blocking* but it's not *lock-free*
+
+* Specific Terms
+- Lock-Free :: If multiple threads are operating on a data structure, then after a
+bounded number of steps one of them will complete its operation.
+- Wait-Free :: Every thread operating on a data structure will complete its operation in a *bounded* number of steps, even if other threads are also operating on
+the data structure.
+
+* Lock-free Data Structures
+- More than one thread must be able to access the data structure concurrently.
+- If one thread accessing is suspended by the scheduler midway through its operation, the others must still be able to complete their operations without waiting for the suspended thread.
+- Algorithms use *compare/exchange* operations
+  - The reason for using a *compare/exchange* operation is that *another thread might have modified the data in the mean time*. The code need to *redo part* before trying the *compare/exchange* again.
+  - This code can still be lock-free if the compare/exchange would eventually succeed *if the other threads were suspended*.
+- Lock-free algorithms with *compare/exchange* loops can result in one thread being subject to /starvation/.
+  - If one thread doesn't have to continually *retry* its operation, the data structure is *wait-free*.
+
+* Wait-free Data Structures
+A wait-free data structure is a lock-free data structure with the additional property that every thread accessing the data structure can complete its operation within a bounded number of steps, regardless of the behavior of other threads.
+
+Algorithms that can involve *an unbounded number of retries* because of clashes with other threads are not *wait-free*.
+
+- *compare/exchange* operations have a loop with no upper bound on the number of times. They are not *wait-free*
+- Writing wait-free data structures correctly is *extremely hard*.
+  - need to make sure that the steps performed by one thread don't cause an operation on another thread to fail.
+  - need some pretty good reasons to write one (when the benefit outweighs the cost of complexity)

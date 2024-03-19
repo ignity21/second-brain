@@ -1,0 +1,59 @@
+:PROPERTIES:
+:ID:       4f91a36d-4b44-4393-8dda-2e89455d348e
+:END:
+#+title: Thread-safe Stack
+#+filetags: C++
+
+* Simple Implementation
+#+begin_src c++
+#include <exception>
+#include <memory>
+#include <mutex>
+#include <stack>
+
+struct empty_stack : std::exception {
+  const char *what() const noexcept override { return "empty stack"; }
+};
+
+template <typename T> class threadsafe_stack {
+private:
+  std::stack<T> data;
+  mutable std::mutex m;
+
+public:
+  threadsafe_stack() {}
+  threadsafe_stack(const threadsafe_stack &other) {
+    std::lock_guard<std::mutex> lock(other.m);
+    // call user code while holding the lock
+    data = other.data;
+  }
+  threadsafe_stack &operator=(const threadsafe_stack &) = delete;
+  void push(T new_value) {
+    std::lock_guard<std::mutex> lock(m);
+    data.push(std::move(new_value)); // user code
+  }
+  std::shared_ptr<T> pop() {
+    std::lock_guard<std::mutex> lock(m);
+    if (data.empty())
+      throw empty_stack();
+    std::shared_ptr<T> const res(std::make_shared<T>(std::move(data.top())));
+    data.pop();
+    return res;
+  }
+  void pop(T &value) {
+    std::lock_guard<std::mutex> lock(m);
+    if (data.empty())
+      throw empty_stack();
+    value = std::move(data.top()); // user code
+    data.pop();
+  }
+  bool empty() const {
+    std::lock_guard<std::mutex> lock(m);
+    return data.empty();
+  }
+};
+#+end_src
+- Opportunities for deadlock, because you call user code while holding a lock.
+- The user must ensure that other threads aren't able to access the stack until it's fully constructed.
+- The stack doesn't provide any means of waiting for an item to be added.
+- [[id:7f7c8750-1a2d-4a09-b008-e999dd17784d][Improved one: Thread-safe Queue]]

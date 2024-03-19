@@ -15,3 +15,6 @@
 
 ** org-roam-ui
 - 子节点会出现在 Linked references 中
+
+* Useful Tips
+- (debug-on-variable-change 'some-variable)

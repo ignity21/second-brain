@@ -6,22 +6,25 @@
 
 * Implementation using ~atomic_flag~
 #+begin_src c++
+#include <atomic>
+#include <thread>
+
 class spinlock_mutex {
-  std::atomic_flag _flag = ATOMIC_FLAG_INIT;
+  std::atomic_flag flag = ATOMIC_FLAG_INIT;
 
 public:
   spinlock_mutex() = default;
+  spinlock_mutex(const spinlock_mutex &) = delete;
+  spinlock_mutex &operator=(const spinlock_mutex &) = delete;
 
   void lock() {
-    while (_flag.test_and_set(std::memory_order_acquire)) {}
-    // the first call to test_and_set() will set the flag and return false
+    while (flag.test_and_set(std::memory_order_acquire)) {
+      std::this_thread::yield();
+    }
   }
 
-  void unlock() {
-    _flag.clear(std::memory_order_release);
-  }
+  void unlock() { flag.clear(std::memory_order_release); }
 };
-
 #+end_src
 - ~lock()~ is an acquire operation on an internal memory location
 - ~unlock()~ is a release operation on that same memory location
