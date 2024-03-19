@@ -37,3 +37,20 @@ Algorithms that can involve *an unbounded number of retries* because of clashes 
 - Writing wait-free data structures correctly is *extremely hard*.
   - need to make sure that the steps performed by one thread don't cause an operation on another thread to fail.
   - need some pretty good reasons to write one (when the benefit outweighs the cost of complexity)
+
+* Pros & Cons of Lock-free
+** Pros
+- Maximum concurrency
+  - Preventing concurrency through mutual exclusion is the entire purpose of a mutex lock
+  - With a lock-free data structure, some thread makes progress with every step.
+  - With a wait-free data structure, every thread can make forward progress.
+- Robustness: If a thread dies while holding a lock, that data structure is broken
+- Deadlocks are impossible
+
+** Cons
+- Complexity over locks
+  - ensure that the invariants are upheld
+  - pay attention to ordering constraints
+- It may *decrease* overall performance
+  - atomic operations can be much slower than non-atomic operations (not using cache)
+  - always check the performance (worst-case wait time, average wait time. overall execution time)
