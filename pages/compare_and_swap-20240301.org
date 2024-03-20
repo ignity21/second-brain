@@ -31,11 +31,11 @@ while (!x.compare_exchange_strong(x0 /* pass by reference */, x0 + 1)) {}
 - The reason to use weak: *read is faster than write*
 #+begin_src c++
 success = x.compare_exchange_weak(expected, desired);
-// Same thing but can "spuriously fail" and return false even if x == expected
+// "spuriously fail" and return false even if x == expected
 // If you can't get the answer from the other core in some timeout, you just return false.
 #+end_src
 
-- pseudo-code
+- *pseudo-code*
 #+begin_src c++
 bool compare_exchange_strong(T& expected, T desired) {
     Lock L; // get exclusive access

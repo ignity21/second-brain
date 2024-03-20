@@ -120,6 +120,7 @@ The use of ~std::async~ (and thus *tasks*) take the burden of this decision away
 
 * Lock-free Data Structures
 - [[id:2569c73d-2087-4aad-89db-809f0ac3619a][Designing Lock-free Data Structures]]
+- [[id:277f745a-2767-4327-95b8-26a69a9d1cc1][Lock-free Stack]]
 
 * Examples
 ** [[id:f31b1ca4-bcd9-466a-af90-1484e8b28684][Parallel Computation]]

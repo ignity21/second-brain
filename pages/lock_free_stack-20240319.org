@@ -1,0 +1,90 @@
+:PROPERTIES:
+:ID:       277f745a-2767-4327-95b8-26a69a9d1cc1
+:END:
+#+title: Lock-free Stack
+#+filetags: C++
+
+* Simple Version
+- using default memory order
+- two operations: ~push~ and ~pop~
+
+** ~push~
+1. Create a new node
+2. Set its next pointer to the current *head* node
+3. Set the *head* node to point it
+
+Things to notice:
+- There's race condition between steps 2 and 3
+  - use a atomic *compare/exchange* operation at step 3 to ensure that *head* hasn' been modified since you read it in step 2
+- It's vital that new node is prepared before head
+
+#+begin_src c++
+void push(T const &data) {
+  node const *new_node = new node(data);
+  new_node->next = head.load();
+  while (!head.compare_exchange_weak(new_node->next, new_node));
+}
+#+end_src
+- cond1: other thread changes head: compare exchange failed
+  - update ~new_node->next~ point to the changed head
+- cond2: *head* point to the *new_node* successfully
+- why ~compare_exchange_weak~? *return false even if x == expected*
+  - because you're looping directly on failure
+  - using ~compare_exchange_weak~ can result in more optimal code on some architectures
+
+** ~pop~
+1. Read the current value of head.
+2. Read ~head->next~.
+3. Set *head* to ~head->next~.
+4. Return the data from the retrieved node.
+5. Delete the retrieved node.
+
+
+Problems:
+
+If there are two threads removing items from the stack, they both might read the same value of head at step 1. If one thread then proceeds all the way through to step 5 before the other gets to step 2, the second thread will be dereferencing a dangling pointer.
+
+- Use *compare/exchange* at step 3
+
+*** First Try
+#+begin_src c++
+void pop(T &result) {
+    node *old_head=head.load();
+    // check if the stack is empty before trying to pop
+    while(old_head && !head.compare_exchange_weak(old_head,old_head->next));
+    result=old_head->data;
+}
+#+end_src
+- *exception-safety* issue: ~result=old_head->data~ may throw an exception
+  - Solution: *returning a smart pointer to the data value*
+
+*** Full Code
+#+begin_src c++
+#include <atomic>
+#include <memory>
+
+template <typename T> class lock_free_stack {
+private:
+  struct node {
+    std::shared_ptr<T> data;
+    node *next;
+    node(T const &data_) : data(std::make_shared<T>(data_)) {}
+  };
+  std::atomic<node *> head;
+
+public:
+  void push(T const &data) {
+    node *const new_node = new node(data);
+    new_node->next = head.load();
+    while (!head.compare_exchange_weak(new_node->next, new_node));
+  }
+
+  std::shared_ptr<T> pop() {
+    node *old_head = head.load();
+    while (old_head && !head.compare_exchange_weak(old_head, old_head->next));
+    return old_head ? old_head->data : std::shared_ptr<T>();
+  }
+};
+#+end_src
+- It's not *wait-free*
+  - ~compare_exchange_weak~ could in theory loop forever
