@@ -58,7 +58,7 @@ void pop(T &result) {
 - *exception-safety* issue: ~result=old_head->data~ may throw an exception
   - Solution: *returning a smart pointer to the data value*
 
-*** Full Code
+* Simple Solution but with Leaks
 #+begin_src c++
 #include <atomic>
 #include <memory>
@@ -88,3 +88,46 @@ public:
 #+end_src
 - It's not *wait-free*
   - ~compare_exchange_weak~ could in theory loop forever
+- the old node in ~pop()~ should be deleted
+  - the problem is one thread deletes a node while another thread still holds a pointer to it.
+
+* Try to Fix Leaks
+#+begin_src c++
+std::shared_ptr<T> pop() {
+  node *old_head = head.load();
+  while (old_head && !head.compare_exchange_weak(old_head, old_head->next));
+  return old_head ? old_head->data : std::shared_ptr<T>();
+}
+#+end_src
+- ~push()~ doesn't access the contents of existing nodes, so that leaves the ~pop()~
+  - one thread successfully updates the ~head~ pointer and deletes the node while another thread is still operating on the same node.
+- need some way to track *when it's safe to delete a node*.
+  - need to write a *special-purpose garbage collector* for /nodes/.
+
+** Garbage Collector for Nodes
+- If there are no threads calling ~pop()~, it's safe to delete all the nodes currently awaiting deletion
+  - Add the nodes to a "to be deleted" list when you've extracted the data
+  - how to make sure no threads calling ~pop()~? *Count them.*
+#+begin_src c++
+private:
+  std::atomic<unsigned> threads_in_pop; // count pop() calls
+  void try_reclaim(node *old_head);
+public:
+  std::shared_ptr<T> pop() {
+    ++threads_in_pop;
+    node *old_head = head.load();
+    while (old_head && !head.compare_exchange_weak(old_head, old_head->next));
+    std::shared_ptr<T> res;
+    if (old_head) {
+      // use swap() to remove the data from the node rather than copying the pointer
+      res.swap(old_head->data);
+    }
+    try_reclaim(old_head); // counter decrement inside try_reclaim
+    return res;
+  }
+#+end_src
+
+** Reference-counted Reclamation Machinery
+#+begin_src c++
+
+#+end_src
