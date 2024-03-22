@@ -1,0 +1,37 @@
+:PROPERTIES:
+:ID:       2b771aec-8c0d-4b6d-9b80-3a2b4f39d9ce
+:END:
+#+title: Conan2
+#+filetags: C++
+
+* Installation
+- ~pip install --user conan~ or ~pipx install conan~
+
+* Building a CMake Project
+** Creating a Profile
+- ~conan profile detect --name profile1~: detect and create a profile based on the environment
+- Changing a compiler
+  - modify compiler =setting= and tell Conan explicitly using the [[https://docs.conan.io/2/reference/tools/cmake/cmaketoolchain.html#conan-cmake-toolchain-conf][tools.build:compiler_executables configuration]].
+- Using different C++ standard
+  - ~conan profile path profile1~: get the profile file location
+  - change the ~compiler.cppstd~ setting
+
+- Writing a ~conanfile.txt~ file
+#+begin_src conf
+[requires]
+zlib/1.2.11
+
+[generators]
+CMakeDeps
+CMakeToolchain
+#+end_src
+
+- Install dependencies
+  - ~conan install . -pr profile1 --output-folder=build --build=missing~
+
+- Build the project
+#+begin_src sh
+cd build
+cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release
+cmake --build .
+#+end_src
