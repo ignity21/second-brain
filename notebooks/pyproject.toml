@@ -1,39 +1,33 @@
 [tool.poetry]
 name = "notebooks"
-version = "0.1.0"
+version = "0.2.0"
 description = "Notebooks"
 authors = ["chrischen <chrischen3121@gmail.com>"]
 
 [[tool.poetry.source]]
-name = "china-mirror"
-default = true
-# url = "https://pypi.doubanio.com/simple/"
-# url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-# url = "https://mirrors.ustc.edu.cn/pypi/web/simple"
-url = "https://mirrors.bfsu.edu.cn/pypi/web/simple/"
+name = "pypimirror"
+url = "https://mirrors.aliyun.com/pypi/simple/"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-pandas = "^1.4.4"
-jupyterlab = "^3.4.6"
-scikit-learn = "^1.1.2"
-seaborn = "^0.12.0"
-debugpy = "1.6.2" # Invalid hashes for 1.6.3
-numpy = "^1.23.3"
+pandas = "^2.2.1"
+jupyterlab = "^4.1.5"
+scikit-learn = "^1.4.0"
+seaborn = "^0.13.2"
+numpy = "^1.26.4"
 jupyterthemes = "^0.20.0"
-akshare = "^1.7.43"
-matplotlib = "^3.6.0"
-plotly = "^5.10.0"
-dash = "^2.6.2"
-ta-lib = "^0.4.25"
-yfinance = "^0.1.77"
-pysocks = "^1.7.1"
-requests = "^2.28.1"
-tensorflow = "^2.10.0"
-tensorflow-io-gcs-filesystem = { version = "^0.27.0", python = ">=3.10,<3.11" }
+akshare = "^1.13.17"
+matplotlib = "^3.8.3"
+ipython = "^8.23.0"
+# ta-lib = "^0.4.28" # need to install ta-lib first
+# plotly = "^5.20.0"
+# dash = "^2.16.1"
+# yfinance = "^0.1.77"
+# pyzmq = "25.1.0"
+# tensorflow = "^2.10.0"
+# tensorflow-io-gcs-filesystem = { version = "^0.27.0", python = ">=3.10,<3.11" }
 
 [tool.poetry.dev-dependencies]
-ipython = "^8.5.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

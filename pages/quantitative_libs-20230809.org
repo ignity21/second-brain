@@ -40,7 +40,7 @@
   - 华鑫 ~TORA_API_PYTHON~
 
 * 量化策略平台/框架
-  - [[https://openbb.co/][OpenBB Terminal]]
+  - [[id:3bdb01fc-80a7-426d-a79b-2dad3be3041e][OpenBB]]
   - 恒生 ~PTrade~
   - 迅投 ~QMT~
   - 丽海弘金 ~CS~

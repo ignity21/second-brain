@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       3bdb01fc-80a7-426d-a79b-2dad3be3041e
+:END:
+#+title: OpenBB
+#+filetags: :Trading:Quant:
+
+* Installation
+** From Source (3.2.5)
+1. ~git clone --depth=1 git@github.com:OpenBB-finance/OpenBBTerminal.git~
+2. may change ~[tool.poetry.source]~
+3. ~poetry install~ or ~poetry install -E all~
+4. ~poetry shell~
+5. ~openbb~
+
+** Docker
+#+begin_src bash
+curl -o docker-compose.yaml https://raw.githubusercontent.com/OpenBB-finance/OpenBBTerminal/main/build/docker/docker-compose.yaml
+curl -o docker-compose.x11.yaml https://raw.githubusercontent.com/OpenBB-finance/OpenBBTerminal/main/build/docker/docker-compose.x11.yaml
+
+docker compose -f docker-compose.yaml -f docker-compose.x11.yaml run openbb
+#+end_src
+
+* Usage
+1. ~login~

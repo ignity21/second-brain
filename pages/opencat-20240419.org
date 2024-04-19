@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       41518626-fa11-416e-ad92-190bc9202561
+:END:
+#+title: OpenCat
+#+filetags: :Tools:
+* Server
+** https (acme)
+#+begin_src bash
+docker run -d --name opencatd -e TLS_DOMAIN="opencat.ignity.xyz" -e API_DOMAIN="https://aiproxy.ignity.xyz" \
+       -p 443:443 -p 80:80 -v "${HOME}/dockervols/db:/opt/db" -v "${HOME}/dockervols/certs:/opt/certs" bayedev/opencatd
+#+end_src
+
+** nginx -> http
+#+begin_src bash
+docker run -d --name opencatd -e API_DOMAIN="https://aiproxy.ignity.xyz" \
+       -p 80:80 -v "${HOME}/dockervols/db:/opt/db" bayedev/opencatd
+#+end_src
