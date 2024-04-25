@@ -28,7 +28,7 @@ Linux 内核给每个进程都提供了一个独立的虚拟地址空间，并�
 - TLB（Translation Lookaside Buffer) 是 MMU 中页表的高速缓存。
   - 通过减少进程的上下文切换，减少 TLB 的刷新次数，就可以提高 TLB 缓存的使用率，进而提高 CPU 的内存访问性能。
 
-* 虚拟内存空间分布
+* 进程虚拟内存空间分布
 [[../assets/Linux/VirtualMemory_3.png]]
 
 #+DOWNLOADED: screenshot @ 2024-01-30 12:21:32
