@@ -7,3 +7,4 @@
 - [[id:09ea9033-4067-4a2f-b442-b7da136fa5be][Financial Terminology]]
 - [[id:1241ce9f-84ca-479b-865a-05f1f1ba21d8][Stock Market]]
 - [[id:6e4ae290-6a89-4208-8559-a97fd08e356e][Quantitative Trading]]
+- [[id:5955446b-3073-4880-822f-83081da78d11][Trading System]]

@@ -4,6 +4,12 @@
 #+title: Interrupt
 #+filetags: Linux
 
+* Definition
+Interrupts are signals to the processor emitted by hardware or software indicating that an event needs immediate attention. The processor, in turn, responds by suspending its current activity, saving its state and handling the interrupt.
+
+** Network Interrupt
+Whenever a packet is received on the Network Interface Card (NIC), an interrupt is sent to handle the bits *that have been loaded into the receive buffer of the NIC*.
+
 * Hardware Interrupt
 :PROPERTIES:
 :ID:       2e165f86-7e8b-4544-a620-7c06f9670338

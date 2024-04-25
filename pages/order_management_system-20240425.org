@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       b5b5401b-b2aa-4366-8a62-cffc07279893
+:END:
+#+title: Order Management System
+
+* Features
+** Order Routing
+The order manager hosts several *adapters* to send orders to multiple destinations and receive data from multiple exchanges.

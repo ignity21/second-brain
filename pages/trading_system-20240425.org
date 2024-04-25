@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       5955446b-3073-4880-822f-83081da78d11
+:END:
+#+title: Trading System
+#+filetags: :Quant:Trading:
+
+* Design Overview
+- [[id:dbc6bea0-6803-45f0-8fa1-1f3aefc1731b][Low Latency Design]]
+
+* Sub Systems
+- [[id:b5b5401b-b2aa-4366-8a62-cffc07279893][Order Management System]]
+- [[id:6dd40230-202f-4d2b-8253-12a17eee6ac0][Risk Management System]]

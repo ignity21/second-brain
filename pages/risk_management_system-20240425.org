@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       6dd40230-202f-4d2b-8253-12a17eee6ac0
+:END:
+#+title: Risk Management System
+#+filetags: :Quant:Trading:
+
+A *risk management system* (RMS) forms a very *critical* component of any trading system.
+
+There are 2 places where risk management is handled:
+- Within the application – We need to ensure those wrong parameters are not set by the trader.
+  - It should not allow a trader to set grossly incorrect values or any fat-finger errors.
+- Before generating an order in the [[id:b5b5401b-b2aa-4366-8a62-cffc07279893][OMS]]
+  - Before the order flows out of the system we need to make sure it goes through some risk management system. This is where the most critical risk management check happens.

@@ -1,4 +1,4 @@
-:PROPERTIES
+:PROPERTIES:
 :ID:       09ea9033-4067-4a2f-b442-b7da136fa5be
 :END:
 #+title: Financial Terminology
@@ -32,19 +32,23 @@
   These are instruments that represent the original stock in a different market.
 
 * Market
-:PROPERTIES:
-:ID:       968a4e81-2072-4fe4-b713-2ebd0e7c8487
-:END:
 - Pre-market :: Market participants often use pre-market session to gauge the strength and direction of the market.
 - Post-market :: are often used by traders who want to trade on corporate announcements made after market closes, or for brokers to make whole of an incomplete client order.
 
 * Market Data
-:PROPERTIES:
-:ID:       93cd33e9-64f3-4f7d-b132-5b0c11e49cd3
-:END:
 - Volume :: Volume refers to the number of shares, contracts, or units of a particular asset that are traded within a specific period of time.
 - Tick Data :: Tick data is sometimes referred to as heterogeneous data, since it is not sampled
   at regular time intervals, whereas Minute-level or End-of-Day data is called homogeneous.
+
+* Strategy
+- Trading Strategy :: is nothing but a set of rules, which is applied to the given input data to generate entry and exit signals.
+- Alpha-seeking Strategy :: is nothing but a profitable trading strategy that can consistently generate returns *without being dependent on the overall market direction*.
+
+* Trading System
+- RMS :: [[id:6dd40230-202f-4d2b-8253-12a17eee6ac0][Risk Management System]]
+- SLRMS :: Strategy-level RMS
+- GRMS :: Global RMS
+- OMS :: [[id:b5b5401b-b2aa-4366-8a62-cffc07279893][Order Management System]] comprises different execution strategies(VWAP, TWAP, etc.) which execute the buy/sell orders based on pre-defined logic.
 
 * 中文名词
 - 股权工具 (Equity) :: 股权工具是其持有者按份额拥有的对企业净收益（扣除费用和税收后的收入）和资产的剩余求偿权。
