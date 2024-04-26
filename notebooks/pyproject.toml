@@ -2,7 +2,7 @@
 name = "notebooks"
 version = "0.2.0"
 description = "Notebooks"
-authors = ["chrischen <chrischen3121@gmail.com>"]
+authors = ["chrischen <chrischen@ignity.xyz>"]
 
 [[tool.poetry.source]]
 name = "pypimirror"
