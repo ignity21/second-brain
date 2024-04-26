@@ -2,7 +2,7 @@
 :ID:       2b951be4-acf8-4778-97e4-111695cb414e
 :END:
 #+title: A* Search
-#+filetags: Algorithm
+#+filetags: :Algorithm:
 
 * A* Search
 A* search is a best-first search algorithm. It is an extension of Dijkstra's

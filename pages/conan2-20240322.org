@@ -11,7 +11,7 @@
 ** Creating a Profile
 - ~conan profile detect --name profile1~: detect and create a profile based on the environment
 - Changing a compiler
-  - modify compiler =setting= and tell Conan explicitly using the [[https://docs.conan.io/2/reference/tools/cmake/cmaketoolchain.html#conan-cmake-toolchain-conf][tools.build:compiler_executables configuration]].
+  - modify compiler =setting= and tell Conan explicitly to use the [[https://docs.conan.io/2/reference/tools/cmake/cmaketoolchain.html#conan-cmake-toolchain-conf][tools.build:compiler_executables configuration]].
 - Using different C++ standard
   - ~conan profile path profile1~: get the profile file location
   - change the ~compiler.cppstd~ setting
