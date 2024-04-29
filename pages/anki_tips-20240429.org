@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       95582cbe-1989-4662-b5d3-a9c9fccefb6f
+:END:
+#+title: Anki Tips
+#+filetags: :Hacks:Learning:
+
+* Effective Learning
+- Keep it simple :: The shorter your cards, the easier they are to review.
+- Don't memorize without understanding :: The best way to learn languages is in context, which means seeing those words used in a sentence.
+- [[https://super-memory.com/articles/20rules.htm][Effective Learning 20 Rules]]
