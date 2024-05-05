@@ -15,7 +15,9 @@
 
 * Cloze Deletion
 - Why to use cloze deletion :: Rule 5
-- give hints for cloze: ~{{c1::Canberra::city}} was founded in 1913~
+- ~{{c1::Canberra::city}} was founded in 1913.~
+  - Anki will treat the text after the two colons as a hint
+  - =[city] was founded in 1913.=
 
 * Field Replacements
 | Prefix                | Description              |
@@ -47,3 +49,110 @@ Some languages commonly use *annotations above the text* to display the pronunci
 - ~{{type:Text}}~
 - ~{{cloze:Text}}~
 - ~{{type:cloze:Text}}~
+
+** Conditional Replacement
+#+begin_example
+This text is always shown.
+
+{{#FieldName}}
+    This text is only shown if FieldName has text in it
+{{/FieldName}}
+
+{{^FieldName}}
+    This text is only shown if FieldName is empty
+{{/FieldName}}
+#+end_example
+- A real life example: showing a label if the field is not empty
+#+begin_example
+{{#Tags}}
+    Tags: {{Tags}}
+{{/Tags}}
+#+end_example
+
+* Styling
+#+begin_src css
+.card {
+    font-family: arial;
+    font-size: 20px;
+    text-align: center;
+    color: black;
+    background-color: white;
+}
+#+end_src
+- [[https://docs.ankiweb.net/templates/styling.html#installing-fonts][Installing Fonts]]
+
+** Image Resizing
+#+begin_src css
+img {
+    max-width: none;
+    max-height: none;
+}
+#+end_src
+
+** Field Styling
+- Wrap the field: ~<div class=mystyle1>What is {{MyField}}?</div>~
+- Add style
+#+begin_src css
+.mystyle1 {
+    font-family: ayuthaya;
+    font-size: 30px;
+}
+#+end_src
+
+** Night Mode
+#+begin_src css
+.card.nightMode {
+    background-color: #555;
+}
+.nightMode .myclass {
+    color: yellow;
+}
+#+end_src
+
+** Audio Replay Buttons
+#+begin_src css
+.replay-button svg {
+  width: 20px;
+  height: 20px;
+}
+.replay-button svg circle {
+  fill: blue;
+}
+.replay-button svg path {
+  stroke: white;
+  fill: green;
+}
+#+end_src
+
+** Platform-Specific CSS
+#+begin_src css
+/* Windows */
+.win .myclass {
+  font-family: "Example1";
+}
+/* macOS */
+.mac .myclass {
+  font-family: "Example2";
+}
+/* Linux desktops */
+.linux:not(.android) .myclass {
+  font-family: "Example3";
+}
+/* both Linux desktops, and Android devices */
+.linux .myclass {
+  font-family: "Example4";
+}
+/* both Android and iOS */
+.mobile .myclass {
+  font-family: "Example5";
+}
+/* iOS */
+.iphone .myclass,
+.ipad .myclass {
+  font-family: "Example6";
+}
+/* Android */
+.android .myclass {
+  font-family: "Example7";
+}
+#+end_src
