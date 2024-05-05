@@ -7,4 +7,43 @@
 * Effective Learning
 - Keep it simple :: The shorter your cards, the easier they are to review.
 - Don't memorize without understanding :: The best way to learn languages is in context, which means seeing those words used in a sentence.
-- [[https://super-memory.com/articles/20rules.htm][Effective Learning 20 Rules]]
+
+** [[https://super-memory.com/articles/20rules.htm][Effective Learning 20 Rules]]
+- Rule 4: *Minimum information principle*
+  - The easier you make it to answer a question in Anki, the less likely you are to remember that question when you encounter it in real life.
+
+
+* Cloze Deletion
+- Why to use cloze deletion :: Rule 5
+- give hints for cloze: ~{{c1::Canberra::city}} was founded in 1913~
+
+* Field Replacements
+| Prefix                | Description              |
+|-----------------------+--------------------------|
+| hint                  | For hint fields          |
+| text                  | HTML format stripping    |
+| furigana, kana, hanji | Ruby charaters           |
+| type                  | Type for answer checking |
+
+** Special Fields
+Tags, Type(Note type), Deck, Subdeck, CardFlag, Card(Card type), FrontSide
+
+** Hidden Fields (Hint Fields)
+1. Add a field to store the hint in
+2. Add ~{{hint:MyField}}~ to template (If MyField is empty, nothing will be shown.)
+
+** Linking to Online Dictionary
+~<a href="http://example.com/search?q={{text:Front}}">check in dictionary</a>~
+- If you prefix a field name with ~text:~, Anki will not include any html formatting.
+
+** Ruby Characters
+Some languages commonly use *annotations above the text* to display the pronunciation of characters.
+- In field edit: ~Text[Ruby]~, ~日本語[にほんご]~, ~世[よ]の 中[なか]~
+- Templates:
+  - ~{{furigana:MyField}}~: Show both kanji and kana
+  - ~{{kana:MyField}}~ or ~{{hanji:MyField}}~
+
+** Typing Fields
+- ~{{type:Text}}~
+- ~{{cloze:Text}}~
+- ~{{type:cloze:Text}}~
