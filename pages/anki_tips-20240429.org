@@ -156,3 +156,10 @@ img {
   font-family: "Example7";
 }
 #+end_src
+
+* Add-ons Recommendations
+- Advanced Review Bottom Bar: 1136455830
+- Review Heatmap: 1771074083
+- Anki Connect: 2055492159
+- AwesomeTTS: 1436550454
+- Aglish: 38866997
