@@ -6,6 +6,7 @@
 
 * Add-ons
 ** ZotFile
+- [[https://zotfile.com/][Download]]
 - Tools -> ZotFile Preferences
 - General Settings -> Custom Location
 - Renaming Format -> Format for all Item Types except Patents: ~%b~
@@ -14,6 +15,7 @@
 - Tablet Settings
 
 ** Better BibTeX
+- [[Better BibTeX][Download]]
 - Edit -> Preferences -> Better BibTeX
 - Citation Key Format: ~shorttitle(3,3)+year+authorsAlpha~
   - [[https://retorque.re/zotero-better-bibtex/citing/]]
