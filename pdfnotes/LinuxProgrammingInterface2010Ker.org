@@ -1,7 +1,7 @@
 * LinuxProgrammingInterface2010Ker
 :PROPERTIES:
 :NOTER_DOCUMENT: ../../Dropbox/Zotero/TabletFiles/LinuxProgrammingInterface2010Ker.pdf
-:NOTER_PAGE: 205
+:NOTER_PAGE: 211
 :END:
 
 ** 8. Users and Groups
@@ -30,3 +30,13 @@
 - =group=: ~getgrnam~, ~getgrgid~
 - Scanning all records: ~setpwent~, ~getpwent~, ~endpwent~
 - =shadow=: ~getspnam~, ~getspent~, ~setspent~, ~endspent~
+**** ~crypt()~
+The ~crypt()~ function encrypts a password in the same manner as the standard ~login~ program, which is useful for programs that need to authenticate users.
+- ~char *crypt(const char *key, const char *salt);~ returns encrypted password.
+- Programs should be compiled with the ~-lcrypt~ option.
+#+begin_src C
+encrypted = crypt(password, salt);
+authOK = strcmp(encrypted, hashFromShadow) == 0;
+#+end_src
+
+** 9. Process Credentials
