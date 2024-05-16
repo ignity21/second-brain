@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       2941b8e2-14d1-4310-bceb-7b4f9574f932
+:END:
+#+title: Modern C++
+#+filetags: C++
+
+- [[id:cbd64e53-ae3e-4bbd-aab3-49fca52d5ab0][Temporary Variables]]
+- [[id:f7fad551-b647-4ef9-a4ef-d76d0dc08e83][Multiple Return Values]]

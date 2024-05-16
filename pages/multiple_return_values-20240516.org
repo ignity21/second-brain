@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       f7fad551-b647-4ef9-a4ef-d76d0dc08e83
+:ROAM_ALIASES: "Tuple Unpacking"
+:END:
+#+title: Multiple Return Values
+#+filetags: C++
+
+* In C++11/14
+1. return ~std::tuple~
+2. use ~std::tie~ to unpack the tuple
+
+- Downside: the caller must know the number and types of the return values.
+
+* In C++17
+#+begin_src cpp
+std::tuple<int, double, std::string> f() {
+    return std::make_tuple(1, 2.3, "456");
+}
+
+int main() {
+    auto [x, y, z] = f();
+    return 0;
+}
+#+end_src

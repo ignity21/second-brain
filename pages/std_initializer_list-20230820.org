@@ -49,3 +49,15 @@ offer seemingly better matches.
 ** Drawbacks
 - auto-deduced-a-std::initializer_list problem, see [[id:c19b4842-be7b-4a29-a85b-462cbad2c6c1][~auto~]]
   - As a result, the more you like auto, the less enthusiastic you’re likely to be about braced initialization.
+
+* Initializer List Constructor
+#+begin_src cpp
+class Widget {
+    public:
+        Widget(std::initializer_list<int, int> i);
+    private:
+        int x {0}; // uniform initialization for member's default value
+};
+
+Widget widget {5, 4};
+#+end_src

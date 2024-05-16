@@ -4,6 +4,7 @@
 #+title: ~constexpr~
 #+filetags: C++
 
+* ~constexpr~ Function
 #+begin_src cpp
 constexpr int len_foo() { return 4; }
 
@@ -18,4 +19,20 @@ constexpr int fibonacci14(const int n) {
   if (n == 1) return 1;
   return fibonacci14(n - 1) + fibonacci14(n - 2);
 }
+#+end_src
+
+* ~if constexpr~ (C++17)
+#+begin_src cpp
+template<typename T>
+auto increment(const T& t) {
+    if constexpr (std::is_integral_v<T>) {
+        return t + 1;
+    } else {
+        return t + 0.01;
+    }
+}
+
+// It will split into two functions at compile time
+int increment_c(const int& t) { return t + 1; }
+double increment_c(const double& t) { return t + 0.01; }
 #+end_src

@@ -1,0 +1,39 @@
+:PROPERTIES:
+:ID:       c863352d-9717-4a36-a3a4-5629ab398241
+:ROAM_ALIASES: "External Templates"
+:END:
+#+title: ~extern template~
+#+filetags: C++
+
+* Why?
+The ~extern template~ feature allows the separation of the declaration and instantiation of templates.
+- It can be used to manage template instantiation in a large project, helping to reduce compile time and binary size.
+
+* Example
+- In =MyClass.h=
+#+begin_src cpp
+#ifndef MYCLASS_H
+#define MYCLASS_H
+
+template <typename T>
+class MyClass {
+public:
+    MyClass(T value);
+    T getValue();
+private:
+    T value;
+};
+
+// Declare that the template instantiation for MyClass<int> is external
+extern template class MyClass<int>;
+#endif /* MYCLASS_H */
+#+end_src
+- In =MyClass.cpp=
+#+begin_src cpp
+#include "MyClass.h"
+
+// Define the template instantiation for MyClass<int>
+template class MyClass<int>;
+#+end_src
+
+- By doing this, you ensure that the template instantiation for ~MyClass<int>~ occurs only in =MyClass.cpp=, *avoiding multiple instantiations across different translation units*.

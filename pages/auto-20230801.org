@@ -78,3 +78,23 @@
 C++14 permits ~auto~ to indicate that a function's return type should be deduced, and
 C++14 lambdas may use auto in parameter declarations. However, these uses of ~auto~ employ
 *template type deduction*, not auto type deduction.
+
+* Returning ~auto~
+** C++11
+- trailing return type
+#+begin_src cpp
+template<typename T, typename U>
+auto add(T x, U y) -> decltype(x+y) {
+    return x + y;
+}
+#+end_src
+
+** C++14
+#+begin_src cpp
+template<typename T, typename U>
+auto add(T x, U y) {
+    return x + y;
+}
+#+end_src
+
+* TODO ~decltype(auto)~ (C++14)

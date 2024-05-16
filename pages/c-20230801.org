@@ -35,3 +35,5 @@
 ** [[id:83aa38f7-a6de-42f0-bf0e-b4e2c9114869][Move Semantics]]
 ** [[id:474df27e-ed1f-42f0-997f-633339b91cb5][RAII]]
 ** [[id:9dada7ef-84e8-44f7-b068-4837411eda69][Smart Pointers]]
+* [[id:2941b8e2-14d1-4310-bceb-7b4f9574f932][Modern C++]]
+* [[id:45a66f1c-ea7b-4607-a417-e8ae6d608ebe][C++ Template]]

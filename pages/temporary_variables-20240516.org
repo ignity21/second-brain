@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       cbd64e53-ae3e-4bbd-aab3-49fca52d5ab0
+:END:
+#+title: Temporary Variables
+#+filetags: C++
+
+* In ~if~ Statement (C++17)
+#+begin_src cpp
+if (const auto iter = std::find(v.begin(), v.end(), 3); iter != v.end())
+    ...
+#+end_src

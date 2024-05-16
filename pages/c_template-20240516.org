@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       45a66f1c-ea7b-4607-a417-e8ae6d608ebe
+:END:
+#+title: C++ Template
+#+filetags: C++
+
+* What is Template?
+- 模板是用来产生类型或函数的。
+- A template is used to create a family of classes or functions.
+
+* Template Arguments
+** Default Arguments
+#+begin_src cpp
+template<typename T = int, typename U = int>
+auto add(T t, U u) -> decltype(t + u) {
+    return t + u;
+}
+#+end_src
+
+** Var
+
+* [[id:c264e461-9c95-4d7c-917e-762cb8ec52e7][Template Type Deduction]]
+* [[id:c863352d-9717-4a36-a3a4-5629ab398241][External Templates]]
+* [[id:ae725222-41d6-4eb6-bbd4-96fcc3ff80af][Variadic Templates]]
