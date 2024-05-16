@@ -18,3 +18,4 @@ Specifies that a constructor or conversion function (since C++11) or deduction g
 To modify one or more data members of class/struct through *const function* even though you don't want the function to update other members of class/struct.
 
 * [[id:97e4dd2e-e344-4d06-b27e-cc20c9330cce][~using/typedef~]]
+* [[id:8872bcad-77ba-4ddf-912d-b159c3d2f252][~constexpr~]]
