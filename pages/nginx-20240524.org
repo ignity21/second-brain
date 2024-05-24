@@ -1,0 +1,60 @@
+:PROPERTIES:
+:ID:       10f94034-98aa-4a2a-a4da-602db5c59ccd
+:END:
+#+title: NGINX
+#+filetags: :Backend:
+
+* Process
+- Master process :: read and evaluate configuration, and maintain worker processes.
+- Worker Process :: do actual processing of requests.
+
+* ~nginx~ Options
+** ~nginx -s signal~
+- stop :: *fast* shutdown
+- quit :: *graceful* shutdown
+- reload :: reloading the configuration file
+- reopen :: reopening the log files
+
+* Configuration
+
+* Examples
+** Serving Static Content
+#+begin_src conf
+http {
+    server {
+        # listen 80; # by default
+        location / {
+            root /data/www;
+        }
+        location /images/ {
+            root /data;
+        }
+    }
+}
+#+end_src
+
+** Setting Up a Simple Proxy Server
+#+begin_src conf
+http {
+    server {
+        listen 8080;
+        # root directive is used when the location block selected for
+        # serving a request does not include its own root directive.
+        # it applies to all locations within the server.
+        root /data/www;
+        location / {
+        }
+    }
+    server {
+        # proxy server configuration
+        location / {
+            proxy_pass http://localhost:8080;
+        }
+        # matching all URIs ending with .gif, .jpg, or .png
+        # A regular expression should be preceded with ~
+        location ~ \.(gif|jpg|png)$ {
+            root /data;
+        }
+    }
+}
+#+end_src
