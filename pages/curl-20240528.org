@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       6148d379-331e-4565-ab00-9413e87c1d22
+:END:
+#+title: ~curl~
+#+filetags: :Linux:Tools:
+
+* Reviewing SSL/TLS certificates
+​​The following curl command shows the SSL certificate served by Cloudflare during an HTTPS request (replace www.example.com with your hostname):
+#+begin_src bash
+curl -svo /dev/null https://www.example.com/ 2>&1 | egrep -v "^{.*$|^}.*$|^* http.*$"
+#+end_src
+
+To display the origin certificate (assuming one is installed), replace 203.0.113.34 below with the actual IP address of your origin web server and replace www.example.com with your domain and hostname:
+#+begin_src bash
+curl -svo /dev/null https://www.example.com --connect-to ::203.0.113.34 2>&1 | egrep -v "^{.*$|^}.*$|^* http.*$"
+#+end_src
+
+** Testing TLS Versions
+- ~--tlsv1.2 --tls-max 1.3~
