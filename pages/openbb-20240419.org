@@ -5,6 +5,10 @@
 #+filetags: :Trading:Quant:
 
 * Installation
+** PyPI
+- ~sudo pacman -S webkit2gtk~ or ~sudo apt install libwebkit2gtk-4.0-dev~
+- ~pip install openbb-cli~
+
 ** From Source (3.2.5)
 1. ~git clone --depth=1 git@github.com:OpenBB-finance/OpenBBTerminal.git~
 2. may change ~[tool.poetry.source]~
