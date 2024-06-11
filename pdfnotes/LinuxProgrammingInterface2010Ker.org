@@ -1,7 +1,7 @@
 * LinuxProgrammingInterface2010Ker
 :PROPERTIES:
-:NOTER_DOCUMENT: ../../Dropbox/Zotero/TabletFiles/LinuxProgrammingInterface2010Ker.pdf
-:NOTER_PAGE: 211
+:NOTER_DOCUMENT: ~/Dropbox/Zotero/TabletFiles/LinuxProgrammingInterface2010Ker.pdf
+:NOTER_PAGE: 197
 :END:
 
 ** 8. Users and Groups
@@ -38,5 +38,6 @@ The ~crypt()~ function encrypts a password in the same manner as the standard ~l
 encrypted = crypt(password, salt);
 authOK = strcmp(encrypted, hashFromShadow) == 0;
 #+end_src
+
 
 ** 9. Process Credentials
