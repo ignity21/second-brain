@@ -9,13 +9,14 @@
 - [[https://zotfile.com/][Download]]
 - Tools -> ZotFile Preferences
 - General Settings -> Custom Location
-- Renaming Format -> Format for all Item Types except Patents: ~%b~
-- Automatically Rename: Advanced Settings -> ~Always rename~
-- Remove special characters from filename: ~true~
+- Renaming Rules -> Format for all Item Types except Patents: ~%b~
+- Advanced Settings
+  - Automatically Rename: Advanced Settings -> ~Always rename~
+  - Remove special characters from filename: ~true~
 - Tablet Settings
 
 ** Better BibTeX
-- [[Better BibTeX][Download]]
+- [[https://github.com/retorquere/zotero-better-bibtex/releases/download/v6.7.203/zotero-better-bibtex-6.7.203.xpi][Download]]
 - Edit -> Preferences -> Better BibTeX
 - Citation Key Format: ~shorttitle(3,3)+year+authorsAlpha~
   - [[https://retorque.re/zotero-better-bibtex/citing/]]
