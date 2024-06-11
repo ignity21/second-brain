@@ -1,0 +1,37 @@
+:PROPERTIES:
+:ID:       2f57cc5e-c1ec-482a-95c2-a9fa96d73a9c
+:END:
+#+title: Users and Groups
+#+filetags: Linux
+
+* Special Filse
+** =/etc/passwd=
+~[username]:x:[UID]:[GID]:[Comment]:[Home Dir]:[Login Shell]~
+
+** Password file =/etc/shadow=
+~username:password:lastchanged:minimum:maximum:warn:inactive:expire:~
+- ~man shadow~ for field details
+- only readable by privileged programs
+- password field ~$6$saltsalt$98HwfL93KL....~
+  - ~$6$~ indicates the use of SHA-512.
+  - *saltsalt* is the salt
+
+** =/etc/group=
+~groupname:x:GID:username1,username2~
+- ~GID~: specifies membership of the group users
+- ~groups~: display current groups
+- =/etc/gshadow=
+
+* Library Functions
+- =passwd=: ~getpwnam~, ~getpwuid~
+- =group=: ~getgrnam~, ~getgrgid~
+- Scanning all records: ~setpwent~, ~getpwent~, ~endpwent~
+- =shadow=: ~getspnam~, ~getspent~, ~setspent~, ~endspent~
+** ~crypt()~
+The ~crypt()~ function encrypts a password in the same manner as the standard ~login~ program, which is useful for programs that need to authenticate users.
+- ~char *crypt(const char *key, const char *salt);~ returns encrypted password.
+- Programs should be compiled with the ~-lcrypt~ option.
+#+begin_src C
+encrypted = crypt(password, salt);
+authOK = strcmp(encrypted, hashFromShadow) == 0;
+#+end_src
