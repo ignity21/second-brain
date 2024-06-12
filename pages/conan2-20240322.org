@@ -4,27 +4,139 @@
 #+title: Conan2
 #+filetags: C++
 
+* Overview
+- It is specifically designed and optimized for accelerating the development and *Continuous Integration* of C and C++ projects.
+- It is easy to run your [[https://conan.io/downloads][own server]]  to *host your own packages and binaries privately*.
+- It can create and manage *pre-compiled binaries* for any possible platform and configuration.
+- Each package can use *their own build system*, and depend on other packages *using different build systems*.
+- It can manage any compiler and *any version*.
+
 * Installation
-- ~pip install --user conan~ or ~pipx install conan~
+- ~pipx install conan~
 
-* Building a CMake Project
-** Creating a Profile
-- ~conan profile detect --name profile1~: detect and create a profile based on the environment
-- Changing a compiler
-  - modify compiler =setting= and tell Conan explicitly to use the [[https://docs.conan.io/2/reference/tools/cmake/cmaketoolchain.html#conan-cmake-toolchain-conf][tools.build:compiler_executables configuration]].
-- Using different C++ standard
-  - ~conan profile path profile1~: get the profile file location
-  - change the ~compiler.cppstd~ setting
-
-- Writing a ~conanfile.txt~ file
-#+begin_src conf
+* Consume Packages
+** Basic Usage
+- Search Packages: ~conan search [package]~ or [[https://conan.io/center][ConanCenter]]
+- Create a default profile: ~conan profile detect~
+- Write a ~conanfile.txt~
+  #+begin_src conf
 [requires]
 zlib/1.2.11
 
 [generators]
 CMakeDeps
 CMakeToolchain
+  #+end_src
+- ~conan install . --output-folder=build --build=missing~
+- build the target
+  #+begin_src bash
+cd build
+cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release
+cmake --build .
+  #+end_src
+
+** Virtual Build
+- Add ~tool_requires~ section to =conanfile.txt=
+- Add the ~[tool_requires]~ section to the *profile* to specify tools to build dependencies
+#+begin_src conf
+[tool_requires]
+cmake/3.28.6
 #+end_src
+- ~conan install ...~
+#+begin_src bash
+cd build
+source conanbuild.sh # activate the environment, PATH for example
+# deactivate_conanbuild.sh will be created
+# check weith cmake --version
+cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release
+cmake --build .
+#+end_src
+
+** Build for Multiple Targets
+- ~conan profile detect --name profile1~: detect and create a profile based on the environment
+- Conan user home location: ~conan config home~
+- Profile location: ~conan profile path profile1~
+- Modify ~build_type=Debug~ or using conan command with ~--settings=build_type=Debug~
+- Adding a ~tool_requires~ to all the packages you build with that profile.
+
+*** Debug Example
+- ~build_type=Debug~ or adding a ~tool_requires~
+- Adding ~#ifdef DEBUG~ to source to check if it works
+#+begin_src bash
+cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Debug
+cmake --build .
+#+end_src
+
+** Link a Shared Library (Virtual Run)
+- ~conan install . --output-folder=build --build=missing --options=zlib/1.2.11:shared=True~
+- ~-o *:shared=True~ if we want all dependencies(whenever possible) as shared libraries
+- or add ~options~ section to the conan profile
+#+begin_src conf
+[options]
+zlib/1.2.11:shared=True
+#+end_src
+- shared libraries are *loaded at runtime*, the application executable needs to know where are the required shared libraries when it runs.
+  - Linux will use the *LD_LIBRARY_PATH*
+  - Conan uses ~VirtualRunEnv~ generator
+
+#+begin_src bash
+source conanrun.sh
+# use ldd to verify
+#+end_src
+
+** =conanfile.py=
+#+begin_src python
+from conan import ConanFile
+
+class CompressorRecipe(ConanFile):
+    # settings defines the project-wide variables
+    settings = "os", "compiler", "build_type", "arch"
+    # specifies which Conan generators will be run when we call the conan install command
+    generators = "CMakeToolchain", "CMakeDeps"
+
+    def requirements(self):
+        self.requires("zlib/1.2.11")
+
+    def build_requirements(self):
+        self.tool_requires("cmake/3.22.6")
+#+end_src
+#+begin_src conf
+[requires]
+zlib/1.2.11
+[tool_requires]
+cmake/3.22.6
+[generators]
+CMakeDeps
+CMakeToolchain
+#+end_src
+
+
+* Conan Profile
+- Change C++ standard: ~compiler.cppstd~ setting
+- Change compiler: ~compiler~ setting
+  - [[https://docs.conan.io/2/reference/tools/cmake/cmaketoolchain.html#conan-cmake-toolchain-conf][Tell conan where to find it]]
+
+** Profile Sections
+- settings :: are typically a project-wide configuration defined by the client machine.
+  - operating system, compiler or build configuration
+- options :: are intended for package-specific configuration that can be set to a default value in the recipe.
+
+* Conanfile Sections
+- requires :: is where we declare the libraries we want to use in the project
+- generators :: tells Conan to generate the files that the compilers or build systems will use to find the dependencies and build the project.
+- tool_requires :: specify the tools we want to build our application
+  - Do not use ~tool_requires~ to depend on library or library-like dependencies.
+
+
+* CMake Generators
+- CMakeDeps :: to generate information about where the package library files are installed
+- CMakeToolchain :: to pass build information to CMake using a CMake toolchain file.
+
+* Build a CMake Project
+
+
+** Writing a ~conanfile.txt~ file
+- List dependency versions: ~conan search [dependency] -r ConanCenter~
 
 - Install dependencies
   - ~conan install . -pr profile1 --output-folder=build --build=missing~
