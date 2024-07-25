@@ -1,0 +1,47 @@
+:PROPERTIES:
+:ID:       f75bc364-5441-414d-b48d-5e35c41ca0ec
+:END:
+#+title: MC Server
+* 原版
+** 安装 PaperMC
+#+begin_src bash
+sudo apt update
+sudo apt upgrade -y
+sudo apt install openjdk-21-jre -y
+
+mkdir ~/paper
+cd ~/paper
+
+# wget paper.jar
+
+# 生成 eula.txt
+java -jar paper.jar
+#+end_src
+- 添加 ~run.sh~
+#+begin_src bash
+#!/bin/bash
+java -Xmx1536M -Xms1024M -jar paper.jar --nogui
+#+end_src
+- systemd 服务 ~sudo nano /etc/systemd/system/paper.service~
+#+begin_src conf
+[Unit]
+Description=Paper Minecraft Server
+After=network.target
+
+[Service]
+User=yourname
+WorkingDirectory=/home/yourname/paper-server
+ExecStart=/bin/bash /home/yourname/paper-server/run.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+#+end_src
+- ~sudo systemctl enable paper.service~
+- ~sudo systemctl start paper.service~
+
+* MOD 服务器
+** Forge
+- Download jar from [[https://files.minecraftforge.net/]]
+- ~java -jar forge-1.xx-installer.jar --installServer~
+- ~run.sh~

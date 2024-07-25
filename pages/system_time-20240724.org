@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       87695f72-2053-4412-9bb9-d163bd2eb882
+:END:
+#+title: System Time
+#+filetags: :Linux:
+
+* Real Time
+* Process Time
+Process time is the amount of CPU time used by a process, and is divided into
+*user* and *system* components.
+
+* System Software Clock
+Measures time in units called *jiffies*
+** Jiffies
+The size of a jiffy is defined by the constant HZ within the kernel source code.
+This is the unit in which the kernel allocates the CPU to processes under the round-robin time-sharing scheduling algorithm.
+- Use ~getconf~ from shell and ~sysconf~ in code to determine the value. See [[id:505fb55e-6b4a-4a66-9f8a-7925d2983d27][System Limits]]
+- The advantages of a higher clock rate are that timers can operate with greater accuracy and time measurements can be made with *greater precision*.
+- Downsides of setting a higher clock rate: each clock interrupt consumes a small amount of CPU time(more frequent), which is time that the CPU can't spend executing processes
+

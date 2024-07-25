@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       505fb55e-6b4a-4a66-9f8a-7925d2983d27
+:END:
+#+title: System Limits
+#+filetags: :Linux:
+
+* Limits
+In most cases, the *minimum value* is defined as a constant in =<limits.h>= with a name prefixed by the string ~_POSIX_~, and (usually) containing the string ~_MAX~; thus, the form of the name is ~_POSIX_XXX_MAX~. The maximum values contain the string ~_MIN~.
+- The constants defines *an upper limit on some resource or feature*. The standards are saying that this upper limit must have a certain minimum value.
+
+* Determining Limits From the Shell
+- ~getconf variable-name [ pathname ]~
+#+begin_src shell
+getconf AGR_MAX
+getconf NAME_MAX /boot
+#+end_src
+
+* Retrieving Limits at Run Time
+#+begin_src c
+#include <unistd.h>
+long sysconf(int name);
+
+// File-related Limits
+long pathconf(const char *pathname, int name);
+long fpathconf(int fd, int name);
+#+end_src

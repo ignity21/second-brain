@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       87bbc997-d5eb-4c45-9a86-b0c184b6c9dd
+:END:
+#+title: ~iperf3~
+#+filetags: :Network:Linux:
+
+* On Server
+- ~iperf3 -s~
+
+* On Client
+- ~iperf3 -c [server_ip]~
+- Useful Options:
+  - ~-R, --reverse~: reverse the direction of a test, so that the server sends data to the client
+  - ~-P, --parallel n~
