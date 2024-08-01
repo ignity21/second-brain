@@ -1,0 +1,47 @@
+:PROPERTIES:
+:ID:       fd21b119-1c2a-4831-aa04-92dc0cc4f797
+:END:
+#+title: =/proc/sys/=
+#+filetags: :Linux:
+
+* General Purpose Files
+- =/proc/sys/fs/=: file systems settings
+  - file-max
+  - =inotify/=
+  - =mqueue/=
+- =/proc/sys/kernel=: general kernel settings
+
+* =/proc/sys/net/=
+- =core/=
+  - =somaxconn=: socket max connections
+- =ipv4/=
+  - =ip_local_port_range=\
+  - =ip_forward=: enable/disable IP forwarding
+- =ipv6/=
+- =unix/=
+
+* =/proc/sys/vm/=
+:PROPERTIES:
+:ID:       6333bfdb-3dae-4131-93a6-eb20daaf9e80
+:END:
+Memory-management settings
+
+** =drop_caches=
+- ~echo 3 > /proc/sys/vm/drop_caches~: forces kernel to clear the page cache, dentries, and inodes.
+
+** =swappiness=
+Swappiness Value Range: 0 to 100
+- 0: The system will avoid swapping processes out of physical memory for as long as possible.
+- 100: The system will aggressively swap processes out of physical memory and into swap space.
+
+Typical Values:
+- 60(default): Balances between swapping and keeping processes in physical memory.
+- 10: Recommended for desktops to minimize latency.
+- Higher values(80): Useful for systems with high memory usage that need to free up RAM for active processes.
+
+  
+* Modifing Settings
+- Temporarily: ~echo [number] > /proc/sys/kernel/pid_max~
+- Permanently:
+  1. Adding ~vm.swappiness = 10~ to =/etc/sysctl.conf=
+  2. Applying with ~sysctl -p~

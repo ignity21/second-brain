@@ -61,7 +61,7 @@
 :END:
 - [[id:d734bb0e-c8fc-4cd7-a1d9-5432aed0c7d0][Memory Hierarchy]]
 - [[id:f659b32b-4b09-46a7-818e-791ca3855765][Memory Allocation]]
-- [[id:5e8af621-8028-458e-8f7b-04bf8d561512][Adjusting Memory Configuration]]
+- [[id:6333bfdb-3dae-4131-93a6-eb20daaf9e80][Adjusting Memory Configuration]]
 - [[id:4dc805d4-c007-4526-bd64-c9ca9af200a4][Virtual Memory]]
 - [[id:0bff214a-a662-4ede-b114-26c968f9ceda][Swap]]
 - [[id:065d6f74-0113-4308-b158-b2333a6f7339][Garbage Collection]]

@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       6e5f182c-2c38-42e4-a255-632978eb69ba
+:END:
+#+title: =/proc/[PID]/=
+#+filetags: :Linux:
+*
+Useful Files in =/proc/[PID]/=
+  - =exe=: symbolic to file being executed
+  - =cmdline=: command-line arguments
+  - =stat=: for program
+  - =status=: provides a range of information about the process.
+  - =cwd/=: symbolic to current working directory
+  - =environ=: /NAME=value/ pairs
+  - =fd=: symbolic links to files opened by the process
+  - =maps=: memory mappings
+  - =mem=: process virtual memory (must ~lseek()~ to valid offset before I/O)
+  - =mounts=: mount points for the process
+  - =task=: sub-directory for each thread in process

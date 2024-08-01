@@ -1,23 +1,34 @@
 :PROPERTIES:
 :ID:       8e974bc1-a02f-4567-8e13-5e8b37b5babb
 :END:
-#+title: =/proc=
+#+title: =/proc/=
 #+filetags: Linux
 
-=/proc= 目录是一个特殊的虚拟文件系统，用于在Linux系统中提供对内核和系统信息的访问。它不包含实际的文件，而是提供文件方式来查看和操作正在运行的内核和系统状态的信息。
+=/proc/= 目录是一个特殊的虚拟文件系统，用于在 Linux 系统中提供对内核和系统信息的访问。它不包含实际的文件，而是提供文件方式来查看和操作正在运行的内核和系统状态的信息。
+- The kernel creates them *"on the fly"* as processes access them.
 
 * 帮助
 ~man 5 proc~
 
-* 常用虚拟文件
+* Common Virtual Files
 - =/proc/cpuinfo=
 - =/proc/meminfo=
-- =/proc/[PID]=
-  - =/proc/[PID]/stat=
+- [[id:6e5f182c-2c38-42e4-a255-632978eb69ba][=/proc/[PID]/=]]
 - =/proc/mounts=: 文件系统挂载信息
 - [[id:b879e051-9bf6-48d5-a135-0da0ee8ee2d4][=/proc/zoneinfo=]]
 - [[id:3158f50d-42bd-46d5-8862-2801f343fe72  :Linux:][=/proc/interrupts=]]: 查看中断情况
-- =/proc/sys/=: 内核参数设置
-  - =/proc/sys/net/ipv4/ip_forward=: 启用或禁用 IP 转发功能
-  - [[id:e6a25528-6006-440d-aa72-86beb98ca9c3][=/proc/sys/vm/swappiness=]]
+- [[id:fd21b119-1c2a-4831-aa04-92dc0cc4f797][=/proc/sys/=]]: System Informations
 - =/proc/net/=: 网络信息
+  - files: =sockstat=, =sockstat6=, =tcp=, =tcp6=, =udp=, =udp6=
+
+* Useful Files in =/proc/[PID]/=
+  - =exe=: symbolic to file being executed
+  - =cmdline=: command-line arguments
+  - =stat=: for program
+  - =status=: provides a range of information about the process.
+  - =cwd/=: symbolic to current working directory
+  - =environ=: /NAME=value/ pairs
+  - =fd=: symbolic links to files opened by the process
+  - =maps=: memory mappings
+  - =mem=: process virtual memory (must ~lseek()~ to valid offset before I/O)
+  - =mounts=: mount points for the process
