@@ -9,7 +9,7 @@
 - [[https://zotfile.com/][Download]]
 - Tools -> ZotFile Preferences
 - General Settings -> Custom Location
-- Renaming Rules -> Format for all Item Types except Patents: ~%b~
+- Renaming Rules -> Format for all Item Types except Patents: %b
 - Advanced Settings
   - Automatically Rename: Advanced Settings -> ~Always rename~
   - Remove special characters from filename: ~true~
