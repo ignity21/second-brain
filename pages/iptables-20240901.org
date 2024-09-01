@@ -1,0 +1,33 @@
+:PROPERTIES:
+:ID:       cee785fb-8f4b-4230-ad02-312714729965
+:END:
+#+title: ~iptables~
+#+filetags: :Network:Linux:
+
+* Basic Syntax
+#+begin_src sh
+sudo iptables [option] CHAIN_rule [-j target]
+#+end_src
+- ~–A~ — append — Add a rule to the chain (at the end)
+- ~–C~ — check — Look for a rule that matches the chain's requirements
+- ~–D~ — delete — Remove specified rules from the chain
+- ~–F~ — flush — Remove all rules.
+- ~–I~ — insert — Add a rule to a chain at some given position.
+- ~–L~ — list — Show all rules in a chain.
+- ~–N~ — new–chain — Create a new chain.
+- ~–v~ — verbose — Show more information when using a list option.
+- ~–X~ — delete–chain — Delete the provided chain.
+
+** Examples
+- ~iptables -L -n -v~: List current rules.
+- ~iptables -A INPUT -i lo -j ACCEPT~: Allow loopback traffic.
+- ~iptables -A INPUT [-p tcp] -s 192.168.72.128 -j DROP~: Block source IP (or only tcp).
+- ~iptables –A INPUT –m iprange ––src–range 192.168.72.1–192.168.72.255 -j REJECT~: Reject IP ranges.
+- ~iptables –A INPUT –p tcp -m multiport ––dport 22,80,443 –j ACCEPT~: Allow traffic on specific ports.
+- ~iptables -A OUTPUT -p tcp --dport 80 -j DROP~
+- ~iptables -A INPUT -p icmp -i eth0 -j DROP~: Block incoming ping requests.
+
+*** Management
+- ~iptables -F~: Delete all tables.
+- ~iptables-save > ~/iptables.rules~ Save rules to a file
+- ~iptables-restore < ~/iptables.rules~
