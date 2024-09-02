@@ -79,36 +79,35 @@ nft 'add chain ip filter input { type filter hook input priority 0 ; }'
 nft 'add chain ip filter output { type filter hook output priority 0 ; }'
 #+end_src
 
-
 ** Rules
 Rules take action on network packets based on whether they match specified criteria.
 
 *** Examples
 #+begin_src bash
 # Listing rules
-nft list table filter
+nft list <table> filter
 # list by chain
-nft list chain filter ouput
+nft list <chain> filter ouput
 
 # Appending new rules
 # filter is the table and output is the chain
-nft add rule filter output ip daddr 8.8.8.8 counter
+nft add rule <table> filter output ip daddr 8.8.8.8 counter
 # The example above adds a rule to match all packets seen by the output chain whose destination is 8.8.8.8
 # The counter(optional) is used to track the number of packets and bytes that match the rule.
 
 # Testing
 ping -c 1 8.8.8.8
-nft -nn list table filter # for fully numerical output
+nft -nn list <table> filter # for fully numerical output
 
 # Getting handle number
-nft -a list table filter
+nft -a list <table> filter
 
 # Inserting rules before the rule with handle 8
 nft insert rule filter output position 8 ip daddr 127.0.0.8 drop
 #+end_src
 
 # Removing rules
-nft delete rule filter output handle 5
+nft delete rule <table> filter output handle 5
 
 # Removing all in a chain
 nft flush chain filter output
@@ -119,3 +118,31 @@ nft flush table filter
 # Replacing rules
 # Specify its handle number and the new rule that you want to replace it
 nft replace rule filter input handle 2 counter
+
+* Matching
+- [[https://wiki.nftables.org/wiki-nftables/index.php/Matching_packet_metainformation][Metainformation]]
+- [[https://wiki.nftables.org/wiki-nftables/index.php/Matching_packet_headers][Packet Headers]]
+- [[https://wiki.nftables.org/wiki-nftables/index.php/Matching_connection_tracking_stateful_metainformation][Connection tracking stateful metainformation]]
+- [[https://wiki.nftables.org/wiki-nftables/index.php/Matching_routing_information][Routing information]]
+- [[https://wiki.nftables.org/wiki-nftables/index.php/Rate_limiting_matchings][Rate limiting matchings]]
+
+* Acting on Matches
+- accept, drop, reject, counter
+  - ~reject~ e.g.: ~nft add rule ip6 filter input reject with icmpv6 type no-route~
+
+** Jumping to Chain
+To structure your ruleset using a tree of chains.
+#+begin_src bash
+# First create at least one regular chain
+nft add chain ip filter tcp-chain
+
+# tcp traffic jump to tcp-chain and packet will return to the chain of the calling rule after the end.
+nft add rule ip filter input ip protocol tcp jump tcp-chain
+
+# add a simple rule to that tcp-chain to count packets and bytes
+nft add rule ip filter tcp-chain counter
+#+end_src
+
+** Logging Traffics
+- ~nft add rule filter input iif lo log tcp dport 22 accept~
+  - will log all packets coming on lo interface and not only the ones with destination port 22.
