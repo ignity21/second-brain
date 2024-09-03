@@ -4,12 +4,37 @@
 #+title: =/proc/=
 #+filetags: Linux
 
-=/proc/= 目录是一个特殊的虚拟文件系统，用于在 Linux 系统中提供对内核和系统信息的访问。它不包含实际的文件，而是提供文件方式来查看和操作正在运行的内核和系统状态的信息。
 - The kernel creates them *"on the fly"* as processes access them.
 
-* 帮助
+* Help
 ~man 5 proc~
 
+* System Information
+| Directory          | Information                              |
+|--------------------+------------------------------------------|
+| =/proc/net=        | Information about networking and sockets |
+| =/proc/sys/fs=     | Settings related to file systems         |
+| =/proc/sys/kernel= | Various general kernel settings          |
+| =/proc/sys/net=    | Networking and sockets settings          |
+| =/proc/sys/vm=     | Memory-management settings               |
+
+Files:
+- =/proc/=
+  - =filesystems=, =kallsyms=, =loadavg=, =locks=, =meminfo=, =partitions=, =stats=, =uptime=, =version=, =vmstat=
+- =/proc/net/=
+  - =sockstat=, =sockstat6=, =tcp=, =tcp6=, =udp=, =udp6=
+- =/proc/sys/fs/=
+  - =file-max=, =inotify=, =mqueue=
+- =/proc/sys/kernel/=
+  - =acct=, =core_pattern=, =hostname=, =msgmax=, =msgmnb=, =msgmni=, =pid_max=, =sem=, =shmall=, =shmmax=, =shmmni=
+- =/proc/sys/net/=
+  - =core/somaxconn=, =ipv4/ip_local_port_range=
+- =/proc/sys/vm/=
+  - =overcommit_memory=, =overcommit_ratio=
+
+** Modifying Settings Example
+- ~echo 100000 > /proc/sys/kernel/pid_max~
+    
 * Common Virtual Files
 - =/proc/cpuinfo=
 - =/proc/meminfo=
@@ -17,11 +42,10 @@
 - =/proc/mounts=: 文件系统挂载信息
 - [[id:b879e051-9bf6-48d5-a135-0da0ee8ee2d4][=/proc/zoneinfo=]]
 - [[id:3158f50d-42bd-46d5-8862-2801f343fe72  :Linux:][=/proc/interrupts=]]: 查看中断情况
-- [[id:fd21b119-1c2a-4831-aa04-92dc0cc4f797][=/proc/sys/=]]: System Informations
-- =/proc/net/=: 网络信息
-  - files: =sockstat=, =sockstat6=, =tcp=, =tcp6=, =udp=, =udp6=
+
 
 * Useful Files in =/proc/[PID]/=
+- links :: [[id:9b389f92-25a2-4d87-ab70-70572a7a23fc][Process Troubleshooting]]
   - =exe=: symbolic to file being executed
   - =cmdline=: command-line arguments
   - =stat=: for program
