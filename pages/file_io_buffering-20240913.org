@@ -70,6 +70,10 @@ Specifying the ~O_SYNC~ flag makes all subsequent output synchronous.
 - ~O_DSYNC~ causes writes to be performed like ~fdatasync()~
 
 *** ~O_RSYNC~
+- The ~O_RSYNC~ flag is specified with ~O_SYNC~ or ~D_SYNC~
+- It extends the write behaviors of these flags to *read operations*.
+- ~O_RSYNC | O_DSYNC~ means that all reads are completed according to the synchronized I/O *data integrity*.
+  - prior to performing the read, all pending file writes are completed.
 
 ** Performance Hints
 If we need to force flushing of kernel buffers
@@ -80,3 +84,7 @@ If we need to force flushing of kernel buffers
 * Disk-Level Cache
 - ~hdparm -I /dev/sdX~: Check the cache/buffer size.
 - ~hdparm -W0~: Disable caching on the disk.
+
+* Summary
+
+[[file:images/screenshots/Summary/2024-09-13_17-33-38_screenshot.png]]
