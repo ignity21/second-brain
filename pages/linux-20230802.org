@@ -6,47 +6,8 @@
 
 * [[id:2fd5f48e-1354-47be-be34-c7f700b5028a][Linux Bootstrap]]
 * [[id:956bf88a-baa4-459c-aebc-a1a29260efb5][Startup Scripts]]
-* File System
-:PROPERTIES:
-:ID:       bd220da0-f129-45c5-be02-67d870159425
-:END:
+* [[id:72e5eb39-6c7e-41ea-9a28-86e0fb144c6f][File System]]
 
-#+caption: File System
-[[../assets/Linux/FileSystem_1.png]]
-
-** Important Data Structures
-- *The per-process file descriptor table*
-  - file descriptor flags: there is just one such flag, the ~close-on-exec~ flag
-  - a reference to the open file description
-- *The system-wide table of open file descriptions*
-  - the current file offset
-  - status flags specified when opening the file
-  - the file access mode (read-only, read-write, etc.)
-  - setting relating to signal-driven IO
-  - a reference to the i-node object for this file
-- *The file system i-node table*
-  - file type (regular file, socket, or FIFO) and permissions
-  - a pointer to a list of locks held on this file
-  - properties of the file, such as size, timestamps etc.
-
-** 磁盘块
-- 逻辑块 :: 磁盘读写的最小单位是扇区，扇区为 512B 大小，最小的数据管理单位为逻辑块，常见大小为 4KB，由8个扇区组成。
-- 超级块 :: 存储整个文件系统的状态。
-
-*** 格式化
-磁盘执行格式化时，会被分成三个存储区域
-- 超级块：存储整个文件系统的状态
-- 索引节点区
-- 数据块区
-
-** Details
-- [[id:808b8114-6d48-4268-815f-270a9e3640f8][Virtual File System]]
-- [[id:937b44b4-497a-466a-924d-0a01a2228266][File Descriptor]]
-- [[id:537013df-12ee-47e1-9e1f-babe976d26fa][Hard Link]]
-- [[id:d81b6ab9-c4fc-4ed3-85f7-dd239e60dcc9][inode]]
-- [[id:3876fd6e-5f00-449c-bd49-6cdde0e05ab0][dentry]]
-- [[id:a20150eb-3731-4848-8a33-c55c4a318b7b][Page Cache]]
-- [[id:be6c0364-12d4-4602-aaee-c1db280685a4][Sharing Files Between Processes]]
 
 * CPU
 :PROPERTIES:
@@ -55,6 +16,7 @@
 - [[id:5dc17fb2-544c-433d-bd94-394a0c37457f][CPU Hardware]]
 - [[id:00e92d55-5469-4d5d-9566-e889d0b86ab3][CPU Metrics]]
 - [[id:3c55f112-a84c-46da-b872-3253ac8ad948][CPU Troubleshooting]]
+  
 * Memory
 :PROPERTIES:
 :ID:       bcae4642-79f1-421a-bc69-38da37d1b0dd

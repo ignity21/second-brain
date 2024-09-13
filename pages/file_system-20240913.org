@@ -1,0 +1,51 @@
+:PROPERTIES:
+:ID:       72e5eb39-6c7e-41ea-9a28-86e0fb144c6f
+:END:
+#+title: File System
+#+filetags: :Linux:
+
+#+caption: File System
+[[../assets/Linux/FileSystem_1.png]]
+* Important Data Structures
+- *The per-process file descriptor table*
+  - file descriptor flags: there is just one such flag, the ~close-on-exec~ flag
+  - a reference to the open file description
+- *The system-wide table of open file descriptions*
+  - the current file offset
+  - status flags specified when opening the file
+  - the file access mode (read-only, read-write, etc.)
+  - setting relating to signal-driven IO
+  - a reference to the i-node object for this file
+- *The file system i-node table*
+  - file type (regular file, socket, or FIFO) and permissions
+  - a pointer to a list of locks held on this file
+  - properties of the file, such as size, timestamps etc.
+
+* 磁盘块
+- 逻辑块 :: 磁盘读写的最小单位是扇区，扇区为 512B 大小，最小的数据管理单位为逻辑块，常见大小为 4KB，由8个扇区组成。
+- 超级块 :: 存储整个文件系统的状态。
+
+** 格式化
+磁盘执行格式化时，会被分成三个存储区域
+- 超级块：存储整个文件系统的状态
+- 索引节点区
+- 数据块区
+
+* File System Benchmarks
+- Performance under heavy multiuser load
+- Speed of file creation and deletion
+- Time required to search for a file in a large directory
+- Space required to store small files
+- Maintenance of file integrity in the event of a system crash.
+
+* Buffering
+- [[id:c7ce9028-6f2b-467d-a4e2-989926573aa4][File IO Buffering]]
+- [[id:a20150eb-3731-4848-8a33-c55c4a318b7b][Page Cache]]
+
+* Details
+- [[id:808b8114-6d48-4268-815f-270a9e3640f8][Virtual File System]]
+- [[id:937b44b4-497a-466a-924d-0a01a2228266][File Descriptor]]
+- [[id:537013df-12ee-47e1-9e1f-babe976d26fa][Hard Link]]
+- [[id:d81b6ab9-c4fc-4ed3-85f7-dd239e60dcc9][inode]]
+- [[id:3876fd6e-5f00-449c-bd49-6cdde0e05ab0][dentry]]
+- [[id:be6c0364-12d4-4602-aaee-c1db280685a4][Sharing Files Between Processes]]
