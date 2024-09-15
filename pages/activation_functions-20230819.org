@@ -4,6 +4,9 @@
 #+title: Activation Functions
 #+filetags: ML
 
+* Overview
+[[file:images/screenshots/Overview/2024-09-15_18-35-53_screenshot.png]]
+
 * Sigmoid
 [[../assets/ML/SigmoidFunction.png]]
 

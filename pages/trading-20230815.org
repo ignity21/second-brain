@@ -8,3 +8,5 @@
 - [[id:1241ce9f-84ca-479b-865a-05f1f1ba21d8][Stock Market]]
 - [[id:6e4ae290-6a89-4208-8559-a97fd08e356e][Quantitative Trading]]
 - [[id:5955446b-3073-4880-822f-83081da78d11][Trading System]]
+
+* [[id:f31358d3-84a6-48c8-97a1-2847d65b48c4][Fundamental Analysis]]

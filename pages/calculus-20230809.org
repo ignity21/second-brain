@@ -4,4 +4,8 @@
 #+title: Calculus
 #+filetags: :Calculus:Math:
 
-- [[id:a6bfbb45-954c-4d78-9c0b-dd582340a181][Multivariate Derivative]]
+* Cheat Sheet
+
+[[file:images/screenshots/Cheat_Sheet/2024-09-15_20-49-40_screenshot.png]]
+
+* [[id:a6bfbb45-954c-4d78-9c0b-dd582340a181][Multivariate Derivative]]

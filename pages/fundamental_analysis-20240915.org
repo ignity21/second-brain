@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       f31358d3-84a6-48c8-97a1-2847d65b48c4
+:END:
+#+title: Fundamental Analysis
+#+filetags: :Trading:
+
+* Indicators
+- [[id:8d449a14-c74f-4a36-ac4b-009d65af083c][Cash Flow]]

@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       8d449a14-c74f-4a36-ac4b-009d65af083c
+:END:
+#+title: Cash Flow
+#+filetags: :Trading:
+
+* Free Cash Flow
+
+[[file:images/screenshots/Free_Cash_Flow/2024-09-15_17-57-41_screenshot.png]]

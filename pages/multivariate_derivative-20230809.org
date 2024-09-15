@@ -4,5 +4,7 @@
 #+title: Multivariate Derivative
 #+filetags: :Calculus:Math:
 
-- [[id:653cc996-052d-4aa3-a325-6d9191a43fe9][Partial Derivative]]
-- [[id:5015719f-bf35-4ed3-8dcd-d42a77be29b4][Multivariate Chain Rule]]
+* Multivariate Chain Rule
+$$\frac{df}{dt}=\frac{\partial f}{\partial \vec{x}}\frac{d\vec{x}}{dt}$$
+
+$$\frac{df}{dt}=\frac{\partial f}{\partial \vec{x}}\frac{\partial \vec{x}}{\partial \vec{u}}\frac{d\vec{u}}{dt}$$

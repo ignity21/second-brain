@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       60538ae7-b57d-426f-a57a-71978db0d076
+:END:
+#+title: English Grammar
+#+filetags: :English:
+
+* Clause
+[[file:images/screenshots/Clause/2024-09-15_12-45-50_screenshot.png]]

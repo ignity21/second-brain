@@ -27,6 +27,7 @@
 - =group=: ~getgrnam~, ~getgrgid~
 - Scanning all records: ~setpwent~, ~getpwent~, ~endpwent~
 - =shadow=: ~getspnam~, ~getspent~, ~setspent~, ~endspent~
+
 ** ~crypt()~
 The ~crypt()~ function encrypts a password in the same manner as the standard ~login~ program, which is useful for programs that need to authenticate users.
 - ~char *crypt(const char *key, const char *salt);~ returns encrypted password.
