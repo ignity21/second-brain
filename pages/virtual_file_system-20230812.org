@@ -3,3 +3,12 @@
 :END:
 #+title: Virtual File System
 #+filetags: Linux
+
+The VFS is a kernel feature that creates an abstraction layer for file-system operations.
+- The VFS defines *a generic interface* for file-system operations.
+- Each file system provides an implementation for the VFS interface.
+
+* Interfaces
+- ~open()~, ~read()~, ~write()~, ~lseek()~, ~close()~
+- ~truncate()~, ~stat()~, ~mount()~, ~umount()~, ~mmap()~
+- ~mkdir()~, ~link()~, ~unlink()~, ~symlink()~, ~rename()~

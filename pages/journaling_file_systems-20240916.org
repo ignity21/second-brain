@@ -1,0 +1,30 @@
+:PROPERTIES:
+:ID:       06344419-df9c-4976-8384-902338a78cc2
+:END:
+#+title: Journaling File Systems
+#+filetags: :Linux:
+
+* Traditional File System Problem
+After a system crash, a file-system consistency check must be performed on reboot in order to
+ensure the integrity of the file system.
+- This consistency check requires examining the entire file system.
+
+* Solution
+A journaling file system logs all metadata updates to a special on-disk journal file before they are
+actually carried out.
+
+* Journaling File Systems
+- /ext4/: is the successor to ext3. Other features:
+  - extents (reservation of contiguous blocks of storage)
+  - reduce file fragmentation
+  - online file-system defragmentation
+  - faster file-system checking.
+- /Btrfs/ (B-tree FS, pronounced "butter FS") modern one.
+  - extents
+  - writable snapshots (like metadata and data journaling)
+  - checksums on data and metadata
+  - online file-system checking
+  - online file-system defragmentation
+  - space-efficient packing of small files
+  - space-efficient indexed directories
+- /XFS/: origin from UNIX implementation.
