@@ -10,3 +10,5 @@
 - [[id:5955446b-3073-4880-822f-83081da78d11][Trading System]]
 
 * [[id:f31358d3-84a6-48c8-97a1-2847d65b48c4][Fundamental Analysis]]
+* Trading Tips
+- Long above the support, short below the resistance.
