@@ -1,0 +1,63 @@
+:PROPERTIES:
+:ID:       dc806d70-20e1-40fa-81cd-9f2c7f660107
+:END:
+#+title: TA Patterns
+#+filetags: :Trading:TA:
+
+* Head and Shoulders
+[[file:images/screenshots/Head_and_Shoulders/2024-09-18_12-43-42_screenshot.png]]
+- Terms: head, shoulder, neckline
+- self fulfilling
+** Entry Point
+** Stop-Loss
+** Profit Target
+
+* Top and Bottom
+** Double Top
+[[file:images/screenshots/Double_Top/2024-09-18_13-06-18_screenshot.png]]
+
+- Meaningful: Probably a big seller at double top line.
+- Meaning more in short-term, especially for intraday.
+*** Entry Point
+*** Stop-Loss
+*** Profit Target
+** Variants
+- Multiple Top
+- Double Bottom
+- Multiple Bottom
+
+* Triangles
+** Ascending Triangle
+[[file:images/screenshots/Ascending_Triangle/2024-09-18_13-38-37_screenshot.png]]
+- Meaningful: buyers became aggressive
+- Volume: Look for increasing volume on the breakout above the resistance line.
+  - This adds validity to the breakout and suggests strong buying momentum.
+- Time frame: The reliability of the pattern tends to increase with longer time frames.
+
+*** Entry Point
+- Entering a long position when the price breaks *above the horizontal resistance line* on *increased volume*.
+  - Logic: when price break above the resistance line, stop-loss orders from sellers will push the price up.
+
+*** Stop-Loss
+- Can be placed just below the last low within the triangle or just below the rising trendline.
+
+*** Profit Target
+?
+
+*** Variants
+- Descending Triangle
+
+** Wedge (Regular Triangle)
+[[file:images/screenshots/Wedge_(Regular_Triangle)/2024-09-18_14-02-14_screenshot.png]]
+
+*** Variants
+- Wedge Up
+- Wedge Down
+
+* Cup and Handle
+[[file:images/screenshots/Cup_and_Handle/2024-09-18_14-28-34_screenshot.png]]
+1. Drops slower and slower and then picks up faster and faster
+2. It reconciliates and then breaks up
+
+* Rounding Bottom
+[[file:images/screenshots/Rounding_Bottom/2024-09-18_14-35-19_screenshot.png]]
