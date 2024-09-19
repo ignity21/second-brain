@@ -1,7 +1,9 @@
 :PROPERTIES:
 :ID:       ede0aad7-a06d-4c84-9081-1c8f40f122da
+:ROAM_ALIASES: TA
 :END:
 #+title: Technical Analysis
 #+filetags: :TA:Trading:
 
 * [[id:dc806d70-20e1-40fa-81cd-9f2c7f660107][TA Patterns]]
+* [[id:3b0a02bb-593b-43a1-808c-f63764ae13a2][TA Indicators]]

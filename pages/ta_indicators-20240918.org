@@ -1,0 +1,44 @@
+:PROPERTIES:
+:ID:       3b0a02bb-593b-43a1-808c-f63764ae13a2
+:END:
+#+title: TA Indicators
+#+filetags: :Trading:TA:
+
+* Tips
+- Different indicators have to be used:
+  - for specific type of strategies
+  - for specific type of stock
+
+* Popular Indicators
+** Bollinger Bands
+[[file:images/screenshots/Bollinger_Bands/2024-09-19_12-49-08_screenshot.png]]
+- For mean reversion strategies.
+- Default: 20 days, \(2\sigma\), SMA/EMA
+
+** RSI
+[[file:images/screenshots/RSI/2024-09-19_12-47-16_screenshot.png]]
+- Relative Strength Indicator
+- For mean reversion strategies.
+- Range from 0 to 100
+  - The higher the number means the bigger the green candles compare to red ones.
+  - Overbought: close to 100
+  - Underbought: close to 0
+- \(RSI=100-\frac{100}{1+RS}\)
+  - RS: Relative Strength, \(RS=\frac{Average Gain}{Average Loss}\)
+- Default: 14 days
+
+*** Formula Explaination
+[[file:images/screenshots/RSI/2024-09-19_10-40-08_screenshot.png]]
+- The large RS means average gain is way more than average loss.
+
+*** Entry Point
+[[file:images/screenshots/RSI/2024-09-19_10-49-17_screenshot.png]]
+- For a buy signal is when the RSI drops below 30 and then rises back above it
+- For a sell signal is when the RSI rises above 70 and then drop back below it.
+
+** ATR
+[[file:images/screenshots/ATR/2024-09-19_12-48-08_screenshot.png]]
+- Average True Range
+- Shows us the average amount that a stock moves in a day in currency value.
+- The indicator shows how far the trend is likely to continue.
+  - *Can be used to set stop-loss or take-profit.*
