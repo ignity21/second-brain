@@ -2,7 +2,7 @@
 :ID:       4c9b7236-d322-4877-a67a-6638718fa4e3
 :END:
 #+title: bcc-tools
-#+filetags: :Tools:Network:Linux:
+#+filetags: :Tools:Linux:
 
 基于 eBPF(extended Berkeley Packet Filters) 机制
 

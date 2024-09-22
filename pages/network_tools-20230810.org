@@ -8,9 +8,18 @@
 - [[id:6f61b842-c5db-4bde-b2bd-46f94ea2568e][~ip~]]
 
 * Hack Tools
+:PROPERTIES:
+:ID:       ef27cd4e-b02d-4053-ab94-d0795f7b8b14
+:END:
 - [[id:94c3d3d6-9be5-46fa-82ad-426fdd0ffe72][netcat]]
 
 * Testing Tools
 - [[id:a07e73bd-8235-461d-aba9-18929611a815][~hping3~]]
 - [[id:663e9802-5bd1-447d-937e-b471dc5ff17a][~pktgen~]]
 - [[id:87bbc997-d5eb-4c45-9a86-b0c184b6c9dd][~iperf3~]]: 测两点之间网速
+
+* GFW Tools
+:PROPERTIES:
+:ID:       eb9a725c-af17-47e0-a103-4d41605f793d
+:END:
+- [[id:4cfade54-5db2-4bc1-a4a1-561bce26aac7][GOST]]

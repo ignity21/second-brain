@@ -4,21 +4,23 @@
 #+title: TCP/IP Layers
 #+filetags: :Linux:Network:
 
-* Data link layer
+* Data Link Layer
 :PROPERTIES:
 :ID:       5091bdbd-c716-49ad-82f0-1fef96c3646d
 :END:
 Provides *MAC routing*, *error detection* and *error correction*, and *flow control*.
+- [[id:84b36379-a24c-4f36-af77-0aeca362066d][ARP]]
 
-* Network layer
+* Network Layer
 :PROPERTIES:
 :ID:       6a28873a-d9b7-4a8c-b2de-3a4da88d26ad
 :END:
 Routes data packets between different networks.
 
 - [[id:3b7e1fae-01cb-4c83-adf1-ea97c3fb2946][MTU]]
+- [[id:42efb840-bcf5-418a-a608-ccaea803b08c][NAT]]
 
-* Transport layer
+* Transport Layer
 :PROPERTIES:
 :ID:       df842644-7897-41ce-8d36-865a60c65bb2
 :END:
@@ -29,3 +31,4 @@ Provides reliable end-to-end communication.
 :ID:       a06c9f51-94f4-4718-b472-c4e9c9b50121
 :END:
 Provides services to applications that need to communicate over the network. HTTP, FTP, SMTP, [[id:176c3083-6489-4b3e-a17e-41eaebc62bee][TLS]] etc.
+- [[id:e38ec05a-c01e-4ce2-baeb-b2ec819a53d5][DHCP]]

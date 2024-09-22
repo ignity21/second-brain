@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       2824b785-632d-4db2-81ab-bfce2140d399
+:END:
+#+title: Firewall
+#+filetags: :Network:
+
+* Rules
+- [[id:cee785fb-8f4b-4230-ad02-312714729965][~iptables~]]
+- [[id:df7a26d0-d2d8-4cd0-9219-2b2e13e19816][nftables]]
