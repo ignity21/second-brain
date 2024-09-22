@@ -27,8 +27,7 @@
 - *Transfer Time*: Finally the required blocks must be transferred.
 - *The total time* required to carry out is typically of the order of *milliseconds*.
 
-
-* File Systems
+* File System Struture
 ** Structure
 - Block Size: 512B
 - Logical Block
@@ -58,10 +57,7 @@
   - Number of blocks actually allocated to the file, measured in units of 512-byte blocks.
   - Pointers to the data blocks of the file
 
-* [[id:808b8114-6d48-4268-815f-270a9e3640f8][Virtual File System]] (VFS)
-* [[id:06344419-df9c-4976-8384-902338a78cc2][Journaling File Systems]]
-
-* Important Data Structures
+** Important Data Structures
 [[../assets/Linux/FileSharing_1.png]]
 - *The per-process file descriptor table*
   - file descriptor flags: there is just one such flag, the ~close-on-exec~ flag
@@ -76,7 +72,8 @@
   - file type (regular file, socket, or FIFO) and permissions
   - a pointer to a list of locks held on this file
   - properties of the file, such as size, timestamps etc.
-
+* [[id:808b8114-6d48-4268-815f-270a9e3640f8][Virtual File System]] (VFS)
+* [[id:06344419-df9c-4976-8384-902338a78cc2][Journaling File Systems]]
 
 * File System Benchmarks
 - Performance under heavy multi-user load
@@ -88,8 +85,37 @@
 * Buffering
 - [[id:c7ce9028-6f2b-467d-a4e2-989926573aa4][File IO Buffering]]
 - [[id:a20150eb-3731-4848-8a33-c55c4a318b7b][Page Cache]]
+* Mounting/Umounting
+Related files (format described in the ~fstab(5)~ manual page):
+- =/proc/mounts=: a list of the currently mounted file systems
+- =/etc/mtab=: ~mount/umount~ commands automatically maintain this file which including mount options
+- =/etc/fstab=: maintained manually by the system administrator, contains descriptions of all of the available file systems.
 
-* Details
+** Stacking Mounts on the Same Mount Point
+- Purpose:
+  - to stack a new mount on an existing mount point *that is busy*.
+  - is useful when we use the /tmpfs/ file system.
+#+begin_src bash
+mount /dev/sda4 /testfs
+mount /dev/sda5 /testfs # stack a second mount on /testfs
+mount | grep testfs
+# /dev/sda4 on /testfs type ext4 (rw)
+# /dev/sda5 on /testfs type reiserfs (rw)
+umount /testfs # pop a mount from /testfs
+mount | grep testfs
+# /dev/sda4 on /testfs type ext4 (rw)
+#+end_src
+
+* System Calls
+- ~mount/umount~
+- ~statvfs/fstatvfs~: obtain information about a file system.
+- File Attributes
+  - ~stat/lstat/fstat~: retrieve information about a file, mostly *drawn from the file i-node*.
+  - ~utime/utimes/utimensat/futimens~: modify file timestamps
+
+
+* Other Details
+- [[id:52cc876c-a7de-45de-a3d8-c28b12c08f78][tmpfs]]
 - [[id:937b44b4-497a-466a-924d-0a01a2228266][File Descriptor]]
 - [[id:537013df-12ee-47e1-9e1f-babe976d26fa][Hard Link]]
 - [[id:d81b6ab9-c4fc-4ed3-85f7-dd239e60dcc9][inode]]

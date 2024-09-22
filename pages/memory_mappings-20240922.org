@@ -1,0 +1,5 @@
+:PROPERTIES:
+:ID:       c2e41773-cd6c-4697-84fd-33a1178a0407
+:END:
+#+title: Memory Mappings
+#+filetags: :OS:Linux:

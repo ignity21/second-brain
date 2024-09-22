@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       52cc876c-a7de-45de-a3d8-c28b12c08f78
+:END:
+#+title: tmpfs
+#+filetags: :Linux:
+
+* /tmpfs/
+A virtual file systems that reside in memory.
+- /tmpfs/ uses not only *RAM*, but also *the swap space* if RAM is exhausted.
+- It is an optional kernel component, configured via the *CONFIG_TMPFS* option.
+- It is permitted to grow to *half the size of RAM*; Use ~size=nbytes~ set a differernt ceiling.
+
+** Purposes
+- Can be used to *improve the performance* of applications(e.g. compilers, creating lots of temporary files)
+- An invisible /tmpfs/, mounted internally by the kernel, is used for implementing [[id:681a06e2-6aad-4c49-881c-286cc53542f0][Shared Memory]] and [[id:c2e41773-cd6c-4697-84fd-33a1178a0407][Memory Mappings]].
+  - A /tmpfs/ mounted at =dev/shm= is used for the ~glibc~ implementation of POSIX shared memory and POSIX semaphores.
+
+** Create a /tmpfs/ File System
+- ~mount -t tmpfs source target~: source can be any name
+- Example:
+#+begin_src bash
+mkdir ~/tmp
+mount -t tmpfs -o size=1G hometmp ~/tmp # limit the size of tmpfs to 1G
+mount | grep hometmp
+hometmp on /home/chrischen/tmp type tmpfs (rw,relatime,inode64)
+#+end_src

@@ -1,0 +1,5 @@
+:PROPERTIES:
+:ID:       681a06e2-6aad-4c49-881c-286cc53542f0
+:END:
+#+title: Shared Memory
+#+filetags: :Linux:OS:

@@ -9,7 +9,8 @@
 
 * 识别问题可以用动态规划解决
 1. 最优解问题。（最大最小值）
-2. 整体问题的最优解包含子问题的最优解
+2. 有没有可以缓存的中间结果。
+3. 整体问题的最优解包含子问题的最优解
 
 * 经验
 1. 每一步有多个选项
@@ -25,6 +26,12 @@
 4. 递归和记忆（DP状态表，存储中间状态）
 
 - *递归思想是自上而下，改写成循环需要自下而上*
+
+** 步骤
+1. Can be divided into subproblem
+2. Recursive Solution
+3. Are there repetitive subproblems?
+4. Memorize subproblems
 
 ** 状态转移表法
 1. 先用回溯算法解决
