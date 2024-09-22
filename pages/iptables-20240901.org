@@ -31,3 +31,6 @@ sudo iptables [option] CHAIN_rule [-j target]
 - ~iptables -F~: Delete all tables.
 - ~iptables-save > ~/iptables.rules~ Save rules to a file
 - ~iptables-restore < ~/iptables.rules~
+
+* Cheat Sheet
+[[file:images/screenshots/Cheat_Sheet/2024-09-22_17-21-06_screenshot.png]]

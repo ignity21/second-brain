@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       42efb840-bcf5-418a-a608-ccaea803b08c
+:END:
+#+title: NAT
+#+filetags: :Network:
+
+* How NAT works
+[[file:images/screenshots/How_NAT_works/2024-09-22_17-32-06_screenshot.png]]

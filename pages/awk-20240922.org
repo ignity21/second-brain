@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       bced3ab6-eba8-4d85-88d6-a60549c9c6c9
+:END:
+#+title: ~awk~
+#+filetags: :Tools:Linux:
+
+* Cheat Sheet
+
+[[file:images/screenshots/Cheat_Sheet/2024-09-22_17-36-17_screenshot.png]]

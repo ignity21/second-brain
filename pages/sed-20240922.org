@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       9334e14b-657c-4796-9c58-9d7cce1376e8
+:END:
+#+title: ~sed~
+#+filetags: :Tools:Linux:
+
+* Cheat Sheet
+
+[[file:images/screenshots/Cheat_Sheet/2024-09-22_17-25-54_screenshot.png]]

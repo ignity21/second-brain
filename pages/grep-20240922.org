@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       3dc23ed1-a507-4c85-bcfe-3ba0409c0c7c
+:END:
+#+title: ~grep~
+#+filetags: :Tools:Linux:
+
+* Cheat Sheet
+
+[[file:images/screenshots/Cheat_Sheet/2024-09-22_17-29-06_screenshot.png]]

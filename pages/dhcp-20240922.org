@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       e38ec05a-c01e-4ce2-baeb-b2ec819a53d5
+:END:
+#+title: DHCP
+#+filetags: :Network:
+
+* How DHCP works
+
+[[file:images/screenshots/How_DHCP_works/2024-09-22_17-47-05_screenshot.png]]

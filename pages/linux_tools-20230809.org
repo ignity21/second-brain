@@ -8,6 +8,9 @@
 #+caption: Linux Tools
 [[../assets/Linux/LinuxTools_1.png]]
 
+* Cheat Sheet
+[[file:images/screenshots/Cheat_Sheet/2024-09-22_17-48-49_screenshot.png]]
+
 * Categories
 - [[id:3eb94d17-33dd-4314-afb4-ee194cb82acd][Testing Tools]]
 - [[id:a416cc1c-53f2-4028-a95a-12cdd6314f91][Performance Tools]]
@@ -42,6 +45,11 @@
 - [[id:febe7777-65eb-4a98-b7ea-3790b4e7245c][sysstat]] :: 包含 mpstat, sar, pidstat
 - [[id:a1819374-b1e5-49b4-93b6-5dafff01832b][~strace~]] :: 记录进程系统调用
 - [[id:d5abaaa5-4638-4ae4-8bba-65645a26ef60][~watch~]] :: 辅助监控用
+
+* Text Processing Tools
+- [[id:3dc23ed1-a507-4c85-bcfe-3ba0409c0c7c][~grep~]]
+- [[id:9334e14b-657c-4796-9c58-9d7cce1376e8][~sed~]]
+- [[id:bced3ab6-eba8-4d85-88d6-a60549c9c6c9][~awk~]]
 
 * Linux Toolkit
 :PROPERTIES:
