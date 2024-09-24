@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       bbb2c010-dee7-4ae6-b3a0-98574874adc9
+:END:
+#+title: Network Layer
+#+filetags: :Network:
+
+* Features
+Routes data packets between different networks.
+
+* Protocols
+- IP
+- [[id:3b7e1fae-01cb-4c83-adf1-ea97c3fb2946][MTU]]
+- [[id:42efb840-bcf5-418a-a608-ccaea803b08c][NAT]]

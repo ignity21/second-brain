@@ -13,6 +13,11 @@
 - 单引号：Bash 不会对单引号中的变量 ~$var~ 求值
   - ~echo '$var'~ -> =$var=
 
+** 别名
+- ~alias ls="ls -al"~
+  - add to =.bashrc= or =.zshrc=
+  - ignore alias: ~\ls~ or ~command ls~
+
 ** 彩色输出
 - 重置=0，黑=30，红=31，绿=32，黄=33，蓝=34，……
 - 设置颜色 ~\e[1;31]~ 还原 ~\e[0m~

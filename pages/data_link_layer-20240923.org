@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       21ac3d90-ff00-40f5-b055-f3c9d911d28c
+:END:
+#+title: Data Link Layer
+#+filetags: :Network:
+
+* Features
+Provides *MAC routing*, *error detection* and *error correction*, and *flow control*.
+
+* Protocols
+- Ethernet
+- Wi-Fi
+- [[id:84b36379-a24c-4f36-af77-0aeca362066d][ARP]]

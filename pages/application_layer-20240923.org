@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       a591c2c0-7da7-4b43-9ce1-72639c9f3ef5
+:END:
+#+title: Application Layer
+#+filetags: :Network:
+
+* Features
+Provides services to applications that need to communicate over the network. HTTP, FTP, SMTP, [[id:176c3083-6489-4b3e-a17e-41eaebc62bee][TLS]] etc.
+
+* Protocols
+- [[id:e38ec05a-c01e-4ce2-baeb-b2ec819a53d5][DHCP]]
