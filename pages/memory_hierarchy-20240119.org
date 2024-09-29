@@ -2,7 +2,7 @@
 :ID:       d734bb0e-c8fc-4cd7-a1d9-5432aed0c7d0
 :END:
 #+title: Memory Hierarchy
-#+filetags: Linux
+#+filetags: :Hardware:
 
 * Diagram
 

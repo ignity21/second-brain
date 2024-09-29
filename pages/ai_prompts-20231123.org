@@ -4,4 +4,4 @@
 #+title: AI Prompts
 
 * Cheat Sheet
-[[file:images/screenshots/Cheet_Sheet/2024-09-15_18-30-41_screenshot.png]]
+[[file:images/screenshots/Cheat_Sheet/2024-09-15_18-30-41_screenshot.png]]

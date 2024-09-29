@@ -38,7 +38,7 @@ nft flush table ip foo # flushing (delete all the rules)
 
 *** Chain Types
 - filter :: which is used to filter packets. This is supported by the arp, bridge, ip, ip6 and inet table families.
-- route :: which is used to reroute packets if any relevant IP header field or the packet mark is modified. This is supported by the ip, ip6 and inet table families.
+- route :: which iused to reroute packets if any relevant IP header field or the packet mark is modified. This is supported by the ip, ip6 and inet table families.
 - nat :: which is used to perform Networking Address Translation (NAT). The nat chain type is supported by the ip, ip6 and inet table families.
 
 *** Base Chain Hooks

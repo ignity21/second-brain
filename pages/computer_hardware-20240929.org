@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       66716bea-36fc-4002-9a38-2081669626dd
+:END:
+#+title: Computer Hardware
+#+filetags: :Hardware:
+
+* Architecture
+** CPU and Memory
+
+[[file:images/screenshots/CPU_and_Memory/2024-09-29_09-00-45_screenshot.png]]
+- *MMC*: Memory Controller Chip
+
+* [[id:4baf1454-8d95-40de-ac60-2a13a4eeae60][Motherboard]]
+* [[id:5dc17fb2-544c-433d-bd94-394a0c37457f][CPU]]
+* [[id:d734bb0e-c8fc-4cd7-a1d9-5432aed0c7d0][Memory Hierarchy]]

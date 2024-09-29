@@ -70,6 +70,13 @@
 * ~ip route~
 - show routing tables: ~ip r list~
   - display routing for CIDR: ~ip r list 192.168.1.0/24~
+- result: =local 192.168.0.1 dev lan1 proto kernel scope host src 192.168.0.1=
+  - Type: local
+  - IP: 192.168.0.1
+  - Interface: lan1
+  - Protocol: kernel
+  - Scope: host
+  - Source IP: 192.168.0.1
 
 ** Adding/Deleting Route
 - ~ip route add [default] {CIDR} via {GATEWAYIP}~
