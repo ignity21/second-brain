@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       a8be299b-df31-4034-9332-355601045101
+:END:
+#+title: Money Management
+#+filetags: :Trading:
+
+* Tips
+- There is a very real probability that you take
+  10 losing trades in a row. Rule of thumb:
+  - Maximum risk per position should never exceed 5%
+  - 2% is ideal
+  - *Taking loss is very important*
+
+* [[id:b2753eb5-588b-45f7-8910-0d799d31f0c8][Portfolio Management]]
