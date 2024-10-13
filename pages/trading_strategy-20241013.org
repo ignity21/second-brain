@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       fac02460-82e1-4da3-9ea7-702c25095669
+:END:
+#+title: Trading Strategy
+#+filetags: :Quant:Trading:
+
+* Categories
+- Momentum
+- Mean-Reverting
+| Factor                  | Momentum | Mean-Reverting |
+|-------------------------+----------+----------------|
+| float                   | low      | high           |
+| institutional ownership | low      | high           |
+
+** Factors
+*** Float
+- Low float
+  - It doesn't require a lot of money to move it. It may suitable for momentum strategies.
+  - However, it also increases risk due to potential for large swings in either direction.
+
+*** Institutional Ownership
+- High institutional ownership
+  - It can suggest stability
+  - Institutions are not likely to buy as stock is going up because institutions would like to buy a lot of shares.

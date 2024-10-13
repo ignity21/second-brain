@@ -42,3 +42,12 @@
 - Shows us the average amount that a stock moves in a day in currency value.
 - The indicator shows how far the trend is likely to continue.
   - *Can be used to set stop-loss or take-profit.*
+
+** VWAP
+The VWAP is used by institutions to benchmark their execution price throughout a period.
+- For example, traders wouldn't like to buy/sell stocks with a price above/below VWAP.
+- Suitable for high institutional ownership.
+- Only be able to used on intraday data.
+- An indicator can be used to pick entry points.
+
+[[file:images/screenshots/VWAP/2024-10-13_15-07-53_screenshot.png]]

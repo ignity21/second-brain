@@ -4,5 +4,11 @@
 #+title: Fundamental Analysis
 #+filetags: :FA:Trading:
 
+* Definition
+Evaluating a stock's price based on it's revenues, earnings, future growth, return on equity,
+profit margins, etc.
+
+Evaluation is done by examining a company's income statements, it's earning releases and balance sheet.
+
 * Indicators
 - [[id:8d449a14-c74f-4a36-ac4b-009d65af083c][Cash Flow]]

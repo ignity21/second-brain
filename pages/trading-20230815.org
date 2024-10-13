@@ -5,15 +5,17 @@
 #+filetags: Trading
 
 * [[id:09ea9033-4067-4a2f-b442-b7da136fa5be][Financial Terminology]]
+* [[id:7fdff970-42aa-4d49-975e-cff07eead309][Micro-Structure]]
 * [[id:1241ce9f-84ca-479b-865a-05f1f1ba21d8][Stock Market]]
-* [[id:5955446b-3073-4880-822f-83081da78d11][Trading System]]
-* [[id:f31358d3-84a6-48c8-97a1-2847d65b48c4][Fundamental Analysis]]
-* [[id:ede0aad7-a06d-4c84-9081-1c8f40f122da][Technical Analysis]]
+* Analysis
+** [[id:f31358d3-84a6-48c8-97a1-2847d65b48c4][Fundamental Analysis]]
+** [[id:ede0aad7-a06d-4c84-9081-1c8f40f122da][Technical Analysis]]
 * [[id:6e4ae290-6a89-4208-8559-a97fd08e356e][Quantitative Trading]]
+* [[id:fac02460-82e1-4da3-9ea7-702c25095669][Strategy]]
 * Risk Management
 * [[id:a8be299b-df31-4034-9332-355601045101][Money Management]]
 * [[id:b2753eb5-588b-45f7-8910-0d799d31f0c8][Portfolio Management]]
-* [[id:918eabbc-848f-4b5c-98ea-68c05792a193][Trading Psychology]]
+* [[id:5955446b-3073-4880-822f-83081da78d11][Trading System]]
 * Trading Tips
 - Long above the support, short below the resistance.
 - Objective: predict what are *other people* going to do.

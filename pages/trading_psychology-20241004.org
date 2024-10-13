@@ -1,8 +1,0 @@
-:PROPERTIES:
-:ID:       918eabbc-848f-4b5c-98ea-68c05792a193
-:END:
-#+title: Trading Psychology
-#+filetags: :Trading:
-
-* Overview
-- Loss Aversion :: Losses have a bigger negative impact than equivalent gains have positive impact.

@@ -5,5 +5,8 @@
 #+title: Technical Analysis
 #+filetags: :TA:Trading:
 
+* Definition
+Forecasting future price direction by analyzing past price and volume data.
+
 * [[id:dc806d70-20e1-40fa-81cd-9f2c7f660107][TA Patterns]]
 * [[id:3b0a02bb-593b-43a1-808c-f63764ae13a2][TA Indicators]]

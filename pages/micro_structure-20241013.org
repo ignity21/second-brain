@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       7fdff970-42aa-4d49-975e-cff07eead309
+:END:
+#+title: Market Micro-Structure
+#+filetags: :Trading:
+
+
+* Business Model of the ECN
+** Incentive for Liquidity Provision
+- Rebates for Providing Liquidity
+- Charging for Taking Liquidity
+
+** Priority Execution for Liquidity Providers
+- Some liquidity providers are willing to pay fees to ensure their orders are prioritized and filled faster.
+  - ECNs might offer rebates to liquidity takers. This encourages more aggressive order flow, ensuring that the liquidity provided by market makers is consumed efficiently.
+
+* Smart Order Router (SOR)
+- The *main purpose* of a SOR
+  - To ensure that orders are filled at the best possible price while minimizing the *impact on the market and reducing transaction costs*.
+
+** Potential Risks from HFTs
+*** Predatory Algorithms
+- Some HFT strategies aim to identify large orders by observing patterns in how trades are executed across venue, then front-runs.
+
+
+* Dark Pools
+- Dark pools allow institutional investors to trade *without exposure* until after the trade has been executed and reported.
+
+** Potential Risks from HFTs
+*** Quote Stuffing and Spoofing
+- HFTs might engage in market manipulation tactics like rapidly placing and canceling orders to create false market conditions.

@@ -4,38 +4,41 @@
 #+title: Financial Terminology
 #+filetags: :Trading:
 
-* Terminologies
-- Ticker *Symbol* :: AAPL for Apple, TSLA for Tesla
+* Securities
+- Security :: A tradable financial asset.
+- Debt Security :: Money that is owed and must be repaid, like government or corporate bonds,
+  or certificates of deposit. Also called fixed-income securities.
+- Equity :: The value of an owned asset minus the amount of all debts on that asset.
+- Equity Security :: A security that represents fractional ownership in an entity, such as stock.
 - Stock :: An asset that represents ownership in a company. A claim on part of a corportation's
   assets and earnings. There are two main types, common and preferred.
-- Share :: A single share represents partial ownership of a company relative to the total number
-  of shares in existence.
 - Common Stock :: One main type of stock; entitles the owner to receive dividends and to vote at
   shareholder meetings.
 - Preferred Stock :: The other main type of stock; generally does not entail voting rights, but
   entitles the owner to a higher claim on the assets and earnings of a company.
-- Dividend :: A partial distribution of a company's profits to shareholders.
-- Capital Gains :: Profits that result from the sale of an asset at a price higher than the
-  purchase price.
-- Security :: A tradable financial asset.
-- Debt Security :: Money that is owed and must be repaid, like government or corporate bonds,
-  or certificates of deposit. Also called fixed-income securities.
 - Derivative Security :: A financial instrument whereby its value is derived from other assets.
-- Equity :: The value of an owned asset minus the amount of all debts on that asset.
-- Equity Security :: A security that represents fractional ownership in an entity, such as stock.
-- Option Contract :: A contract which gives the buyer the right, but not the obligation, to buy
-  or sell an underlying asset at a specified price on or by a specified date
 - Futures Contract :: A contract that obligates the buyer to buy or the seller to sell an asset
   at a predetermined price at a specified time in the future
-- American Depository Receipts(ADR) :: Foreign stocks are sometimes allowed to trade on a local
-  stock exchange via an indirect method such as American Depository Receipts (ADR).
-  These are instruments that represent the original stock in a different market.
+- Option Contract :: A contract which gives the buyer the right, but not the obligation, to buy
+  or sell an underlying asset at a specified price on or by a specified date
+
+* FA Terms
+- Share :: A single share represents partial ownership of a company relative to the total number
+  of shares in existence.
+- Dividend :: A partial distribution of a company's profits to shareholders.
+- Float :: The number of a company's shares that are available for trading by the public.
+- Capital Gains :: Profits that result from the sale of an asset at a price higher than the
+  purchase price.
 
 * Market
 - Pre-market :: Market participants often use pre-market session to gauge the strength and direction of the market.
 - Post-market :: are often used by traders who want to trade on corporate announcements made after market closes, or for brokers to make whole of an incomplete client order.
+- American Depository Receipts(ADR) :: Foreign stocks are sometimes allowed to trade on a local
+  stock exchange via an indirect method such as American Depository Receipts (ADR).
+  These are instruments that represent the original stock in a different market.
 
 * Market Data
+- Ticker *Symbol* :: AAPL for Apple, TSLA for Tesla
 - Volume :: Volume refers to the number of shares, contracts, or units of a particular asset that are traded within a specific period of time.
 - Tick Data :: Tick data is sometimes referred to as heterogeneous data, since it is not sampled
   at regular time intervals, whereas Minute-level or End-of-Day data is called homogeneous.
@@ -44,7 +47,11 @@
 - Trading Strategy :: is nothing but a set of rules, which is applied to the given input data to generate entry and exit signals.
 - Alpha-seeking Strategy :: is nothing but a profitable trading strategy that can consistently generate returns *without being dependent on the overall market direction*.
 
+* Psychology
+- Loss Aversion :: Losses have a bigger negative impact than equivalent gains have positive impact.
+
 * Trading System
+- ECN :: Electronic Communication Networks are platforms that match buy and sell orders in the financial markets. (e.g. ARCA, INET)
 - RMS :: [[id:6dd40230-202f-4d2b-8253-12a17eee6ac0][Risk Management System]]
 - SLRMS :: Strategy-level RMS
 - GRMS :: Global RMS
