@@ -13,3 +13,21 @@
 * [[id:4baf1454-8d95-40de-ac60-2a13a4eeae60][Motherboard]]
 * [[id:5dc17fb2-544c-433d-bd94-394a0c37457f][CPU]]
 * [[id:d734bb0e-c8fc-4cd7-a1d9-5432aed0c7d0][Memory Hierarchy]]
+* [[id:04eccc31-b7a3-4ba3-870e-64f7640bc447][Computer Display]]
+* Glossary
+- Memory controller chip (MCC) :: A bridge between the CPU and the RAM
+- Address bus :: Connects the CPU to the MCC and sends over the location of the data, but not the data itself
+- Clock cycle :: When you send a voltage to the clock wire
+- Clock speed :: The maximum number of clock cycles that it can handle in a set in a certain time period
+- Clock wire ::  When you send or receive data, it sends a voltage to that clock wire to let the CPU know it can start doing calculations
+- CPU :: Central processing unit
+- Electrostatic discharge :: Electrostatic discharge is a sudden and momentary flow of electric current between two electrically charged objects caused by contact, an electrical short or dielectric breakdown
+- Hard drive :: It is a long term memory component that holds all of our data
+- HDD (Hard disk drive) :: Hard disk drives, or HDDs, use a spinning platter and a mechanical arm to read and write information
+- Heatsink :: It is used to dissipate heat from our CPU
+- Mb/s :: *megabit* per second
+- Peripherals :: the external devices which we connect to our computer that add functionality, like a mouse, a keyboard, and a monitor
+- POST (Power On Self Test) :: It figures out what hardware is on the computer
+- ROM chip (Read Only Memory) :: A read-only memory chip where the BIOS is stored
+- Thermal paste :: A substance used to better connect our CPU and heat sink, so the heat transfers from to the other better
+- UEFI :: Unified Extensible Firmware Interface

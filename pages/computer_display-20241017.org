@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       04eccc31-b7a3-4ba3-870e-64f7640bc447
+:END:
+#+title: Computer Display
+#+filetags: :Hardware:
+
+* LCD (Liquid Crystal Display)
+- LCDs require backlighting, often provided by LEDs
+  - The backlighting unit (BLU) requires extra space
+
+** Common LCD Types
+- In-Plane Switching (IPS)
+- Twisted Nematic (TN)
+- VA-Vertical Alignment
+
+* OLED (Organic Light Emitting Diodes)
+OLEDs are diodes that emit light using organic (carbon-based) materials when electricity is passed through the diodes.
+
+** Common OLED Types
+- Active Matrix Organic Light Emitting Diode (AMOLED)
+- Inorganic mini-LEDs (mLEDs)
+- Inorganic micro-LEDs (μLEDs)
