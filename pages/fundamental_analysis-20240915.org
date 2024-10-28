@@ -12,8 +12,53 @@ Evaluation is done by examining a company's income statements, it's earning rele
 
 * Statements
 ** Balance Sheet
+*** Market Cap
+Market price times total shares
+- Small: 300M ~ 2B
+- Medium: 2B ~ 10B
+- Large: 10B ~
+
+*** Book Value
+- Book Value = Tangible assets (sellable) - Liabilities
+- Equity = Total assets - Liabilities
+
 ** Income Statement
+- Net Income (Earnings) :: Revenue - Expenses
 ** Cash Flow Statement
+** Example (Without Intangible Assets)
+- IPO Balance Sheet $y_{0}$
+|             | Company A | Company B |
+|-------------+-----------+-----------|
+| Shares Out  | =30M=     | =90M=     |
+| IPO Price   | =$1.5=    | =$1.5=    |
+| Liabilities | =$2M=     | =$5M=     |
+| Equity      | =$45M=    | =$135M=   |
+| Assets      | /$47M/    | /$140M/   |
+
+- Income Statement $y_{1}$
+|            | Company A | Company B |
+|------------+-----------+-----------|
+| Net Income | $2M       | $5M       |
+
+- Cash Flow $y_{1}$
+|           | Company A | Company B |
+|-----------+-----------+-----------|
+| Dividends | $2M       | $1M       |
+
+- Balance Sheet $y_{1}$
+|             | Company A     | Company B       |
+|-------------+---------------+-----------------|
+| Shares Out  | 30M           | 90M             |
+| Liabilities | =$2M=         | =$5M=           |
+| Equity      | /$45M=45+2-2/ | /$139M=135+5-1/ |
+| Assets      | /$47M/        | /$144M/         |
+
+- Market $y_{1}$
+| Market Price | =$2=           | =$2.5=           |
+| Market Cap   | /$2*30M=$60M/  | /$2.5*90M=$225M/ |
+| Book Value   | /$47M-2M=$45M/ | /$144M-5M=$139M/ |
+| BVPS         | /$1.5/         | /$1.54/           |
+
 
 * Indicators
 - [[id:8d449a14-c74f-4a36-ac4b-009d65af083c][Cash Flow]]
