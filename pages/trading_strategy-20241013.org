@@ -11,6 +11,8 @@
 |-------------------------+----------+----------------|
 | float                   | low      | high           |
 | institutional ownership | low      | high           |
+| value company           | low      | high           |
+| growth company          | high     | low            |
 
 ** Factors
 *** Float

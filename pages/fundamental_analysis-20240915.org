@@ -9,6 +9,23 @@ Evaluating a stock's price based on it's revenues, earnings, future growth, retu
 profit margins, etc.
 
 Evaluation is done by examining a company's income statements, it's earning releases and balance sheet.
+* Ratios
+** Activity Ratios
+- Turnover
+- Total Assets Turnover
+** Liquidity Ratios
+** Solvency Ratios
+Conveys information on the company's ability to pay long-term debt.
+- Debt to Equity Ratio(Total Debt / Total Shareholder's equity)
+
+** Profitability Ratios
+- ROE (Net Income / Average Total Equity)
+- EPS
+- P/E
+- EPS next Year
+- Forward P/E
+
+** Valuation Ratios
 
 * Statements
 ** Balance Sheet
@@ -25,6 +42,14 @@ Market price times total shares
 ** Income Statement
 - Net Income (Earnings) :: Revenue - Expenses
 ** Cash Flow Statement
+** Fundamental Metrics
+- Price: Price per share
+- Book/sh: Book per share
+- P/B: Price / (Book/sh)
+- EPS: Earnings per share
+- P/E: Price / EPS
+- ROE: Return on investment(Net Income / Equity(t-1)); How much the company can make for each dollar of equity
+
 ** Example (Without Intangible Assets)
 - IPO Balance Sheet $y_{0}$
 |             | Company A | Company B |
@@ -33,31 +58,36 @@ Market price times total shares
 | IPO Price   | =$1.5=    | =$1.5=    |
 | Liabilities | =$2M=     | =$5M=     |
 | Equity      | =$45M=    | =$135M=   |
-| Assets      | /$47M/    | /$140M/   |
+| Assets      | $47M      | $140M     |
 
 - Income Statement $y_{1}$
 |            | Company A | Company B |
 |------------+-----------+-----------|
-| Net Income | $2M       | $5M       |
+| Net Income | =$2M=      | =$5M=      |
 
 - Cash Flow $y_{1}$
 |           | Company A | Company B |
 |-----------+-----------+-----------|
-| Dividends | $2M       | $1M       |
+| Dividends | =$2M=     | =$1M=     |
 
 - Balance Sheet $y_{1}$
 |             | Company A     | Company B       |
 |-------------+---------------+-----------------|
-| Shares Out  | 30M           | 90M             |
+| Shares Out  | =30M=         | =90M=           |
 | Liabilities | =$2M=         | =$5M=           |
-| Equity      | /$45M=45+2-2/ | /$139M=135+5-1/ |
-| Assets      | /$47M/        | /$144M/         |
+| Equity      | $45M=45+2-2   | $139M=135+5-1   |
+| Assets      | $47M          | $144M           |
 
 - Market $y_{1}$
-| Market Price | =$2=           | =$2.5=           |
-| Market Cap   | /$2*30M=$60M/  | /$2.5*90M=$225M/ |
-| Book Value   | /$47M-2M=$45M/ | /$144M-5M=$139M/ |
-| BVPS         | /$1.5/         | /$1.54/           |
+| Market Price          | =$2=         | =$2.5=         |
+| Market Cap            | $2*30M=$60M  | $2.5*90M=$225M |
+| Book Value            | $47M-2M=$45M | $144M-5M=$139M |
+| BKPS(Book/Share)      | $1.5         | $1.54          |
+| P/B(Price/BKPS)       | 1.333        | 1.623          |
+| EPS(Earnings/Share)   | 0.0667       | 0.0556         |
+| P/E(Price/EPS)        | 30           | 45             |
+| ROE(Return on Invest) | 4.4%         | 3.7%           |
+| Dividend              | =$0.06(3%)=  | =$0.01(0.4%)=  |
 
 
 * Indicators
