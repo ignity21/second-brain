@@ -9,7 +9,7 @@ Evaluating a stock's price based on it's revenues, earnings, future growth, retu
 profit margins, etc.
 
 Evaluation is done by examining a company's income statements, it's earning releases and balance sheet.
-* Ratios
+* Metrics
 ** Activity Ratios
 - Turnover
 - Total Assets Turnover
@@ -27,6 +27,12 @@ Conveys information on the company's ability to pay long-term debt.
 
 ** Valuation Ratios
 
+** Others
+- Insider Ownership, Insider Transaction
+- Institutional Ownership
+- Float: is the amount of shares that are available to trade for the company.
+- *Short* Float(Short interest shares): The percentage of people who are short vs. entire shares float.
+- *Short* Ratio(Short interest ratio): is the amount of days that it would take all the shorts to cover their positions at the current daily avg volume.
 * Statements
 ** Balance Sheet
 *** Market Cap
@@ -89,6 +95,20 @@ Market price times total shares
 | ROE(Return on Invest) | 4.4%         | 3.7%           |
 | Dividend              | =$0.06(3%)=  | =$0.01(0.4%)=  |
 
+* Analysis
+** Trend Analysis
+** Benchmarking
+Benchmark is the process of comparing the fundamental ratios against a company's peers within the same industry.
+- For Portfolio Manager
+** DDM(Dividend Discount Model)
+It is a method we want to value the price of the stock by adding up all the payments the stock will make us in the future.
+$$P_{0}=\frac{D_{0}(1+g)}{r-g}=\frac{D_{1}}{r-g}$$
+- $P_{0}$: Current Dividend
+- r: Discount Rate
+- g: Growth Rate
+- $D_{1}$: Next Dividend
 
-* Indicators
-- [[id:8d449a14-c74f-4a36-ac4b-009d65af083c][Cash Flow]]
+* Reference Websites
+- https://finviz.com/
+- https://finance.yahoo.com/
+- https://www.dividend.com/

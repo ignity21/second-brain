@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       d190f854-9f8c-4757-b14a-304c1f4d97f9
+:END:
+#+title: Monetary Policy
+#+filetags: :Trading:
+
+* Definition
+Monetary policy is the process of:
+- Supplying currency
+  - less currency slower economy
+- Setting interest rates
+  - lower interest rates -> stronger economy
+
+* In US
+FOMC (Federal Open Market Committee)
+- 8 meetings per year
+- Decision on appropriate monetary policy
+- Setting up rules for banks
+- Setting interest rates

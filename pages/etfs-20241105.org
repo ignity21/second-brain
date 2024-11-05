@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       bb4cb7de-ab5a-4bb0-b37c-3a1cd8f93795
+:END:
+#+title: ETFs
+#+filetags: :Trading:
+
+- Exchange Traded Funds
+
+* Popular ETFs
+[[https://finviz.com/screener.ashx?v=111&f=ind_exchangetradedfund][Screener]]
+- SPY
+- XLF -> Financial Sector
+- XLE -> Energy
+- XLU -> Utilities
+- XLK -> Healthcare

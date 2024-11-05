@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       916f4d11-e91d-4574-bfa2-befca1493e58
+:END:
+#+title: Financial Events
+#+filetags: :Trading:
+
+* Economic Cycle
+- Expansion
+- Peak
+- Contraction
+- Trough
+
+** What Represents a Strong Economy
+- Increase in economic output (GDP)
+- Decrease in unemployment
+- Increase in inflation
+- Increase in investments (capital expenditure)
+- *Political Stability*
+
+* Economic Calendar
+- [[https://www.bloomberg.com/markets/economic-calendar][Bloomberg]]
+
+* [[id:d190f854-9f8c-4757-b14a-304c1f4d97f9][Monetary Policy]]
+
+* [[id:8ef9307d-592f-41df-a012-1dda97bdd7eb][Fiscal Policy]]

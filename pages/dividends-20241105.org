@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       0bc150e5-006c-4d69-96f7-145952cd5b7e
+:END:
+#+title: Dividends
+#+filetags: :Trading:
+
+* Process
+- T+2 Settlement Period: Two business days for your stock to settle.
+- T+3 Your name will actually on it.
+- Three Dates:
+  - Ex-Dividend date: You need to buy before this date to get the dividends.
+  - Record date: to people who are on record will get the dividends.
+  - Payout date
+
+* Cash Dividends
+* Stock Dividends
