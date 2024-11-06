@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       c78f636f-88e8-4cb8-8e28-0dc34bfbaf3a
+:END:
+#+title: Matplotlib
+#+filetags: :DataScience:
+
+* Basic Example
+#+begin_src python
+import matplotlib.pyplot as plt
+
+
+#+end_src
