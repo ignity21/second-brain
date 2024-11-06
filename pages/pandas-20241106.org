@@ -5,3 +5,11 @@
 #+filetags: :DataScience:
 
 - links :: [[id:99384a8d-1cd7-45e6-9913-01a96e895630][Numpy]]
+
+* Filtering
+** Multiple Conditions
+#+begin_src python
+filtered_df = df[(df['A'] > 5) &
+                 (df['B'] < 10) &
+                 (df['C'] == 7)]
+#+end_src

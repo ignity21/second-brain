@@ -4,9 +4,26 @@
 #+title: Matplotlib
 #+filetags: :DataScience:
 
-* Basic Example
+* Customization Example
 #+begin_src python
 import matplotlib.pyplot as plt
 
+plt.scatter(gdp_cap, life_exp, s=np.array(population)*2, c=colors, alpha=0.6)
 
+# Customizations
+plt.xscale('log')
+plt.xlabel('GDP per Capita [in USD]')
+plt.ylabel('Life Expectancy [in years]')
+plt.title('World Development')
+
+tick_val = [1000, 10000, 100000]
+tick_lab = ['1k', '10k', '100k']
+
+plt.xticks(tick_val, tick_lab)
+
+plt.text(x=5700, y=69, s='China')
+
+plt.grid(True)
+
+plt.show()
 #+end_src
