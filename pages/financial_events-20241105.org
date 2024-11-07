@@ -50,4 +50,28 @@
 - Monthly survey
   - Done to at least 500 respondents that answer 50 questions concerning near-term consumption and spending attitude
 
-* Leading Economic Indicator
+* LEI(Leading Economic Indicators)
+- Monthly(around 20th)
+  - [[https://www.conference-board.org/topics/us-leading-indicators][For US]]
+  - https://www.conference-board.org/data
+- Composition of LEI index:
+  - Unemployment claims
+  - Stock prices
+  - Orders of consumer goods
+  - Plant and equipment orders
+  - Length of workweek
+  - Speed of deliveries
+  - Money supply
+  - Building permits
+  - Yield spread
+  - Consumer expectations
+
+* CEI(Coincident Economic Indicators)
+- Monthly(around 20th)
+  - [[https://www.conference-board.org/topics/us-leading-indicators][For US]]
+- Difference from LEI: It doesn't *lead* the economy.
+- Composition of CEI index:
+  - Average hours worked in manufacturing
+  - Nonfarm payroll employment
+  - Unemployment rate
+  - Wages and salary
