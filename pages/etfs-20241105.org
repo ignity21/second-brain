@@ -13,3 +13,4 @@
 - XLE -> Energy
 - XLU -> Utilities
 - XLK -> Healthcare
+- USO -> Oil

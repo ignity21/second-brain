@@ -24,3 +24,7 @@
 - High institutional ownership
   - It can suggest stability
   - Institutions are not likely to buy as stock is going up because institutions would like to buy a lot of shares.
+
+* Ideas
+- If the sector goes up and some companies are lagging, then we take the position.
+  - e.g. 10:30 [[id:916f4d11-e91d-4574-bfa2-befca1493e58][EIA Report]] looking at USO, finding lagers in the oil industry.

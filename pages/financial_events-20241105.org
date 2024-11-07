@@ -20,6 +20,34 @@
 * Economic Calendar
 - [[https://www.bloomberg.com/markets/economic-calendar][Bloomberg]]
 
-* [[id:d190f854-9f8c-4757-b14a-304c1f4d97f9][Monetary Policy]]
+* Government Policies
+** [[id:d190f854-9f8c-4757-b14a-304c1f4d97f9][Monetary Policy]]
+** Fiscal Policy
+- Lower taxes -> More money in circulation, more spending
+  - stimulate the economy
+- Higher taxes -> Less money in circulation
+  - Positive Impact: Use taxes to stimulate the economy
+  - Negative Impact: Use taxes to pay back their debts
 
-* [[id:8ef9307d-592f-41df-a012-1dda97bdd7eb][Fiscal Policy]]
+* Important Reports
+** EIA Petroleum Status Report
+- EIA (Energy Information Administration) Report
+  - Weekly that comes out at (9:30/10:30) EST every wednesday
+  - It provides weekly information on petroleum *inventory* changes
+  - Inventory decreases -> more demand / less supply -> price up
+  - See on [[https://www.bloomberg.com/markets/economic-calendar][Bloomberg Calendar]]
+
+** Jobless Claims Report
+- Weekly on [[https://www.bloomberg.com/markets/economic-calendar][Bloomberg Calendar]] (7:30/8:30) EST every Thursday
+
+** Housing Market Index
+- Monthly survey
+  - Done by the members of the National Association of Home Builders
+  - Measures demand and conditions in the single-family housing market
+- If it increases(big demand), that's good for economy -> spending up (furniture/appliances market up)
+
+** Consumer Sentiment Index
+- Monthly survey
+  - Done to at least 500 respondents that answer 50 questions concerning near-term consumption and spending attitude
+
+* Leading Economic Indicator

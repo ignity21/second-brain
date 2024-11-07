@@ -1,5 +1,0 @@
-:PROPERTIES:
-:ID:       8ef9307d-592f-41df-a012-1dda97bdd7eb
-:END:
-#+title: Fiscal Policy
-#+filetags: :Trading:
