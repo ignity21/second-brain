@@ -40,6 +40,13 @@ df.sort_values("col_a", ascdending=False)
 df.sort_values(["col_a", "col_b"], ascending=[True, False])
 #+end_src
 
+* Counting
+#+begin_src python
+df.drop_duplicates(subset=["col_a", "col_b"])
+df["col_a"].value_counts()
+df["col_a"].value_counts(normalize=True, sort=True) # % of total
+#+end_src
+
 * Aggregating(Statistics)
 - ~mean()~, ~median()~, ~mode()~
 - ~min()~, ~max()~, ~cummin()~, ~cummax()~
@@ -53,3 +60,19 @@ def iqr(column):
 
 df.agg([np.median])
 #+end_src
+
+** Grouped Aggregating
+#+begin_src python
+dogs.groupby("color")["weight"].mean()
+dogs.groupby("color")["weight"].agg(["mean", "std", "count"])
+dogs.groupby(["color", "breed"])["weight"].mean()
+
+# get grouped summary by pivoting table
+import numpy as np
+dogs.pivot_table(index="color", values="weight", aggfunc=[np.mean, np.median]) # by deafult aggfunc=np.mean
+# equivalent to dogs.groupby(["color", "breed"])["weight"].mean()
+dogs.pivot_table(index="color", columns="breed", values="weight", aggfunc=np.mean, fill_value=0, margins=True)
+# margin=True to get total summary row and column
+
+#+end_src
+
