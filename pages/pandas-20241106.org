@@ -98,6 +98,10 @@ dogs.pivot_table(index="color", values="weight", aggfunc=[np.mean, np.median]) #
 # equivalent to dogs.groupby(["color", "breed"])["weight"].mean()
 dogs.pivot_table(index="color", columns="breed", values="weight", aggfunc=np.mean, fill_value=0, margins=True)
 # margin=True to get total summary row and column
+
+mean_weight_by_color = dogs.pivot_table(index="color", values="weight", aggfunc=np.mean)
+mean_weight_by_color.mean(axis="index") # mean of each column
+mean_weight_by_color.mean(axis="columns") # mean of each row
 #+end_src
 * Plotting
 #+begin_src python
@@ -109,13 +113,25 @@ df_by_idx.plot(kind="bar", title="42")
 df_timeseries.plot(x="date", y="col_a", kind="line", rot=45)
 
 df.plot(x="col_a", y="col_b", kind="scatter")
-
 # plt.show() to display the plot
 #+end_src
+
 ** Layering Plots
 #+begin_src python
 dogs[dogs["sex"]=="F"]["height"].hist(alpha=0.5)
 dogs[dogs["sex"]=="M"]["height"].hist(alpha=0.5)
 plt.legend(["F","M"])
 plt.show()
+#+end_src
+
+* Missing Values
+#+begin_src python
+df.isna().any() # detect missing values
+df.isna().sum() # count missing values
+df.isna().plot(kind="bar") # plot missing values
+
+# handle missing values
+df.dropna() # drop rows with missing values
+df.fillna(0) # fill missing values with 0
+df.fillna(method="ffill") # fill missing values with previous value
 #+end_src
