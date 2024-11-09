@@ -14,62 +14,70 @@
 - ~df.columns~, ~df.index~
 - ~df.values~: internal numpy array
 
+** Creating DataFrames
+- From a list of dictionaries(row by row): ~pd.DataFrame(list_of_dicts)~
+- From a dictionary of lists(by column): ~pd.DataFrame(dict_of_lists)~
+
 * Filtering
 #+begin_src python
 df["col_a"] # Series
-df[["col_a"]] # DataFrame
-df[["col_a", "col_b"]]
-df[df["col_a"] > 0]
-df[(df["col_a"] > 0) & (df["col_b"] > 0) $ (df["col_c"] < 0)]
+df[["col_a']] # DataFrame
+df[['col_a', 'col_b']]
+df[df['col_a'] > 0]
+df[(df['col_a'] > 0) & (df['col_b'] > 0) $ (df['col_c'] < 0)]
 
-is_black_or_blue = df["color"].isin(["black", "blue"])
+is_black_or_blue = df['color'].isin(['black', 'blue'])
 df[is_black_or_blue]
 
-df.loc["row_a"]
+df.loc['row_a']
 df.iloc[0]
 
-df.loc["row_a", "col_a"]
+df.loc['row_a', 'col_a']
 df.iloc[0, 0]
 
-df.loc["row_a", ["col_a", "col_b"]]
+df.loc['row_a', ['col_a', 'col_b']]
 #+end_src
-
 ** Slicing
 #+begin_src python
 # Slicing
-df.loc["row_b":"row_g"]
-df.loc[:, "col_b":"col_d"]
-df.loc[("outer_lvl_1", "inner_lvl_2"):("outer_lvl_3", "inner_lvl_8")];
+df.loc['row_b':'row_g']
+df.loc[:, 'col_b':'col_d']
+df.loc[('outer_lvl_1', 'inner_lvl_2'):('outer_lvl_3', 'inner_lvl_8')];
 
 # Timeseries Slicing
-df.loc["2014":"2016"] # 2014-01-01 to 2016-12-31
-df.loc["2014-04":"2016-08"] # 2014-04-01 to 2016-08-31
-df.loc["2014-05-01":"2016-07-15"] # 2014-05-01 to 2016-07-15
+df.loc['2014':'2016'] # 2014-01-01 to 2016-12-31
+df.loc['2014-04':'2016-08'] # 2014-04-01 to 2016-08-31
+df.loc['2014-05-01':'2016-07-15'] # 2014-05-01 to 2016-07-15
+#+end_src
+
+** ~query()~
+#+begin_src python
+df.query("col_a > 0 and col_b < 0")
 #+end_src
 
 * Sorting
 #+begin_src python
-df.sort_values("col_a", ascdending=False)
-df.sort_values(["col_a", "col_b"], ascending=[True, False])
+df.sort_values('col_a', ascdending=False)
+df.sort_values(['col_a', 'col_b'], ascending=[True, False])
 #+end_src
 
 * Counting
 #+begin_src python
-df.drop_duplicates(subset=["col_a", "col_b"])
-df["col_a"].value_counts()
-df["col_a"].value_counts(normalize=True, sort=True) # % of total
+df.drop_duplicates(subset=['col_a', 'col_b'])
+df['col_a'].value_counts()
+df['col_a'].value_counts(normalize=True, sort=True) # % of total
 #+end_src
 
 * Indexing
 #+begin_src python
-df_ind = df.set_index("col_a")
+df_ind = df.set_index('col_a')
 df_dropped = df_ind.reset_index() # there is a drop option
-df_ind = df.set_index(["col_a", "col_b"])
-df.loc[[("val_a1", "val_b1"), ("val_a3", "val_b4")]]
+df_ind = df.set_index(['col_a', 'col_b'])
+df.loc[[('val_a1', 'val_b1'), ('val_a3', 'val_b4')]]
 
 df.sort_index() # default outer level then inner level
-df.sort_index(level="col_b")
-df.sort_index(level=["col_a", "col_b"], ascending=[True, False])
+df.sort_index(level='col_b')
+df.sort_index(level=['col_a', 'col_b'], ascending=[True, False])
 #+end_src
 
 * Aggregating(Statistics)
@@ -88,50 +96,112 @@ df.agg([np.median])
 
 ** Grouped Aggregating
 #+begin_src python
-dogs.groupby("color")["weight"].mean()
-dogs.groupby("color")["weight"].agg(["mean", "std", "count"])
-dogs.groupby(["color", "breed"])["weight"].mean()
+dogs.groupby('color')['weight'].mean()
+dogs.groupby('color')['weight'].agg(['mean', 'std', 'count'])
+dogs.groupby(['color', 'breed'])['weight'].mean()
+dogs.groupby('color').agg({'weight': ['mean', 'std'], 'height': ['mean', 'std']})
+
 
 # get grouped summary by pivoting table
 import numpy as np
-dogs.pivot_table(index="color", values="weight", aggfunc=[np.mean, np.median]) # by deafult aggfunc=np.mean
-# equivalent to dogs.groupby(["color", "breed"])["weight"].mean()
-dogs.pivot_table(index="color", columns="breed", values="weight", aggfunc=np.mean, fill_value=0, margins=True)
+dogs.pivot_table(index='color', values='weight', aggfunc=[np.mean, np.median]) # by deafult aggfunc=np.mean
+# equivalent to dogs.groupby(['color', 'breed'])['weight'].mean()
+dogs.pivot_table(index='color', columns='breed', values='weight', aggfunc=np.mean, fill_value=0, margins=True)
 # margin=True to get total summary row and column
 
-mean_weight_by_color = dogs.pivot_table(index="color", values="weight", aggfunc=np.mean)
-mean_weight_by_color.mean(axis="index") # mean of each column
-mean_weight_by_color.mean(axis="columns") # mean of each row
+mean_weight_by_color = dogs.pivot_table(index='color', values='weight', aggfunc=np.mean)
+mean_weight_by_color.mean(axis='index') # mean of each column
+mean_weight_by_color.mean(axis='columns') # mean of each row
 #+end_src
+
 * Plotting
 #+begin_src python
 import matplotlib.pyplot as plt
-df["col_a"].hist(bins=20)
-df_by_idx.plot(kind="bar", title="42")
+df['col_a'].hist(bins=20)
+df_by_idx.plot(kind='bar', title='42')
 
 # rot=45 rotate x-axis labels by 45 degrees
-df_timeseries.plot(x="date", y="col_a", kind="line", rot=45)
+df_timeseries.plot(x='date', y=['col_a', 'col_b'], kind='line', rot=45)
 
-df.plot(x="col_a", y="col_b", kind="scatter")
+df.plot(x='col_a', y='col_b', kind='scatter')
 # plt.show() to display the plot
 #+end_src
 
 ** Layering Plots
 #+begin_src python
-dogs[dogs["sex"]=="F"]["height"].hist(alpha=0.5)
-dogs[dogs["sex"]=="M"]["height"].hist(alpha=0.5)
-plt.legend(["F","M"])
+dogs[dogs['sex']=='F']['height'].hist(alpha=0.5)
+dogs[dogs['sex']=='M']['height'].hist(alpha=0.5)
+plt.legend(['F','M'])
 plt.show()
 #+end_src
 
 * Missing Values
 #+begin_src python
-df.isna().any() # detect missing values
-df.isna().sum() # count missing values
-df.isna().plot(kind="bar") # plot missing values
+# Check if any columns contain missing values
+df.isna().any()
 
-# handle missing values
+# Count missing values by column
+df.isna().sum()
+
+# Bar plot of missing values by variable
+df.isna().sum().plot(kind='bar')
+
+# Show the distributions of columns with missing values
+df[['col_a', 'col_b']].hist() # two histograms
+
+# Handle missing values
 df.dropna() # drop rows with missing values
 df.fillna(0) # fill missing values with 0
-df.fillna(method="ffill") # fill missing values with previous value
+df.fillna(method='ffill') # fill missing values with previous value
 #+end_src
+
+* Merging
+#+begin_src python
+df1.merge(df2, on='key', how='inner', selfuffixes=('_df1', '_df2'),
+          validate='one_to_one', # check if the merge keys are unique in both dataframes
+          )
+
+# Semi join: keep only the rows in df1 that have a match in df2
+df1[df1['id'].isin(df2['id'])]
+
+# Anti join: keep only the rows in df1 that do not have a match in df2
+df1[~df1['id'].isin(df2['id'])]
+
+# Concatenate
+pd.concat([df1, df2],
+          axis=0, # 0: vertical, 1: horizontal
+          ignore_index=True, # reset index
+          keys=['from_df1', 'from_df2'], # create a hierarchical index to track the origin table
+          sort=False, # do not sort the columns (default is True)
+          )
+
+pd.concat([df1, df2],
+          join='inner', # keep only the columns that are in both dataframes, default is 'outer'
+          varify_integrity=True, # check if the indexes are unique
+          )
+#+end_src
+- ~merge(validate='one_to_many')~ and ~concat(varify_integrity=True)~ are useful
+  - Real world data is often *NOT* clean
+  - What to do next: *Fix incorrect data* or *Drop duplicate rows*
+
+** Time-series Merge
+#+begin_src python
+pd.merge_ordered(df1, df2, on='date', fill_method='ffill')
+gdp_sp500 = pd.merge_ordered(gdp, sp500, left_on='year', right_on='date',
+                             how='left')
+
+pd.merge_asof(df1, df2, on='date',
+              direction='nearest', # but default 'backward' is appropriate for stock data, it avoids look-ahead bias
+              )
+#+end_src
+
+#+RESULTS:
+
+- ~merge_asof()~
+  - Similar to ~merge_ordered()~ left join
+  - But it matches on the nearest key column and not exact numbers
+
+[[file:images/screenshots/Time-series_Merge/2024-11-09_15-44-18_screenshot.png]]
+* Wide/Long Format Reshaping
+[[file:images/screenshots/Wide/Long_Format_Reshaping/2024-11-09_16-08-26_screenshot.png]]
+- ~df.melt(id_vars=['first', 'last'], value_vars=['height', 'weight'], var_name='variable', value_name='value')~

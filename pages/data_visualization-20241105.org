@@ -5,5 +5,6 @@
 #+filetags: :DataScience:
 
 * Types of Charts
-
 [[file:images/screenshots/Charts_Type/2024-11-05_20-33-12_screenshot.png]]
+* [[id:c78f636f-88e8-4cb8-8e28-0dc34bfbaf3a][Matplotlib]]
+* [[id:f86e4126-bb1a-45f1-b9b7-b00c2d98672e][Seaborn]]

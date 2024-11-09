@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       63c07a9b-2388-455a-8db7-d7cb66f6c6c7
+:END:
+#+title: Data Analysis
+#+filetags: :DataScience:
+
+* Data Analysis Workflow
+
+[[file:images/screenshots/Data_Analysis_Workflow/2024-11-09_20-55-57_screenshot.png]]
+
+* [[id:05ef9aaa-7fa2-45b4-9ed9-d8d01c8abff2][Pandas]]
+* [[id:41c5482c-9098-4b60-a2ff-e3c13bfb4486][Data Visualization]]

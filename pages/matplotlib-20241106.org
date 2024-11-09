@@ -4,7 +4,7 @@
 #+title: Matplotlib
 #+filetags: :DataScience:
 
-* Customization Example
+* Simple Examples
 #+begin_src python
 import matplotlib.pyplot as plt
 
@@ -27,3 +27,126 @@ plt.grid(True)
 
 plt.show()
 #+end_src
+
+* Customization
+#+begin_src python
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots(2, 1) # figure, axes with 2 rows, 1 column
+
+ax[0].plot(aapl["datetime"], aapl["close"], label="AAPL")
+# options:
+# marker="o", linestyle="--", color="red", linewidth=2
+
+# Always label your axes
+ax[0].set_xlabel("Date")
+ax[0].set_ylabel("Price")
+
+ax[1].plot(nvda["datetime"], nvda["close"], label="NVDA")
+ax[1].set_xlabel("Date")
+ax[1].set_ylabel("Price")
+
+ax[0].legend() # legend is used to show the labels
+ax[1].legend()
+
+plt.show()
+#+end_src
+
+** Two Y-Variable in One Figure
+#+begin_src python
+fig, ax = plt.subplots()
+ax.plot(aapl.index, aapl, label='AAPL')
+ax.set_ylabel('AAPL')
+ax.set_xlabel('Date')
+ax.tick_params(axis='x', rotation=45)
+
+ax2 = ax.twinx()
+ax2.plot(sp500.index, sp500, label='SP500', color='red')
+ax2.set_ylabel('SP500')
+ax2.tick_params(axis='y', colors='red')
+
+plt.show()
+#+end_src
+
+** Annotation
+#+begin_src python
+ax.annotate("breakthrough",
+            xy=(pd.Timestamp("2023-01-01"), 42), # (index, y_value)
+            xytext=(pd.Timestamp("2023-01-01"), 50), # the text position
+            arrowprops=dict(arrowstyle="->", color="gray"),
+            )
+#+end_src
+* Charts
+** Bar
+#+begin_src python
+fig, ax = plt.subplots()
+ax.bar(medals["country"], medals["gold"], color="gold", label="Gold")
+ax.bar(medals["country"], medals["silver"], color="silver", label="Silver",
+       bottom=medals["gold"]) # bottom=medals["gold"] is used to stack the bars
+
+ax.bar(medals["country"], medals["bronze"], label="Bronze", bottom=medals["gold"] + medals["silver"])
+
+ax.set_xticklabels(medals["country"], rotation=90)
+ax.set_ylabel("Number of medals")
+
+ax.legend()
+plt.show()
+#+end_src
+
+** Histogram
+#+begin_src python
+fig, ax = plt.subplots()
+ax.hist(mens_rowing["Height"], bins=8, label="Rowing", histtype="step")
+ax.hist(mens_gymnastics["Height"], bins=8, label="Gymnastics", histtype="step")
+ax.set_xlabel("Height (cm)")
+ax.set_ylabel("# of observations")
+ax.legend()
+
+plt.show()
+#+end_src
+
+** Scatter
+#+begin_src python
+fig, ax = plt.subplots()
+ax.scatter(df["gdp"], df["life_expectancy"], c=df["population"], alpha=0.5)
+ax.set_xscale('log')
+ax.set_xlabel("GDP per Capita")
+ax.set_ylabel("Life Expectancy")
+plt.show()
+#+end_src
+
+** Statistical Visualization
+- Error bars
+#+begin_src python
+ax.bar(values.mean(), yerr=values.std()) # yerr adds error bars
+
+# line plot
+# errorbar is a more general function that can be used to plot error bars
+ax.errorbar(df["month"], df["avg_temp"], yerr=df["std_temp"])
+#+end_src
+*** Boxplot
+#+begin_src python
+fig, ax = plt.subplots()
+ax.boxplot([df['A'], df['B'], df['C']])
+ax.set_xticklabels(['A', 'B', 'C'])
+ax.set_ylabel('Values (cm)')
+plt.show()
+#+end_#+begin_src
+
+      #+end_src
+* Reporting
+- ~plt.style.use('seaborn-colorblind')~ See [[https://matplotlib.org/stable/gallery/style_sheets/style_sheets_reference.html][Styles]]
+- ~fig.savefig("pic.png", dpi=300)~ to save your visualization
+  - ~fig.set_size_inches([5, 3])~
+
+** Guidelines for Choosing Style
+- Avoid using dark backgrounds
+- Colorblind-friendly options: =seaborn-colorblind=, =tableau-colorblind10=
+- Using less ink for printers: Avoid colored backgrounds
+- Black-and-white: =grayscale=
+
+* References
+- [[https://matplotlib.org/stable/gallery/][Matplotlib Gallery]]
+- [[https://matplotlib.org/stable/users/explain/toolkits/mplot3d.html][Plotting 3D Plots]]
+- [[https://matplotlib.org/stable/tutorials/images.html][Image Tutorial]]
+- [[https://matplotlib.org/stable/api/animation_api.html][Animations]]
+- [[https://scitools.org.uk/cartopy/docs/latest/][Using Matplotlib for Geo Date]]
