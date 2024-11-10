@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       69c30551-e3b1-4d83-87a9-784dfe71f189
+:END:
+#+title: Types of Data
+#+filetags: :Statistics:
+
+* Numeric
+** Continuous (Measured)
+- Airplane Speed
+- Time spent waiting in line
+
+** Discrete (Counted)
+- Number of pets
+- Number of packages shipped
+
+* Categorical
+** Nominal (Unordered)
+- Married/unmarried
+- Country of residence
+
+** Ordinal (Ordered)
+- Strongly disagree
+- Somewhat disagree
+- Neither agree nor disagree
+- Somewhat agree
+- Strongly agree

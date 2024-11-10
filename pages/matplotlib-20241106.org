@@ -27,8 +27,7 @@ plt.grid(True)
 
 plt.show()
 #+end_src
-
-* Customization
+- with ~fig~ and ~ax~
 #+begin_src python
 import matplotlib.pyplot as plt
 fig, ax = plt.subplots(2, 1) # figure, axes with 2 rows, 1 column
@@ -133,7 +132,7 @@ plt.show()
 #+end_#+begin_src
 
       #+end_src
-* Reporting
+* Customization
 - ~plt.style.use('seaborn-colorblind')~ See [[https://matplotlib.org/stable/gallery/style_sheets/style_sheets_reference.html][Styles]]
 - ~fig.savefig("pic.png", dpi=300)~ to save your visualization
   - ~fig.set_size_inches([5, 3])~

@@ -4,5 +4,8 @@
 #+title: Statistics
 #+filetags: Statistics
 
+* Types of Statistics
+- [[id:925a0f11-b567-4e43-a9a7-41006a814c33][Descriptive Statistics]] :: Describe and summarize data
+- [[id:bc202bb0-0793-4e92-8316-1186e5525c97][Inferential Statistics]] :: Use a sample of data to make inferences about a larger population
 
-- [[id:bc202bb0-0793-4e92-8316-1186e5525c97][Inferential Statistics]]
+* [[id:69c30551-e3b1-4d83-87a9-784dfe71f189][Types of Data]]

@@ -20,7 +20,7 @@ sns.scatterplot(x='height', y='weight', data=df)
 sns.countplot(x='gender', data=df) # bar plot
 #+end_src
 
-* hue
+* Subgroups Comparison ~hue~
 #+begin_src python
 import pandas as pd
 import seaborn as sns
@@ -34,8 +34,7 @@ sns.scatterplot(x='total_bill', y='tip',
                 palette=hue_colors)
 #+end_src
 
-* Relational Plots
-** ~relplot()~
+* Relational Plots ~relplot()~
 - Why use ~relplot()~ instead of ~scatterplot()~?
   - ~relplot()~ lets you create subplots in a single figure
 #+begin_src python
@@ -53,7 +52,7 @@ sns.relplot(x='total_bill', y='tip', data=tips, kind='scatter',
   - Subplots with color (hue)
   - Subgroups with point size, style and transparency
   - Changing point transparency
-*** Examples
+** Examples
 - Point Size:
   - ~sns.relplot(x='total_bill', y='tip', data=tips, kind='scatter', size='size', hue='size')~
   [[file:images/screenshots/Scatter_Plots/2024-11-09_22-43-31_screenshot.png]]
@@ -75,3 +74,92 @@ sns.relplot(x='hour', y='NO_2_MEAN', data=air_df_loc_mean,
   - Replacing CI with std: ~ci='sd'~
   - Turn off the CI: ~ci=None~
 [[file:images/screenshots/Line_Plots/2024-11-09_22-56-40_screenshot.png]]
+* Categorical Plots ~catplot()~
+- Used to create categorical plots
+- Same advantages of ~relplot()~
+- Easily create subplots with ~col=~ and ~row=~
+** Count Plots
+#+begin_src python
+sns.catplot(x="how_masculine", data=masculinity_data,
+            kind="count",
+            order=["Not at all", "Not very", "Somewhat", "Very"])
+#+end_src
+
+** Bar Plots
+- Bar plots shows the 95% confidence interval by default
+#+begin_src python
+sns.catplot(x="day", y="total_bill",
+            data=tips, kind="bar")
+#+end_src
+
+** Box Plots
+- Shows the distribution of quantitative data
+  - Shows median, spread, skewness, and outliers
+- Facilitates comparisons between groups
+#+begin_src python
+g = sns.catplot(x="time",
+                y="total_bill",
+                data=tips,
+                kind="box",
+                order=["Dinner", "Lunch"])
+# Options:
+# sym="": Don't show outliers
+# whis=1.5: Set whiskers to 1.5 * IQR (default)
+# whis=[5, 95]: Set whiskers to 5th and 95th percentiles
+#+end_src
+
+** Point Plots
+- Points show mean of quantitative variable
+- Vertical lines show 95% confidence intervals
+[[file:images/screenshots/Point_Plots/2024-11-10_09-47-26_screenshot.png]]
+#+begin_src python
+sns.catplot(x='smoker',
+            y='total_bill',
+            data=tips,
+            kind='point',
+            capsize=0.2,
+            estimator=np.median)
+#+end_src
+
+* Seaborn Objects
+- ~FacetGrid~ or ~AxesSubplot~
+#+begin_src python
+g = sns.scatterplot(x='x', y='y', data=df)
+type(g)
+# <class 'matplotlib.axes._subplots.AxesSubplot'>
+
+g = sns.catplot(x='x', y='y', data=df)
+type(g)
+# <class 'seaborn.axisgrid.FacetGrid'>
+
+* Titles and Labels
+** For FacetGrid
+#+begin_src python
+g = sns.catplot(x="day", y="total_bill", data=tips)
+g.fig.suptitle("Figure Title", y=1.02)
+
+# Subplot titles
+g = sns.catplot(x="day", y="total_bill", data=tips, col="time")
+g.fig.suptitle("Figure Title", y=1.02)
+g.set_titles("This is {col_name}")
+
+# Axis labels
+g.set(xlabel="Day", ylabel="Total Bill")
+# or g.set_axis_labels("Day", "Total Bill")
+
+# Rotate x-axis labels
+plt.xticks(rotation=90)
+#+end_src
+
+** For AxesSubplot
+#+begin_src python
+g = sns.scatterplot(x='x', y='y', data=df)
+g.set_title('Scatterplot of x and y', y=1.05)
+#+end_src
+
+* Customization
+- ~sns.set_style()~
+- ~sns.set_palette()~
+  - Sequential palette
+- Use ~sns.set_context()~ to change the scale of the plot elements and labels
+  - Smallest to largest: "paper", "notebook", "talk", "post"
