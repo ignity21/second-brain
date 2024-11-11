@@ -1,0 +1,127 @@
+:PROPERTIES:
+:ID:       5c108829-17e1-4980-9268-6e3eb555b857
+:END:
+#+title: Discrete Distributions
+#+filetags: :Probability:
+
+* Binomial distribution
+   1. You're running a series of *independent* trials.
+   2. There can be either a success or failure for each trial, and the probability of success is the same for each trial.
+   3. There are a *finite* number of trials.
+   4. The main thing you're interested in is *the number of successes* in the $n$ independent trials.
+
+   Let:
+   - $X$ be the number of successful outcomes out of $n$ trials
+   - $p$ be the probability of success in a trial
+
+   $$X\sim B(n, p)$$
+
+** PMF
+    $$PMF_X(x)=\dbinom{n}{x} p^x (1-p)^{n-x}$$
+
+** E[X]
+    $$E[X]=np$$
+
+** Var[X]
+    $$Var[X]=np(1-p)$$
+
+** CDF
+    $$CDF_X(x)=\sum_{m=0}^{\lfloor x \rfloor}{n \choose m}p^m(1-p)^{n-m}$$
+
+* Geometric distribution
+   1. You run a series of *independent* trials.
+   2. There can be either a success or failure for each trial, and the probability of success is the same for each trial.
+   3. The main thing you're interested in is *how many* trials are needed in order to get the *first* successful outcome.
+
+   Let:
+   - $X$ be the number of trials needed to get the first successful outcome
+   - $p$ be the probability of success in a trial
+
+   $$X\sim Geo(p)$$
+** PMF
+    let X be the number of trials needed to get the first successful outcome.
+    To find the probability of $X$ taking a particular value $x$, using:
+    $$PMF_X(x)=p(1-p)^{x-1}$$
+
+** E[X]
+    $$E[X]=\frac{1}{p}$$
+
+** Var[X]
+    $$Var[X]=\frac{1-p}{p^2}$$
+
+** CDF
+    $$CDF_X(x)=1-(1-p)^{\lfloor x \rfloor}$$
+
+** memorylessness
+* Pascal distribution
+   aslo known as *Negative Binomial Distribution*
+
+   1. You run a series of *independent* trials.
+   2. There can be either a success or failure for each trial, and the probability of success is the same for each trial.
+   3. The main thing you’re interested in is *how many* trials are needed in order to get the $k$ successful outcomes.
+
+   Let:
+   - $X$ be the number of trials needed to get the $k$ successful outcomes
+   - $p$ be the probability of success in a trial
+
+   $$X\sim Pascal(k, p)$$
+
+** PMF
+$$PMF_X(x)=\begin{cases}
+{x-1 \choose k-1}(1-p)^{x-k}p^k,  & x\ge k\\
+0, & otherwise\\
+\end{cases}$$
+
+** E[X]
+    $$E[X]=\frac{k}{p}$$
+
+** Var[X]
+    $$Var[X]=\frac{k(1-p)}{p^2}$$
+
+** CDF
+$$CDF_X(x)=\begin{cases}
+I_p(k, \lfloor x \rfloor - k + 1),  & x\ge k\\
+0, & otherwise\\
+\end{cases}$$
+$I_z(a,b)$ is the regularized incomplete beta function
+*** more
+$$\begin{align*}
+CDF_X(x) & =P(X\le x)\\
+& =P(\mbox{the k-th success occurs before the x-th trial})\\
+& =P(\mbox{k success in x trials})\\
+& =P(Y\ge n), Y\sim B(x, p)
+\end{align*}$$
+This is why *pascal* is aslo called *negative binomial*.
+
+* Poisson distribution
+   1. Individual events occur at *random* and *independently* in a given interval.
+   2. You know the mean number of occurrences in the interval or the rate of occurrences, and it’s finite.
+   3. The purpose is to know the number of occurrences in another particular interval.
+
+   Let:
+   - $X$ be the number of occurrences in a particular interval $T$
+   - $\lambda$ be the rate of occurrences, should be $uT$, $u$ is the frequency of occurrences
+
+   $$X\sim Po(\lambda)$$
+
+** PMF
+    $$PMF_X(x)=\frac{e^{-\lambda}\lambda^{x}}{x!}$$
+
+** E[X]
+    $$E[X]=\lambda$$
+
+** Var[X]
+    $$Var[X]=\lambda$$
+
+** CDF
+$$CDF_X(x)= \begin{cases}
+-\lambda^e\sum_{n=-\infty}^{\lfloor x \rfloor}e^{-\lambda}\cdot \frac{\lambda^n}{n!}, & \mbox{if }x\ge 1 \\
+0, & \mbox{otherwise} \\
+\end{cases}$$
+
+** linear transforms
+    If $X\sim Po(\lambda_x)$ and $Y\sim Po(\lambda_y)$, and $X$ and $Y$ are independent,
+    $$X+Y\sim Po(\lambda_x + \lambda_y)$$
+
+** simplify the special Binomial distribution case
+    If $X\sim B(n, p)$ where $n$ is large and $p$ is small, you can approximate it with $X \sim Po(np)$.

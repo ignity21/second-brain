@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       0cd40c78-f1e1-4408-962c-f54770bf0606
+:END:
+#+title: Probability
+#+filetags: :Probability:Math:
+
+* [[id:5c108829-17e1-4980-9268-6e3eb555b857][Discrete Distributions]]

@@ -155,6 +155,18 @@ df.fillna(0) # fill missing values with 0
 df.fillna(method='ffill') # fill missing values with previous value
 #+end_src
 
+* ~df.sample()~
+#+begin_src python
+die = pd.DataFrame({"number": [1, 2, 3, 4, 5, 6],
+                    "prob": [1/6, 1/6, 1/6, 1/6, 1/6, 1/6]})
+rolls_10 = die.sample(10, replace=True) # replace=True allows for duplicates
+
+# shows the probability of each number
+sns.catplot(x="number", y="prob", data=die, kind="bar")
+
+# shows the number of times each number was rolled
+rolls_10["number"].hist(bins=np.linspace(1,7,7))
+#+end_src
 * Merging
 #+begin_src python
 df1.merge(df2, on='key', how='inner', selfuffixes=('_df1', '_df2'),
