@@ -2,7 +2,7 @@
 :ID:       69c30551-e3b1-4d83-87a9-784dfe71f189
 :END:
 #+title: Types of Data
-#+filetags: :Statistics:
+#+filetags: :DataScience:Math:Statistics:
 
 * Numeric
 ** Continuous (Measured)

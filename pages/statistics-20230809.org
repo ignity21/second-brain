@@ -2,7 +2,9 @@
 :ID:       cf78ad70-6034-4224-80e5-eaf0610ad882
 :END:
 #+title: Statistics
-#+filetags: Statistics
+#+filetags: :Math:Statistics:
+
+- links :: [[id:0cd40c78-f1e1-4408-962c-f54770bf0606][Probability]]
 
 * Types of Statistics
 - [[id:925a0f11-b567-4e43-a9a7-41006a814c33][Descriptive Statistics]] :: Describe and summarize data

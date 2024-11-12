@@ -3,7 +3,7 @@
 :ROAM_ALIASES: "Summary Statistics"
 :END:
 #+title: Descriptive Statistics
-#+filetags: :Statistics:
+#+filetags: :Math:Statistics:
 
 * Measure of Central
 ** mean
