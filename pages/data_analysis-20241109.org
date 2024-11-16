@@ -8,5 +8,11 @@
 
 [[file:images/screenshots/Data_Analysis_Workflow/2024-11-09_20-55-57_screenshot.png]]
 
-* [[id:05ef9aaa-7fa2-45b4-9ed9-d8d01c8abff2][Pandas]]
 * [[id:41c5482c-9098-4b60-a2ff-e3c13bfb4486][Data Visualization]]
+
+* Python Modules
+- [[id:99384a8d-1cd7-45e6-9913-01a96e895630][NumPy]]
+- [[id:05ef9aaa-7fa2-45b4-9ed9-d8d01c8abff2][Pandas]]
+- [[id:c78f636f-88e8-4cb8-8e28-0dc34bfbaf3a][Matplotlib]]
+- [[id:f86e4126-bb1a-45f1-b9b7-b00c2d98672e][Seaborn]]
+- [[id:c6961658-1c4b-4f9d-8a52-e919562d6277][SciPy]]

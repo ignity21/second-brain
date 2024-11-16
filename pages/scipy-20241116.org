@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       c6961658-1c4b-4f9d-8a52-e919562d6277
+:END:
+#+title: SciPy
+#+filetags: :Python:Math:Statistics:
+
+* [[id:7c802e9e-8fc0-41fd-8078-1e09ee72378f][T-Test]] Example
+- ~stats.ttest_ind()~ is used for comparing the means of two independent samples. It returns the t-statistic and the p-value.
+#+begin_src python
+import numpy as np
+from scipy import stats
+
+# Sample data
+np.random.seed(0)  # For reproducibility
+sample1 = np.random.normal(loc=5.0, scale=1.0, size=30)  # Sample from a normal distribution
+sample2 = np.random.normal(loc=5.5, scale=1.0, size=30)
+
+# Perform a two-sample t-test
+t_statistic, p_value = stats.ttest_ind(sample1, sample2)
+
+# Output the results
+print(f"T-statistic: {t_statistic:.4f}")
+print(f"P-value: {p_value:.4f}")
+
+# Interpret the results
+alpha = 0.05  # Significance level
+if p_value < alpha:
+    print("Reject the null hypothesis: The means of the two samples are significantly different.")
+else:
+    print("Fail to reject the null hypothesis: No significant difference between the means of the two samples.")
+#+end_src

@@ -9,19 +9,63 @@
 - A/B testing
 - Feature selection in ML
 
-* Steps
-1. Define null(H0) and alternative(H1) hypothesis
-2. Choose the appropriate statistical test
-3. Calculate the p-value
-4. Determine the statistical significance -- p value is then compared against the significance level.
+* Basics
+** Symbols
+| $\mu$          | mean(expected value)      |
+| $\sigma$          | standard deviation        |
+| $\hat\mu$    | estimated population mean |
+| $\hat\sigma$ | estimated population sd   |
+| $\bar{X_i}$  | one sample $X_i$'s mean   |
+| $s$          | sample sd                 |
+| $n$          | sample size               |
+- Bessel's correction $\hat\sigma=\sqrt\frac{\sum_{i=1}^n(x_i-\bar{x})}{n-1}$
 
-* Choose the Appropriate Test
-[[../assets/Statistics/InferentialStats_1.png]]
+** Degrees of Freedom
+- Example1: You have to choose n numbers from all natural numbers.($DF=n$)
+- Example2: You have n numbers that must sum to 10. ($DF=n-1$)
+- Example3: $DF=4$
+  [[../assets/Statistics/DegreesOfFreedom.png]]
 
-- Z-Test: compare two groups/categories of numeric variables with large sample size
-- [[id:7c802e9e-8fc0-41fd-8078-1e09ee72378f][T-Test]]: compare two groups/categories of numeric variables with small sample size
-- ANOVA test: compare the difference between two or more groups/categories of numeric variables
-- Chi-Squared test: examine the relationship between two categorical variables
-- Correlation test: examine the relationship between two numeric variables
+- Related to estimated population sd
+  - $x_1+x_2+...+x_n=\bar{x}\cdot{n}$ (to get $\bar{x}\cdot{n}$ -> $DF=n-1$)
+  - Only $n-1$ values are independent *after* we know the mean.
 
-** TODO Python examples for these tests
+* Sampling Distribution
+- Sampling Distribution :: Distribution of sample means
+| $X_i$                | Variable in Sample i               |
+| $\bar{X_i}$          | sample mean                        |
+| $n$                  | number of samples                  |
+| $M$                  | mean of sample means               |
+| $SE$(Standard Error) | standard deviation of sample means |
+
+- $M=\frac{1}{n}\sum_{i=1}^{n}\bar{X_i}$
+- Ratio of $\sigma$ to $SE$: $\frac{\sigma}{SE}=\sqrt{n}$
+- Margin of Error: $z\cdot\frac{\sigma}{\sqrt{n}}$. it's half the width of the confidence interval.
+  - e.g. for 95% CI: Margin of Error $= 1.96SE = \frac{1.96\sigma}{\sqrt{n}}$
+- *Central Limit Theorem*: Distribution of sample means is normal distribution.
+  - $SE=\frac{\sigma}{\sqrt{n}}$
+  - z score of sample mean: $z=\frac{\bar{X_i} - \mu}{SE}$
+
+** Confidence Interval Bounds
+| z-score(critical value) |  CI |
+|-------------------------+-----|
+| $\pm 1.96$                | 95% |
+| $\pm 2.33$                | 98% |
+- $\bar{X_i}$ should be in $(\mu-1.96SE, \mu+1.96SE)$, then 95% Confidence Interval is:
+  - $\bar{X_i}-1.96SE<\mu<\bar{X_i}+1.96SE$
+  - 95% CI with the bigger sample size -> the smaller CI bounds
+
+** $\alpha$ Levels
+- $\alpha$ Levels of Likelihood.
+- $\alpha$ level is a criterion for deciding whether or not something is likely or unlikely.
+  - 5% (generally used)
+  - 1%
+  - 0.1%
+
+** Critical Region
+- For one-tailed test
+  [[../assets/Statistics/CriticalRegionOneTailed.png]]
+- For two-tailed test
+  [[../assets/Statistics/CriticalRegionTwoTailed.png]]
+
+* [[id:61297403-6903-4513-90c7-2b5fc0b49e11][Hypothesis Testing]]

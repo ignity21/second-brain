@@ -11,3 +11,4 @@
 - [[id:bc202bb0-0793-4e92-8316-1186e5525c97][Inferential Statistics]] :: Use a sample of data to make inferences about a larger population
 
 * [[id:69c30551-e3b1-4d83-87a9-784dfe71f189][Types of Data]]
+* [[id:c6961658-1c4b-4f9d-8a52-e919562d6277][SciPy]]
