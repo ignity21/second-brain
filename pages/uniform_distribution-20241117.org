@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       408f940c-5870-4c00-b54c-6d4aea4809d6
+:ROAM_ALIASES: "Discrete Uniform Distribution"
+:END:
+#+title: Uniform Distribution(D)
+#+filetags: :Statistics:Probability:Math:
+
+* Examples
+** Rolling the Dice (Uniform Distribution)
+#+begin_src python
+# Rolling the Dice
+np.random.seed(0)
+
+# PMF of a fair 6-sided die
+die = np.array([1, 2, 3, 4, 5, 6])
+prob = np.ones(6) / 6
+df = pd.DataFrame({'number': die, 'prob': prob})
+
+expected_value = np.mean(df['number'])
+
+# Plot the PMF
+plt.bar(df['number'], df['prob'])
+plt.show()
+
+# Simulate rolling (Sampling)
+rolls_10 = df.sample(100, replace=True)
+rolls_10['number'].hist(bins=np.linspace(1,7,7))
+
+# CDF of a fair 6-sided die
+# CDF is the area under the PMF
+cdf = np.cumsum(prob)
+#+end_src

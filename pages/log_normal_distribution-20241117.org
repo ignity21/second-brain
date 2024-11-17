@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       9a78a66a-28e8-4a94-8297-7ef16b48f72d
+:END:
+#+title: Log-normal Distribution
+#+filetags: :Probability:Statistics:Math:
+
+* Overview
+- Variable whose logarithm is normally distributed
+  - Length of chess games
+  - Adult blood pressure
+  - Number of hospitalizations in the 2003 SARS outbreak

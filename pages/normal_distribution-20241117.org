@@ -1,0 +1,36 @@
+:PROPERTIES:
+:ID:       6ec38f0c-dde2-44f7-94b2-b5a7d4096a06
+:END:
+#+title: Normal Distribution
+#+filetags: :Math:Statistics:Probability:
+
+
+* 68-95-99.7 Rule
+- 68%: within 1 std
+- 95%: within 2 std
+- 99.7%: within 3 std
+
+* Python Examples
+** Generating Data
+- ~norm.rvs(mean, std, size=n)~
+
+** Calculating CDF & PPF
+#+begin_src python
+from scipy.stats import norm
+
+# stadard normal distribution
+mean = 0
+std = 1
+# P( X <= 0.6)
+print(norm.cdf(0.6, mean, std))
+
+# P(0.6 <= X <= 1.6)
+print(norm.cdf(1.6, mean, std1) - norm.cdf(0.6, mean, std))
+
+# What value are 90% of the values less than?
+print(norm.ppf(0.9, mean, std))
+
+# 68% of values are within 1 standard deviation
+# print (mean - std, mean + std)
+print(norm.ppf(0.16, mean, std), norm.ppf(0.84, mean, std))
+#+end_src

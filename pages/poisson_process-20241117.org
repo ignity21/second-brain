@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       85ef2d1a-c912-46c7-a4b1-3af274c4fd4c
+:END:
+#+title: Poisson Process
+#+filetags: :Statistics:Probability:Math:
+* Poisson process
+Events appear to happen at a certain rate, but *completely at random*
+- Number of animals adopted from an animal shelter *per week*
+- Number of people arriving at a restaurant *per hour*
+- Number of earthquakes in US *per year*

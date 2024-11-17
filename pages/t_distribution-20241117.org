@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       19a09447-4f2f-4d82-914a-0ce293477362
+:END:
+#+title: t-distribution
+#+filetags: :Statistics:Math:Probability:
+
+* Overview
+- Similar as the normal distribution
+  [[file:images/screenshots/Overview/2024-11-17_17-42-19_screenshot.png]]
+- t-distribution with 1 ddof, tails are thicker

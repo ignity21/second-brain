@@ -2,11 +2,7 @@
 :ID:       5c108829-17e1-4980-9268-6e3eb555b857
 :END:
 #+title: Discrete Distributions
-#+filetags: :Math:Probability:
-
-* Terms
-- PMF :: Probability mass function is the probability distribution of a discrete random variable. $PMF_{X}(x)=P(X=x)$
-- CDF :: $CDF_{X}(x)=P(X\le x)=\sum_{k\le x}PMF_X(k)$
+#+filetags: :Statistics:Math:Probability:
 
 * Skewed Data
 [[file:images/screenshots/Skewed_Data/2024-11-15_09-21-19_screenshot.png]]
@@ -14,28 +10,6 @@
 - Positive Skewed == Right Skewed
 - Negative Skewed == Left Skewed
 
-* Examples
-** Rolling the Dice (Uniform Distribution)
-#+begin_src python
-# Rolling the Dice
-np.random.seed(0)
-
-# PMF of a fair 6-sided die
-die = np.array([1, 2, 3, 4, 5, 6])
-prob = np.ones(6) / 6
-df = pd.DataFrame({'number': die, 'prob': prob})
-
-expected_value = np.mean(df['number'])
-
-# Plot the PMF
-plt.bar(df['number'], df['prob'])
-plt.show()
-
-# Simulate rolling (Sampling)
-rolls_10 = df.sample(100, replace=True)
-rolls_10['number'].hist(bins=np.linspace(1,7,7))
-
-# CDF of a fair 6-sided die
-# CDF is the area under the PMF
-cdf = np.cumsum(prob)
-#+end_src
+* [[id:0a97c486-67fb-40a4-b1ff-e1229a387064][Binomial Distribution]]
+* [[id:408f940c-5870-4c00-b54c-6d4aea4809d6][Uniform Distribution(D)]]
+* [[id:5233b01c-750c-481c-a853-b61b48eac54c][Poisson Distribution]]

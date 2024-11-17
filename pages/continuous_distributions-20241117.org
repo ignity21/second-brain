@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       9c332f14-b4f7-4bd5-bd8a-2fdebcdae27c
+:END:
+#+title: Continuous Distributions
+#+filetags: :Probability:Math:
+
+
+* [[id:41fc96ca-d4b5-44fc-ad46-c8783a7253ff][Uniform Distribution(C)]]
+* [[id:6ec38f0c-dde2-44f7-94b2-b5a7d4096a06][Normal Distribution]]
+* [[id:6b3723fd-b1c2-432e-9176-feaec1d9b8b5][Exponential Distribution]]
+* [[id:19a09447-4f2f-4d82-914a-0ce293477362][t-distribution]]
+* [[id:9a78a66a-28e8-4a94-8297-7ef16b48f72d][Log-normal Distribution]]

@@ -1,0 +1,36 @@
+:PROPERTIES:
+:ID:       0a97c486-67fb-40a4-b1ff-e1229a387064
+:END:
+#+title: Binomial Distribution
+#+filetags: :Math:Statistics:Probability:
+
+* Independence
+#+begin_quote
+The binomial distribution is a probability distribution
+of the number of successes in a sequence of *independent*
+trials.
+#+end_quote
+
+* Python Examples
+** Generating Data
+#+begin_src python
+from scipy.stats import binom
+
+# Flip 1 coin with 50% chance of heads 10 times
+data = binom.rvs(1, 0.5, size=10)
+
+# Flip 10 coins with 50% chance of heads 2 times
+binom.rvs(10, 0.5, size=2)
+#+end_src
+
+** Calculating PMF & PDF
+#+begin_src python
+from scipy.stats import binom
+
+# binom.pmf(num heads, num trials, prob of heads)
+# What's the prob of getting 3 heads in 5 coin flips?
+p = binom.pmf(3, 5, 0.5)
+
+# What's the prob of getting 3 or fewer heads in 5 coin flips?
+p = binom.cdf(3, 5, 0.5)
+#+end_src

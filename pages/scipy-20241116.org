@@ -4,6 +4,17 @@
 #+title: SciPy
 #+filetags: :Python:Math:Statistics:
 
+* Generating Samples
+#+begin_src python
+import numpy as np
+from scipy.stats import uniform
+
+np.random.seed(0)
+
+# generate 10 random numbers between 0 and 5
+uniform.rvs(0,5, size=10)
+#+end_src
+
 * [[id:7c802e9e-8fc0-41fd-8078-1e09ee72378f][T-Test]] Example
 - ~stats.ttest_ind()~ is used for comparing the means of two independent samples. It returns the t-statistic and the p-value.
 #+begin_src python

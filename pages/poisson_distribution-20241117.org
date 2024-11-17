@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       5233b01c-750c-481c-a853-b61b48eac54c
+:END:
+#+title: Poisson Distribution
+#+filetags: :Probability:Math:Statistics:
+* [[id:85ef2d1a-c912-46c7-a4b1-3af274c4fd4c][Poisson Process]]
+* Definition
+- Poisson distribution: Probability of some # of events occurring over a fixed period of time.
+  - Probability of > 5 animals adopted from an animal shelter per week
+  - Probability of 12 people arriving at a restaurant per hour
+- \(\lambda\) = average number of events per time interval
+
+* Python Examples
+** Generating Data
+- ~poisson.rvs(lambda, size=10)~
+
+** Calculating PMF & CDF
+#+begin_src python
+from scipy.stats import poisson
+
+# What is P(# of customers in a hour = 2)? if the average # of customers per hour is 5
+prob = poisson.pmf(2, 5)
+
+# What is P(# of customers in a hour <= 3)? if the average # of customers per hour is 5
+prob = poisson.cdf(3, 5)
+#+end_src

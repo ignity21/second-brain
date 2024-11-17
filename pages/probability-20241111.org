@@ -3,5 +3,11 @@
 :END:
 #+title: Probability
 #+filetags: :Probability:Math:
+* Probability Distribution
+** Terms
+- PMF :: Probability mass function is the probability distribution of a *discrete* random variable. $PMF_{X}(x)=P(X=x)$
+- PDF :: Probability density function for *continuous* random variable.
+- CDF :: $CDF_{X}(x)=P(X\le x)=\sum_{k\le x}PMF_X(k)$
 
-* [[id:5c108829-17e1-4980-9268-6e3eb555b857][Discrete Distributions]]
+** [[id:5c108829-17e1-4980-9268-6e3eb555b857][Discrete Distributions]]
+** [[id:9c332f14-b4f7-4bd5-bd8a-2fdebcdae27c][Continuous Distributions]]

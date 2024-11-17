@@ -2,7 +2,7 @@
 :ID:       f86e4126-bb1a-45f1-b9b7-b00c2d98672e
 :END:
 #+title: Seaborn
-#+filetags: :DataScience:
+#+filetags: :Python:DataScience:
 
 * Overview
 - Easy way to create the most common types of plots
@@ -47,7 +47,7 @@ sns.relplot(x='total_bill', y='tip', data=tips, kind='scatter',
 #+end_src
 
 ** Scatter Plots
-- Customizations:
+- Customization:
   - Subplots (~col~ and ~row~)
   - Subplots with color (hue)
   - Subgroups with point size, style and transparency

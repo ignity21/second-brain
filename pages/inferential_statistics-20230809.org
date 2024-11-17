@@ -42,10 +42,8 @@
 - Ratio of $\sigma$ to $SE$: $\frac{\sigma}{SE}=\sqrt{n}$
 - Margin of Error: $z\cdot\frac{\sigma}{\sqrt{n}}$. it's half the width of the confidence interval.
   - e.g. for 95% CI: Margin of Error $= 1.96SE = \frac{1.96\sigma}{\sqrt{n}}$
-- *Central Limit Theorem*: Distribution of sample means is normal distribution.
-  - $SE=\frac{\sigma}{\sqrt{n}}$
-  - z score of sample mean: $z=\frac{\bar{X_i} - \mu}{SE}$
 
+** [[id:193270c8-6738-48fb-b728-8462f10de3c5][Central Limit Theorem]]
 ** Confidence Interval Bounds
 | z-score(critical value) |  CI |
 |-------------------------+-----|

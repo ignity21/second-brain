@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       41fc96ca-d4b5-44fc-ad46-c8783a7253ff
+:ROAM_ALIASES: "Continious Uniform Distribution"
+:END:
+#+title: Uniform Distribution(C)
+#+filetags: :Probability:Statistics:Math:
+
+* Examples
+** Wait Time
+- Bus interval 12 mins
+[[file:images/screenshots/Wait_Time/2024-11-17_10-27-35_screenshot.png]]
+#+begin_src python
+from scipy.stats import uniform
+
+# Wait time 4-7 minutes for 12 minutes interval
+prob = uniform.cdf(7, 0, 12) - uniform.cdf(4, 0, 12)
+#+end_src
