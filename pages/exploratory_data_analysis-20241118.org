@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       d31a2f5c-51c6-4742-8248-8d3c8904011a
+:END:
+#+title: Exploratory Data Analysis
+#+filetags: :Python:DataScience:
+
+* Initial Exploration
+- ~df.head()~
+- ~df.info()~: show null-value and column type
+- ~df.describe()~
+- ~df['col1'].value_counts()~: count categorical values
