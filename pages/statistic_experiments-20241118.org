@@ -1,0 +1,58 @@
+:PROPERTIES:
+:ID:       889cc76c-cbfa-4f3a-b4c7-7ba4acaaf8e6
+:END:
+#+title: Statistic Experiments
+#+filetags: :Math:Statistics:
+
+* Terms
+Experiment aims to answer: What is the effect of the treatment on the response?
+- Treatment :: explanatory/independent variable
+- Response :: response/dependent variable
+
+** Example
+What is the effect of an advertisement on the number of products purchased?
+- Treatment: advertisement
+- Response: number of products purchased
+
+* Controlled Experiments
+- Participants are assigned to either treatment group(with treatment) or control group(without treatment)
+- *Bias* Group should be comparable so that causation can be inferred.
+  - Not comparable: treatment group avg age 25, control group avg age 50
+    - Age is a potential confounder
+
+** Example A/B Test
+- Treatment group sees advertisement
+- Control group does not
+
+** Eliminating Bias
+*** Randomized controlled trial
+*** Placebo
+- Resembles treatment, but has no effect
+- Participants will not know which group they're in
+- Example: a sugar pill
+*** Double-blind Trial
+- Person =administering the treatment= / =running the study= doesn't know whether the treatment is real or a placebo
+- Prevents bias in the response and/or analysis of results
+
+* Observational Studies
+- Participants are not assigned randomly to groups
+  - Participants assign themselves, usually based on pre-existing characteristics
+- Many research questions are not conducive to a controlled experiment
+  - You can't force someone to smoke or have a disease
+  - You can't make someone have certain past behavior
+- Observation studies can't establish causation, only association
+  - Confounded by factors that got certain people into the control/treatment group
+  - There are ways to control for confounders to get more reliable conclusions about association
+
+** Examples
+- Prevalence of heart disease is compared between veterans with PTSD and veterans without PTSD
+
+
+* Longitudinal vs. Cross-sectional Studies
+- Longitudinal study
+  - Participants are followed *over a period of time* to examine effect of treatment on response
+  - More expansive, results take longer
+- Cross-sectional study
+  - Data on participants is collected from a single snapshot in time
+  - Effect of age on height is confounded by generations(each generation is getting taller)
+  - Cheaper, faster, more convenient
