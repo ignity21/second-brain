@@ -1,0 +1,67 @@
+:PROPERTIES:
+:ID:       b80406e2-60b3-4607-9dc2-6791405020cc
+:END:
+#+title: Correlation
+#+filetags: :Statistics:Math:
+
+* Correlation Coefficient
+- Quantifies the *linear relationship* between two variables
+- Number between -1 and 1
+- Magnitude corresponds to strength of relationship
+- Sign (+ or -) corresponds to direction of relationship
+- *Correlation shouldn't be used blindly*; Always visualize the data
+- *Correlation does not imply causation*
+
+** Confounding Phenomenon
+[[file:images/screenshots/Confounding_Phenomenon/2024-11-18_10-26-11_screenshot.png]]
+- Note that =coffee drinking= doesn't cause =lung cancer=, but the =smoking= does.
+- The =smoking= variable is called a confounder, or lurking variable.
+- The relationship between =coffee= and =lung cancer= is a spurious correlation.
+
+* Pearson Product-moment Correlation (r)
+\[r=\sum_{i=1}^{n}\frac{(x_{i}-\bar{x})(y_{i}-\bar{y})}{\sigma_{x}\times\sigma_{y}}\]
+- Most common
+- Some variations on this formula:
+
+** Kendall's Tau
+** Spearman's Rho
+
+* Non-linear Relationship
+Using transformer to make relationship linear
+- Log transformation(~log(x)~)
+- Square root transformation(~sqrt(x)~)
+- Reciprocal transformation(~1 / x~)
+- Combinations of transformation
+  - ~log(x)~ and ~log(y)~
+  - ~sqrt(x)~ and ~1 / y~
+
+** Log Transformation Example
+High Skewed Relationship
+[[file:images/screenshots/High_Skewed_Relationship/2024-11-18_09-55-50_screenshot.png]]
+- Using log transformation
+#+begin_src python
+msleep['log_bodywt'] = np.log(msleep['bodywt'])
+
+sns.lmplot(x='log_bodywt', y='awake', data=msleep, ci=None)
+plt.show()
+#+end_src
+
+[[file:images/screenshots/High_Skewed_Relationship/2024-11-18_09-58-15_screenshot.png]]
+
+
+
+* Python Examples
+** Visualizing Relationships
+#+begin_src python
+import seaborn as sns
+
+sns.scatterplot(x='sleep_total', y='sleep_rem', data=msleep)
+plt.show()
+
+# Adding a trendline with confidence interval off
+sns.lmplot(x='sleep_total', y='sleep_rem', data=msleep, ci=None)
+#+end_src
+
+
+** Calculating Correlation
+- Pearson Correlation: ~msleep['sleep_total'].corr(msleep['sleep_rem'])~

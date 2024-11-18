@@ -1,5 +1,6 @@
 :PROPERTIES:
 :ID:       f86e4126-bb1a-45f1-b9b7-b00c2d98672e
+:ROAM_ALIASES: sns
 :END:
 #+title: Seaborn
 #+filetags: :Python:DataScience:
@@ -43,7 +44,7 @@ sns.relplot(x='total_bill', y='tip', data=tips, kind='scatter',
             col="smoker", # separate plots by smoker
             row="time", # separate plots by time
             )
-# useful options: col_wrap, col_order, row_order
+# useful options: col_wrap, col_order, row_orderns
 #+end_src
 
 ** Scatter Plots
@@ -52,6 +53,8 @@ sns.relplot(x='total_bill', y='tip', data=tips, kind='scatter',
   - Subplots with color (hue)
   - Subgroups with point size, style and transparency
   - Changing point transparency
+- Adding trendline: ~sns.lmplot()~
+
 ** Examples
 - Point Size:
   - ~sns.relplot(x='total_bill', y='tip', data=tips, kind='scatter', size='size', hue='size')~
