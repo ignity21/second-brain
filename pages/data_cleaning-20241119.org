@@ -1,0 +1,41 @@
+:PROPERTIES:
+:ID:       de66c696-5ca1-4fbc-a9b2-097ee7bf4ccd
+:END:
+#+title: Data Cleaning
+#+filetags: :DataScience:Python:
+
+* Missing Values
+** Missing Data Problems
+- Affects distributions
+  - Missing heights of taller students
+- Less representative of the population
+  - Lacking data on oldest students
+- Can result in drawing incorrect conclusions
+
+** Strategies for Handling Missing Data
+*** Dropping Missing Values
+- Drop missing values if 5% or less of total values
+#+begin_src python
+cols_with_missing_values = df.columns[df.isna().any()]
+
+# Drop missing value if the number of missing values is less than 5% of the total number
+threshold = len(df) * 0.05
+cols_to_drop = df.columns[df.isna().sum() <= threshold]
+df.dropna(subset=cols_to_drop, inplace=True)
+#+end_src
+
+*** Imputing a Summary Statistic
+- Impute mean, median, mode depends on distribution and context
+#+begin_src python
+cols_with_missing_values = df.columns[df.isna().any()]
+
+for col in cols_with_missing_values:
+    df[col] = df[col].fillna(df[col].median()[0])
+#+end_src
+
+*** Imputing by Sub-group
+- Different experience levels have different median salary
+#+begin_src python
+salaries_dict = salaries.groupby('Experience')['Salary_USD'].median().to_dict()
+salaries['Salary_USD'] = salaries['Salary_USD'].fillna(salaries['Experience'].map(salaries_dict))
+#+end_src

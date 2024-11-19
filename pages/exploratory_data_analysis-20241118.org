@@ -6,6 +6,19 @@
 
 * Initial Exploration
 - ~df.head()~
-- ~df.info()~: show null-value and column type
+- ~df.info()~: show null-value and column type or ~df.dtypes~
 - ~df.describe()~
+
+* Validating Data
+** Numerical Data
+- ~df.select_dtypes('number').head()~
+- Use ~sns.boxplot()~ to overview distribution, ~y~ could be a categorical column
+- Use ~astype(int)~ to convert data type
+- ~min~, ~max~, ~describe~ to see range of data
+
+** Categorical Data
 - ~df['col1'].value_counts()~: count categorical values
+- Exploring data using ~groupby~
+- Use ~sns.barplot(..., x='categorical', ...)~ to see categorical summaries
+
+* [[id:de66c696-5ca1-4fbc-a9b2-097ee7bf4ccd][Data Cleaning]]

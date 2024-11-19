@@ -14,7 +14,7 @@
 - ~df.columns~, ~df.index~
 - ~df.values~: internal numpy array
 
-** Creating DataFrames
+** Creating a DataFrame
 - From a list of dictionaries(row by row): ~pd.DataFrame(list_of_dicts)~
 - From a dictionary of lists(by column): ~pd.DataFrame(dict_of_lists)~
 
@@ -100,6 +100,9 @@ dogs.groupby('color')['weight'].mean()
 dogs.groupby('color')['weight'].agg(['mean', 'std', 'count'])
 dogs.groupby(['color', 'breed'])['weight'].mean()
 dogs.groupby('color').agg({'weight': ['mean', 'std'], 'height': ['mean', 'std']})
+
+# named summary columns
+dogs.groupby('color').agg(weight_mean=('weight', 'mean'), weight_std=('weight', 'std'))
 
 
 # get grouped summary by pivoting table

@@ -8,6 +8,8 @@
 
 [[file:images/screenshots/Data_Analysis_Workflow/2024-11-09_20-55-57_screenshot.png]]
 
+* [[id:d31a2f5c-51c6-4742-8248-8d3c8904011a][Exploratory Data Analysis]]
+* [[id:de66c696-5ca1-4fbc-a9b2-097ee7bf4ccd][Data Cleaning]]
 * [[id:41c5482c-9098-4b60-a2ff-e3c13bfb4486][Data Visualization]]
 
 * Python Modules
