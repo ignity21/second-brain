@@ -17,8 +17,30 @@
 - ~min~, ~max~, ~describe~ to see range of data
 
 ** Categorical Data
+- Previewing all categorical data: ~df.select_dtypes('object').head()~
 - ~df['col1'].value_counts()~: count categorical values
 - Exploring data using ~groupby~
 - Use ~sns.barplot(..., x='categorical', ...)~ to see categorical summaries
+
+*** Search Substrings & New Category
+#+begin_src python
+# find substring in a string
+salaries["Designation"].str.contains("Machine Learning|AI")
+salaries["Designation"].str.contains("^Data") # starts with Data
+
+# multiple conditions
+data_science = "Data Science|NLP"
+data_analyst ="Analyst|Analytics"
+manager = "Manager|Head|Director|Lead"
+conditions = [
+    salaries["Designation"].str.contains(data_science),
+    salaries["Designation"].str.contains(data_analyst),
+    salaries["Designation"].str.contains(manager)
+]
+job_categories = ["Data Science", "Data Analyst", "Managerial"]
+salaries["Job_Category"] = np.select(conditions,
+                                     job_categories,
+                                     default="Other")
+#+end_src
 
 * [[id:de66c696-5ca1-4fbc-a9b2-097ee7bf4ccd][Data Cleaning]]
