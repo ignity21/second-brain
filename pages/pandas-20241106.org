@@ -217,6 +217,12 @@ pd.merge_asof(df1, df2, on='date',
   - But it matches on the nearest key column and not exact numbers
 
 [[file:images/screenshots/Time-series_Merge/2024-11-09_15-44-18_screenshot.png]]
+* Selecting Data
+- ~query('SELECTION STATEMENT')~: input string similar to statement after WHERE in SQL
+#+begin_src python
+stocks.query('financial == "gross_profit" and value > 100')
+#+end_src
+
 * Wide/Long Format Reshaping
 [[file:images/screenshots/Wide/Long_Format_Reshaping/2024-11-09_16-08-26_screenshot.png]]
-- ~df.melt(id_vars=['first', 'last'], value_vars=['height', 'weight'], var_name='variable', value_name='value')~
+- unpivot: ~df.melt(id_vars=['first', 'last'], value_vars=['height', 'weight'], var_name='variable', value_name='value')~

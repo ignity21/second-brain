@@ -51,6 +51,7 @@ plt.show()
 #+end_src
 
 ** Two Y-Variable in One Figure
+- ~ax2 = ax.twinx()~
 #+begin_src python
 fig, ax = plt.subplots()
 ax.plot(aapl.index, aapl, label='AAPL')
@@ -74,6 +75,7 @@ ax.annotate("breakthrough",
             arrowprops=dict(arrowstyle="->", color="gray"),
             )
 #+end_src
+
 * Charts
 ** Bar
 #+begin_src python
