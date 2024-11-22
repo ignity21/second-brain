@@ -63,5 +63,19 @@ lower = twenty_fifth - 1.5 * salary_iqr
 outliers = salaries[(salaries['salary_usd'] < lower) | (salaries['salary_usd'] > upper)] \
     [['location', 'experience', 'salary_usd']] # location, experience may be useful for further analysis
 #+end_src
--  Or if outliers are not accurate, you could just drop them.
+-  Or if outliers are not accurate, you could just drop.
   - ~no_outliers = salaries[(salaries > lower) & (salaries < upper)]~
+
+* Converting to Datetime
+#+begin_src python
+# from csv
+pd.read_csv('spy.csv', parse_dates=['date'])
+
+# str to datetime
+# pd.to_datetime
+df['date'] = pd.to_datetime(df['date'])
+df['date'] = pd.to_datetime(df[['year', 'month', 'day']])
+
+# datetime to dt.year, dt.month, dt.day
+df['month'] = df['date'].dt.month
+#+end_src

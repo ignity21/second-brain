@@ -18,15 +18,16 @@
 - The =smoking= variable is called a confounder, or lurking variable.
 - The relationship between =coffee= and =lung cancer= is a spurious correlation.
 
-* Pearson Product-moment Correlation (r)
+* Calculating Correlations
+** Pearson Product-moment Correlation (r)
 \[r=\sum_{i=1}^{n}\frac{(x_{i}-\bar{x})(y_{i}-\bar{y})}{\sigma_{x}\times\sigma_{y}}\]
 - Most common
 - Some variations on this formula:
 
-** Kendall's Tau
-** Spearman's Rho
+*** Kendall's Tau
+*** Spearman's Rho
 
-* Non-linear Relationship
+** Non-linear Relationship
 Using transformer to make relationship linear
 - Log transformation(~log(x)~)
 - Square root transformation(~sqrt(x)~)
@@ -35,7 +36,7 @@ Using transformer to make relationship linear
   - ~log(x)~ and ~log(y)~
   - ~sqrt(x)~ and ~1 / y~
 
-** Log Transformation Example
+*** Log Transformation Example
 High Skewed Relationship
 [[file:images/screenshots/High_Skewed_Relationship/2024-11-18_09-55-50_screenshot.png]]
 - Using log transformation
@@ -48,9 +49,31 @@ plt.show()
 
 [[file:images/screenshots/High_Skewed_Relationship/2024-11-18_09-58-15_screenshot.png]]
 
+* Categorical Relationships
+- ~sns.histplot(data=df, x='date', y='value', hue='category')~: explore relationships
+[[file:images/screenshots/Categorical_Relationships/2024-11-22_16-29-07_screenshot.png]]
+- Relationship isn't clear
+** KDE Plots
+- ~sns.kdeplot(data=df, x='date', y='value', hue='category')~
+- ~kdeplot~ uses smoothing algorithm, can use option ~cut=0~ to trim nonsense curves
+[[file:images/screenshots/Categorical_Relationships/2024-11-22_16-31-22_screenshot.png]]
+  - Cumulative KDE plots
+    - ~sns.kdeplot(data=df, x='date', y='value', hue='category', cut=0, cumulative=True)~
+[[file:images/screenshots/KDE_Plots/2024-11-22_16-36-58_screenshot.png]]
+** Scatter Plots
+  - ~sns.scatterplot(data=divorce, x='woman_age_marriage', y='income_woman', hue='education_woman')~
+[[file:images/screenshots/KDE_Plots/2024-11-22_16-43-44_screenshot.png]]
+
 
 
 * Python Examples
+** Calculating Correlation
+- Pearson Correlation:
+  - Quick way to see pairwise correlation: ~df.corr()~
+    - ~sns.heatmap(df.corr, annot=True)~: pairwise correlation overview
+    - ~sns.pairplot(data=df, vars=['spy', 'appl', 'nvda'])~: pairwise correlation details
+  - ~s1.corr(s2)~
+
 ** Visualizing Relationships
 #+begin_src python
 import seaborn as sns
@@ -61,7 +84,3 @@ plt.show()
 # Adding a trendline with confidence interval off
 sns.lmplot(x='sleep_total', y='sleep_rem', data=msleep, ci=None)
 #+end_src
-
-
-** Calculating Correlation
-- Pearson Correlation: ~msleep['sleep_total'].corr(msleep['sleep_rem'])~
