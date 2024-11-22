@@ -39,3 +39,29 @@ for col in cols_with_missing_values:
 salaries_dict = salaries.groupby('Experience')['Salary_USD'].median().to_dict()
 salaries['Salary_USD'] = salaries['Salary_USD'].fillna(salaries['Experience'].map(salaries_dict))
 #+end_src
+
+* Handling Outliers
+- Why look for outliers?
+  - may not accurately represent our data
+  - can have a huge impact on mean and std
+  - models may need normally distributed data
+- IQR = 75th - 25th percentile
+- Upper Outliers > 75th percentile + (1.5 * IQR)
+- Lower Outliers < 25th percentile - (1.5 * IQR)
+#+begin_src python
+seventy_fifth = salaries['salary_usd'].quantile(0.75)
+twenty_fifth = salaries['salary_usd'].quantile(0.25)
+salary_iqr = seventy_fifth - twenty_fifth
+upper = seventy_fifth + 1.5 * salary_iqr
+lower = twenty_fifth - 1.5 * salary_iqr
+#+end_src
+- Question to ask: Why do these outliers exist?
+  - More senior roles / different countries
+  - Consider leaving them in the dataset
+#+begin_src python
+# Subsetting for outliers
+outliers = salaries[(salaries['salary_usd'] < lower) | (salaries['salary_usd'] > upper)] \
+    [['location', 'experience', 'salary_usd']] # location, experience may be useful for further analysis
+#+end_src
+-  Or if outliers are not accurate, you could just drop them.
+  - ~no_outliers = salaries[(salaries > lower) & (salaries < upper)]~

@@ -1,0 +1,47 @@
+:PROPERTIES:
+:ID:       5ff02ad6-b7d0-4a8b-9543-b96188c68280
+:END:
+#+title: Manipulating Data
+#+filetags: :Python:DataScience:
+
+* Converting Strings to Numbers
+- ~df.transform()~ : Specifically designed to transform data while preserving the original shape of the DataFrame.
+#+begin_src python
+# Currency(CNY)
+# '123,580.00' -> 123580.00
+salary["salary"] = salary["salary"].str.replace(",", "").astype(float)
+salary["salary_USD"] = salary["salary"] / 7.2
+#+end_src
+
+* Summarize Numerical Data by Group
+#+begin_src python
+planes["airline_price_std"] = planes.groupby("Airline")["Price"].transform(
+    lambda x: x.std()) # or "std"
+
+print(planes[["Airline", "airline_price_std"]].value_counts())
+#+end_src
+
+#+RESULTS:
+
+* Converting & Analyzing Categorical Data
+#+begin_src python
+# 0        19h
+# 1     5h 25m
+# 2     4h 45m
+# 3     2h 25m
+# 4    15h 30m
+# Name: Duration, dtype: object
+flight_categories = ["Short-haul", "Medium", "Long-haul"]
+short_flights = "^0h|^1h|^2h|^3h|^4h"
+medium_flights = "^5h|^6h|^7h|^8h|^9h"
+long_flights = "10h|11h|12h|13h|14h|15h|16h"
+conditions = [
+    flights["Duration"].str.contains(short_flights),
+    flights["Duration"].str.contains(medium_flights),
+    flights["Duration"].str.contains(long_flights)
+]
+planes["Duration_Category"] = np.select(conditions,
+                                        flight_categories,
+                                        default="Extreme duration")
+sns.countplot(x="Duration_Category", data=planes)
+#+end_src

@@ -92,6 +92,7 @@ ax.set_ylabel("Number of medals")
 ax.legend()
 plt.show()
 #+end_src
+- ~ax.bar(x=categorical_name, values.mean(), yerr=values.std())~
 
 ** Histogram
 #+begin_src python
@@ -118,7 +119,7 @@ plt.show()
 ** Statistical Visualization
 - Error bars
 #+begin_src python
-ax.bar(values.mean(), yerr=values.std()) # yerr adds error bars
+ax.bar(x=categorical_name, height=values.mean(), yerr=values.std()) # yerr adds error bars
 
 # line plot
 # errorbar is a more general function that can be used to plot error bars
@@ -136,14 +137,16 @@ plt.show()
       #+end_src
 * Customization
 - ~plt.style.use('seaborn-colorblind')~ See [[https://matplotlib.org/stable/gallery/style_sheets/style_sheets_reference.html][Styles]]
-- ~fig.savefig("pic.png", dpi=300)~ to save your visualization
-  - ~fig.set_size_inches([5, 3])~
 
 ** Guidelines for Choosing Style
 - Avoid using dark backgrounds
 - Colorblind-friendly options: =seaborn-colorblind=, =tableau-colorblind10=
 - Using less ink for printers: Avoid colored backgrounds
 - Black-and-white: =grayscale=
+
+* Save Figures
+- ~fig.savefig("pic.png", dpi=300)~ to save your visualization
+  - ~fig.set_size_inches([5, 3])~: width=5, height=3
 
 * References
 - [[https://matplotlib.org/stable/gallery/][Matplotlib Gallery]]
