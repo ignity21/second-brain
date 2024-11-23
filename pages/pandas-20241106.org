@@ -96,7 +96,7 @@ df.agg([np.median])
 
 ** Grouped Aggregating
 #+begin_src python
-dogs.groupby('color')['weight'].mean()
+dogs.groupby('color', as_index=False)['weight'].mean()
 dogs.groupby('color')['weight'].agg(['mean', 'std', 'count'])
 dogs.groupby(['color', 'breed'])['weight'].mean()
 dogs.groupby('color').agg({'weight': ['mean', 'std'], 'height': ['mean', 'std']})

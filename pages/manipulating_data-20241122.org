@@ -21,8 +21,6 @@ planes["airline_price_std"] = planes.groupby("Airline")["Price"].transform(
 print(planes[["Airline", "airline_price_std"]].value_counts())
 #+end_src
 
-#+RESULTS:
-
 * Converting & Analyzing Categorical Data
 #+begin_src python
 # 0        19h
