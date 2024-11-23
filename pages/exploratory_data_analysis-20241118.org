@@ -82,4 +82,3 @@ salaries["Job_Category"] = np.select(conditions,
   - Choosing a sample
   - Calculating how many data points we need
   - Deciding what statistical test to run
->>>>>>> 72a8f6c (updated EDA note)
