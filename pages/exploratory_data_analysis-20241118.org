@@ -1,8 +1,14 @@
 :PROPERTIES:
 :ID:       d31a2f5c-51c6-4742-8248-8d3c8904011a
+:ROAM_ALIASES: EDA
 :END:
 #+title: Exploratory Data Analysis
 #+filetags: :Python:DataScience:
+
+* Overview
+- Detecting patterns and relationships
+- Generating questions, or hypotheses
+- Preparing data for machine learning
 
 * Initial Exploration
 - ~df.head()~
@@ -44,5 +50,36 @@ salaries["Job_Category"] = np.select(conditions,
                                      default="Other")
 #+end_src
 
-* [[id:de66c696-5ca1-4fbc-a9b2-097ee7bf4ccd][Data Cleaning]]
 * [[id:5ff02ad6-b7d0-4a8b-9543-b96188c68280][Manipulating Data]]
+* Class Frequencies
+- Sample should represents the population
+- Class imbalance: one class occurs more frequently than others
+  - bias results particularly if this class does not occur more frequently in the population
+  - check frequency: ~df.value_count()~, ~normalize=True~ for percentage
+- Another way to look at class frequency: Cross-tabulation
+  - ~pd.crosstab(index=planes['Source'], columns=planes['Destination'])~ values will be the count
+  - ~pd.crosstab(lanes['Source'], planes['Destination'], values=planes['Price'], aggfunc='median')~
+
+* Creating Features
+- *str* to *number*, useful functions:
+  - ~df['col'].str.contains~, ~df['col'].str.replace~, ~df['col'].astype~
+- *datetime* to *month/weekday/...*
+  - ~df['col'].dt.month~, weekday, hour, ...
+  - ~sns.heatmap(df.corr(), annot=True)~ to check relationships
+- *number* to *category*
+  - ~pd.cut~
+  - ~sns.countplot()~ to explore the new category (maybe group by other category)
+
+* Verifying Hypotheses
+- Generating hypotheses by detecting relationships, differences, and patterns
+- Then uses *Hypothesis Testing* to verify hypotheses
+  - Generating a hypothesis or question
+  - A decision on what statistical test to use
+  - The process is known as *data snooping* or *p-hacking*
+
+** Designing Experiments
+- Involves steps such as:
+  - Choosing a sample
+  - Calculating how many data points we need
+  - Deciding what statistical test to run
+>>>>>>> 72a8f6c (updated EDA note)
