@@ -81,6 +81,7 @@ df.sort_index(level=['col_a', 'col_b'], ascending=[True, False])
 #+end_src
 
 * Aggregating(Statistics)
+- ~size()~
 - ~mean()~, ~median()~, ~mode()~
 - ~min()~, ~max()~, ~cummin()~, ~cummax()~
 - ~var()~, ~std()~
@@ -98,7 +99,7 @@ df.agg([np.median])
 #+begin_src python
 dogs.groupby('color', as_index=False)['weight'].mean()
 dogs.groupby('color')['weight'].agg(['mean', 'std', 'count'])
-dogs.groupby(['color', 'breed'])['weight'].mean()
+dogs.groupby(['color', 'breed'])['weight', 'height'].mean()
 dogs.groupby('color').agg({'weight': ['mean', 'std'], 'height': ['mean', 'std']})
 
 # named summary columns
@@ -222,7 +223,23 @@ pd.merge_asof(df1, df2, on='date',
 #+begin_src python
 stocks.query('financial == "gross_profit" and value > 100')
 #+end_src
-
 * Wide/Long Format Reshaping
 [[file:images/screenshots/Wide/Long_Format_Reshaping/2024-11-09_16-08-26_screenshot.png]]
 - unpivot: ~df.melt(id_vars=['first', 'last'], value_vars=['height', 'weight'], var_name='variable', value_name='value')~
+* Manipulating Categorical Data
+** Basic
+- Nominal
+  - ~df['str_col'].astype('category')~
+  - ~pd.Series(my_list, dtype='category')~
+  - ~pd.read_csv('data.csv', dtype={'Status': 'category'})~
+- Ordinal
+  - ~pd.Categorical(my_list, categories=['C', 'B', 'A'], ordered=True)~
+- Category type saves memory: ~series.nbytes~
+
+** ~cat~ Accessor
+- Set: ~df['status'].cat.set_categories(new_categories=['created', 'running', 'finished'])~
+  - all values not specified are dropped (None)
+- Add: ~df['status'].cat.add_categories(new_categories=['creating', 'canceled'])~
+- Remove: ~df['status'].cat.remove_categories(removals=['creating'])~
+  - set 'creating' to None
+- Check: ~df['status'].cat.categories~

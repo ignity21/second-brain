@@ -24,3 +24,12 @@
 - Neither agree nor disagree
 - Somewhat agree
 - Strongly agree
+
+** Categorical in Python
+- Nominal
+  - ~df['str_col'].astype('category')~
+  - ~pd.Series(my_list, dtype='category')~
+  - ~pd.read_csv('data.csv', dtype={'Status': 'category'})~
+- Ordinal
+  - ~pd.Categorical(my_list, categories=['C', 'B', 'A'], ordered=True)~
+- Category type saves memory: ~series.nbytes~
