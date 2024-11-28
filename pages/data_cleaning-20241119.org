@@ -79,3 +79,8 @@ df['date'] = pd.to_datetime(df[['year', 'month', 'day']])
 # datetime to dt.year, dt.month, dt.day
 df['month'] = df['date'].dt.month
 #+end_src
+* Modifying Strings
+- ~series.replace({'old': 'new'}, inplace=True)~
+- Removing whitespaces: ~series.str.strip()~
+- Capitalization: ~str.title()~, ~str.upper()~, ~str.lower()~
+- Filtering: ~str.contains('substring', regex=False)~

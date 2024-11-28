@@ -68,12 +68,7 @@ salaries["Job_Category"] = np.select(conditions,
   - ~sns.heatmap(df.corr(), annot=True)~ to check relationships
 - *number* to *category*
   - ~sns.countplot()~ to explore the new category (maybe group by other category)
-  - ~pd.cut~
-#+begin_src python
-age_bins = [0, 17, 25, 34, 44, 54, 64, np.inf]
-age_labels = ['0-17', '18-25', '26-34', '35-44', '45-54', '55-64', '65+']
-crimes['Age Bracket'] = pd.cut(crimes['Vict Age'], bins=age_bins, labels=age_labels)
-#+end_src
+  - ~pd.cut~ see [[id:c73b007a-f41e-4f9e-b2b9-41be79452544][Manipulating Categorical Data]]
 
 * Verifying Hypotheses
 - Generating hypotheses by detecting relationships, differences, and patterns

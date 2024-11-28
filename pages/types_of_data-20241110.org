@@ -25,11 +25,4 @@
 - Somewhat agree
 - Strongly agree
 
-** Categorical in Python
-- Nominal
-  - ~df['str_col'].astype('category')~
-  - ~pd.Series(my_list, dtype='category')~
-  - ~pd.read_csv('data.csv', dtype={'Status': 'category'})~
-- Ordinal
-  - ~pd.Categorical(my_list, categories=['C', 'B', 'A'], ordered=True)~
-- Category type saves memory: ~series.nbytes~
+** [[id:c73b007a-f41e-4f9e-b2b9-41be79452544][Manipulating Categorical Data]]

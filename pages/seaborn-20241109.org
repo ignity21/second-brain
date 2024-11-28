@@ -81,6 +81,8 @@ sns.relplot(x='hour', y='NO_2_MEAN', data=air_df_loc_mean,
 - Used to create categorical plots
 - Same advantages of ~relplot()~
 - Easily create subplots with ~col=~ and ~row=~
+- ~hue~ for another categorical variable
+
 ** Count Plots
 #+begin_src python
 sns.catplot(x="how_masculine", data=masculinity_data,
@@ -100,7 +102,7 @@ sns.catplot(x="day", y="total_bill",
   - Shows median, spread, skewness, and outliers
 - Facilitates comparisons between groups
 #+begin_src python
-g = sns.catplot(x="time",
+g = sns.catplot(x="time", # categorial variable
                 y="total_bill",
                 data=tips,
                 kind="box",
@@ -121,8 +123,11 @@ sns.catplot(x='smoker',
             data=tips,
             kind='point',
             capsize=0.2,
+            dodge=True, # offsets the line so they don't overlap
+            join=False, # don't connect the points with a line
             estimator=np.median)
 #+end_src
+
 
 * Seaborn Objects
 - ~FacetGrid~ or ~AxesSubplot~
@@ -161,7 +166,8 @@ g.set_title('Scatterplot of x and y', y=1.05)
 #+end_src
 
 * Customization
-- ~sns.set_style()~
+- ~sns.set(font_scale=1.4)~
+- ~sns.set_style('whitegrid')~
 - ~sns.set_palette()~
   - Sequential palette
 - Use ~sns.set_context()~ to change the scale of the plot elements and labels

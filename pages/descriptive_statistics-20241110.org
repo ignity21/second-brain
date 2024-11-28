@@ -51,7 +51,7 @@ np.median(np.abs(dists))
 #+end_src
 
 ** Quantiles (Robust)
-- ~np.quantile(series, 0.5)~ equals to ~np.median(series)~
+- ~np.quantile(series, 0.5)~ equals ~np.median(series)~
 - Quartiles: ~np.quantile(series, [0, 0.25, 0.5, 0.75, 1])~
   - Shortcut: ~np.quantile(series, np.linspace(0, 1, 5))~
 [[file:images/screenshots/Quantiles_(Robust)/2024-11-15_09-38-27_screenshot.png]]
