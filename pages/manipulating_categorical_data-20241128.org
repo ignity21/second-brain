@@ -70,3 +70,14 @@ dogs['coat'].cat.reorder_categories(new_categories=['short', 'medium', 'long'],
   - the order of grouped result
   - the order of printout
 - ~ordered=False~: can still reorder for display purposes without the category being ordinal.
+
+* Categorical Pitfalls
+- ~.str~ accessor converts category to an object
+- ~.apply()~ converts category to an object
+- ~.cat~ accessor methods do not all handle missing categories in the same way
+- NumPy functions do not work with categorical series
+
+** Handle Problems
+- Check and convert: ~series.dtype~, ~series.astype('category')~
+- Look for missing values: use ~s.value_counts(dropna=False)~ to check after using ~.cat~ accessor
+- NumPy calculation: ~s.astype(int).sum()~

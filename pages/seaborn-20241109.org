@@ -90,6 +90,24 @@ sns.catplot(x="how_masculine", data=masculinity_data,
             order=["Not at all", "Not very", "Somewhat", "Very"])
 #+end_src
 
+*** More Options
+#+begin_src python
+sns.catplot(x='Traveler Type', kind='count'
+            col='User continent',
+            col_wrap=3, # 3 plots per row
+            plalette=sns.color_palette('Set1'),
+            data=reviews)
+#+end_src
+[[file:images/screenshots/Count_Plots/2024-11-29_14-17-09_screenshot.png]]
+#+begin_src python
+# customization
+ax = sns.catplot(...)
+ax.fig.suptitle("My Custom Title", y=1.05)
+ax.set_axis_labels("X Label", "Y Label")
+plt.subplots_adjust(top=0.85)
+plt.show()
+#+end_src
+
 ** Bar Plots
 - Bar plots shows the 95% confidence interval by default
 #+begin_src python
@@ -172,3 +190,9 @@ g.set_title('Scatterplot of x and y', y=1.05)
   - Sequential palette
 - Use ~sns.set_context()~ to change the scale of the plot elements and labels
   - Smallest to largest: "paper", "notebook", "talk", "post"
+
+** Using ~matplotlib~
+- ~ax = sns.catplot(...)~
+- Plot title: ~ax.fig.suptitle('My Title')~
+- Axis labels: ~ax.set_axis_labels('x-axis-label', 'y-axis-label')~
+- Title height: ~plt.subplots_adjust(top=.9)~
