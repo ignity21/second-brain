@@ -81,3 +81,41 @@ dogs['coat'].cat.reorder_categories(new_categories=['short', 'medium', 'long'],
 - Check and convert: ~series.dtype~, ~series.astype('category')~
 - Look for missing values: use ~s.value_counts(dropna=False)~ to check after using ~.cat~ accessor
 - NumPy calculation: ~s.astype(int).sum()~
+
+* Label Encoding
+- Code each category as an integer from \(0\) to \(n-1\)
+  - \(-1\) is reserved for any missing values
+- Advantages
+  - Can save on memory
+  - Simplify responses when using survey data
+- Drawbacks
+  - Can be used in ML models; But not the best encoding method for ML
+
+** Python Codes
+- Creating codes: ~df['cat_codes'] = df['category'].cat.codes~
+- Creating code book: ~code_book = dict(zip(codes, categories))~
+- Reverting to categorical values: ~df['cat_codes'].map(code_book)~
+
+*** Boolean Encoding
+#+begin_src python
+# Create a boolean coding
+used_cars['van_code'] = np.where(
+    used_cars['body_type'].str.contains('van', regex=False),
+    1, 0) # or True, False
+# if values are 1 and 0, python can use them in algorithms
+used_cars['van_code'].value_counts()
+#+end_src
+
+* One-hot Encoding
+One-hot encoding is the process of creating dummy variables
+- ~pd.get_dummies(data=df, columns=['cat', 'num'], prefix='cat')~
+  - any numeric columns will remain the same
+  - The categorical variable is removed and replaced with the one-hot encoded variables.
+#+begin_src python
+used_car_onehot = pd.get_dummies(used_car[['odometer_value', 'color']])
+used_car_onehot.head()
+#+end_src
+[[file:images/screenshots/One-hot_Encoding/2024-11-29_18-06-40_screenshot.png]]
+#+begin_src python
+used_cars_onehot = pd.get_dummies(used_cars, columns=['color'], prefix='')
+#+end_src
