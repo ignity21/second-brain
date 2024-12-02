@@ -139,26 +139,6 @@ plt.legend(['F','M'])
 plt.show()
 #+end_src
 
-* Missing Values
-#+begin_src python
-# Check if any columns contain missing values
-df.isna().any()
-
-# Count missing values by column
-df.isna().sum()
-
-# Bar plot of missing values by variable
-df.isna().sum().plot(kind='bar')
-
-# Show the distributions of columns with missing values
-df[['col_a', 'col_b']].hist() # two histograms
-
-# Handle missing values
-df.dropna() # drop rows with missing values
-df.fillna(0) # fill missing values with 0
-df.fillna(method='ffill') # fill missing values with previous value
-#+end_src
-
 * ~df.sample()~
 #+begin_src python
 die = pd.DataFrame({"number": [1, 2, 3, 4, 5, 6],
@@ -228,3 +208,8 @@ stocks.query('financial == "gross_profit" and value > 100')
 - unpivot: ~df.melt(id_vars=['first', 'last'], value_vars=['height', 'weight'], var_name='variable', value_name='value')~
 
 * [[id:c73b007a-f41e-4f9e-b2b9-41be79452544][Manipulating Categorical Data]]
+* Timeseries Data
+#+begin_src python
+df['created_time'] = pd.to_datetime(df['created_time_str'])
+df['date'] = pd.to_datetime(df['date_str']).dt.date
+#+end_src

@@ -30,3 +30,9 @@ np.random.rand() # 0~1
 coin = np.random.randint(0, 2)
 print(coin)
 #+end_src
+
+* Importing Data
+#+begin_src python
+data = np.loadtxt(filename, delimiter=',',
+                  skiprows=1, usecols=[0, 2])
+#+end_src

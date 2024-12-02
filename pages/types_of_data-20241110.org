@@ -26,3 +26,5 @@
 - Strongly agree
 
 ** [[id:c73b007a-f41e-4f9e-b2b9-41be79452544][Manipulating Categorical Data]]
+
+* Timeseries

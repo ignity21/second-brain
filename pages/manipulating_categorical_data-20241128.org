@@ -4,7 +4,7 @@
 #+title: Manipulating Categorical Data
 #+filetags: :DataScience:Python:
 
-* Basic
+* Overview
 - Nominal
   - *astype*: ~df['str_col'].astype('category')~
   - ~pd.Series(my_list, dtype='category')~
@@ -12,6 +12,7 @@
 - Ordinal
   - ~pd.Categorical(my_list, categories=['C', 'B', 'A'], ordered=True)~
 - Category type saves memory: ~series.nbytes~
+- Show all possible values: ~series.unique()~
 
 * Converting to Categorical Data
 ** String to Category

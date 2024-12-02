@@ -1,0 +1,16 @@
+#    -*- mode: org -*-
+
+
+Archived entries from file /home/chrischen/second-brain/pages/pandas-20241106.org
+
+
+* Timeseries Data
+:PROPERTIES:
+:ARCHIVE_TIME: 2024-12-02 Mon 17:36
+:ARCHIVE_FILE: ~/second-brain/pages/pandas-20241106.org
+:ARCHIVE_CATEGORY: pandas-20241106
+:ARCHIVE_ITAGS: Python DataScience
+:END:
+#+begin_src python
+df['date'] = pd.to_datetime(df['date_str']).dt.date
+#+end_src

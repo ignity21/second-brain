@@ -1,0 +1,66 @@
+:PROPERTIES:
+:ID:       16fff215-ce9c-45ca-a5d3-5e509f647732
+:END:
+#+title: Data Importing
+#+filetags: :DataScience:Python:
+
+* Files
+** Flat Files (CSV)
+#+begin_src python
+data = np.loadtxt(filename, delimiter=',',
+                  skiprows=1, usecols=[0, 2])
+# or pd.read_csv()
+#+end_src
+
+** Excel
+#+begin_src python
+xls = pd.ExcelFile(filename)
+df = xls.parse(sheet_name)
+# or
+df = pd.read_excel(filename, sheet_name, skiprows=1)
+#+end_src
+
+** SAS
+Statistical Analysis System) for business analytics and biostatistics
+#+begin_src python
+import pandas as pd
+from sas7bdat import SAS7BDAT
+with SAS7BDAT('sales.sas7bdat') as file:
+    df_sas = file.to_data_frame()
+#+end_src
+
+** Stata
+Statistics + data for academic social sciences research
+- ~pd.read_stata('xxx.dta')~
+
+** HDF5
+#+begin_src python
+import h5py
+data = h5py.File('data.h5', 'r')
+groups = list(data.keys())
+#+end_src
+
+** MATLAB file
+#+begin_src python
+import scipy.io
+mat = scipy.io.loadmat('data.mat')
+print(type(mat)) # -> <class 'dict'>
+#+end_src
+
+* Databases
+** Relational
+- SQLAlchemy Approach
+#+begin_src python
+import pandas as pd
+from sqlalchemy import create_engine
+engine = create_engine('sqlite:///mymusic.db', echo=True)
+
+# show all tables
+print(engine.table_names())
+
+with engine.connect() as con:
+    rs = con.execute('SELECT * FROM Artist')
+    df = pd.DataFrame(rs.fetchall()) # fetchmany(size=4)
+    df.columns = rs.keys()
+#+end_src
+- Pandas Approach: ~df = pd.read_sql_query('SELECT ...', engine)~

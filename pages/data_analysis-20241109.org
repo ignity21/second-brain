@@ -9,9 +9,11 @@
 [[file:images/screenshots/Data_Analysis_Workflow/2024-11-09_20-55-57_screenshot.png]]
 
 * [[id:d31a2f5c-51c6-4742-8248-8d3c8904011a][Exploratory Data Analysis]]
+* [[id:16fff215-ce9c-45ca-a5d3-5e509f647732][Data Importing]]
+* [[id:f30a4ed6-0c03-46d6-960e-d136981f3348][Data Preparation]]
 * [[id:de66c696-5ca1-4fbc-a9b2-097ee7bf4ccd][Data Cleaning]]
 * [[id:41c5482c-9098-4b60-a2ff-e3c13bfb4486][Data Visualization]]
-
+* [[id:6eed31dd-a6eb-41f6-95b5-6125b86b3536][Data Storytelling]]
 * Python Modules
 - [[id:99384a8d-1cd7-45e6-9913-01a96e895630][NumPy]]
 - [[id:05ef9aaa-7fa2-45b4-9ed9-d8d01c8abff2][Pandas]]

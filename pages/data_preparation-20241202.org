@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       f30a4ed6-0c03-46d6-960e-d136981f3348
+:END:
+#+title: Data Preparation
+#+filetags: :Python:DataScience:
+
+* Converting to Datetime
+#+begin_src python
+# from csv
+pd.read_csv('spy.csv', parse_dates=['date'])
+
+# str to datetime
+# pd.to_datetime
+df['datetime'] = pd.to_datetime(df['datetime'])
+df['date'] = pd.to_datetime(df[['year', 'month', 'day']]).dt.date
+
+# datetime to dt.year, dt.month, dt.day, or dt.date
+df['month'] = df['date'].dt.month
+#+end_src
+
+* Modifying Strings
+- ~series.replace({'old': 'new'}, inplace=True)~
+- Removing whitespaces: ~series.str.strip()~
+- Capitalization: ~str.title()~, ~str.upper()~, ~str.lower()~
+- Filtering: ~str.contains('substring', regex=False)~
