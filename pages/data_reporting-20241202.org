@@ -1,0 +1,38 @@
+:PROPERTIES:
+:ID:       6eed31dd-a6eb-41f6-95b5-6125b86b3536
+:END:
+#+title: Data Reporting
+#+filetags: :DataScience:
+
+* Fundamentals of Storytelling
+** Definition
+Data storytelling is the practice of building a narrative around a set of data and
+its accompanying visualizations to help convey the meaning of that data in a powerful
+and compelling fashion.
+
+** Goals
+- *Convince* change-adverse stakeholders(especially non-technical stakeholders)
+- Drive *changes*
+  - e.g. Center your story around how the company's profits will increase.
+
+** Process
+  [[file:images/screenshots/Fundamentals_of_Storytelling/2024-12-02_09-36-25_screenshot.png]]
+- *Translating* technical results
+- *Impacting* decision-making process
+- Making results *stick*: *Simple*, *Concrete*, *Credible*
+
+** Contents
+- *Results* (e.g. predictions) and *findings* (e.g. data analysis)
+- *Actionable* insights
+
+** Traits
+- Anecdotes = *imagination*
+- Stories = *memorable*
+- Add value (provide *context*)
+- Capture audience's *attention*
+- Facilitate *decision-making*
+
+** Effective Storytelling
+- *3-minute story*: what would we focus on if we only had three minutes to tell a story.
+- *Big idea*: in one sentence
+- *Prioritize* essential points
