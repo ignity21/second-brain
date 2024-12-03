@@ -30,7 +30,6 @@ outliers = salaries[(salaries['salary_usd'] < lower) | (salaries['salary_usd'] >
 -  Or if outliers are not accurate, you could just drop.
   - ~no_outliers = salaries[(salaries > lower) & (salaries < upper)]~
 
-
 * Missing Values
 ** Checking
 #+begin_src python
@@ -85,6 +84,19 @@ for col in cols_with_missing_values:
 #+begin_src python
 salaries_dict = salaries.groupby('Experience')['Salary_USD'].median().to_dict()
 salaries['Salary_USD'] = salaries['Salary_USD'].fillna(salaries['Experience'].map(salaries_dict))
+#+end_src
+
+* Cleaning Text Data
+- ~series.str.replace('old', 'new')~
+- Use ~str.len()~ to filter rows less than required length
+  - ~df.loc[df['phone'].str.len() < 10, 'phone'] = np.nan~
+  - ~assert df['phone'].str.len().min() >= 10~
+- Check any invalid char ~str.contains()~
+  - ~assert airlines['full_name'].str.contains('Ms.|Mr.|Miss|Dr.').any() == False~
+
+** Regular Expressions
+#+begin_src python
+df['phone']=df['phone'].str.replace(r'\D+', '')
 #+end_src
 
 * Data Range Constraints

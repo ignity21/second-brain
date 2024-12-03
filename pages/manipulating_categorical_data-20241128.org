@@ -5,17 +5,21 @@
 #+filetags: :DataScience:Python:
 
 * Overview
-- Nominal
+- Show all values: ~series.unique()~
+- Create nominal category
   - *astype*: ~df['str_col'].astype('category')~
   - ~pd.Series(my_list, dtype='category')~
   - ~pd.read_csv('data.csv', dtype={'Status': 'category'})~
-- Ordinal
+- Create ordinal category
   - ~pd.Categorical(my_list, categories=['C', 'B', 'A'], ordered=True)~
-- Category type saves memory: ~series.nbytes~
-- Show all possible values: ~series.unique()~
+- Category type saves memory: ~series.nbytes~ or ~df.memory_usage()~ or just ~df.info()~
 
 * Converting to Categorical Data
 ** String to Category
+Common ways:
+- ~series.replace({...})~ then ~astype('category')~
+  - ~series.map({...})~ then ~astype('category')~
+- ~category.cat.remove_categories~
 #+begin_src python
 # 0        19h
 # 1     5h 25m
@@ -44,6 +48,7 @@ age_bins = [0, 17, 25, 34, 44, 54, 64, np.inf]
 age_labels = ['0-17', '18-25', '26-34', '35-44', '45-54', '55-64', '65+']
 crimes['Age Bracket'] = pd.cut(crimes['Vict Age'], bins=age_bins, labels=age_labels)
 #+end_src
+- ~pd.qcut~: quantile-based discretization function
 
 * ~cat~ Accessor
 - Set: ~df['status'].cat.set_categories(new_categories=['created', 'running', 'finished'])~
@@ -54,7 +59,7 @@ crimes['Age Bracket'] = pd.cut(crimes['Vict Age'], bins=age_bins, labels=age_lab
 - Rename: ~df['status'].cat.rename_categories({'running': 'processing'})~
   - Using lambda function: ~df['status'].cat.rename_categories(lambda c: c.upper())~
 - Check (identifying issues): ~series.cat.categories~ or ~series.value_counts~
-- Replace strings, then convert to ~Categorical~
+- Other Approach: Replace strings, then convert to ~Categorical~
   - ~series.replace({'running': 'processing'})~
   - Then convert back to ~Categorical~
 
