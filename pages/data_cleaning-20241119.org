@@ -42,6 +42,12 @@ df.isna().sum()
 # Bar plot of missing values by variable
 df.isna().sum().plot(kind='bar')
 
+# Compare missing and non-missing values may find patterns
+complete = df[~df['col_a'].isna()]
+missing = df[df['col_a'].isna()]
+complete.describe()
+missing.describe()
+
 # Show the distributions of columns with missing values
 df[['col_a', 'col_b']].hist() # two histograms
 
@@ -50,13 +56,6 @@ df.dropna() # drop rows with missing values
 df.fillna(0) # fill missing values with 0
 df.fillna(method='ffill') # fill missing values with previous value
 #+end_src
-
-** Missing Data Problems
-- Affects distributions
-  - Missing heights of taller students
-- Less representative of the population
-  - Lacking data on oldest students
-- Can result in drawing incorrect conclusions
 
 ** Strategies for Handling Missing Data
 *** Dropping Missing Values
@@ -84,6 +83,27 @@ for col in cols_with_missing_values:
 #+begin_src python
 salaries_dict = salaries.groupby('Experience')['Salary_USD'].median().to_dict()
 salaries['Salary_USD'] = salaries['Salary_USD'].fillna(salaries['Experience'].map(salaries_dict))
+#+end_src
+
+*** Imputing with ML models
+** Missing Types
+[[file:images/screenshots/Missing_Types/2024-12-03_19-58-03_screenshot.png]]
+
+*** Visualization MAR
+#+begin_src python
+import missingno as msno
+import matplotlib.pyplot as plt
+
+msno.matrix(df)
+plt.show()
+
+# Isolate missing and non missing values to find related columns
+df[col_is_na].describe()
+df[~col_is_na].describe()
+
+sorted_df = df.sort_values('related_col')
+msno.matrix(sorted_df)
+plt.show()
 #+end_src
 
 * Cleaning Text Data
@@ -193,4 +213,46 @@ inconsistent_categories = set(df['blood_type']).difference(categories['blood_typ
 inconsistent_row = df['blood_type'].isin(inconsistent_categories)
 inconsistent_data = df[inconsistent_row]
 consistent_data = df[~inconsistent_row]
+#+end_src
+* Uniformity
+** Temperature Example
+- Plot data first
+#+begin_src python
+temp_fah = temperatures.loc[temperatures['Temperature'] > 45, 'Temperature']
+temp_cels = (temp_fah - 32) * 5/9
+temperatures.loc[temperatures['Temperature'] > 45, 'Temperature'] = temp_cels
+
+assert temperatures['Temperature'].max() <= 45
+#+end_src
+
+** Date Example
+[[file:images/screenshots/Date_Example/2024-12-03_16-44-39_screenshot.png]]
+#+begin_src python
+# Just for wierd date formats
+birthdays['Birthday'] = pd.to_datetime(birthdays['Birthday'],
+                                       # Attempt to infer format of each date
+                                       infer_datetime_format=True,
+                                       # Return NA for rows where conversion failed
+                                       errors='coerce')
+#+end_src
+* Cross Field Validation
+** Flight Example
+#+begin_src python
+sum_classes = flights[['economy_class', 'business_class', 'first_class']].sum(axis=1)
+passenger_equ = sum_classes == flights['total_passengers']
+
+inconsistent_pass = flights[~passenger_equ]
+consistent_pass = flights[passenger_equ]
+#+end_src
+
+** Birthday Example
+#+begin_src python
+users['Birthday'] = pd.to_datetime(users['Birthday'])
+today = dt.date.today()
+
+age_manual = today.year - users['Birthday'].dt.year
+age_equ = age_manual == users['Age']
+
+inconsistent_age = users[~age_equ]
+consistent_age = users[age_equ]
 #+end_src

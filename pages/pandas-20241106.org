@@ -212,4 +212,7 @@ stocks.query('financial == "gross_profit" and value > 100')
 #+begin_src python
 df['created_time'] = pd.to_datetime(df['created_time_str'])
 df['date'] = pd.to_datetime(df['date_str']).dt.date
+
+# Change date format
+df['date_str'] = df['date'].dt.strftime('%Y-%m-%d')
 #+end_src
