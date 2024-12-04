@@ -119,6 +119,37 @@ plt.show()
 df['phone']=df['phone'].str.replace(r'\D+', '')
 #+end_src
 
+** Typo and Similar Strings
+<<Typo and Similar Strings>>
+- Minimum edit distance algorithms: =Damerau-Levenshtein=, =Levenshtein=, =Hamming=, =Jaro distance=
+- Possible packages: ~nltk~, ~thefuzz~, ~textdistance~
+- ~thefuzz~ package example:
+#+begin_src python
+from thefuzz import fuzz
+
+# Compute the similarity between two strings
+fuzz.WRatio('Reeding', 'Reading') #=> 86 (0~100)
+# Partial strings
+fuzz.WRatio('Houston Rockets', 'Rockets') #=> 90
+# Partial strings with different orderings
+fuzz.WRatio('Houston Rockets vs Los Angeles Lakers', 'Lakers vs Rockets') #=> 86
+
+# Array of possible matches
+from thefuze import process
+str = 'Houston Rockets vs Los Angeles Lakers'
+choices = ['Lakers vs Rockets', 'Rockets vs Lakers', 'Houston vs Los Angeles', 'Heat vs Bulls']
+process.extract(str, choices, limit = 2) #=> [('Lakers vs Rockets', 86), ('Rockets vs Lakers', 86)]
+#+end_src
+- with Pandas
+#+begin_src python
+states_cat = ['California', 'New York']
+for state in states_cat:
+    matches = process.extract(state, survey['state'], limit=survey.shape[0])
+    for potential_match in matches:
+        if potential_match[1] >= 80:
+            df.loc[survey['state'] == potential_match[0], 'state'] = state
+#+end_src
+
 * Data Range Constraints
 - How to deal with?
   - Dropping data
@@ -203,6 +234,46 @@ assert duplicate_heights.empty
 # or
 assert duplicate_heights.shape[0] == 0
 #+end_src
+** Fuzzy Duplicate Values
+[[file:images/screenshots/Fuzzy_Duplicate_Values/2024-12-04_11-01-27_screenshot.png]]
+- No common unique identifier, ~join~ will not work
+  - Use *Record Linkage*
+
+*** Record Linkage
+Record linkage is the act of linking data from different sources regarding the same entity.
+[[file:images/screenshots/Fuzzy_Duplicate_Values/2024-12-04_11-04-25_screenshot.png]]
+- Similar to [[Typo and Similar Strings]]
+#+begin_src python
+import recordlinkage as rl
+
+# Generating pairs based on a matching column
+# Create a indexing object
+indexer = rl.Index() # the object we can use to generate pairs from df
+
+# Generate pairs blocked on state
+indexer.block(left_on='state', right_on='state')
+pairs = indexer.index(df_A, df_B) # pandas multiIndex object containing all possible pairs
+
+# Create a comparison object
+compare_cl = rl.Compare()
+
+# Find exact matches for pairs of date_of_birth and state
+compare_cl.exact('date_of_birth', 'date_of_birth', label='date_of_birth')
+compare_cl.exact('state', 'state', label='state')
+# label lets us set the column name in the resulting dataframe
+
+# Find similar matches for pairs of surname and address_1 using string similarity
+compare_cl.string('surname', 'surname', threshold=0.85, label='surname')
+compare_cl.string('address_1', 'address_1', threshold=0.85, label='address_1')
+
+# Find matches
+potential_matches = compare_cl.compute(pairs, df_A, df_B)
+# Find the only pairs we want
+potential_matches[potential_matches.sum(axis=1) >= 2]
+#+end_src
+[[file:images/screenshots/Fuzzy_Duplicate_Values/2024-12-04_11-41-24_screenshot.png]]
+
+
 * Membership Constraints (Categorical)
 ** Finding Inconsistent Categories
 - Inconsistent Categories (Anti Join)
