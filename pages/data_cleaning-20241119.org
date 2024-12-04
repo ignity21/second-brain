@@ -269,10 +269,18 @@ compare_cl.string('address_1', 'address_1', threshold=0.85, label='address_1')
 # Find matches
 potential_matches = compare_cl.compute(pairs, df_A, df_B)
 # Find the only pairs we want
-potential_matches[potential_matches.sum(axis=1) >= 2]
+matches = potential_matches[potential_matches.sum(axis=1) >= 2]
+
+# Link the dataframes
+# Get the indices of the duplicates in df_B
+duplicates_rows_in_B = matches.index.get_level_values(1) # or by name
+# Find new rows in df_B
+df_B_new = df_B.loc[~df_B.index.isin(duplicates_rows_in_B)]
+
+# Link df
+df_full = df_A.append(df_B_new)
 #+end_src
 [[file:images/screenshots/Fuzzy_Duplicate_Values/2024-12-04_11-41-24_screenshot.png]]
-
 
 * Membership Constraints (Categorical)
 ** Finding Inconsistent Categories
