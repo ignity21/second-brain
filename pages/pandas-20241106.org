@@ -203,9 +203,16 @@ pd.merge_asof(df1, df2, on='date',
 #+begin_src python
 stocks.query('financial == "gross_profit" and value > 100')
 #+end_src
+
 * Wide/Long Format Reshaping
 [[file:images/screenshots/Wide/Long_Format_Reshaping/2024-11-09_16-08-26_screenshot.png]]
-- unpivot: ~df.melt(id_vars=['first', 'last'], value_vars=['height', 'weight'], var_name='variable', value_name='value')~
+- unpivot(wide->long): ~df.melt(id_vars=['first', 'last'], value_vars=['height', 'weight'], var_name='variable', value_name='value')~
+#+begin_src python
+#    Australia   Spain   France   UK   USA
+# 0      24.6     46.7     22.2  21.2  100.5
+
+df = pd.melt(df, var_name='Country', value_name='population')
+#+end_src
 
 * [[id:c73b007a-f41e-4f9e-b2b9-41be79452544][Manipulating Categorical Data]]
 * [[id:a707e96d-102d-4549-8abe-ffeb9a8c3e9e][Pandas Datetime]]

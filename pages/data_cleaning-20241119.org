@@ -107,7 +107,9 @@ plt.show()
 #+end_src
 
 * Cleaning Text Data
-- ~series.str.replace('old', 'new')~
+- ~series.replace({'old': 'new'}, inplace=True)~
+- Removing whitespaces: ~series.str.strip()~
+- Capitalization: ~str.title()~, ~str.upper()~, ~str.lower()~
 - Use ~str.len()~ to filter rows less than required length
   - ~df.loc[df['phone'].str.len() < 10, 'phone'] = np.nan~
   - ~assert df['phone'].str.len().min() >= 10~
