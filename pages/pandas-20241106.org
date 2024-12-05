@@ -208,11 +208,4 @@ stocks.query('financial == "gross_profit" and value > 100')
 - unpivot: ~df.melt(id_vars=['first', 'last'], value_vars=['height', 'weight'], var_name='variable', value_name='value')~
 
 * [[id:c73b007a-f41e-4f9e-b2b9-41be79452544][Manipulating Categorical Data]]
-* Timeseries Data
-#+begin_src python
-df['created_time'] = pd.to_datetime(df['created_time_str'])
-df['date'] = pd.to_datetime(df['date_str']).dt.date
-
-# Change date format
-df['date_str'] = df['date'].dt.strftime('%Y-%m-%d')
-#+end_src
+* [[id:a707e96d-102d-4549-8abe-ffeb9a8c3e9e][Pandas Datetime]]

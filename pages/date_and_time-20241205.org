@@ -1,38 +1,14 @@
 :PROPERTIES:
-:ID:       69c30551-e3b1-4d83-87a9-784dfe71f189
+:ID:       2d34ce40-09a1-48ab-978e-3779d9114f78
 :END:
-#+title: Types of Data
-#+filetags: :DataScience:Math:Statistics:
+#+title: Date and Time
+#+filetags: :DataScience:Python:
 
-* Numeric
-** Continuous (Measured)
-- Airplane Speed
-- Time spent waiting in line
-
-** Discrete (Counted)
-- Number of pets
-- Number of packages shipped
-
-* Categorical
-** Nominal (Unordered)
-- Married/unmarried
-- Country of residence
-
-** Ordinal (Ordered)
-- Strongly disagree
-- Somewhat disagree
-- Neither agree nor disagree
-- Somewhat agree
-- Strongly agree
-
-** [[id:c73b007a-f41e-4f9e-b2b9-41be79452544][Manipulating Categorical Data]]
-
-* [[id:2d34ce40-09a1-48ab-978e-3779d9114f78][Date and Time]]
-* Date and Time
+* Overview
 - ~datetime~: ~strptime()~ str to dt, ~strftime()~ dt to str
 - ~timedelta~: ~total_seconds()~, ...
 
-** Timezone
+* Timezone
 #+begin_src python
 from datetime import datetime, timezone
 
@@ -51,9 +27,9 @@ et = tz.gettz('America/New_York')
 dt = datetime(2019, 1, 1, 12, 0, 0, tzinfo=et)
 #+end_src
 
-** Daylight Saving Time
+* Daylight Saving Time
 - The key is we need to do our math *in UTC*.
-*** Starting
+** Starting
 [[file:images/screenshots/Daylight_Saving_Time/2024-12-05_08-50-16_screenshot.png]]
 #+begin_src python
 spring_ahead_159am = datetime(2017, 3, 12, 1, 59, 59)
@@ -77,7 +53,7 @@ spring_ahead_3am = datetime(2017, 3, 12, 3, 0, 0, tzinfo=eastern) # EDT
 print((spring_ahead_3am - spring_ahead_159am).total_seconds()) # 1
 #+end_src
 
-*** Ending
+** Ending
 [[file:images/screenshots/Daylight_Saving_Time/2024-12-05_09-01-31_screenshot.png]]
 #+begin_src python
 eastern = tz.gettz('US/Eastern')
@@ -92,3 +68,4 @@ second_1am = tz.enfold(second_1am) # enfold: this time belongs to the second 1am
 print((second_1am - first_1am).total_seconds()) # 0
 print((second_1am.astimezone(tz.UTC) - first_1am.astimezone(tz.UTC)).total_seconds()) # 3600
 #+end_src
+* [[id:a707e96d-102d-4549-8abe-ffeb9a8c3e9e][Pandas Datetime]]

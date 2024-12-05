@@ -1,0 +1,33 @@
+:PROPERTIES:
+:ID:       a707e96d-102d-4549-8abe-ffeb9a8c3e9e
+:END:
+#+title: Pandas Datetime
+#+filetags: :DataScience:Python:
+
+* Basic Examples
+#+begin_src python
+# convert to pandas Timestamp
+df['start_dt'] = pd.to_datetime(df['start_time'])
+df['end_dt'] = pd.to_datetime(df['end_time'])
+
+# Or: from csv
+df = pd.read_csv('data.csv', parse_dates=['start_time', 'end_time'])
+
+# Duration
+df['duration'] = df['end_dt'] - df['start_dt'] # df['duration]: timedelta64[ns]
+df['duration_sec'] = df['duration'].dt.total_seconds()
+
+# Change date format
+df['date_str'] = df['date'].dt.strftime('%Y-%m-%d')
+#+end_src
+
+* Timezone
+- ~tz_localize()~ to set a timezone, like ~dt.replace(tzinfo=...)~
+- ~tz_convert()~ is like ~dt.astimezone()~
+#+begin_src python
+dt['start_dt'].dt.tz_localize('US/Eastern')
+# may raise pytz.exceptions.AmbiguousTimeError: 2017-11-05 01:00:00
+# try using the 'ambiguous' parameter
+
+dt['start_dt'].dt.tz_localize('US/Eastern', ambiguous='NaT')
+#+end_src
