@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       eb2a5e50-a93f-4013-b48b-722bef3682cc
+:END:
+#+title: Modeling and Predicting
+#+filetags: :Statistics:Python:DataScience:
+
+* Variable Transformation
+- Square roots: common when your data has a right-skewed distribution.

@@ -53,7 +53,7 @@ sns.relplot(x='total_bill', y='tip', data=tips, kind='scatter',
   - Subplots with color (hue)
   - Subgroups with point size, style and transparency
   - Changing point transparency
-- Adding trendline: ~sns.lmplot()~
+- Adding trendline: ~sns.lmplot()~, ~sns.regplot~ using linear regression
 
 ** Examples
 - Point Size:
@@ -108,6 +108,11 @@ plt.subplots_adjust(top=0.85)
 plt.show()
 #+end_src
 
+** Histogram Plots
+#+begin_src python
+sns.displot(data=fish, x='weight', col='species', col_wrap=2, bins=9)
+#+end_src
+
 ** Bar Plots
 - Bar plots shows the 95% confidence interval by default
 #+begin_src python
@@ -146,7 +151,6 @@ sns.catplot(x='smoker',
             estimator=np.median)
 #+end_src
 
-
 * Seaborn Objects
 - ~FacetGrid~ or ~AxesSubplot~
 #+begin_src python
@@ -157,7 +161,15 @@ type(g)
 g = sns.catplot(x='x', y='y', data=df)
 type(g)
 # <class 'seaborn.axisgrid.FacetGrid'>
-
+#+end_src
+* Multiple Plots on Single Chart
+#+begin_src python
+# create fig before multiple plots
+fig = plt.figure()
+sns.regplot(...)
+sns.scatterplot(...)
+plt.show()
+#+end_src
 * Titles and Labels
 ** For FacetGrid
 #+begin_src python

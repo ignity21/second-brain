@@ -115,6 +115,18 @@ ax.set_xlabel("GDP per Capita")
 ax.set_ylabel("Life Expectancy")
 plt.show()
 #+end_src
+- Adding a line: ~plt.axline()~
+#+begin_src python
+sns.scatterplot(...)
+plt.axline(xy1=(150, 150), # intercept
+           slope=1,
+           linewidth=2,
+           color='g')
+plt.axis('equal') # make the plot square
+plt.show()
+#+end_src
+[[file:images/screenshots/Scatter/2024-12-06_12-43-24_screenshot.png]]
+
 
 ** Statistical Visualization
 - Error bars
@@ -132,9 +144,8 @@ ax.boxplot([df['A'], df['B'], df['C']])
 ax.set_xticklabels(['A', 'B', 'C'])
 ax.set_ylabel('Values (cm)')
 plt.show()
-#+end_#+begin_src
+#+end_src
 
-      #+end_src
 * Customization
 - ~plt.style.use('seaborn-colorblind')~ See [[https://matplotlib.org/stable/gallery/style_sheets/style_sheets_reference.html][Styles]]
 
