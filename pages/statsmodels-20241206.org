@@ -39,9 +39,53 @@ response_data = price_vs_area.predict(explanatory_data)
 prediction_data = explanatory_data.assign(price=price_vs_area.predict(explanatory_data))
 #+end_src
 - Extrapolating :: means making predictions outside the range of observed data. *Can lead to misleading results!*
+
 * Model Object
 - ~.params~
 - ~.fittedvalues~: predictions on the original dataset
 - ~.resid~: residuals -- actual response values minus predicted response values
   - equivalent to: ~df['actual'] - model.fittedvalues~
 - ~.summary()~
+
+** Quantifying Model Fit
+*** R-squared
+- *r-squared* is the proportion of the variance in the response variable
+  that is predictable from the explanatory variable
+- ~.rsquared~
+- *R-squared*: /more than one/ explanatory variable
+- It's just correlation squared ~s1.corr(s2) ** 2~
+- =1= means a perfect fit
+- =2= means the worst possible fit
+
+*** RSE (Residual Standard Error)
+- A *typical* difference between a prediction and an observed response,
+  i.e. How much the predictions are typically wrong.
+- /same unit/ as the response variable
+- Calculating RSE
+#+begin_src python
+# one way
+rse = np.sqrt(model.mse_resid)
+
+# another way
+residuals_sq = model.resid ** 2
+sum_of_residuals_sq = sum(residuals_sq)
+degrees_of_freedom = len(df.index) - 2
+rse = np.sqrt(sum_of_residuals_sq / degrees_of_freedom)
+#+end_src
+
+*** MSE (Mean Squared Error)
+- ~model.mse_resid~
+- MSE = RSE ** 2
+
+*** RMSE (Root Mean Squared Error)
+#+begin_src python
+# one way
+rse = np.sqrt(model.mse_resid)
+
+# another way
+residuals_sq = model.resid ** 2
+sum_of_residuals_sq = sum(residuals_sq)
+n_obs = len(df.index)
+rmse = np.sqrt(sum_of_residuals_sq / n_obs)
+#+end_src
+- Should use RSE instead typically.
