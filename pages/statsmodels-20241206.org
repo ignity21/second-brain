@@ -170,15 +170,15 @@ explanatory_data = pd.DataFrame({'x': np.arange(10)})
 
 prediction_data = explanatory_data.assign(
     y = model.predict(explanatory_data))
-prediction_data['cat_y'] = np.round(prediction_data['y'])
+prediction_data['most_likely'] = np.round(prediction_data['prob']) # most likely value
 
-sns.scatterplot(x='x', y='cat_y', data=prediction_data, color='red')
+sns.scatterplot(x='x', 'most_likely', data=prediction_data, color='red')
 #+end_src
 - Another way to talk about binary responses: *Odds ratios*
   - Commonly used in gambling
   - \(odds\_ratio=\frac{prob}{1-prob}\)
 #+begin_src python
-prediction_data['odds_ratio'] = prediction_data['cat_y'] / (1 - prediction_data['cat_y'])
+prediction_data['odds_ratio'] = prediction_data[''prob''] / (1 - prediction_data['prob'])
 
 # Visualize the odds ratio
 sns.lineplot(x='x', y='odds_ratio', data=prediction_data)
