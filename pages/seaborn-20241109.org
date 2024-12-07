@@ -110,6 +110,10 @@ plt.show()
 
 ** Histogram Plots
 #+begin_src python
+# single histogram
+sns.histplot(data=fish, x='weight', bins=9, hue='species')
+
+# multiplots
 sns.displot(data=fish, x='weight', col='species', col_wrap=2, bins=9)
 #+end_src
 

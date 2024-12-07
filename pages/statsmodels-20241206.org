@@ -48,7 +48,7 @@ prediction_data = explanatory_data.assign(price=price_vs_area.predict(explanator
 - ~.summary()~
 
 ** Quantifying Model Fit
-*** R-squared
+*** R-squared (Coefficient of Determination)
 - *r-squared* is the proportion of the variance in the response variable
   that is predictable from the explanatory variable
 - ~.rsquared~
@@ -89,3 +89,110 @@ n_obs = len(df.index)
 rmse = np.sqrt(sum_of_residuals_sq / n_obs)
 #+end_src
 - Should use RSE instead typically.
+
+** Visualizing Model Fit
+*** Residuals vs. Fitted
+#+begin_src python
+sns.residplot(x='height', y='mass', data=df,
+              lowess=True, # lowess trend line, smooth curve following the data
+              )
+plt.xlabel('Height')
+plt.ylabel('Residuals')
+plt.show()
+#+end_src
+[[file:images/screenshots/Visualizing_Model_Fit/2024-12-07_12-40-24_screenshot.png]]
+
+
+*** Q-Q Plot
+It shows whether or not the residuals follow a *normal distribution*.
+- x-axis: quantiles from the normal distribution
+- y-axis: quantiles derived from the dataset
+#+begin_src python
+from statsmodels.api import qqplot
+qqplot(data=model.resid,
+       fit=True, # Compare to a normal distribution
+       line='45', # 45-degree line
+       )
+#+end_src
+[[file:images/screenshots/Visualizing_Model_Fit/2024-12-07_12-40-09_screenshot.png]]
+
+
+*** Scale-location Plot
+- Square root of the standardized residuals vs. Fitted
+- Shows whether *the size of the residuals* (abs) gets bigger or smaller
+#+begin_src python
+# Preprocess
+# Extract the normalized residuals from the model
+model_norm_resid = model.get_influence().resid_studentized_internal
+
+# Standardize the residuals
+# Take the absolute value and the square root of the normalized residuals
+model_norm_resid_std = np.sqrt(np.abs(model_norm_resid))
+
+# Plot the residuals
+sns.regplot(x=model.fittedvalues, y=model_norm_resid_std,
+            ci=None, lowess=True)
+#+end_src
+[[file:images/screenshots/Visualizing_Model_Fit/2024-12-07_12-40-50_screenshot.png]]
+
+* Outliers
+** Leverage & Influence
+- Leverage :: Measures how extreme the explanatory values are.
+- Influence :: Measures how much the model would change if you left the observation out of the dataset when modeling.
+#+begin_src python
+model = ols('y ~ x', df).fit()
+summary = model.get_influence().summary_frame()
+df['leverage'] = summary['hat_diag'] # Indicates how extreme x is
+
+# Cook's distance is the most common measure of influence
+df['cooks_dist'] = summary['cooks_d'] # Indicates how extreme y is
+df['cooks_dist'].sort_values(ascending=False).head() # Top 5 most influential points
+#+end_src
+- Removing the most influential rows
+
+* Logistic Regression
+#+begin_src python
+from statsmodels.formula.api import logit
+
+# Modeling
+model = logit("y ~ x", data=df).fit()
+print(model.params)
+
+# Plotting
+sns.regplot(x="x", y="y", data=df, logistic=True, ci=None)
+plt.axline((0, model.params["Intercept"]), slope=model.params["x"], color='black')
+plt.show()
+#+end_src
+
+** Making Predictions
+#+begin_src python
+explanatory_data = pd.DataFrame({'x': np.arange(10)})
+
+prediction_data = explanatory_data.assign(
+    y = model.predict(explanatory_data))
+prediction_data['cat_y'] = np.round(prediction_data['y'])
+
+sns.scatterplot(x='x', y='cat_y', data=prediction_data, color='red')
+#+end_src
+- Another way to talk about binary responses: *Odds ratios*
+  - Commonly used in gambling
+  - \(odds\_ratio=\frac{prob}{1-prob}\)
+#+begin_src python
+prediction_data['odds_ratio'] = prediction_data['cat_y'] / (1 - prediction_data['cat_y'])
+
+# Visualize the odds ratio
+sns.lineplot(x='x', y='odds_ratio', data=prediction_data)
+plt.axhline(y=1, linestyle='dotted')
+
+# prediction_data['log_odds_ratio'] = np.log(prediction_data['odds_ratio'])
+# plt.yscale('log') # oodds ratio changes linearly with x
+#+end_src
+*** Comparing Scales
+| Scale               | Values easy to understand? | Changes easy to understand? | Is precise? |
+|---------------------+----------------------------+-----------------------------+-------------|
+| Probability         | ✔️                        | ❌                          | ✔️         |
+| Most likely outcome | ✔️✔️                      | ✔️                         | ❌          |
+| Odd ratio           | ✔️                        | ❌                          | ✔️         |
+| Log odd ratio       | ❌                         | ✔️                         | ✔️         |
+- "Changes easy to interpret" means:
+  - It's easy to reason about how changes in the explanatory variable will change the response.
