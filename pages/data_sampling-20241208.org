@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       2be62d58-9f1c-4c6e-a20e-5722a4e0c4e7
+:END:
+#+title: Data Sampling
+#+filetags: :DataScience:Python:Statistics:
+
+* Basic Example
+#+begin_src python
+sample_df = population_df.sample(n=20)
+
+col_a_series_pop = population_df['col_a']
+col_a_series_sample = col_a_series_pop.sample(n=50)
+#+end_src

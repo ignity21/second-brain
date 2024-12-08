@@ -13,6 +13,7 @@
 * [[id:de66c696-5ca1-4fbc-a9b2-097ee7bf4ccd][Data Cleaning]]
 * [[id:41c5482c-9098-4b60-a2ff-e3c13bfb4486][Data Visualization]]
 * [[id:6eed31dd-a6eb-41f6-95b5-6125b86b3536][Data Storytelling]]
+* [[id:2be62d58-9f1c-4c6e-a20e-5722a4e0c4e7][Data Sampling]]
 * [[id:eb2a5e50-a93f-4013-b48b-722bef3682cc][Modeling and Predicting]]
 * Python Modules
 - [[id:99384a8d-1cd7-45e6-9913-01a96e895630][NumPy]]
