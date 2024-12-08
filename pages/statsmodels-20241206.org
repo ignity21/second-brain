@@ -39,14 +39,12 @@ response_data = price_vs_area.predict(explanatory_data)
 prediction_data = explanatory_data.assign(price=price_vs_area.predict(explanatory_data))
 #+end_src
 - Extrapolating :: means making predictions outside the range of observed data. *Can lead to misleading results!*
-
-* Model Object
+** Model Methods
 - ~.params~
 - ~.fittedvalues~: predictions on the original dataset
 - ~.resid~: residuals -- actual response values minus predicted response values
   - equivalent to: ~df['actual'] - model.fittedvalues~
 - ~.summary()~
-
 ** Quantifying Model Fit
 *** R-squared (Coefficient of Determination)
 - *r-squared* is the proportion of the variance in the response variable
@@ -135,6 +133,7 @@ sns.regplot(x=model.fittedvalues, y=model_norm_resid_std,
 #+end_src
 [[file:images/screenshots/Visualizing_Model_Fit/2024-12-07_12-40-50_screenshot.png]]
 
+
 * Outliers
 ** Leverage & Influence
 - Leverage :: Measures how extreme the explanatory values are.
@@ -178,7 +177,7 @@ sns.scatterplot(x='x', 'most_likely', data=prediction_data, color='red')
   - Commonly used in gambling
   - \(odds\_ratio=\frac{prob}{1-prob}\)
 #+begin_src python
-prediction_data['odds_ratio'] = prediction_data[''prob''] / (1 - prediction_data['prob'])
+prediction_data['odds_ratio'] = prediction_data['prob'] / (1 - prediction_data['prob'])
 
 # Visualize the odds ratio
 sns.lineplot(x='x', y='odds_ratio', data=prediction_data)
@@ -196,3 +195,51 @@ plt.axhline(y=1, linestyle='dotted')
 | Log odd ratio       | ❌                         | ✔️                         | ✔️         |
 - "Changes easy to interpret" means:
   - It's easy to reason about how changes in the explanatory variable will change the response.
+** Quantifying Model Fit
+*** Confusion Matrix
+|              | predicted false | predicted true |
+| actual false | correct         | false positive |
+| actual true  | false negative  | correct        |
+- Confusion matrix: the counts of each outcome
+#+begin_src python
+# manually calculate the confusion matrix
+actual_response = churn['has_churned']
+predicted_response = np.round(model.predict()) # predict() returns each observation's probability
+outcomes = pd.DataFrame({'actual': actual_response, 'predicted': predicted_response})
+print(outcomes.value_counts(sort=False))
+
+# automatically calculate the confusion matrix
+conf_matrix = model.pred_table()
+# => array([[TN, FP],
+#           [FN, TP]])
+# TN = conf_matrix[0, 0]
+# FP = conf_matrix[0, 1]
+#+end_src
+- Plotting Confusion Matrix
+#+begin_src python
+from statsmodels.graphics.mosaicplot import mosaic
+mosaic(conf_matrix)
+#+end_src
+
+[[file:images/screenshots/Quantifying_Model_Fit/2024-12-08_10-05-39_screenshot.png]]
+
+*** Metrics
+- *Accuracy* is the proportion of correct predictions.
+
+\[accuracy=\frac{TN+TP}{TN+FN+FP+TP}\]
+
+- *Sensitivity* is the proportion of true positives.
+
+\[sensitivity=\frac{TP}{FN+TP}\]
+
+- *Specificity* is the proportion of true negatives.
+
+\[specificity=\frac{TN}{TN+FP}\]
+
+- There is often a *trade-off* between sensitivity and specificity.
+
+* TODO Courses
+- Intermediate Regression with ~statsmodels~ in Python
+- Generalized Linear Models in Python
+- Introduction to Predictive Analytics in Python
+- Linear Classifiers in Python
