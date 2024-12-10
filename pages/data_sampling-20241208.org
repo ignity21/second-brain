@@ -6,8 +6,20 @@
 
 * Basic Example
 #+begin_src python
-sample_df = population_df.sample(n=20)
+sample_df = population_df.sample(n=20, random_state=763528) # random_state is the seed
 
 col_a_series_pop = population_df['col_a']
 col_a_series_sample = col_a_series_pop.sample(n=50)
 #+end_src
+
+** Systematic Sampling
+- fixed interval
+#+begin_src python
+sample_size = 5
+pop_size = len(pop_df) # 1338
+interval = pop_size // sample_size
+
+sample_df = pop_df.iloc[::interval]
+#+end_src
+- Systematic sampling is only safe if we don't see a pattern in:
+  - ~df.plot(x='index', y='col_a', kind='scatter')~

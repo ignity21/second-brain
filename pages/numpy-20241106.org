@@ -30,3 +30,7 @@ np.random.rand() # 0~1
 coin = np.random.randint(0, 2)
 print(coin)
 #+end_src
+- Random functions: e.g. ~np.random.normal(loc=2, scale=1.5, size=100)~
+  - beta, binomial, chisqaure, exponential, f, gamma, geometric,
+    hypergeometric, lognormal, negative_binomial, normal, poisson,
+    standard_t, uniform
