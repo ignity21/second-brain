@@ -11,13 +11,13 @@
 
 * Basics
 ** Symbols
-| $\mu$          | mean(expected value)      |
-| $\sigma$          | standard deviation        |
-| $\hat\mu$    | estimated population mean |
-| $\hat\sigma$ | estimated population sd   |
-| $\bar{X_i}$  | one sample $X_i$'s mean   |
-| $s$          | sample sd                 |
-| $n$          | sample size               |
+| $\mu$          | population mean(expected value) |
+| $\sigma$          | population standard deviation   |
+| $\hat\mu$    | estimated population mean       |
+| $\hat\sigma$ | estimated population sd         |
+| $\bar{X_i}$  | one sample $X_i$'s mean         |
+| $s$          | sample sd                       |
+| $n$          | sample size                     |
 - Bessel's correction $\hat\sigma=\sqrt\frac{\sum_{i=1}^n(x_i-\bar{x})}{n-1}$
 
 ** Degrees of Freedom
@@ -29,6 +29,16 @@
 - Related to estimated population sd
   - $x_1+x_2+...+x_n=\bar{x}\cdot{n}$ (to get $\bar{x}\cdot{n}$ -> $DF=n-1$)
   - Only $n-1$ values are independent *after* we know the mean.
+
+* Relative Errors (on Sample Size)
+- Relative errors: \(error\%=100\times\frac{|\mu-\bar{X_{i}}|}{\mu}\)
+#+begin_src python
+rel_error_pct = 100 * abs(pop_mean - sample_mean) / pop_mean
+
+rel_errors.plot(x='sample_size', y='relative_error', kind='line')
+plt.show()
+#+end_src
+[[file:images/screenshots/Sample_Sizes/2024-12-10_18-08-15_screenshot.png]]
 
 * Sampling Distribution
 - Sampling Distribution :: Distribution of sample means
@@ -65,5 +75,16 @@
   [[../assets/Statistics/CriticalRegionOneTailed.png]]
 - For two-tailed test
   [[../assets/Statistics/CriticalRegionTwoTailed.png]]
+
+** Python Example
+#+begin_src python
+sample_means = []
+for _ in range(1000):
+    sample = pop.sample(n=30)["height"]
+    sample_means.append(sample.mean())
+
+plt.hist(sample_means, bins=30)
+plt.show() # normal distribution
+#+end_src
 
 * [[id:61297403-6903-4513-90c7-2b5fc0b49e11][Hypothesis Testing]]
