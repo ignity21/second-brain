@@ -9,6 +9,15 @@ The Distribution of sample means is normal distribution.
 - $SE=\frac{\sigma}{\sqrt{n}}$ the std of sample means
 - z score of sample mean: $z=\frac{\bar{X_i} - \mu}{SE}$
 
+** Example
+- Mean of sample means
+[[file:images/screenshots/Mean/2024-12-13_21-25-34_screenshot.png]]
+- Std of sample means
+[[file:images/screenshots/Std_of_Sampling_Mean/2024-12-13_21-26-38_screenshot.png]]
+
+- SE(Std of sample means) = \(\frac{\sigma}{\sqrt{n}}\)
+[[file:images/screenshots/Example/2024-12-13_21-34-36_screenshot.png]]
+
 * Python Examples
 #+begin_src python
 die = pd.Series([1, 2, 3, 4, 5, 6])
