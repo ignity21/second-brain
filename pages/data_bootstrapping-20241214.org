@@ -1,0 +1,46 @@
+:PROPERTIES:
+:ID:       a200c616-3de2-4340-bb77-8bb77ff2980c
+:END:
+#+title: Data Bootstrapping
+#+filetags: :Statistics:Python:DataScience:
+
+* Idea
+- Coffee bean example
+  - Each coffee in our sample represents many different hypothetical population coffees
+  - Sampling with replacement(Resampling) to approximate those other theoretical coffees
+#+begin_src python
+coffee_ratings = coffee_ratings.reset_index() # add a 'index' column with the old index
+coffee_resamp = coffee_ratings.sample(frac=1, replace=True) # same size, expect some duplicates
+coffee_resamp['index'].value_counts() # see duplicates
+num_unique = len(coffee_resamp.drop_duplicates(subset='index'))
+not_included = len(coffee_ratings) - num_unique # number of rows of the original not included in the resample
+#+end_src
+
+* Overview
+- Sampling vs. Bootstrapping
+  - Sampling: going from a population to a smaller sample
+  - Bootstrapping: building up a theoretical population from the sample
+- Bootstrapping use case
+  - Develop understanding of sampling variability using a single sample
+  - Important in cases where we can't sample the population multiple times to create a sampling distribution.
+
+* Bootstrapping Steps
+1. Make a resample(sample with replacement) of the same size as the original sample
+2. Calculate the statistic of interest for this bootstrap sample
+3. Repeat steps 1 and 2 many times
+
+The resulting statistics are *bootstrap statistics*, and they form a *bootstrap distribution*.
+#+begin_src python
+import numpy as np
+mean_flavors_1000 = []
+for _ in range(1000):
+    mean_flavors_1000.append(
+        np.mean(coffee_sample.sample(frac=1, replace=True)['flavor'])
+    )
+plt.hist(mean_flavors_1000, bins=30) # close following a normal distribution
+plt.show()
+#+end_src
+
+* Application Example
+- A hedge fund lacks the resources to track every stock, but feels confident that the 100
+  stocks they have tracked represent the market.
