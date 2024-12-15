@@ -7,7 +7,7 @@
 
 * 68-95-99.7 Rule
 - 68%: within 1 std
-- 95%: within 2 std
+- 95%: within ~2 std
 - 99.7%: within 3 std
 
 * Python Examples
@@ -18,7 +18,7 @@
 #+begin_src python
 from scipy.stats import norm
 
-# stadard normal distribution
+# stadard normal distribution (z-distribution)
 mean = 0
 std = 1
 # P( X <= 0.6)

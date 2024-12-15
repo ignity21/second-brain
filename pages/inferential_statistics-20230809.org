@@ -42,23 +42,39 @@ plt.show()
 
 * Sampling Distribution
 - Sampling Distribution :: Distribution of sample means
-| $X_i$                | Variable in Sample i               |
-| $\bar{X_i}$          | sample mean                        |
-| $n$                  | number of samples                  |
-| $M$                  | mean of sample means               |
-| $SE$(Standard Error) | standard deviation of sample means |
+| $X_i$                | Variable in Sample i                                        |
+| $\bar{X_i}$          | sample mean                                                 |
+| $n$                  | number of samples                                           |
+| $M$                  | mean of sample means                                        |
+| $SE$(Standard Error) | standard deviation of the statistic of interest (mean here) |
 
 - $M=\frac{1}{n}\sum_{i=1}^{n}\bar{X_i}$
 - Ratio of $\sigma$ to $SE$: $\frac{\sigma}{SE}=\sqrt{n}$
-- Margin of Error: $z\cdot\frac{\sigma}{\sqrt{n}}$. it's half the width of the confidence interval.
-  - e.g. for 95% CI: Margin of Error $= 1.96SE = \frac{1.96\sigma}{\sqrt{n}}$
+** [[id:fd7b8935-0094-403b-ac49-a61c8df0a733][Confidence Intervals]]
+** Python Example
+#+begin_src python
+sample_means = []
+for _ in range(1000):
+    sample = pop.sample(n=30)["height"]
+    sample_means.append(sample.mean())
 
-** [[id:193270c8-6738-48fb-b728-8462f10de3c5][Central Limit Theorem]]
+plt.hist(sample_means, bins=30)
+plt.show() # normal distribution
+#+end_src
+
+* [[id:193270c8-6738-48fb-b728-8462f10de3c5][Central Limit Theorem]]
+* Z-Distribution
+- Z-Distribution is a special normal distribution where
+  - the mean is 0
+  - the standard deviation is 1
+
 ** Confidence Interval Bounds
 | z-score(critical value) |  CI |
 |-------------------------+-----|
 | $\pm 1.96$                | 95% |
 | $\pm 2.33$                | 98% |
+- Margin of Error: $z\times SE$. it's half the width of the confidence interval.
+  - e.g. for 95% CI: Margin of Error $= 1.96\times SE = 1.96\times\frac{\sigma}{\sqrt{n}}$
 - $\bar{X_i}$ should be in $(\mu-1.96SE, \mu+1.96SE)$, then 95% Confidence Interval is:
   - $\bar{X_i}-1.96SE<\mu<\bar{X_i}+1.96SE$
   - 95% CI with the bigger sample size -> the smaller CI bounds
@@ -76,15 +92,5 @@ plt.show()
 - For two-tailed test
   [[../assets/Statistics/CriticalRegionTwoTailed.png]]
 
-** Python Example
-#+begin_src python
-sample_means = []
-for _ in range(1000):
-    sample = pop.sample(n=30)["height"]
-    sample_means.append(sample.mean())
-
-plt.hist(sample_means, bins=30)
-plt.show() # normal distribution
-#+end_src
 
 * [[id:61297403-6903-4513-90c7-2b5fc0b49e11][Hypothesis Testing]]

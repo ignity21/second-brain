@@ -1,0 +1,35 @@
+:PROPERTIES:
+:ID:       fd7b8935-0094-403b-ac49-a61c8df0a733
+:END:
+#+title: Confidence Intervals
+#+filetags: :Python:Statistics:
+
+* Idea
+One way to quantify sampling distribution and bootstrap distribution:
+- "Values with one standard deviation of the mean"
+
+* Calculating CI
+** Quantile Method
+#+begin_src python
+# 95%
+lower = np.quantile(bootstrap_distribution, 0.025)
+upper = np.quantile(bootstrap_distribution, 0.975)
+#+end_src
+
+** Standard Error Method
+- Use Inverse CDF: flip x and y axes of the CDF of normal distribution
+  - ~norm.ppf~
+#+begin_src python
+from scipy.stats import norm
+norm.ppf(quantile, loc=0, scale=1)
+#+end_src
+
+*** Example
+#+begin_src python
+point_estimate = np.mean(bootstrap_distribution)
+std_error = np.std(bootstrap_distribution, ddof=1)
+
+from scipy.stats import norm
+lower = norm.ppf(0.025, loc=point_estimate, scale=std_error)
+upper = norm.ppf(0.975, loc=point_estimate, scale=std_error)
+#+end_src

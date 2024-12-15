@@ -21,7 +21,7 @@ not_included = len(coffee_ratings) - num_unique # number of rows of the original
   - Sampling: going from a population to a smaller sample
   - Bootstrapping: building up a theoretical population from the sample
 - Bootstrapping use case
-  - Develop understanding of sampling variability using a single sample
+  - Develop understanding of sampling *variability* using a single sample
   - Important in cases where we can't sample the population multiple times to create a sampling distribution.
 
 * Bootstrapping Steps
@@ -40,6 +40,24 @@ for _ in range(1000):
 plt.hist(mean_flavors_1000, bins=30) # close following a normal distribution
 plt.show()
 #+end_src
+
+* Bootstrap Distribution
+- *Bootstrap distribution mean cannot correct biases from sampling*
+  - When the original sample wasn't closely representative of the population
+- The *goal* of bootstrapping is to *quantify variability*
+#+begin_src python
+# mean_flavors_1000: bootstrap distribution
+
+estimated_pop_mean = np.mean(mean_flavors_1000)
+
+# Estimating standard deviation of the population
+standard_error = np.std(mean_flavors_1000, ddof=1) # note that we use ddof=1 to calculate SE
+estimated_pop_std = sample_std / np.sqrt(len(coffee_sample))
+#+end_src
+
+* Most Important Summary
+- The *std* of bootstrap statistics is a good approximation of the standard error
+- Can assume bootstrap distributions are normally distributed for confidence intervals
 
 * Application Example
 - A hedge fund lacks the resources to track every stock, but feels confident that the 100
