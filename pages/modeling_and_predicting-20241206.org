@@ -6,3 +6,5 @@
 
 * Variable Transformation
 - Square roots: common when your data has a right-skewed distribution.
+
+* [[id:ba10e7ca-778d-4e4b-8251-e398cf189a83][statsmodels]]
