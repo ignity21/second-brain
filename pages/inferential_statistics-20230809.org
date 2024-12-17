@@ -9,8 +9,7 @@
 - A/B testing
 - Feature selection in ML
 
-* Basics
-** Symbols
+* Statistic Symbols
 | $\mu$          | population mean(expected value) |
 | $\sigma$          | population standard deviation   |
 | $\hat\mu$    | estimated population mean       |
@@ -18,79 +17,13 @@
 | $\bar{X_i}$  | one sample $X_i$'s mean         |
 | $s$          | sample sd                       |
 | $n$          | sample size                     |
-- Bessel's correction $\hat\sigma=\sqrt\frac{\sum_{i=1}^n(x_i-\bar{x})}{n-1}$
 
-** Degrees of Freedom
-- Example1: You have to choose n numbers from all natural numbers.($DF=n$)
-- Example2: You have n numbers that must sum to 10. ($DF=n-1$)
-- Example3: $DF=4$
-  [[../assets/Statistics/DegreesOfFreedom.png]]
-
-- Related to estimated population sd
-  - $x_1+x_2+...+x_n=\bar{x}\cdot{n}$ (to get $\bar{x}\cdot{n}$ -> $DF=n-1$)
-  - Only $n-1$ values are independent *after* we know the mean.
-
-* Relative Errors (on Sample Size)
-- Relative errors: \(error\%=100\times\frac{|\mu-\bar{X_{i}}|}{\mu}\)
-#+begin_src python
-rel_error_pct = 100 * abs(pop_mean - sample_mean) / pop_mean
-
-rel_errors.plot(x='sample_size', y='relative_error', kind='line')
-plt.show()
-#+end_src
-[[file:images/screenshots/Sample_Sizes/2024-12-10_18-08-15_screenshot.png]]
-
-* Sampling Distribution
-- Sampling Distribution :: Distribution of sample means
-| $X_i$                | Variable in Sample i                                        |
-| $\bar{X_i}$          | sample mean                                                 |
-| $n$                  | number of samples                                           |
-| $M$                  | mean of sample means                                        |
-| $SE$(Standard Error) | standard deviation of the statistic of interest (mean here) |
-
-- $M=\frac{1}{n}\sum_{i=1}^{n}\bar{X_i}$
-- Ratio of $\sigma$ to $SE$: $\frac{\sigma}{SE}=\sqrt{n}$
+* Concepts
+** [[id:80cef9fb-e3b0-4903-85a9-ca96efd96428][Degree of Freedom]]
+** [[id:0afb7034-f053-47d7-aea2-8d71eb45c627][Relative Error]]
 ** [[id:fd7b8935-0094-403b-ac49-a61c8df0a733][Confidence Intervals]]
-** Python Example
-#+begin_src python
-sample_means = []
-for _ in range(1000):
-    sample = pop.sample(n=30)["height"]
-    sample_means.append(sample.mean())
-
-plt.hist(sample_means, bins=30)
-plt.show() # normal distribution
-#+end_src
-
+** TODO Critical Value
+** TODO Alpha Level \(\alpha\)
+* [[id:4514ee9e-86ef-4f32-bfc3-151320f23d97][Sampling Distribution]]
 * [[id:193270c8-6738-48fb-b728-8462f10de3c5][Central Limit Theorem]]
-* Z-Distribution
-- Z-Distribution is a special normal distribution where
-  - the mean is 0
-  - the standard deviation is 1
-
-** Confidence Interval Bounds
-| z-score(critical value) |  CI |
-|-------------------------+-----|
-| $\pm 1.96$                | 95% |
-| $\pm 2.33$                | 98% |
-- Margin of Error: $z\times SE$. it's half the width of the confidence interval.
-  - e.g. for 95% CI: Margin of Error $= 1.96\times SE = 1.96\times\frac{\sigma}{\sqrt{n}}$
-- $\bar{X_i}$ should be in $(\mu-1.96SE, \mu+1.96SE)$, then 95% Confidence Interval is:
-  - $\bar{X_i}-1.96SE<\mu<\bar{X_i}+1.96SE$
-  - 95% CI with the bigger sample size -> the smaller CI bounds
-
-** $\alpha$ Levels
-- $\alpha$ Levels of Likelihood.
-- $\alpha$ level is a criterion for deciding whether or not something is likely or unlikely.
-  - 5% (generally used)
-  - 1%
-  - 0.1%
-
-** Critical Region
-- For one-tailed test
-  [[../assets/Statistics/CriticalRegionOneTailed.png]]
-- For two-tailed test
-  [[../assets/Statistics/CriticalRegionTwoTailed.png]]
-
-
 * [[id:61297403-6903-4513-90c7-2b5fc0b49e11][Hypothesis Testing]]

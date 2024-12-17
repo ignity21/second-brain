@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       595c863f-d7c9-41b0-ade8-9416418b2c31
+:END:
+#+title: Python DA Modules
+#+filetags: :Python:DataScience:
+
+* Modules
+- [[id:99384a8d-1cd7-45e6-9913-01a96e895630][NumPy]]
+- [[id:05ef9aaa-7fa2-45b4-9ed9-d8d01c8abff2][Pandas]]
+- [[id:c78f636f-88e8-4cb8-8e28-0dc34bfbaf3a][Matplotlib]]
+- [[id:f86e4126-bb1a-45f1-b9b7-b00c2d98672e][Seaborn]]
+- [[id:c6961658-1c4b-4f9d-8a52-e919562d6277][SciPy]]
+- [[id:ba10e7ca-778d-4e4b-8251-e398cf189a83][statsmodels]]: Optimized for insight
+- [[id:f4ca75d9-362e-4d52-8e5c-0362c6882dc2][Scikit-Learn]]: Optimized for prediction

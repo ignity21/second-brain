@@ -4,7 +4,8 @@
 #+title: Data Sampling
 #+filetags: :DataScience:Python:Statistics:
 
-* Simple Random Sampling
+* Sampling
+** Simple Random Sampling
 #+begin_src python
 sample_df = population_df.sample(n=20, random_state=763528) # random_state is the seed
 
@@ -12,7 +13,7 @@ col_a_series_pop = population_df['col_a']
 col_a_series_sample = col_a_series_pop.sample(n=50)
 #+end_src
 
-* Systematic Sampling
+** Systematic Sampling
 - fixed interval
 #+begin_src python
 sample_size = 5
@@ -30,7 +31,7 @@ shuffled = df.sample(frac=1) # fraction = 1 means all rows
 shuffled = shuffled.reset_index(drop=True).reset_index()
 #+end_src
 
-* Stratified Sampling
+** Stratified Sampling
 <<Stratified Sampling>>
 Stratified Sampling sample a population that contains subgroups.
 1. Split the population into subgroups
@@ -49,7 +50,7 @@ print(coffee_rating['country_of_origin'].value_counts(normalize=True).head(6)) #
 print(coffee_rating_samp['country_of_origin'].value_counts(normalize=True)) # samp
 #+end_src
 
-** Proportional Stratified Sampling
+*** Proportional Stratified Sampling
 #+begin_src python
 coffee_rating_strat = coffee_rating_top.groupby('country_of_origin')\
                                        .sample(frac=0.1, random_state=42)
@@ -57,11 +58,11 @@ coffee_rating_strat = coffee_rating_top.groupby('country_of_origin')\
 print(coffee_rating_strat['country_of_origin'].value_counts(normalize=True))
 #+end_src
 
-** Equal Counts Stratified Sampling
+*** Equal Counts Stratified Sampling
 - ~df.groupby('category').sample(n=18)~
   - Equal proportions
 
-* Weighted Random Sampling
+** Weighted Random Sampling
 - Specify weights to adjust the relative probability of a row being sampled
   - By creating a column of weights
 #+begin_src python
@@ -75,7 +76,7 @@ coffee_rating_weight['weight'] = np.where(condition, 2, 1)
 coffee_rating_weight = coffee_rating_weight.sample(frac=0.1, weights='weight')
 #+end_src
 
-* Clustering Sampling
+** Clustering Sampling
 - Problem of [[Stratified Sampling]]:
   - We need to collect data from every subgroup.
   - Clustering sampling give us an answer that almost as good while using less data
@@ -96,8 +97,8 @@ df_cluster['category'] = df_cluster['category'].cat.remove_unused_categories()
 
 df_cluster.groupby('category').sample(n=len(df_pop)//4) # 25% of the population
 #+end_src
-* Examples
-** 4 Dice
+** Examples
+*** 4 Dice
 #+begin_src python
 import itertools
 import pandas as pd
@@ -114,3 +115,8 @@ pop['mean_roll'].value_counts(sort=False).plot(kind='bar')
 #+end_src
 - numpy simulation
   - ~np.random.choice(list(range(1, 7)), size=4, replace=True).mean()~
+
+* [[id:4514ee9e-86ef-4f32-bfc3-151320f23d97][Sampling Distribution]]
+* [[id:a200c616-3de2-4340-bb77-8bb77ff2980c][Bootstrap Distribution]]
+* Metrics
+** [[id:fd7b8935-0094-403b-ac49-a61c8df0a733][Confidence Intervals]]

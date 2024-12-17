@@ -2,24 +2,16 @@
 :ID:       61297403-6903-4513-90c7-2b5fc0b49e11
 :END:
 #+title: Hypothesis Testing
-#+filetags: :Math:Statistics:
+#+filetags: :Python:DataScience:Math:Statistics:
 
 * Steps
-1. Define null(H0) and alternative(H1) hypothesis
-2. Choose the appropriate statistical test
+1. [[Define Hypothesi][Define null(H0) and alternative(H1) hypothesis]]
+2. [[Choose Test][Choose the appropriate statistical test]]
 3. Calculate the p-value
 4. Determine the statistical significance -- p value is then compared against the significance level.
 
-* Choose the Appropriate Test
-[[../assets/Statistics/InferentialStats_1.png]]
-
-- Z-Test: compare two groups/categories of numeric variables with large sample size
-- [[id:7c802e9e-8fc0-41fd-8078-1e09ee72378f][T-Test]]: compare two groups/categories of numeric variables with small sample size
-- ANOVA test: compare the difference between two or more groups/categories of numeric variables
-- Chi-Squared test: examine the relationship between two categorical variables
-- Correlation test: examine the relationship between two numeric variables
-
-* Defining Hypothesis
+* Define Hypothesis
+<<Define Hypothesis>>
 - $H_0$ (Null Hypothesis): $\mu_{1}\approx\mu_{2}$ (no significant difference)
   - $\mu_{2}$ is not in critical region
 
@@ -29,6 +21,18 @@
   - $\mu_{1}\lt\mu_{2}$ $\mu_I$ is in the one-tailed right critical region
   - $\mu_{1}\gt\mu_{2}$ one-tailed left critical region
   - $\mu_{1}\neq\mu_{2}$ two-tailed
+
+* Choose the Appropriate Test
+<<Choose Test>>
+[[../assets/Statistics/InferentialStats_1.png]]
+
+- Z-Test: compare two groups/categories of numeric variables with large sample size
+- [[id:7c802e9e-8fc0-41fd-8078-1e09ee72378f][T-Test]]: compare two groups/categories of numeric variables with small sample size
+- ANOVA test: compare the difference between two or more groups/categories of numeric variables
+- Chi-Squared test: examine the relationship between two categorical variables
+- Correlation test: examine the relationship between two numeric variables
+
+
 
 ** Example
 - $H_0$: Most dogs have four legs. (Most = more than 50%)
@@ -40,3 +44,7 @@
    |                          | Reject $H_0$ | Retain $H_0$  |
    | real world $H_0$ *True*  | Type I Error | Correct       |
    | real world $H_0$ *False* | Correct      | Type II Error |
+
+
+* Tests
+** [[id:3c158478-8d52-4fa3-9262-f0267d6c48c8][Z-Test]]

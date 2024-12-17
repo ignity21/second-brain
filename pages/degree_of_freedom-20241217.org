@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       80cef9fb-e3b0-4903-85a9-ca96efd96428
+:END:
+#+title: Degree of Freedom
+#+filetags: :Statistics:
+
+* Degree of Freedom
+- Example1: You have to choose n numbers from all natural numbers.($DF=n$)
+- Example2: You have n numbers that must sum to 10. ($DF=n-1$)
+- Example3: $DF=4$
+  [[../assets/Statistics/DegreesOfFreedom.png]]
+
+- Related to estimated population sd
+  - $x_1+x_2+...+x_n=\bar{x}\cdot{n}$ (to get $\bar{x}\cdot{n}$ -> $DF=n-1$)
+  - Only $n-1$ values are independent *after* we know the mean.
+
+* Bessel's correction
+- $\hat\sigma=\sqrt\frac{\sum_{i=1}^n(x_i-\bar{x})}{n-1}$

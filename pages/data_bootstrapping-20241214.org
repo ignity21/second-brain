@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       a200c616-3de2-4340-bb77-8bb77ff2980c
 :END:
-#+title: Data Bootstrapping
+#+title: Bootstrap Distribution
 #+filetags: :Statistics:Python:DataScience:
 
 * Idea

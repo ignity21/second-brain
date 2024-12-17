@@ -7,7 +7,6 @@
 * Definition
 The Distribution of sample means is normal distribution.
 - $SE=\frac{\sigma}{\sqrt{n}}$ the std of sample means
-- z score of sample mean: $z=\frac{\bar{X_i} - \mu}{SE}$
 
 ** Example
 - Mean of sample means

@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       4514ee9e-86ef-4f32-bfc3-151320f23d97
+:END:
+#+title: Sampling Distribution
+#+filetags: :Python:DataScience:Statistics:
+
+* Overview
+- Sampling Distribution :: Distribution of sample *statistic of interest* (mean here)
+| $X_i$                | Variable in Sample i        |
+| $\bar{X_i}$          | sample mean                 |
+| $n$                  | number of samples           |
+| $M$                  | mean of sample means        |
+| $SE$(Standard Error) | standard deviation of means |
+
+- $M=\frac{1}{n}\sum_{i=1}^{n}\bar{X_i}$
+- Ratio of $\sigma$ to $SE$: $\frac{\sigma}{SE}=\sqrt{n}$
+  - [[id:193270c8-6738-48fb-b728-8462f10de3c5][Central Limit Theorem]]
