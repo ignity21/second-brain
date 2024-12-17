@@ -125,3 +125,6 @@ used_car_onehot.head()
 #+begin_src python
 used_cars_onehot = pd.get_dummies(used_cars, columns=['color'], prefix='')
 #+end_src
+* Cookbook
+** Calculating Proportions
+- ~(df['gender'] == 'M').mean()~ -> e.g. 0.53
