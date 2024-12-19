@@ -22,6 +22,11 @@
 ** [[id:80cef9fb-e3b0-4903-85a9-ca96efd96428][Degree of Freedom]]
 ** [[id:0afb7034-f053-47d7-aea2-8d71eb45c627][Relative Error]]
 ** [[id:fd7b8935-0094-403b-ac49-a61c8df0a733][Confidence Intervals]]
+** p-values
+Probability of obtaining a result, assuming the null hypothesis is true.
+[[file:images/screenshots/p-values/2024-12-19_08-36-08_screenshot.png]]
+
+
 ** TODO Critical Value
 ** TODO Alpha Level \(\alpha\)
 * [[id:4514ee9e-86ef-4f32-bfc3-151320f23d97][Sampling Distribution]]

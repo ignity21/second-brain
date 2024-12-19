@@ -17,11 +17,12 @@ Z-Test can further be classified into
 - left-tailed
 - right-tailed
 - two-tailed
+
 [[file:images/screenshots/Overview/2024-12-17_10-12-25_screenshot.png]]
 
 * Steps
 1. State hypotheses\(H_{0}\), \(H_{a}\) and identify the claim
-2. Find critical value/s
+2. Find critical values
 3. Compute test value by using Z-Test
 4. Make decision to reject or to not reject the \(H_{0}\)
 
@@ -29,9 +30,14 @@ Z-Test can further be classified into
 To compare one mean to a hypothesized value when
 - The variances are known (use *bootstrapping*)
 - The sample size is large (\(n\ge30\))
+- Use bootstrap distribution to calculate SE
 - z-score: \(z=\frac{SampStat-HypothValue}{StdError}\)
   - *Standardized Value*
-  - Then can utilize the z-table (standard normal distribution table) [[id:e671c7ff-b03d-47a3-aa8a-91277e0e80c3][Z-Distribution]]
+  - Then can utilize the z-table (standard normal distribution table)
+  - [[id:e671c7ff-b03d-47a3-aa8a-91277e0e80c3][Z-Distribution]]
+- z-score -> p-value:
+  - left-tailed: ~scipy.stats.norm.cdf(z_score, loc=0, scale=1)~
+  - right-tailed: ~1 - norm.cdf(...)~
 
 ** Left-tailed
 - Null hypothesis: \(H_{0}\): \(\mu=\mu_{0}\)
@@ -46,7 +52,7 @@ To compare one mean to a hypothesized value when
 ** Two-tailed
 - Null hypothesis: \(H_{0}\): \(\mu=\mu_{0}\)
 - Alternate hypothesis: \(H_{a}\): \(\mu\ne\mu_{0}\)
-- Decision Criteria: reject the \(H_{0}\) if the z statistic > z critical value
+- Decision Criteria: reject the \(H_{0}\) if the z statistic > z critical value?
 
 * Two Sample Z-Test
 \[z=\frac{(\bar{X_{1}}-\bar{X_{2}})-(\mu_{1}-\mu_{2})}{\sqrt{\frac{\sigma_{1}^{2}}{n_{1}}+\frac{\sigma_{2}^{2}}{n_{2}}}}\]
@@ -68,7 +74,8 @@ The null hypothesis is that the two proportions are the same
 * Examples
 **  One Sample Two-tailed
 Stack Overflow Survey
-- Hypothesis: The mean annual compensation of the population of data scientists is $110000
+- \(H_{0}\): The mean annual compensation of the population of data scientists is $110000
+- \(H_{a}\): \(\ne110000\)
 
 #+begin_src python
 import numpy as np
@@ -94,4 +101,6 @@ std_error = np.std(boot_distn, ddof=1)
 
 # z-score
 z_score = (sample_mean - hypothesis) / std_error
+
+# p-value
 #+end_src

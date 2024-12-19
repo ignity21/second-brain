@@ -15,14 +15,14 @@
 - $H_0$ (Null Hypothesis): $\mu_{1}\approx\mu_{2}$ (no significant difference)
   - $\mu_{2}$ is not in critical region
 
-- $H_a$ (Alternative Hypothesis), or $H_1$
+- $H_a$ (Alternative Hypothesis), or $H_{1}$
   - $\mu_{2}$ is in critical region
   - $\mu_{1}\not\approx\mu_{2}$
-  - $\mu_{1}\lt\mu_{2}$ $\mu_I$ is in the one-tailed right critical region
+  - $\mu_{1}\lt\mu_{2}$  $\mu_2$ is in the one-tailed right critical region
   - $\mu_{1}\gt\mu_{2}$ one-tailed left critical region
   - $\mu_{1}\neq\mu_{2}$ two-tailed
 
-* Choose the Appropriate Test
+* Choose the Appropriate Test (2 Groups)
 <<Choose Test>>
 [[../assets/Statistics/InferentialStats_1.png]]
 
@@ -31,8 +31,6 @@
 - ANOVA test: compare the difference between two or more groups/categories of numeric variables
 - Chi-Squared test: examine the relationship between two categorical variables
 - Correlation test: examine the relationship between two numeric variables
-
-
 
 ** Example
 - $H_0$: Most dogs have four legs. (Most = more than 50%)
