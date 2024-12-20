@@ -23,6 +23,24 @@ Since we don't know the population standard deviation $\sigma$, we use sample st
 * P-Value
 [[../assets/Statistics/P-Value.png]]
 
+  Two Sample t-Test
+- \(H_{0}\): \(\mu_{1} - \mu_{2} = 0\)
+- \(H_{A}\):
+  - two-tailed: \(\mu_{1} - \mu_{2} \ne 0\)
+  - left-tailed: \(\mu_{1} - \mu_{2} < 0\)
+  - right-tailed: \(\mu_{1} - \mu_{2} > 0\)
+- \(t=\frac{\text{diff in sample stats}-\text{diff in pop stats}}{\text{standard error}}\)
+  - \(t=\frac{(\bar{x}_{1} - \bar{x}_{2}) - (\mu_{1} - \mu_{2})}{SE(\bar{x}_{1} - \bar{x}_{2})}\)
+  - Assume \(H_{0}\) is True: \(t=\frac{(\bar{x}_{1} - \bar{x}_{2})}{SE(\bar{x}_{1} - \bar{x}_{2})}\)
+- Calculating SE
+  - Bootstrapping is a good option
+  - Easier way to approximate is: \(SE(\bar{x}_{1} - \bar{x}_{2})\approx\sqrt{\frac{s^{2}_{1}}{n_{1}}+\frac{s^{2}_{2}}{n_{2}}}\)
+    - \(s\) is the std of the variable
+    - \(n\) is the sample size (num of observations/rows in sample)
+
+\[t=\frac{(\bar{x}_{1} - \bar{x}_{2})}{\sqrt{\frac{s^{2}_{1}}{n_{1}}+\frac{s^{2}_{2}}{n_{2}}}}\]
+
+
 * One Sample t-Test
 $$t=\frac{\hat\mu-\mu_0}{\hat\sigma/\sqrt{n}}$$
 - $\mu_0$ is some specified value.
@@ -30,5 +48,27 @@ $$t=\frac{\hat\mu-\mu_0}{\hat\sigma/\sqrt{n}}$$
 - $H_A$: $\mu < \mu_0$, $\mu > \mu_0$, $\mu \neq \mu_0$
   - Cohen's d: $d=\frac{\hat\mu-\mu_0}{\hat\sigma}$
 
+
 * Dependent t-Test
-    # TODO
+
+* Examples
+** Two Sample Right-tailed
+- ~converted_comp~ is a numerical variable
+- ~age_first_code_cut~ is a categorical variable with levels ("child" and "adult")
+- Compare sample across groups ~age_first_code_cut~
+- Question: Are users in "child" group compensated higher than "adult"
+- \(H_{0}\): The mean compensation is the same \(\mu_{child}=\mu_{adult}\)
+  - \(\mu_{child}-\mu_{adult}=0\)
+- \(H_{A}\): The mean compensation in "child" group is greater than in "adult" \(\mu_{child}>\mu_{adult}\)
+  - \(\mu_{child}-\mu_{adult}>0\)
+- Test statistic is \(\mu_{child} - \mu_{adult}\)
+#+begin_src python
+# Two sample means 'child' and 'adult'
+xbar = stack_overflow.groupby('age_first_code_cut')['converted_comp'].mean()
+s = stack_overflow.groupby('age_first_code_cut')['converted_comp'].std()
+n = stack_overflow.groupby('age_first_code_cut')['converted_comp'].count()
+
+t_numerator = xbar.loc['child'] - xbar.loc['adult']
+t_denominator = np.sqrt(s.loc['child']**2/n.loc['child'] + s.loc['adult']**2/n.loc['adult'])
+t_stat = t_numerator / t_denominator
+#+end_src

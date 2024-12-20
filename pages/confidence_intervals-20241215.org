@@ -5,7 +5,7 @@
 #+filetags: :Python:Statistics:
 
 * Idea
-One way to quantify sampling distribution and bootstrap distribution:
+One way to quantify sampling *distribution* and bootstrap *distribution*:
 - "Values with one standard deviation of the mean"
 
 * Calculating CI
