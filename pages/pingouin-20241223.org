@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       ffde831f-5883-4dd5-b406-caa135d0e53b
+:END:
+#+title: pingouin
+
+* t-test Example
+** Paired Sample t-test
+#+begin_src python
+import pingouin
+
+pingouin.ttest(x=sample_data['diff'],
+               y=0, # null hypothesis
+               alternative='less', # left-tailed test
+               )
+# alternative: 'less', 'greater', 'two-sided'
+#+end_src
+or
+#+begin_src python
+pingouin.ttest(x=sample_data['2021'],
+               y=sample_data['2024'],
+               paired=True,
+               alternative='less')
+#+end_src

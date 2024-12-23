@@ -12,13 +12,7 @@
 
 * Concepts
 ** [[id:fd7b8935-0094-403b-ac49-a61c8df0a733][Confidence Intervals]]
-** p-values
-Probability of obtaining a result, assuming the null hypothesis is true.
-- Quantify evidence for the null hypothesis
-- Large p-value -> fail to reject null hypothesis
-  - if \(p\le\alpha\), reject \(H_{0}\)
-[[file:images/screenshots/p-values/2024-12-19_08-36-08_screenshot.png]]
-
+** [[id:4946fa5a-e743-4270-bee9-82e029890d7c][P-Values]]
 ** Significance Level \(\alpha\)
 The significance level of a hypothesis test is the threshold point of "beyond a reasonable doubt"
 - Cutoff point between a small p-value and a large one

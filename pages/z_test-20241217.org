@@ -43,17 +43,18 @@ To compare one mean to a hypothesized value when
 ** Left-tailed
 - Null hypothesis: \(H_{0}\): \(\mu=\mu_{0}\)
 - Alternate hypothesis: \(H_{A}\): \(\mu<\mu_{0}\)
-- Decision Criteria: reject the \(H_{0}\) if the z statistic < z critical value
+- Decision Criteria: reject the \(H_{0}\) if \(z < -z_{\alpha}\)
 
 ** Right-tailed
 - Null hypothesis: \(H_{0}\): \(\mu=\mu_{0}\)
 - Alternate hypothesis: \(H_{A}\): \(\mu>\mu_{0}\)
-- Decision Criteria: reject the \(H_{0}\) if the z statistic > z critical value
+- Decision Criteria: reject the \(H_{0}\) if \(z > z_{\alpha}\)
 
 ** Two-tailed
 - Null hypothesis: \(H_{0}\): \(\mu=\mu_{0}\)
 - Alternate hypothesis: \(H_{A}\): \(\mu\ne\mu_{0}\)
-- Decision Criteria: reject the \(H_{0}\) if the z statistic > z critical value?
+- Decision Criteria: reject the \(H_{0}\) if \(z < -z_{\alpha/2}\) or \(z > z_{\alpha/2}\)
+- [[https://www.mathandstatistics.com/learn-stats/hypothesis-testing/two-tailed-z-test-hypothesis-test-by-hand][Example]]
 
 * Two Sample Z-Test
 \[z=\frac{(\bar{X_{1}}-\bar{X_{2}})-(\mu_{1}-\mu_{2})}{\sqrt{\frac{\sigma_{1}^{2}}{n_{1}}+\frac{\sigma_{2}^{2}}{n_{2}}}}\]
@@ -73,7 +74,7 @@ The null hypothesis is that the two proportions are the same
 ** [[https://www.cuemath.com/data/z-test/][Reference]]
 
 * Examples
-**  One Sample Right-tailed
+** One Sample Right-tailed
 Stack Overflow Survey
 - \(H_{0}\): The mean annual compensation of the population of data scientists is $110000
 - \(H_{A}\): \(>110000\)
@@ -85,6 +86,7 @@ import numpy as np
 
 hypothesis = 110000
 sample_mean = stack_overflow['converted_comp'].mean()
+alhpa = 0.05
 
 # bootstrapping
 boot_distn = []
@@ -112,4 +114,8 @@ z_score = (sample_mean - hypothesis) / std_error
 p_value = 1 - stats.norm.cdf(z_score)
 # p = 3.149874e-05 < 0.05, reject the null hypothesis
 
+# Prefered: or use z critical value
+z_critical = stats.norm.ppf(1 - alhpa)
+# z-score > 1.64485, reject the null hypothesis
 #+end_src
+** [[id:ffde831f-5883-4dd5-b406-caa135d0e53b][pingouin]]
