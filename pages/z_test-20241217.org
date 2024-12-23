@@ -19,6 +19,7 @@ Z-Test can further be classified into
 - two-tailed
 
 [[file:images/screenshots/Overview/2024-12-17_10-12-25_screenshot.png]]
+- [[id:e671c7ff-b03d-47a3-aa8a-91277e0e80c3][Z-Distribution]]
 
 * Steps
 1. State hypotheses\(H_{0}\), \(H_{A}\) and identify the claim

@@ -1,0 +1,5 @@
+:PROPERTIES:
+:ID:       f8e02ca7-7025-4937-bd0b-ad6474152aa0
+:END:
+#+title: PySide6
+#+filetags: :Python:
