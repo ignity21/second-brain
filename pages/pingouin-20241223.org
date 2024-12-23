@@ -21,3 +21,20 @@ pingouin.ttest(x=sample_data['2021'],
                paired=True,
                alternative='less')
 #+end_src
+
+* ANOVA Example
+** One-way
+#+begin_src python
+pingouin.anova(data=stack_overflow,
+               dv='converted_comp',
+               between='job_sat', # categorical variable
+               )
+# p-value stored in 'p-unc' column
+
+# to find out which group is different from the others
+pingouin.pairwise_tests(data=stack_overflow,
+                        dv='converted_comp',
+                        between='job_sat',
+                        padjust='none', # no correction
+                        )
+#+end_src
