@@ -4,10 +4,16 @@
 #+title: Supervised Learning
 #+filetags: ML
 
+* Overview
 In supervised learning, we are given a data set and already *know what our correct output should look like*,
 having the idea that there is a *relationship* between the input and the output.
 
 [[../assets/ML/SupervisedLearning_1.png]]
+
+* Data Requirements
+- No missing values
+- Data in numeric format
+- Perform [[id:d31a2f5c-51c6-4742-8248-8d3c8904011a][Exploratory Data Analysis]] first
 
 * Regression
 :PROPERTIES:

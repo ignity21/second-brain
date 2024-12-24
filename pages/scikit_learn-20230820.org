@@ -36,3 +36,12 @@ strings or numbers.
 ** Composition
 It is easy to create a Pipeline estimator from an arbitrary sequence of
 transformers followed by a final estimator.
+
+* General scikit-learn Workflow
+#+begin_src python
+from sklearn.module import Model
+
+model = Model()
+model.fit(X, y) # X: features, y: target variable
+predictions = model.predict(X_new)
+#+end_src
