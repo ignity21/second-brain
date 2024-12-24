@@ -7,3 +7,4 @@
 * Rules
 - [[id:cee785fb-8f4b-4230-ad02-312714729965][~iptables~]]
 - [[id:df7a26d0-d2d8-4cd0-9219-2b2e13e19816][nftables]]
+- [[id:684bdb05-fad5-4c1a-8880-10874c82da89][ufw]]

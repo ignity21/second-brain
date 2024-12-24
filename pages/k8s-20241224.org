@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       05ada1ee-25e7-4332-8803-1eb5229c6ece
+:END:
+#+title: K8s
+#+filetags: :DevOps:
+
+* Troubleshooting
+
+[[file:images/screenshots/Troubleshooting/2024-12-24_08-36-21_screenshot.png]]

@@ -4,4 +4,7 @@
 #+title: Docker
 #+filetags: DevOps
 
-- [[id:eab9fb9a-8249-4537-9434-9dab4c4436ee][Docker Troubleshooting]]
+* Docker Image Lifecycle
+[[file:images/screenshots/Docker_Image_Lifecycle/2024-12-24_08-31-36_screenshot.png]]
+
+* [[id:eab9fb9a-8249-4537-9434-9dab4c4436ee][Docker Troubleshooting]]

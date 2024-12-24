@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       5521b2f9-f8ea-44d3-887a-1e9190e366f7
+:END:
+#+title: ZeroMQ
+#+filetags: :Network:
+
+* Sockets Overheads
+- Message Serialization and Buffering
+- Inter-process Communication (IPC) Buffering
+  - Even domain sockets rely on memory buffers to pass messages between processes.
+- Memory Copy Overhead
+  - Application memory space <-> ZeroMQ buffer

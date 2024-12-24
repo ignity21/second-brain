@@ -31,3 +31,9 @@
 - [[id:5561dbba-1542-4b9a-8cdc-334ca6501990][Pub/Sub Pattern]]
 - [[id:6e803f5c-a87d-4130-90fa-36d321d8f960][Polling]]
 - [[id:c009f066-8c97-484c-be46-0673caec8027][Streaming]]
+
+* IPC
+:PROPERTIES:
+:ID:       4ad696b4-b6dd-4058-8d0a-4ee3b1332cb7
+:END:
+- [[id:5521b2f9-f8ea-44d3-887a-1e9190e366f7][ZeroMQ]]
