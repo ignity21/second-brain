@@ -37,3 +37,5 @@
 :ID:       4ad696b4-b6dd-4058-8d0a-4ee3b1332cb7
 :END:
 - [[id:5521b2f9-f8ea-44d3-887a-1e9190e366f7][ZeroMQ]]
+
+* [[id:bed8b081-8910-4309-9aa5-b4fc5179b0ef][System Design Interview]]

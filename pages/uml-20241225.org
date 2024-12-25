@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       fb8a2b1f-761c-4e47-8f4c-da29478bfe39
+:END:
+#+title: UML
+#+filetags: :DevOps:Tools:SystemDesign:
+
+- [[https://www.lucidchart.com/pages/uml-deployment-diagram][Deployment Diagram]]
