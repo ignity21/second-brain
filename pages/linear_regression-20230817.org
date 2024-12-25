@@ -74,7 +74,6 @@
 - [[file:../notebooks/ML/linear_regression.ipynb][Code]]
 
 * [[id:7ac9ccb4-374e-4c58-b932-7704b3c86381][Regularized Linear Regression]]
-
 * Comparison of algorithms for Linear Regression
 | Algorithm       | Large m | Out-of-core support | Large n | Hyperparams | Scaling required | Scikit-Learn     |
 |-----------------+---------+---------------------+---------+-------------+------------------+------------------|

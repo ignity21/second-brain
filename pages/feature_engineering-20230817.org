@@ -7,3 +7,5 @@
 * Concept
 Using intuition to design new features, by transforming or combining original features.
  - Example: Area may be more predictive. $area = frontage \times depth$
+
+* [[id:d24c5dbe-3329-40a8-b8e2-3566499ce38b][Feature Selection]]

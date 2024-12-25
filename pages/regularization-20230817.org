@@ -4,6 +4,13 @@
 #+title: Regularization
 #+filetags: ML
 
+* Why Regularize?
+- Linear regression minimizes a loss function
+- It choose a coefficient \(a\) for each feature variable, plus intercept \(b\)
+- Large coefficients can lead to overfitting
+- Regularization: Penalize large coefficients
+
+* Overview
 Regularization means explicitly restricting a model to avoid [[id:4a034a17-5a7f-4003-a2fb-4c833e76cc98][Overfitting]]
 - with enough training data, regularization becomes less important.
 

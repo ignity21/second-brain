@@ -1,0 +1,35 @@
+:PROPERTIES:
+:ID:       04e7b7cf-d5d3-4e31-b06b-ba66204c56d8
+:END:
+#+title: R-squared
+#+filetags: :Statistics:ML:
+
+* Overview
+- known as "Coefficient of Determination"
+- be used to evaluate the performance of regression models
+
+* Definition
+- *R-squared* is the proportion of the variance in the response variable
+  that is predictable from the explanatory variable
+- \(R^2=1-\frac{SS_{res}}{SS_{tot}}\)
+- \(SS_{res}=\sum(y_i-\hat{y}_i)^2=\)
+  - \(\hat{y}_i\): predicted value from the model.
+  - Residual Sum of Squares
+    - measures the variance in dependent variable that is not explained by the independent variable
+- \(SS_{tot}=\sum(y_i-\bar{y})^2=\)
+  - \(\bar{y}\): mean of the actual values
+  - Total Sum of Squares
+    - measures the total variance in the dependent variable
+
+* Interpretation
+- range from 0 to 1
+  - =1= means a perfect fit
+  - =0= means the worst possible fit
+- Higher R-squared values indicate a better fit for the model
+- Low R-squared values indicate a poor model fit.
+
+* Limitations
+- Not Always Indicative of Model Quality: A high R-squared does not necessarily mean that the model
+  is good. It can be misleading, especially in the presence of overfitting.
+- Does Not Indicate Causation: R-squared only indicates correlation and not causation.
+- Sensitive to Outliers: Outliers can disproportionately affect the R-squared value.

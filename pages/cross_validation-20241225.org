@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       5461b659-bc1a-4594-b7fb-8388345187d3
+:END:
+#+title: Cross-validation
+#+filetags: :Python:ML:
+
+* Problem
+- Model performance (e.g. R-squared) is dependent on the way we split up the data
+  - Not representative of the model's ability to generalize to unseen data
+
+* Idea
+[[file:images/screenshots/Idea/2024-12-25_20-56-33_screenshot.png]]
+
+* Code
+#+begin_src python
+from sklearn.model_selection import cross_val_score, KFold
+
+kf = KFold(n_splits=5, shuffle=True, random_state=42)
+reg = LinearRegression()
+
+cv_results = cross_val_score(reg, X, y, cv=kf)
+# return the default score (R^2) for linear regression
+
+# analyze the results
+# mean, std, quantiles, boxplot etc.
+#+end_src

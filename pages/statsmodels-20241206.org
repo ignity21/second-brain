@@ -48,14 +48,8 @@ prediction_data = explanatory_data.assign(price=price_vs_area.predict(explanator
 - ~.summary()~
 
 ** Quantifying Model Fit
-*** R-squared (Coefficient of Determination)
-- *r-squared* is the proportion of the variance in the response variable
-  that is predictable from the explanatory variable
-- ~.rsquared~
-- *R-squared*: /more than one/ explanatory variable
-- It's just correlation squared ~s1.corr(s2) ** 2~
-- =1= means a perfect fit
-- =0= means the worst possible fit
+*** [[id:04e7b7cf-d5d3-4e31-b06b-ba66204c56d8][R-squared]]
+
 
 *** RSE (Residual Standard Error)
 - A *typical* difference between a prediction and an observed response,

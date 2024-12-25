@@ -74,7 +74,7 @@ The null hypothesis is that the two proportions are the same
 ** [[https://www.cuemath.com/data/z-test/][Reference]]
 
 * Examples
-** One Sample Right-tailed
+**  One Sample Right-tailed
 Stack Overflow Survey
 - \(H_{0}\): The mean annual compensation of the population of data scientists is $110000
 - \(H_{A}\): \(>110000\)
@@ -102,6 +102,8 @@ plt.show()
 # 95% confidence interval
 lower = np.quantile(boot_distn, 0.025)
 upper = np.quantile(boot_distn, 0.975)
+# or
+lower, upper = np.quantile(boot_distn, [0.025, 0.975])
 
 # standard error
 std_error = np.std(boot_distn, ddof=1)

@@ -20,12 +20,13 @@ having the idea that there is a *relationship* between the input and the output.
 :ID:       e4e7e012-6d8d-472d-ba81-147b35bf1740
 :END:
 Predict a *continuous* output.
-
 ** Algorithms
 - [[id:b6f03e6b-8850-4f2d-8d2d-f337029fe1e7][Linear Regression]]
 - [[id:10b0fc16-06fe-4725-ac6a-738f6842ce84][Polynomial Regression]]
 - [[id:4e603b85-7e9e-47ca-b3f4-b7747cd6019a][K-Neighbors Regression]]
-
+** Performance Evaluation
+- [[id:04e7b7cf-d5d3-4e31-b06b-ba66204c56d8][R-squared]]
+** [[id:5461b659-bc1a-4594-b7fb-8388345187d3][Cross-validation]]
 * Classification
 :PROPERTIES:
 :ID:       009a561d-de32-408a-a5ec-a75839547797

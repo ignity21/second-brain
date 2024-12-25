@@ -4,11 +4,30 @@
 #+title: Ridge Linear Regression
 #+filetags: ML
 
+* Loss Function
+- Loss function = OLS loss function + \(\alpha\sum_{i=1}^n a_i^2\)
+  - Penalize large positive or negative coefficients
+  - \(\alpha\): hyperparameter which is used to optimize model parameters
+  - Picking \(\alpha\) is similar to picking \(k\) in KNN
+  - \(\alpha\) controls model complexity
+    - 0: just OLS (Can lead to overfitting)
+    - Very high \(\alpha\): Can lead to underfitting
+** Code Example: Choosing \(\alpha\)
+#+begin_src python
+from sklearn.linear_model import Ridge
+scores = []
+for alpha in [0.1, 1, 10, 100, 1000]:
+    ridge = Ridge(alpha=alpha)
+    ridge.fit(X_train, y_train)
+    y_pred = ridge.predict(X_test)
+    scores.append(ridge.score(X_test, y_test))
+print(scores)
+#+end_src
+
 * Cost Function
 
-\[J(\bm{w}, b)=MSE(\bm{w}, b) + \frac{\lambda}{2}\sum_{i=1}^{n}w_i^2\]
-
-- regularization term: $\frac{1}{2}(\|\bm{w}\|_{2})^2$
+- Cost function \(J(\bm{w}, b)=MSE(\bm{w}, b) + \frac{\lambda}{2}\sum_{i=1}^{n}w_i^2\)
+- Regularization term: $\frac{1}{2}(\|\bm{w}\|_{2})^2$
   - $\|\bm{w}\|_{2}$ represents the L2 norm of the weight vector.
 - It is important to *scale the data* before performing Ridge Regression
 - Given enough data, ridge and linear regression will have the same performance

@@ -3,8 +3,24 @@
 :END:
 #+title: Lasso Linear Regression
 #+filetags: ML
+
+* Overview
 Least Absolute Shrinkage and Selection Operator Regression
 - uses the L1 norm of the weight vector
+
+* Loss Function
+- Loss function = OLS loss function + \(\alpha\sum_{i=1}^n|a_i|\)
+** Code Example: Choosing \(\alpha\)
+#+begin_src python
+from sklearn.linear_model import Lasso
+scores = []
+for alpha in [0.1, 1, 10, 20, 50]:
+    lasso = Lasso(alpha=alpha)
+    lasso.fit(X_train, y_train)
+    y_pred = ridge.predict(X_test)
+    scores.append(ridge.score(X_test, y_test))
+print(scores)
+#+end_src
 
 * Cost Function
 \[J(\bm{w}, b)=MSE(\bm{w}, b) + \lambda\sum_{i=1}^{n}|w_i|\]
@@ -41,3 +57,5 @@ Least Absolute Shrinkage and Selection Operator Regression
   sgd_reg.fit(X, y.ravel())
   sgd_reg.predict([[1.5]])
 #+end_src
+
+* Lasso Regression for [[id:d24c5dbe-3329-40a8-b8e2-3566499ce38b][Feature Selection]]

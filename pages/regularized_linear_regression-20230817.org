@@ -31,5 +31,5 @@ w_j & = w_j-\alpha\frac{\partial}{\partial w_j}J(\bm{w}, b) \\
 
 * Implementations
 - [[id:f6fb8e17-c115-4aba-91ec-894cca2f3106][Ridge Linear Regression]]
-- [[id:28980177-1875-4360-8ea8-6800da4fe576][Elastic Net]]
 - [[id:a5a11c25-1ea0-4f97-a1c2-ebae8a524c61][Lasso Linear Regression]]
+- [[id:28980177-1875-4360-8ea8-6800da4fe576][Elastic Net]]
