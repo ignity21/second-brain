@@ -55,7 +55,7 @@ prediction_data = explanatory_data.assign(price=price_vs_area.predict(explanator
 - *R-squared*: /more than one/ explanatory variable
 - It's just correlation squared ~s1.corr(s2) ** 2~
 - =1= means a perfect fit
-- =2= means the worst possible fit
+- =0= means the worst possible fit
 
 *** RSE (Residual Standard Error)
 - A *typical* difference between a prediction and an observed response,
@@ -74,10 +74,12 @@ rse = np.sqrt(sum_of_residuals_sq / degrees_of_freedom)
 #+end_src
 
 *** MSE (Mean Squared Error)
+- \(MSE=\frac{1}{n}\sum_{i=1}^n(y_i, \hat{y}_i)^2\)
 - ~model.mse_resid~
-- MSE = RSE ** 2
 
 *** RMSE (Root Mean Squared Error)
+- Measure RMSE in the same units at the target variable
+- \(RMSE=\sqrt{MSE}\)
 #+begin_src python
 # one way
 rse = np.sqrt(model.mse_resid)

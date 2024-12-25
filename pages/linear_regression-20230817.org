@@ -81,5 +81,54 @@
 | Normal Equation | Fast    | No                  | Slow    |           0 | No               | N/A              |
 | SVD             | Fast    | No                  | Slow    |           0 | No               | LinearRegression |
 | Batch GD        | Slow    | No                  | Fast    |           2 | Yes              | SGDRegressor     |
-| Stochastic GD   | Fast    | Yes                 | Fast    |     $\ge 2$ | Yes              | SGDRegressor     |
-| Mini-batch GD   | Fast    | Yes                 | Fast    |     $\ge 2$ | Yes              | SGDRegressor     |
+| Stochastic GD   | Fast    | Yes                 | Fast    |       $\ge 2$ | Yes              | SGDRegressor     |
+| Mini-batch GD   | Fast    | Yes                 | Fast    |       $\ge 2$ | Yes              | SGDRegressor     |
+
+* Python Code
+** Single Feature
+#+begin_src python
+# Creating feature and target arrays
+X = df.drop('house_price', axis=1).values
+y = df['house_price'].values
+
+# Making predictions from a single feature
+X_bedrooms = X[:, 1] # shape (n, )
+X_bedrooms = X_bedrooms.reshape(-1, 1) # shape (n, 1)
+
+# Plotting scatter plot
+plt.scatter(X_bedrooms, y, alpha=0.5)
+
+# Fitting a linear regression model
+from sklearn.linear_model import LinearRegression
+reg = LinearRegression()
+reg.fit(X_bedrooms, y)
+
+# Plotting the regression line
+prediction = reg.predict(x_Bedrooms)
+plt.plot(X_bedrooms, prediction, color='red')
+plt.show()
+#+end_src
+
+** Multiple Features
+#+begin_src python
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+reg = LinearRegression()
+reg.fit(X_train, y_train)
+y_pred = reg.predict(X_test)
+
+# Quantifing the quality of the model
+# 1. R-squared (0~1)
+r2 = reg.score(X_test, y_test) # 1 is perfect, 0 is random
+
+# 2. Mean Squared Error (MSE)
+from sklearn.metrics import mean_squared_error
+mse = mean_squared_error(y_test, y_pred, squared=True)
+
+# 3. Root Mean Squared Error (RMSE)
+rmse = mean_squared_error(y_test, y_pred, squared=False)
+#+end_src
+- [[id:ba10e7ca-778d-4e4b-8251-e398cf189a83][statsmodels/Linear Regression/Quantifying Model Fit]]
