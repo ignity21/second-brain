@@ -1,12 +1,20 @@
 :PROPERTIES:
 :ID:       3f815adf-8a11-42cd-8eed-94ee7d2b46b9
 :END:
-#+title: Sharding
+#+title: Database Sharding
 #+filetags: SystemDesign
 
-Sharding is the act of splitting a database into two or more pieces called shards.
+* Overview
+Sharding is the act of splitting a large database into smaller pieces called shards.
 - also called *data partitioning*
-- to increase the throughput
+
+* Considerations
+- Choosing appropriate *sharding key that can evenly distributed data*
+- Using [[id:3237b43a-1ce2-438a-8db3-f5ed52cecd7d][Consistent Hashing]] to solve resharding data problem.
+- Celebrity problem (hotspot key problem)
+  - may need to allocate *a shard for each celebrity*
+- Hard to perform join operations across database shards.
+  - common workaround: de-normalize the database so queries can be performed in a single table.
 
 * Sharding Strategies
 - based on a client's region
