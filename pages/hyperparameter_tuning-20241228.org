@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       30854a8a-8177-4677-881d-6264f243aa91
+:END:
+#+title: Hyperparameter Tuning
+#+filetags: :ML:
+
+* Hyperparameters
+- Ridge/lasso regression: \(\alpha\)
+- KNN: =n_neighbors=
+
+* Tuning Steps
+1. Try lots of hyperparameter values
+2. Fit all of them separately
+3. See how well they perform
+4. Choose the best performing values
+
+
+- It's essential to use [[id:5461b659-bc1a-4594-b7fb-8388345187d3][cross validation]] on the training set to avoid overfitting
+- We withhold the test set for final evaluation
+
+* Python Code
+** [[id:b035cde2-fde9-4b2a-84c9-28495f122ecc][GridSearchCV]]
+** [[id:7cddaa40-82f2-438e-92be-5d516d68db0c][RandomizedSearchCV]]

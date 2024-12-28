@@ -47,44 +47,7 @@ prediction_data = explanatory_data.assign(price=price_vs_area.predict(explanator
   - equivalent to: ~df['actual'] - model.fittedvalues~
 - ~.summary()~
 
-** Quantifying Model Fit
-*** [[id:04e7b7cf-d5d3-4e31-b06b-ba66204c56d8][R-squared]]
-
-
-*** RSE (Residual Standard Error)
-- A *typical* difference between a prediction and an observed response,
-  i.e. How much the predictions are typically wrong.
-- /same unit/ as the response variable
-- Calculating RSE
-#+begin_src python
-# one way
-rse = np.sqrt(model.mse_resid)
-
-# another way
-residuals_sq = model.resid ** 2
-sum_of_residuals_sq = sum(residuals_sq)
-degrees_of_freedom = len(df.index) - 2
-rse = np.sqrt(sum_of_residuals_sq / degrees_of_freedom)
-#+end_src
-
-*** MSE (Mean Squared Error)
-- \(MSE=\frac{1}{n}\sum_{i=1}^n(y_i, \hat{y}_i)^2\)
-- ~model.mse_resid~
-
-*** RMSE (Root Mean Squared Error)
-- Measure RMSE in the same units at the target variable
-- \(RMSE=\sqrt{MSE}\)
-#+begin_src python
-# one way
-rse = np.sqrt(model.mse_resid)
-
-# another way
-residuals_sq = model.resid ** 2
-sum_of_residuals_sq = sum(residuals_sq)
-n_obs = len(df.index)
-rmse = np.sqrt(sum_of_residuals_sq / n_obs)
-#+end_src
-- Should use RSE instead typically.
+** [[id:8038235d-fdb1-44b6-b2b9-76c38e740f0e][Regression Metrics]]
 
 ** Visualizing Model Fit
 *** Residuals vs. Fitted
@@ -194,48 +157,7 @@ plt.axhline(y=1, linestyle='dotted')
 - "Changes easy to interpret" means:
   - It's easy to reason about how changes in the explanatory variable will change the response.
 
-** Quantifying Model Fit
-*** Confusion Matrix
-|              | predicted false | predicted true |
-| actual false | correct         | false positive |
-| actual true  | false negative  | correct        |
-- Confusion matrix: the counts of each outcome
-#+begin_src python
-# manually calculate the confusion matrix
-actual_response = churn['has_churned']
-predicted_response = np.round(model.predict()) # predict() returns each observation's probability
-outcomes = pd.DataFrame({'actual': actual_response, 'predicted': predicted_response})
-print(outcomes.value_counts(sort=False))
-
-# automatically calculate the confusion matrix
-conf_matrix = model.pred_table()
-# => array([[TN, FP],
-#           [FN, TP]])
-# TN = conf_matrix[0, 0]
-# FP = conf_matrix[0, 1]
-#+end_src
-- Plotting Confusion Matrix
-#+begin_src python
-from statsmodels.graphics.mosaicplot import mosaic
-mosaic(conf_matrix)
-#+end_src
-
-[[file:images/screenshots/Quantifying_Model_Fit/2024-12-08_10-05-39_screenshot.png]]
-
-*** Metrics
-- *Accuracy* is the proportion of correct predictions.
-
-\[accuracy=\frac{TN+TP}{TN+FN+FP+TP}\]
-
-- *Sensitivity* is the proportion of true positives.
-
-\[sensitivity=\frac{TP}{FN+TP}\]
-
-- *Specificity* is the proportion of true negatives.
-
-\[specificity=\frac{TN}{TN+FP}\]
-
-- There is often a *trade-off* between sensitivity and specificity.
+** [[id:91a5b0fd-48cd-47aa-8fff-cb9cb0fd520c][Classification Metrics]]
 
 * TODO Courses
 - Intermediate Regression with ~statsmodels~ in Python

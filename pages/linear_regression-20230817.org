@@ -83,6 +83,7 @@
 | Stochastic GD   | Fast    | Yes                 | Fast    |       $\ge 2$ | Yes              | SGDRegressor     |
 | Mini-batch GD   | Fast    | Yes                 | Fast    |       $\ge 2$ | Yes              | SGDRegressor     |
 
+* [[id:8038235d-fdb1-44b6-b2b9-76c38e740f0e][Regression Metrics]]
 * Python Code
 ** Single Feature
 #+begin_src python

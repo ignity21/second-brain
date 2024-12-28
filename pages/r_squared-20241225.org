@@ -33,3 +33,6 @@
   is good. It can be misleading, especially in the presence of overfitting.
 - Does Not Indicate Causation: R-squared only indicates correlation and not causation.
 - Sensitive to Outliers: Outliers can disproportionately affect the R-squared value.
+
+* Code
+- statsmodels: ~model.rsquared~

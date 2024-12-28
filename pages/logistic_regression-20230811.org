@@ -74,3 +74,14 @@ J(\bm{w}, b) & = \frac{1}{m}\sum_{i=1}^m [L(f_{\bm{w}, b}(\bm{x^{(i)}}), y^{(i)}
 
 * [[id:5c390dc6-4c36-4f33-8a41-0b8dba9cee79][Regularized Logistic Regression]]
 * [[id:21f0b9c3-bda5-47cd-82e2-a885400f71c1][Precision and Recall]]
+* Python Code
+#+begin_src python
+from sklearn.linear_model import LogisticRegression
+logreg = LogisticRegression()
+logreg.fit(X_train, y_train)
+y_pred = logreg.predict(X_test)
+
+# Predicting probabilities
+y_pred_prob = logreg.predict_proba(X_test)[:, 1]
+#+end_src
+

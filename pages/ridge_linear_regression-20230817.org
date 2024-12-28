@@ -12,6 +12,7 @@
   - \(\alpha\) controls model complexity
     - 0: just OLS (Can lead to overfitting)
     - Very high \(\alpha\): Can lead to underfitting
+
 ** Code Example: Choosing \(\alpha\)
 #+begin_src python
 from sklearn.linear_model import Ridge
