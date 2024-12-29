@@ -21,7 +21,7 @@ from sklearn.model_selection import cross_val_score, KFold
 kf = KFold(n_splits=5, shuffle=True, random_state=42)
 reg = LinearRegression()
 
-cv_results = cross_val_score(reg, X, y, cv=kf)
+cv_results = cross_val_score(reg, X, y, cv=kf, scoring='r2')
 # return the default score (R^2) for linear regression
 
 # analyze the results
@@ -71,7 +71,7 @@ params = {"penalty": ["l1", "l2"],
 logreg = LogisticRegression()
 
 # Instantiate the RandomizedSearchCV object
-logreg_cv = RandomizedSearchCV(logreg, params, cv=kf)
+logreg_cv = RandomizedSearchCV(logreg, params, cv=kf, scoring='recall')
 
 # Fit the data to the model
 logreg_cv.fit(X_train, y_train)

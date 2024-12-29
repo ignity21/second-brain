@@ -45,3 +45,27 @@ model = Model()
 model.fit(X, y) # X: features, y: target variable
 predictions = model.predict(X_new)
 #+end_src
+
+* Preprocessing Data
+:PROPERTIES:
+:ID:       41289401-f997-4222-97c6-60a729eb8234
+:END:
+- Numeric data
+- No missing values
+
+** Dealing with Categorical Features
+- Converting to *dummy variables*
+  - 0: Observation was NOT that category
+  - 1: Observation was that category
+[[file:images/screenshots/Dealing_with_Categorical_Features/2024-12-29_11-00-41_screenshot.png]]
+- Can delete the last column "Rock"
+  - If a song is not any of the first nine genres, then it is a rock song
+  - If we don't delete it, we are duplicating information. might be an issue for some models
+- Code:
+  - scikit-learn: ~OneHotEncoder()~
+  - pandas: ~get_dummies()~
+#+begin_src python
+# genre: categorical feature
+# popularity: target variable
+music_dummies = pd.get_dummies(music_df, columns=['genre'], drop_first=True)
+#+end_src

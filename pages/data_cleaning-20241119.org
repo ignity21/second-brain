@@ -337,3 +337,4 @@ age_equ = age_manual == users['Age']
 inconsistent_age = users[~age_equ]
 consistent_age = users[age_equ]
 #+end_src
+* [[id:41289401-f997-4222-97c6-60a729eb8234][scikit-learn Data Preprocessing]]

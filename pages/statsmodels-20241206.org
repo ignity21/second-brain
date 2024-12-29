@@ -158,7 +158,6 @@ plt.axhline(y=1, linestyle='dotted')
   - It's easy to reason about how changes in the explanatory variable will change the response.
 
 ** [[id:91a5b0fd-48cd-47aa-8fff-cb9cb0fd520c][Classification Metrics]]
-
 * TODO Courses
 - Intermediate Regression with ~statsmodels~ in Python
 - Generalized Linear Models in Python
