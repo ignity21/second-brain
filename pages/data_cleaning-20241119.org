@@ -37,7 +37,7 @@ outliers = salaries[(salaries['salary_usd'] < lower) | (salaries['salary_usd'] >
 df.isna().any()
 
 # Count missing values by column
-df.isna().sum()
+df.isna().sum().sort_values()
 
 # Bar plot of missing values by variable
 df.isna().sum().plot(kind='bar')
@@ -71,11 +71,38 @@ df.dropna(subset=cols_to_drop, inplace=True)
 
 *** Imputing a Summary Statistic
 - Impute mean, median, mode depends on distribution and context
+- Common to use mean, median
+- For categorical values, use the most frequent value (the mode)
 #+begin_src python
 cols_with_missing_values = df.columns[df.isna().any()]
 
 for col in cols_with_missing_values:
     df[col] = df[col].fillna(df[col].median()[0])
+#+end_src
+- ~scikit-learn~ transformers
+#+begin_src python
+# Split features into categorical and numerical
+X_cat = music_df["genre"].values.reshape(-1, 1)
+X_num = music_df.drop(["genre", "popularity"], axis=1).values
+y = music_df["popularity"].values
+
+X_train_cat, X_test_cat, y_train, y_test = train_test_split(
+    X_cat, y, test_size=0.2, random_state=42)
+X_train_num, X_test_num, y_train, y_test = train_test_split(
+    X_num, y, test_size=0.2, random_state=42)
+
+# Impute categorical missing values
+imp_cat = SimpleImputer(strategy="most_frequent")
+X_train_cat = imp_cat.fit_transform(X_train_cat)
+X_test_cat = imp_cat.transform(X_test_cat)
+
+# Impute numerical missing values
+imp_num = SimpleImputer(strategy="mean")
+X_train_num = imp_num.fit_transform(X_train_num)
+X_test_num = imp_num.transform(X_test_num)
+
+X_train = np.append(X_train_cat, X_train_num, axis=1)
+X_test = np.append(X_test_cat, X_test_num, axis=1)
 #+end_src
 
 *** Imputing by Sub-group

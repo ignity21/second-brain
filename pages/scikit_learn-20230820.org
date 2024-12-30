@@ -19,6 +19,26 @@ Some estimators can transform a dataset; they are called /transformers/.
 - This transformation generally relies on the learned parameters.(~fit()~ results)
 - Convenience method ~fit_transform()~
 
+*** Pipeline
+Used to run a series of transformations.
+#+begin_src python
+from sklearn.pipeline import Pipeline
+
+music_df = music_df.dropna(subset=["genre", "popularity", "loudness"])
+music_df["genre"] = np.where(music_df["genre"] == "Rock", 1, 0)
+X = music_df.drop("genre", axis=1).values
+y = music_df["genre"].values
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42)
+
+# pipeline
+steps = [("imputation", SimpleImputer()), ("model", LogisticRegression())]
+pipeline = Pipeline(steps)
+
+pipeline.fit(X_train, y_train)
+#+end_src
+
 *** Predictors
 Some estimators are capable of making predictions given a dataset; they are called predictors.
 - ~predict()~ takes a dataset of new instances and returns a dataset of corresponding predictions.
