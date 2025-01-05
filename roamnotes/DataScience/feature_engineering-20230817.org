@@ -10,4 +10,4 @@ Using intuition to design new features, by transforming or combining original fe
  - Example: Area may be more predictive. $area = frontage \times depth$
 
 * [[id:d24c5dbe-3329-40a8-b8e2-3566499ce38b][Feature Selection]]
-* [[id:d1d65fac-3a72-4095-8a05-17f4fb073475][Data Transforming]]
+*

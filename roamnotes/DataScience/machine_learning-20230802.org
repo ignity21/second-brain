@@ -72,6 +72,7 @@ Your spam filter is a Machine Learning program that, given examples of spam emai
 :PROPERTIES:
 :ID:       c496154c-f57c-4de7-b4ba-a89ad7472802
 :END:
-** [[id:8dc25af2-f3bd-4ec4-b949-40958e167e75][Feature Scaling]]
 ** [[id:f8088283-0154-4050-9cef-911f5ae69ef4][Feature Engineering]]
+** [[id:8dc25af2-f3bd-4ec4-b949-40958e167e75][Feature Scaling]]
+
 * [[id:62150352-f6f0-466e-a59d-0874064ddb74][ML Development]]
