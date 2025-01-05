@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       d1d65fac-3a72-4095-8a05-17f4fb073475
+:END:
+#+title: Data Transforming
+#+filetags: :Python:ML:
+
+* Imputers
+** SimpleImputer
+- to fill missing values
+
+* [[id:8dc25af2-f3bd-4ec4-b949-40958e167e75][Feature Scaling]]

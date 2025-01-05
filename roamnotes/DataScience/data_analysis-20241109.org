@@ -9,6 +9,7 @@
 [[file:images/screenshots/Data_Analysis_Workflow/2024-11-09_20-55-57_screenshot.png]]
 * [[id:16fff215-ce9c-45ca-a5d3-5e509f647732][Data Importing]]
 * [[id:de66c696-5ca1-4fbc-a9b2-097ee7bf4ccd][Data Cleaning]]
+* [[id:d1d65fac-3a72-4095-8a05-17f4fb073475][Data Transforming]]
 * [[id:2be62d58-9f1c-4c6e-a20e-5722a4e0c4e7][Data Sampling]]
 * [[id:d31a2f5c-51c6-4742-8248-8d3c8904011a][Exploratory Data Analysis]]
 * [[id:41c5482c-9098-4b60-a2ff-e3c13bfb4486][Data Visualization]]

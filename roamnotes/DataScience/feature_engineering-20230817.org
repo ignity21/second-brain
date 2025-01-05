@@ -4,8 +4,10 @@
 #+title: Feature Engineering
 #+filetags: ML
 
+* [[id:41289401-f997-4222-97c6-60a729eb8234][Preprocessing Data]] first
 * Concept
 Using intuition to design new features, by transforming or combining original features.
  - Example: Area may be more predictive. $area = frontage \times depth$
 
 * [[id:d24c5dbe-3329-40a8-b8e2-3566499ce38b][Feature Selection]]
+* [[id:d1d65fac-3a72-4095-8a05-17f4fb073475][Data Transforming]]
