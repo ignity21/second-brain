@@ -16,5 +16,11 @@
 ** org-roam-ui
 - 子节点会出现在 Linked references 中
 
+
 * Useful Tips
 - (debug-on-variable-change 'some-variable)
+
+* TODO List
+- Add github.io for exported htmls
+- Streamlined anki note-taking process
+- Migrate images of ML notes

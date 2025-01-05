@@ -36,3 +36,4 @@
 
 * Code
 - statsmodels: ~model.rsquared~
+- scikit-learn: ~model.score(X_)~
