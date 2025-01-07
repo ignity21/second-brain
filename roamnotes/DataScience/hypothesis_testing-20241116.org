@@ -5,7 +5,7 @@
 #+filetags: :Python:DataScience:Math:Statistics:
 
 * Steps
-1. [[Define Hypothesi][Define null(H0) and alternative(H1) hypothesis]]
+1. [[Define Hypothesis][Define null(H0) and alternative(H1) hypothesis]]
 2. [[Choose Test][Choose the appropriate statistical test]]
 3. Calculate the p-value
 4. Determine the statistical significance -- p value is then compared against the significance level.

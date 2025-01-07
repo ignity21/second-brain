@@ -52,5 +52,7 @@ Classifying Iris Species
 
 ** Making Predictions
    # making predictions
-   X_new = np.array([[5, 2.9, 1, 0.2]])
-   prediction = knn.predict(X_new)
+#+begin_src python
+X_new = np.array([[5, 2.9, 1, 0.2]])
+prediction = knn.predict(X_new)
+#+end_src
