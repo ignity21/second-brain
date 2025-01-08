@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       f3b97038-dc5e-4f69-aa6d-8466b26df753
+:END:
+#+title: Python Cookbook
+#+filetags: :Python:
+
+* Data Structures
+#+begin_src python
+# unpacking a sequence into separate variables
+data = [ 'ACME', 50, 91.1, (2012, 12, 21) ]
+name, shares, price, date = data
+
+# fixed-length queue
+from collections import deque
+q = deque(maxlen=3)
+
+# heap data structure
+import heapq
+nums = [1, 8, 2, 23, 7, -4, 18, 23, 42, 37, 2]
+print(heapq.nlargest(3, nums))
+print(heapq.nsmallest(3, nums))
+heapq.heapify(nums) # convert list into heap
+#+end_src

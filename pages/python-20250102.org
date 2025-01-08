@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       553340b5-a3ec-4715-ba52-7c3ba006be11
+:END:
+#+title: Python
+#+filetags: :Python:
+
+* [[id:d804f2b8-17a7-4ae0-a03b-b3ab77ba13fb][Python Modules]]
+* [[id:f3b97038-dc5e-4f69-aa6d-8466b26df753][Python Cookbook]]
