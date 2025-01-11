@@ -31,7 +31,7 @@ print(scores)
 ** Difference with Ridge
 - Example: \(\theta_1=2\) and \(\theta_2=0.5\)
 #+CAPTION: Lasso versus Ridge regularization
-[[file:../assets/ML/LassoVsRidge.png]]
+[[file:images/ML/LassoVsRidge.png]]
 - \(\theta_2\) will reach 0 soon for L1 norm.
   - Ends up bouncing around the global optimum
   - To avoid bouncing around, you need to gradually reduce the learning rate during training.

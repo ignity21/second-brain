@@ -5,7 +5,7 @@
 #+filetags: :ML:
 
 * Why?
-[[file:../assets/ML/FeatureScaling.png]]
+[[file:images/ML/FeatureScaling.png]]
 
 * Methods
 ** Min-Max Scaling

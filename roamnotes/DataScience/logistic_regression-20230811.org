@@ -11,7 +11,7 @@
 
 ** Sigmoid Function
 or Logistic Function
-[[file:../assets/ML/SigmoidFunction.png]]
+[[file:images/ML/SigmoidFunction.png]]
 \[g(z)=\frac{1}{1+e^{-z}}\]
 - \(0 < g(z) < 1\)
 - \(g(z)\ge 0.5\) when \(z\ge 0\)
@@ -43,11 +43,11 @@ or Logistic Function
 
 - \(y^{(i)}=1\)
 
-[[file:../assets/ML/LogisticLossFunction_1.png]]
+[[file:images/ML/LogisticLossFunction_1.png]]
 
 - \(y^{(i)}=0\)
 
-[[file:../assets/ML/LogisticLossFunction_2.png]]
+[[file:images/ML/LogisticLossFunction_2.png]]
 
 *** Simplified Loss Function
 \[L(f_{\bm{w}, b}(\bm{x^{(i)}}), y^{(i)})=-y^{(i)}\log(f_{\bm{w}, b}(\bm{x^{(i)}}))-(1-y^{(i)})\log(1-f_{\bm{w}, b}(\bm{x^{(i)}}))\]

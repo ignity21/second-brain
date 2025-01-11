@@ -29,7 +29,7 @@ $$\frac{TruePositive}{ActualPositive}$$
 - Plotting the curve and balancing precision and recall
   - Pick threshold manually
 
-[[file:../assets/ML/PrecisionAndRecall.png]]
+[[file:images/ML/PrecisionAndRecall.png]]
 
 - If you want to automatically trade-off precision and recall,
   - use *F1 score* metric, Combing precision and recall into a single score.
