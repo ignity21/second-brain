@@ -1,5 +1,6 @@
 :PROPERTIES:
 :ID:       f4ca75d9-362e-4d52-8e5c-0362c6882dc2
+:ROAM_ALIASES: sklearn
 :END:
 #+title: Scikit-Learn
 #+filetags: :Python:ML:
@@ -30,10 +31,13 @@ X = music_df.drop("genre", axis=1).values
 y = music_df["genre"].values
 
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.3, random_state=42)
+    X, y, test_size=0.3, random_state=42
+)
 
-# pipeline
-steps = [("imputation", SimpleImputer()), ("model", LogisticRegression())]
+# Build pipeline
+steps = [("imp_mean", SimpleImputer()),
+         ("scaler", StandardScaler()),
+         ("logreg", LogisticRegression())]
 pipeline = Pipeline(steps)
 
 pipeline.fit(X_train, y_train)

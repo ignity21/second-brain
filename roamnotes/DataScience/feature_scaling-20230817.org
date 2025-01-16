@@ -16,3 +16,9 @@
 
 ** Z-score Normalization
 \[x_{scaled}^{(j)}=\frac{x^{(j)}-\mu_x}{\sigma_x}\]
+
+* Models Affected by Scaling
+- [[id:4dec577e-c1d9-4b01-9a95-63e3413b42a9][KNN]]
+- [[id:b6f03e6b-8850-4f2d-8d2d-f337029fe1e7][Linear Regression]]
+- [[id:9db494ed-d782-4bfe-b9d2-52c768251490][Logistic Regression]]
+- [[id:31b71a06-0592-444b-b410-916ee717b488][Neural Network]]

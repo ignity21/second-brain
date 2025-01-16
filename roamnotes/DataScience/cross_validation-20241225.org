@@ -41,13 +41,14 @@ param_grid = {"alpha": np.arange(0.0001, 1, 0.1), # hyperparameter for ridge reg
               "solver": ["sag", "lsqr"], # solver for ridge regression
               }
 ridge = Ridge()
-ridge_cv = GridSearchCV(ridge, param_grid, cv=kf)
-ridge_cv.fit(X_train, y_train)
-print(ridge_cv.best_params_, ridge_cv.best_score_)
+tuning = GridSearchCV(ridge, param_grid, cv=kf)
+tuning.fit(X_train, y_train)
+print(tuning.best_params_, ridge_cv.best_score_)
 # {'alpha': 0.0001, 'solver': 'sag'} 0.75839
 
 # Evaluate on test data
-test_score = ridge_cv.score(X_test, y_test)
+test_score = tuning.score(X_test, y_test)
+print(f"Tuned parameters: {tuning.best_params_}, Accuracy on test data: {test_score}")
 #+end_src
 - number of fits example:
   - 10-fold, 3 hyperparam, 30 total values = 900 fits
