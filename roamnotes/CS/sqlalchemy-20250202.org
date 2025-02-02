@@ -1,0 +1,34 @@
+:PROPERTIES:
+:ID:       65ffd859-1077-49ff-b553-11eed302b111
+:END:
+#+title: SQLAlchemy
+#+filetags: :Database:Python:
+
+* Workflows
+** SQL Querying
+- Import
+- Create engine
+- Connect to the engine
+- Query the database
+- Save query results to a DataFrame
+- Close the connection
+
+* SQLite Example
+#+begin_src python
+from sqlalchemy import create_engine
+
+engine = create_engine("sqlite:///home/root/northwind.db")
+
+table_names = engine.table_names()
+
+with engine.connect() as conn:
+    query = "SELECT * FROM Orders"
+    rs= conn.execute(query)
+
+    # to DataFrame
+    df = pd.DataFrame(rs.fetchmany(size=5)) # rs.fetchall()
+    df.columns = rs.keys()
+
+# easy way
+df = pd.read_sql_table(query, engine)
+#+end_src

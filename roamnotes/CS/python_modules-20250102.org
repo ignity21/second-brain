@@ -5,3 +5,4 @@
 #+filetags: :Python:
 
 - [[id:595c863f-d7c9-41b0-ade8-9416418b2c31][Python DA Modules]]
+- [[id:65ffd859-1077-49ff-b553-11eed302b111][SQLAlchemy]]

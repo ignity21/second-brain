@@ -15,9 +15,10 @@ data = np.loadtxt(filename, delimiter=',',
 ** Excel
 #+begin_src python
 xls = pd.ExcelFile(filename)
-df = xls.parse(sheet_name)
+sheetnames = xls.sheet_names
+df = xls.parse(sheetnames[0])
 # or
-df = pd.read_excel(filename, sheet_name, skiprows=1)
+df = pd.read_excel(filename, 'sheet1', skiprows=1)
 #+end_src
 
 ** SAS
