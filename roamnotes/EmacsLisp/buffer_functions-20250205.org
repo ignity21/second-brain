@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       fd832357-7836-485f-90ad-f7360b25fcce
+:END:
+#+title: Buffer Functions
+
+* Buffer Names
+#+begin_src elisp
+(buffer-name)
+#+end_src
+
+#+RESULTS:
+: useful_functions-20250205.org
+- ~(buffer-file-name)~: abs file path(str) of buffer
+
+* Buffer Instance
+- ~(current-buffer)~
+- ~(other-buffer)~: returns the most recent selected buffer
+- ~(switch-to-buffer (other-buffer))~
+- ~(set-buffer (other-buffer))~

@@ -1,4 +1,10 @@
 :PROPERTIES:
 :ID:       c84a722b-6419-4d6d-9224-802bb2dfbe96
 :END:
-#+title: Symbol
+#+title: Symbols
+
+* Symbol Name String
+#+begin_src elisp
+(symbol-name 'foo) ; => "foo"
+(make-symbol "foo") ; => foo
+#+end_src
