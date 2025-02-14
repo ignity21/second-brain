@@ -6,10 +6,37 @@
 * Arguments
 - Variable number of args *&rest*: ~(concat &rest SEQUENCES)~
 
-* ~message()~
+* ~(message)~
 #+begin_src elisp
 (message "There are %d %s in the office!"
          (- fill-column 14) "pink elephants")
+#+end_src
+
+* ~interactive~ Special Forms
+- Call interactive function for its *side effects*
+  - return value is not displayed in the echo area (should use ~(message)~)
+- ~(interactive "p")~
+  - The "p" tells Emacs to pass the prefix (number) to the function
+  - Use =C-u prefix M-x= to pass arguments
+#+begin_src elisp
+(defun multiply-by-seven (number)       ; Interactive version.
+  "Multiply NUMBER by seven."
+  (interactive "p")
+  (message "The result is %d" (* 7 number)))
+
+(defun name-of-function (num char)
+  "documentation..."
+  (interactive "p\ncZap to char: ") ; p fornumber, c for char
+  (message "num: %d, char: %c" num char))
+#+end_src
+
+* Local Variables
+#+begin_src elisp
+(let ((variable value)
+      (variable value)
+      variable ; default: nil
+      ...)
+  body...)
 #+end_src
 
 * [[id:e9340ee9-2f0b-4d90-9f1f-2465fbad8288][Useful Functions]]

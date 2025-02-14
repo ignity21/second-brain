@@ -17,3 +17,7 @@
 - ~(other-buffer)~: returns the most recent selected buffer
 - ~(switch-to-buffer (other-buffer))~
 - ~(set-buffer (other-buffer))~
+
+* Location of Point
+- ~(buffer-size)~
+- ~(point)~
