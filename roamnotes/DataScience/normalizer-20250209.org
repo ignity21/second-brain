@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       c76969a3-86b9-4225-abd0-160cfdc6b4ac
+:END:
+#+title: Normalizer
+#+filetags: :ML:
+
+* Overview
+Normalizer is used to scale individual samples to have unit norm.
+- it adjusts the values of each sample vector (row) such that the vector has a norm (magnitude) of 1.
+- useful when the direction of the vector is more important than its magnitude such as in text classification or clustering.
+
+* Methods
+- L1 Normalization :: Scales the vector such that the sum of the absolute values is 1. This is useful when you want to emphasize sparsity.
+
+- L2 Normalization :: Scales the vector such that the sum of the squares is 1. This is the most common normalization method, as it maintains the Euclidean distance between points.
+
+- Max Normalization :: Scales the vector such that the maximum absolute value is 1. This method is useful when you want to emphasize the strongest signal in the sample.

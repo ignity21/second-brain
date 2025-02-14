@@ -66,3 +66,40 @@ for k in ks:
 
 plt.plot(ks, inertias, '-o')
 #+end_src
+** Improving Performance
+*** [[id:8dc25af2-f3bd-4ec4-b949-40958e167e75][Feature Scaling]]
+*** [[id:c76969a3-86b9-4225-abd0-160cfdc6b4ac][Normalizer]]
+#+begin_src python
+from sklearn.preprocessing import Normalizer
+
+normalizer = Normalizer()
+kmeans = KMeans(n_clusters=10)
+pipeline = make_pipeline(normalizer, kmeans)
+pipeline.fit(samples)
+#+end_src
+
+* Examples
+** Cluster Companies Using Their Daily Stock Price Movements
+#+begin_src python
+# movements:
+# each row corresponds to a company
+# each column corresponds to a trading day.
+
+# companies: list of the company names.
+
+# Because some stocks are more expensive than others, should normalize the data.
+from sklearn.preprocessing import Normalizer
+from sklearn.cluster import KMeans
+import pandas as pd
+
+normalizer = Normalizer()
+kmeans = KMeans(n_clusters=10)
+
+pipeline = make_pipeline(normalizer, kmeans)
+pipeline.fit(movements)
+
+labels = pipeline.predict(movements)
+
+df = pd.DataFrame({'labels': labels, 'companies': companies})
+print(df.sort_values(by='labels'))
+#+end_src
