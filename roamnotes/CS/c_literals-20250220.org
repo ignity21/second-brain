@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       93ea9dcc-19c5-43cf-8695-7d75e0e07522
+:END:
+#+title: C++ Literals
+#+filetags: :C++:
+
+* Overview
+- int :: =26, 0x1A, 032, 0b111010=
+- float :: =2.1, 2.1f, 0.021e2, 21e-1, .26E1f=
+- char :: ='a', 97, '\x60'(Hex), '\100'(Oct)=

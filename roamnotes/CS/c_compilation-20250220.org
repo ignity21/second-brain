@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       726f8c7e-5021-4247-b502-70a38c5b3173
+:END:
+#+title: C++ Compilation
+#+filetags: :C++:
+
+* Compilation Process
+#+caption: C++ Compilation Process
+[[../assets/CPP/c-compilation-process.svg]]
+
+* [[id:1c06b333-7aae-484c-af97-74d8009a6aa2][Include Guard]]
