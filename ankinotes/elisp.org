@@ -1,0 +1,49 @@
+#+title: Elisp
+
+* Deck
+  :PROPERTIES:
+  :ANKI_DECK: CS::Emacs
+  :END:
+** ~C-x C-x~
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1740539763658
+:END:
+- function: ~exchange-point-and-mark~
+- example:
+  - ~M-<~ set point to beginning of the buffer
+  - ~C-x C-x~ select the region from beginning to current position
+
+** M-h
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1740539764688
+:END:
+- mark-paragraph: Put point at beginning of this paragraph, mark at end.
+
+** ~save-excursion~
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1740539765693
+:END:
+- Save point, and current buffer; execute BODY; restore those things.
+#+begin_src elisp
+(let ((var val))
+  (save-excursion
+    BODY))
+#+end_src
+
+** M-.
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1740540768688
+:END:
+- xref-find-definitions
+- Use ~M-,~ to jump backward
+
+** C-x h
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1740540940353
+:END:
+- mark-whole-buffer: Mark the whole buffer as a region

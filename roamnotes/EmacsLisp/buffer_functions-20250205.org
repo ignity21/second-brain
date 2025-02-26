@@ -17,7 +17,18 @@
 - ~(other-buffer)~: returns the most recent selected buffer
 - ~(switch-to-buffer (other-buffer))~
 - ~(set-buffer (other-buffer))~
+- ~(insert-buffer-substring)~
+- ~(get-buffer)~, ~(get-buffer-create)~
 
-* Location of Point
-- ~(buffer-size)~
-- ~(point)~
+** ~(read-buffer)~
+#+begin_src elisp
+(read-buffer
+ "Select buffer: " ; a prompt as first argument
+ ;; default if you don't specify anything
+ (other-buffer (current-buffer) t)
+ )
+#+end_src
+
+** ~(insert-buffer-substring)~
+- ~(insert-buffer-substring BUFFER &optional START END)~
+Copy a region of text from a buffer that is passed to the function as an argument and insert the region into the current buffer.

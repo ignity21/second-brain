@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       e19ead80-8836-42bb-a9cb-c9f538ef7d1a
+:END:
+#+title: Emacs Tips
+
+* Point and Mark
+- ~C-x C-x~ ~exchange-point-and-mark~
+  - e.g. ~M-<~ ~C-x C-x~

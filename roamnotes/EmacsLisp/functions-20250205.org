@@ -10,6 +10,27 @@
 #+begin_src elisp
 (message "There are %d %s in the office!"
          (- fill-column 14) "pink elephants")
+n#+end_src
+
+* Examples
+#+begin_src elisp
+(defun simplified-beginning-of-buffer ()
+  "Move point to the beginning of the buffer;
+leave mark at previous position."
+  (interactive)
+  (push-mark) ; leave a mark at the original position in the buffer; C-h v mark-ring
+  (goto-char (point-min)) ; move to the beginning of the buffer
+  )
+
+(defun mark-whole-buffer ()
+  "Put point at beginning and mark at end of buffer.
+Just toy, it is usually a mistake for a Lisp function to use any subroutine
+that uses or sets the mark."
+  (interactive)
+  (push-mark (point)) ; same as (push-pack)
+  (push-mark (point-max) nil t) ; set a mark at the end of the buffer
+  (goto-char (point-min)) ; move to the beginning of the buffer
+  )
 #+end_src
 
 * ~interactive~ Special Forms
