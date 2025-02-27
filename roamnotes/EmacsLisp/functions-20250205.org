@@ -13,6 +13,7 @@
 n#+end_src
 
 * Examples
+** Buffer-related
 #+begin_src elisp
 (defun simplified-beginning-of-buffer ()
   "Move point to the beginning of the buffer;
@@ -31,26 +32,37 @@ that uses or sets the mark."
   (push-mark (point-max) nil t) ; set a mark at the end of the buffer
   (goto-char (point-min)) ; move to the beginning of the buffer
   )
+
+(defun copy-to-buffer (buffer start end)
+  "Replace the text of the current buffer with the text of the region."
+  (interactive "BCopy to buffer: \nr")
+  (let ((oldbuf (current-buffer))) ; bind-oldbuf-to-value-of-current-buffer
+    (with-current-buffer (get-buffer-create buffer) ; with-the-buffer-you-are-copying-to
+      (barf-if-buffer-read-only) ; but-do-not-erase-or-copy-to-a-read-only-buffer
+      (erase-buffer)
+      (save-excursion
+        (insert-buffer-substring oldbuf start end) ; insert-substring-from-oldbuf-into-buffer
+        ))))
 #+end_src
 
-* ~interactive~ Special Forms
-- Call interactive function for its *side effects*
-  - return value is not displayed in the echo area (should use ~(message)~)
-- ~(interactive "p")~
-  - The "p" tells Emacs to pass the prefix (number) to the function
-  - Use =C-u prefix M-x= to pass arguments
+** Text-related
 #+begin_src elisp
-(defun multiply-by-seven (number)       ; Interactive version.
-  "Multiply NUMBER by seven."
-  (interactive "p")
-  (message "The result is %d" (* 7 number)))
-
-(defun name-of-function (num char)
-  "documentation..."
-  (interactive "p\ncZap to char: ") ; p fornumber, c for char
-  (message "num: %d, char: %c" num char))
+(defun zap-to-char (arg char)
+  "Kill up to and including ARG'th occurrence of CHAR.
+Case is ignored if `case-fold-search' is non-nil in the current buffer.
+Goes backward if ARG is negative; error if CHAR not found."
+  (interactive "p\ncZap to char: ")
+  ;; '\n' is the separator
+  ;; 'p' means that the first argument will be passed the value of a processed prefix.
+  (if (char-table-p translation-table-for-input)
+      (setq char (or (aref translation-table-for-input char) char)))
+  (kill-region (point) (progn
+                         (search-forward (char-to-string char)
+                                         nil nil arg)
+                         (point))))
 #+end_src
 
+* [[id:67ee9921-b986-40d1-a2ca-45fce97f4a48][~interactive~ Special Forms]]
 * Local Variables
 #+begin_src elisp
 (let ((variable value)
@@ -60,4 +72,5 @@ that uses or sets the mark."
   body...)
 #+end_src
 
+* [[id:792a006c-552e-418e-8fbe-0be91a7c36f0][Inline Functions]]
 * [[id:e9340ee9-2f0b-4d90-9f1f-2465fbad8288][Useful Functions]]

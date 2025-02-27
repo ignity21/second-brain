@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       bcb4ec09-2d9e-428b-9f67-074e7336ab55
+:END:
+#+title: Macros
+
+* Overview
+A Lisp macro enables you to define new *control constructs* and other *language features*.
+- It tells *how to compute another Lisp expression*
+  - instead of telling how to compute a value
+- Macros operate on the *unevaluated expressions for the argument*
+
+* Examples
+** Simple Example
+#+begin_src elisp
+;; just like ++ in C, (inc x)
+(defmacro inc (var) ; argument var is a symbol
+  ;; generate code (setq var (1+ var))
+  (list 'setq var (list '1+ var))
+  ;; Lisp proceeds this expansion
+  )
+#+end_src
+
+* Built-in Macros
+** ~when~
+A when expression is simply a programmers' convenience.(syntax sugar)
+- It is like an if without the possibility of an else clause

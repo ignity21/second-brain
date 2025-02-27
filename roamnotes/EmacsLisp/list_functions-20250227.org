@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       526a68e0-3df6-483b-b4f8-749d92983f85
+:END:
+#+title: List Functions
+
+* Names
+- car :: Contents of the Address part of the Register
+- cdr :: (pronounced “could-er”) Contents of the Decrement part of the Register
+- cons :: it is an abbreviation of the word "construct"
+
+* Useful Functions
+- ~car/cdr~
+- ~(cons 'pine '(fir oak maple))~ first element to the list head
+- ~(length LIST)~
+- ~(nthcdr N LIST)~: returns list without its first N items
+- ~(nth LIST)~: returns the Nth element of the list (index)
+- ~(setcar LIST NEWFIRST)~
+- ~(setcdr LIST NOFIRST-LIST)~

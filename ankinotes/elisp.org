@@ -11,7 +11,7 @@
 :END:
 - function: ~exchange-point-and-mark~
 - example:
-  - ~M-<~ set point to beginning of the buffer
+  - ~M-<~ move point to beginning of the buffer, push mark at previous position
   - ~C-x C-x~ select the region from beginning to current position
 
 ** M-h
@@ -47,3 +47,12 @@
 :ANKI_NOTE_ID: 1740540940353
 :END:
 - mark-whole-buffer: Mark the whole buffer as a region
+
+** Narrowing
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1740618021304
+:END:
+- ~C-x n~
+- ~C-x n w~ widen
+- Use case: replace a word in one part of a buffer but not in another
