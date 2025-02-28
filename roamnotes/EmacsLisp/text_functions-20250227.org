@@ -5,3 +5,4 @@
 
 - ~(zap-to-char (NTH CHAR))~
 - ~(kill-region)~ It clips text from a region and copies that text to the kill ring.
+- ~(copy-region-as-kill)~: copies a region of text from a buffer and saves it in the kill-ring.

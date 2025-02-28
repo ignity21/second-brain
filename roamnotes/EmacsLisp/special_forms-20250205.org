@@ -17,6 +17,15 @@
 ;; => "a: 1, b: nil, c: nil, d: 3"
 #+end_src
 
+** ~let*~
+Variables in the latter part of the varlist can make use of the values to which Emacs set variables earlier in the varlist.
+#+begin_src elisp
+(let* ((append-to (get-buffer-create buffer))
+       (windows (get-buffer-window-list append-to t t)) ; use append-to
+       point)
+  BODY...)
+#+end_src
+
 * ~save-excursion~
 :PROPERTIES:
 :ID:       f21f0312-15cd-4a7a-8176-7c89e220f0d3

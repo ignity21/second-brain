@@ -1,0 +1,42 @@
+:PROPERTIES:
+:ID:       3874f863-df85-43b5-8eec-e5e3a6c49810
+:END:
+#+title: Loops
+
+* ~when~
+#+begin_src elisp
+(defun print-elements-of-list (list)
+  "Print each element of LIST on a line of its own."
+  (while list
+    (print (car list))
+    (setq list (cdr list))))
+#+end_src
+
+* ~dolist~
+- like ~for val in myitems:~ in Python
+#+begin_src elisp
+(setq animals '(gazelle giraffe lion tiger))
+
+;; using dolist macro
+(defun reverse-list-with-dolist (list)
+  "Using dolist, reverse the order of LIST."
+  (let (value) ; initialize value to empty list
+    (dolist (element list value)
+      (setq value (cons element value)))))
+
+(reverse-list-with-dolist animals)
+#+end_src
+
+
+* ~dotimes~
+- like ~for i in range(len(rows)):~ in Python
+#+begin_src elisp
+(defun triangle-using-dotimes (number-of-rows)
+  "Using `dotimes', add up the number of pebbles in a triangle."
+(let ((total 0))  ; otherwise a total is a void variable
+  (dotimes (number number-of-rows)
+    (setq total (+ total (1+ number))))
+  total))
+
+(triangle-using-dotimes 4)
+#+end_src

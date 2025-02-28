@@ -4,6 +4,7 @@
   :PROPERTIES:
   :ANKI_DECK: CS::Emacs
   :END:
+
 ** ~C-x C-x~
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
@@ -56,3 +57,10 @@
 - ~C-x n~
 - ~C-x n w~ widen
 - Use case: replace a word in one part of a buffer but not in another
+
+** M-y
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1740703084489
+:END:
+- yank loop over the kill-*ring*
