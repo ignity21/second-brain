@@ -1,0 +1,29 @@
+:PROPERTIES:
+:ID:       e28fe170-8733-448f-9911-2f785b901549
+:END:
+#+title: Debugging
+
+* Two Debuggers
+- debug
+- edebug
+
+* debug
+- Emacs starts the debugger automatically when your function has an error.
+** debug-on-entry
+- ~M-x debug-on-entry RET function-name RET~
+| Key | Binding                  |
+|-----+--------------------------|
+| d   | step-through expressions |
+| c   | continue                 |
+| e   | eval expression          |
+| q   | quit                     |
+- ~cancel-debug-on-entry~
+
+** Debug Infinite Loops
+- ~toggle-debug-on-quit~
+- Start debug whenever you type ~C-g~
+
+* Edebug
+Source Level Debugger
+- ~M-x edebug-defun~, use ~SPC~ to step through
+- See [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Edebug.html#Edebug][Edebug]]

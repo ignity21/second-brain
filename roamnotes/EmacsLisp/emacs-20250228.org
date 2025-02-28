@@ -53,7 +53,4 @@ Arguments
   - The file must be located in a directory specified by load-path
 - interactive -> t
 
-* Debugging
-Two debuggers
-- debug
-- edebug
+* [[id:e28fe170-8733-448f-9911-2f785b901549][Debugging]]
