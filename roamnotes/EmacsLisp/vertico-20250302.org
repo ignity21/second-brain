@@ -1,0 +1,34 @@
+:PROPERTIES:
+:ID:       f0e95f32-7d9c-4faa-ad96-6e6057d5f52c
+:END:
+#+title: vertico
+
+* Overview
+- Enhancing the built-in ~completing-read~ interface
+- The current candidate is inserted with TAB and selected with RET.
+
+* Packages
+- Vertico: the vertical completion user interface
+- Consult: a suite of useful commands using ~completing-read~
+- Embark: a set of minibuffer actions
+- Marginalia: annotations to completion candidates
+- Orderless: better filtering methods
+
+** Consult
+- ~consult-grep~, ~consult-ripgrep~
+- ~consult-line~
+- ~consult-buffer~
+- ~consult-imenu~
+
+* Keybindings
+| Keybinding | Description                   |
+|------------+-------------------------------|
+| C-c ;      | ~<embark>~                    |
+| C-c ; e    | ~embark-export~               |
+| C-c ; c    | ~embark-collect~              |
+| C-l        | vertico delete word           |
+| C-j        | minibuffer exit               |
+| C-c C-[    | previous group                |
+| C-c C-]    | next group                    |
+| C-c C-SPC  | preview the candidate         |
+| M-RET      | submit non-existing candidate |

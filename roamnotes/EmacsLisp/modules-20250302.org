@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       4b047da0-1409-491b-8bcf-5aa1ca4e7822
+:END:
+#+title: Doom Modules
+
+* Completion
+- [[id:f0e95f32-7d9c-4faa-ad96-6e6057d5f52c][vertico]]

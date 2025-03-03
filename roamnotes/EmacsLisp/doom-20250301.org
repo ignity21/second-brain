@@ -32,4 +32,5 @@
 - ~use-package-hook!~ allows you to disable, append/prepend to and/or overwrite ~use-package!~ blocks
   - must be used before that ~use-package!~ block (in =init.el=)
 
-* [[id:8e3d9b83-691a-43cc-95fc-22375cd003c2][Writing Doom Modules]]
+* [[id:4b047da0-1409-491b-8bcf-5aa1ca4e7822][Doom Modules]]
+* [[id:8e3d9b83-691a-43cc-95fc-22375cd003c2][Writing Your Own Modules]]

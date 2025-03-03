@@ -32,17 +32,6 @@ Arguments
 1. ~M-x customize~
 2. ~custom-set-variables~
 
-* Keybindings
-- ~keymap-global-set~ set global bindings
-  - example: ~(keymap-global-set "C-z" 'shell)~
-  - low level function: ~(global-set-key (kbd "C-z") 'shell)~
-- ~keymap-set~
-  - ~(keymap-set texinfo-mode-map "C-c p" 'backward-paragraph)~
-  - low level: ~(define-key texinfo-mode-map (kbd "C-c p") 'backward-paragraph)~
-- Reserved key sequences for users (should not be used by modes)
-  - C-c followed by a letter
-  - Function keys F5 through F9 without modifiers
-
 * Autoloading
 #+begin_src elisp
 (autoload 'html-helper-mode
@@ -54,3 +43,4 @@ Arguments
 - interactive -> t
 
 * [[id:e28fe170-8733-448f-9911-2f785b901549][Debugging]]
+* [[id:1df107b4-38f9-4451-8d0c-e86d8e2a802a][Keybindings]]

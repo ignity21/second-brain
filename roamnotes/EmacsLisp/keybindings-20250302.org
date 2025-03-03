@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       1df107b4-38f9-4451-8d0c-e86d8e2a802a
+:END:
+#+title: Keybindings
+
+* Overview
+- ~keymap-global-set~ set global bindings
+  - example: ~(keymap-global-set "C-z" 'shell)~
+  - low level function: ~(global-set-key (kbd "C-z") 'shell)~
+  - ~keymap-global-unset~
+- ~keymap-set~
+  - ~(keymap-set texinfo-mode-map "C-c p" 'backward-paragraph)~
+  - low level: ~(define-key texinfo-mode-map (kbd "C-c p") 'backward-paragraph)~
+- Reserved key sequences for users (should not be used by modes)
+  - C-c followed by a letter
+  - Function keys F5 through F9 without modifiers
+
+* Prefix Keymaps
+- ~ctl-x-map~: ~C-x~
+- ~help-map~: ~C-h~
+- ~esc-map~: ~ESC~, ~C-M-~
+- ~ctl-x-4-map~: ~C-x 4~
+- ~mode-specific-map~: ~C-c~
+- ~project-prefix-map~: ~C-x p~
+
+** Minibuffer Keymaps
+- ~minibuffer-local-map~: used for ordinary input
+- ~minibuffer-local-completion-map~: permissive completion (TAB, SPC and ?)
+
+** My Keymaps
+- ~user-global-map~: ~C-c C-c~
+- ~user-local-map~: ~C-c l~
