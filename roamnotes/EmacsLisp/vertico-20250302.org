@@ -11,8 +11,13 @@
 - Vertico: the vertical completion user interface
 - Consult: a suite of useful commands using ~completing-read~
 - Embark: a set of minibuffer actions
+  - a keyboard-based version of a right-click contextual menu
+  - ~embark-act~: contextual menu
+  - ~embark-dwim~: runs the default action (pretty handy in non-minibuffer buffers)
 - Marginalia: annotations to completion candidates
+  - may bind ~"M-A" marginalia-cycle~ in ~minibuffer-local-map~
 - Orderless: better filtering methods
+  - divides the pattern into *space-separated* components (regexp match)
 
 ** Consult
 - ~consult-grep~, ~consult-ripgrep~
@@ -21,14 +26,20 @@
 - ~consult-imenu~
 
 * Keybindings
+- Global
+| Keybinding | Description     |
+|------------+-----------------|
+| C-c a e    | ~embark-dwim~   |
+| C-c a ;    | ~embark-act~    |
+
+- ~vertico-map~
 | Keybinding | Description                   |
 |------------+-------------------------------|
-| C-c ;      | ~<embark>~                    |
-| C-c ; e    | ~embark-export~               |
-| C-c ; c    | ~embark-collect~              |
 | C-l        | vertico delete word           |
-| C-j        | minibuffer exit               |
-| C-c C-[    | previous group                |
-| C-c C-]    | next group                    |
-| C-c C-SPC  | preview the candidate         |
+| C-j        | minibuffer confirm and exit   |
+| C-c C-l    | ~embark-collect~              |
+| C-c C-e    | ~embark-export~               |
+| C-M-p      | previous group                |
+| C-M-n      | next group                    |
+| C-SPC      | preview the candidate         |
 | M-RET      | submit non-existing candidate |

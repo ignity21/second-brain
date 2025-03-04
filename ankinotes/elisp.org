@@ -9,6 +9,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740539763658
+:ANKI_NOTE_HASH: 24fc61afac2b6bdcc191a27c089a6b07
 :END:
 - function: ~exchange-point-and-mark~
 - example:
@@ -19,6 +20,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740539764688
+:ANKI_NOTE_HASH: 2226a53bbe1e659d8f4742319f9bafd7
 :END:
 - mark-paragraph: Put point at beginning of this paragraph, mark at end.
 
@@ -26,6 +28,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740539765693
+:ANKI_NOTE_HASH: bc609c51c7028f4b879bff33ede51a6b
 :END:
 - Save point, and current buffer; execute BODY; restore those things.
 #+begin_src elisp
@@ -38,6 +41,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740540768688
+:ANKI_NOTE_HASH: 676c17189de6ec0dd0cb13d2106bb96b
 :END:
 - xref-find-definitions
 - Use ~M-,~ to jump backward
@@ -46,6 +50,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740540940353
+:ANKI_NOTE_HASH: 07f8b250e89487f910308cc5c9019d1e
 :END:
 - mark-whole-buffer: Mark the whole buffer as a region
 
@@ -53,6 +58,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740618021304
+:ANKI_NOTE_HASH: db367c74316e933a88a7ab1c6880738a
 :END:
 - ~C-x n~
 - ~C-x n w~ widen
@@ -62,5 +68,25 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740703084489
+:ANKI_NOTE_HASH: 7ba045dacaef364a28a6676ffb8fa10d
 :END:
 - yank loop over the kill-*ring*
+
+
+** embark
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1741060392230
+:ANKI_NOTE_HASH: 27837e5dcaec15c015c1d14354b519ee
+:END:
+- ~C-c a e~: ~embark-dwim~
+- ~C-c a ;~: ~embark-act~
+
+** vertico groups
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1741060392234
+:ANKI_NOTE_HASH: 8daebbbba15108fda70f9487b7994d77
+:END:
+- ~C-M-p~: previous group
+- ~C-M-n~: next group
