@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       44d52adb-7a9a-44ea-b73f-ab0e4682f1f4
+:END:
+#+title: corfu
+
+* Keybindings
+- ~corfu-map~
+| Keybinding | Description              |
+|------------+--------------------------|
+| C-c C-e    | export to minibuffer     |
+| C-SPC      | insert space (orderless) |
+
+- ~corfu-popupinfo-map~
+| Keybinding | Description       |
+|------------+-------------------|
+| M-p        | scroll down       |
+| M-n        | scroll up         |
+| M-<        | move to beginning |
+| M->        | move to end       |
+| M-t        | toggle popupinfo  |
+
+* Adding CAPFs
+#+begin_src elisp
+(add-hook! some-mode (add-hook 'completion-at-point-functions #'some-capf depth t))
+
+;; add CAPFs to keys
+(map! :map some-mode-map
+      "C-x e" #'cape-emoji)
+#+end_src
+
+- DEPTH above is an integer between -100, 100, default 0
