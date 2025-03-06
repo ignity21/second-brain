@@ -6,3 +6,10 @@
 * Completion
 - [[id:f0e95f32-7d9c-4faa-ad96-6e6057d5f52c][vertico]]
 - [[id:44d52adb-7a9a-44ea-b73f-ab0e4682f1f4][corfu]]
+
+* UI
+- [[id:27be00b6-ada3-4820-a650-980aff005f95][popup]]
+- [[id:14ae397e-cc44-4edd-8fe3-faab2a122332][workspaces]]
+
+* Editor
+- [[id:1efb8520-f472-465f-9fad-beec10c84e66][file-templates]]

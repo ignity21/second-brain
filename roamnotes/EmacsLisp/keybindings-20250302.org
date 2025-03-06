@@ -28,5 +28,5 @@
 - ~minibuffer-local-completion-map~: permissive completion (TAB, SPC and ?)
 
 ** My Keymaps
-- ~user-global-map~: ~C-c C-c~
-- ~user-local-map~: ~C-c l~
+- ~user-global-map~: ~C-c g~
+- ~user-code-map~: ~C-c c~

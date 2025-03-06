@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       1efb8520-f472-465f-9fad-beec10c84e66
+:END:
+#+title: file-templates
+
+* Overview
+- Use ~set-file-template!~ to add new or change existing one.
+- File template usually starts with =__=
+  - Just check the doom =file-templates/config.el=
+- Insert licenses: ~(+file-templates/insert-license)~
