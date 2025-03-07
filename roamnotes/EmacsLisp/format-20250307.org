@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       da6a0a07-cfcd-4f63-852e-4c2d13c9f135
+:END:
+#+title: format
+
+* Overview
+- ~+format-with~: decide which formatter will be used.
+  - e.g. ~(setq-hook! 'python-mode-hook +format-with 'black)~
+- ~(set-formatter!)~
+#+begin_src elisp
+ (after! dockerfile-mode
+   (set-formatter! 'dockfmt '("dockfmt" "fmt" filepath) :modes '(dockerfile-mode)))
+#+end_src
+- ~+format-on-save-disabled-modes~

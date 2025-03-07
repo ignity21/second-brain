@@ -41,6 +41,7 @@ Copy a region of text from a buffer that is passed to the function as an argumen
 - ~(save-restriction)~ keep track of whatever narrowing is in effect
   - it executes the code in the body of the save-restriction expression
   - and then undoes any changes to narrowing that the code caused
+
 ** Examples
 #+begin_src elisp
 ;; (save-restriction
