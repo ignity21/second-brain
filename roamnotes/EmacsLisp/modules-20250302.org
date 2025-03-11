@@ -15,3 +15,8 @@
 - [[id:1efb8520-f472-465f-9fad-beec10c84e66][file-templates]]
 - [[id:da6a0a07-cfcd-4f63-852e-4c2d13c9f135][format]]
 - [[id:24b27ea3-68d5-46a0-958e-d455da49fdc3][multiple-cursors]]
+
+* Emacs
+- [[id:30e08ef0-a17e-462c-aae4-ea71ed3b8ad6][dired]]
+
+* Tools
