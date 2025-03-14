@@ -3,6 +3,7 @@
 :END:
 #+title: lookup
 
+
 * Changing Lookup Handlers
 - ~set-lookup-handlers!~
   - ~:definition FN~
@@ -20,6 +21,9 @@
 (set-lookup-handlers! 'js2-mode
   :xref-backend #'xref-js2-xref-backend)
 #+end_src
+
+* Check Up Handlers
+- ~C-h v~: "+lookup-definition-functions", etc.
 
 * Associating Docsets
 #+begin_src elisp
