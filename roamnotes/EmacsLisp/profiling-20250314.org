@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       9eb7ecc9-7aa6-4da7-89a6-a2f192a93f16
+:END:
+#+title: Profiling
+
+* CPU
+1. ~M-x profiler-start~
+2. Reproduce the slow behavior.
+3. ~M-x profiler-stop~
+4. ~M-x profiler-report~
+
+* Tips
+- In the profiler report expand all nodes by doing ~C-u TAB~.

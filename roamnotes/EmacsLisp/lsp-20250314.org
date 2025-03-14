@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       35b271c9-61cf-4644-81f8-4433493fb246
+:END:
+#+title: lsp
+
+* Overview
+- Use ~M-x lsp-doctor~ to validate if your lsp-mode is properly configured.
+- [[https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/][A guide on disabling/enabling lsp-mode features]]
+- [[https://emacs-lsp.github.io/lsp-mode/page/performance/#tuning][Tuning]]
+- [[id:9eb7ecc9-7aa6-4da7-89a6-a2f192a93f16][Profiling]]

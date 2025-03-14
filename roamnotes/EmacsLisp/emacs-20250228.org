@@ -14,7 +14,8 @@
 * Customizable Variables
 ** ~defcustom~
 Arguments
-1. variable name
+1. variable #+name:
+
 2. initial value, this value is set only if the value has not already been set
 3. documentation
 4. types, options and group (not featured in ~defvar~)
@@ -43,4 +44,5 @@ Arguments
 - interactive -> t
 
 * [[id:e28fe170-8733-448f-9911-2f785b901549][Debugging]]
+* [[id:9eb7ecc9-7aa6-4da7-89a6-a2f192a93f16][Profiling]]
 * [[id:1df107b4-38f9-4451-8d0c-e86d8e2a802a][Keybindings]]
