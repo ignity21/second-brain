@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       e191be4e-9d77-4afe-975d-ef7517222ad5
+:END:
+#+title: lookup
+
+* Changing Lookup Handlers
+- ~set-lookup-handlers!~
+  - ~:definition FN~
+  - ~:references FN~
+  - ~:documentation FN~
+  - ~:file FN~: Run when looking up the file for a symbol/string
+  - ~:xref-backend FN~: Defines an doom-package:xref backend, which implicitly provides ~:definition~ and ~:references~ handlers.
+- e.g.
+#+begin_src elisp
+(set-lookup-handlers! 'python-mode
+  :definition #'anaconda-mode-find-definitions
+  :references #'anaconda-mode-find-references
+  :documentation #'anaconda-mode-show-doc)
+
+(set-lookup-handlers! 'js2-mode
+  :xref-backend #'xref-js2-xref-backend)
+#+end_src
+
+* Associating Docsets
+#+begin_src elisp
+(set-docsets! 'js2-mode "JavaScript" "JQuery")
+;; Add docsets to minor modes by starting DOCSETS with :add
+(set-docsets! 'rjsx-mode :add "React")
+;; Or remove docsets from minor modes
+(set-docsets! 'nodejs-mode :remove "JQuery")
+#+end_src
