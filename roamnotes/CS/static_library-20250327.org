@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       bb06ab67-6adf-4d00-ba0e-be52ac12c40d
+:END:
+#+title: Static Library
+#+filetags: :C++:
+
+* Creating an Archive
+- Using ~ar~
+#+begin_src bash
+ar rcs libfoo.a foo.o # archive foo.o into libfoo.a
+ar -t libfoo.a # list the contents of libfoo.a
+#+end_src
+
+* Linking
+#+begin_src bash
+g++ main.cpp -L. -lfoo -o demo
+#+end_src
+

@@ -1,0 +1,173 @@
+:PROPERTIES:
+:ID:       c21b1c17-614b-4fb3-b0d4-bf0f4acaa2f5
+:END:
+#+title: CMake
+
+* Overview
+1. write ~CMakeFiles.txt~ at project root
+2. ~cmake -B build~ to generate build files in =build= directory
+3. ~cmake --build build~ to build project
+
+** Choose Generator
+- List generator: ~cmake -G~
+- Choose generator: ~cmake -B build -G "Unix Makefiles"~
+  - ~-B build~: specify build directory
+
+* Variable
+- ~set(varname value... [PARENT_SCOPE]~
+  - Name rule: characters, numbers, '_', and '-'
+#+begin_src cmake
+set(foo "hello")
+set(foo hello) # same as above
+set(foo [[ hello ]]) # same as above
+set(foo hello world) # list type, but stored as string. foo="hello;world"
+message("foo: ${foo}")
+set(multiline "
+Hello,
+World!")
+set(multiline [[
+Hello,
+World!
+]])
+#+end_src
+
+** Environment Variable
+- ~set(ENV{varname} value)~
+#+begin_src cmake
+set(ENV{PATH} "$ENV{PATH}:$ENV{HOME}/.local/bin")
+#+end_src
+
+** Cache Variable
+- Stored in =CMakeCache.txt=
+- ~set(varname [value] CACHE type "description" [FORCE])~
+- type: STRING, PATH, FILEPATH, BOOL, INTERNAL
+  - BOOL: [on,true,yes,Y,1], [off,false,no,N,0]
+  - ~cmake-gui~ will display these types in a different manner
+  - ~FORCE~: always update cache
+- Another way for BOOL variable
+  - ~option(varname "description" [value])~
+
+** Command-line Variable
+#+begin_src bash
+cmake -D "MY_VAR:STRING=hello world"
+cmake -U "MY*" # unset all variables starting with MY
+#+end_src
+
+** Predefined Variables
+- ~CMAKE_SOURCE_DIR~, ~CMAKE_BINARY_DIR~
+- ~MSVC~, ~UNIX~, ~CYGWIN~, ~MINGW~, ~XCODE~
+
+* Syntax
+** Scope
+#+begin_src cmake
+set(my_pet dog)
+block()
+    set(my_pet cat)
+endblock()
+message("${my_pet}") # => cat
+#+end_src
+
+** Control Flow
+*** Operators
+- AND, OR, NOT
+| value         | string           | version               | path       |
+|---------------+------------------+-----------------------+------------|
+| LESS          | STRLESS          | VERSION_LESS          |            |
+| GREATER       | STRGREATER       | VERSION_GREATER       |            |
+| EQUAL         | STREQUAL         | VERSION_EQUAL         | PATH_EQUAL |
+| LESS_EQUAL    | STRLESS_EQUAL    | VERSION_LESS_EQUAL    |            |
+| GREATER_EQUAL | STRGREATER_EQUAL | VERSION_GREATER_EQUAL |            |
+|               | MATCHES          |                       |            |
+- ~if("path1" PATH_EQUAL "path2") ...~
+- File operators: EXISTS, IS_READABLE, IS_WRITABLE, IS_EXECUTABLE
+  - IS_DIRECTORY, IS_REGULAR_FILE, IS_SYMLINK, IS_ABSOLUTE, IS_NEWER_THAN
+- Others: COMMAND, TARGET, TEST, DEFINED, *IN_LIST*
+
+*** ~if~
+#+begin_src cmake
+if(cond)
+    # code
+elseif(cond2)
+    # code
+else()
+    # code
+endif()
+#+end_src
+*** ~foreach~
+#+begin_src cmake
+foreach(var IN ITEMS a b c) # same as (var a b c)
+    message("${var}")
+endforeach()
+
+set(list1 a b c)
+set(list2 d e f)
+foreach(var IN LIST list1 list2)
+    message("${var}")
+endforeach()
+
+# zip list
+foreach(v IN ZIP_LISTS list1 list2)
+    message("${v_0}: ${v_1}")
+endforeach()
+
+# range
+foreach(num RANGE 1 8 2)
+    message("${num}")
+endforeach()
+#+end_src
+
+*** ~while~
+#+begin_src cmake
+while(<condition>)
+    <commands>
+endwhile()
+#+end_src
+
+
+* Examples
+** Basic Example
+#+begin_src cmake
+add_executable(demo main.cpp foo.cpp foo.h) # add .h for IDE support
+
+# if there are many files
+add_executable(demo)
+target_sources(demo
+    PRIVATE
+        main.cpp
+        foo.cpp
+        foo.h
+)
+#+end_src
+
+** Creating Static Library
+#+begin_src cmake
+add_executable(demo)
+target_sources(demo PRIVATE main.cpp)
+
+add_library(foo) # will generate libfoo.a
+target_sources(foo PRIVATE foo.cpp foo.h)
+
+target_link_libraries(demo PRIVATE foo)
+# target_link_libraries(demo INTERFACE foo) # for header-only libraries
+#+end_src
+
+** Optional Build
+#+begin_src cmake
+option(BUILD_FOO "build foo library" on)
+if(BUILD_FOO)
+    add_library(foo foo.cpp)
+else()
+    # ...
+endif()
+# use cmake .. -DBUILD_FOO=on/off
+#+end_src
+
+** Forbid In-Source Build
+#+begin_src cmake
+if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
+    message(FATAL_ERROR "In-source build is forbidden")
+endif()
+#+end_src
+
+* VS
+- ~cmake --build build --config Release --target helloworld~
