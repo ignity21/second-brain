@@ -4,5 +4,6 @@
 #+title: Modern C++
 #+filetags: C++
 
+- [[id:10faff15-6db6-45ac-bae7-81f86753fa99][Type Deduction]]
 - [[id:cbd64e53-ae3e-4bbd-aab3-49fca52d5ab0][Temporary Variables]]
 - [[id:f7fad551-b647-4ef9-a4ef-d76d0dc08e83][Multiple Return Values]]

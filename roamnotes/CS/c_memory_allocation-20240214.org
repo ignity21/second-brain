@@ -13,13 +13,7 @@
 #+DOWNLOADED: screenshot @ 2024-02-14 11:33:03
 [[file:images/On_Stack/2024-02-14_11-33-03_screenshot.png]]
 
-** Call by Pointer
-vs. call by reference
-- can be nullptr
-- can be initialized within the function
-- can be reassigned to another memory block on the heap
-
-In order to benefit from call-by-reference/pointer, the size of the data type passed to the function has to surpass the size of the pointer on the respective architecture (i.e. 32 bit or 64 bit).
+- Stack Frame :: is a block of memory on the stack that *a function* uses to store its execution context. When the function returns, the stack frame is removed.
 
 * Allocating Dynamic Memory
 ** ~malloc~ and ~free~

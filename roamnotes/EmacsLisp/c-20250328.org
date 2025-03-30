@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       9c419268-56d9-45df-b0e5-c278c61956c9
+:END:
+#+title: C++
+
+* Disassemble
+- package ~disaster~
+- use =compile_commands.json= to get the compilation command
+  - ~cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -B build-directory~
+  - ~set(CMAKE_EXPORT_COMPILE_COMMANDS ON)~ in =CMakeLists.txt=

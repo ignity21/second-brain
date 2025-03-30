@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       10faff15-6db6-45ac-bae7-81f86753fa99
+:END:
+#+title: Type Deduction
+
+- [[id:c264e461-9c95-4d7c-917e-762cb8ec52e7][Template Type Deduction]]
+- [[id:c19b4842-be7b-4a29-a85b-462cbad2c6c1][~auto~]]
+- [[id:5bdcb00b-4ded-4b55-a41e-2750838325c0][~decltype~]]
+- [[id:f1e9eb0e-735e-451c-85dd-eb355d661549][Type Deduction Diagnosis]]

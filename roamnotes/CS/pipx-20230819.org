@@ -6,7 +6,7 @@
 
 * Installation
 1. May remove system pipx: ~sudo pacman -Rns python-pipx~
-2. [Optional] Specify python version: ~pyenv local x.x.x~
+2. [Optional] Specify python version: ~pyenv local x.x.x~, avoiding issues caused by system python upgrade
 3. ~pip install --user -U pipx~
 4. Make sure ~pipx~ in the ~$PATH~
 

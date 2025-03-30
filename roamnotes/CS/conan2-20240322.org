@@ -19,14 +19,14 @@
 - Search Packages: ~conan search [package]~ or [[https://conan.io/center][ConanCenter]]
 - Create a default profile: ~conan profile detect~
 - Write a ~conanfile.txt~
-  #+begin_src conf
+#+begin_src conf
 [requires]
 zlib/1.2.11
 
 [generators]
 CMakeDeps
 CMakeToolchain
-  #+end_src
+#+end_src
 - ~conan install . --output-folder=build --build=missing~
 - build the target
   #+begin_src bash
