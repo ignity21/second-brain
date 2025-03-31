@@ -1,16 +1,33 @@
 :PROPERTIES:
 :ID:       5e72dbf9-f281-4f99-9d26-c5a663e4c8a2
 :END:
-#+title: Pointers
+#+title: C++ Pointers
 #+filetags: C++
 
+* Overview
 | Variable | Type | Memory | Value |
 |----------+------+--------+-------|
-| pointer  | int* |    111 |   222 |
-| value    | int  |    222 |  1234 |
+| pvalue   | int* |   1001 |  1002 |
+| value    | int  |   1002 |  1212 |
 
-- &pointer: 111
-- pointer: 222
-- *pointer: 1234
-- &value: 222
-- value: 1234
+- &value: 1002
+- value: 1212
+- &pvalue: 1001
+- pvalue: 1002
+- *pvalue: 1212
+
+* const
+- ~int i = 0;~
+- ~const int * p = i~: pointer to constant integer
+- ~int * const p = i~: constant pointer to integer
+
+* new & delete
+#+begin_src cpp
+int *pvalue = new int{5};
+delete pvalue;
+
+int *parray = new int[5]{1, 2, 3, 4, 5};
+delete[] parray;
+#+end_src
+
+* [[id:9dada7ef-84e8-44f7-b068-4837411eda69][Smart Pointers]]

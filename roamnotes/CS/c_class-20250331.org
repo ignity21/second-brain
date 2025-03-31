@@ -1,0 +1,57 @@
+:PROPERTIES:
+:ID:       0c48ecd1-63cc-43f3-bb43-652253a86f1b
+:END:
+#+title: C++ Class
+
+
+* Constructor
+** Copy Constructor
+- When to use copy constructor?
+  - When there is a pointer member variable
+  - default: shallow copy; copy pointer, not the data
+- Use private default constructor to prevent default constructor
+
+* Inheritance
+#+begin_src cpp
+class Base {
+public:
+  Base(int a) {}
+};
+
+class Derived : public Base {
+public:
+  Derived() : Base(0), ptr_(nullptr) {}
+
+private:
+  ptr_;
+}
+#+end_src
+- Memebers can not be inherited
+  - Constructors and destructors
+  - Operator= ()
+  - Friend functions
+
+** Non-virtual Override
+#+begin_src cpp
+class Base {
+public:
+  void print() { cout << "Base\n"; }
+};
+
+class Derived : public Base {
+public:
+  void print() { cout << "Derived\n"; }
+};
+
+Derived obj;
+obj.print(); // Derived
+Base *pBase = static_cast<Base *>&obj;
+pBase->print() // Base
+#+end_src
+
+** Polymorphism
+- use base class pointer to call derived class override function
+* Virtual Destructor
+- If a class has a virtual function, it should have a virtual destructor
+- Virtual destructor is needed to delete derived class object using base class pointer
+  - derived class destructor is called first, then base class destructor is called

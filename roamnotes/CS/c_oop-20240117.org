@@ -9,6 +9,8 @@
 - use structures when member variables are *independent* of each other
 - use classes when member variables are related by an "invariant"
 
+* [[id:0c48ecd1-63cc-43f3-bb43-652253a86f1b][C++ Class]]
+
 * Scope Resolution
 #+begin_src c++
 Date::Date(int year, int month, int day) {
