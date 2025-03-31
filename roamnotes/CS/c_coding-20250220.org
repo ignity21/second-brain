@@ -49,10 +49,13 @@ if(strcmp(hello, hello2) == 0)
   - No static variables
   - No recursion
 
+*** [[id:0ea84d5f-1340-433c-804c-053c2c58c4a7][Operator Overloading]]
 ** [[id:76959270-4bbe-4a53-ab41-942a492f734b][C++ Lambda]]
+** [[id:6faf4309-f313-4230-bfc9-30dc308e0947][Type Casting]]
 ** [[id:10faff15-6db6-45ac-bae7-81f86753fa99][Type Deduction]]
 
 * Advanced
+** [[id:5d31ac8b-58a8-4926-b328-3cf408f898b2][C++ OOP]]
 ** [[id:45a66f1c-ea7b-4607-a417-e8ae6d608ebe][C++ Template]]
 ** [[id:ce669b17-3f02-4a00-b2df-4b8993863720][C++ Memory Management]]
 ** [[id:5a856fd8-e1ec-4964-8862-17e7d48f906c][Concurrency]]

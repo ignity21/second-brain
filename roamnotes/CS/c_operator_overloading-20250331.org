@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       0ea84d5f-1340-433c-804c-053c2c58c4a7
+:END:
+#+title: C++ Operator Overloading
+
+* Global Functions
+* In-class Functions
+- bool: ~operator bool() const~
+- dereference:  ~T& operator*() const~
+- pointer: ~T* operator->() const~
