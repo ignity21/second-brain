@@ -26,7 +26,6 @@ and compelling fashion.
 - *Big idea*: in one sentence
 - *Prioritize* essential points
 
-
 * Process
   [[file:images/screenshots/Fundamentals_of_Storytelling/2024-12-02_09-36-25_screenshot.png]]
 
@@ -54,3 +53,59 @@ Should be
 Instead of process, focus on impact, e.g.
 - *Instead*: Use a non-relational database to make efficient nested queries.
 - *Focus*: Changing the storage approach will save a lot of time.
+* Audiences
+- Executive team
+  - Role: Executive level(CEO, investors, etc.)
+  - Knowledge: Fundamental(technical aspects)
+  - Interest: Inform their decisions based on findings
+- PM
+  - Role: Project Manager
+  - Interest: Project aligns with company objectives
+  - Right data
+    - Summary data: $2 cost of marketing campaign
+    - Metrics: 10% monthly increase in number of customers; %2 risk of declining profits
+- Tech team
+  - Role: Project collaborators, Technical supervisors
+  - Knowledge: Expert(technical aspects)
+  - Interest: Replicate project; Continue project
+- General audience
+  - Knowledge: Novice or generalist
+  - Interests: To understand the general results and impact of the project
+  - Right data
+    - Historical data: Decline in profits
+    - Correlation/Impact:
+      - Chocolate needs rebranding
+
+* Key Elements
+[[file:images/screenshots/Key_Elements/2025-04-01_08-59-32_screenshot.png]]
+** Compelling Narrative
+- Background
+  - What *motivated* the analysis?
+  - What *changed*?
+  - Who is *focus* of the analysis?
+  - e.g.
+- Insights
+  - What *contributed* to the problem?
+  - Add *supporting evidence*
+- Climax
+  - Central insight
+  - *What would happen if there is no change*?
+- Next Steps
+  - Potential solutions
+  - Course of action
+  - Proactive and guide the audience
+
+*** Chocolates Example
+- Background: Total profit decreased
+- Insights
+  - Chips 20% increase
+  - Sweets 30% decrease
+  - Most popular chocolate 50% decrease
+- Climax: Loss $10M next year
+- Next Step: Rebrand chocolate
+
+*** Angles to Build Narrative
+- *Change over time*: Chocolate lower in summer
+- *Correlation*: Chocolate rating vs. price
+- *Comparison*: Two age groups vs. chocolate consumption
+- *Clustering*: Groups with different coffee and chocolate consumption
