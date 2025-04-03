@@ -1,14 +1,16 @@
 :PROPERTIES:
 :ID:       0874134e-082a-4f60-8c94-cc0ed6e4001b
+:ROAM_ALIASES: "Thread-safe Singleton"
 :END:
 #+title: Thread-safe Lazy Initialization
 #+filetags: C++
 
+* Inefficient
 #+begin_src c++
   std::shared_ptr<some_resource> resource_ptr;
   std::mutex resource_mutex;
 
-  // could optimized by using infamous  double-checked locking pattern.
+  // could optimized by using infamous double-checked locking pattern.
   void foo() {
     std::unique_lock<std::mutex> lk(resource_mutex);
     if (!resource_ptr) {
@@ -19,7 +21,8 @@
   }
 #+end_src
 
-- using ~std::once_flag~ and ~std::call_once~ *Recommended*
+* Recommended
+- using ~std::once_flag~ and ~std::call_once~
 #+begin_src c++
   std::shared_ptr<some_resource> resource_ptr;
   std::once_flag resource_flag;

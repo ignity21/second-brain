@@ -51,6 +51,7 @@ pBase->print() // Base
 
 ** Polymorphism
 - use base class pointer to call derived class override function
+
 * Virtual Destructor
 - If a class has a virtual function, it should have a virtual destructor
 - Virtual destructor is needed to delete derived class object using base class pointer

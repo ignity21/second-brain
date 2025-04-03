@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       93ea9dcc-19c5-43cf-8695-7d75e0e07522
 :END:
-#+title: C++ Literals
+#+title: Literals
 #+filetags: :C++:
 
 * Overview

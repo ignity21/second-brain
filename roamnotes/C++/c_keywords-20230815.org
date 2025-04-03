@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       1e83db6b-6955-4f9f-a107-da4af74f9071
 :END:
-#+title: C++ Keywords
+#+title: Keywords
 #+filetags: C++
 
 * ~explicit~

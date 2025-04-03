@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       45a66f1c-ea7b-4607-a417-e8ae6d608ebe
 :END:
-#+title: C++ Template
+#+title: Template
 #+filetags: C++
 
 * What is Template?

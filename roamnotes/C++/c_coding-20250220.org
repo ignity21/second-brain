@@ -6,9 +6,9 @@
 #+filetags: :C++:
 
 * Basic Syntax
-** [[id:1e83db6b-6955-4f9f-a107-da4af74f9071][C++ Keywords]]
-** [[id:93ea9dcc-19c5-43cf-8695-7d75e0e07522][C++ Literals]]
-** [[id:5e72dbf9-f281-4f99-9d26-c5a663e4c8a2][C++ Pointers]]
+** [[id:1e83db6b-6955-4f9f-a107-da4af74f9071][Keywords]]
+** [[id:93ea9dcc-19c5-43cf-8695-7d75e0e07522][Literals]]
+** [[id:5e72dbf9-f281-4f99-9d26-c5a663e4c8a2][Pointers]]
 ** Loop
 *** For Loop
 #+begin_src cpp
@@ -43,25 +43,19 @@ if(strcmp(hello, hello2) == 0)
     puts("Strings are equal");
 #+end_src
 
-** Functions
-*** ~inline~ Functions
-- Requirements
-  - No loops, no switch statements
-  - No static variables
-  - No recursion
-
-*** [[id:0ea84d5f-1340-433c-804c-053c2c58c4a7][Operator Overloading]]
-** [[id:76959270-4bbe-4a53-ab41-942a492f734b][C++ Lambda]]
+** [[id:7cea8b50-218e-40c5-915b-16dddc5c4790][Functions]]
 ** [[id:6faf4309-f313-4230-bfc9-30dc308e0947][Type Casting]]
+
+* Modern
 ** [[id:10faff15-6db6-45ac-bae7-81f86753fa99][Type Deduction]]
+** [[id:cbd64e53-ae3e-4bbd-aab3-49fca52d5ab0][Temporary Variables]]
 
 * Advanced
-** [[id:5d31ac8b-58a8-4926-b328-3cf408f898b2][C++ OOP]]
-** [[id:45a66f1c-ea7b-4607-a417-e8ae6d608ebe][C++ Template]]
-** [[id:ce669b17-3f02-4a00-b2df-4b8993863720][C++ Memory Management]]
+** [[id:5d31ac8b-58a8-4926-b328-3cf408f898b2][OOP]]
+** [[id:45a66f1c-ea7b-4607-a417-e8ae6d608ebe][Template]]
+** [[id:ce669b17-3f02-4a00-b2df-4b8993863720][Memory Management]]
 ** [[id:5a856fd8-e1ec-4964-8862-17e7d48f906c][Concurrency]]
-
-* [[id:2941b8e2-14d1-4310-bceb-7b4f9574f932][Modern C++]]
 
 * Library
 ** [[id:de67ad04-b348-4367-9a6f-88404e0f38b0][STL]]
+** [[id:5521b2f9-f8ea-44d3-887a-1e9190e366f7][ZeroMQ]]

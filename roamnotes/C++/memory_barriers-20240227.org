@@ -1,8 +1,7 @@
 :PROPERTIES:
 :ID:       89931198-0b9b-486a-880e-2029569ed6cc
-:ROAM_ALIASES: Fences "Memory Orders"
 :END:
-#+title: Memory Barriers
+#+title: C++ Memory Orders
 #+filetags: C++
 * Overview
 - What guarantees that other threads see this memory in the desired state

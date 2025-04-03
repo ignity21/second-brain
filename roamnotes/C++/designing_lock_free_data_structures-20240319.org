@@ -54,3 +54,8 @@ Algorithms that can involve *an unbounded number of retries* because of clashes 
 - It may *decrease* overall performance
   - atomic operations can be much slower than non-atomic operations (not using cache)
   - always check the performance (worst-case wait time, average wait time. overall execution time)
+
+* Examples
+- [[id:b5341053-2f9b-45d3-afa3-3384e75cbd8e][Atomic List]]
+- [[id:02247881-b505-4201-83b6-7fdf3903ddd0][Atomic Queue]]
+- [[id:277f745a-2767-4327-95b8-26a69a9d1cc1][Lock-free Stack]]

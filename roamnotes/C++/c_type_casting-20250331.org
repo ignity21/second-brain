@@ -1,7 +1,8 @@
 :PROPERTIES:
 :ID:       6faf4309-f313-4230-bfc9-30dc308e0947
 :END:
-#+title: C++ Type Casting
+#+title: Type Casting
+#+filetags: :C++:
 
 * C-style Casting
 not recommended, because it is not type-safe

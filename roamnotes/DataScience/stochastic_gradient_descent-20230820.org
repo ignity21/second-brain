@@ -24,4 +24,4 @@ called the *learning schedule*.
 - If the learning rate is reduced too quickly, you may get stuck in a local minimum.
 - If the learning rate is reduced too slowly, you may jump around the minimum for a long time.
 
-- [[file:../notebooks/ML/linear_regression.ipynb][Code]]
+- [[file:../../notebooks/ML/linear_regression.ipynb][Code]]

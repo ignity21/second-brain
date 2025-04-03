@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       5d31ac8b-58a8-4926-b328-3cf408f898b2
 :END:
-#+title: C++ OOP
+#+title: OOP
 #+filetags: C++
 
 * Struct or Class

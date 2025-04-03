@@ -44,6 +44,9 @@ std::atomic<size_t> count;
 
 * Simple Lock-free Examples
 ** Atomic Queue
+:PROPERTIES:
+:ID:       02247881-b505-4201-83b6-7fdf3903ddd0
+:END:
 #+begin_src c++
 int q[N];
 std::atomic<size_t> front{0};
@@ -59,6 +62,9 @@ int pop() {
 #+end_src
 
 ** Atomic List
+:PROPERTIES:
+:ID:       b5341053-2f9b-45d3-afa3-3384e75cbd8e
+:END:
 #+begin_src c++
 struct node {int value; node *next; };
 std::atomic<node*> head;
@@ -72,7 +78,6 @@ void push_front(int x) {
     // else old_head = head, then continue
 }
 #+end_src
-
 
 * Increment Operation Performance
 #+DOWNLOADED: screenshot @ 2024-02-22 22:09:36

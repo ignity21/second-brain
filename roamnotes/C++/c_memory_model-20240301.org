@@ -9,6 +9,30 @@
   - The C++ Standard defines an object as *"a region of storage"*
   - An object is stored in *one or more memory locations*
 
+#+begin_src cpp
+#include <iostream>
+using namespace std;
+
+struct my_data {
+    int i; // 4
+    double d; // 8
+    unsigned bf1:10; // bf1+bf2 8
+    int bf2:25;
+    // int bf3:0;
+    int bf4:9; // 8
+    int i2;  // 4
+    char c1, c2; // 1, 1
+};
+
+int main(int argc, char *argv[]) {
+    cout << "sizeof(my_data) = " << sizeof(my_data) << endl;
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: sizeof(my_data) = 40
+
 #+DOWNLOADED: screenshot @ 2024-03-01 08:45:38
     [[file:images/Overview/2024-03-01_08-45-38_screenshot.png]]
 - The entire struct is one object that consists of several sub-objects
@@ -17,6 +41,12 @@
 - The zero-length bit field ~bf3~ separates bf4 into its own memory location, but doesn't have a memory location itself
 - Variables of fundamental types occupy exactly one memory location, whatever their size
 - Adjacent bit fields are part of the same memory location ~bf1, bf2~
+
+* Class Memory Size
+- static members in global scope are stored in the data segment
+#+begin_src cpp
+
+#+end_src
 
 * Crucial for Multi-threaded Application
 - Everything hinges on those *memory locations*
