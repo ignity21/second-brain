@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       af4b6edc-c8e9-43f2-af92-bb1cbc6d49e8
+:END:
+#+title: Cryptocurrency
+
+* Withdrawal Flow
+- kraken->ifast->wise->港卡
+  - kraken usdt转为GBP英镑
+  - 提现英镑到ifast(2欧元)
+  - ifast FPS转账到wise（每天限额5000欧元）
+  - wise转英镑为港币(0.33%损耗)
+  - wise到香港卡
+- [[https://jichangtuijian.com/usdt%E5%87%BA%E9%87%91.html][出金详细]]
