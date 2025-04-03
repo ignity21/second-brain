@@ -13,28 +13,26 @@
 #include <iostream>
 using namespace std;
 
-struct my_data {
-    int i; // 4
-    double d; // 8
-    unsigned bf1:10; // bf1+bf2 8
-    int bf2:25;
-    // int bf3:0;
-    int bf4:9; // 8
-    int i2;  // 4
-    char c1, c2; // 1, 1
+struct MyData {
+    unsigned int flag:1; // 1bit
+    unsigned int sig:1;
+    unsigned int sn:4;
+    unsigned int reserved:2;
+    unsigned int crc:8;
 };
 
 int main(int argc, char *argv[]) {
-    cout << "sizeof(my_data) = " << sizeof(my_data) << endl;
+    cout << "sizeof(MyData) = " << sizeof(MyData) << endl;
     return 0;
 }
 #+end_src
 
 #+RESULTS:
-: sizeof(my_data) = 40
+| sizeof(MyData) | = | 4 |
+| sizeof(MyData) | = | 4 |
 
 #+DOWNLOADED: screenshot @ 2024-03-01 08:45:38
-    [[file:images/Overview/2024-03-01_08-45-38_screenshot.png]]
+[[file:images/Overview/2024-03-01_08-45-38_screenshot.png]]
 - The entire struct is one object that consists of several sub-objects
 - The ~bf1~ and ~bf2~ bit fields share a memory location
 - The ~std::string object s~ consists of several memory locations internally

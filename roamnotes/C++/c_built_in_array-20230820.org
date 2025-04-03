@@ -1,9 +1,28 @@
 :PROPERTIES:
 :ID:       cecdb0e0-82ac-467f-8585-56c966db4551
 :END:
-#+title: C++ Built-in Array
+#+title: Array
 #+filetags: :C++:
 
 #+begin_src cpp
-  int array[26] = {0};
+float weight[5] = {0.1, 0.2}; // partial initialization
+float weight[5] = {0}; // all elements initialized to 0
+char hello[] = {'H', 'e', 'l', 'l', 'o', '\0'}; // can be used as a string
+char hello_notstr[] = {'H', 'e', 'l', 'l', 'o'}; // no null terminator
+
+char c;
+while(c=hello[i++]) // loop until null terminator
+    putchar(c);
+
+for(int i=0; i<sizeof(hello); i++) // loop until null terminator
+    putchar(hello[i]);
+
+// Compare strings
+char hello2[] = "Hello";
+if(strcmp(hello, hello2) == 0)
+    puts("Strings are equal");
+
+// Dynamic memory allocation
+int *parray = new int[10];
+delete[] parray;
 #+end_src

@@ -18,7 +18,7 @@ Things to notice:
   - use a atomic *compare/exchange* operation at step 3 to ensure that *head* hasn' been modified since you read it in step 2
 - It's vital that new node is prepared before head
 
-#+begin_src c++
+#+begin_src cpp
 void push(T const &data) {
   node const *new_node = new node(data);
   new_node->next = head.load();
@@ -47,7 +47,7 @@ If there are two threads removing items from the stack, they both might read the
 - Use *compare/exchange* at step 3
 
 *** First Try
-#+begin_src c++
+#+begin_src cpp
 void pop(T &result) {
     node *old_head=head.load();
     // check if the stack is empty before trying to pop
@@ -59,7 +59,7 @@ void pop(T &result) {
   - Solution: *returning a smart pointer to the data value*
 
 * Simple Solution but with Leaks
-#+begin_src c++
+#+begin_src cpp
 #include <atomic>
 #include <memory>
 
@@ -92,7 +92,7 @@ public:
   - the problem is one thread deletes a node while another thread still holds a pointer to it.
 
 * Try to Fix Leaks
-#+begin_src c++
+#+begin_src cpp
 std::shared_ptr<T> pop() {
   node *old_head = head.load();
   while (old_head && !head.compare_exchange_weak(old_head, old_head->next));
@@ -108,7 +108,7 @@ std::shared_ptr<T> pop() {
 - If there are no threads calling ~pop()~, it's safe to delete all the nodes currently awaiting deletion
   - Add the nodes to a "to be deleted" list when you've extracted the data
   - how to make sure no threads calling ~pop()~? *Count them.*
-#+begin_src c++
+#+begin_src cpp
 private:
   std::atomic<unsigned> threads_in_pop; // count pop() calls
   void try_reclaim(node *old_head);
@@ -128,6 +128,6 @@ public:
 #+end_src
 
 ** Reference-counted Reclamation Machinery
-#+begin_src c++
+#+begin_src cpp
 
 #+end_src

@@ -6,14 +6,14 @@
 
 * Overview
 - compare-exchange operation is the *cornerstone* of programming with atomic types.
-#+begin_src c++
+#+begin_src cpp
 bool success = x.compare_exchange_strong(expected, desired);
 // if x == expected, make x = desired and return true
 // Otherwise, set expected = x and return false
 #+end_src
 
 - Atomic increment with CAS
-#+begin_src c++
+#+begin_src cpp
 std::atomic<int> x{0};
 int x0 = x;
 while (!x.compare_exchange_strong(x0 /* pass by reference */, x0 + 1)) {}
@@ -29,14 +29,14 @@ while (!x.compare_exchange_strong(x0 /* pass by reference */, x0 + 1)) {}
 - The ~store()~ might not be successful even if the original value was equal to the expected value.
   - most likely to happen on machines that *lack a single compare-and-exchange instruction*
 - The reason to use weak: *read is faster than write*
-#+begin_src c++
+#+begin_src cpp
 success = x.compare_exchange_weak(expected, desired);
 // "spuriously fail" and return false even if x == expected
 // If you can't get the answer from the other core in some timeout, you just return false.
 #+end_src
 
 - *pseudo-code*
-#+begin_src c++
+#+begin_src cpp
 bool compare_exchange_strong(T& expected, T desired) {
     Lock L; // get exclusive access
     T tmp = value; // current value of the atomic (read)
@@ -62,7 +62,7 @@ bool compare_exchange_weak(T& expected, T desired) {
 
 ** Usage
 Because ~compare_exchange_weak()~ can fail *spuriously*, *it must typically be used in a loop.*
-#+begin_src c++
+#+begin_src cpp
 bool expected = false;
 extern atomic<bool> b;
 while (!b.compare_exchange_weak(expected, true) && !expected);

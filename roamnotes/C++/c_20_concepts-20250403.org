@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       64fd6df5-2024-4123-a159-afa322afe5b4
+:END:
+#+title: C++ 20 Concepts
+
+* Overview
+- Can specify a template requirements on its argument.

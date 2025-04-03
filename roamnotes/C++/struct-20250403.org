@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       062c0a49-7513-40c1-adbf-5a706b68a41a
+:END:
+#+title: Struct
+
+* Struct or Class
+[[https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#c2-use-class-if-the-class-has-an-invariant-use-struct-if-the-data-members-can-vary-independently][Core Guidelines]]
+- use structures when member variables are *independent* of each other
+- use classes when member variables are related by an "invariant"
+
+* Example
+#+begin_src cpp
+struct MyStruct {
+  int a;
+  int b;
+} my_s{2, 4}; // initialized
+
+MyStruct my_s2{1, 5};
+#+end_src

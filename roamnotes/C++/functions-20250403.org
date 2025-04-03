@@ -1,10 +1,10 @@
 :PROPERTIES:
 :ID:       7cea8b50-218e-40c5-915b-16dddc5c4790
 :END:
-#+title: Functions
+#+title: Function
 #+filetags: :C++:
 
-* Inline Functions
+* Inline Function
 :PROPERTIES:
 :ID:       8348adab-99af-459b-b8dc-922a68edabea
 :END:
@@ -14,5 +14,6 @@
   - No recursion
 
 * [[id:0ea84d5f-1340-433c-804c-053c2c58c4a7][Operator Overloading]]
-* [[id:76959270-4bbe-4a53-ab41-942a492f734b][Lambda Functions]]
+* [[id:76959270-4bbe-4a53-ab41-942a492f734b][Lambda Function]]
 * [[id:f7fad551-b647-4ef9-a4ef-d76d0dc08e83][Multiple Return Values]]
+* [[id:8c2aec96-acc6-4c02-b975-dd0432cc759d][Chaining Function Calls]]

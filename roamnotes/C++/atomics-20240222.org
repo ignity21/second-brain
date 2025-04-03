@@ -10,7 +10,7 @@ Atomic operation is guaranteed to execute as a single transaction: (indivisible)
 - ~is_lock_free()~ member function determines whether the atomic type uses atomic instructions or locks.
 
 ** Overview
-#+begin_src c++
+#+begin_src cpp
 #include <atomic>
 std::atomic<int> x{0};
 // multi-thread ++x operation;
@@ -54,7 +54,7 @@ std::atomic<int> x{0};
 ** Other Performance Issues
 *** Cache Line
 - Atomic operations have to wait for cache line access.
-#+begin_src c++
+#+begin_src cpp
 std::atomic<int> x[2];
 ++x[0]; // in Thread 1
 ++x[1]; // in Thread 2
@@ -125,7 +125,7 @@ In general, the compiler isn't going to be able to generate lock-free code for s
 - Operations ~load~, ~store~, ~exchange~ and ~compare_exchange~
   - takes an ~std::shared_ptr<>*~ as the first argument
 
-#+begin_src c++
+#+begin_src cpp
 std::shared_ptr<mydata> p;
 
 void process_global_data() {

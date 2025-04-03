@@ -1,0 +1,100 @@
+:PROPERTIES:
+:ID:       8c3fb3ab-e02e-4cc8-98b5-e1e09f1390a5
+:END:
+#+title: Singleton
+
+* Traditional Singleton Approach
+:PROPERTIES:
+:ID:       43844ccd-e6af-4276-9a6e-328e1126f80b
+:END:
+#+begin_src cpp
+class Singleton {
+private:
+    Singleton() = default;
+    ~Singleton() = default;
+    Singleton(const Singleton&) = delete;
+    Singleton& operator=(const Singleton&) = delete;
+
+    static std::unique_ptr<Singleton> instance;
+    static std::mutex mutex;
+
+public:
+    static Singleton* GetInstance() {
+        if (!instance) {
+            std::lock_guard<std::mutex> lock(mutex);
+            if (!instance) {
+                instance = std::unique_ptr<Singleton>(new Singleton());
+            }
+        }
+        return instance.get();
+    }
+};
+
+// In the .cpp file:
+std::unique_ptr<Singleton> Singleton::instance = nullptr;
+std::mutex Singleton::mutex;
+
+#+end_src
+
+* Modern Static Method Singleton
+:PROPERTIES:
+:ID:       a5915bd3-1fa1-41de-8e87-a753f6ef4765
+:END:
+#+begin_src cpp
+class Singleton {
+private:
+    Singleton() = default;
+    Singleton(const Singleton&) = delete;
+    Singleton& operator=(const Singleton&) = delete;
+
+    static std::once_flag init_flag;
+
+public:
+    static std::shared_ptr<Singleton> GetInstance() {
+        static std::shared_ptr<Singleton> instance;
+        std::call_once(init_flag, []() {
+            instance = std::shared_ptr<Singleton>(new Singleton());
+        });
+        return instance;
+    }
+};
+
+// In the .cpp file:
+std::once_flag Singleton::init_flag;
+#+end_src
+
+* Modern Singleton without Class
+:PROPERTIES:
+:ID:       fdaef2da-79ca-45e0-b2e8-b91960a6906e
+:END:
+#+begin_src cpp
+std::unique_ptr<Singleton> singleton;
+std::once_flag init_once_flag;
+
+void InitSingleton() {
+    singleton = std::make_unique<Singleton>();
+}
+
+Singleton & GetInstance() {
+    std::call_once(init_once_flag, InitSingleton);
+    return *singleton;
+}
+#+end_src
+
+* Meyer's Singleton
+- No lazy initialization
+#+begin_src cpp
+class Singleton {
+private:
+    Singleton() = default;
+    Singleton(const Singleton&) = delete;
+    Singleton& operator=(const Singleton&) = delete;
+
+public:
+    static Singleton& GetInstance() {
+        static Singleton instance; // static local variable
+        return instance;
+    }
+};
+#+end_src
+- [[id:bdaf53b0-a247-45a1-b7fb-278fbcbabb2b][Static Local Variable]]

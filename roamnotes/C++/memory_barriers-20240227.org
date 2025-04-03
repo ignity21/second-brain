@@ -46,7 +46,7 @@ It guarantees that *all memory operations* scheduled before the barrier in the p
 - ~std::memory_order_acq_rel~
 
 ** Example
-#+begin_src c++
+#+begin_src cpp
 bool x = false;
 std::atomic<bool> y;
 void write_x_then_y() {

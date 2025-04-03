@@ -5,12 +5,19 @@
 #+title: C++ Coding
 #+filetags: :C++:
 
-* Basic Syntax
+* Basic
 ** [[id:1e83db6b-6955-4f9f-a107-da4af74f9071][Keywords]]
 ** [[id:93ea9dcc-19c5-43cf-8695-7d75e0e07522][Literals]]
 ** [[id:5e72dbf9-f281-4f99-9d26-c5a663e4c8a2][Pointers]]
+** [[id:7cea8b50-218e-40c5-915b-16dddc5c4790][Function]]
+** [[id:6faf4309-f313-4230-bfc9-30dc308e0947][Type Casting]]
+
+* [[id:a94d8236-7cd6-4e11-baf7-75680083bb74][Built-in Data Structures]]
+
+
+* Statements
 ** Loop
-*** For Loop
+*** For Loop (i, j)
 #+begin_src cpp
 // Two indices for loop
 bool isPalindrome(string str) {
@@ -23,39 +30,21 @@ bool isPalindrome(string str) {
 }
 #+end_src
 
-** Array
-#+begin_src cpp
-float weight[5] = {0.1, 0.2}; // partial initialization
-float weight[5] = {0}; // all elements initialized to 0
-char hello[] = {'H', 'e', 'l', 'l', 'o', '\0'}; // can be used as a string
-char hello_notstr[] = {'H', 'e', 'l', 'l', 'o'}; // no null terminator
-
-char c;
-while(c=hello[i++]) // loop until null terminator
-    putchar(c);
-
-for(int i=0; i<sizeof(hello); i++) // loop until null terminator
-    putchar(hello[i]);
-
-// Compare strings
-char hello2[] = "Hello";
-if(strcmp(hello, hello2) == 0)
-    puts("Strings are equal");
-#+end_src
-
-** [[id:7cea8b50-218e-40c5-915b-16dddc5c4790][Functions]]
-** [[id:6faf4309-f313-4230-bfc9-30dc308e0947][Type Casting]]
-
 * Modern
 ** [[id:10faff15-6db6-45ac-bae7-81f86753fa99][Type Deduction]]
 ** [[id:cbd64e53-ae3e-4bbd-aab3-49fca52d5ab0][Temporary Variables]]
 
 * Advanced
 ** [[id:5d31ac8b-58a8-4926-b328-3cf408f898b2][OOP]]
+** [[id:4df12e60-9889-4290-af79-35ca2f488d52][Design Pattern]]
 ** [[id:45a66f1c-ea7b-4607-a417-e8ae6d608ebe][Template]]
 ** [[id:ce669b17-3f02-4a00-b2df-4b8993863720][Memory Management]]
 ** [[id:5a856fd8-e1ec-4964-8862-17e7d48f906c][Concurrency]]
 
-* Library
-** [[id:de67ad04-b348-4367-9a6f-88404e0f38b0][STL]]
+* [[id:de67ad04-b348-4367-9a6f-88404e0f38b0][STL]]
+
+* Librarys
+:PROPERTIES:
+:ID:       95b27d3a-ae6c-4aed-a7a6-947edadddfc4
+:END:
 ** [[id:5521b2f9-f8ea-44d3-887a-1e9190e366f7][ZeroMQ]]

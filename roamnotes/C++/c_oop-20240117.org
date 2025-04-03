@@ -4,15 +4,10 @@
 #+title: OOP
 #+filetags: C++
 
-* Struct or Class
-[[https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#c2-use-class-if-the-class-has-an-invariant-use-struct-if-the-data-members-can-vary-independently][Core Guidelines]]
-- use structures when member variables are *independent* of each other
-- use classes when member variables are related by an "invariant"
-
 * [[id:0c48ecd1-63cc-43f3-bb43-652253a86f1b][C++ Class]]
 
 * Scope Resolution
-#+begin_src c++
+#+begin_src cpp
 Date::Date(int year, int month, int day) {
     Date::year = year; // instead of coding "this->year = year;""
     Date::month = month;

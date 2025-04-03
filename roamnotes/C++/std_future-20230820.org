@@ -5,13 +5,13 @@
 #+filetags: C++
 
 * Usage
-#+begin_src c++
+#+begin_src cpp
   std::future<double> f = std::async(square_root, -1);
   double y = f.get();
 #+end_src
 
 * Set Exceptions
-#+begin_src c++
+#+begin_src cpp
   catch (...) {
     some_promise.set_exception(std::current_exception());
   }
@@ -33,7 +33,7 @@ The preferred way to use it would be to pass a *copy* of the ~shared_future~ obj
 One potential use is for implementing [[id:f31b1ca4-bcd9-466a-af90-1484e8b28684][Parallel Computation]].
 
 ** Transferred from ~std::future~
-#+begin_src c++
+#+begin_src cpp
   std::future<double> f = std::async(square_root, 4);
   std::shared_future<double> sf = std::move(f);
   // leave f in an empty state, can not be used anymore.

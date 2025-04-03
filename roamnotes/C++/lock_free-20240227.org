@@ -10,14 +10,14 @@
 
 ** Expressing Intent
 *** relaxed
-#+begin_src c++
+#+begin_src cpp
 std::atomic<size_t> count;
 count.fetch_add(1, std::memory_order_relaxed);
 #+end_src
 count is not used to index any memory or as a reference count.(no other memory access depends on it) - it's just a counter.
 
 *** release
-#+begin_src c++
+#+begin_src cpp
 std::atomic<size_t> count;
 T data[max_count];
 initialize(data[count.load(std::memory_order_relaxed)]); // nobody can see this yet
@@ -27,7 +27,7 @@ count.fetch_add(1, std::memory_order_release); // make it visible, now they can 
 count indexes some memory that was prepared by this thread and now is release to other threads.
 
 *** increment operator
-#+begin_src c++
+#+begin_src cpp
 std::atomic<size_t> count;
 ++count;
 #+end_src
@@ -47,7 +47,7 @@ std::atomic<size_t> count;
 :PROPERTIES:
 :ID:       02247881-b505-4201-83b6-7fdf3903ddd0
 :END:
-#+begin_src c++
+#+begin_src cpp
 int q[N];
 std::atomic<size_t> front{0};
 void push(int x) {
@@ -65,7 +65,7 @@ int pop() {
 :PROPERTIES:
 :ID:       b5341053-2f9b-45d3-afa3-3384e75cbd8e
 :END:
-#+begin_src c++
+#+begin_src cpp
 struct node {int value; node *next; };
 std::atomic<node*> head;
 void push_front(int x) {

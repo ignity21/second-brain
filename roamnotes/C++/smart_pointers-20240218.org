@@ -25,7 +25,7 @@ Unique pointers should be the *default choice* unless you know for certain that 
 A *key feature* of a unique pointer, which makes it so well-suited as a *return type for many functions*, *is the possibility to convert it to a shared pointer*.
 
 ** Transferring Ownership
-#+begin_src c++
+#+begin_src cpp
 auto src_ptr = std::make_unique<MyObject>();
 auto dest_ptr = std::move(src_ptr);
 #+end_src

@@ -5,7 +5,7 @@
 #+filetags: C++
 
 * Implementation using ~atomic_flag~
-#+begin_src c++
+#+begin_src cpp
 #include <atomic>
 #include <thread>
 

@@ -5,7 +5,7 @@
 #+filetags: C++
 
 * Simple Implementation
-#+begin_src c++
+#+begin_src cpp
 #include <exception>
 #include <memory>
 #include <mutex>

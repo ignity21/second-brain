@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       8c2aec96-acc6-4c02-b975-dd0432cc759d
+:END:
+#+title: Chaining Function Calls
+
+#+begin_src cpp
+class Complex {
+public:
+  Complex(double real, double imag) : real_(real), imag_(imag) {}
+  Complex& add(const Complex& other) {
+    real_ += other.real_;
+    imag_ += other.imag_;
+    return *this;
+  }
+private:
+  double real_;
+  double imag_;
+};
+
+Complex c(4, 3);
+c.add(Complex(1, 2)).add(Complex(3, 4));
+#+end_src

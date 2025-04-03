@@ -20,7 +20,7 @@ Required operations:
 - Remove an item
 - Update an item
 - Copy each item to another container
-#+begin_src c++
+#+begin_src cpp
 #include <memory>
 #include <mutex>
 

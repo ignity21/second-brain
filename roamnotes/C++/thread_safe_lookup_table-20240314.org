@@ -34,7 +34,7 @@ such as red-black tree
 - can safely have a separate lock per bucket
 
 * Code
-#+begin_src c++
+#+begin_src cpp
 #include <algorithm>
 #include <functional>
 #include <list>

@@ -1,0 +1,29 @@
+:PROPERTIES:
+:ID:       ab09b7df-71e5-45ff-96ac-fe80bc21e311
+:END:
+#+title: Union
+#+filetags: :C++:
+
+* Overview
+#+begin_src cpp
+#include <iostream>
+
+union MyUnion {
+    unsigned long l; // 4bytes
+    char c[8]; // 8bytes
+    struct {
+        unsigned char i;
+        unsigned char o;
+    } s; // 2bytes
+};
+
+int main(int argc, char *argv[]) {
+    std::cout << "sizeof(MyUnion) = " << sizeof(MyUnion) << std::endl;
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: sizeof(MyUnion) = 8
+
+- Size of union is the size of the largest type. ~char c[8]~

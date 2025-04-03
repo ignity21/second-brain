@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       e6374be2-60f2-4b47-a465-49ea6d58b970
+:END:
+#+title: Debugging
+
+* Tools
+- [[id:55c7e05b-9c7a-447e-8245-33f568b777d7][GDB]]

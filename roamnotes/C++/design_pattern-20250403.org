@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       4df12e60-9889-4290-af79-35ca2f488d52
+:END:
+#+title: Design Pattern
+
+- [[id:8c3fb3ab-e02e-4cc8-98b5-e1e09f1390a5][Singleton]]

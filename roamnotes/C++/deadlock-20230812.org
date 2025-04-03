@@ -13,7 +13,7 @@
 
 * ~std::lock~
 - ~std::lock~ can help you avoid deadlock in those cases where you need to acquire two or more locks together.
-  #+begin_src c++
+  #+begin_src cpp
     friend void swap(X& lhs, X& rhs) {
       if (&lhs == &rhs)
         return;
@@ -30,7 +30,7 @@
 
 ** ~std::defer_lock~
 - [Optimization]: You can optionally release a lock in a specific code branch if it's apparent that the lock is no longer required. This can be important for the performance.
-#+begin_src c++
+#+begin_src cpp
   std::unique_lock<std::mutex> lock_a(lhs.m, std::defer_lock);
   std::unique_lock<std::mutex> lock_a(rhs.m, std::defer_lock);
   std::lock(lock_a, lock_b); // Mutexes are locked here.
@@ -44,7 +44,7 @@
 When code tries to lock a mutex, it isn't permitted to lock that mutex if it already holds a lock from a lower layer. You can check this *at runtime* (at least not *timing-dependent*) by assigning layer numbers to each mutex and
 keeping a record of which mutexes are locked by each thread. (Common Pattern)
 - Implementation
-#+begin_src c++
+#+begin_src cpp
   #include <limits.h>
   #include <mutex>
 
@@ -95,7 +95,7 @@ keeping a record of which mutexes are locked by each thread. (Common Pattern)
       hierarchical_mutex::this_thread_hierarchy_value(ULONG_MAX);
 #+end_src
 - Usage
-#+begin_src c++
+#+begin_src cpp
   hierarchical_mutex high_level_mutex(10000);
   hierarchical_mutex low_level_mutex(5000);
   hierarchical_mutex other_mutex(6000);
@@ -125,7 +125,7 @@ keeping a record of which mutexes are locked by each thread. (Common Pattern)
 * Transferring Mutex Ownership
 Usage: when the lock isn't returned directly but is a data member of a gateway class used to ensure correctly locked access to some protected data.
 - When you're finished, you destroy the gateway object, which releases the lock.
-#+begin_src c++
+#+begin_src cpp
   std::unique_lock<std::mutex> get_lock() {
     extern std::mutex some_mutex;
     std::unique_lock<std::mutex> lk(some_mutex);

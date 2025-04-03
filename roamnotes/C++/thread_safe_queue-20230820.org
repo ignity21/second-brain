@@ -8,7 +8,7 @@
 * Lock-based
 ** Using Locks and Condition Variables
 
-#+begin_src c++
+#+begin_src cpp
 #include <condition_variable>
 #include <memory>
 #include <mutex>
@@ -78,7 +78,7 @@ public:
 #+end_src
 
 ** Holding ~std::shared_ptr<>~ instances
-#+begin_src c++
+#+begin_src cpp
 template<typename T>
 class threadsafe_queue {
 private:
@@ -201,7 +201,7 @@ dummy -> nullptr
   - ~void push(T new_value)~
   - ~bool empty()~
 
-#+begin_src c++
+#+begin_src cpp
 #include <mutex>
 #include <queue>
 #include <memory>
@@ -301,7 +301,7 @@ mutex~.
 - In ~wait_and_pop()~
   - The condition you are waiting for is "queue not empty" (head != tail)
   - It would require both ~head_mutex~ and ~tail_mutex~ to be locked
-#+begin_src c++
+#+begin_src cpp
 // helper functions
 private:
 node *get_tail() {
@@ -347,7 +347,7 @@ void wait_and_pop(T& value) {
 #+end_src
 
 *** ~try_pop()~ and ~empty~
-#+begin_src c++
+#+begin_src cpp
 private:
 std::unique_potr<node> try_pop_head() {
   std::lock_guard<std::mutex> head_lock(head_mutex);

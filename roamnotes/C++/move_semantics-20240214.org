@@ -22,7 +22,7 @@ have an address that can be accessed. They are expressions whose evaluation by t
 do not have an address that is accessible directly. They are temporary expressions used to initialize objects or compute the value of the operand of an operator.
 - An rvalue is usually a short-lived object.
 - Could think of lvalues as *named containers* for rvalues.
-#+begin_src c++
+#+begin_src cpp
 int i = 42;  // lvalue = rvalue;
 int *j = &i;
 // `&i` generates the address of `i` as an rvalue
@@ -31,7 +31,7 @@ int *j = &i;
 
 * lvalue References
 An lvalue reference can be considered as an alternative name for an object.
-#+begin_src c++
+#+begin_src cpp
 int &j = i; // lvalue reference j
 void myFunction(int &lval) { ++lval; } // lvalue reference val
 // myFunction(42); // Error: 42 is an rvalue
@@ -39,7 +39,7 @@ void myFunction(int &lval) { ++lval; } // lvalue reference val
 #+end_src
 
 * rvalue References
-#+begin_src c++
+#+begin_src cpp
 int i = 1;
 int j = 2;
 
@@ -51,7 +51,7 @@ myFunction(i + j); // prints 3
 - Important Aspect: *rvalue references are themselves lvalues*
 
 * Move
-#+begin_src c++
+#+begin_src cpp
 #include <iostream>
 using namespace std;
 

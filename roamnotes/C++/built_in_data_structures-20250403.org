@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       a94d8236-7cd6-4e11-baf7-75680083bb74
+:END:
+#+title: Built-in Data Structures
+
+- [[id:cecdb0e0-82ac-467f-8585-56c966db4551][Array]]
+- [[id:ab09b7df-71e5-45ff-96ac-fe80bc21e311][Union]]
+- [[id:062c0a49-7513-40c1-adbf-5a706b68a41a][Struct]]
+- [[id:b85e6082-de0c-4f33-826d-cb9e6e7e3ae3][~enum~]]

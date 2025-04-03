@@ -9,11 +9,11 @@
 * Copying Policies
 1. Default copying
 2. No copying
-3. Exclusive ownership
+3. Exclusive ownership (unique_ptr)
 4. Deep copying
-5. Shared ownership
+5. Shared ownership (shared_ptr)
 
-#+begin_src c++
+#+begin_src cpp
   // int **XXXCopy::_myInt;
 
   ExclusiveCopy(ExclusiveCopy &source) {

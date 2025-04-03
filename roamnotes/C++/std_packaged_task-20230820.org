@@ -12,7 +12,7 @@
 - The scheduler just deals with ~std::packaged_task<>~ instances rather than individual functions.
 
 * Code Example
-#+begin_src c++
+#+begin_src cpp
   std::mutex m;
   std::deque<std::packaged_task<void()>> tasks;
 
@@ -47,7 +47,7 @@
 #+end_src
 
 * Specialization Example
-#+begin_src c++
+#+begin_src cpp
   template<>
   class packaged_task<std::string(std::vector<char> *, int)> {
   public:

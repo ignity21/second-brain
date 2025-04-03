@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       5efa3691-4464-4a11-9d52-1e83016d8bc1
 :END:
-#+title: C++ Memory Allocation
+#+title: Memory Allocation
 #+filetags: C++
 
 * Basic Types of Memory Allocation
@@ -67,7 +67,7 @@ free(pResizedArray)
 *** ~placement new~
 ~placement new~ is used to separating allocation from construction for performance optimization. With ~placement new~, we can pass a preallocated memory and construct an object at that memory location.
 - no ~delete~ equivalent to ~placement new~
-#+begin_src c++
+#+begin_src cpp
 void *memory = malloc(sizeof(MyClass));
 MyClass *object = new (memory) MyClass;
 
@@ -83,7 +83,7 @@ free(memory);
 
 *** Overloading ~new~ and ~delete~
 **** Syntax
-#+begin_src c++
+#+begin_src cpp
 // syntax
 void* operator new(size_t size);
 void operator delete(void*);
@@ -106,14 +106,14 @@ void operator delete[](void*);
   - ~--track-origins~: can be used to see where uninitialized values come from.
   - example: ~valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind-out.txt ./a.out~
 ** Buffer Overruns
-#+begin_src c++
+#+begin_src cpp
 char str[5];
 strcpy(str,"BufferOverrun");
 printf("%s",str);
 #+end_src
 ** Uninitialized Memory
 ** Invalid Memory Access
-#+begin_src c++
+#+begin_src cpp
 char *pStr=new char[25];
 delete[] pStr;
 strcpy(pStr, "Invalid Access");

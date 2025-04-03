@@ -32,7 +32,7 @@ because the data structure has been modified by another thread, the transaction 
   - the process of copying the data to return to the caller might throw an exception.
 ** Option 1
 Pass in a reference.
-#+begin_src c++
+#+begin_src cpp
   std::vector<int> result;
   some_stack.pop(result);
 #+end_src
@@ -48,7 +48,7 @@ Provide both =Option 1= and either =Option 3=
 - Flexibility should never be ruled out in *generic* code.
 
 ** Well-designed Thread-safe Stack Interface
-#+begin_src c++
+#+begin_src cpp
   #include <exception>
   #include <memory>
 

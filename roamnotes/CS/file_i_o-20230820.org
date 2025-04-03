@@ -43,7 +43,7 @@
   - =O_SYNC=: 以同步方式写入文件
 
 ** An Example
-#+begin_src c++
+#+begin_src cpp
   #define BUFFSIZE 4096
   #include <fcntl.h>
   #include <stdio.h>
@@ -98,7 +98,7 @@ Features
 常用用途：修改 *file status flags*
 - 文件不是由调用程序打开的，比如标准输入输出
 - 文件描述符的获取是通过 ~open()~ 之外的系统调用，比如 ~pipe()~, ~socket()~ 调用
-#+begin_src c++
+#+begin_src cpp
   int flags;
 
   flags = fcntl(fd, F_GETFL);

@@ -1,0 +1,4 @@
+:PROPERTIES:
+:ID:       bdaf53b0-a247-45a1-b7fb-278fbcbabb2b
+:END:
+#+title: Static Local Variable

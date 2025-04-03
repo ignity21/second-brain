@@ -1,14 +1,14 @@
 :PROPERTIES:
 :ID:       76959270-4bbe-4a53-ab41-942a492f734b
 :END:
-#+title: Lambda Functions
+#+title: Lambda Function
 #+filetags: C++
 
 * Overview
 The runtime effect of a Lambda is the generation of an object, which is known as *closure*. The difference between a Lambda and the corresponding closure is similar to the distinction between a class and an instance of the class.
 
 * ~mutable~
-#+begin_src c++
+#+begin_src cpp
 // fn is a closure
 auto fn = [id]() mutable {
   std::cout << "ID = " << ++id << std::endl;

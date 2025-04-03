@@ -1,12 +1,11 @@
 :PROPERTIES:
 :ID:       0874134e-082a-4f60-8c94-cc0ed6e4001b
-:ROAM_ALIASES: "Thread-safe Singleton"
 :END:
 #+title: Thread-safe Lazy Initialization
 #+filetags: C++
 
 * Inefficient
-#+begin_src c++
+#+begin_src cpp
   std::shared_ptr<some_resource> resource_ptr;
   std::mutex resource_mutex;
 
@@ -23,7 +22,7 @@
 
 * Recommended
 - using ~std::once_flag~ and ~std::call_once~
-#+begin_src c++
+#+begin_src cpp
   std::shared_ptr<some_resource> resource_ptr;
   std::once_flag resource_flag;
 
@@ -36,3 +35,5 @@
     resource_ptr->do_something();
   }
 #+end_src
+
+** [[id:fdaef2da-79ca-45e0-b2e8-b91960a6906e][Modern Singleton without Class]]

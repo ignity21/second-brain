@@ -14,7 +14,7 @@
 - Providing ~T pop()~ instead of separate ~T top()~ and ~void pop()~
 
 ** Paying Attention to Exception-safe
-#+begin_src c++
+#+begin_src cpp
 // data_cond.notify_one(); in push function
 
 std::shared_ptr<T> wait_and_pop() {

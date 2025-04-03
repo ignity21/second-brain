@@ -22,7 +22,7 @@
 3. Response of the last thread to a cancellation request
 
 * Exit Function
-#+begin_src c++
+#+begin_src cpp
   #include <stdlib.h> // ISO C
   void exit(int status);
   void _Exit(int status);

@@ -1,8 +1,8 @@
 :PROPERTIES:
 :ID:       0c48ecd1-63cc-43f3-bb43-652253a86f1b
 :END:
-#+title: C++ Class
-
+#+title: Class
+#+filetags: :C++:
 
 * Constructor
 ** Copy Constructor
@@ -12,6 +12,9 @@
 - Use private default constructor to prevent default constructor
 
 * Inheritance
+:PROPERTIES:
+:ID:       7f52b349-590e-4697-bd12-85c2bd618af9
+:END:
 #+begin_src cpp
 class Base {
 public:
@@ -49,10 +52,59 @@ Base *pBase = static_cast<Base *>&obj;
 pBase->print() // Base
 #+end_src
 
-** Polymorphism
+** Virtual Inheritance
+- Virtual inheritance is used to solve the diamond problem
+#+begin_example
+    Base
+   /    \
+  /      \
+Derived1  Derived2
+  \      /
+   \    /
+    Final
+#+end_example
+- Without virtual inheritance, Final would inherit two separate copies of Base
+
+#+begin_src cpp
+
+** ~final~
+- ~class Derived final : public Base {}~
+  - The Derived class cannot be inherited from
+
+* Polymorphism
+:PROPERTIES:
+:ID:       fcfe25ea-0f94-4655-a943-62ae75f80547
+:END:
 - use base class pointer to call derived class override function
+
+** ~override~
+- ~override~ is used to indicate that a function is overriding a virtual function in the base class
+  - The compiler will check the ~virtual~ function signature
+- ~virtual int DoSomething() override {}~
+
+** ~final~
+- ~final~ is used to indicate that a virtual function cannot be overridden in derived classes
+- ~virtual int DoSomething() override final {}~
 
 * Virtual Destructor
 - If a class has a virtual function, it should have a virtual destructor
 - Virtual destructor is needed to delete derived class object using base class pointer
   - derived class destructor is called first, then base class destructor is called
+
+* Static Members
+#+begin_src cpp
+class A {
+private:
+  static unsigned int count;
+};
+
+unsigned int A::count = 0; // static member initialization
+#+end_src
+
+* Friend
+#+begin_src cpp
+Class A {
+friend class B;
+friend int increase(A &a);
+}
+#+end_src

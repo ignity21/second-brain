@@ -5,7 +5,13 @@
 #+filetags: C++
 
 * [[id:726f8c7e-5021-4247-b502-70a38c5b3173][C++ Compilation]]
-* [[id:2b771aec-8c0d-4b6d-9b80-3a2b4f39d9ce][Package Management]]
-* [[id:c21b1c17-614b-4fb3-b0d4-bf0f4acaa2f5][CMake]]
+* Build Tools
+:PROPERTIES:
+:ID:       18384124-a048-49a6-961d-5527f79eed07
+:END:
+- [[id:2b771aec-8c0d-4b6d-9b80-3a2b4f39d9ce][Conan2]]
+- [[id:c21b1c17-614b-4fb3-b0d4-bf0f4acaa2f5][CMake]]
+
 * [[id:f08a3b70-aa82-4ba8-b824-16dd3400878c][C++ Coding]]
+* [[id:e6374be2-60f2-4b47-a465-49ea6d58b970][Debugging]]
 * [[id:ce669b17-3f02-4a00-b2df-4b8993863720][C++ Memory Management]]
