@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       5e72dbf9-f281-4f99-9d26-c5a663e4c8a2
 :END:
-#+title: Pointers
+#+title: Pointer
 #+filetags: C++
 
 * Overview

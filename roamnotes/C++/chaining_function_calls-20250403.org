@@ -3,6 +3,11 @@
 :END:
 #+title: Chaining Function Calls
 
+* Overview
+- Generally type of return value is the same as the type of first argument.
+  - ~std::ostream& operator<<(std::ostream&, const T&);~
+
+* Example
 #+begin_src cpp
 class Complex {
 public:

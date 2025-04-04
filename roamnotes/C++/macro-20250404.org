@@ -1,0 +1,102 @@
+:PROPERTIES:
+:ID:       1cffdada-e2ad-4e59-a569-201cdbde2d71
+:END:
+#+title: Macro
+
+* Empty Macro
+- It is used for conditional compilation.
+#+begin_src cpp
+#define LARGE_ARRAY
+
+#ifdef LARGE_ARRAY
+  #define SIZE 1000000
+#else
+  #define SIZE 100
+#endif
+#+end_src
+
+* Predefined Macros
+- ~__FILE__~: The name of the current source file.
+- ~__LINE__~: The line number of the current source file.
+- ~__DATE__~: The date of compilation.
+- ~__TIME__~: The time of compilation.
+- ~__cplusplus~: The version of compiler.
+
+* Function Macro
+- just use inline function instead of macro
+- ~#define NAME(ARGS) EXPRESSION~
+#+begin_src cpp
+#include <iostream>
+using namespace std;
+
+#define SQUARE(x) x*x
+#define MULT(x, y) x*y
+#define MULT2(x, y) (x)*(y) // Use () to avoid precedence problem
+
+
+int main() {
+    cout << SQUARE(5) << endl; // 25
+    cout << MULT(5, 6) << endl; // 30
+    cout << MULT(5, 6+1) << endl; // 5*6+1 tricky!
+    cout << MULT2(5, 6+1) << endl; // 5*(6+1) = 35
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+| 25 |
+| 30 |
+| 31 |
+| 35 |
+
+** Variadic Macro
+- ~__VA_ARGS__~: The variable arguments (...) in the macro.
+#+begin_src cpp
+#include <iostream>
+
+#define LOG(o,...)                              \
+    fprintf(o, "[%s:%d] ", __FILE__, __LINE__); \
+    fprintf(o, __VA_ARGS__);
+// __VA_ARGS__ is replaced by '...''
+
+int main() {
+    LOG(stdout, "%s\n", "Hello World");
+    return 0;
+}
+#+end_src
+
+#+RESULTS:
+: [/tmp/babel-9SYsck/C-src-nSSgzn.cpp:16] Hello World
+
+* ~#~, ~##~
+- ~#~ is used to convert the argument into a string literal.
+- ~##~ is used to concatenate two arguments.
+#+begin_src cpp
+#include <iostream>
+using namespace std;
+#define PRINT(x) cout << #x << " = " << (x) << endl
+
+#define MEMBER(type,a) type m_##a
+struct MyStruct {
+    MEMBER(int, a); // int m_a;
+    MEMBER(float, b); // float m_b;
+};
+
+int main() {
+    float a = 5.0;
+    PRINT(a); // #x == 'a'
+}
+#+end_src
+
+#+RESULTS:
+: a = 5
+
+* Multi-line
+#+begin_src cpp
+#define PROPERTY(type, name) \
+    private: \
+        type m_##name; \
+    public: \
+        const type & get_##name() const { return m_##name; } \
+        void set_##name(type value) { m_##name = value; } \
+#+end_src

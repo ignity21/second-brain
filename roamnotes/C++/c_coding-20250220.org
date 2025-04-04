@@ -6,11 +6,12 @@
 #+filetags: :C++:
 
 * Basic
-** [[id:1e83db6b-6955-4f9f-a107-da4af74f9071][Keywords]]
-** [[id:93ea9dcc-19c5-43cf-8695-7d75e0e07522][Literals]]
-** [[id:5e72dbf9-f281-4f99-9d26-c5a663e4c8a2][Pointers]]
+** [[id:1e83db6b-6955-4f9f-a107-da4af74f9071][Keyword]]
+** [[id:93ea9dcc-19c5-43cf-8695-7d75e0e07522][Literal]]
+** [[id:5e72dbf9-f281-4f99-9d26-c5a663e4c8a2][Pointer]]
 ** [[id:7cea8b50-218e-40c5-915b-16dddc5c4790][Function]]
 ** [[id:6faf4309-f313-4230-bfc9-30dc308e0947][Type Casting]]
+** [[id:1cffdada-e2ad-4e59-a569-201cdbde2d71][Macro]]
 
 * [[id:a94d8236-7cd6-4e11-baf7-75680083bb74][Built-in Data Structures]]
 

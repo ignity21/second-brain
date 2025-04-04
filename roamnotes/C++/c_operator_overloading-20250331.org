@@ -1,10 +1,15 @@
 :PROPERTIES:
 :ID:       0ea84d5f-1340-433c-804c-053c2c58c4a7
 :END:
-#+title: C++ Operator Overloading
+#+title: Operator Overloading
 
 * Global Functions
+- increment: ~int operator++()~, ~int operator++(int)~ (postfix, int is just a dummy)
+
 * In-class Functions
 - bool: ~operator bool() const~
 - dereference:  ~T& operator*() const~
 - pointer: ~T* operator->() const~
+- increment: ~T& operator++()~, ~T operator++(int)~
+- assignment: ~T& operator=(const T&)~
+- type cast: ~operator float() const~, ~operator int() const~, etc.
