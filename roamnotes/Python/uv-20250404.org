@@ -2,7 +2,7 @@
 :ID:       196944f7-2304-448c-9f27-4e3a6d2892f7
 :END:
 #+title: ~uv~
-#+filetags: :Python:
+#+filetags: :Project:Python:
 
 * Python Interpreter
 - ~uv python list~ shows the list of all available Python interpreters.

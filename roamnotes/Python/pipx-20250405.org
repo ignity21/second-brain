@@ -1,8 +1,8 @@
 :PROPERTIES:
-:ID:       611eaef4-a96b-4835-b3d3-7e1e6910fbe2
+:ID:       490f42a5-7df9-4885-a0fc-d8c47518ea6f
 :END:
 #+title: ~pipx~
-#+filetags: Python
+#+filetags: :Tool:
 
 * Installation
 1. May remove system pipx: ~sudo pacman -Rns python-pipx~

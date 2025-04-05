@@ -1,8 +1,8 @@
 :PROPERTIES:
-:ID:       c7646c59-10f8-42c0-b181-d476019efe95
+:ID:       0806bf3e-0d19-4f34-b0ef-fa9441a575c4
 :END:
 #+title: ~poetry~
-#+filetags: Python
+#+filetags: :Project:
 
 * Installation
 - ~pipx install poetry~
