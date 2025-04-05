@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       0f708bdd-acb3-419f-a4b3-8a8e8546c7bf
+:END:
+#+title: =pyproject.toml=
+
+- [[https://packaging.python.org/en/latest/guides/writing-pyproject-toml/][Writing pyproject.toml]]

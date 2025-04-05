@@ -1,0 +1,50 @@
+:PROPERTIES:
+:ID:       196944f7-2304-448c-9f27-4e3a6d2892f7
+:END:
+#+title: ~uv~
+#+filetags: :Python:
+
+* Python Interpreter
+- ~uv python list~ shows the list of all available Python interpreters.
+- ~uv python install 3.8 3.11~
+- ~uv python install pypy@3.10~
+- ~uv python uninstall 3.11~
+- ~uv python pin pypy~: Pin the current project to use a specific Python version using =.python-version= file.
+- ~uv python dir~: Show the directory where Python interpreters are installed.
+
+* Projects
+** Work Flow
+1. ~uv init -p [MINIMUN]~
+2. ~uv add [PACKAGES]~
+3. ~uv venv -p [PYTHON]~, ~uv lock~, ~uv sync~
+4. ~source .venv/bin/activate~
+5. ~uv pip install -e .~
+
+** Commands
+Replaces ~poetry~
+- ~uv init~: Create a new Python project.
+- ~uv venv -p 3.8~: Create a new virtual environment for the project.
+- ~uv add~: Add a dependency to the project.
+- ~uv remove~: Remove a dependency from the project.
+- ~uv sync~: Sync the project's dependencies with the environment.
+- ~uv lock~: Create a lockfile for the project's dependencies.
+- ~uv run~: Run a command in the project environment.
+- ~uv tree~: View the dependency tree for the project.
+- ~uv build~: Build the project into distribution archives.
+- ~uv publish~: Publish the project to a package index.
+
+* Tools
+Replaces ~pipx~
+- ~uvx~ / ~uv tool run~: Run a tool in a temporary environment.
+- ~uv tool install~: Install a tool user-wide.
+- ~uv tool uninstall~: Uninstall a tool.
+- ~uv tool list~: List installed tools.
+- ~uv tool update-shell~: Update the shell to include tool executables.
+- ~uv tool dir~: Show the directory where tools are installed.
+
+* Virtual Environments
+- ~uv venv -p [PYTHON]~
+- ~uv pip [COMMAND]~
+
+* Others
+- ~uv self update~
