@@ -132,18 +132,25 @@
   # 追加模式，用 4>>output.txt
   echo "hello world\!" >&4
 #+end_src
+
 * 数组
 #+begin_src bash
-  array=(1 2 3 4 5 6)
-  # or
-  array_test[0] = "a"
-  array_test[1] = "b"
+array=(1 2 3 4 5 6)
 
-  # print
-  echo ${array[0]}
-  echo ${array_test[*]} # or ${array_test[@]}
-  echo ${#array_test[*]} # 元素个数
+# print
+echo ${array[0]}
+echo ${#array[*]} # 元素个数
+
+echo ${array[*]}
+
+# using @ to expand all elements
+for i in ${array[@]}; do
+    echo $i
+done
 #+end_src
+- ~"${array[@]}"~: Expands to all elements of the array, each quoted individually.
+- ~"${array[*]}"~: Joins all elements into a single string (space-separated).
+
 ** 关联数组
 #+begin_src bash
   declare -A ass_array # 声明关联数组
@@ -159,6 +166,9 @@
   echo ${!ass_array[*]} # 列出索引列表 or ${!ass_array[@]}
 #+end_src
 
+* 命令行参数
+- ~--~: 用于分隔命令的 option 部分和 command 部分
+  - ~uv run --python pypy@3.8 -- python --version~
 
 * Tricks
 - 获取字符串长度： ~${#var}~

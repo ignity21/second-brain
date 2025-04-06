@@ -33,6 +33,39 @@ Replaces ~poetry~
 - ~uv build~: Build the project into distribution archives.
 - ~uv publish~: Publish the project to a package index.
 
+** Dependencies
+#+begin_src bash
+uv add requests
+uv add 'requests==2.31.0'
+uv add git+https://github.com/psf/requests
+uv add -r requirements.txt -c constraints.txt
+uv remove requests
+
+# Upgrade a package
+uv lock --upgrade-package requests
+#+end_src
+
+** Example
+#+begin_src bash
+uv init hello-world
+# or
+mkdir hello-world
+cd hello-world
+uv init
+uv add flask
+# or uv add git+https://github.com/psf/requests
+uv run -- flask run -p 3000
+uv run main.py
+#+end_src
+- =.python-version=: the project's default Python version.
+- =.venv=: contains your project's virtual environment.
+- =uv.lock=: is a cross-platform lockfile that contains exact information about your project's dependencies.
+
+** Migration
+*** From =requirements.txt=
+- ~uv add -r requirements.txt -c constraints.txt~
+-
+
 * Tools
 Replaces ~pipx~
 - ~uvx~ / ~uv tool run~: Run a tool in a temporary environment.
@@ -43,8 +76,12 @@ Replaces ~pipx~
 - ~uv tool dir~: Show the directory where tools are installed.
 
 * Virtual Environments
+- ~uv python pin 3.11~: Use a specific Python version in the current directory
 - ~uv venv -p [PYTHON]~
+
+** ~uv pip~
 - ~uv pip [COMMAND]~
+
 
 * Others
 - ~uv self update~
