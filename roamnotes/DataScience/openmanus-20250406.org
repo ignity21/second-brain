@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       f072b323-cea7-459f-8ef4-b4508031388b
+:END:
+#+title: OpenManus
+
+* Installation
+- Install dependencies:
+  - ~sudo pamac install icu66-bin libffi7~
+  - ~sudo ln -s /usr/lib/libwebp.so.7 /usr/lib/libwebp.so.6~
+
+* Use Cases
+** Web Development
+Create websites, generate content, and maintain online presence with minimal human intervention.
+- Create a personal blog website with five placeholder articles about artificial intelligence
+
+** Research Assistant
+Conduct in-depth research on specific topics, summarize findings, and identify key insights.
+- Research recent advancements in renewable energy and prepare a comprehensive report
+
+** Business Analytics
+Analyze market trends, customer data, and performance metrics to provide actionable business insights
+- Analyze customer feedback from our e-commerce store and identify recurring themes
+
+** Personal Productivity
+Plan schedules, organize tasks, and optimize workflows for better personal productivity.
+- Create a weekly meal plan with grocery list based on Mediterranean diet preferences
