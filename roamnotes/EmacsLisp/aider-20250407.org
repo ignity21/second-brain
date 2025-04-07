@@ -1,0 +1,30 @@
+:PROPERTIES:
+:ID:       964c2294-759f-4758-84ff-be9887557496
+:END:
+#+title: aider
+
+* Installation
+- ~curl -LsSf https://aider.chat/install.sh | sh~: one-liner (recommended)
+  - It will use uv tool to install aider.
+- ~uv tool install --force --python python3.12 aider-chat@lates~
+
+** System Package Manager
+- ~pamac install aider-chat~
+
+* Configuration
+- =.aider.conf.yml=
+#+begin_src yaml
+# Specify the model to use for the main chat
+model: xxx
+thinking-tokens: 8k
+reasoning-effort: "medium" # low, medium, high
+
+openai-api-key: <key>  # OPENAI_API_KEY=<key>
+anthropic-api-key: <key> # ANTHROPIC_API_KEY=<key>
+api-key:
+- gemini=foo      # Sets env var GEMINI_API_KEY=foo
+
+dark-mode: false
+light-mode: true
+pretty: true
+#+end_src
