@@ -1,0 +1,36 @@
+:PROPERTIES:
+:ID:       6c721a34-d7ff-451f-b29a-368692d2f8c8
+:END:
+#+title: Function Template
+
+* Overview
+- Declaration
+#+begin_src cpp
+template <typename T, typename U> void func(T t, U u) {};
+template <class T, class U> void func2(T t, U u) {};
+#+end_src
+- Instantiation
+#+begin_src cpp
+// Explicit instantiation
+template void func<float, double>(float t, double u); // Explicit instantiation
+
+// Implicit instantiation: void func<int, double>(int, double)
+func<int, double>(1, 2.0);
+
+#+end_src
+
+* Specialization
+Overriding the template function.
+#+begin_src cpp
+template<class T>
+T max(T a, T b) {
+    return (a > b) ? a : b;
+};
+
+// explicit instantiation
+template long max<long>(long a, long b);
+
+// explicit specialization, should provide an implementation
+template<> int max<int>(int a, int b) {...};
+// <> indicates you are providing a specialization
+#+end_src

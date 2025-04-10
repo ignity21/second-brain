@@ -8,6 +8,8 @@
 - 模板是用来产生类型或函数的。
 - A template is used to create a family of classes or functions.
 
+* [[id:6c721a34-d7ff-451f-b29a-368692d2f8c8][Function Template]]
+
 * Template Arguments
 ** Default Arguments
 #+begin_src cpp
