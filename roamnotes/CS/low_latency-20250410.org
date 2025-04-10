@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       e7e8f2c3-5951-41ad-b55b-a9b86187091b
+:END:
+#+title: Low Latency
+
+* Overview
+- 性能分析：GNU Profiler, Google Perf Tools (gperftools), Linux perf
+- 并行计算：SIMD 指令集, 类似 Cuda ~#include <experimental/simd>~
+- 内存读写优化
+  - 块访问技术，按适合的缓存块来读取数据（依据 L1d 大小）
+  - 启用大页缓存，减少页表（内存映射索引）项，减少 TLB(Translation Lookaside Buffer) 缓存 miss 率
+  - 多处理器服务器 NUMA架构，处理器访问自己的本地内存
+- 进程执行优化：实时优先级进程调度 ~chrt~ , 绑定 CPU 核心 (CPU pinning) ~taskset~
+- 网络优化：UDP?
+  - 调整 TCP Sliding Window 大小
+  - 拥塞算法
+  - 网络缓冲区大小
+  - 关闭 Nagle 算法：小包合并算法
+  - 零拷贝技术：直接在用户空间处理数据。DPDK （Intel 开发）
+  - Kafka 零拷贝读取: 使用系统调用 ~sendfile~ 直接在内核空间中将文件数据从磁盘传输到网络套接字
