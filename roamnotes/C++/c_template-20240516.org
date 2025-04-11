@@ -9,6 +9,8 @@
 - A template is used to create a family of classes or functions.
 
 * [[id:6c721a34-d7ff-451f-b29a-368692d2f8c8][Function Template]]
+* [[id:16c1d5c2-ba04-4e64-b6e3-bf0d3e5a0d68][Class Template]]
+* [[id:ae725222-41d6-4eb6-bbd4-96fcc3ff80af][Variadic Templates]]
 
 * Template Arguments
 ** Default Arguments
@@ -21,5 +23,4 @@ auto add(T t, U u) -> decltype(t + u) {
 
 * [[id:c264e461-9c95-4d7c-917e-762cb8ec52e7][Template Type Deduction]]
 * [[id:c863352d-9717-4a36-a3a4-5629ab398241][External Templates]]
-* [[id:ae725222-41d6-4eb6-bbd4-96fcc3ff80af][Variadic Templates]]
 * [[id:64fd6df5-2024-4123-a159-afa322afe5b4][C++20 Concepts]]

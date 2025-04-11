@@ -6,7 +6,9 @@
 * Overview
 - Declaration
 #+begin_src cpp
+// generally preferred
 template <typename T, typename U> void func(T t, U u) {};
+// for template template parameters
 template <class T, class U> void func2(T t, U u) {};
 #+end_src
 - Instantiation
@@ -22,9 +24,9 @@ func<int, double>(1, 2.0);
 * Specialization
 Overriding the template function.
 #+begin_src cpp
-template<class T>
+template<typename T = int> // default template argument
 T max(T a, T b) {
-    return (a > b) ? a : b;
+  return (a > b) ? a : b;
 };
 
 // explicit instantiation
@@ -34,3 +36,14 @@ template long max<long>(long a, long b);
 template<> int max<int>(int a, int b) {...};
 // <> indicates you are providing a specialization
 #+end_src
+
+* Variadic Arguments
+#+begin_src cpp
+template<typename... Args>
+void func(Args... args) {
+  std::cout << sizeof...(args) << std::endl;
+}
+#+end_src
+** TODO Unpacking Arguments
+*** Recursive Template Function
+*** Variadic Template  (C++17)

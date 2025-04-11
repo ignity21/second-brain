@@ -3,6 +3,7 @@
 :END:
 #+title: Variadic Templates
 #+filetags: C++
+
 * Class
 #+begin_src cpp
 template<typename... Args> class Magic;
@@ -16,18 +17,6 @@ class Magic<> Nothing;
 // at least one template argument is required
 template<typename Require, typename... Args> class Magic2;
 #+end_src
-
-* Function
-- Function with variadic arguments
-#+begin_src cpp
-template<typename... Args>
-void magic(Args... args) {
-    std::cout << sizeof...(args) << std::endl;
-}
-#+end_src
-** TODO Unpacking Arguments
-*** Recursive Template Function
-*** Variadic Template  (C++17)
 
 * ~std::thread~ Example
 ** Definition

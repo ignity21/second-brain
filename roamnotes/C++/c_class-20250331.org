@@ -86,6 +86,7 @@ Derived1  Derived2
 - ~final~ is used to indicate that a virtual function cannot be overridden in derived classes
 - ~virtual int DoSomething() override final {}~
 
+* [[id:16c1d5c2-ba04-4e64-b6e3-bf0d3e5a0d68][Class Template]]
 * Virtual Destructor
 - If a class has a virtual function, it should have a virtual destructor
 - Virtual destructor is needed to delete derived class object using base class pointer

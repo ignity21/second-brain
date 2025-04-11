@@ -1,0 +1,108 @@
+:PROPERTIES:
+:ID:       16c1d5c2-ba04-4e64-b6e3-bf0d3e5a0d68
+:END:
+#+title: Class Template
+
+* Overview
+#+begin_src cpp
+template <typename T1, typename T2>
+class Pair {
+public:
+  Pair(const T1 &first, const T2 &second) : first_(first), second_(second) {}
+
+  T1 GetFirst() const { return first_; }
+  T2 GetSecond() const; // declaration
+private:
+  T1 first_;
+  T2 second_;
+};
+
+// defnition of getSecond()
+template <typename T1, typename T2>
+T2 Pair<T1, T2>::GetSecond() const { return second_; }
+
+// instantiation
+template class Pair<int, float>;
+#+end_src
+
+
+** Specialization
+#+begin_src cpp
+template <typename T1, typename T2>
+class Pair {/*...*/};
+
+// complete specialization
+template <> class Pair<double, int> {
+  /*...*/
+};
+
+// partial specialization
+template <typename T2> class Pair<int, T2> {
+public:
+  Pair(int first, const T2 &second) : first_(first), second_(second) {}
+  int getFirst() const { return first_; }
+  T2 getSecond() const { return second_; }
+
+private:
+  int first_;
+  T2 second_;
+};
+#+end_src
+
+** Default Argument
+#+begin_src cpp
+template<typename T = int, int N = 2>
+class Array {
+  /* ... */
+};
+
+Array<> a1; // T = int, N = 2
+#+end_src
+
+* Non-type Parameter
+#+begin_src cpp
+template <class T, int N> class Array {
+public:
+  Array(T values[N]) {
+    for (int i = 0; i < N; ++i) {
+      data[i] = values[i];
+    }
+  }
+
+  T GetMax() {
+    T max = data[0];
+    for (const auto &value : data) {
+      max = std::max(max, value);
+    }
+    return max;
+  }
+
+private:
+  T data[N];
+};
+
+int main() {
+  constexpr int N = 5;
+  int values[N] = {1, 2, 3, 4, 5};
+  Array<int, N> array(values);
+  std::cout << "Max value: " << array.GetMax() << std::endl;
+}
+#+end_src
+* Template Parameter
+#+begin_src cpp
+// 'template<typename...> class' is a template template parameter
+template<template<typename...> class Container, typename T>
+class Iterator {
+public:
+  Iterator(const Container<T> &c) : container(c) {}
+private:
+  Container<T> container;
+};
+
+std::vector<int> vec;
+Iterator<std::vector, int> it(vec);
+#+end_src
+- ~template<typename> class T~: T can only be used with a single template parameter.
+- ~template<typename...> class T~: T can be used with multiple template parameters (unordered_map)
+  - more flexible
+  - Even vector has multiple template parameters ~vector<T, Allocator>~
