@@ -1,0 +1,47 @@
+:PROPERTIES:
+:ID:       d266d5a3-9613-45d2-ba83-2292c9c4f49c
+:END:
+#+title: Exception
+* Overview
+#+begin_src cpp
+try {
+  res = a / b;
+}
+catch (const std::exception& e) {
+  std::cerr << "Exception: " << e.what() << std::endl;
+}
+#+end_src
+- [[https://en.cppreference.com/w/cpp/error/exception][std exceptions]]
+
+* ~throw~
+- throwable types
+  - variables, objects, pointers, functions, references
+#+begin_src cpp
+try {
+  throw "char prointer exception";
+} catch (const char *e) {
+  std::cout < < < < e << std::endl;
+}
+#+end_src
+- *Recommended* to throw ~std::exception~ or its derived classes
+
+* Custom Exceptions
+#+begin_src cpp
+class my_exception : public std::exception {
+  unsigned int code;
+  string reason;
+
+public:
+  my_exception(unsigned int c, const string &r) : code(c), reason(r) {}
+  virtual const char *what() const noexcept override { return reason.c_str(); }
+};
+
+int main() {
+  try {
+    throw my_exception{1, "Error occurred"};
+  } catch (const my_exception &e) { // or its base classes std::exception
+    cout << e.code << ": " << e.reason << endl;
+  }
+  return 0;
+}
+#+end_src

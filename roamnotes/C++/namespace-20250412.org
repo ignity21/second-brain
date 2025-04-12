@@ -1,0 +1,68 @@
+:PROPERTIES:
+:ID:       50d36ffe-1839-47bd-b008-37b5fd18b103
+:END:
+#+title: Namespace
+
+* Overview
+#+begin_src cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+void foo(string &prefix) { cout << prefix << " global foo()" << endl; }
+
+namespace myns {
+void foo(string &prefix) { cout << prefix << "myns foo()" << endl; }
+} // namespace myns
+
+void no_using() {
+  string s{"no_using "};
+  myns::foo(s);
+  foo(s);
+}
+
+void using_foo() {
+  string s{"using_foo "};
+  using myns::foo;
+  foo(s);
+  ::foo(s);
+}
+
+void using_ns() {
+  string s{"using_ns "};
+  using namespace myns;
+  myns::foo(s); // foo(s) is ambiguous
+  ::foo(s);
+}
+
+int main() {
+  no_using();
+  using_foo();
+  using_ns();
+  return 0;
+}
+#+end_src
+
+#+RESULTS:
+| no_using  | myns   | foo() |
+| no_using  | global | foo() |
+| using_foo | myns   | foo() |
+| using_foo | global | foo() |
+| using_ns  | myns   | foo() |
+| using_ns  | global | foo() |
+
+* Embedded Namespaces
+#+begin_src cpp
+int i;
+namespace N {
+  int i;
+  namespace M {
+    int i;
+  }
+}
+
+// Usage
+i;
+N::i;
+N::M::i;
+#+end_src
