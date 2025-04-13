@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       077afbe6-6935-4726-830b-2583f2bce35e
+:END:
+#+title: Virtual Destructor
+
+* Overview
+- If a class has a virtual function, it should have a virtual destructor
+- Virtual destructor is needed to delete derived class object using base class pointer
+  - derived class destructor is called first, then base class destructor is called

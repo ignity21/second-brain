@@ -4,13 +4,7 @@
 #+title: Class
 #+filetags: :C++:
 
-* Constructor
-** Copy Constructor
-- When to use copy constructor?
-  - When there is a pointer member variable
-  - default: shallow copy; copy pointer, not the data
-- Use private default constructor to prevent default constructor
-
+* [[id:1a2bf798-53c4-49b2-990b-ed031c5c9e12][Constructors]]
 * Inheritance
 :PROPERTIES:
 :ID:       7f52b349-590e-4697-bd12-85c2bd618af9
@@ -87,11 +81,7 @@ Derived1  Derived2
 - ~virtual int DoSomething() override final {}~
 
 * [[id:16c1d5c2-ba04-4e64-b6e3-bf0d3e5a0d68][Class Template]]
-* Virtual Destructor
-- If a class has a virtual function, it should have a virtual destructor
-- Virtual destructor is needed to delete derived class object using base class pointer
-  - derived class destructor is called first, then base class destructor is called
-
+* [[id:077afbe6-6935-4726-830b-2583f2bce35e][Virtual Destructor]]
 * Static Members
 #+begin_src cpp
 class A {

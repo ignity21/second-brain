@@ -5,10 +5,13 @@
 #+filetags: :C++:
 
 * C-style Casting
-not recommended, because it is not type-safe
-- ~int i = (int)3.14;~
-- ~Base *pBase = (Base *)new Derived();~
-- ~B *pB = new B(); A *pA = (A *)pB;~ is not safe but it can be compiled.
+- i.e. explicit casting
+- not recommended, because it is not type-safe
+#+begin_src cpp
+int i = (int)3.14;
+Base *pBase = (Base *)new Derived();
+B *pB = new B(); A *pA = (A *)pB; // not safe but it can be compiled
+#+end_src
 
 * Dynamic Casting
 - Runtime type checking
@@ -39,32 +42,32 @@ try{
 }
 #+end_src
 
-** RTTI (Run-Time Type Information)
-- RTTI is required for ~dynamic_cast~
-- RTTI is enabled by default, disable it by ~-fno-rtti~, use ~static_cast~ instead
-  - May use ~dynamic_cast~ in *debug mode* and ~static_cast~ in *release mode*
-- RTTI is comipled into the binary, so it can be used in runtime
-- ~typeid~ operator returns a reference to a *type_info* object
+** [[id:6d28c323-b24f-4197-9e54-608b81049b97][RTTI]] is Required for ~dynamic_cast~
 
 * Static Casting
 - Compile-time type checking
+- All implicit conversions can be replaced with ~static_cast~
 #+begin_src cpp
 int i = static_cast<int>(3.14);
 Base *pBase = static_cast<Base *>(new Derived());
 #+end_src
 
 * Reinterpret Casting
+:PROPERTIES:
+:ID:       f3bce280-7f7b-4d2b-8541-6f78fa4bd35d
+:END:
 - Low-level reinterpretation of bits
 - Used for casting between unrelated types. e.g. *casting between a pointer and an integer*
 #+begin_src cpp
 Foo *pFoo = new Foo();
-int64_t address = reinterpret_cast<int64_t>(pFoo);
-Foo *pFoo2 = reinterpret_cast<Foo *>(address);
+int64_t address = reinterpret_cast<int64_t>(pFoo); // pointer to int64_t
+Foo *pFoo2 = reinterpret_cast<Foo *>(address); // int64_t to pointer
 #+end_src
 - may useful for casting data in buffer to a struct
 
 * Const Casting
-- Commonly used to remove constness
+- Commonly used to remove constness of an object
+  - Try to call a non-const member function on a const object
 - type must be a pointer or reference
 #+begin_src cpp
 const int i = 10;

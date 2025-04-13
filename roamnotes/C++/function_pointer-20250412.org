@@ -1,0 +1,4 @@
+:PROPERTIES:
+:ID:       e5c6dc31-8c47-4c5a-9f00-14fe06357c45
+:END:
+#+title: Function Pointer

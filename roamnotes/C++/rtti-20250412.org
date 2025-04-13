@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       6d28c323-b24f-4197-9e54-608b81049b97
+:END:
+#+title: RTTI
+
+* Overview
+- RTTI is required for ~dynamic_cast~
+- RTTI is enabled by default, disable it by ~-fno-rtti~, use ~static_cast~ instead
+  - May use ~dynamic_cast~ in *debug mode* and ~static_cast~ in *release mode*
+- RTTI is comipled into the binary, so it can be used in runtime
+- ~typeid~ operator returns a reference to a *type_info* object

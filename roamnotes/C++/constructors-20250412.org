@@ -1,0 +1,30 @@
+:PROPERTIES:
+:ID:       1a2bf798-53c4-49b2-990b-ed031c5c9e12
+:END:
+#+title: Constructors
+
+* Overview
+#+begin_src cpp
+// Simple example of copy and move contructors
+class A {
+public:
+  A() { std::cout << "Default constructor called\n"; }
+  A(const A &) { std::cout << "Copy constructor called\n"; }
+  A(A &&) noexcept { std::cout << "Move constructor called\n"; }
+
+  virtual ~A() { std::cout << "Destructor called\n"; }
+};
+
+// A a;
+// A a2 = a; // Copy constructor
+// A a3 = std::move(a); // Move constructor
+// A a4;
+// a4 = a2; // Copy assignment
+// a5 = A(); // Move assignment
+#+end_src
+
+* Copy Constructor
+- When to use copy constructor?
+  - When there is a pointer member variable
+  - default: shallow copy; copy pointer, not the data
+- Use private default constructor to prevent default constructor
