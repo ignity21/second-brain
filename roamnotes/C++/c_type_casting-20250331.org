@@ -60,8 +60,10 @@ Base *pBase = static_cast<Base *>(new Derived());
 - Used for casting between unrelated types. e.g. *casting between a pointer and an integer*
 #+begin_src cpp
 Foo *pFoo = new Foo();
-int64_t address = reinterpret_cast<int64_t>(pFoo); // pointer to int64_t
-Foo *pFoo2 = reinterpret_cast<Foo *>(address); // int64_t to pointer
+uint64_t address = reinterpret_cast<uint64_t>(pFoo); // pointer to uint64_t
+// or (uint64_t)pFoo; (unsigned long long)pFoo;
+
+Foo *pFoo2 = reinterpret_cast<Foo *>(address); // uint64_t to pointer
 #+end_src
 - may useful for casting data in buffer to a struct
 

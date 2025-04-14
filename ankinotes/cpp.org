@@ -1,0 +1,58 @@
+#+title: C++
+
+* Deck
+  :PROPERTIES:
+  :ANKI_DECK: CS::C++
+  :END:
+
+** Pointers
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1744601670300
+:ANKI_NOTE_HASH: dc93f318da99e1967e7c72d45ced3e9f
+:END:
+
+*** Front
+#+begin_src cpp
+int i = 0;
+int *p = &i;
+&i
+&p
+p
+*p
+#+end_src
+
+*** Back
+- ~&i~ : address of int variable i
+- ~&p~ : address of pointer itself
+- ~p~ : address of i
+- ~*p~ : value of i
+
+** Pointers to Array
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1744601946301
+:ANKI_NOTE_HASH: a99885b2c5a662948cfec127509505a7
+:END:
+
+*** Front
+#+begin_src cpp
+int array[5] = {1, 2, 3, 4, 5};
+int *ptr = array;
+&ptr
+ptr
+array
+*ptr
+ptr[0]
+*(++ptr)
+*(ptr++)
+#+end_src
+
+*** Back
+- ~&ptr~ : address of pointer itself
+- ~ptr~ : address of array
+- ~array~ : address of array
+- ~*ptr~ : value of first element
+- ~ptr[0]~ : value of first element
+- ~*(++ptr)~ : increment pointer second and value of second
+- ~*(ptr++)~ : increment pointer to third and value of second

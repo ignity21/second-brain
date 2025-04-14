@@ -12,7 +12,7 @@
 
 - &value: 1002
 - value: 1212
-- &pvalue: 1001
+- &pvalue: 1001 the address of the pointer itself
 - pvalue: 1002
 - *pvalue: 1212
 

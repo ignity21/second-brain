@@ -1,5 +1,6 @@
 :PROPERTIES:
 :ID:       9bb46372-40a5-416c-9a00-b00009a3e663
+:ROAM_ALIASES: "Virtual Tables"
 :END:
 #+title: VTables
 

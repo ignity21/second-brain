@@ -4,6 +4,7 @@
 #+title: Array
 #+filetags: :C++:
 
+* Overview
 #+begin_src cpp
 float weight[5] = {0.1, 0.2}; // partial initialization
 float weight[5] = {0}; // all elements initialized to 0
@@ -25,4 +26,21 @@ if(strcmp(hello, hello2) == 0)
 // Dynamic memory allocation
 int *parray = new int[10];
 delete[] parray;
+#+end_src
+
+* Pointer to Array
+:PROPERTIES:
+:ID:       66214d1f-a18e-4d7b-bf7e-f796148c6c18
+:END:
+#+begin_src cpp
+#include <iostream>
+int nums[] = {1, 2, 3, 4, 5};
+int *ptr= nums; // Pointer to the first element of the array
+// &ptr: address of the pointer itself
+// ptr: first element address
+// nums: address of the first element
+// *ptr: first element value
+// ptr[0]: first element value
+// ptr[1]: second element value
+// *(ptr++): increment pointer to the second and return the first element value
 #+end_src
