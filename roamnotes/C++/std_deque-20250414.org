@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       41c864cb-fcac-4b1d-ac88-08ca0471045c
+:END:
+#+title: ~std::deque~
+#+filetags: :STL:
+
+* Overview
+- Unlike ~std::vector~
+  - Allows insertion and deletion at both ends.
+  - Utilizes a non-contiguous memory layout.
+- Resizing avoids value copying, adding new memory blocks as needed.
+
+
+** Strengths
+- Better performance than ~std::vector~ when resizing.
+- Can be used as a circular buffer.
+
+** Weaknesses
+- It might not be as memory-efficient or cache-friendly as ~std::vector~

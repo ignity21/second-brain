@@ -1,0 +1,68 @@
+:PROPERTIES:
+:ID:       d6893378-aac5-4435-8cac-980bcf7fc95d
+:END:
+#+title: Iterator
+
+* Overview
+#+begin_src cpp
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> numbers = {1, 2, 3, 4, 5};
+  for (auto it = numbers.crbegin(); it != numbers.crend(); ++it) {
+    std::cout << *it << " ";
+  }
+
+  return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 5 4 3 2 1
+
+* Iterator Invalidation
+#+begin_src cpp
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> numbers = {1, 2, 3, 4, 5};
+  auto it = numbers.begin() + 1; // point to second element
+  std::cout << *it << std::endl;
+  numbers.insert(numbers.begin(), 0);
+  // Attempt to use the iterator again
+  std::cout << *it << std::endl;
+  return 0;
+}
+#+end_src
+
+#+RESULTS:
+| 2 |
+| 5 |
+- For ~std::list~, *iterators do not become invalidated upon insertion or deletion of elements*
+
+** Solution in Loops
+- ~it = vec.insert(it)~, ~it = vec.erase(it)~, etc.
+#+begin_src cpp
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> numbers = {1, 2, 3, 4, 5};
+
+  for (auto it = numbers.begin(); it != numbers.end(); ++it) {
+    if (*it % 2 == 0) {
+      it = numbers.erase(it); // returns the next iterator after the erased element
+      --it; // Decrement iterator to stay at the same position
+    }
+  }
+  for (const auto &num : numbers) {
+    std::cout << num << " ";
+  }
+  return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 1 3 5

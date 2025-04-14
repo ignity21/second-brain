@@ -17,10 +17,18 @@
 :PROPERTIES:
 :ID:       20ab4a25-85ff-4006-9a6d-47863362bd2f
 :END:
-- [[id:cecdb0e0-82ac-467f-8585-56c966db4551][C++ Built-in Array]]
+** Sequential Containers
+- [[id:cbc6a2ee-feed-4f66-9558-1bd77b535c3f][~std::array~]]: replacement for C-style arrays
 - [[id:a2807e14-ea95-4d42-aa97-eebdc0798c95][~std::vector~]]
-- [[id:b85e6082-de0c-4f33-826d-cb9e6e7e3ae3][~enum~]]
+- ~std::list~: double-linked list
+- [[id:41c864cb-fcac-4b1d-ac88-08ca0471045c][~std::deque~]]
+
+** Associative Containers
+- ~std::set~
+- ~~std::map~
 - [[id:2d29f137-6278-4364-b0dc-2307410589a1][~std::unordered_map~]]
+
+** [[id:d6893378-aac5-4435-8cac-980bcf7fc95d][Iterator]]
 
 * STL Functional
 :PROPERTIES:

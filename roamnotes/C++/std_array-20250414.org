@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       cbc6a2ee-feed-4f66-9558-1bd77b535c3f
+:END:
+#+title: ~std::array~
+#+filetags: :STL:
+
+* Overview
+- ~template<class T, std::size_t N> class array;~
+- Can be used as a replacement for C-style arrays.
+  - Can be used with STL algorithms.
+  - Copyable and assignable.
+#+begin_src cpp
+#include <array>
+#include <iostream>
+
+int main() {
+  array<int, 5> arr = {1, 2, 3, 4, 5};
+
+}
+#+end_src

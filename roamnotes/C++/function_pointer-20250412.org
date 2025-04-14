@@ -12,30 +12,71 @@ int add(int a, int b) { return a + b; }
 int main() {
   int (*add_ptr)(int, int) = add; // function pointer
   auto *add_ptr2 = add;           // function pointer using auto
-  std::cout << "add_ptr(...): " << (unsigned long long)add_ptr << std::endl;
-  std::cout << "(*add_ptr)(...): " << (unsigned long long)(*add_ptr)
+  std::cout << "add_ptr(...) " << (unsigned long long)add_ptr << std::endl;
+  std::cout << "(*add_ptr)(...) " << (unsigned long long)(*add_ptr)
             << std::endl;
-  std::cout << "Result: " << add_ptr(1, 1) << std::endl;
-  std::cout << "Result: " << (*add_ptr)(2, 2) << std::endl;
-  std::cout << "Result: " << add_ptr2(3, 3) << std::endl;
+  std::cout << "Result " << add_ptr(1, 1) << std::endl;
+  std::cout << "Result " << (*add_ptr)(2, 2) << std::endl;
+  std::cout << "Result " << add_ptr2(3, 3) << std::endl;
 }
 #+end_src
 
 #+RESULTS:
-| add_ptr(...):    | 94181223887209 |
-| (*add_ptr)(...): | 94181223887209 |
-| Result:          |              2 |
-| Result:          |              4 |
-| Result:          |              6 |
+| add_ptr(...)    | 102557768966505 |
+| (*add_ptr)(...) | 102557768966505 |
+| Result          |               2 |
+| Result          |               4 |
+| Result          |               6 |
 - Direct syntax: ~add_ptr(2, 2)~~
   - The direct syntax is more commonly used because it's cleaner.
 - Dereference syntax: ~(*add_ptr)(2, 2)~
   - The dereference syntax is more explicit about what's happening.
+** Class Member Function Pointer
+- ~return-type (ClassName::*pointer-name)([args]);~
+  - ~double (Matrix::*mul_ptr)(double, double);~
+#+begin_src cpp
+#include <iostream>
+class Calculator {
+public:
+  double add(double a, double b) { return a + b; };
+  double multiply(double a, double b) { return a * b; };
+};
+
+int main() {
+  double (Calculator::*op_ptr)(double, double);
+  // add
+  op_ptr = &Calculator::add;
+  Calculator calc;
+  double result = (calc.*op_ptr)(5.0, 3.0);
+  std::cout << "Addition " << result << std::endl;
+
+  // multiply
+  auto p_calc= &calc;
+  op_ptr = &Calculator::multiply;
+  double result2 = (p_calc->*op_ptr)(5.0, 3.0);
+  std::cout << "Multiplication " << result2 << std::endl;
+  return 0;
+}
+#+end_src
+
+#+RESULTS:
+| Addition       |  8 |
+| Multiplication | 15 |
+
+* Use Cases
+- Used as arguments to higher-order functions
+- Used as callbacks
 
 * Alias to Function Pointer
 #+begin_src cpp
 typedef int (*FuncPtr)(int, int);
-using FuncPtr2 = int (*)(int, int);
+using FuncPtrU = int (*)(int, int);
 int add(int a, int b) { return a + b; }
-FuncPtr2 add_ptr = add; // function pointer
+FuncPtr add_ptr1 = add;
+FuncPtrU add_ptr2 = add;
+
+typedef int (FuncType)(int, int);
+using FuncTypeU = int (int, int);
+FuncType *add_ptr3 = add;
+FuncTypeU *add_ptr4 = add;
 #+end_src

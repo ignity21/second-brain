@@ -3,11 +3,42 @@
 :END:
 #+title: ~std::vector~
 #+filetags: :C++:
+* Overview
+- ~template<class T, class Alloc = std::allocator<T>> class vector;~
 #+begin_src cpp
-  vector<int> v1{1, 2, 3};
-  vector<int> v2 = {4, 5};
-  vector<int> v3;
-  v3 = {6, 7, 8};
+vector<int> v1{1, 2, 3};
+vector<int> v2 = {4, 5};
+vector<int> v3;
+v3 = {6, 7, 8};
+int size = 10, value = 0;
+vector<int> v4(size, value);
 
-  vector<vector<int>> v2d = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+vector<vector<int>> v2d = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
 #+end_src
+
+* Useful Methods
+- ~v.at(idx)~: Accesses the element at the specified index, throwing an exception if out of range.
+- ~v.size()~: Returns the number of elements in the vector.
+- ~v.capacity()~: Returns the size of the allocated storage.
+- ~v.reserve(std::size_t n)~: Pre-allocates storage for at least n elements.
+
+* Auto Resizing
+#+begin_src cpp
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> numbers = {1, 2, 3};
+  int capacity = numbers.capacity(), size = numbers.size();
+  std::cout << "Capacity " << capacity << " Size " << size << std::endl;
+  for (int i = size; i <= capacity; ++i) {
+    numbers.push_back(9);
+  }
+  std::cout << "Capacity " << numbers.capacity() << " Size " << numbers.size()
+            << std::endl;
+}
+#+end_src
+
+#+RESULTS:
+| Capacity | 3 | Size | 3 |
+| Capacity | 6 | Size | 4 |
