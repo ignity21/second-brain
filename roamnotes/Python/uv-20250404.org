@@ -64,7 +64,6 @@ uv run main.py
 ** Migration
 *** From =requirements.txt=
 - ~uv add -r requirements.txt -c constraints.txt~
--
 
 * Tools
 Replaces ~pipx~

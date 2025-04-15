@@ -12,7 +12,6 @@
 - Rule 4: *Minimum information principle*
   - The easier you make it to answer a question in Anki, the less likely you are to remember that question when you encounter it in real life.
 
-
 * Cloze Deletion
 - Why to use cloze deletion :: Rule 5
 - ~{{c1::Canberra::city}} was founded in 1913.~
@@ -164,3 +163,12 @@ img {
 - AwesomeTTS: 1436550454
 - Aglish: 38866997
 - Bulk Image Downloader: 8280891
+
+** AnkiBrain
+1. 1915225457
+2. Local Mode
+3. =/.local/share/Anki2/addons21/1915225457/=
+4. ~uv python pin 3.9.13~
+5. ~uv venv -p 3.9.13~
+6. ~sudo pacman -S openmp~ or ~libomp-dev~ on Ubuntu
+7. ~uv pip install -r linux_requirements.txt~
