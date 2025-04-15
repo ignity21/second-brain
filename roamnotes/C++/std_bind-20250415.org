@@ -1,0 +1,27 @@
+:PROPERTIES:
+:ID:       ca728cfa-e55e-4bf7-bb1b-d9c251fdc6a5
+:END:
+#+title: ~std::bind~
+
+* Overview
+- Used to bind arguments to a function or callable object.
+
+* Declaration
+#+begin_src cpp
+template< class F, class... Args >
+bind(F &&f, Args &&... args);
+#+end_src
+
+* Example
+#+begin_src cpp
+int sum(int a, int b, int c){
+    return a + b + c;
+}
+
+auto func = std::bind(sum, 5, std::placeholders::_1, 10);
+auto res = func(1); // res = 16
+#+end_src
+
+* Hint
+- Use ~std::ref~, ~std::cref~ to pass arguments by reference.
+  - ~auto func = std::bind(sum, 1, 2, std::cref(x))~~

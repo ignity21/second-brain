@@ -4,6 +4,33 @@
 #+title: ~std::function~
 #+filetags: :C++:
 
+* Overview
 ~std::function~ is a *template* in the STL.
 - ~std::function~ can refer to *any callable object*.
 - Invoking a closure via a ~std::function~ object is slower than calling it via an *auto-declared* object.
+
+* Declaration
+#+begin_src cpp
+template<class R, class... Args> // R: Return
+class function<R(Args...)>;
+#+end_src
+
+* Example
+#+begin_src cpp
+double multiply(double a, double b) { return a * b; }
+
+std::function<double(double, double)> MultiplyFunction = multiply;
+double res = MultiplyFunction(2.0, 3.0);
+#+end_src
+
+- class member function
+#+begin_src cpp
+class Calculator {
+  double multiply(double a, double b) { return a * b; }
+};
+
+std::function<double(Calculator&, double, double)> MultiplyFunction = &Calculator::multiply;
+Calculator calc;
+double res = MultiplyFunction(calc, 2.0, 3.0);
+#+end_src
+- [[id:92eefd58-3653-4a53-9947-c2d375d8fe69][~std::mem_fn~]] is more convenient for class member functions.

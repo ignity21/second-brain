@@ -25,7 +25,7 @@
 
 ** Associative Containers
 - ~std::set~
-- ~~std::map~
+- [[id:0dfcccd6-da50-4f8c-af79-69017dcb3bcd][~std::map~]], ~std::multimap~
 - [[id:2d29f137-6278-4364-b0dc-2307410589a1][~std::unordered_map~]]
 
 ** [[id:d6893378-aac5-4435-8cac-980bcf7fc95d][Iterator]]
@@ -35,6 +35,8 @@
 :ID:       7284b140-b1c6-443b-841a-8b07acde4ab5
 :END:
 - [[id:9dd5fcd3-584a-410d-8aed-16eadfd19ccc][~std::function~]]
+- [[id:ca728cfa-e55e-4bf7-bb1b-d9c251fdc6a5][~std::bind~]]
+- [[id:92eefd58-3653-4a53-9947-c2d375d8fe69][~std::mem_fn~]]
 
 * STL Concurrency
 :PROPERTIES:

@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       92eefd58-3653-4a53-9947-c2d375d8fe69
+:END:
+#+title: ~std::mem_fn~
+
+* Declaration
+#+begin_src cpp
+template< class M, class T >
+mem_fn( M T::*pm ) noexcept;
+#+end_src
+
+* Example
+#+begin_src cpp
+class A {
+public:
+  void print(int x) { std::cout << x << std::endl; }
+};
+
+auto memfn = std::mem_fn(&A::print);
+A a;
+memfn(a, 42);
+#+end_src
+- operator overloading
+  - ~op_add_assign = std::mem_fn(&Foo::operator+=)~~
