@@ -78,6 +78,8 @@ sharedptr --> dynamic_obj : "pointer_"
 
 #+RESULTS:
 [[file:images/puml/shared_ptr.png]]
+- when the ~shared_ptr~ is destroyed, the control block won't be deleted if the weak count is not zero.
+  - so that the ~weak_ptr~ can still access the control block.
 
 * Weak Pointers
 ~~std::weak_ptr~ behaves similar to the shared pointer but does not increase the reference counter. There can be multiple weak pointers to the same resource.
