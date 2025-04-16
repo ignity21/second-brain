@@ -53,4 +53,6 @@ bool isPalindrome(string str) {
 :PROPERTIES:
 :ID:       95b27d3a-ae6c-4aed-a7a6-947edadddfc4
 :END:
+** [[https://github.com/google/benchmark][Google benchmark]]
+** [[https://github.com/google/googletest][GoogleTest]]
 ** [[id:5521b2f9-f8ea-44d3-887a-1e9190e366f7][ZeroMQ]]

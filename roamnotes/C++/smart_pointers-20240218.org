@@ -31,6 +31,10 @@ auto dest_ptr = std::move(src_ptr);
 #+end_src
 
 * Shared Pointers
+:PROPERTIES:
+:ID:       512f9d72-844f-4260-9091-5254e87306fa
+:END:
+
 ~std::shared_ptr~ points to a heap resource but does not explicitly own it.
 
 ** When to Use?
@@ -45,9 +49,35 @@ The use of ~std::make_shared~ to avoid the overhead of a second memory allocatio
 In C++, when you create a shared pointer using ~std::shared_ptr~, the memory for the object and the reference count is allocated separately.
 
 ~std::make_shared~ allocates memory for both the object and the reference count in a single memory block.
+** ~shared_ptr~ Casting
+#+begin_src cpp
+shared_ptr<Base> p1 = make_shared<Derived>();
+shared_ptr<Derived> p2 = dynamic_pointer_cast<Derived>(p1);
+shared_ptr<Base> p3 = static_pointer_cast<Derived>(p2);
+assert(p1.use_count() == 3);
+#+end_src
+
 ** Pitfalls
-- May produce *circular references*. Use ~std::weak_ptr~ to avoid it.
+- May produce [[id:66947b80-7c59-4033-a207-f8b84f8a9373][Circular References]]. Use [[id:78ebef46-6318-4e97-99c3-4c339a0ed08e][Weak Pointers]] to avoid it.
 - When using raw pointers retrieved from the ~get()~ function, you should take special care not to delete them or to create new smart pointers from them.
+
+** ~std::shared_ptr~ Internals
+#+begin_src plantuml :file images/puml/shared_ptr.png
+@startuml
+object sharedptr
+object dynamic_obj
+object controlblock {
+    use_count : int
+    weak_count : int
+}
+
+sharedptr --> controlblock : "pi_"
+sharedptr --> dynamic_obj : "pointer_"
+@enduml
+#+end_src
+
+#+RESULTS:
+[[file:images/puml/shared_ptr.png]]
 
 * Weak Pointers
 ~~std::weak_ptr~ behaves similar to the shared pointer but does not increase the reference counter. There can be multiple weak pointers to the same resource.
@@ -89,7 +119,7 @@ Return a smart pointer, both unique or shared, if the caller needs to manipulate
 Smart pointers should always be returned by value. This is not only simpler but also has the following advantages:
 1. The overhead is small due to the move semantics of smart pointers.
 2. Compiler uses *Return Value Optimization* (ROV)
-3. When returning a *shared_ptr* by value, the internal reference counter is guaranteed to be properly incremented.
+3. When returning a ~~shared_ptr~ by value, the internal reference counter is guaranteed to be properly incremented.
 
 * Core Guidelines
 - [[https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#r-resource-management][Resource Management]]

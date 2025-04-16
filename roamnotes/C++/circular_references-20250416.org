@@ -1,0 +1,47 @@
+:PROPERTIES:
+:ID:       66947b80-7c59-4033-a207-f8b84f8a9373
+:END:
+#+title: Circular References
+
+* Overview
+#+begin_src cpp
+#include <iostream>
+#include <memory>
+
+class B; // Forward declaration
+
+class A {
+public:
+  // Use weak_ptr instead of shared_ptr to break the cycle
+  std::weak_ptr<B> ptrB;
+  ~A() { std::cout << "A destroyed\n"; }
+};
+
+class B {
+public:
+  std::weak_ptr<A> ptrA;
+  ~B() { std::cout << "B destroyed\n"; }
+};
+
+int main() {
+  {
+    auto a = std::make_shared<A>();
+    auto b = std::make_shared<B>();
+
+    a->ptrB = b;
+    b->ptrA = a;
+  }
+  // Now, destructors are called because the circular reference is broken.
+  return 0;
+}
+#+end_src
+
+* Weak Pointers
+:PROPERTIES:
+:ID:       78ebef46-6318-4e97-99c3-4c339a0ed08e
+:END:
+- ~weak_ptr~ can be only used with ~shared_ptr~.
+- Useful methods: ~use_count()~, ~expired()~, ~lock()~.
+  - ~lock()~: returns a ~shared_ptr~ if the object is still alive.
+    - It is a good practice to use ~lock()~ instead of ~use_count()~.
+    - ~lock()~ is an *atomic operation* which is thread-safe.
