@@ -1,16 +1,75 @@
 :PROPERTIES:
 :ID:       76959270-4bbe-4a53-ab41-942a492f734b
 :END:
-#+title: Lambda Function
+#+title: Lambda
 #+filetags: C++
 
 * Overview
 The runtime effect of a Lambda is the generation of an object, which is known as *closure*. The difference between a Lambda and the corresponding closure is similar to the distinction between a class and an instance of the class.
+#+begin_src cpp
+int main() {
+  int x = 4;
+  int y = 6;
+  auto sum_all_func = [x, y](int a, int b) -> int { return a + b + x + y; };
+  // the same as
+  struct SumAll {
+    int x_;
+    int y_;
+    int operator()(int a, int b) const { return a + b + x_ + y_; }
+  }sum_all{x, y};
+  sum_all_func(1, 2);
+  sum_all(1, 2);
+  return 0;
+}
+#+end_src
+* Capturing
+- Default capture by value ~[=]~;
+- Default capture by reference ~[&]~;
+- If the local variable is not used in the lambda, it is not captured;
+** Capturing ~this~
+- ~[this]~: by reference
+- ~[*this]~: by value (C++17), the object will be copied.
+#+begin_src cpp
+class Test {
+private:
+  int count_;
+
+public:
+  Test(int c) : count_(c) {}
+  void increment() {
+    [this] { ++count_; }(); // can modify the object members
+  }
+  void increment2() {
+    [*this] mutable { ++count_; }(); // a copy of this object
+  }
+};
+#+end_src
+
 
 * ~mutable~
+- The variables captured by value can be modified when the lambda is marked as mutable.
 #+begin_src cpp
 // fn is a closure
 auto fn = [id]() mutable {
   std::cout << "ID = " << ++id << std::endl;
 };  // OK, captured 'id' may be modified inside the function body
 #+end_src
+
+* C++14 Generic Lambda
+#+begin_src cpp
+#include <iostream>
+// just like a template function
+auto f = [](auto x, auto y) {
+  return x + y;
+};
+
+int main() {
+  std::cout << f(1, 2) << std::endl;
+  std::cout << f(1.5, 2.6) << std::endl;
+  return 0;
+}
+#+end_src
+
+#+RESULTS:
+| 3 |
+| 4 |
