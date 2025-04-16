@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       9475821e-6e1b-4bf0-b9f8-eaefb7bd538c
+:ROAM_ALIASES: "Membership Constraints"
+:END:
+#+title: Categorical Constraints
+#+filetags: :Wrangling:
+* Finding Inconsistent Categories
+- Inconsistent Categories (Anti Join)
+#+begin_src python
+# To filter the wrong blood type, like ['Z', 'C'] in df['blood_type']
+inconsistent_categories = set(df['blood_type']).difference(categories['blood_type'])
+# return the categories that are in df['blood_type'] but not in categories['blood_type']
+inconsistent_row = df['blood_type'].isin(inconsistent_categories)
+inconsistent_data = df[inconsistent_row]
+consistent_data = df[~inconsistent_row]
+#+end_src

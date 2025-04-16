@@ -1,0 +1,112 @@
+:PROPERTIES:
+:ID:       7e7fbc3a-3109-4e49-a79e-60b33ae0469a
+:END:
+#+title: Missing Values
+#+filetags: :Wrangling:
+
+* Checking
+#+begin_src python
+# Check if any columns contain missing values
+df.isna().any()
+
+# Count missing values by column
+df.isna().sum().sort_values()
+
+# Bar plot of missing values by variable
+df.isna().sum().plot(kind='bar')
+
+# Simple way to handle missing values
+df.dropna() # drop rows with missing values
+df.fillna(0) # fill missing values with 0
+df.fillna(method='ffill') # fill missing values with previous value
+#+end_src
+
+* Finding Patterns
+#+begin_src python
+# Compare missing and non-missing values may find patterns
+complete = df[~df['col_a'].isna()]
+missing = df[df['col_a'].isna()]
+complete.describe()
+missing.describe()
+
+# Show the distributions of columns with missing values
+df[['col_a', 'col_b']].hist() # two histograms
+#+end_src
+- Missing Types
+[[file:images/screenshots/Missing_Types/2024-12-03_19-58-03_screenshot.png]]
+
+** Visualization MAR
+#+begin_src python
+import missingno as msno
+import matplotlib.pyplot as plt
+
+msno.matrix(df)
+plt.show()
+
+# Isolate missing and non missing values to find related columns
+df[col_is_na].describe()
+df[~col_is_na].describe()
+
+sorted_df = df.sort_values('related_col')
+msno.matrix(sorted_df)
+plt.show()
+#+end_src
+
+* Strategies for Handling Missing Data
+** Dropping Missing Values
+- Drop missing values if 5% or less of total values
+#+begin_src python
+cols_with_missing_values = df.columns[df.isna().any()]
+
+# Drop missing value if the number of missing values is less than 5% of the total number
+threshold = len(df) * 0.05
+cols_to_drop = df.columns[df.isna().sum() <= threshold]
+df.dropna(subset=cols_to_drop, inplace=True)
+#+end_src
+
+** Imputing a Summary Statistic
+- Impute mean, median, mode depends on distribution and context
+- Common to use mean or median
+- For categorical values, use the most frequent value (the mode)
+#+begin_src python
+cols_with_missing_values = df.columns[df.isna().any()]
+
+for col in cols_with_missing_values:
+    df[col] = df[col].fillna(df[col].median()[0])
+#+end_src
+
+*** Imputing by Sub-group
+- Different experience levels have different median salary
+#+begin_src python
+salaries_dict = salaries.groupby('Experience')['Salary_USD'].median().to_dict()
+salaries['Salary_USD'] = salaries['Salary_USD'].fillna(salaries['Experience'].map(salaries_dict))
+#+end_src
+
+*** Using ~scikit-learn~ transformers
+- ~SimpleImputer~
+#+begin_src python
+# Split features into categorical and numerical
+X_cat = music_df["genre"].values.reshape(-1, 1)
+X_num = music_df.drop(["genre", "popularity"], axis=1).values
+y = music_df["popularity"].values
+
+X_train_cat, X_test_cat, y_train, y_test = train_test_split(
+    X_cat, y, test_size=0.2, random_state=42)
+X_train_num, X_test_num, y_train, y_test = train_test_split(
+    X_num, y, test_size=0.2, random_state=42)
+
+# Impute categorical missing values
+imp_cat = SimpleImputer(strategy="most_frequent")
+X_train_cat = imp_cat.fit_transform(X_train_cat)
+X_test_cat = imp_cat.transform(X_test_cat)
+
+# Impute numerical missing values
+imp_num = SimpleImputer(strategy="mean")
+X_train_num = imp_num.fit_transform(X_train_num)
+X_test_num = imp_num.transform(X_test_num)
+
+X_train = np.append(X_train_cat, X_train_num, axis=1)
+X_test = np.append(X_test_cat, X_test_num, axis=1)
+#+end_src
+
+** TODO Imputing with ML models

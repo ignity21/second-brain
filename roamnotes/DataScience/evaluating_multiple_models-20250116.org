@@ -10,17 +10,19 @@
   - Some models require large amounts of data to perform well, e.g. [[id:31b71a06-0592-444b-b410-916ee717b488][Neural Network]]
 - Interpretability
   - Some models are easier to explain, can be important for stakeholders
-    - e.g. [[id:b6f03e6b-8850-4f2d-8d2d-f337029fe1e7][Linear Regression]] the model coefficients can be interpret
+    - e.g. Linear regression the model coefficients can be interpret
 - Flexibility
   - May improve accuracy, by making fewer assumptions about data
-  - [[id:4dec577e-c1d9-4b01-9a95-63e3413b42a9][KNN]] is a more flexible model, doesn't assume any linear relationship.
+  - KNN is a more flexible model, doesn't assume any linear relationship.
 
 * Comparing Different Models
-- [[id:8038235d-fdb1-44b6-b2b9-76c38e740f0e][Regression Metrics]]: RMSE, R-squared
+- [[id:8038235d-fdb1-44b6-b2b9-76c38e740f0e][Regression Metrics]]
 - [[id:91a5b0fd-48cd-47aa-8fff-cb9cb0fd520c][Classification Metrics]]
   - Accuracy, Confusion Matrix
   - [[id:21f0b9c3-bda5-47cd-82e2-a885400f71c1][Precision and Recall]], F1-score, ROC AUC
-- Best to [[id:8dc25af2-f3bd-4ec4-b949-40958e167e75][scale data]] before evaluating models
+- Best to scale data before evaluating [[id:ec578120-cdb3-427a-8d83-0d7bbc62f8c9][Models Affected by Scaling]]
+
+** Example
 #+begin_src python
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler

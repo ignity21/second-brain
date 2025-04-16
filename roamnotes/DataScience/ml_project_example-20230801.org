@@ -8,16 +8,45 @@
 Classifying Iris Species
 
 * Meet the Data
-  #+begin_src python
-    from sklearn.datasets import load_iris
-    iris_dataset = load_iris()
-    iris_dataset.keys()
-    #-> dict_keys(['data', 'target', 'frame', 'target_names', 'DESCR', 'feature_names', 'filename', 'data_module'])
-    print(iris_dataset['DESCR'][:193]) # Description
-    # iris_dataset['target_names']
-    # iris_dataset['feature_names']
-    # iris_dataset['data'], iris_dataset['target']
+  #+begin_src python :results value table :session iris
+from sklearn.datasets import load_iris
+import matplotlib
+import matplotlib.pyplot as plt
+iris_dataset = load_iris(as_frame=True)
+iris_df = iris_dataset["frame"]
+iris_df.head()
+# print(iris_dataset.isna.sum().sort())
+# print(iris_dataset['DESCR'][:193]) # Description
+# iris_dataset['target_names']
+# iris_dataset['feature_names']
+# iris_dataset['data'], iris_dataset['target']
   #+end_src
+
+#+RESULTS:
+|   | sepal length (cm) | sepal width (cm) | petal length (cm) | petal width (cm) | target |
+|---+-------------------+------------------+-------------------+------------------+--------|
+| 0 |               5.1 |              3.5 |               1.4 |              0.2 |    0.0 |
+| 1 |               4.9 |              3.0 |               1.4 |              0.2 |    0.0 |
+| 2 |               4.7 |              3.2 |               1.3 |              0.2 |    0.0 |
+| 3 |               4.6 |              3.1 |               1.5 |              0.2 |    0.0 |
+| 4 |               5.0 |              3.6 |               1.4 |              0.2 |    0.0 |
+
+** Checking Missing Values
+#+begin_src python :results value table :session iris
+iris_df.isna().sum().sort_values()
+# iris_df.isna().sum().plot(kind='bar')
+#+end_src
+#+RESULTS:
+| sepal length (cm) | 0 |
+| sepal width (cm)  | 0 |
+| petal length (cm) | 0 |
+| petal width (cm)  | 0 |
+| target            | 0 |
+
+#+begin_src python :results graphics file output :file images/pyout/iris_missing_barplot.png :session iris
+iris_df.isna().sum().plot(kind='bar')
+#+end_src
+
 
 ** Training Test Split
    #+begin_src python
@@ -32,6 +61,7 @@ Classifying Iris Species
      grr = pd.scatter_matrix(iris_dataframe, c=y_train, figsize=(15, 15), marker='o',
                              hist_kwds={'bins': 20}, s=60, alpha=.8, cmap=mglearn.cm3)
    #+end_src
+
 
 * Building the Model
   #+begin_src python

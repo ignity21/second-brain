@@ -27,6 +27,7 @@ Predict a *continuous* output.
 ** Performance Evaluation
 - [[id:04e7b7cf-d5d3-4e31-b06b-ba66204c56d8][R-squared]]
 ** [[id:5461b659-bc1a-4594-b7fb-8388345187d3][Cross-validation]]
+
 * Classification
 :PROPERTIES:
 :ID:       009a561d-de32-408a-a5ec-a75839547797
@@ -43,6 +44,8 @@ Predict a *discrete* output.
 - [[id:a3762245-595d-4b5e-b317-4eafd2a45c7f][Softmax Regression]]
 - [[id:4dec577e-c1d9-4b01-9a95-63e3413b42a9][K-Nearest Neighbors]]
 - [[id:31b71a06-0592-444b-b410-916ee717b488][Neural Network]]
+
+** [[id:91a5b0fd-48cd-47aa-8fff-cb9cb0fd520c][Performance Evaluation]]
 
 * Examples
 - Regression Problem: Given data about the size of houses on the real estate market, try to predict their price.

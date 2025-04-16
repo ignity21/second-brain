@@ -1,0 +1,11 @@
+[project]
+name = "datascience"
+version = "0.1.0"
+description = "Data Science Notes"
+requires-python = ">=3.13"
+dependencies = [
+    "matplotlib>=3.10.1",
+    "numpy>=2.2.4",
+    "pandas>=2.2.3",
+    "scikit-learn>=1.6.1",
+]

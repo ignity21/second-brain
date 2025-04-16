@@ -89,9 +89,6 @@ predictions = model.predict(X_new)
 :PROPERTIES:
 :ID:       41289401-f997-4222-97c6-60a729eb8234
 :END:
-- Numeric data
-- No missing values
-
 ** Dealing with Categorical Features
 - Converting to *dummy variables*
   - 0: Observation was NOT that category

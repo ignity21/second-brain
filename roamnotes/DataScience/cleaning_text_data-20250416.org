@@ -1,0 +1,51 @@
+:PROPERTIES:
+:ID:       995548b7-2f2c-4383-ac56-fe93c5ab70f7
+:END:
+#+title: Cleaning Text Data
+#+filetags: :Wrangling:
+
+* Overview
+- ~series.replace({'old': 'new'}, inplace=True)~
+- Removing whitespaces: ~series.str.strip()~ or ~series.str.strip('prefix')~
+- Capitalization: ~str.title()~, ~str.upper()~, ~str.lower()~
+- Use ~str.len()~ to filter rows less than required length
+  - ~df.loc[df['phone'].str.len() < 10, 'phone'] = np.nan~
+  - ~assert df['phone'].str.len().min() >= 10~
+- Check any invalid char ~str.contains()~
+  - ~assert airlines['full_name'].str.contains('Ms.|Mr.|Miss|Dr.').any() == False~
+
+** Regular Expressions
+#+begin_src python
+df['phone']=df['phone'].str.replace(r'\D+', '')
+#+end_src
+
+* Typo and Similar Strings
+<<Typo and Similar Strings>>
+- Minimum edit distance algorithms: =Damerau-Levenshtein=, =Levenshtein=, =Hamming=, =Jaro distance=
+- Possible packages: ~nltk~, ~thefuzz~, ~textdistance~
+- ~thefuzz~ package example:
+#+begin_src python
+from thefuzz import fuzz
+
+# Compute the similarity between two strings
+fuzz.WRatio('Reeding', 'Reading') #=> 86 (0~100)
+# Partial strings
+fuzz.WRatio('Houston Rockets', 'Rockets') #=> 90
+# Partial strings with different orderings
+fuzz.WRatio('Houston Rockets vs Los Angeles Lakers', 'Lakers vs Rockets') #=> 86
+
+# Array of possible matches
+from thefuze import process
+str = 'Houston Rockets vs Los Angeles Lakers'
+choices = ['Lakers vs Rockets', 'Rockets vs Lakers', 'Houston vs Los Angeles', 'Heat vs Bulls']
+process.extract(str, choices, limit = 2) #=> [('Lakers vs Rockets', 86), ('Rockets vs Lakers', 86)]
+#+end_src
+- with Pandas
+#+begin_src python
+states_cat = ['California', 'New York']
+for state in states_cat:
+    matches = process.extract(state, survey['state'], limit=survey.shape[0])
+    for potential_match in matches:
+        if potential_match[1] >= 80:
+            df.loc[survey['state'] == potential_match[0], 'state'] = state
+#+end_src

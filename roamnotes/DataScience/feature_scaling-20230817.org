@@ -19,6 +19,9 @@
 - ~StandardScaler~
 
 * Models Affected by Scaling
+:PROPERTIES:
+:ID:       ec578120-cdb3-427a-8d83-0d7bbc62f8c9
+:END:
 - Supervised
   - [[id:b6f03e6b-8850-4f2d-8d2d-f337029fe1e7][Linear Regression]]
   - [[id:9db494ed-d782-4bfe-b9d2-52c768251490][Logistic Regression]]

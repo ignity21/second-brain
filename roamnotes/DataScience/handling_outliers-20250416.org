@@ -1,0 +1,37 @@
+:PROPERTIES:
+:ID:       a3a33881-04b9-47b7-a760-e5652b596887
+:END:
+#+title: Handling Outliers
+#+filetags: :Wrangling:
+
+* Why Look for Outliers?
+- may not accurately represent our data
+- can have a huge impact on mean and std
+- models may need normally distributed data
+
+* Checking Outliers
+- IQR = 75th - 25th percentile
+- Upper Outliers > 75th percentile + (1.5 * IQR)
+- Lower Outliers < 25th percentile - (1.5 * IQR)
+#+begin_src python
+seventy_fifth = salaries['salary_usd'].quantile(0.75)
+twenty_fifth = salaries['salary_usd'].quantile(0.25)
+salary_iqr = seventy_fifth - twenty_fifth
+upper = seventy_fifth + 1.5 * salary_iqr
+lower = twenty_fifth - 1.5 * salary_iqr
+#+end_src
+
+
+* Question to Ask
+- Why do these outliers exist?
+  - More senior roles / different countries
+  - Consider leaving them in the dataset
+#+begin_src python
+# Subsetting for outliers
+outliers = salaries[(salaries['salary_usd'] < lower) | (salaries['salary_usd'] > upper)] \
+    [['location', 'experience', 'salary_usd']] # location, experience may be useful for further analysis
+#+end_src
+  - if outliers are not accurate, you could just drop.
+#+begin_src python
+no_outliers = salaries[(salaries > lower) & (salaries < upper)]
+#+end_src

@@ -1,0 +1,51 @@
+:PROPERTIES:
+:ID:       b5cf039a-4e4d-41a4-8387-839c14291293
+:END:
+#+title: Range Constraints
+#+filetags: :Wrangling:
+
+* How to Check?
+- ~min~, ~max~, ~describe~
+- Plot data
+
+* How to deal with?
+  - Dropping values
+  - Setting custom minimums and maximums
+  - Treat as missing and impute
+  - Setting custom value depending on business assumptions
+
+** Dropping Values
+- Movie Rating Example
+#+begin_src python
+movies = movies[movies['avg_rating'] <= 5]
+# or
+movies.drop(movies[movies['avg_rating'] > 5].index, inplace=True)
+
+assert movies['avg_rating'].max() <= 5
+#+end_src
+- Date Range Example
+#+begin_src python
+# str to date
+user_signups['subscriptions_date'] = pd.to_datetime(user_signups['subscriptions_date']).dt.date
+
+today_date = dt.date.today()
+
+# Drop values using filtering
+user_signups = user_signups[user_signups['subscriptions_date'] < today_date]
+
+# Drop values using .drop()
+user_signups.drop(user_signups[user_signups['subscriptions_date'] < today_date].index, inplace=True)
+#+end_src
+
+** Fill Values
+- Movie Rating Example
+#+begin_src python
+movies.loc[movies['avg_rating'] > 5, 'avg_rating'] = 5
+#+end_src
+- Date Range Example
+#+begin_src python
+today_date = dt.date.today()
+user_signups.loc[user_signups['subscription_date'] > today_date, 'subscription_date'] = today_date
+
+assert user_signups['subscription_date'].max() <= today_date
+#+end_src
