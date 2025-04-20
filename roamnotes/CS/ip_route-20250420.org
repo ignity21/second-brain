@@ -1,0 +1,59 @@
+:PROPERTIES:
+:ID:       e29921b0-a25c-4158-b33c-fecdb5406b51
+:END:
+#+title: ~ip route~
+#+filetags: :Network:
+
+- links :: [[id:9b34dbd7-7d77-47e1-acf7-638d7ec0b8dc][~ip rule~]]
+
+* Synopsis
+- ~ip [options] route <command>~
+
+* Frequently Used Commands
+- ~cat /etc/iproute2/rt_tables~: Show all table names.
+- ~ip route (show)~: Display the *main* routing table(ID 254).
+  - ~ip route show table local~: Display the *local* table(ID 255).
+  - ~ip route show table all~: Display all routing tables.
+- ~ip route add <destination> via <gateway> dev <interface>~~
+- ~ip route del <destination>~~
+- Troubleshooting
+  - ~ip route get <destination>~: Show the route that would be used to reach the destination.
+  - ~ip route get to <dest> from <src>~
+- IPv6: ~ip -6 route <command>~
+
+* Result Description
+| local [IP] | Indicates that the address belongs to the /local machine itself/. |
+| dev        | The network interface that should be used for this route        |
+| proto      | How this route was added to the routing table? kernel, static   |
+| scope      | How "local" the destination is? global, site, link, host        |
+
+- =default via 113.158.85.1 dev if-wan proto static=
+  - default way out: sending to =113.158.85.1=
+- =192.168.0.0/16 dev if-lan proto kernel scope link src 192.168.0.1=
+  - from =192.168.0.1= to =192.168.0.0/16=
+
+** Example
+- =local 192.168.0.1 dev lan1 proto kernel scope host src 192.168.0.1=
+  - Type: local, the local machine itself
+  - DEST IP: 192.168.0.1
+  - Interface: if-lan
+  - Protocol: kernel automatically add this route
+  - Scope: host
+  - Source IP: 192.168.0.1
+
+* Adding/Deleting Route
+- ~ip route add [default] <CIDR> via <GATEWAYIP>~~
+- ~ip route add [default] <CIDR> dev <DEVICE}>~~
+- e.g. route all traffic connected via eth0
+  - ~ip route add 192.168.1.0/24 dev eth0~
+- delete the default route: ~ip route del default~
+- ~ip route del 192.168.1.0/24 dev eth0~
+
+* Changing MAC Address
+#+begin_src bash
+NIC="eth0"
+ip link show $NIC
+ip link set dev $NIC down
+ip link set dev $NIC address 00:11:22:33:44:55
+ip link set dev $NIC up
+#+end_src

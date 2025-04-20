@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       9b34dbd7-7d77-47e1-acf7-638d7ec0b8dc
+:END:
+#+title: ~ip rule~
+#+filetags: :Network:
+
+* Synopsis
+- ~ip [options] rule <command>~
+
+* Frequently Used Commands
+- ~ip rule (show)~: Show all rules
+- ~ip rule add from <ipcidr> table <tablename>~
+- ~ip rule del from <ipcidr> table <tablename>~
+- ~ip rule flush~: Flush all custom rules
+
+* Result Description
+- =from all lookup <tablename>=: all traffics to host itself
+- =from 192.168.0.2 to 123.83.93.211 iif lan oif wan lookup <tablename>=

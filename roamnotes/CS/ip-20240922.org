@@ -37,7 +37,6 @@
   - ~ip -br -c addr show~
   - ~ip -br -c link show~
 
-
 * ~ip addr~
 - list all ip address: ~ip addr~
   - ~ip -4 a~, ~ip -6 a~
@@ -67,36 +66,15 @@
   - e.g. ~ip neigh add 192.168.1.5 lladdr 00:1a:30:38:a8:00 dev eth0 nud perm~
 - ~ip neigh del {IP} dev {DEVICE}~, ~ip -s -s neigh flush {IPAddress}~
   - e.g. ~ip -s -s n flush 192.168.1.5~
-* ~ip route~
-- show routing tables: ~ip r list~
-  - display routing for CIDR: ~ip r list 192.168.1.0/24~
-- result: =local 192.168.0.1 dev lan1 proto kernel scope host src 192.168.0.1=
-  - Type: local
-  - IP: 192.168.0.1
-  - Interface: lan1
-  - Protocol: kernel
-  - Scope: host
-  - Source IP: 192.168.0.1
+* [[id:e29921b0-a25c-4158-b33c-fecdb5406b51][~ip route~]]
+- is about the *path*
 
-** Adding/Deleting Route
-- ~ip route add [default] {CIDR} via {GATEWAYIP}~
-- ~ip route add [default] {CIDR} dev {DEVICE}~
-- e.g. route all traffic connected via eth0
-  - ~ip route add 192.168.1.0/24 dev eth0~
-- delete the default route: ~ip route del default~
-- ~ip route del 192.168.1.0/24 dev eth0~
+* [[id:9b34dbd7-7d77-47e1-acf7-638d7ec0b8dc][~ip rule~]]
+- is about the *criteria* for choosing the path
 
-** Changing MAC Address
-#+begin_src bash
-NIC="eth0"
-ip link show $NIC
-ip link set dev $NIC down
-ip link set dev $NIC address 00:11:22:33:44:55
-ip link set dev $NIC up
-#+end_src
 * Old vs. New
-| Old command                           | New command                            |
-|---------------------------------------+----------------------------------------|
+| Old command                         | New command                          |
+|-------------------------------------+--------------------------------------|
 | ~ifconfig eth0 up/down~               | ~ip link set eth0 up/down~             |
 | ~ifconfig eth0 192.168.2.24~          | ~ip addr add 192.168.2.24/24 dev eth0~ |
 | ~ifconfig eth0 netmask 255.255.255.0~ | ~ip addr add 192.168.1.1/24 dev eth0~  |

@@ -6,6 +6,10 @@
 
 - links :: [[id:cee785fb-8f4b-4230-ad02-312714729965][~iptables~]]
 
+* Overview
+- What it does?
+  - firewall and packet manipulation tool
+
 * Basic Operations
 ** Tables
 - Tables are the top-level containers within an nftables ruleset;
