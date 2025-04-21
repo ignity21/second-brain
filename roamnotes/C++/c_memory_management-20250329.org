@@ -7,7 +7,5 @@
 - [[id:5efa3691-4464-4a11-9d52-1e83016d8bc1][Memory Allocation]]
 - [[id:c47f4f7a-d15b-4c9a-8ccb-d00d473059cd][Memory Model]]
 - [[id:89931198-0b9b-486a-880e-2029569ed6cc][Memory Barriers]]
-- [[id:eb744df4-2d27-40d7-bb9a-607ad22b63e3][Copy Semantics]]
-- [[id:83aa38f7-a6de-42f0-bf0e-b4e2c9114869][Move Semantics]]
 - [[id:474df27e-ed1f-42f0-997f-633339b91cb5][RAII]]
 - [[id:9dada7ef-84e8-44f7-b068-4837411eda69][Smart Pointers]]

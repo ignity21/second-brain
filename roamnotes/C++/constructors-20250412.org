@@ -4,24 +4,46 @@
 #+title: Constructors
 
 * Overview
-#+begin_src cpp
+#+begin_src cpp :results output
+#include <iostream>
+
 // Simple example of copy and move contructors
 class A {
 public:
-  A() { std::cout << "Default constructor called\n"; }
-  A(const A &) { std::cout << "Copy constructor called\n"; }
-  A(A &&) noexcept { std::cout << "Move constructor called\n"; }
-
-  virtual ~A() { std::cout << "Destructor called\n"; }
+  A() { std::cout << "Default constructor\n"; }
+  A(const A &) { std::cout << "Copy constructor\n"; }
+  A(A &&) noexcept { std::cout << "Move constructor\n"; }
+  A &operator=(const A &) {
+    std::cout << "Copy assignment\n";
+    return *this;
+  }
+  A &operator=(A &&) noexcept {
+    std::cout << "Move assignment\n";
+    return *this;
+  }
+  virtual ~A() { }
 };
 
-// A a;
-// A a2 = a; // Copy constructor
-// A a3 = std::move(a); // Move constructor
-// A a4;
-// a4 = a2; // Copy assignment
-// a5 = A(); // Move assignment
+int main() {
+  A a; // Default constructor
+  A a2{a}; // or `A a2 = a;` Copy constructor
+  A a3{std::move(a)};  // or `A a3 = std::move(a);` // Move constructor
+  A a4; // Default constructor
+  a4 = a2;            // Copy assignment
+  a4 = A();           // Move assignment
+  a4 = std::move(a2); // Move assignment
+}
 #+end_src
+
+#+RESULTS:
+: Default constructor
+: Copy constructor
+: Move constructor
+: Default constructor
+: Copy assignment
+: Default constructor
+: Move assignment
+: Move assignment
 
 * Copy Constructor
 - When to use copy constructor?

@@ -21,6 +21,7 @@ vector<vector<int>> v2d = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
 - ~v.size()~: Returns the number of elements in the vector.
 - ~v.capacity()~: Returns the size of the allocated storage.
 - ~v.reserve(std::size_t n)~: Pre-allocates storage for at least n elements.
+- ~v.emplace_back(Args&&...args)~: Construct its entry objects directly within the container for maximum efficiency.
 
 * Auto Resizing
 #+begin_src cpp

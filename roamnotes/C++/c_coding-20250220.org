@@ -16,7 +16,9 @@
 ** [[id:6faf4309-f313-4230-bfc9-30dc308e0947][Type Casting]]
 ** [[id:1cffdada-e2ad-4e59-a569-201cdbde2d71][Macro]]
 ** [[id:d266d5a3-9613-45d2-ba83-2292c9c4f49c][Exception]]
-
+** [[id:eb744df4-2d27-40d7-bb9a-607ad22b63e3][Copying Semantics]]
+** [[id:83aa38f7-a6de-42f0-bf0e-b4e2c9114869][Move Semantics]]
+** [[id:caa19143-c5cc-48ff-9977-ed946d3af15b][Perfect Forwarding]]
 
 * [[id:a94d8236-7cd6-4e11-baf7-75680083bb74][Built-in Data Structures]]
 

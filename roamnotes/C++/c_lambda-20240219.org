@@ -58,6 +58,7 @@ auto fn = [id]() mutable {
 * C++14 Generic Lambda
 #+begin_src cpp
 #include <iostream>
+
 // just like a template function
 auto f = [](auto x, auto y) {
   return x + y;
@@ -71,5 +72,5 @@ int main() {
 #+end_src
 
 #+RESULTS:
-| 3 |
-| 4 |
+|   3 |
+| 4.1 |

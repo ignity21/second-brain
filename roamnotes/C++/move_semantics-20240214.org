@@ -3,6 +3,7 @@
 :END:
 #+title: Move Semantics
 #+filetags: C++
+- links :: [[id:caa19143-c5cc-48ff-9977-ed946d3af15b][Perfect Forwarding]]
 
 * When are move semantics used?
 1. Copying heavy-weight objects can be expensive.
@@ -29,6 +30,10 @@ int *j = &i;
 // and assigns it to `j`, which is an lvalue holding the memory location of `i`
 #+end_src
 
+** xvalue
+- expiring value
+- It's typically created by ~std::move~, casting to ~T&&~, or functions returning ~T&&~.
+
 * lvalue References
 An lvalue reference can be considered as an alternative name for an object.
 #+begin_src cpp
@@ -44,14 +49,16 @@ int i = 1;
 int j = 2;
 
 int &&l = i + j; // l is an rvalue reference, and an lvalue
+// int &&l = i; // error: cannot bind rvalue reference to lvalue
 
-void myFunction(int &&rval) { cout << val << endl; };
+void myFunction(int &&rval) { cout << rval << endl; };
 myFunction(i + j); // prints 3
 #+end_src
+
 - Important Aspect: *rvalue references are themselves lvalues*
 
 * Move
-#+begin_src cpp
+#+begin_src cpp :results value verbatim
 #include <iostream>
 using namespace std;
 
@@ -72,9 +79,13 @@ int main() {
 }
 #+end_src
 
+#+RESULTS:
+: val = 42
+: val = 23
+
 ** ~std::move~
 - ~std::move~ converts lvalue into an rvalue(actually *xvalue*)
-- By using ~std::move~ we can force the compiler to use move semantics.
+- By using ~std::move~ we can force the compiler to use *move semantics*.
 
 * The Rule of Five
 The Rule of Five states that if you have to write one of the functions listed below then you should consider implementing all of them with a proper resource management policy in place.
@@ -83,3 +94,27 @@ The Rule of Five states that if you have to write one of the functions listed be
 3. assignment operator
 4. move constructor
 5. move assignment constructor
+* Tips
+** Copy Elision
+- Copy elision is a compiler optimization technique that eliminates unnecessary copying/moving of objects.
+  - e.g. ~Foo f(Foo());~
+  - Compiler options for C++11
+  - C++17 guarantees copy elision
+
+** RVO
+- Return Value Optimization eliminates unnecessary copying/moving of objects.
+  - C++17 guarantees RVO: So do not return a rvalue reference of a local object. It's *undefined behavior*.
+  - The crucial rule for returning any reference is that the object being referenced *must outlive the function call*.
+
+
+#+begin_src cpp
+Foo GenerateFoo() {
+    Foo f;
+    // do something with f
+    return f; // NRVO named return value optimization
+}
+int main() {
+    Foo f = GenerateFoo();
+    return 0;
+}
+#+end_src
