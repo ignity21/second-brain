@@ -62,8 +62,13 @@ T && forward(typename std::remove_reference<T>::type &t) noexcept {
 
 // const int &i as argument
 // T = const int &
-// T && = const int & && = const int &  (reference collapsing)
 // std::remove_reference<T>::type = const int
+// replace T with `const int &`:
+const int & && forward(const int &t) noexcept {
+  return static_cast<const int & &&>(t);
+}
+
+// T && = const int & && = const int &  (reference collapsing)
 const int & forward(const int &i) {
   return static_cast<const int &>(i); // T && = const int & && = const int &
 }
@@ -78,8 +83,13 @@ T && forward(typename std::remove_reference<T>::type &&t) noexcept {
 
 // int &&i as argument
 // T = int
-// T && = int &&
 // std::remove_reference<T>::type = int
+// replace T with int:
+int && forward(int &&t) noexcept {
+  return static_cast<int &&>(t);
+}
+
+// T && = int &&
 int && forward(int &&i) {
   return static_cast<int &&>(i); // T && = int &&
 }
