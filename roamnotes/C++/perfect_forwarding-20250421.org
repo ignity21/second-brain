@@ -2,3 +2,85 @@
 :ID:       caa19143-c5cc-48ff-9977-ed946d3af15b
 :END:
 #+title: Perfect Forwarding
+
+* What is Perfect Forwarding?
+It means passing an argument from one function to another while preserving its original value category (whether it was an lvalue or an rvalue)
+
+* Overview
+#+begin_src cpp :results output
+#include <iostream>
+#include <string>
+void print(const int &i) { std::cout << "lvalue " << i << std::endl; }
+void print(int &&i) { std::cout << "rvalue " << i << std::endl; }
+
+template <typename T> void forward_func(T &&i) {
+  print(i); // lvalue, coz s is a lvalue reference
+}
+
+template <typename T> void perfect_forward(T &&i) {
+  print(
+      std::forward<T>(i)); // using std::forward to preserve the value category
+}
+
+int main() {
+  int i = 1;
+  forward_func(i);    // lvalue
+  forward_func(1);    // lvalue
+  perfect_forward(i); // lvalue
+  perfect_forward(1); // rvalue
+  return 0;
+}
+#+end_src
+
+#+RESULTS:
+: lvalue 1
+: lvalue 1
+: lvalue 1
+: rvalue 1
+
+* Universal Reference
+- ~T &&s~ *argument* is a *universal reference* or *forwarding reference*.
+  - can bind to both lvalues and rvalues.
+  - if ~T &&s~ is not a argument, then it is not a universal reference.
+- *Universal reference rule*
+  - lvalue + ~&&~ -> ~&~
+  - rvalue + ~&&~ -> type itself
+- Examples: ~int i = 1~
+   - ~perfect_forward(i)~ T is deduced as ~int&~, argument as ~int &i~
+   - ~perfect_forward(5)~ T is deduced as ~int~, argument as ~int &&i~
+
+* ~std::forward~
+- ~std::remove_reference<T>::type~: removes references from ~T~
+
+** lvalues passed to forward
+#+begin_src cpp
+// lvalues passed to forward
+template <typename T>
+T && forward(typename std::remove_reference<T>::type &t) noexcept {
+  return static_cast<T &&>(t);
+}
+
+// const int &i as argument
+// T = const int &
+// T && = const int & && = const int &  (reference collapsing)
+// std::remove_reference<T>::type = const int
+const int & forward(const int &i) {
+  return static_cast<const int &>(i); // T && = const int & && = const int &
+}
+#+end_src
+
+** rvalues passed to forward
+#+begin_src cpp
+template <typename T>
+T && forward(typename std::remove_reference<T>::type &&t) noexcept {
+  return static_cast<T &&>(t);
+}
+
+// int &&i as argument
+// T = int
+// T && = int &&
+// std::remove_reference<T>::type = int
+int && forward(int &&i) {
+  return static_cast<int &&>(i); // T && = int &&
+}
+#+end_src
