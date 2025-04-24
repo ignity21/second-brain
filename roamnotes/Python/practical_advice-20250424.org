@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       3b513038-1dc5-4cb6-a644-58a5510e46f4
+:END:
+#+title: Practical Advice
+#+filetags: :Style:
+
+* 变量相关
+** 作用域内有太多变量
+- Group 相关变量，用类封装
+- 也说明函数可能过于复杂，需拆分
