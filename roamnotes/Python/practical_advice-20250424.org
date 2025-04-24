@@ -8,3 +8,35 @@
 ** 作用域内有太多变量
 - Group 相关变量，用类封装
 - 也说明函数可能过于复杂，需拆分
+
+* 变量类型
+** bool 用于统计计数
+- ~count = sum(i % 2 == 0 for i in nums)~
+- ~df.isna().sum()~
+
+** str 有用但不常用的方法
+- ~s.partition(":")~ can split "key" -> ["key", "", ""]
+- ~s.translate()~
+#+begin_src python :return
+s = "英文,标点."
+trans_table = s.maketrans(",.", "，。")
+return s.translate(trans_table)
+#+end_src
+
+#+RESULTS:
+: 英文，标点。
+
+** 多行 str
+#+begin_src python
+from textwrap import dedent
+s1 = "akbfieurerewriuweiruewiruewi\
+iueirueirerer"
+s2 = ("akbfieurerewriuweiruewiruewi"
+      "iueirueirerer")
+s3 = """ieuriereiruewirueiwruieruierereiurie
+irueirueiurieurie"""
+s4 = dedent("""\
+ieuriereiruewirueiwruieruierereiurie
+irueirueiurieurie""")
+#+end_src
+- ~dedent~ 增强对齐的视觉效果，增加代码可读性
