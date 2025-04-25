@@ -93,3 +93,22 @@ print(d_merged)
 
 ** 自定义字典
 - 继承 ~MutableMapping~
+* 分支语句
+** 使用字典优化等值判断
+- e.g. ~Dict[str, Function/Lambda]~ 代替其它语言的 ~switch~
+
+** 使用 ~bisect~ 将数值转换为 Categorical
+#+begin_src python
+from bisect import bisect
+breakpoints = [6, 7, 8, 8.5]
+grades = ["D", "C", "B", "A", "S"]
+
+def get_grade(score):
+    index = bisect(breakpoints, score)
+    return grades[index]
+
+return get_grade(8.4)
+#+end_src
+
+#+RESULTS:
+: A
