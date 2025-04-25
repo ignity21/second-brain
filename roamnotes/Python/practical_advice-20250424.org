@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       3b513038-1dc5-4cb6-a644-58a5510e46f4
 :END:
-#+title: Practical Advice
+#+title: Practical Advices
 #+filetags: :Style:
 
 * 变量相关
@@ -40,3 +40,56 @@ ieuriereiruewirueiwruieruierereiurie
 irueirueiurieurie""")
 #+end_src
 - ~dedent~ 增强对齐的视觉效果，增加代码可读性
+* 容器相关
+** ~namedtuple~
+- 多用于函数的返回值
+#+begin_src python
+from collections import namedtuple
+Rectangle = namedtuple('Rectangle', 'width height') # or 'width,height' or list
+#+end_src
+- 带类型注解 ~NamedTuple~
+#+begin_src python
+from typing import NamedTuple
+
+class Rectangle(NamedTuple):
+    width: int
+    height: int
+#+end_src
+
+** 拷贝可变类型
+- ~copy.copy()~ 浅拷贝
+#+begin_src python
+from copy import copy
+org = [1, 2, 3]
+
+# shallow copied
+c1 = copy(org)
+c2 = org.copy()
+c3 = [x for x in org]
+#+end_src
+- ~copy.deepcopy()~ 深拷贝：拷贝嵌套对象
+#+begin_src python
+from copy import copy, deepcopy
+org = [1, 2, [3, 4]]
+
+c1 = copy(org) # shallow copy
+assert id(c1[-1]) == id(org[-1])
+deepcopied = deepcopy(org)
+assert id(deepcopied[-1]) != id(org[-1])
+#+end_src
+** 解包容器对象
+#+begin_src python :results output
+l = [1, 2, *range(3, 10)]
+print(l)
+d1 = {"a": 1}
+d2 = {"b": 2}
+d_merged = {**d1, **d2}
+print(d_merged)
+#+end_src
+
+#+RESULTS:
+: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+: {'a': 1, 'b': 2}
+
+** 自定义字典
+- 继承 ~MutableMapping~
