@@ -4,71 +4,148 @@
 #+title: ~decltype~
 #+filetags: C++
 
-- ~decltype~ almost always yields the type of a variable or expression without any modifications.
-#+begin_src cpp
-  const int i = 0; // decltype(i) is const int
-
-  bool f(const Widget& w);
-  // decltype(w) is const Widget&
-  // decltype(f) is bool(const Widget&)
-  // decltype(f(w)) is bool
-#+end_src
-- One exception: For lvalue expressions of type T other than names, ~decltype~ always reports a type of T&.
-#+begin_src cpp
-  int x = 0;
-  decltype((x)) y = x;
-  // the expression (x) is defined to be an lvalue, decltype((x)) is therefore int&.
-
-  decltype(auto) f() {
-    int x = 0;
-    return (x); // returns int&
-  }
-#+end_src
-
+* Overview
 - The *primary use* for ~decltype~ is declaring function templates where the function's return type depends on its parameter types. (C++11)
+- It *preserves the exact type and value category* (lvalue/rvalue)
 #+begin_src cpp
-  std::vector<int> container;
+std::vector<int> container;
 
-  template<typename Container, typename Index>
-  auto AccessInC11(Container& c, Index i)
-      -> decltype(c[i]) {
-    return c[i];
-  }
+template<typename Container, typename Index>
+auto AccessInC11(Container& c, Index i)
+  -> decltype(c[i]) {
+  return c[i];
+}
 
-  // For functions with an auto return type specification,
-  // compilers employ template type deduction. return type will be int, not int& as below.
-  template<typename Container, typename Index>
-  auto AccessInC14(Container& c, Index i) {
-    return c[i];
-  }
+// For functions with an auto return type specification,
+// compilers employ template type deduction.
+template<typename Container, typename Index>
+auto AccessInC14(Container& c, Index i) {
+  return c[i]; // return type is int
+}
 
-  // C++14 refined 1
-  // auto specifies that the type is to be deduced, and decltype says
-  // that decltype rules should be used during the deduction.
-  template<typename Container, typename Index>
-  decltype(auto) AccessC14Refined1(Container& c, Index i) {
-    return c[i];
-  }
+// C++14 refined 1
+// auto specifies that the type is to be deduced, and decltype says
+// that decltype rules should be used during the deduction.
+template<typename Container, typename Index>
+decltype(auto) AccessC14Refined1(Container& c, Index i) {
+  return c[i]; // return type is int&
+}
 
-  // C++14 refined final
-  template<typename Container, typename Index>
-  decltype(auto) AccessC14RefinedFinal(Container& c, Index i) {
-    return std::forward<Container>(c)[i];
-  }
+// C++14 refined final
+template<typename Container, typename Index>
+decltype(auto) AccessC14RefinedFinal(Container& c, Index i) {
+  return std::forward<Container>(c)[i];
+}
 
-  // C++11 final
-  template<typename Container, typename Index>
-  auto AccessC11RefinedFinal(Container& c, Index i)
-      -> decltype(std::forward<Container>(c)[i])
-  {
-    return std::forward<Container>(c)[i];
-  }
+// C++11 final
+template<typename Container, typename Index>
+auto AccessC11RefinedFinal(Container& c, Index i)
+  -> decltype(std::forward<Container>(c)[i])
+{
+  return std::forward<Container>(c)[i];
+}
 #+end_src
-- ~decltype(auto)~ example
+
+* ~decltype~ on Variable
+- It will keep the constness and reference-ness of the variable.
 #+begin_src cpp
-  Widget w;
-  const Widget& cw = w;
-
-  auto myWidget1 = cw; // auto type deduction: myWidget1's type is Widget
-  decltype(auto) myWidget2 = cw; // decltype type deduction: myWidget2's type is const Widget&
+int i = 0;
+const int &j = i;
+decltype(i) x = 0; // x is int
+decltype(j) y = 0; // y is const int&
 #+end_src
+
+* ~decltype~ on Expression
+| Expression Type | ~decltype~       |
+|-----------------+------------------|
+| lvalue          | lvalue reference |
+| prvalue         | just type        |
+| xvalue          | rvalue reference |
+#+begin_src cpp
+int f1() { return 0; }
+int &f2() {
+  static int x = 0;
+  return x;
+}
+int &&f3(int &x) { return std::move(x); }
+
+int main() {
+  decltype(f1()) k = 0; // f1(): prvalue -> decltype(f1()) : int
+  decltype(f2()) l = f2(); // f2(): lvalue -> decltype(f2()) : int&
+  decltype(f3(i)) m = 0; // f3(): lvalue -> decltype(f3(i)) : int&&
+
+}
+#+end_src
+
+** Expression ~(i)~
+#+begin_src cpp
+int i = 0;
+decltype((i)) j = i;     // decltype((i)) is int&
+int *p = &(i);           // can get address of expression `(i)`
+decltype((i + 1)) k = i; // decltype((i+1)) is int
+#+end_src
+- ~(i)~: lvalue
+- ~(i + 1)~: prvalue
+
+** Check Expression Deduced Type
+#+begin_src cpp :results output
+#include <iostream>
+template <typename T> struct ValueCategory {
+  static constexpr auto value = "prvalue";
+};
+template <typename T> struct ValueCategory<T &> {
+  static constexpr auto value = "lvalue";
+};
+template <typename T> struct ValueCategory<T &&> {
+  static constexpr auto value = "xvalue";
+};
+
+#define VALUE_CATEGORY(expr) ValueCategory<decltype((expr))>::value
+#define CAT(a)                                                                 \
+  std::cout << "category of " << #a << ": " << VALUE_CATEGORY(a) << std::endl;
+
+int main() {
+  int i = 0;
+  CAT(5);            // prvalue
+  CAT((i));          // lvalue
+  CAT((i+1));        // prvalue
+  CAT(std::move(i)); // xvalue
+}
+#+end_src
+
+#+RESULTS:
+: category of 5: prvalue
+: category of (i): lvalue
+: category of (i+1): prvalue
+: category of std::move(i): xvalue
+
+
+* ~decltype(auto)~
+- added in C++14
+- To check the value category of ~decltype~ expression
+
+** ~decltype(auto)~ on Initialization
+#+begin_src cpp
+#include <string>
+
+int main () {
+  std::string s1 = "Hello";
+
+  decltype(auto) s2 = s1 + ", World!";
+  // s1 + ", World!" returns std::string
+  // decltype(auto) is std::string
+
+  decltype(auto) s3{s1.append(", World!")};
+  // s1.append(", World!") returns std::string&
+  // decltype(auto) is std::string&
+}
+#+end_src
+
+** ~decltype(auto)~ on Function Return Type
+#+begin_src cpp
+template <typename T, typename U>
+decltype(auto) add(T &&t, U &&u) {
+  return std::forward<T>(t) + std::forward<U>(u);
+}
+#+end_src
+- ~decltype(auto)~: deduce type from return expression

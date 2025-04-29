@@ -112,3 +112,45 @@ return get_grade(8.4)
 
 #+RESULTS:
 : A
+* 异常
+- Prefer EAFP(easier to ask for forgiveness than permission) over LBYL(look before you leap)
+- 不带任何参数的 ~raise~ 会重复抛出当前异常
+- “空对象模式”去避免一些针对边界值的错误处理工作
+- 保持异常与接口的抽象层次一致
+- 自定义异常继承 ~Exception~ 类
+
+** 异常处理方式
+*** 使用上下文管理器
+- 可利用 ~__exit__(self, exc_type, exc_val, traceback)~ 忽略异常
+#+begin_src python
+class ignore_closed:
+    def __enter__(self):
+        pass
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        if exc_type == AlreadyClosedError:
+            return True # Suppress the exception, won't raise it
+        return False # Raise other exceptions
+
+with ignore_closed():
+    close_conn(conn)
+#+end_src
+
+*** 使用 ~contextmanager~ 简化上下文管理器
+#+begin_src python
+from contextlib import contextmanager
+
+@contextmanager
+def create_conn_obj(host, port, timeout=None):
+    conn = create_conn(host, port, timeout)
+    try:
+        # before yield: __enter__ end
+        yield conn
+        # after yield: __exit__ begin
+    finally:
+        conn.close()
+#+end_src
+- 必须用 ~try~ 包裹 ~yield~ 语句来处理异常
+
+*** 数据校验
+- 建议直接使用第三方库，如 ~pydantic~

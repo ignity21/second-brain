@@ -3,6 +3,14 @@
 :END:
 #+title: C++ Compilation
 #+filetags: :C++:
+* Files
+- =*.ii=: preprocessed files
+- =*.s=: assembly files
+- =*.o=: object files
+- =*.a=: static libraries
+- =*.so=: shared libraries
+
+- ~-save-temps~: to keep intermediate files
 
 * Compilation Process
 #+caption: C++ Compilation Process
