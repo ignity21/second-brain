@@ -10,8 +10,7 @@
 
 * [[id:6c721a34-d7ff-451f-b29a-368692d2f8c8][Function Template]]
 * [[id:16c1d5c2-ba04-4e64-b6e3-bf0d3e5a0d68][Class Template]]
-* [[id:ae725222-41d6-4eb6-bbd4-96fcc3ff80af][Variadic Templates]]
-
+* [[id:b057e0d3-849b-435c-bba6-f59d2cbfdc21][Variable Template]]
 * Template Arguments
 ** Default Arguments
 #+begin_src cpp

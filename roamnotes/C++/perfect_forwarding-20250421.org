@@ -94,3 +94,4 @@ int && forward(int &&i) {
   return static_cast<int &&>(i); // T && = int &&
 }
 #+end_src
+* [[id:751e7694-bb67-4339-ac64-c0dedcb2518e][Variadic Perfect Forwarding]]

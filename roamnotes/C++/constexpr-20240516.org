@@ -68,18 +68,4 @@ int main() {
 }
 #+end_src
 
-* ~if constexpr~ (C++17)
-#+begin_src cpp
-template<typename T>
-auto increment(const T& t) {
-    if constexpr (std::is_integral_v<T>) {
-        return t + 1;
-    } else {
-        return t + 0.01;
-    }
-}
-
-// It will split into two functions at compile time
-int increment_c(const int& t) { return t + 1; }
-double increment_c(const double& t) { return t + 0.01; }
-#+end_src
+* [[id:6a30ae48-5551-4c38-a279-2175905c1c13][~if constexpr~]]

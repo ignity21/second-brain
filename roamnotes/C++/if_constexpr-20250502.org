@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       6a30ae48-5551-4c38-a279-2175905c1c13
+:END:
+#+title: ~if constexpr~
+
+* Use Case
+- Compile-time branching
+  - Avoids unnecessary code generation
+
+* Example
+#+begin_src cpp
+template<typename T>
+auto increment(const T& t) {
+    if constexpr (std::is_integral_v<T>) {
+        return t + 1;
+    } else {
+        return t + 0.01;
+    }
+}
+#+end_src

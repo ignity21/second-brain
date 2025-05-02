@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       ae725222-41d6-4eb6-bbd4-96fcc3ff80af
 :END:
-#+title: Variadic Templates
+#+title: Variadic Class Template
 #+filetags: C++
 
 * Class

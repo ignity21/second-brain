@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       a370c3b2-547e-4ab7-8f39-86c57d8cbfee
+:END:
+#+title: STL Algorithms
+
+* ~std::ranges~ & ~std::views~
+#+begin_src cpp :results output
+#include <vector>
+#include <algorithm>
+#include <ranges>
+#include <iostream>
+
+int main () {
+  // before
+  std::vector<int> vec = {1, 2, 3, 4, 5};
+  std::vector<int> res;
+  auto is_even = [](int x) { return x % 2 == 0; };
+  std::copy_if(vec.begin(), vec.end(), std::back_inserter(res), is_even);
+
+  // use ranges
+  std::vector<int> res2;
+  res2 = std::ranges::copy_if(vec, std::back_inserter(res2), is_even);
+
+  // use views filter
+  auto res3 = vec | std::views::filter(is_even); // lazy evaluation
+  for (auto i : res3) {
+    std::cout << i << " "; // Output: 2 4
+  };
+  return 0;
+}
+#+end_src

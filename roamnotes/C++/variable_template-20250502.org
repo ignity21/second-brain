@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       b057e0d3-849b-435c-bba6-f59d2cbfdc21
+:END:
+#+title: Variable Template
+#+filetags: :C++14:
+
+* Use Cases
+- It enables *creating variables* with different types based on template parameters.
+
+* Examples
+#+begin_src cpp
+template<typename T>
+constexpr T pi = static_cast<T>(3.14159265);
+
+// Usage
+auto float_pi = pi<float>;   // float version of pi
+auto double_pi = pi<double>; // double version of pi
+#+end_src

@@ -1,0 +1,56 @@
+:PROPERTIES:
+:ID:       a591ef2c-77fc-4dd1-8de6-a3a9f42e22fe
+:END:
+#+title: Variadic Arguments
+
+* Examples
+#+begin_src cpp
+template<typename... Args>
+void func(Args... args) {
+  std::cout << sizeof...(args) << std::endl;
+}
+#+end_src
+
+* Recursive Variadic Template Function
+#+begin_src cpp
+// Base case for recursion
+void print() {
+    std::cout << std::endl;
+}
+
+// Recursive variadic template
+template<typename T, typename... Args>
+void print(T first, Args... rest) {
+    std::cout << first << " ";
+    print(rest...);  // Recursive call with remaining arguments
+}
+
+// Usage
+print(1, "hello", 3.14); // Output: 1 hello 3.14
+#+end_src
+
+* Variadic Perfect Forwarding
+:PROPERTIES:
+:ID:       751e7694-bb67-4339-ac64-c0dedcb2518e
+:END:
+#+begin_src cpp
+template<typename... Args>
+auto create_unique(Args&&... args) {
+    return std::make_unique<SomeClass>(std::forward<Args>(args)...);
+}
+#+end_src
+
+** TODO Fold Expression(C++17)
+#+begin_src cpp
+// Sum of arguments
+template <typename... Args>
+auto sum(Args... args) {
+  return (args + ...);
+}
+
+// Print all arguments
+template <typename... Args>
+void print_all(Args... args) {
+  (std::cout << ... << args) << std::endl;
+}
+#+end_src

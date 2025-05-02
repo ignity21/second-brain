@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       76ed6b9f-aad9-4f13-9b28-f790577f564d
+:END:
+#+title: Standard Layout Class
+
+* Overview
+- A class is standard layout if it can be used in a C-style struct
+- ~std::is_standard_layout<T>::value~: check if a class is standard layout
+
+* Requirements
+- No virtual functions
+- All non-static data members must have the same access control
+- All non-static data members must be of standard layout types
+- Base classes and members follow specific layout rules

@@ -37,13 +37,29 @@ template<> int max<int>(int a, int b) {...};
 // <> indicates you are providing a specialization
 #+end_src
 
-* Variadic Arguments
+* [[id:a591ef2c-77fc-4dd1-8de6-a3a9f42e22fe][Variadic Arguments]]
 #+begin_src cpp
 template<typename... Args>
 void func(Args... args) {
   std::cout << sizeof...(args) << std::endl;
 }
 #+end_src
+
+** Perfect Forwarding
+
 ** TODO Unpacking Arguments
 *** Recursive Template Function
-*** Variadic Template  (C++17)
+*** Fold Expression(C++17)
+#+begin_src cpp
+// Sum of arguments
+template <typename... Args>
+auto sum(Args... args) {
+  return (args + ...);
+}
+
+// Print all arguments
+template <typename... Args>
+void print_all(Args... args) {
+  (std::cout << ... << args) << std::endl;
+}
+#+end_src

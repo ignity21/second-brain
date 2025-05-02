@@ -106,3 +106,4 @@ Iterator<std::vector, int> it(vec);
 - ~template<typename...> class T~: T can be used with multiple template parameters (unordered_map)
   - more flexible
   - Even vector has multiple template parameters ~vector<T, Allocator>~
+* [[id:ae725222-41d6-4eb6-bbd4-96fcc3ff80af][Variadic Class Template]]

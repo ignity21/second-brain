@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       2dfd7cb7-8419-43d2-b3e7-eea485f65a43
+:END:
+#+title: Trivially Copyable Class
+
+* Overview
+A class is trivially copyable if it can be copied using ~memcpy~
+- without invoking any constructors, destructors, or assignment operators.
+- ~std::is_trivially_copyable<T>::value~: check if a class is trivially copyable
+
+* Requirements
+- No virtual functions
+- All non-static data members must be trivially copyable
+- Auto-generated destructor
+- Copy/Move constructors and assignment operators are not all deleted

@@ -47,3 +47,4 @@
 - [[id:0ef56589-d45f-45d9-99f9-851a16a65692][~std::shared_future~]]
 - [[id:d9aa699d-1dc0-416e-bd59-00c97e7b9e2b][~std::packaged_task~]]
 - [[id:fb10c09a-372d-4137-ad09-0a535508822f][~std::async~]]
+* [[id:a370c3b2-547e-4ab7-8f39-86c57d8cbfee][STL Algorithms]]

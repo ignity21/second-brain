@@ -100,3 +100,6 @@ friend class B;
 friend int increase(A &a);
 }
 #+end_src
+* Class Types
+** [[id:2dfd7cb7-8419-43d2-b3e7-eea485f65a43][Trivially Copyable Class]]
+** [[id:76ed6b9f-aad9-4f13-9b28-f790577f564d][Standard Layout Class]]

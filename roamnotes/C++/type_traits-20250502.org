@@ -1,0 +1,52 @@
+:PROPERTIES:
+:ID:       682872b2-e600-4b8b-b680-d1e340db9680
+:END:
+#+title: type_traits
+
+* Overview
+- ~std::is_integral<T>::value~: Checks if the type ~T~ is an integer type.
+
+* Implementation
+#+begin_src cpp
+template <typename T>
+class IsIntegral {
+  public:
+    static const bool value{false};
+};
+
+template <>
+class IsIntegral<int> {
+  public:
+    static const bool value{true};
+};
+
+template <>
+class IsIntegral<bool> {
+  public:
+    static const bool value{true};
+};
+
+// ...
+#+end_src
+
+** Simplified Helper ~std::true_type~
+#+begin_src cpp
+#include <type_traits>
+
+template <typename T>
+struct IsIntegral : std::false_type {};
+
+template <>
+struct IsIntegral<bool> : std::true_type {};
+
+template <>
+struct IsIntegral<char> : std::true_type {};
+#+end_src
+** Simplified using [[id:b057e0d3-849b-435c-bba6-f59d2cbfdc21][Variable Template]]
+#+begin_src cpp
+template <typename T>
+constexpr bool
+is_integral_v{std::is_integral<T>::value};
+
+cout << is_integral_v<int> << endl; // true
+#+end_src

@@ -1,0 +1,30 @@
+:PROPERTIES:
+:ID:       f26331a4-a3cf-4751-9e6d-905f850d0e6d
+:END:
+#+title: ~static_assert~
+
+* Use Case
+- Compile-time assertions
+
+* Example
+#+begin_src cpp :results output
+#include <iostream>
+#include <type_traits>
+
+template <typename T>
+auto sum(T a, T b) {
+  static_assert(std::is_integral<T>::value, "T must be an integral type");
+  return a + b;
+};
+
+int main() {
+  int result = sum(5, 10);
+  std::cout << "Sum: " << result << std::endl;
+  // double result2 = sum(5.0, 10.0);
+  // error: static assertion failed: T must be an integral type
+  return 0;
+}
+#+end_src
+
+#+RESULTS:
+: Sum: 15

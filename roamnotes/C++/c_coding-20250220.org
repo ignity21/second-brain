@@ -22,7 +22,6 @@
 
 * [[id:a94d8236-7cd6-4e11-baf7-75680083bb74][Built-in Data Structures]]
 
-
 * Statements
 ** Loop
 *** For Loop (i, j)
@@ -41,6 +40,11 @@ bool isPalindrome(string str) {
 * Modern
 ** [[id:10faff15-6db6-45ac-bae7-81f86753fa99][Type Deduction]]
 ** [[id:cbd64e53-ae3e-4bbd-aab3-49fca52d5ab0][Temporary Variables]]
+
+* Compile-time Utilities
+- [[id:682872b2-e600-4b8b-b680-d1e340db9680][type_traits]]
+- [[id:6a30ae48-5551-4c38-a279-2175905c1c13][~if constexpr~]]
+- [[id:f26331a4-a3cf-4751-9e6d-905f850d0e6d][~static_assert~]]
 
 * Advanced
 ** [[id:5d31ac8b-58a8-4926-b328-3cf408f898b2][OOP]]
