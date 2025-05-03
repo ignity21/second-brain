@@ -112,6 +112,59 @@ return get_grade(8.4)
 
 #+RESULTS:
 : A
+* 循环
+** 迭代器和可迭代对象
+*** Iterable 接口
+- ~__iter__~: 返回一个迭代器
+- ~__getitem__~: 即使没有实现 ~__iter__~ 也是可迭代的，根据下标遍历，直到抛出 IndexError 为止
+
+*** Iterator 接口
+- ~__iter__~: ~return self~
+- ~__next__~: return 返回每次迭代结果，抛出 StopIteration 退出循环
+
+** ~itertools~
+- ~product()~: 替代多层嵌套循环 ~for i, j, k in product(X, Y, Z)~
+- ~islice(start, stop, step)~: 实现循环隔行处理
+  - for 循环用于文件对象上，会进行逐行遍历，可使用 ~islice~ 实现每隔 n 行处理
+- ~takewhile(pred, iterable)~: 替代 ~break~ 语句
+
+** ~iter(callable, sentinel)~
+- 代替 ~while True~ 循环
+#+begin_src python
+def count_digit(fpath):
+    count = 0
+    with open(fpath, 'r') as f:
+        block_size = 1024
+        while True:
+            block = f.read(block_size)
+            # block == '' means EOF
+            if not block:
+                break
+            for char in block:
+                if char.isdigit():
+                    count += 1
+    return count
+
+from functools import partial
+def count_digit_revised(fpath):
+    count = 0
+    block_size = 1024
+    with open(fpath, 'r') as f:
+        _read = partial(f.read, block_size)
+        for block in iter(_read, ''):
+            for char in block:
+                if char.isdigit():
+                    count += 1
+    return count
+#+end_src
+
+** 复杂循环简化
+- Ask 循环体内代码是否有多个职责
+- 如是，考虑抽象成独立的生成器或者迭代器
+** 巧用 ~next()~
+- 获取生成器第一个值 ~next(iter(dict.keys()))~
+- 返回第一个被7整除的数 ~next(i for i in nums if i % 7 == 0)~
+
 * 异常
 - Prefer EAFP(easier to ask for forgiveness than permission) over LBYL(look before you leap)
 - 不带任何参数的 ~raise~ 会重复抛出当前异常
