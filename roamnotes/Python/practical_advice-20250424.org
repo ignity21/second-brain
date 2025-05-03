@@ -207,3 +207,23 @@ def create_conn_obj(host, port, timeout=None):
 
 *** 数据校验
 - 建议直接使用第三方库，如 ~pydantic~
+* 函数
+** 限定关键字参数
+- 提升可读性
+#+begin_src python
+def query(limit, *, kwarg1, kwarg2):
+    pass
+query(5, kwarg1=1, kwarg2=2)
+#+end_src
+
+
+** 圈复杂度
+- Cyclomatic Complexity
+- ~pipx install radon~
+  - ~radon cc xxx.py -s~
+
+** 函数状态管理
+三种方式：
+- 全局变量：避免使用
+- 闭包：简单状态管理
+- 类：变量较多时使用

@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       d7ff1cd4-8d7e-4d16-a6a0-3eab08f5cf3a
+:END:
+#+title: radon
+
+* Overview
+[[https://pypi.org/project/radon/][Radon]] is a Python tool that computes various metrics from the source code.
+- McCabe’s complexity, i.e. cyclomatic complexity
+- raw metrics (these include SLOC, comment lines, blank lines, &c.)
+- Halstead metrics (all of them)
+- Maintainability Index (the one used in Visual Studio)
