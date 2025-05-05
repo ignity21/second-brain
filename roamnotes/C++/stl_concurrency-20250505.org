@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       7c79b159-d595-4be4-b2ad-d322177c6dde
+:END:
+#+title: STL Concurrency
+* Changes
+[[file:images/screenshots/Changes/2025-05-05_09-59-43_screenshot.png]]
+* Overview
+- [[id:c400a8cc-46b7-4afb-a0e1-29bde365fe36][~std::thread~]]
+- [[id:affca3ee-0c2d-4a19-a268-e1ab078e9117][~std::future~]]
+- [[id:0ef56589-d45f-45d9-99f9-851a16a65692][~std::shared_future~]]
+- [[id:d9aa699d-1dc0-416e-bd59-00c97e7b9e2b][~std::packaged_task~]]
+- [[id:fb10c09a-372d-4137-ad09-0a535508822f][~std::async~]]

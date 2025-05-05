@@ -4,6 +4,12 @@
 #+title: STL
 #+filetags: C++
 
+* Changes
+[[file:images/screenshots/Changes/2025-05-05_10-08-28_screenshot.png]]
+
+** C++ 20
+[[file:images/screenshots/C++_20/2025-05-05_10-04-07_screenshot.png]]
+
 * STL General
 :PROPERTIES:
 :ID:       f4caef98-2ec3-4fe7-89dc-6b635677862d
@@ -38,13 +44,6 @@
 - [[id:ca728cfa-e55e-4bf7-bb1b-d9c251fdc6a5][~std::bind~]]
 - [[id:92eefd58-3653-4a53-9947-c2d375d8fe69][~std::mem_fn~]]
 
-* STL Concurrency
-:PROPERTIES:
-:ID:       bfb36506-4b84-4171-b209-b7b155bf75fb
-:END:
-- [[id:c400a8cc-46b7-4afb-a0e1-29bde365fe36][~std::thread~]]
-- [[id:affca3ee-0c2d-4a19-a268-e1ab078e9117][~std::future~]]
-- [[id:0ef56589-d45f-45d9-99f9-851a16a65692][~std::shared_future~]]
-- [[id:d9aa699d-1dc0-416e-bd59-00c97e7b9e2b][~std::packaged_task~]]
-- [[id:fb10c09a-372d-4137-ad09-0a535508822f][~std::async~]]
+* [[id:7c79b159-d595-4be4-b2ad-d322177c6dde][STL Concurrency]]
 * [[id:a370c3b2-547e-4ab7-8f39-86c57d8cbfee][STL Algorithms]]
+* [[id:442b8404-f5ba-4449-8fdd-e5d362ede5bb][Modern STL Evolution]]
