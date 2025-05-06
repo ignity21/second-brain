@@ -6,6 +6,10 @@
 * Arguments
 - Variable number of args *&rest*: ~(concat &rest SEQUENCES)~
 
+** Keyword Arguments *&key*
+  - ~(defun foo (&key a b c) ...)~
+  - ~(foo :a 1 :b 2 :c 3)~
+
 * ~(message)~
 #+begin_src elisp
 (message "There are %d %s in the office!"

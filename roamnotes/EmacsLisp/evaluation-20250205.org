@@ -3,5 +3,13 @@
 :END:
 #+title: Evaluation
 
+* Eval Last Sexp
 - ~C-x C-e~: show result in the echo area.
 - ~C-u C-x C-e~: return result just after the expression.
+
+* Eval in a List
+#+begin_src elisp
+`(1 2 ,(+ 3 4)) ; => (1 2 7)
+`(1 2 ,@(+ 3 4)) ; => (1 2 3 4)
+#+end_src
+- ~,@~: splice the list.
