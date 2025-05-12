@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       3b513038-1dc5-4cb6-a644-58a5510e46f4
 :END:
-#+title: Practical Advices
+#+title: Practical Advises
 #+filetags: :Style:
 
 * 变量相关
@@ -216,10 +216,9 @@ def query(limit, *, kwarg1, kwarg2):
 query(5, kwarg1=1, kwarg2=2)
 #+end_src
 
-
 ** 圈复杂度
 - Cyclomatic Complexity
-- ~pipx install radon~
+- ~uvx install radon~
   - ~radon cc xxx.py -s~
 
 ** 函数状态管理
@@ -227,3 +226,8 @@ query(5, kwarg1=1, kwarg2=2)
 - 全局变量：避免使用
 - 闭包：简单状态管理
 - 类：变量较多时使用
+
+* 装饰器
+** 浅装饰器，深实现
+- 装饰器归根结底，只是一个特殊的 API
+  - 内部逻辑应该简单，复杂逻辑需要封装
