@@ -50,7 +50,7 @@ print(myinst.created_at)
 : myinst.value=42
 : 1747116185.1157982
 - ~MyClass~ 的方法 ~value(self)~ 被转换为属性
-* 用简单的语法替代元类
+* 用其它方式替代元类
 1. [[id:02d375d4-d851-40b2-bb71-831ea66659e4][Class Decorator]]
 2. [[id:d588e609-9006-4532-a187-2c253df73c0a][~__init__subclass__~]] 钩子方法
 3. 描述符

@@ -1,4 +1,28 @@
 :PROPERTIES:
 :ID:       d588e609-9006-4532-a187-2c253df73c0a
 :END:
-#+title: ~__init__subclass__~
+#+title: __init__subclass__
+
+* Overview
+- ~__init__subclass__~ ：主要作用是当其它类继承该类时，钩子方法就会被出发
+#+begin_src python :results output
+class Validator:
+    _validators = {}
+
+    def __init_subclass__(cls, **kwargs):
+        print(f"{cls.__name__} registered, extra kwargs: {kwargs}")
+        Validator._validators[cls.__name__] = cls
+
+class StringValidator(Validator, foo="bar"):
+    name = "string"
+
+class IntegerValidator(Validator):
+    name = "int"
+
+print(Validator._validators)
+#+end_src
+
+#+RESULTS:
+: StringValidator registered, extra kwargs: {'foo': 'bar'}
+: IntegerValidator registered, extra kwargs: {}
+: {'StringValidator': <class '__main__.StringValidator'>, 'IntegerValidator': <class '__main__.IntegerValidator'>}

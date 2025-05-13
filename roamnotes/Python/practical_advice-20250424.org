@@ -218,14 +218,34 @@ query(5, kwarg1=1, kwarg2=2)
 
 ** 圈复杂度
 - Cyclomatic Complexity
-- ~uvx install radon~
+- ~uv tool install radon~
   - ~radon cc xxx.py -s~
+- ~flake8~ 中的 ~mccabe~ 模块也提供圈复杂度检查
 
 ** 函数状态管理
 三种方式：
 - 全局变量：避免使用
 - 闭包：简单状态管理
 - 类：变量较多时使用
+
+** 函数作为模块级 API 使用
+- 类似 facade pattern
+- 例如： ~requests~ 中的 ~get()~, ~post()~ 函数
+  - 降低使用成本，不必自己创建 ~Session~ 类
+
+** 配置文件预绑定
+- 可取代单例模式
+  - 但无法做到延迟加载
+  - 可提供简洁函数 API
+#+begin_src python :results output
+class AppConfig:
+    ...
+
+_config = AppConfig()
+get_database_conf = _config.get_database_conf
+reload_config = _config.reload
+#+end_src
+
 
 * 装饰器
 ** 浅装饰器，深实现
