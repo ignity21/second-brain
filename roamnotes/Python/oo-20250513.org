@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       5df3b40f-7130-4a88-9411-f2f7608df28f
+:END:
+#+title: OO
+#+filetags: :OO:
+
+* [[id:734c0052-0cd7-49c7-badf-10019a558773][Abstract Class]]
+* [[id:0c108061-bce6-4dba-b1ce-c610aeecdcc8][MRO]]
+* [[id:f6ce40bf-224e-42a9-97f7-49cc084e1167][Mixin Class]]
+* [[id:95feb43d-d5a4-41de-8c70-40fedf3f6265][metaclass]]

@@ -1,0 +1,4 @@
+:PROPERTIES:
+:ID:       d588e609-9006-4532-a187-2c253df73c0a
+:END:
+#+title: ~__init__subclass__~

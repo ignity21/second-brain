@@ -221,7 +221,10 @@ print(f"get_time_taken: {sleep_a_while.get_time_taken()}")
 : "sleep_a_while", args: (1,), kwargs: {}
 : time cost: 1.0001554489135742s
 : get_time_taken: 1.0001554489135742
-* 装饰器装饰类
+* Class Decorator
+:PROPERTIES:
+:ID:       02d375d4-d851-40b2-bb71-831ea66659e4
+:END:
 - 可替换较简单的 ~metaclass~
 #+begin_src python :results output
 _validators = {}
