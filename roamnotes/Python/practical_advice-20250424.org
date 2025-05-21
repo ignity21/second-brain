@@ -246,7 +246,6 @@ get_database_conf = _config.get_database_conf
 reload_config = _config.reload
 #+end_src
 
-
 * 装饰器
 ** 浅装饰器，深实现
 - 装饰器归根结底，只是一个特殊的 API

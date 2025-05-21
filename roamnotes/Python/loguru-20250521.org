@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       311759eb-82a6-4f6c-a09c-6eec896e20d6
+:END:
+#+title: loguru
+
+* Overview
+#+begin_src python :results output
+import sys
+from loguru import logger
+logger.remove(0) # remove default handler
+logger.remove() # remove all handlers
+
+sink_id = logger.add(sys.stdout, level="DEBUG",
+                     format="{time: YYYY-MM-DD HH:mm:ss} {message}")
+logger.debug("This is a debug message")
+logger.success("This is a success message")
+logger.remove(sink_id) # remove the handler
+#+end_src
+
+#+RESULTS:
+:  2025-05-21 09:55:02 This is a debug message
+:  2025-05-21 09:55:02 This is a success message
+- [[https://github.com/Delgan/loguru?tab=readme-ov-file#pretty-logging-with-colors][logging with colors]]
+- [[https://github.com/Delgan/loguru?tab=readme-ov-file#lazy-evaluation-of-expensive-functions][lazy evaluation of verbose messages(e.g. debug)]]
+- [[https://github.com/Delgan/loguru?tab=readme-ov-file#customizable-levels][customizable levels]]

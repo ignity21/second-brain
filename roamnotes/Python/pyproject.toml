@@ -1,9 +1,10 @@
 [project]
-name = "python"
+name = "Pynote"
 version = "0.1.0"
-description = "Add your description here"
+description = "Nothing"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "loguru>=0.7.3",
     "wrapt>=1.17.2",
 ]
