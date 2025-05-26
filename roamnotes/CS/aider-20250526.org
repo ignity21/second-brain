@@ -1,0 +1,110 @@
+:PROPERTIES:
+:ID:       9b992503-6524-431e-ac75-d5e5fae1b846
+:END:
+#+title: aider
+
+* Modes
+- code mode(default): ~/code~; Aider will make changes to your code to satisfy your requests
+- architect mode: ~/architect~
+  - Architect model will *propose* changes
+- editor mode: ~/architect~
+  - Editor model will translate that *proposal* into specific file edits.
+- ask mode: ~/ask~; Aider will discuss your code and answer questions about it,
+- context mode: ~/context~: enter context mode to see surrounding code context.
+
+** General Use
+1. ~/ask~
+2. ~/code~
+
+** Architect Mode
+1. First, it sends your request to the *main model* which will act as an architect to propose how to solve your coding request.
+2. Then it sends another request to the *editor model*, asking it to turn the architect's proposal into specific file editing instructions.
+
+* Commands
+- File related
+  - ~/add~: add files
+  - ~/read-only~: add files to the chat that are for reference only
+  - ~/drop~
+  - ~/ls~
+- Code related
+  - ~/lint~: lint and fix in-chat files
+- Repository related commands
+  - ~/git~: run a git command
+  - ~/diff~
+  - ~/commit~
+  - ~/undo~: undo the last git commit if it was done by aider
+  - ~/map~: print out the current repository map
+  - ~/map-refresh~
+- Model related commands
+  - ~/model~: switch model
+  - ~/weak-model~: switch weak model, used for commit messages and chat history summaries
+  - ~/models~: list available models
+  - ~/reasoning-effort~: number or low/medium/high depending on model
+- General:
+  - ~/help~
+  - ~/clear~: clear the chat history
+  - ~/reset~: drop all files and clear the chat history
+  - ~/settings~: print out the current settings
+  - ~/exit(quit)~
+  - ~/multiline-mode~: =Enter= for new line, =Alt+Enter= to send
+  - ~/voice~: record and transcribe voice input
+  - ~/web~: scrape a webpage, convert to markdown and send in a message
+- Run commands
+  - ~/run~: run a shell command and add the output to the chat (alias: !)
+  - ~/test~
+
+* Edit Formats (Diff)
+- whole :: LLM returns a full updated copy
+- diff :: LLM specifies file edits as a series of search/replace blocks
+- diff-fenced :: is based on the diff format; file path inside the fence (for Gemini family)
+- udiff :: widely used unified diff format (e.g. ~git diff~)
+
+* AI Comments in Code
+- Start or end with =AI=, =AI!= or =AI?=
+  - =AI!= triggers aider to make changes to your code.
+  - =AI?= triggers aider to ask questions about your code.
+- Simply put an =#AI= comment and save the file.
+
+** Examples
+#+begin_src javascript
+function factorial(n) // Implement this. AI!
+app.get('/sqrt/:n', (req, res) => {
+    const n = parseFloat(req.params.n);
+
+    // Add error handling for NaN and less than zero. AI!
+
+    const result = math.sqrt(n);
+    res.json({ result: result });
+});
+#+end_src
+#+begin_src python
+@app.route('/factorial/<int:n>')
+def factorial(n):
+    if n < 0:
+        return jsonify(error="Factorial is not defined for negative numbers"), 400
+
+    # AI: Refactor this code...
+
+    result = 1
+    for i in range(1, n + 1):
+        result *= i
+
+    # ... into to a compute_factorial() function. AI!
+
+    return jsonify(result=result)
+
+# Make these changes: AI!
+# - Add a proper main() function
+# - Use Click to process cmd line args
+# - Accept --host and --port args
+# - Print a welcome message that includes the listening url
+
+if __name__ == "__main__":
+    app.run(debug=True)
+#+end_src
+
+* References
+- [[https://aider.chat/docs/usage/tutorials.html][Tutorials]]
+- [[https://aider.chat/docs/usage/conventions.html][Specifing Coding Conventions]]
+- [[https://aider.chat/docs/usage/lint-test.html][Linting and testing]]
+- [[https://aider.chat/docs/usage/not-code.html][Editing config & text files]]

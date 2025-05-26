@@ -73,6 +73,9 @@ Replaces ~pipx~
 - ~uv tool list~: List installed tools.
 - ~uv tool update-shell~: Update the shell to include tool executables.
 - ~uv tool dir~: Show the directory where tools are installed.
+- replace ~pipx inject~
+  - ~pipx inject aider-chat google-generativeai~
+  - ~uv tool run --from aider-chat pip install google-generativeai~
 
 * Virtual Environments
 - ~uv python pin 3.11~: Use a specific Python version in the current directory

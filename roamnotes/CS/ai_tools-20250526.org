@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       6bb8a181-257e-42d3-bd64-6858e2a80043
+:END:
+#+title: AI Tools
+
+- [[id:f350adc2-8a9a-4058-b0e5-f099edce5004][AI Prompts]]
+- [[id:9b992503-6524-431e-ac75-d5e5fae1b846][aider]]
