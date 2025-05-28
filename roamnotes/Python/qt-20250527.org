@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       e6c611fd-1796-463f-a844-2e2935996aba
+:END:
+#+title: Qt
+
+* Overview
+
+* 组件
+** 窗体组件
+- Main Window: 具备主窗体的特性，如菜单栏、工具栏、状态栏等
+- Dialog: 一般对话框，可以模态显示、有返回值等
+- Widget: 界面组件，如 ~QLable~, ~QPushButton~
+  - ~QWidget~ 是所有组件的父类，也包括 ~QMainWindow~ 和 ~QDialog~
+  - ~QWidget~ 可以作为独立的窗口运行
+
+* Python Modules
+- [[id:2d8c01d9-ed79-4af6-b18d-3ea846da454e][PyQt5]]
+- [[id:fd46841b-5f7c-410f-b7bb-bf2c5a28456b][PySide6]]

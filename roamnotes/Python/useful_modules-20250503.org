@@ -9,3 +9,6 @@
 
 * Utilities
 - [[id:311759eb-82a6-4f6c-a09c-6eec896e20d6][loguru]]
+
+* GUI
+- [[id:e6c611fd-1796-463f-a844-2e2935996aba][Qt]]
