@@ -48,3 +48,16 @@ authers:
   - username: user2
     password: pass2
 #+end_src
+* Examples
+** Relay
+*** 代理模式
+- 服务端：
+  - ~gost -L "relay+mwss://gost:gost:443?path=/ws"~
+  - ~gost -L relay+wss://gost:gost@:8420?path=/ws~
+- 客户端
+  - ~gost -L socks://:1080 -F "relay+mwss://gost:gost@www.ignity.xyz:443?path=/ws"~
+  - ~gost -L http://:8080 -F relay+wss://gost:gost@192.168.1.1:8420?path=/ws~
+
+*** 转发模式
+- 服务端： ~gost -L relay+wss://:8420/:18080~
+- 客户端： ~gost -L tcp://:8080 -F relay+wss://:8420~

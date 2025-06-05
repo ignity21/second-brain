@@ -15,7 +15,7 @@
 * Projects
 ** Work Flow
 1. ~uv init -p [MINIMUN]~
-2. ~uv add [PACKAGES]~
+2. ~uv add (--dev) [PACKAGES]~
 3. ~uv venv -p [PYTHON]~, ~uv lock~, ~uv sync~
 4. ~source .venv/bin/activate~
 5. ~uv pip install -e .~
