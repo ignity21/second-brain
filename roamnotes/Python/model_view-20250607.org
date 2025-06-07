@@ -1,0 +1,56 @@
+:PROPERTIES:
+:ID:       0687e6c8-53b6-4aba-baa4-ccf6b17ea193
+:END:
+#+title: Model/View
+
+* Overview
+- View: 界面组件，如 ~QListView~, ~QTreeView~, ~QTableView~
+- Model: 与源数据通信，并为界面组件提供数据接口, 如 ~QStringListModel~, ~QSqlTableModel~
+- Delegate: 模型向视图提供数据是单向的，代理的作用是可以在视图上编辑数据再提交回模型
+  - 例： ~QTableView~ 上双击单元格，出现一个由代理提供的 ~QLineEdit~ 编辑器
+
+* Model
+- Item roles
+  - ~Qt.DisplayRole~: 视图组件中显示的字符串
+  - ~Qt.UserRole~: 自定义数据
+  - ~Qt.ToolTipRole~
+
+* Examples
+#+begin_src python
+self.model=QStringListModel()
+self.model.setStringList(['apple', 'banana', 'cherry'])
+self.ui.listView.setModel(self.model)
+# Set the edit triggers for the list view
+self.ui.listView.setEditTriggers(QAbstractItemView.DoubleClicked | QAbstractItemView.SelectedClicked)
+#+end_src
+
+** Add Item
+#+begin_src python
+def on_btn_add_clicked(self):
+    row_to_insert = self.model().rowCount()
+    self.model().insertRow(row_to_insert)
+    index = self.model().index(row_to_insert, 0)
+    self.model().setData(index, "new item", QtCore.Qt.DisplayRole)
+    self.ui.listView.setCurrentIndex(index)
+#+end_src
+
+** Remove Item
+#+begin_src python
+def on_btn_remove_clicked(self):
+    index = self.ui.listView.currentIndex()
+    self.model().removeRow(index.row())
+#+end_src
+
+** Remove All
+#+begin_src python
+def on_btn_remove_all_clicked(self):
+    self.model().removeRows(0, self.model().rowCount())
+#+end_src
+
+* Custom Delegate
+- 代理类继承自 ~QStyledItemDelegate~
+- 需重载接口：
+  - ~createEditor(self, parent, option, index)~: 创建编辑器
+  - ~setEditorData(self, editor, index)~: 设置编辑器数据
+  - ~setModelData(self, editor, model, index)~: 将编辑器数据提交回模型
+  - ~updateEditorGeometry(self, editor, option, index)~: 更新编辑器几何形状

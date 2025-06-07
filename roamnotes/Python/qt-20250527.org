@@ -13,6 +13,26 @@
   - ~QWidget~ 是所有组件的父类，也包括 ~QMainWindow~ 和 ~QDialog~
   - ~QWidget~ 可以作为独立的窗口运行
 
+* Qt Modules
+- ~QtCore~: 提供核心的非 GUI 功能的类，常用命名空间 ~Qt~ ；常用 ~pyqtSlot~, ~pyQtSignal~
+- ~QtGui~: 提供 GUI 设计中用到的功能性的类，如 ~QFont~, ~QIcon~, ~QCloseEvent~
+- ~QtWidgets~
+- ~QtMultimedia~
+- ~QtMultimediaWidgets~
+
+* [[id:0687e6c8-53b6-4aba-baa4-ccf6b17ea193][Model/View]]
+* QEvent
+** 接口函数
+- ~accept()~: 表示接受此事件，不再向上传播
+- ~ignore()~: 忽略事件，向上传播
+- ~type()~: 返回事件类型
+
+** 事件处理流程
+1. 收到操作系统事件
+2. 传入 ~QObject~ 的 ~event(self, e)~ 函数进行处理
+3. 分派到具体处理函数，如： ~mouseDoubleClickEvent()~
+4. 处理函数中触发信号 ~qtsingal.emit()~ (signal 是对事件的封装)
+
 * Python Modules
 - [[id:2d8c01d9-ed79-4af6-b18d-3ea846da454e][PyQt5]]
 - [[id:fd46841b-5f7c-410f-b7bb-bf2c5a28456b][PySide6]]
