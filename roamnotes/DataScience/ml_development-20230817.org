@@ -35,6 +35,4 @@
 :ID:       68b04e22-0fea-4771-9a11-d77e0b73dd84
 :END:
 - [[id:f4ca75d9-362e-4d52-8e5c-0362c6882dc2][Scikit-Learn]]
-
-* [[id:4f76535d-cab2-4465-bb8a-3abbc3dadfe5][ML Diagnostic]]
 * [[id:33846b1e-3e19-46a2-9158-6c9b3c06743b][ML System]]

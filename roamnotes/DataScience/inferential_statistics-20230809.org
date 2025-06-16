@@ -4,6 +4,7 @@
 #+title: Inferential Statistics
 #+filetags: :Math:Statistics:
 
+* [[id:889cc76c-cbfa-4f3a-b4c7-7ba4acaaf8e6][Statistic Experiments]]
 * Implications
 - Clinical research
 - A/B testing
@@ -22,6 +23,7 @@
 ** [[id:80cef9fb-e3b0-4903-85a9-ca96efd96428][Degree of Freedom]]
 ** [[id:0afb7034-f053-47d7-aea2-8d71eb45c627][Relative Error]]
 ** [[id:fd7b8935-0094-403b-ac49-a61c8df0a733][Confidence Intervals]]
+** [[id:b80406e2-60b3-4607-9dc2-6791405020cc][Correlation]]
 * [[id:4514ee9e-86ef-4f32-bfc3-151320f23d97][Sampling Distribution]]
 * [[id:193270c8-6738-48fb-b728-8462f10de3c5][Central Limit Theorem]]
 * [[id:61297403-6903-4513-90c7-2b5fc0b49e11][Hypothesis Testing]]

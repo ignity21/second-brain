@@ -4,8 +4,9 @@
 #+title: ML System
 #+filetags: ML
 
-* Batch Versus Online
+* Design
+** Batch Versus Online
 - Batch Learning: general tasks
 - Online Learning: incremental learning
 
-* Instance-Based Versus Model-Based
+** Instance-Based Versus Model-Based

@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       1fbfa73e-c1a7-42c6-ad6a-03bd91b75c80
+:END:
+#+title: ML Algos
+
+- [[id:31b71a06-0592-444b-b410-916ee717b488][Neural Network]]
+- [[id:e0a49219-943c-4fba-b790-0b3e365b5e3d][Decision Tree]]

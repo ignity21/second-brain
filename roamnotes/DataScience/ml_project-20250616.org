@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       1a96a73f-c7b8-44dc-84f8-a1a390f2d5e8
+:END:
+#+title: ML Project
+
+* [[id:c5578ba1-fd32-417f-92ea-414f83ca9109][ML Project Checklist]]
+
+* Data Preparation
+:PROPERTIES:
+:ID:       c496154c-f57c-4de7-b4ba-a89ad7472802
+:END:
+** [[id:de66c696-5ca1-4fbc-a9b2-097ee7bf4ccd][Data Cleaning]]
+** [[id:f8088283-0154-4050-9cef-911f5ae69ef4][Feature Engineering]]
+** [[id:8dc25af2-f3bd-4ec4-b949-40958e167e75][Feature Scaling]]
+* [[id:4f76535d-cab2-4465-bb8a-3abbc3dadfe5][ML Diagnostic]]
+* [[id:56c41011-4424-42ee-b032-ebcb626a2506][ML Project Example]]

@@ -5,6 +5,14 @@
 #+title: Machine Learning
 #+filetags: ML
 
+* Math Prerequisites
+:PROPERTIES:
+:ID:       c4b3b97a-9d25-4494-ac4c-0184f8ba64a0
+:END:
+
+- [[id:bc202bb0-0793-4e92-8316-1186e5525c97][Inferential Statistics]]
+- [[id:8ff66d66-2df2-4dad-b09a-9ba4e42736d9][Linear Algebra]]
+
 * Definition
 A computer program is said to learn from experience /E/ with respect to some class
 of tasks /T/ and performance measure /P/, if its performance at tasks in /T/, as
@@ -54,11 +62,15 @@ Your spam filter is a Machine Learning program that, given examples of spam emai
 - How will I *measure success* in my application?
 - How will the machine learning solution interact with other parts of my research or business product?
 
-* [[id:79bd8eb3-154b-470d-bbcb-ff6ae9c507db][Supervised Learning]]
-* [[id:8b7a21ee-1fc3-4566-9cd9-1865de8b6e46][Unsupervised Learning]]
-* [[id:31b71a06-0592-444b-b410-916ee717b488][Neural Network]]
-* [[id:e0a49219-943c-4fba-b790-0b3e365b5e3d][Decision Tree]]
-* [[id:e1a528d4-0948-4f04-b114-48dd128863a1][Cost Function]]
+* Categories
+** [[id:79bd8eb3-154b-470d-bbcb-ff6ae9c507db][Supervised Learning]]
+** [[id:8b7a21ee-1fc3-4566-9cd9-1865de8b6e46][Unsupervised Learning]]
+** [[id:01741dd5-e612-4c76-832c-3760642b34ea][Reinforcement Learning]]
+** [[id:18561ec5-17e3-4b2f-bb7d-66cd033a203b][Recommender System]]
+* [[id:1fbfa73e-c1a7-42c6-ad6a-03bd91b75c80][ML Algos]]
+** [[id:31b71a06-0592-444b-b410-916ee717b488][Neural Network]]
+** [[id:e0a49219-943c-4fba-b790-0b3e365b5e3d][Decision Tree]]
+** [[id:e1a528d4-0948-4f04-b114-48dd128863a1][Cost Function]]
 
 * ML Optimization Algorithms
 :PROPERTIES:
@@ -68,11 +80,7 @@ Your spam filter is a Machine Learning program that, given examples of spam emai
 ** [[id:1800f8d6-afdd-48f6-a680-fd8460bd1f2e][Normal Equation]]
 ** [[id:5765135f-eb1d-46f7-ac0d-627582a02b8e][Adam Algorithm]]
 
-* ML Preparation
-:PROPERTIES:
-:ID:       c496154c-f57c-4de7-b4ba-a89ad7472802
-:END:
-** [[id:f8088283-0154-4050-9cef-911f5ae69ef4][Feature Engineering]]
-** [[id:8dc25af2-f3bd-4ec4-b949-40958e167e75][Feature Scaling]]
 
+* [[id:1a96a73f-c7b8-44dc-84f8-a1a390f2d5e8][ML Project]]
 * [[id:62150352-f6f0-466e-a59d-0874064ddb74][ML Development]]
+* [[id:7c730187-a0a7-480e-9c7e-429646371fee][ML Resources]]
