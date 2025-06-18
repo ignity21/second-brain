@@ -5,10 +5,10 @@
 #+filetags: C++
 
 * Overview
-| Variable | Type | Memory | Value |
-|----------+------+--------+-------|
-| pvalue   | int* |   1001 |  1002 |
-| value    | int  |   1002 |  1212 |
+| Variable | Type | Memory Loc | Value |
+|----------+------+------------+-------|
+| value    | int  |       1002 |  1212 |
+| pvalue   | int* |       1001 |  1002 |
 
 - &value: 1002
 - value: 1212

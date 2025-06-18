@@ -5,7 +5,10 @@
 #+title: C++ Coding
 #+filetags: :C++:
 
-* Basic
+* Basics
+:PROPERTIES:
+:ID:       676c992f-7be0-4667-9239-cdf51be101c9
+:END:
 ** [[id:1e83db6b-6955-4f9f-a107-da4af74f9071][Keyword]]
 ** [[id:93ea9dcc-19c5-43cf-8695-7d75e0e07522][Literal]]
 ** [[id:b85e6082-de0c-4f33-826d-cb9e6e7e3ae3][~enum~]]
@@ -42,11 +45,17 @@ bool isPalindrome(string str) {
 ** [[id:cbd64e53-ae3e-4bbd-aab3-49fca52d5ab0][Temporary Variables]]
 
 * Compile-time Utilities
+:PROPERTIES:
+:ID:       ae1e5332-883b-4208-9906-41c2094c8238
+:END:
 - [[id:682872b2-e600-4b8b-b680-d1e340db9680][type_traits]]
 - [[id:6a30ae48-5551-4c38-a279-2175905c1c13][~if constexpr~]]
 - [[id:f26331a4-a3cf-4751-9e6d-905f850d0e6d][~static_assert~]]
 
 * Advanced
+:PROPERTIES:
+:ID:       1ef95f0e-e686-414b-8933-db9355c2b4c9
+:END:
 ** [[id:5d31ac8b-58a8-4926-b328-3cf408f898b2][OOP]]
 ** [[id:4df12e60-9889-4290-af79-35ca2f488d52][Design Pattern]]
 ** [[id:45a66f1c-ea7b-4607-a417-e8ae6d608ebe][Template]]

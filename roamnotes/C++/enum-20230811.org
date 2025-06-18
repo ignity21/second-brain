@@ -7,7 +7,7 @@
 * Features
 - Scoped enums
 - They convert to other types only with a cast
-- Support foward declaration
+- Support forward declaration
 
 #+begin_src cpp
   // forward declaration
@@ -37,7 +37,7 @@
 #+end_src
 
 * Work with ~std::tuple~
-- Downside
+- Downside of using ~std::get~ with enum class
   #+begin_src cpp
     using UserInfo = std::tuple<std::string, // name
                                 std::string, // email
@@ -53,6 +53,7 @@
     enum UserInfoFields2 {uiName, uiEmail, uiReputation};
     auto var2 = std::get<uiName>(uInfo); // no namespace, no implicit conversion
   #+end_src
+
 - Helper Function
 #+begin_src cpp
   template<typename E>

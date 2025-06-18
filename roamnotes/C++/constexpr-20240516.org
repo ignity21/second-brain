@@ -37,13 +37,6 @@ constexpr int len_foo() { return 4; }
 constexpr int fibonacci(const int n) {
   return n <= 1 ? n : fibonacci(n - 1) + fibonacci(n - 2);
 }
-
-// C++14 with loops and if statements
-constexpr int fibonacci14(const int n) {
-  if (n == 0) return 0;
-  if (n == 1) return 1;
-  return fibonacci14(n - 1) + fibonacci14(n - 2);
-}
 #+end_src
 
 * ~constexpr~ on Class

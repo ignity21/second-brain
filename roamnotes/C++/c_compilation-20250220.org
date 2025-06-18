@@ -4,12 +4,11 @@
 #+title: C++ Compilation
 #+filetags: :C++:
 * Files
-- =*.ii=: preprocessed files
-- =*.s=: assembly files
+- =*.ii=: preprocessed files ~g++ -E xxx.cpp -o xxx.ii~
+- =*.s=: assembly files ~-S~
 - =*.o=: object files
 - =*.a=: static libraries
 - =*.so=: shared libraries
-
 - ~-save-temps~: to keep intermediate files
 
 * Compilation Process

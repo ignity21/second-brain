@@ -5,6 +5,7 @@
 #+title: ~using~
 #+filetags: C++
 
+* Using Type Aliases
 #+begin_src cpp
   typedef std::unique_ptr<std::unordered_map<std::string, int>> UPtrMapSI;
   using UPtrMapSI = std::unique_ptr<std::unordered_map<std::string, int>>;
