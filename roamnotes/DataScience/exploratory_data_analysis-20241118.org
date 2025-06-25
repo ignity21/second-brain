@@ -7,7 +7,7 @@
 
 * Overview
 - Detecting patterns and relationships
-- Generating questions, or hypotheses
+- Generating questions or hypotheses
 - Preparing data for machine learning
 
 * Initial Exploration
@@ -17,7 +17,7 @@
 
 * Numerical Data
 - Previewing all numerical data: ~df.select_dtypes('number').head()~
-- Use ~sns.boxplot()~ to overview distribution, ~y~ could be a categorical column
+- Use ~sns.boxplot()~ to overview distribution, ~y~ axis could be a categorical column
 - Use ~astype(int)~ to convert data type
 - ~min~, ~max~, ~describe~ to see range of data
 

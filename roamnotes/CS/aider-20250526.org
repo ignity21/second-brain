@@ -48,7 +48,8 @@
   - ~/exit(quit)~
   - ~/multiline-mode~: =Enter= for new line, =Alt+Enter= to send
   - ~/voice~: record and transcribe voice input
-  - ~/web~: scrape a webpage, convert to markdown and send in a message
+  - ~/web~: scrape a webpage, convert to markdown and send in a message (default: using ~httpx~)
+    - Aider works best using Playwright's chromium browser ~playwright install --with-deps chromium~
 - Run commands
   - ~/run~: run a shell command and add the output to the chat (alias: !)
   - ~/test~
