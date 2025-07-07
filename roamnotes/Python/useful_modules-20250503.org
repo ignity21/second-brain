@@ -3,6 +3,8 @@
 :END:
 #+title: Useful Modules
 
+* Schema
+
 * Coding Utilities
 - [[id:d7ff1cd4-8d7e-4d16-a6a0-3eab08f5cf3a][radon]]: code complexity analysis
 - [[id:ffb4d5cb-79fe-4565-a40a-a8ef50de415a][wrapt]]: decorator library
