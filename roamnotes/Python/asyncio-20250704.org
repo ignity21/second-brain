@@ -43,6 +43,7 @@ asyncio.run(main())
 : started at 15:45:45
 : finished at 15:45:48
 : task3 result: 3
+
 * Awaitables
 ** Coroutines
 - A coroutine function: an ~async def~ function;

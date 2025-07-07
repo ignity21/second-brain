@@ -1,0 +1,53 @@
+:PROPERTIES:
+:ID:       70f106c0-7601-4c43-9d97-4f0f28b5c47a
+:END:
+#+title: websockets
+
+* Overview
+- Server
+#+begin_src python
+import asyncio
+from websockets.asyncio.server import serve
+
+async def echo(websocket):
+    async for msg in websocket:
+        await websocket.send(msg)
+
+async def main():
+    async with serve(echo, "localhost", 8765) as server:
+        await server.serve_forever()
+#+end_src
+- Client
+#+begin_src python
+import asyncio
+from websockets.asyncio.client import connect
+from websockets.exceptions import ConnectionClosed
+
+async def hello():
+    # async with connect("ws://localhost:8765") as websocket:
+    # Using `async for` for automatic reconnection
+    async for websocket in connect("ws://localhost:8765"):
+        loop = asyncio.get_running_loop()
+        loop.add_signal_handler(signal.SIGTERM, loop.create_task, websocket.close())
+        try:
+            await websocket.send("Hello world!")
+            message = await websocket.recv()
+        except ConnectionClosed:
+            continue
+
+async def main():
+    loop = asyncio.get_event_loop()
+    hello_task = loop.create_task(hello())
+    loop.add_signal_handler(signal.SIGTERM, hello_task.cancel)
+#+end_src
+
+* Server
+* Client
+** Automatic Reconnection
+- ~async for ... in connect(...)~
+  - only network errors and server errors (HTTP 500, 502, 503, or 504) are considered retryable
+
+** [[https://websockets.readthedocs.io/en/stable/faq/client.html][FAQ]]
+** [[https://websockets.readthedocs.io/en/stable/reference/asyncio/client.html][API References]]
+
+* [[https://websockets.readthedocs.io/en/stable/topics/logging.html][logging]]

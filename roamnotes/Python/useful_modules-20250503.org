@@ -14,3 +14,6 @@
 
 * GUI
 - [[id:e6c611fd-1796-463f-a844-2e2935996aba][Qt]]
+
+* Web
+- [[id:70f106c0-7601-4c43-9d97-4f0f28b5c47a][websockets]]
