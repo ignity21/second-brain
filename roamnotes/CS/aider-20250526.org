@@ -3,6 +3,9 @@
 :END:
 #+title: aider
 
+* Overview
+- [[https://aider.chat/docs/usage/tips.html][Tips]]: Important!
+
 * Modes
 - code mode(default): ~/code~; Aider will make changes to your code to satisfy your requests
 - architect mode: ~/architect~
@@ -15,6 +18,9 @@
 ** General Use
 1. ~/ask~
 2. ~/code~
+3. ~/read~ to read doc files into the chat
+4. ~/run~
+5. ~/test~
 
 ** Architect Mode
 1. First, it sends your request to the *main model* which will act as an architect to propose how to solve your coding request.
