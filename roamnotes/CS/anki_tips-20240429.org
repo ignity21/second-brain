@@ -163,6 +163,7 @@ img {
 - AwesomeTTS: 1436550454
 - Aglish: 38866997
 - Bulk Image Downloader: 8280891
+- Ankimon: 1908235722
 
 ** AnkiBrain
 1. 1915225457

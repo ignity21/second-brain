@@ -1,0 +1,41 @@
+:PROPERTIES:
+:ID:       b09fb519-4748-44bb-b38d-5ba9f0c77ddf
+:END:
+#+title: ZeroMQ
+#+filetags: :Network:
+
+* Patterns
+- PUB and SUB
+- REQ and REP
+- REQ and ROUTER (take care, REQ inserts an extra null frame)
+- DEALER and REP (take care, REP assumes a null frame)
+- DEALER and ROUTER
+- DEALER and DEALER
+- ROUTER and ROUTER
+- PUSH and PULL
+- PAIR and PAIR
+
+* PUB and SUB
+** Small-scale
+[[file:images/screenshots/PUB_and_SUB/2025-07-30_10-54-54_screenshot.png]]
+** Pub-Sub Synchronization
+[[file:images/screenshots/Pub-Sub_Synchronization/2025-07-30_11-02-34_screenshot.png]]
+
+** Using XSUB and XPUB
+[[file:images/screenshots/PUB_and_SUB/2025-07-30_10-55-44_screenshot.png]]
+** Pub-Sub Forwarder Proxy
+
+[[file:images/screenshots/PUB_and_SUB/2025-07-30_10-57-22_screenshot.png]]
+
+
+* REQ and REP
+** Extended Request-Reply
+[[file:images/screenshots/REQ_and_REP/2025-07-30_10-56-48_screenshot.png]]
+
+* PUSH and PULL
+** Parallel Pipeline with Kill Signaling
+[[file:images/screenshots/Parallel_Pipeline_with_Kill_Signaling/2025-07-30_10-59-30_screenshot.png]]
+
+* PAIR and PAIR
+** Signaling Between Threads
+[[file:images/screenshots/Signaling_Between_Threads/2025-07-30_11-01-54_screenshot.png]]
