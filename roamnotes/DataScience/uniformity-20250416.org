@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       50086988-bef5-40c4-acc1-204572b05996
-:ROAM_ALIASES: Data Consistency
+:ROAM_ALIASES: "Data Consistency"
 :END:
 #+title: Data Uniformity
 #+filetags: :Wrangling:

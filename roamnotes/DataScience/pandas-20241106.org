@@ -151,6 +151,7 @@ sns.catplot(x="number", y="prob", data=die, kind="bar")
 # shows the number of times each number was rolled
 rolls_10["number"].hist(bins=np.linspace(1,7,7))
 #+end_src
+
 * Merging
 #+begin_src python
 df1.merge(df2, on='key', how='inner', selfuffixes=('_df1', '_df2'),
@@ -206,7 +207,10 @@ stocks.query('financial == "gross_profit" and value > 100')
 
 * Wide/Long Format Reshaping
 [[file:images/screenshots/Wide/Long_Format_Reshaping/2024-11-09_16-08-26_screenshot.png]]
-- unpivot(wide->long): ~df.melt(id_vars=['first', 'last'], value_vars=['height', 'weight'], var_name='variable', value_name='value')~
+- pivot(long->wide):
+  - ~df.pivot(index=['first', 'last'], columns='variable', values='value')~
+- unpivot(wide->long):
+  - ~df.melt(id_vars=['first', 'last'], value_vars=['height', 'weight'], var_name='variable', value_name='value')~
 #+begin_src python
 #    Australia   Spain   France   UK   USA
 # 0      24.6     46.7     22.2  21.2  100.5

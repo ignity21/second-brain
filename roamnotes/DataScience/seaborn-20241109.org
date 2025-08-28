@@ -158,14 +158,15 @@ sns.catplot(x='smoker',
 * Seaborn Objects
 - ~FacetGrid~ or ~AxesSubplot~
 #+begin_src python
-g = sns.scatterplot(x='x', y='y', data=df)
-type(g)
+ax = sns.scatterplot(x='x', y='y', data=df)
+type(ax)
 # <class 'matplotlib.axes._subplots.AxesSubplot'>
 
 g = sns.catplot(x='x', y='y', data=df)
 type(g)
 # <class 'seaborn.axisgrid.FacetGrid'>
 #+end_src
+
 * Multiple Plots on Single Chart
 #+begin_src python
 # create fig before multiple plots
@@ -174,6 +175,7 @@ sns.regplot(...)
 sns.scatterplot(...)
 plt.show()
 #+end_src
+
 * Titles and Labels
 ** For FacetGrid
 #+begin_src python

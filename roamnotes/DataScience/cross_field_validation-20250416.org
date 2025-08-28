@@ -6,7 +6,7 @@
 * Flight Example
 #+begin_src python
 sum_classes = flights[['economy_class', 'business_class', 'first_class']].sum(axis=1)
-passenger_equ = sum_classes == flights['total_passengers']
+passenger_equ = (sum_classes == flights['total_passengers'])
 
 inconsistent_pass = flights[~passenger_equ]
 consistent_pass = flights[passenger_equ]
@@ -18,7 +18,7 @@ users['Birthday'] = pd.to_datetime(users['Birthday'])
 today = dt.date.today()
 
 age_manual = today.year - users['Birthday'].dt.year
-age_equ = age_manual == users['Age']
+age_equ = (age_manual == users['Age'])
 
 inconsistent_age = users[~age_equ]
 consistent_age = users[age_equ]

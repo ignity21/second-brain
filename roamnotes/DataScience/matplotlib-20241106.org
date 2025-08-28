@@ -137,6 +137,7 @@ ax.bar(x=categorical_name, height=values.mean(), yerr=values.std()) # yerr adds 
 # errorbar is a more general function that can be used to plot error bars
 ax.errorbar(df["month"], df["avg_temp"], yerr=df["std_temp"])
 #+end_src
+
 *** Boxplot
 #+begin_src python
 fig, ax = plt.subplots()
