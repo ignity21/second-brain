@@ -39,7 +39,6 @@ sns.scatterplot(x='total_bill', y='tip',
 - Why use ~relplot()~ instead of ~scatterplot()~?
   - ~relplot()~ lets you create subplots in a single figure
 #+begin_src python
-
 sns.relplot(x='total_bill', y='tip', data=tips, kind='scatter',
             col="smoker", # separate plots by smoker
             row="time", # separate plots by time
