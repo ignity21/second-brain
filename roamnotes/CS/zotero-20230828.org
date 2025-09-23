@@ -6,7 +6,7 @@
 * Settings
 ** General
 - Customize Filename Format
-  - ~{{ firstCreator suffix=" - " }}{{ year suffix=" - " }}{{ shortTitle truncate="50" }}~
+  - ~{{citationKey}}~
 
 ** Sync
 - File Syncing: =WebDAV=
