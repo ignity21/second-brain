@@ -1,0 +1,80 @@
+:PROPERTIES:
+:ID:       fae08b2e-d4fb-4524-8564-924d0b3fc937
+:END:
+#+title: Linux Directories
+
+- links :: [[https://www.youtube.com/watch?v=ISJ44S5sZu8][Linux File System Structure Explained]]
+
+* Categories
+1. System Binaries
+2. Boot & Kernel-related
+3. Configuration Files
+4. User-Related: =/home=
+5. Shared Libraries
+6. Mount Points & Media
+7. System Info
+8. Multi-user Resources
+9. Temporary Files
+10. Optional Software
+
+* System Binaries
+- =/bin=
+- =/lib=, =/lib32=, =/lib64=: Library
+- =/sbin=: System Binary for root/admin users
+- =/user=
+  - *It doesn't store personal user files*.
+  - It stands for *Unix System Resources*
+  - It contains most of the system's *user-space applications/libraries*
+
+* Boot & Kernel-related
+- =/boot= contains:
+  - linux kernel
+  - initial RAM disk, ~initrd~ or ~initramfs~
+  - GRUB bootloader files =grub.cfg=
+
+* Devices
+- =/dev=
+  - Block Devices: e.g. hard drives, handle data in chunks
+  - Character Devices: e.g. keyboards, handle data as a stream of characters
+
+* Configuration
+- =/etc=: system-wide configuration files
+
+* Variable
+- =/var=: variable data files
+  - is used to store files that change frequently during system operation.
+  - e.g. logs =/var/log=, databases, caches, spool files, mail and print queues
+  - Package managers also use =/var/lib= to keep important metadata about installed packages.
+  - Since these files can expand significantly, =/var= is *often placed on a separate partition*.
+
+* Mount & Media
+- =/media=: removable media
+  - user-friendly and often doesn't require administrative privileges.
+  - automatically mounted when a device is plugged in.
+- =/mnt=: temporary mount points
+  - traditionally used for manually mounting file systems temporarily by the system administrator.
+  - etc. USB drives, external hard drives or remote file systems.
+
+* System Info
+- =/proc=: virtual filesystem providing process and system information
+  - vital tool for monitoring, debugging and interacting with the system inner workings in real-time.
+- =/sys=: Psuedo-filesystem that provides information about devices, drivers and some kernel features.
+  - Allowing administrators to tweak kernel settings on the fly.
+  - Can be used to customize hardware behavior.
+- =/run=: In-memory directory for *runtime* data
+  - Stores temporary runtime data used by the system and applications after booting.
+  - =/run/user=: for user sessions
+  - =/run/lock=: for system locks
+  - replace older directories like =/var/run= and =/var/lock=
+
+* Temporary Files
+- =/tmp=: temporary files
+  - often cleared on reboot
+  - *Sticky bit* permission is usually set to prevent users from deleting or renaming files owned by other users.
+
+* Optional Software
+- =/srv=: data for services provided by the system
+  - e.g. web server files =/srv/www=, FTP server files, etc.
+- =/opt=: optional software packages
+  - often used for third-party applications, e.g. chrome, docker
+  - Not all third-party applications follow this convention, but it's a common practice.

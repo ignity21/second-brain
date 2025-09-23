@@ -74,7 +74,6 @@
   - properties of the file, such as size, timestamps etc.
 * [[id:808b8114-6d48-4268-815f-270a9e3640f8][Virtual File System]] (VFS)
 * [[id:06344419-df9c-4976-8384-902338a78cc2][Journaling File Systems]]
-
 * File System Benchmarks
 - Performance under heavy multi-user load
 - Speed of file creation and deletion
