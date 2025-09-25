@@ -17,8 +17,8 @@
 
 * Plugins
 ** Better BibTeX
-- [[https://github.com/retorquere/zotero-better-bibtex/releases/download/v6.7.203/zotero-better-bibtex-6.7.203.xpi][Download]]
+- [[https://github.com/retorquere/zotero-better-bibtex/releases/download/v7.0.50/zotero-better-bibtex-7.0.50.xpi][Download]]
 - Citation Key Format: ~shorttitle(3,3)+year+authorsAlpha~
   - [[https://retorque.re/zotero-better-bibtex/citing/]]
 - Keep keys unique: ~across all libraries~
-- Automatic Export: ~On Change~
+- Automatic Export: ~On Change~ (Default)
