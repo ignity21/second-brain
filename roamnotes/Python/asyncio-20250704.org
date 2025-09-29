@@ -38,6 +38,7 @@ async def main():
 
 asyncio.run(main())
 #+end_src
+- [[https://docs.python.org/3/library/asyncio-task.html#task-groups][TaskGroup Docs]]
 
 #+RESULTS:
 : started at 15:45:45
@@ -47,14 +48,14 @@ asyncio.run(main())
 * Awaitables
 ** Coroutines
 - A coroutine function: an ~async def~ function;
-- A coroutine object: an object returned by calling a coroutine function.
+- A coroutine object: an object returned by calling a coroutine function. ~coro = asyncio.sleep(5)~
 
 ** Tasks
 - Tasks are used to schedule coroutines concurrently.
 - When calls ~asyncio.create_task()~ the coroutine is automatically scheduled.
 
 *** Cancellation
-- When a task is cancelled, ~asyncio.CancelledError~ will be raised in the task *at the next opportunity*.
+- When a task is canceled, ~asyncio.CancelledError~ will be raised in the task *at the next opportunity*.
   - If ~asyncio.CancelledError~ is *explicitly caught*, it should generally *be propagated when clean-up is complete*.
 - It is recommended that coroutines use *try/finally blocks to robustly perform clean-up logic*.
 
@@ -62,5 +63,6 @@ asyncio.run(main())
 - Represents an *eventual* result of an asynchronous operation.
 - When a Future object is awaited it means that the coroutine will wait until the Future is resolved in some other place.
 - Future objects needed to allow *callback-based* code to be used with ~async/await~.
+
 * Functions
 - ~asyncio.sleep~: Setting the delay to 0 provides an optimized path to allow other tasks to run.
