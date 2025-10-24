@@ -1,0 +1,59 @@
+:PROPERTIES:
+:ID:       a7b8622b-68f5-4482-923e-c551386a13c0
+:END:
+#+title: Type System
+
+* Alias
+#+begin_src python
+type Vector = list[float]
+#+end_src
+
+* NewType
+#+begin_src python
+from typing import NewType
+UserId = NewType('UserId', int)
+def get_user_name(user_id: UserId) -> str:
+    ...
+user_a = get_user_name(UserId(42351))
+user_b = get_user_name(-1) # fails type checking
+#+end_src
+
+* Callable
+#+begin_src python
+from collections.abc import Callable, Awaitable
+# from typing import Callable -> deprecated in Python 3.12
+type Function = Callable[[int, str], float]
+type AsyncFunction = Callable[[int, str], Awaitable[float]]
+x: Callable[..., str] # A function that takes any number of arguments and returns a string
+#+end_src
+
+- Callable cannot express complex signatures such as
+  - *functions that take a variadic number of arguments*
+  - *overloaded functions*
+  - *functions that have keyword-only parameters*
+  - Solution: using ~Protocol~
+
+** Protocol
+#+begin_src python
+from typing import Protocol
+
+from collections.abc import Iterable
+from typing import Protocol
+
+class Combiner(Protocol):
+    def __call__(self, *vals: bytes, maxlen: int | None = None) -> list[bytes]: ...
+
+def batch_proc(data: Iterable[bytes], cb_results: Combiner) -> bytes:
+    for item in data:
+        ...
+
+def good_cb(*vals: bytes, maxlen: int | None = None) -> list[bytes]:
+    ...
+def bad_cb(*vals: bytes, maxitems: int | None) -> list[bytes]:
+    ...
+
+batch_proc([], good_cb)  # OK
+batch_proc([], bad_cb)   # Error! Argument 2 has incompatible type deferent name
+#+end_src
+* Generics
+** Generic functions
