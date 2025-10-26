@@ -6,6 +6,10 @@
 * Alias
 #+begin_src python
 type Vector = list[float]
+type MyTuple = tuple[int, ...] # Variable-length tuple of integers
+
+# built-in types
+type tuple = Tuple[Any, ...]
 #+end_src
 
 * NewType
@@ -55,5 +59,83 @@ def bad_cb(*vals: bytes, maxitems: int | None) -> list[bytes]:
 batch_proc([], good_cb)  # OK
 batch_proc([], bad_cb)   # Error! Argument 2 has incompatible type deferent name
 #+end_src
+
+* Generators and Coroutines¶
+** Generators
+- ~Generator[YieldType, SendType, ReturnType]~
+  - ~SendType, ReturnType~ default to ~types.NontType~
+  - ~Generator[int]~ = ~Generator[int, None, None]~
+- Simple generators that only ever yield values can also be annotated as
+  - ~Iterable[YieldType]~
+  - ~Iterator[YieldType]~
+#+begin_src python
+from collections.abc import Generator
+
+def echo_round() -> Generator[int, float, str]:
+    sent: float = yield 0
+    while sent >= 0:
+        sent = yield round(sent)
+    return 'Done'
+#+end_src
+- ~AsyncGenerator[YieldType, SendType]~
+  - Don’t expect a ~ReturnType~ type argument
+  - ~AsyncIterable[YieldType]~
+  - ~AsyncIterator[YieldType]~
+
+** Coroutines
+- ~Coroutine[YieldType, SendType, ReturnType]~
+#+begin_src python
+from collections.abc import Coroutine
+c: Coroutine[list[str], str, int]  # Some coroutine defined elsewhere
+x = c.send('hi')                   # Inferred type of 'x' is list[str]
+async def bar() -> None:
+    y = await c                    # Inferred type of 'y' is int
+#+end_src
+
 * Generics
-** Generic functions
+#+begin_src python
+from collections.abc import Sequence
+from typing import TypeVar
+
+def max[T](args: list[T]) -> T:
+    ...
+
+class Queue[T]:
+    def push(self, item: T) -> None:
+        ...
+
+    def pop(self) -> T:
+        ...
+
+# TypeVar Way
+U = TypeVar('U') # Declare type variable "U"
+def first_element(args: Sequence[U]) -> U:
+    ...
+#+end_src
+
+** Bounded Type
+#+begin_src python
+# for Python 3.13+
+class Sequence[T]:
+    ...
+
+class StrSequence[T: str]:
+    ...
+
+class StrOrBytesSequence[T: str | bytes]:
+    ...
+
+# legacy way for Python 3.9+
+from typing import Generic, TypeVar
+T = TypeVar('T')
+S = TypeVar('S', bound=str)
+A = TypeVar('A', str, bytes)
+#+end_src
+
+** Variable-Length Generic Class
+#+begin_src python
+class MyTuple[*Ts]:
+    def __init__(self, *args: *Ts) -> None:
+        self.values: tuple[*Ts, ...] = args
+#+end_src
+
