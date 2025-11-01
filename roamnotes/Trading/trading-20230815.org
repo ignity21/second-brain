@@ -19,3 +19,6 @@
 * Trading Tips
 - Long above the support, short below the resistance.
 - Objective: predict what are *other people* going to do.
+
+* Other Markets
+- [[id:62003c7e-6bf5-4b57-b0d3-79e70c5f1053][Perpetual Contract]]
