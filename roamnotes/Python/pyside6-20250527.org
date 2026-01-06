@@ -2,3 +2,19 @@
 :ID:       fd46841b-5f7c-410f-b7bb-bf2c5a28456b
 :END:
 #+title: PySide6
+
+* Device Interface
+QScreen
+- ~logicalDotsPerInch()~: 逻辑 DPI（考虑系统缩放）
+- ~physicalDotsPerInch()~: 物理 DPI
+- ~devicePixelRatio()~: 设备像素比
+- ~geometry()~
+- ~size()~
+- ~availableGeometry()~
+QApplication
+- ~primaryScreen()~: 主屏幕
+- ~screens()~: 所有屏幕列表
+- ~screenAt(point)~: 指定点所在屏幕
+QWidget
+- ~screen()~: 获取窗口所在屏幕
+- ~devicePixelRatioF()~: 设备像素比

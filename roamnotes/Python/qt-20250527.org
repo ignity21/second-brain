@@ -4,7 +4,6 @@
 #+title: Qt
 
 * Overview
-
 * 组件
 ** 窗体组件
 - Main Window: 具备主窗体的特性，如菜单栏、工具栏、状态栏等

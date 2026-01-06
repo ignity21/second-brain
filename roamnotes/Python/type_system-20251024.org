@@ -78,7 +78,7 @@ def echo_round() -> Generator[int, float, str]:
     return 'Done'
 #+end_src
 - ~AsyncGenerator[YieldType, SendType]~
-  - Don’t expect a ~ReturnType~ type argument
+  - Don't expect a ~ReturnType~ type argument
   - ~AsyncIterable[YieldType]~
   - ~AsyncIterator[YieldType]~
 
