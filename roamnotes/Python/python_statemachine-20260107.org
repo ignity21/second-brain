@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       56c54cf4-674f-4940-ae1e-bf0f0981cd3b
+:END:
+#+title: python-statemachine
+
+- [[https://python-statemachine.readthedocs.io/en/latest/actions.html#ordering][Action Ordering]]

@@ -17,3 +17,6 @@
 
 * Web
 - [[id:70f106c0-7601-4c43-9d97-4f0f28b5c47a][websockets]]
+
+* State Machine
+- [[id:56c54cf4-674f-4940-ae1e-bf0f0981cd3b][python-statemachine]]

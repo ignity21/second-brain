@@ -2,58 +2,11 @@
 :ID:       05ef9aaa-7fa2-45b4-9ed9-d8d01c8abff2
 :END:
 #+title: Pandas
-#+filetags: :Python:DataScience:
+#+filetags: :Pandas:Python:DataScience:
 
 - links :: [[id:99384a8d-1cd7-45e6-9913-01a96e895630][Numpy]]
 
-* DataFrame
-** Exploring a DataFrame
-- ~df.shape~
-- ~df.info()~: show Non-Null Count
-- ~df.describe()~: summary statistics
-- ~df.columns~, ~df.index~
-- ~df.values~: internal numpy array
-
-** Creating a DataFrame
-- From a list of dictionaries(row by row): ~pd.DataFrame(list_of_dicts)~
-- From a dictionary of lists(by column): ~pd.DataFrame(dict_of_lists)~
-
-* Filtering
-#+begin_src python
-df["col_a"] # Series
-df[["col_a']] # DataFrame
-df[['col_a', 'col_b']]
-df[df['col_a'] > 0]
-df[(df['col_a'] > 0) & (df['col_b'] > 0) $ (df['col_c'] < 0)]
-
-is_black_or_blue = df['color'].isin(['black', 'blue'])
-df[is_black_or_blue]
-
-df.loc['row_a']
-df.iloc[0]
-
-df.loc['row_a', 'col_a']
-df.iloc[0, 0]
-
-df.loc['row_a', ['col_a', 'col_b']]
-#+end_src
-** Slicing
-#+begin_src python
-# Slicing
-df.loc['row_b':'row_g']
-df.loc[:, 'col_b':'col_d']
-df.loc[('outer_lvl_1', 'inner_lvl_2'):('outer_lvl_3', 'inner_lvl_8')];
-
-# Timeseries Slicing
-df.loc['2014':'2016'] # 2014-01-01 to 2016-12-31
-df.loc['2014-04':'2016-08'] # 2014-04-01 to 2016-08-31
-df.loc['2014-05-01':'2016-07-15'] # 2014-05-01 to 2016-07-15
-#+end_src
-
-** ~query()~
-#+begin_src python
-df.query("col_a > 0 and col_b < 0")
-#+end_src
+* [[id:6aed921f-bc66-49aa-b021-a2b9435f1a15][Pandas Basics]]
 
 * Sorting
 #+begin_src python

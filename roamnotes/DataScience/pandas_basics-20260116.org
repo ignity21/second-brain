@@ -1,0 +1,59 @@
+:PROPERTIES:
+:ID:       6aed921f-bc66-49aa-b021-a2b9435f1a15
+:END:
+#+title: Pandas Basics
+#+filetags: :Python:DataScience:Pandas:
+
+
+* DataFrame
+** Exploring a DataFrame
+- ~df.shape~
+- ~df.info()~: show Non-Null Count
+- ~df.describe()~: summary statistics
+- ~df.columns~, ~df.index~
+- ~df.values~: internal numpy array
+
+** Creating a DataFrame
+- From a list of dictionaries(row by row): ~pd.DataFrame(list_of_dicts)~
+- From a dictionary of lists(by column): ~pd.DataFrame(dict_of_lists)~
+
+* Selecting
+** By Columns
+#+begin_src python
+df["col_a"]  # Series
+df[["col_a"]]  # DataFrame
+df[["col_a", "col_b"]]
+#+end_src
+
+** By Rows
+#+begin_src python
+df.loc["row_a"]
+df.iloc[0]
+
+df.loc["row_a", "col_a"]
+df.iloc[0, 0]
+#+end_src
+
+** By Rows and Columns
+#+begin_src python
+df.loc["row_a", ["col_a", "col_b"]]
+df.iloc[0, [0, 1]]
+df.loc[["row_a", "row_b"], ["col_a", "col_b"]]
+df.iloc[[0, 1], [0, 1]]
+#+end_src
+
+* Slicing
+- By Rows: ~df.loc["row_a":"row_d"]~
+  - MultiIndex: ~df.loc[("outer1", "inner2"):("outer2", "inner5")]~
+- Time Series: ~df.loc["2020-01-01":"2020-03-31"]~
+- By Columns: ~df.loc[:, "col_a":"col_d"]~
+
+* Filtering
+** by Columns
+#+begin_src python
+df[df["col_a"] > 0]
+df[(df["col_a"] > 0) & (df["col_b"] > 0) $ (df["col_c"] < 0)]
+
+is_black_or_blue = df["color"].isin(["black", "blue"])
+df[is_black_or_blue]
+#+end_src
