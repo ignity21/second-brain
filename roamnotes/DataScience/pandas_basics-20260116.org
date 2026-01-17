@@ -42,6 +42,12 @@ df.loc[["row_a", "row_b"], ["col_a", "col_b"]]
 df.iloc[[0, 1], [0, 1]]
 #+end_src
 
+** SQL-like Query
+- ~query('SELECTION STATEMENT')~: input string similar to statement after WHERE in SQL
+#+begin_src python
+stocks.query('financial == "gross_profit" and value > 100')
+#+end_src
+
 * Slicing
 - By Rows: ~df.loc["row_a":"row_d"]~
   - MultiIndex: ~df.loc[("outer1", "inner2"):("outer2", "inner5")]~
@@ -56,4 +62,58 @@ df[(df["col_a"] > 0) & (df["col_b"] > 0) $ (df["col_c"] < 0)]
 
 is_black_or_blue = df["color"].isin(["black", "blue"])
 df[is_black_or_blue]
+#+end_src
+
+* Indexing
+#+begin_src python
+df_ind = df.set_index('col_a')
+df_dropped = df_ind.reset_index() # there is a drop option
+df_ind = df.set_index(['col_a', 'col_b'])
+df.loc[[('val_a1', 'val_b1'), ('val_a3', 'val_b4')]]
+#+end_src
+
+* Sorting
+#+begin_src python
+df.sort_values("col_a", ascdending=False)
+df.sort_values(["col_a", "col_b"], ascending=[True, False])
+
+df.sort_index() # default outer level then inner level
+df.sort_index(level="idx_b")
+df.sort_index(level=["idx_a", "idx_b"], ascending=[True, False])
+#+end_src
+
+* Counting
+#+begin_src python
+df["col_a"].value_counts()
+df["col_a"].value_counts(normalize=True, sort=True) # % of total
+#+end_src
+
+* Plotting
+#+begin_src python
+# histogram of 'col_a' with 20 bins
+df['col_a'].hist(bins=20)
+
+# bar plot of df_by_idx with title '42'
+df_by_idx.plot(kind='bar', title='42')
+
+# line plot of df_timeseries
+# rot=45 rotate x-axis labels by 45 degrees
+df_timeseries.plot(x='date', y=['col_a', 'col_b'], kind='line', rot=45)
+
+# scatter plot of 'col_a' vs 'col_b'
+df.plot(kind='scatter', x='col_a', y='col_b')
+
+plt.show() # to display the plot
+
+# categorical plot using seaborn, x is the category, y is the probability
+# output a bar plot
+sns.catplot(x="number", y="prob", data=die, kind="bar")
+#+end_src
+
+** Layering Plots
+#+begin_src python
+dogs[dogs['sex']=='F']['height'].hist(alpha=0.5)
+dogs[dogs['sex']=='M']['height'].hist(alpha=0.5)
+plt.legend(['F','M'])
+plt.show()
 #+end_src

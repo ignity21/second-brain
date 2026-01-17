@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       881a87d5-754b-4791-b398-3345c88fdcb2
+:END:
+#+title: IQR
+
+
+- IQR is an *absolute measure* of dispersion
+
+* Quartile Coefficient of Dispersion
+- A version of the IQR that is normalized.
+  - Formula: \[QCD = \frac{Q_3 - Q_1}{Q_3 + Q_1}\]
+- Benefit: You can now compare the spread of "elephant weights" and "ant weights" fairly, as the units cancel out.
+- In many normalization formulas, you divide by the average to see how large the variation is compared to the size of the numbers.
+  - \[Q_3 - Q_1\] term acts as a *measure of spread*. \[\frac{Q_3 - Q_1}{2}\] is the semi-interquartile range.
+  - \[Q_3 + Q_1\] acts as a "Relative" Average \[\frac{Q_3 + Q_1}{2}\]
+  - So the QCD is a ratio of *Semi-IQR* to *Mean of Quartiles(Midhinge)*.
