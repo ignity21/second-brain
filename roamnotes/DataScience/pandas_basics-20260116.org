@@ -58,10 +58,21 @@ stocks.query('financial == "gross_profit" and value > 100')
 ** by Columns
 #+begin_src python
 df[df["col_a"] > 0]
-df[(df["col_a"] > 0) & (df["col_b"] > 0) $ (df["col_c"] < 0)]
+
+mask1 = (df["col_a"] > 0) & (df["col_b"] > 0))
+mask2 =  df["col_c"] <= 0
+df[mask1 & mask2]
 
 is_black_or_blue = df["color"].isin(["black", "blue"])
 df[is_black_or_blue]
+#+end_src
+
+** Filtering & Selecting
+#+begin_src python
+is_90s = (netflix_df["release_year"] >= 1990) & (netflix_df["release_year"] < 2000)
+is_short = netflix_df["duration"] < 90
+is_action = netflix_df["genre"] == "Action"
+q2_df = netflix_df.loc[is_90s & is_short & is_action, "duration"]
 #+end_src
 
 * Indexing
