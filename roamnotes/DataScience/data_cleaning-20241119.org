@@ -17,7 +17,7 @@
 :END:
 ** [[id:a3a33881-04b9-47b7-a760-e5652b596887][Handling Outliers]]
 ** [[id:b5cf039a-4e4d-41a4-8387-839c14291293][Range Constraints]]
-
+** ~df.round()~
 * Non-numerical Data
 :PROPERTIES:
 :ID:       ca3678b9-e2b7-4fcc-aa18-bd4041484a69
