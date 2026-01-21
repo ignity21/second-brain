@@ -3,8 +3,14 @@
 :END:
 #+title: Poisson Process
 #+filetags: :Statistics:Probability:Math:
+
 * Poisson process
 Events appear to happen at a certain rate, but *completely at random*
 - Number of animals adopted from an animal shelter *per week*
+  - Event: one animal is adopted
 - Number of people arriving at a restaurant *per hour*
 - Number of earthquakes in US *per year*
+
+* \(\lambda\)
+- Average rate of events per time period
+- Example: if on average 3 animals are adopted per week, then \(\lambda = 3\) adoptions/week

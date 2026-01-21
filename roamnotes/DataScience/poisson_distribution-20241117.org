@@ -4,11 +4,11 @@
 #+title: Poisson Distribution
 #+filetags: :Probability:Math:Statistics:
 * [[id:85ef2d1a-c912-46c7-a4b1-3af274c4fd4c][Poisson Process]]
+- \(\lambda\) = average number of events per time interval
 * Definition
 - Poisson distribution: Probability of some # of events occurring over a fixed period of time.
-  - Probability of > 5 animals adopted from an animal shelter per week
-  - Probability of 12 people arriving at a restaurant per hour
-- \(\lambda\) = average number of events per time interval
+  - Probability of 12 people arriving at a restaurant per hour (PMF)
+  - Probability of > 5 animals adopted from an animal shelter per week (1 - CDF)
 
 * Python Examples
 ** Generating Data
