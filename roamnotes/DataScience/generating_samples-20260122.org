@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       32b3ad6c-b0e1-4f27-a1bf-f7e08b509f2d
+:END:
+#+title: Generating Samples
+
+| Distribution | Function                    |
+|--------------+-----------------------------|
+| Normal       | norm.rvs(mean, std, size=n) |
+| Binomial     | binom.rvs(n, p_success)     |

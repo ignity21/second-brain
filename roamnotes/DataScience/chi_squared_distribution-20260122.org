@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       ac892808-1336-492f-9992-63cb00ea646a
+:END:
+#+title: Chi-squared Distribution
+#+filetags: :Statistics:
+
+* Overview
+- Alias: \(X^2\)
+- Continuous probability distribution
+- We use it to measure *discrepancy*
+  - discrepancy: how much our observed data deviates from what we expected
+- The \(X^2\) distribution is directly derived from the *Standard Normal Distribution* =Z~N(0,1)=.
+
+* When is it used?
+- Goodness of Fit :: Does your data follow a specific distribution? Calculating the *Chi-square statistic*
+- Test of Independence :: Are two categorical variables related? For example, "Does gender affect voting preference?"
+- Inferences about Variance :: If you want to test if a population's variance $\sigma^2$ is equal to a specific value, the sample variance $s^2$ (when scaled) follows a $\chi^2$ distribution.
