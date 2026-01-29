@@ -40,3 +40,10 @@ async def test_async_iterator(mocker):
   - In ~app.py~
   - ~import utils; utils.get~: mock ~mocker.patch('utils.get')~
   - ~from utils import get~: mock ~mocker.patch('app.get')~
+
+* Asyncio
+** ~@pytest.mark.asyncio~
+1. *Bootstraps the loop*: It creates an asyncio event loop.
+2. *Schedules it on that loop*
+3. *Awaits completion*
+4. *Handles Setup/Teardown*
