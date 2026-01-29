@@ -1,0 +1,42 @@
+:PROPERTIES:
+:ID:       033e4cf9-68b6-4d8c-98c4-eac2c3a7c507
+:END:
+#+title: Testing
+
+* Mocking
+** Mock ~async with~
+- mock ~async with session.get(...)~
+#+begin_src python
+async def test_async_context(mocker):
+    mock_client = mocker.MagicMock()
+    # mock context manager
+    mock_ctx = mocker.AsyncMock()
+    mock_ctx.__aenter__.return_value.json.return_value = {"key": "value"}
+
+    mock_client.get.return_value = mock_ctx
+
+    # testing
+    async with mock_client.get("url") as response:
+        data = await response.json()
+
+    assert data["key"] == "value"
+#+end_src
+
+** Mock ~async for~
+- mock ~async for item in cursor:~
+#+begin_src python
+async def test_async_iterator(mocker):
+    mock_cursor = mocker.AsyncMock()
+    mock_cursor.__aiter__.return_value = ["row1", "row2", "row3"]
+
+    results = [item async for item in mock_cursor]
+    assert results == ["row1", "row2", "row3"]
+#+end_src
+** Tricks
+- use ~mocker.patch('module.Class.method')~
+  - It is easier to mock methods this way rather than creating a full mock object.
+  - e.g. ~mocker.patch('aiohttp.ClientSession.get')~
+- Be careful with ~from ... import ...~
+  - In ~app.py~
+  - ~import utils; utils.get~: mock ~mocker.patch('utils.get')~
+  - ~from utils import get~: mock ~mocker.patch('app.get')~
