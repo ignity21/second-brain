@@ -1,0 +1,30 @@
+:PROPERTIES:
+:ID:       53273cbd-8b59-468b-a173-d8da1b863133
+:END:
+#+title: Keycloak
+
+* Concepts
+| Concept          | Analogy                     | Purpose                                 |
+|------------------+-----------------------------+-----------------------------------------|
+| Realm            | Isolated tenant / namespace | Separates the entire user space         |
+| Group / Subgroup | Department / Team           | Manages users in bulk by membership     |
+| Role Mapping     | Permission label            | Determines what a user is allowed to do |
+
+* Client Role
+- Clients -> some client -> Roles -> Create role
+
+* Shared Client Scope 
+- Creating: Client Scopes -> Create -> ✔️ Include in token scope (?)
+- Binding: Clients -> some client -> Add client scope
+
+* Attributes
+** Client Scope Level (Const)
+- Mappers -> Add by configuration -> Hardcoded -> ✔️ Add to ID token (?)
+
+** User Group Level (Recommended)
+- Groups -> some group -> Attributes
+- Client Scope add "Group Membership" or "User Attribute" mapper (??)
+- Client Scope define "User Attribute" using the same name (?)
+
+** Client Role Level
+- Clients -> some client -> Roles -> some role -> Attributes
