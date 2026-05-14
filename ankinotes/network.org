@@ -1,0 +1,78 @@
+#+title: Network
+
+* Deck
+:PROPERTIES:
+:ANKI_DECK: CS::Network
+:END:
+
+** ARP
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1778729504142
+:ANKI_NOTE_HASH: 8cff6921c1c26ab240d65b3f9b49505b
+:END:
+
+*** Front
+1. 发送方...
+2. 交换机...
+3. 交换机...
+4. 接收方...
+5. 交换机...
+6. 交换机...
+
+*** Back
+1. 发送方发送已知信息：
+   - 发送方 IP 地址
+   - 发送方 MAC 地址
+   - 目标 IP 地址
+   - 目标 MAC 地址填广播地址 ~FF:FF:FF:FF:FF:FF~
+
+2. 交换机关联(缓存)发送方 MAC 地址和物理端口
+3. 交换机向网络广播
+4. 接收方验证目标 IP 地址是否匹配，不匹配直接丢弃。匹配发送响应包。
+5. 交换机根据响应包关联响应方 MAC 地址和物理端口
+6. 交换机将响应包发回发送方
+
+** VLAN
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1778730929296
+:ANKI_NOTE_HASH: 1ce1633828a73b4a4f3ac43ce370ca63
+:END:
+
+*** Front
+VLAN 用途 
+
+*** Back
+通俗理解：在同一套交换机和网线基础设施上，虚拟出多台彼此隔离的交换机。
+- 网络隔离、划分安全边界
+- VLAN 之间通信必须通过路由
+- 独立广播域
+
+大网络不划分 VLAN 的问题：
+- 广播风暴，整个网络都会收到奇怪协议 mDNS、NetBIOS、Windows 广播、某些发现协议等等
+- 不同部门之间可以直接访问, 容易实现 ARP 欺骗、中间人攻击、广播嗅探
+
+* 3 层交换机
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_DECK: CS::Network
+:ANKI_NOTE_ID: 1778731536244
+:ANKI_NOTE_HASH: 78c9d9727650e1534c8162c971ebb05e
+:END:
+
+** Front
+为什么会出现 3 层交换机？
+
+** Back
+- 一般是大网络环境需要路由器的场景
+- 路由器痛点：
+  - 不会设置太多物理端口
+  - 路由器处理事情过多，速度慢
+
+3 层交换机包含 2 层交换机所有功能，加上部分路由器功能，如 NAT, QoS 等等，但是没有 WAN 口
+| 功能        | 2层交换机 | 3层交换机 | 路由器 |
+|------------+----------+----------+-------|
+| 处理协议    | MAC      | MAC / IP | IP    |
+| VLAN间通信  | ❌        | ✔️        | ✔️     |
+| 有无 WAN 口 | ❌        | ❌        | ✔️     |
