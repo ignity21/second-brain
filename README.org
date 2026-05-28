@@ -1,26 +1,25 @@
-* 问题
-
-** 优势
+* 优势
 - 熟悉 org-mode
 - 数学公式记录方便
 
-** 如何组织？
-- 读书笔记是否使用 org-noter 记录？
-  - 能否在 org-roam 中方便引用
-- 多大程度能兼容 logseq ，以便能在移动端浏览笔记
-- 如何运用 filetag 来组织同一大类笔记？方便在 org-roam-ui 中浏览
+* 如何组织？
+- 多大程度能兼容 logseq ，以便能在移动端浏览笔记（待测试）
+  - logseq graph 显示问题
+  - logseq journals 用不用，能与 dailies 合并吗
+- 已测组织方式
+  - 单目录，全部 Note 在其中，只依赖 tag 记录。（大知识库不适用）
+  - 一个大类一个目录，跨类链接不方便
+- 新组织方式
+  - 整体单个数据库，笔记目录需要干净，现在有 assets, pages, logseq 文件夹
+    - 一个方式是选目录的函数中，自动忽略这些目录
+  - 大类，作为子目录，记录时自定义函数，选择要记的大类
+  - UI 可根据子目录出图，也能一个大类一个图
+  - tags 也可以用
+- 需要支持项目 export 静态网页到 github.io ？
+- 集成 Aider？或者 copilot？AI 辅助修改
+- 近期记录的笔记 ~org-roam-node-find~
 - 笔记 Node 以文件为单位，文头 ~- tags:~ 记录与其它笔记间的联系?
-- Node 的粒度
 - 找到最佳实践
-
-** org-roam-ui
-- 子节点会出现在 Linked references 中
-
-
-* Useful Tips
-- (debug-on-variable-change 'some-variable)
-
+  
 * TODO List
-- Add github.io for exported htmls
 - Streamlined anki note-taking process
-- Migrate images of ML notes
