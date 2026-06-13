@@ -23,3 +23,49 @@
   
 * TODO List
 - Streamlined anki note-taking process
+
+
+* Org-Roam 笔记系统
+
+** 优势
+- 熟悉 org-mode 生态
+- 数学公式记录方便（LaTeX 原生支持）
+
+** 目录结构方案
+
+*** 已测试方案
+- *单目录 + 全靠 tag* ：所有 Note 平铺，依赖 tag 分类
+  - 缺点：大知识库下难以管理
+- *大类一个目录* ：跨类链接不方便
+
+*** 当前方向（大类子目录）
+- 整体单个数据库，按大类建子目录
+- 记录时用自定义函数选择目标大类
+- UI 可按子目录或全库出图
+- Tag 作为补充分类手段
+- Node 以文件为单位，文头 =- tags:= 记录关联关系
+
+** Logseq 兼容（移动端浏览）
+#+begin_quote
+待测试
+#+end_quote
+
+- [ ] Graph 显示问题排查
+- [ ] Journals / dailies 是否可合并使用
+- 兼容方案：在 =org-roam-node-find= 的目录选择函数中自动忽略
+  Logseq 专用目录（=assets/=, =pages/=, =logseq/=）
+
+** AI 集成
+- [ ] 接入 gptel ?
+
+** 发布
+- [ ] 是否需要支持 export 静态网页到 GitHub Pages？
+
+** 常用操作
+- 查找近期笔记：~org-roam-node-find~
+
+** 待确认的最佳实践
+- [ ] 确定最终目录结构
+- [ ] Logseq 兼容性测试结论
+- [ ] AI 工具选型
+- [ ] 发布需求确认
