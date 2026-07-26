@@ -1,0 +1,26 @@
+#+title: Second Brain Tips
+
+* Org-roam 与 Logseq 协作
+
+** 结论
+- 使用传统 Logseq file graph 打开 Org-roam 库；不要使用 Logseq DB graph，后者不支持 Org 文件。
+- Logseq 可以正确解析 Org 文件头的 =:ID:=，并支持 =[[id:UUID][标题]]= 链接的跳转和反向引用。
+- Logseq Graph view 不会为 Org =id:= 链接建立页面间的边。这些笔记会显示为 orphan pages；这是图谱展示限制，不影响链接本身。
+- 保持 Org-roam 的 =id:= 链接作为唯一事实来源。不要为 Graph view 改为标题链接或 =file:= 链接，以避免重命名、同名笔记和跨工具兼容性问题。
+
+** 推荐工作流
+- Emacs + org-roam 是主编辑器和全局关系图工具（使用 org-roam-ui）。
+- Logseq 用作阅读器：用 All pages、标题搜索、Favorites、backlinks 和标签浏览。
+- 为常用领域创建 MOC（Map of Content）/ =Contents= 索引页，在其中以 Org ID 链接手工组织导航树。Logseq 能正常打开这些链接，也可将索引页放在侧栏。
+- 目录用于文件系统中的归档；MOC 用于 Logseq 内导航；tag/filetags 用于横向主题入口。
+
+** Logseq 全局配置
+#+begin_src clojure
+{:preferred-format :org
+ :journals-directory "dailies"
+ :org-mode/insert-file-link? false}
+#+end_src
+
+- =:preferred-format :org=：新建页面优先使用 Org。
+- =:journals-directory "dailies"=：日记放到库根目录的 =dailies/=。
+- =:org-mode/insert-file-link? false=：不将页面链接自动改为 =file:= 链接，保留 Org ID 链接工作流。

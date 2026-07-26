@@ -1,8 +1,9 @@
+# logseq
+**/logseq/bak/
+**/logseq/.recycle/
 
 # org-mode
 ltximg/
-logseq/bak
-logseq/.recycle/
 .cache/
 org-roam.db
 
