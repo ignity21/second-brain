@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       python-packaging-20260728
+:END:
+#+title: 包管理
+
+* 包管理 (Package Management)
+[[id:5e637aa5-ddd8-4493-9b9f-becf82417b60][Package Management]]
+** uv
+** pipx
+** poetry
+** pyproject.toml

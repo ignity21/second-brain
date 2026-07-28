@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       python-frameworks-20260728
+:END:
+#+title: 框架
+
+* Qt (PyQt5 / PySide6)
+
+* python-statemachine
+
+* websockets

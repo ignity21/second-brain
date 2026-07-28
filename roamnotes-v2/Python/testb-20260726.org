@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       c514506b-a9c7-4079-b4a0-a113713259a5
-:END:
-#+title: testB
-
-- [[id:75be4d86-f751-4367-914c-bd8fefc3050b][TestA]]

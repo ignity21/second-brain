@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       python-dev-practices-20260728
+:END:
+#+title: 开发实践
+
+* 编码规范 (Coding)
+
+* 风格指南 (Style Guide)
+
+* 实用建议 (Practical Advice)
+
+* 测试 (Testing)
+
+* 日志 (Logging)

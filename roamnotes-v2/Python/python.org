@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       python-index-v2-20260728
+:END:
+#+title: Python
+
+* [[file:language_features.org][语言特性]]
+* [[file:dev_practices.org][开发实践]]
+* [[file:packaging.org][包管理]]
+* [[file:stdlib.org][标准库与第三方库]]
+* [[file:frameworks.org][框架]]

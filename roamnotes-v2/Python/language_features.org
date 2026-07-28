@@ -1,0 +1,28 @@
+:PROPERTIES:
+:ID:       python-lang-features-20260728
+:END:
+#+title: 语言特性
+
+* 装饰器 (Decorator)
+[[id:40d506d8-6dab-477f-8beb-9a4029ce2b2b][Decorator]]
+
+* 异步编程 (asyncio)
+[[id:48cbf16f-048a-4bd3-9561-4c4566f6b204][asyncio]]
+
+* 异常 (Exceptions)
+[[id:d9f8970a-d0a6-4fd4-984f-ca5fb413b4ac][Exceptions]]
+
+* 类型系统 (Type System)
+
+* 面向对象 (OO)
+** 元类 (Metaclass)
+** 抽象类 / Interface (Abstract Class)
+** Mixin
+** MRO (方法解析顺序)
+** __init_subclass__
+
+* 迭代器与生成器 (Iterator & Generator)
+
+* 上下文管理器 (Context Manager)
+
+* 数据类 (dataclasses)

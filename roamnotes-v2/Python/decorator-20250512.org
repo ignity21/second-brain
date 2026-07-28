@@ -1,0 +1,351 @@
+:PROPERTIES:
+:ID:       40d506d8-6dab-477f-8beb-9a4029ce2b2b
+:TOC_2:
+:END:
+#+title: Decorator
+
+* 目录 :TOC_1:
+- [[#用途][用途]]
+- [[#函数装饰器][函数装饰器]]
+- [[#装饰器有参数][装饰器有参数]]
+- [[#类实现装饰器][类实现装饰器]]
+- [[#class-decorator][Class Decorator]]
+- [[#类装饰器和函数装饰器的区别][类装饰器和函数装饰器的区别]]
+- [[#用-wrapt-装饰类成员函数][用 wrapt 装饰类成员函数]]
+
+* 用途
+- 运行时校验，如 ~login_required~
+- 改参数、返回值
+  - 注入额外参数，如 ~@unittest.mock.patch~
+  - 替换为复杂对象，如 ~@property~, ~@staticmethod~
+- 缓存，如 ~@functools.lru_cache~
+- 注册函数，如 ~@app.route~
+
+* 函数装饰器
+** 装饰器无参数
+#+begin_src python :results output
+import time
+from functools import wraps
+
+def timer(func):
+    @wraps(func)
+    def decorated(*args, **kwargs):
+        st = time.perf_counter()
+        ret = func(*args, **kwargs)
+        print(f"time cost: {time.perf_counter() - st:.0f}s")
+        return ret
+    return decorated
+
+@timer
+def sleep_a_while(sec):
+    time.sleep(sec)
+
+# call the function
+sleep_a_while(3)
+#+end_src
+
+#+RESULTS:
+: time cost: 3s
+
+* 装饰器有参数
+#+begin_src python :results output
+import time
+from functools import wraps
+
+def timer(print_args=False):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            start_time = time.time()
+            result = func(*args, **kwargs)
+            end_time = time.time()
+            elapsed_time = end_time - start_time
+            if print_args:
+                print(f'"{func.__name__}", args: {args}, kwargs: {kwargs}')
+            print(f"time cost: {elapsed_time:.0f}s")
+            return result
+        return wrapper
+    return decorator
+
+# with default `@timer()`
+@timer(print_args=True)
+def sleep_a_while(sec):
+    time.sleep(sec)
+
+sleep_a_while(3)
+# _decorator = timer(print_args=True)
+# sleep_a_while = _decorator(sleep_a_while)
+#+end_src
+
+#+RESULTS:
+: "sleep_a_while", args: (3,), kwargs: {}
+: time cost: 3s
+
+- ~@timer()~ 问题：
+  - 不能直接使用 ~@timer~
+  - 需要使用 ~@timer(print_args=True)~ ，或者使用 ~@timer()~
+
+** 解决有参数括号问题
+用于实现代码库中的装饰器，这个模式解决了“装饰器本身需要接收参数时，如何保持调用语法一致”的问题。如果没有这种技巧，带参数的装饰器通常需要写成 ~@timer()~ 或 ~@timer(print_args=True)~ ，但无法兼容无括号的 ~@timer~ 。
+#+begin_src python :results output
+import time
+from functools import wraps
+
+def timer(func=None, *, print_args=False):
+    def decorator(_func):
+        @wraps(_func)
+        def wrapper(*args, **kwargs):
+            start_time = time.time()
+            result = _func(*args, **kwargs)
+            end_time = time.time()
+            elapsed_time = end_time - start_time
+            if print_args:
+                print(f'"{func.__name__}", args: {args}, kwargs: {kwargs}')
+            print(f"time cost: {elapsed_time:.0f}s")
+            return result
+        return wrapper
+    if func is None:
+        return decorator
+    else:
+        return decorator(func)
+
+@timer
+def sleep_a_while(sec):
+    time.sleep(sec)
+
+sleep_a_while(3)
+#+end_src
+
+#+RESULTS:
+: time cost: 3s
+- ~@timer~ ：直接装饰，等价于 ~timer(sleep_a_while)~ ，此时 ~print_args=False~ 。  
+- ~@timer(print_args=True)~ ：可带参数，此时 ~timer~ 先返回 ~decorator~ 再装饰函数，实现了“可选参数装饰器”的经典模式。
+
+* 类实现装饰器
+** 函数替换
+#+begin_src python :results output
+import time
+from functools import wraps
+
+class Timer:
+    def __init__(self, print_args=False):
+        self._print_args = print_args
+
+    def __call__(self, func):
+        @wraps(func)
+        def decorated(*args, **kwargs):
+            st = time.perf_counter()
+            result = func(*args, **kwargs)
+            et = time.perf_counter()
+            elapsed_time = et - st
+            if self._print_args:
+                print(f'"{func.__name__}", args: {args}, kwargs: {kwargs}')
+            print(f"time cost: {elapsed_time}s")
+            return result
+        return decorated
+
+@Timer(print_args=True)
+def sleep_a_while(sec):
+    time.sleep(sec)
+
+sleep_a_while(3)
+#+end_src
+
+#+RESULTS:
+: "sleep_a_while", args: (3,), kwargs: {}
+: time cost: 3.000095790999694s
+
+** 实例替换
+- 好处：
+  - 可管理装饰器的内部状态
+  - 可追加额外的方法和属性
+
+*** 无参数
+#+begin_src python :results output
+import time
+from functools import wraps
+
+from functools import update_wrapper
+class Timer:
+    def __init__(self, func):
+        update_wrapper(self, func) # Preserve metadata of the original function(like wraps)
+        self._func = func
+        self._time_taken = 0
+
+    def __call__(self, *args, **kwargs):
+        start_time = time.time()
+        result = self._func(*args, **kwargs)
+        end_time = time.time()
+        self._time_taken = end_time - start_time
+        return result
+
+    def get_time_taken(self):
+        return self._time_taken
+
+@Timer
+def sleep_a_while(sec):
+    time.sleep(sec)
+# sleep_a_while = Timer(sleep_a_while)
+
+sleep_a_while(3)
+
+print(f"time cost: {sleep_a_while.get_time_taken()}s")
+#+end_src
+
+#+RESULTS:
+: time cost: 3.000122547149658s
+
+*** 有参数
+#+begin_src python :results output
+import time
+from functools import update_wrapper, partial
+
+class Timer:
+    def __init__(self, func, *, print_args=False):
+        update_wrapper(self, func)
+        self._func = func
+        self._print_args = print_args
+        self._time_taken = 0
+
+    def __call__(self, *args, **kwargs):
+        start_time = time.time()
+        result = self._func(*args, **kwargs)
+        end_time = time.time()
+        self._time_taken = end_time - start_time
+        if self._print_args:
+            print(f'"{self._func.__name__}", args: {args}, kwargs: {kwargs}')
+        print(f"time cost: {self._time_taken}s")
+        return result
+
+    def get_time_taken(self):
+        return self._time_taken
+
+def timer(**kwargs):
+    return partial(Timer, **kwargs)
+
+@timer(print_args=True)
+def sleep_a_while(sec):
+    time.sleep(sec)
+
+sleep_a_while(1)
+print(f"get_time_taken: {sleep_a_while.get_time_taken()}")
+#+end_src
+
+#+RESULTS:
+: "sleep_a_while", args: (1,), kwargs: {}
+: time cost: 1.0001554489135742s
+: get_time_taken: 1.0001554489135742
+* Class Decorator
+:PROPERTIES:
+:ID:       02d375d4-d851-40b2-bb71-831ea66659e4
+:END:
+- 可替换较简单的 ~metaclass~
+#+begin_src python :results output
+_validators = {}
+def register(cls):
+    global _validators
+    _validators[cls.name] = cls
+    return cls
+
+def get_validator(name):
+    return _validators.get(name)
+
+@register
+class StringValidator:
+    name = "string"
+
+@register
+class IntegerValidator:
+    name = "int"
+
+print(get_validator("string"))
+#+end_src
+
+#+RESULTS:
+: <class '__main__.StringValidator'>
+
+* 类装饰器和函数装饰器的区别
+*函数装饰器* 和 *类装饰器* 的核心区别在于实现方式、状态管理和适用场景：
+
+** 1. 实现方式
+- *函数装饰器* ：用嵌套函数实现。外层函数接收被装饰对象（函数/类），内层函数（=wrapper=）添加额外逻辑并调用原对象。
+  #+begin_src python
+  def decorator(func):
+      def wrapper(*args, **kwargs):
+          # 前置逻辑
+          result = func(*args, **kwargs)
+          # 后置逻辑
+          return result
+      return wrapper
+  #+end_src
+- *类装饰器* ：定义一个类，在 =__init__= 中接收被装饰对象，在 =__call__= 中实现包装逻辑。
+  #+begin_src python
+  class Decorator:
+      def __init__(self, func):
+          self.func = func
+      def __call__(self, *args, **kwargs):
+          # 前置逻辑
+          result = self.func(*args, **kwargs)
+          # 后置逻辑
+          return result
+  #+end_src
+
+** 2. 状态管理
+- *函数装饰器*：使用闭包变量或外部容器（如 =nonlocal=、全局变量、函数属性）保存状态。
+- *类装饰器*：直接利用实例属性管理状态，更直观、易扩展（如需要多个装饰器实例独立状态时）。
+
+** 3. 可读性与扩展性
+- *函数装饰器*：简单场景下更简洁；复杂逻辑（如需要多个辅助方法）容易导致嵌套过多。
+- *类装饰器*：结构清晰，适合需要复杂状态、方法组合或继承的场景；但必须实现 =__call__=，且调用时有一定开销。
+
+** 4. 装饰对象
+- *两者均可装饰函数和类*，但习惯上：
+  - 函数装饰器多用于装饰*函数*（如 =@staticmethod=、=@property= 底层是描述符，但一般函数装饰器足够）。
+  - 类装饰器常用于装饰*类*（如注册类、修改属性、实现单例模式），因为可以用 =__init__= 保存类本身，并返回修改后的类。
+
+** 总结：何时用哪个？
+- 简单包装、无状态 → *函数装饰器*
+- 需要存储多个状态、多个辅助方法、或者装饰器本身需要参数化（推荐用类装饰器实现 =__init__= 接收参数） → *类装饰器*
+- 装饰类以实现元类功能（如添加方法、注册） → *类装饰器*更合适
+
+* 用 [[id:ffb4d5cb-79fe-4565-a40a-a8ef50de415a][wrapt]] 装饰类成员函数
+- 自己实现需要区分是普通函数还是类成员函数
+#+begin_src python :results output
+import time
+import wrapt
+
+def timer(print_args=False):
+    def decorator(func):
+        @wrapt.decorator
+        def wrapper(wrapped, instance, args, kwargs):
+            # wrapped: the original function or method
+            # instance:
+            # - `instance` for `class instance`
+            # - `class` for classmethod
+            # - None for functions(including staticmethod)
+            start_time = time.time()
+            result = wrapped(*args, **kwargs)
+            end_time = time.time()
+            elapsed_time = end_time - start_time
+            if print_args:
+                print(f'"{wrapped.__name__}", args: {args}, kwargs: {kwargs}')
+            print(f"time cost: {elapsed_time}s")
+            return result
+        return wrapper(func)
+    return decorator
+
+class Sleeper:
+    def __init__(self, sec):
+        self._sec = sec
+
+    @timer(print_args=True)
+    def sleep_a_while(self):
+        time.sleep(self._sec)
+
+sleeper = Sleeper(3)
+sleeper.sleep_a_while()
+#+end_src
+
+#+RESULTS:
+: "sleep_a_while", args: (), args: {}
+: time cost: 3.0001564025878906s
