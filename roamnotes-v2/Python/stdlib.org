@@ -1,12 +1,10 @@
 :PROPERTIES:
-:ID:       python-stdlib-20260728
+:ID:       067b59f7-27a6-4070-b9de-95a4f208f3cc
+:ROAM_ALIASES: 标准库与第三方库
 :END:
-#+title: 标准库与第三方库
+#+title: Standard Library & Third-Party
 
-* 实用模块 (Useful Modules)
-
+* [[id:ae79085a-8eea-4197-ab45-9b25c3b60307][Useful Modules]]
 * wrapt
-
-* radon (代码复杂度)
-
+* radon
 * loguru

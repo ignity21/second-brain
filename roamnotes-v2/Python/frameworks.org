@@ -1,10 +1,9 @@
 :PROPERTIES:
-:ID:       python-frameworks-20260728
+:ID:       09ab1e21-d4d5-4c26-af79-a8857270068b
+:ROAM_ALIASES: 框架
 :END:
-#+title: 框架
+#+title: Frameworks
 
 * Qt (PyQt5 / PySide6)
-
 * python-statemachine
-
 * websockets

@@ -1,0 +1,38 @@
+:PROPERTIES:
+:ID:       734c0052-0cd7-49c7-badf-10019a558773
+:ROAM_ALIASES: Interface
+:END:
+#+title: Abstract Class
+#+filetags: :OO:
+
+* 子类化机制
+#+begin_src python :results output :session abc
+from abc import ABC
+class Validator(ABC):
+
+    @classmethod
+    def __subclasshook__(cls, subclass):
+        if any("validate" in B.__dict__ for B in subclass.__mro__):
+            return True
+        return NotImplemented
+
+    def validate(self, data):
+        raise NotImplementedError("Subclasses must implement this method")
+#+end_src
+
+
+- ~__subclasshook__~: 任何实现了 ~validate~ 的类都是该抽象类的实例
+  - ~isinstance(...)~ 返回 *True*
+  - 子类化只关心结构，不关心真实继承关系；常被称为“结构化子类”
+
+* ~ABC.register()~
+#+begin_src python :results output :session abc
+class Foo:
+    pass
+
+Validator.register(Foo)
+print(f"isinstance {isinstance(Foo(), Validator)}")
+#+end_src
+
+#+RESULTS:
+: isinstance True

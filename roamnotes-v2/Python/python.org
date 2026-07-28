@@ -1,10 +1,11 @@
 :PROPERTIES:
-:ID:       python-index-v2-20260728
+:ID:       6922b85c-8b24-41e3-8c75-83202222e309
+:ROAM_ALIASES: Python
 :END:
 #+title: Python
 
-* [[file:language_features.org][语言特性]]
-* [[file:dev_practices.org][开发实践]]
-* [[file:packaging.org][包管理]]
-* [[file:stdlib.org][标准库与第三方库]]
-* [[file:frameworks.org][框架]]
+* [[id:0f4bb4ee-12f8-46c4-b5eb-2be0d1bb2af5][Language Features]]
+* [[id:9caeb97a-3a07-4652-be52-63a1a4d92d8d][Development Practices]]
+* [[id:5e637aa5-ddd8-4493-9b9f-becf82417b60][Packaging Management]]
+* [[id:067b59f7-27a6-4070-b9de-95a4f208f3cc][Standard Library & Third-Party]]
+* [[id:09ab1e21-d4d5-4c26-af79-a8857270068b][Frameworks]]

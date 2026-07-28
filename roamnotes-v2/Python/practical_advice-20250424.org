@@ -1,0 +1,266 @@
+:PROPERTIES:
+:ID:       3b513038-1dc5-4cb6-a644-58a5510e46f4
+:END:
+#+title: Practical Advises
+#+filetags: :Style:
+
+* TOC :TOC_2:
+
+* 变量相关
+** 作用域内有太多变量
+- Group 相关变量，用类封装
+- 也说明函数可能过于复杂，需拆分
+
+* 变量类型
+** bool 用于统计计数
+- ~count = sum(i % 2 == 0 for i in nums)~
+- ~df.isna().sum()~
+
+** str 有用但不常用的方法
+- ~s.partition(":")~ can split "key" -> ["key", "", ""]
+- ~s.translate()~
+#+begin_src python :return
+s = "英文,标点."
+trans_table = s.maketrans(",.", "，。")
+return s.translate(trans_table)
+#+end_src
+
+#+RESULTS:
+: 英文，标点。
+
+** 多行 str
+#+begin_src python
+from textwrap import dedent
+s1 = "akbfieurerewriuweiruewiruewi\
+iueirueirerer"
+s2 = ("akbfieurerewriuweiruewiruewi"
+      "iueirueirerer")
+s3 = """ieuriereiruewirueiwruieruierereiurie
+irueirueiurieurie"""
+s4 = dedent("""\
+ieuriereiruewirueiwruieruierereiurie
+irueirueiurieurie""")
+#+end_src
+- ~dedent~ 增强对齐的视觉效果，增加代码可读性
+* 容器相关
+** ~namedtuple~
+- 多用于函数的返回值
+#+begin_src python
+from collections import namedtuple
+Rectangle = namedtuple('Rectangle', 'width height') # or 'width,height' or list
+#+end_src
+- 带类型注解 ~NamedTuple~
+#+begin_src python
+from typing import NamedTuple
+
+class Rectangle(NamedTuple):
+    width: int
+    height: int
+#+end_src
+
+** 拷贝可变类型
+- ~copy.copy()~ 浅拷贝
+#+begin_src python
+from copy import copy
+org = [1, 2, 3]
+
+# shallow copied
+c1 = copy(org)
+c2 = org.copy()
+c3 = [x for x in org]
+#+end_src
+- ~copy.deepcopy()~ 深拷贝：拷贝嵌套对象
+#+begin_src python
+from copy import copy, deepcopy
+org = [1, 2, [3, 4]]
+
+c1 = copy(org) # shallow copy
+assert id(c1[-1]) == id(org[-1])
+deepcopied = deepcopy(org)
+assert id(deepcopied[-1]) != id(org[-1])
+#+end_src
+** 解包容器对象
+#+begin_src python :results output
+l = [1, 2, *range(3, 10)]
+print(l)
+d1 = {"a": 1}
+d2 = {"b": 2}
+d_merged = {**d1, **d2}
+print(d_merged)
+#+end_src
+
+#+RESULTS:
+: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+: {'a': 1, 'b': 2}
+
+** 自定义字典
+- 继承 ~MutableMapping~
+* 分支语句
+** 使用字典优化等值判断
+- e.g. ~Dict[str, Function/Lambda]~ 代替其它语言的 ~switch~
+
+** 使用 ~bisect~ 将数值转换为 Categorical
+#+begin_src python
+from bisect import bisect
+breakpoints = [6, 7, 8, 8.5]
+grades = ["D", "C", "B", "A", "S"]
+
+def get_grade(score):
+    index = bisect(breakpoints, score)
+    return grades[index]
+
+return get_grade(8.4)
+#+end_src
+
+#+RESULTS:
+: A
+* 循环
+** 迭代器和可迭代对象
+*** Iterable 接口
+- ~__iter__~: 返回一个迭代器
+- ~__getitem__~: 即使没有实现 ~__iter__~ 也是可迭代的，根据下标遍历，直到抛出 IndexError 为止
+
+*** Iterator 接口
+- ~__iter__~: ~return self~
+- ~__next__~: return 返回每次迭代结果，抛出 StopIteration 退出循环
+
+** ~itertools~
+- ~product()~: 替代多层嵌套循环 ~for i, j, k in product(X, Y, Z)~
+- ~islice(start, stop, step)~: 实现循环隔行处理
+  - for 循环用于文件对象上，会进行逐行遍历，可使用 ~islice~ 实现每隔 n 行处理
+- ~takewhile(pred, iterable)~: 替代 ~break~ 语句
+
+** ~iter(callable, sentinel)~
+- 代替 ~while True~ 循环
+#+begin_src python
+def count_digit(fpath):
+    count = 0
+    with open(fpath, 'r') as f:
+        block_size = 1024
+        while True:
+            block = f.read(block_size)
+            # block == '' means EOF
+            if not block:
+                break
+            for char in block:
+                if char.isdigit():
+                    count += 1
+    return count
+
+from functools import partial
+def count_digit_revised(fpath):
+    count = 0
+    block_size = 1024
+    with open(fpath, 'r') as f:
+        _read = partial(f.read, block_size)
+        for block in iter(_read, ''):
+            for char in block:
+                if char.isdigit():
+                    count += 1
+    return count
+#+end_src
+
+** 复杂循环简化
+- Ask 循环体内代码是否有多个职责
+- 如是，考虑抽象成独立的生成器或者迭代器
+** 巧用 ~next()~
+- 获取生成器第一个值 ~next(iter(dict.keys()))~
+- 返回第一个被7整除的数 ~next(i for i in nums if i % 7 == 0)~
+
+* 异常
+- Prefer EAFP(easier to ask for forgiveness than permission) over LBYL(look before you leap)
+- 不带任何参数的 ~raise~ 会重复抛出当前异常
+- "空对象模式"去避免一些针对边界值的错误处理工作
+- 保持异常与接口的抽象层次一致
+- 自定义异常继承 ~Exception~ 类
+
+** 异常处理方式
+*** 使用上下文管理器
+- 可利用 ~__exit__(self, exc_type, exc_val, traceback)~ 忽略异常
+#+begin_src python
+class ignore_closed:
+    def __enter__(self):
+        pass
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        if exc_type == AlreadyClosedError:
+            return True # Suppress the exception, won't raise it
+        return False # Raise other exceptions
+
+with ignore_closed():
+    close_conn(conn)
+#+end_src
+
+*** 使用 ~contextmanager~ 简化上下文管理器
+#+begin_src python
+from contextlib import contextmanager
+
+@contextmanager
+def create_conn_obj(host, port, timeout=None):
+    conn = create_conn(host, port, timeout)
+    try:
+        # before yield: __enter__ end
+        yield conn
+        # after yield: __exit__ begin
+    finally:
+        conn.close()
+#+end_src
+- 必须用 ~try~ 包裹 ~yield~ 语句来处理异常
+
+*** 数据校验
+- 建议直接使用第三方库，如 ~pydantic~
+* 函数
+** 限定关键字参数
+- 提升可读性
+#+begin_src python
+def query(limit, *, kwarg1, kwarg2):
+    pass
+query(5, kwarg1=1, kwarg2=2)
+#+end_src
+
+** 圈复杂度
+- Cyclomatic Complexity
+- ~uv tool install radon~
+  - ~radon cc xxx.py -s~
+- ~flake8~ 中的 ~mccabe~ 模块也提供圈复杂度检查
+
+** 函数状态管理
+三种方式：
+- 全局变量：避免使用
+- 闭包：简单状态管理
+- 类：变量较多时使用
+
+** 函数作为模块级 API 使用
+- 类似 facade pattern
+- 例如： ~requests~ 中的 ~get()~, ~post()~ 函数
+  - 降低使用成本，不必自己创建 ~Session~ 类
+
+** 配置文件预绑定
+- 可取代单例模式
+  - 但无法做到延迟加载
+  - 可提供简洁函数 API
+#+begin_src python :results output
+class AppConfig:
+    ...
+
+_config = AppConfig()
+get_database_conf = _config.get_database_conf
+reload_config = _config.reload
+#+end_src
+
+* 装饰器
+** 浅装饰器，深实现
+- 装饰器归根结底，只是一个特殊的 API
+  - 内部逻辑应该简单，复杂逻辑需要封装
+
+* 类
+** 类方法和类静态方法的区别
+- 类方法第一个参数是类本身 ~cls~ ，函数内可以使用该类对象
+- 类静态方法无须传入类对象或实例对象
+  - 内部逻辑不需要访问类对象或实例对象
+  - 类和实例方法都可以调用类静态方法
+
+** 类静态方法和普通函数的考量
+- 类作为命名空间使用
+- 当类静态方法与类 *关系密切* 时，使用类静态方法
+- 类静态方法可以被继承和重写

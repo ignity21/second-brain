@@ -1,0 +1,56 @@
+:PROPERTIES:
+:ID:       95feb43d-d5a4-41de-8c70-40fedf3f6265
+:END:
+#+title: metaclass
+#+filetags: :OO:
+
+* 概述
+- 类控制对象的创建行为， *元类控制类的创建行为*
+- ~type~ 是最基础元类
+  - 可使用 ~type(name: str, bases: Tuple[Type], attrs: Dict[str, Any])~ 创建类
+  - ~name~: 类名
+  - ~bases~: 包含其它类的元组，代表类的所有基类
+  - ~attrs~: 包含所有类成员的字典
+
+* 例子
+- 元类通常会继承 ~type~
+- ~__new__~ 方法会在 *创建类时* 被调用
+- ~__call__~ 方法会在 *创建实例时* 被调用
+#+begin_src python :results output
+import types
+import time
+
+class AutoPropertyMeta(type):
+    def __new__(cls, name, bases, attrs):
+        for key, value in attrs.items():
+            if isinstance(value, types.FunctionType) and not key.startswith("_"):
+                attrs[key] = property(value)
+        return super().__new__(cls, name, bases, attrs)
+
+    def __call__(cls, *args, **kwargs):
+        instance = super().__call__(*args, **kwargs)
+        instance.created_at = time.time()
+        return instance
+
+class MyClass(metaclass=AutoPropertyMeta):
+    def __init__(self, value):
+        self._value = value
+
+    def value(self):
+        return self._value
+
+myinst = MyClass(42)
+print(myinst.__dict__)
+print(f"myinst.value={myinst.value}")
+print(myinst.created_at)
+#+end_src
+
+#+RESULTS:
+: {'_value': 42, 'created_at': 1747116185.1157982}
+: myinst.value=42
+: 1747116185.1157982
+- ~MyClass~ 的方法 ~value(self)~ 被转换为属性
+* 用其它方式替代元类
+1. [[id:02d375d4-d851-40b2-bb71-831ea66659e4][Class Decorator]]
+2. [[id:d588e609-9006-4532-a187-2c253df73c0a][~__init__subclass__~]] 钩子方法
+3. 描述符

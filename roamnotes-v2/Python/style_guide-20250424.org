@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       9a2b4b47-bdcb-4930-9a22-5705cafbde1e
+:END:
+#+title: Style Guide
+#+filetags: :Style:
+
+* Overview
+- [[https://peps.python.org/pep-0008/][Official Guide]]
+
+* Naming Conventions
+- ~some_module~
+- ~SomeClass~
+- ~SomeException~
+- ~SOME_CONSTANT~
+- ~some_var~, ~some_function~
+- keyword conflict: ~class_~ append a single trailing underscore
