@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       3f728fab-0070-4674-a664-17a6fa174b96
+:END:
+#+title: Doom Emacs
+
+Doom Emacs framework — architecture, module system, and configuration.
+
+* Doom Core
+  - [[id:2d1b02f1-0a07-4253-a311-1ade09a3df14][Doom]] — load order, configuration overview
+  - [[id:8e3d9b83-691a-43cc-95fc-22375cd003c2][Writing Doom Modules]]
+  - [[id:4b047da0-1409-491b-8bcf-5aa1ca4e7822][Doom Modules]] — module index by category
+
+* Module Categories
+  - [[id:b80ae92b-8c5a-40bc-9f08-92566b333781][Completion]] — vertico, corfu
+  - [[id:bdbf8e5a-4c70-4b10-b853-957141cd1288][UI]] — popup, workspaces
+  - [[id:ab63fc36-bd8c-42c9-bd68-2f256e19903b][Editing]] — file-templates, format, multiple-cursors
+  - [[id:565c2448-3742-4f92-bc41-9e539e083fc3][Development Tools]] — eval, lsp, lookup, docker, editorconfig, upload

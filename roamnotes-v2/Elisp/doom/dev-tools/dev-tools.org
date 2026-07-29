@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       565c2448-3742-4f92-bc41-9e539e083fc3
+:END:
+#+title: Development Tools
+
+* Code Evaluation
+  - [[id:e174a908-f87e-4c23-bc49-52897aef089e][eval]]
+
+* Language Server
+  - [[id:35b271c9-61cf-4644-81f8-4433493fb246][lsp]]
+
+* Lookup & Documentation
+  - [[id:e191be4e-9d77-4afe-975d-ef7517222ad5][lookup]]
+
+* Infrastructure
+  - [[id:8cf97c59-f3e8-40ed-a265-3c28d1ecabb7][docker]]
+  - [[id:b4568c34-28e1-4795-a7b9-c14539022412][editorconfig]]
+  - [[id:6b915d86-b074-4615-9112-f68474c81ec2][upload]]
