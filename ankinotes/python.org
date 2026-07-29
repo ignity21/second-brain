@@ -1,0 +1,24 @@
+#+title: Python
+
+* Deck
+  :PROPERTIES:
+  :ANKI_DECK: CS::Python
+  :END:
+
+** Radon 的代码度量
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1785249007074
+:ANKI_NOTE_HASH: b168a98d53118afa604c6418f5893630
+:END:
+
+*** Front
+Radon 是什么？它可以计算哪些 Python 源代码度量？
+
+*** Back
+Radon 是一个用于分析 Python 源代码的工具，可以计算：
+
+- McCabe 复杂度，也就是圈复杂度（cyclomatic complexity）
+- 原始度量（raw metrics），包括 SLOC、注释行数和空白行数等
+- Halstead 度量
+- 可维护性指数（Maintainability Index），即 Visual Studio 使用的那种指数

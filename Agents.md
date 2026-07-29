@@ -190,3 +190,37 @@
 ### 4.5 源文件清理规则
 - 笔记从 `roamnotes/` 迁移到 `roamnotes-v2/` 后，立即删除 `roamnotes/` 中的源文件
 - 图片目录（`images/`、`assets/`）待所有文件迁移完成后统一清理
+
+## 8. Anki 卡片规则
+
+### 8.1 文件结构
+- `ankinotes/*.org` 默认都是 Anki 笔记文件。
+- 每个文件使用 `* Deck` 作为唯一的一级标题，并在其 `:PROPERTIES:` 抽屉中填写对应的 `:ANKI_DECK:`。
+- 制作 Anki 卡片时，在 `* Deck` 下新增一个二级标题（`**`），标题主题由助手根据卡片内容自行确定。
+- 卡片内容使用两个三级标题：`*** Front` 和 `*** Back`。
+
+### 8.2 卡片属性
+- 新卡片的 `:PROPERTIES:` 抽屉中只填写 `:ANKI_NOTE_TYPE: CC Basic`。
+- 不要在新卡片中填写 `:ANKI_DECK:`；牌组从所属文件的 `* Deck` 属性继承。
+- 不要预先填写 `:ANKI_NOTE_ID:` 或 `:ANKI_NOTE_HASH:`，这些字段由 Anki/同步流程生成。
+
+### 8.3 标准模板
+```org
+* Deck
+  :PROPERTIES:
+  :ANKI_DECK: <deck name>
+  :END:
+
+** <topic>
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+<question or prompt>
+
+*** Back
+<answer>
+```
+
+- 用户要求制作卡片时，完成上述结构和 Front/Back 内容即可；不需要代替用户确认或同步 Anki。
