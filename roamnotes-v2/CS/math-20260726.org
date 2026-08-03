@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       848074ca-3408-4efe-9828-6f2158f4649c
-:END:
-#+title: Math
-
-- [[id:c514506b-a9c7-4079-b4a0-a113713259a5][testB]]

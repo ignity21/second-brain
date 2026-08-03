@@ -1,0 +1,1004 @@
+order_id,order_datetime,customer_id,region,channel,category,product,quantity,unit_price,discount_pct,revenue,cost,status,payment_method,is_member,customer_age,rating,coupon_code,sales_rep,notes
+ORD-00001,2026-05-12 12:18:00,CUST-0056,Central,partner,Home,Storage Box,1,174.61,10,157.15,116.87,completed,credit_card,True,37,4,VIP,Alice,delayed shipment
+ORD-00002,2025-02-19 20:40:00,CUST-0062,Central,partner,Books,Python Basics,4,211.97,0,0.0,0.0,cancelled,credit_card,False,40,3,,Bob,priority customer
+ORD-00003,2025-03-24 13:39:00,CUST-0037,East,mobile,Sports,Dumbbell,5,524.49,5,2491.33,1688.46,pending,apple_pay,False,27,2,VIP,,delayed shipment
+ORD-00004,2026-03-02 08:21:00,CUST-0018,Central,mobile,Books,Finance 101,5,801.73,5,3808.22,2395.21,completed,bank_transfer,True,70,3,,Alice,gift order
+ORD-00005,2026-02-02 12:01:00,CUST-0112,Central,web,Books,Finance 101,3,268.09,0,804.27,540.19,completed,paypal,False,56,4,WELCOME10,Bob,
+ORD-00006,2025-01-02 15:51:00,CUST-0167,East,web,Electronics,Headphones,5,121.34,25,455.03,287.92,pending,paypal,False,48,,VIP,Diana,address corrected
+ORD-00007,2025-04-22 22:47:00,CUST-0200,East,store,Sports,Dumbbell,3,552.25,10,1491.08,944.71,pending,paypal,True,47,1,SUMMER25,,delayed shipment
+ORD-00008,2025-08-02 14:47:00,CUST-0020,North,web,Sports,Running Shoes,6,215.36,5,0.0,0.0,cancelled,apple_pay,True,74,4,VIP,Evan,
+ORD-00009,2026-06-10 14:51:00,CUST-0109,West,store,Sports,Basketball,3,29.56,15,75.38,60.17,completed,paypal,True,46,4,SUMMER25,Evan,delayed shipment
+ORD-00010,2025-03-27 19:54:00,CUST-0184,West,store,Home,Lamp,5,448.7,20,1794.8,1362.51,pending,apple_pay,True,23,,,Evan,
+ORD-00011,2026-05-08 11:34:00,CUST-0122,West,store,Electronics,Mouse,2,622.02,20,-995.23,687.98,refunded,paypal,False,41,5,,Chen,gift order
+ORD-00012,2026-03-15 11:21:00,CUST-0022,Central,store,Electronics,Mouse,6,82.06,15,418.51,251.82,completed,paypal,False,63,4,,Evan,address corrected
+ORD-00013,2025-01-17 17:15:00,CUST-0167,West,mobile,Sports,Basketball,3,676.81,20,-1624.34,788.76,refunded,apple_pay,False,47,4,WELCOME10,Evan,delayed shipment
+ORD-00014,2026-03-07 16:39:00,CUST-0075,West,store,Electronics,Mouse,6,53.64,5,305.75,171.76,completed,bank_transfer,True,51,1,SUMMER25,Chen,
+ORD-00015,2026-02-23 15:35:00,CUST-0171,West,store,Electronics,Headphones,6,811.47,15,0.0,0.0,cancelled,credit_card,True,71,1,VIP,Chen,
+ORD-00016,2025-09-30 13:19:00,CUST-0147,South,mobile,Home,Storage Box,4,676.92,0,2707.68,1614.56,completed,bank_transfer,False,23,2,VIP,Alice,delayed shipment
+ORD-00017,2025-11-06 16:14:00,CUST-0218,South,store,Sports,Yoga Mat,2,49.77,10,0.0,0.0,cancelled,paypal,True,54,4,VIP,,
+ORD-00018,2026-03-26 09:27:00,CUST-0210,South,partner,Sports,Water Bottle,3,613.07,15,1563.33,731.68,completed,bank_transfer,False,29,1,WELCOME10,Alice,
+ORD-00019,2025-04-14 10:43:00,CUST-0141,South,partner,Home,Kettle,4,124.23,5,472.07,250.47,completed,bank_transfer,True,63,2,WELCOME10,Bob,delayed shipment
+ORD-00020,2025-01-31 08:24:00,CUST-0024,North,partner,Sports,Running Shoes,4,605.88,0,2423.52,1929.3,pending,paypal,False,27,3,SUMMER25,Bob,
+ORD-00021,2025-10-08 13:48:00,CUST-0126,South,store,Sports,Yoga Mat,5,95.71,20,382.84,194.87,completed,paypal,False,31,,,Alice,address corrected
+ORD-00022,2025-07-12 19:50:00,CUST-0141,North,mobile,Home,Chair,2,807.94,0,1615.88,837.62,completed,apple_pay,True,28,4,SUMMER25,Diana,delayed shipment
+ORD-00023,2025-08-29 09:45:00,CUST-0114,North,store,Electronics,Headphones,2,653.42,15,-1110.81,502.64,refunded,paypal,True,37,4,SUMMER25,,delayed shipment
+ORD-00024,2025-09-11 21:21:00,CUST-0150,South,mobile,Home,Desk,2,658.69,0,0.0,0.0,cancelled,paypal,False,45,4,,Bob,
+ORD-00025,2026-02-14 12:22:00,CUST-0113,East,web,Home,Chair,5,205.15,0,0.0,0.0,cancelled,paypal,True,71,3,VIP,Diana,delayed shipment
+ORD-00026,2026-03-08 14:49:00,CUST-0172,East,mobile,Home,Storage Box,1,400.22,0,-400.22,203.69,refunded,paypal,True,38,5,,Evan,
+ORD-00027,2025-01-31 20:10:00,CUST-0099,Central,web,Books,Finance 101,4,46.15,0,0.0,0.0,cancelled,apple_pay,True,58,2,,Chen,priority customer
+ORD-00028,2025-02-08 17:10:00,CUST-0143,South,partner,Sports,Water Bottle,2,21.02,5,-39.94,24.82,refunded,apple_pay,True,25,3,,Evan,delayed shipment
+ORD-00029,2025-03-09 18:02:00,CUST-0064,South,store,Sports,Water Bottle,1,406.92,0,406.92,272.52,pending,apple_pay,False,54,5,SUMMER25,Alice,gift order
+ORD-00030,2025-11-09 08:34:00,CUST-0090,East,web,Electronics,Mouse,1,670.77,10,603.69,471.54,completed,paypal,True,33,4,WELCOME10,Chen,
+ORD-00031,2026-03-22 15:08:00,CUST-0027,Central,partner,Electronics,Mouse,2,221.51,0,-443.02,317.16,refunded,paypal,False,26,4,,Alice,address corrected
+ORD-00032,2026-04-17 08:45:00,CUST-0165,Central,partner,Books,Statistics,3,794.89,15,2026.97,1331.67,completed,credit_card,False,52,4,VIP,Diana,
+ORD-00033,2025-03-06 19:07:00,CUST-0209,Central,store,Home,Lamp,5,301.8,15,1282.65,951.35,completed,paypal,False,52,4,,Alice,delayed shipment
+ORD-00034,2026-02-10 14:12:00,CUST-0053,South,mobile,Books,Machine Learning,4,272.91,25,0.0,0.0,cancelled,credit_card,False,40,4,,Alice,
+ORD-00035,2025-03-09 13:22:00,CUST-0011,West,mobile,Home,Lamp,5,59.87,5,284.38,197.75,completed,bank_transfer,True,22,,VIP,Alice,priority customer
+ORD-00036,2026-02-06 09:48:00,CUST-0102,Central,mobile,Home,Storage Box,4,660.27,0,2641.08,1980.77,completed,credit_card,False,58,,,Alice,address corrected
+ORD-00037,2025-01-03 17:24:00,CUST-0107,South,web,Books,Finance 101,3,154.35,15,393.59,293.69,completed,paypal,False,56,4,SUMMER25,,
+ORD-00038,2026-05-05 20:54:00,CUST-0209,West,partner,Books,Statistics,3,146.56,0,0.0,0.0,cancelled,apple_pay,False,48,5,WELCOME10,Chen,
+ORD-00039,2025-06-27 17:44:00,CUST-0084,North,store,Sports,Water Bottle,1,705.14,10,-634.63,390.79,refunded,paypal,True,74,,,Bob,address corrected
+ORD-00040,2025-05-25 13:53:00,CUST-0129,North,partner,Sports,Water Bottle,6,632.02,15,3223.3,2598.6,completed,apple_pay,False,61,5,SUMMER25,Alice,
+ORD-00041,2025-02-07 18:46:00,CUST-0043,North,partner,Sports,Basketball,4,31.76,5,-120.69,88.4,refunded,credit_card,True,26,1,SUMMER25,Alice,address corrected
+ORD-00042,2026-03-13 21:44:00,CUST-0214,North,store,Electronics,Webcam,1,250.15,25,0.0,0.0,cancelled,credit_card,True,47,,SUMMER25,Alice,gift order
+ORD-00043,2026-01-03 14:56:00,CUST-0222,Central,mobile,Sports,Yoga Mat,6,467.18,0,2803.08,2199.68,completed,bank_transfer,True,72,5,,Chen,
+ORD-00044,2026-05-15 17:30:00,CUST-0227,West,partner,Home,Lamp,4,740.7,25,2222.1,1064.3,completed,apple_pay,False,55,1,,Bob,priority customer
+ORD-00045,2025-11-09 21:52:00,CUST-0148,Central,web,Books,Machine Learning,5,108.61,0,-543.05,255.34,refunded,credit_card,True,21,5,,,gift order
+ORD-00046,2026-04-27 18:14:00,CUST-0239,East,partner,Sports,Running Shoes,2,777.06,25,1165.59,864.83,pending,paypal,False,67,3,VIP,Evan,delayed shipment
+ORD-00047,2025-05-24 09:30:00,CUST-0138,North,mobile,Home,Lamp,5,785.69,5,3732.03,1916.06,completed,bank_transfer,False,65,5,,Chen,gift order
+ORD-00048,2025-12-21 09:56:00,CUST-0041,Central,partner,Books,Python Basics,6,262.97,25,0.0,0.0,cancelled,apple_pay,False,60,5,SUMMER25,Alice,
+ORD-00049,2025-05-11 09:32:00,CUST-0013,Central,mobile,Sports,Basketball,5,437.49,5,2078.08,1416.48,completed,apple_pay,False,44,,,Evan,gift order
+ORD-00050,2026-05-27 22:21:00,CUST-0009, west ,store,Sports,Water Bottle,2,803.81,0,1607.62,935.32,completed,apple_pay,True,28,3,,,delayed shipment
+ORD-00051,2025-06-18 16:07:00,CUST-0116,West,mobile,Sports,Basketball,2,115.55,0,0.0,0.0,cancelled,apple_pay,True,44,4,VIP,Diana,
+ORD-00052,2025-03-15 11:01:00,CUST-0070,Central,partner,Electronics,Mouse,1,794.11,10,714.7,485.23,completed,credit_card,False,60,2,,,address corrected
+ORD-00053,2025-03-29 09:46:00,CUST-0118,East,store,Sports,Dumbbell,4,634.73,0,-2538.92,1379.44,refunded,credit_card,True,29,4,,,priority customer
+ORD-00054,2025-11-19 09:43:00,CUST-0152,East,partner,Home,Lamp,4,523.59,0,2094.36,1183.88,pending,apple_pay,False,18,4,VIP,Evan,
+ORD-00055,2026-01-27 20:00:00,CUST-0156,Central,mobile,Books,Data Engineering,2,322.53,10,580.55,432.64,completed,credit_card,False,33,5,,Bob,gift order
+ORD-00056,2026-02-17 22:06:00,CUST-0155,West,store,Books,Finance 101,5,41.7,0,208.5,157.76,completed,credit_card,True,23,5,WELCOME10,Diana,
+ORD-00057,2026-02-19 09:48:00,CUST-0041,North,mobile,Electronics,Webcam,6,39.73,0,238.38,165.78,completed,paypal,False,20,,,,gift order
+ORD-00058,2025-07-10 20:51:00,CUST-0120,South,store,Home,Kettle,3,128.05,5,364.94,216.06,completed,bank_transfer,True,34,1,SUMMER25,Bob,
+ORD-00059,2026-02-05 11:17:00,CUST-0232,Central,mobile,Books,Finance 101,6,309.35,20,-1484.88,866.5,refunded,apple_pay,False,53,5,,Alice,
+ORD-00060,2026-06-30 16:26:00,CUST-0054,North,store,Books,Data Engineering,4,826.39,0,3305.56,2201.48,completed,paypal,False,52,4,,,delayed shipment
+ORD-00061,2025-06-20 12:32:00,CUST-0139,Central,mobile,Electronics,Headphones,3,183.57,0,-550.71,259.41,refunded,bank_transfer,True,64,4,,Alice,
+ORD-00062,2026-06-02 08:35:00,CUST-0188,East,web,Electronics,Mouse,6,747.1,20,3586.08,2884.57,completed,credit_card,True,38,2,,Chen,address corrected
+ORD-00063,2025-10-10 14:12:00,CUST-0190,North,store,Sports,Dumbbell,1,278.48,0,0.0,0.0,cancelled,bank_transfer,False,44,4,WELCOME10,Alice,
+ORD-00064,2025-08-22 11:45:00,CUST-0021,Central,mobile,Books,Machine Learning,1,303.44,0,303.44,171.64,completed,credit_card,True,50,2,,Bob,address corrected
+ORD-00065,2025-10-25 18:53:00,CUST-0080,South,web,Electronics,Monitor,5,519.73,0,2598.65,1474.3,completed,apple_pay,False,68,4,,Alice,
+ORD-00066,2026-02-18 16:04:00,CUST-0010,West,partner,Electronics,Monitor,6,415.26,20,1993.25,990.11,pending,apple_pay,False,65,4,WELCOME10,Diana,
+ORD-00067,2026-05-23 13:11:00,CUST-0164,North,partner,Books,Statistics,3,88.12,25,0.0,0.0,cancelled,bank_transfer,True,66,2,,,
+ORD-00068,2025-07-21 20:45:00,CUST-0054,East,partner,Home,Kettle,4,407.75,20,-1304.8,762.8,refunded,paypal,True,68,,,Diana,gift order
+ORD-00069,2026-06-20 20:57:00,CUST-0207,South,store,Electronics,Monitor,4,420.98,20,0.0,0.0,cancelled,bank_transfer,True,40,2,,Evan,address corrected
+ORD-00070,2025-05-27 14:15:00,CUST-0045,West,web,Sports,Yoga Mat,5,603.33,20,2413.32,1375.25,completed,paypal,True,41,4,,Diana,address corrected
+ORD-00071,2026-04-16 20:06:00,CUST-0026,Central,partner,Books,Finance 101,4,432.27,0,1729.08,1011.46,pending,bank_transfer,False,41,5,SUMMER25,,delayed shipment
+ORD-00072,2025-11-01 14:44:00,CUST-0026,Central,partner,Home,Desk,2,311.59,15,529.7,364.87,completed,bank_transfer,True,21,4,SUMMER25,Evan,
+ORD-00073,2025-08-22 11:46:00,CUST-0085,West,mobile,Electronics,Webcam,3,694.24,20,1666.18,925.54,completed,apple_pay,False,73,4,VIP,Bob,delayed shipment
+ORD-00074,2025-08-23 22:56:00,CUST-0216,East,web,Sports,Yoga Mat,3,792.95,0,0.0,0.0,cancelled,apple_pay,True,31,5,,Alice,priority customer
+ORD-00075,2026-03-11 21:06:00,CUST-0204,Central,mobile,Books,Python Basics,6,747.21,0,0.0,0.0,cancelled,credit_card,True,55,1,,Bob,
+ORD-00076,2025-02-24 15:43:00,CUST-0087,South,web,Books,Statistics,2,520.17,0,1040.34,542.47,completed,credit_card,True,47,3,,,delayed shipment
+ORD-00077,2025-12-19 16:43:00,CUST-0229,East,partner,Sports,Water Bottle,6,197.4,0,0.0,0.0,cancelled,credit_card,True,18,3,VIP,Bob,address corrected
+ORD-00078,2025-09-01 19:40:00,CUST-0113,West,mobile,Books,Finance 101,1,310.11,0,-310.11,251.97,refunded,credit_card,True,65,4,VIP,Evan,gift order
+ORD-00079,2026-06-25 12:44:00,CUST-0214,Central,partner,Sports,Running Shoes,3,728.2,20,1747.68,1407.35,completed,apple_pay,False,34,1,WELCOME10,Chen,
+ORD-00080,2025-10-09 15:34:00,CUST-0168,West,mobile,Books,Data Engineering,1,451.85,5,429.26,298.19,pending,paypal,False,32,4,SUMMER25,Diana,
+ORD-00081,2025-12-09 17:34:00,CUST-0171,Central,mobile,Home,Chair,4,260.46,25,781.38,517.63,completed,credit_card,True,53,3,,Evan,delayed shipment
+ORD-00082,2026-02-28 21:09:00,CUST-0164,Central,web,Electronics,Mouse,1,230.12,25,172.59,118.6,pending,apple_pay,False,53,5,SUMMER25,Chen,priority customer
+ORD-00083,2025-11-03 11:38:00,CUST-0036,South,mobile,Books,Statistics,6,57.74,15,0.0,0.0,cancelled,apple_pay,True,74,5,WELCOME10,Bob,delayed shipment
+ORD-00084,2026-06-11 16:14:00,CUST-0130,Central,web,Books,Statistics,4,338.48,20,-1083.14,614.55,refunded,bank_transfer,False,41,2,VIP,Evan,delayed shipment
+ORD-00085,2026-01-25 22:38:00,CUST-0213,South,store,Electronics,Mouse,6,806.83,20,3872.78,3146.84,completed,credit_card,True,61,,WELCOME10,Bob,
+ORD-00086,2026-05-24 10:24:00,CUST-0140,East,mobile,Sports,Water Bottle,4,465.61,20,1489.95,1011.0,completed,apple_pay,False,43,5,SUMMER25,Evan,address corrected
+ORD-00087,2025-06-24 17:30:00,CUST-0022,West,partner,Electronics,Headphones,3,276.34,25,621.76,443.05,completed,bank_transfer,False,30,5,VIP,Evan,priority customer
+ORD-00088,2026-04-22 22:04:00,CUST-0210,South,mobile,Sports,Basketball,5,311.88,20,1247.52,920.78,completed,credit_card,False,50,5,SUMMER25,Diana,
+ORD-00089,2025-09-28 09:57:00,CUST-0093,Central,mobile,Home,Desk,6,37.94,25,0.0,0.0,cancelled,credit_card,True,69,2,WELCOME10,,gift order
+ORD-00090,2026-02-03 11:00:00,CUST-0194,East,mobile,Home,Lamp,4,817.56,20,2616.19,1693.35,pending,credit_card,False,41,4,VIP,Diana,priority customer
+ORD-00091,2025-09-02 15:15:00,CUST-0089,North,web,Sports,Running Shoes,2,51.97,15,0.0,0.0,cancelled,apple_pay,False,52,1,,,gift order
+ORD-00092,2025-03-20 20:12:00,CUST-0189,East,store,Home,Lamp,2,493.65,0,987.3,475.47,pending,paypal,False,29,1,,Chen,priority customer
+ORD-00093,2025-11-28 13:36:00,CUST-0080,Central,web,Books,Finance 101,3,623.59,0,1870.77,1444.31,pending,apple_pay,False,40,5,SUMMER25,Diana,
+ORD-00094,2026-02-26 17:25:00,CUST-0203,East,web,Sports,Dumbbell,3,16.4,0,49.2,31.44,completed,paypal,False,72,5,SUMMER25,Alice,gift order
+ORD-00095,2025-08-24 21:11:00,CUST-0050,North,web,Books,Finance 101,4,309.94,10,1115.78,812.33,completed,credit_card,True,26,1,SUMMER25,Diana,gift order
+ORD-00096,2025-05-22 13:48:00,CUST-0022,West,web,Sports,Running Shoes,3,784.67,25,1765.51,1198.48,pending,apple_pay,True,63,4,,,
+ORD-00097,2025-06-24 09:12:00,CUST-0226,East,store,Sports,Running Shoes,1,796.85,0,796.85,439.75,completed,credit_card,True,58,5,,,delayed shipment
+ORD-00098,2025-09-18 09:33:00,CUST-0006,North,mobile,Sports,Dumbbell,1,436.94,0,-436.94,310.35,refunded,bank_transfer,True,20,,VIP,Chen,address corrected
+ORD-00099,2025-12-20 10:56:00,CUST-0186,West,mobile,Books,Finance 101,4,759.75,20,2431.2,1805.84,completed,credit_card,False,43,4,WELCOME10,Diana,gift order
+ORD-00100,2026-03-04 21:49:00,CUST-0126,West,partner,Books,Data Engineering,6,411.72,20,0.0,0.0,cancelled,apple_pay,True,45,2,SUMMER25,Evan,
+ORD-00101,2025-12-14 17:50:00,CUST-0092,South,web,Home,Storage Box,3,213.6,10,576.72,292.52,completed,paypal,False,55,2,VIP,Alice,address corrected
+ORD-00102,2025-09-07 09:15:00,CUST-0218,East,web,Electronics,Monitor,6,596.47,20,2863.06,1579.77,completed,apple_pay,True,57,1,VIP,Diana,priority customer
+ORD-00103,2025-12-23 19:12:00,CUST-0156,North,web,Electronics,Keyboard,2,430.55,25,-645.83,427.63,refunded,paypal,True,39,4,WELCOME10,Chen,delayed shipment
+ORD-00104,2025-02-11 20:09:00,CUST-0068,South,partner,Sports,Running Shoes,2,392.63,0,785.26,554.16,pending,apple_pay,False,57,3,SUMMER25,Bob,
+ORD-00105,2025-05-19 18:54:00,CUST-0232,East,partner,Sports,Basketball,2,528.34,0,-1056.68,695.8,refunded,apple_pay,True,51,5,,,
+ORD-00106,2025-04-27 22:10:00,CUST-0233,Central,web,Electronics,Headphones,5,848.55,0,4242.75,3180.17,pending,credit_card,True,55,4,WELCOME10,Diana,address corrected
+ORD-00107,2025-04-29 22:20:00,CUST-0192,South,store,Home,Chair,4,370.93,20,0.0,0.0,cancelled,bank_transfer,True,20,1,SUMMER25,Chen,address corrected
+ORD-00108,2025-08-03 19:44:00,CUST-0216,West,partner,Home,Kettle,2,103.12,5,0.0,0.0,cancelled,credit_card,False,56,1,,Bob,
+ORD-00109,2026-04-03 09:17:00,CUST-0097,North,mobile,Electronics,Keyboard,3,133.14,10,359.48,271.57,completed,credit_card,True,72,4,,Chen,
+ORD-00110,2025-04-09 22:42:00,CUST-0221,South,web,Books,Python Basics,3,217.48,15,554.57,272.19,completed,bank_transfer,False,53,5,SUMMER25,Alice,address corrected
+ORD-00111,2025-12-20 15:43:00,CUST-0015,North,store,Books,Data Engineering,3,503.69,0,1511.07,1131.57,completed,credit_card,True,32,3,,Diana,priority customer
+ORD-00112,2026-06-08 20:00:00,CUST-0031,South,partner,Books,Finance 101,3,791.79,0,2375.37,1608.05,completed,paypal,False,29,4,,Evan,
+ORD-00113,2025-08-22 11:52:00,CUST-0042,West,store,Sports,Running Shoes,1,434.58,5,412.85,248.2,completed,apple_pay,False,35,1,,Evan,address corrected
+ORD-00114,2025-07-14 13:21:00,CUST-0162,West,mobile,Electronics,Headphones,4,253.44,25,0.0,0.0,cancelled,paypal,True,47,1,SUMMER25,Bob,
+ORD-00115,2026-06-25 21:47:00,CUST-0084,North,partner,Home,Lamp,6,464.38,0,0.0,0.0,cancelled,bank_transfer,True,67,1,WELCOME10,Diana,
+ORD-00116,2025-06-20 19:38:00,CUST-0162,Central,store,Books,Data Engineering,4,319.78,0,1279.12,697.54,completed,bank_transfer,False,26,5,,Bob,
+ORD-00117,2025-02-19 13:16:00,CUST-0091,East,mobile,Home,Storage Box,2,70.58,10,127.04,86.61,completed,credit_card,True,26,4,WELCOME10,Bob,delayed shipment
+ORD-00118,2025-06-08 17:43:00,CUST-0198,East,web,Home,Kettle,4,799.83,0,3199.32,2501.82,completed,apple_pay,True,35,4,,Bob,
+ORD-00119,2025-09-23 09:57:00,CUST-0152,North,web,Books,Finance 101,1,670.7,25,-503.03,302.77,refunded,bank_transfer,True,73,2,,Chen,address corrected
+ORD-00120,2025-06-25 17:07:00,CUST-0090,South,MOBILE,Sports,Water Bottle,6,422.25,0,2533.5,1984.77,completed,paypal,True,30,5,,Chen,
+ORD-00121,2025-05-20 13:10:00,CUST-0163,North,store,Electronics,Keyboard,5,122.11,25,457.91,370.18,completed,paypal,False,57,4,,Evan,gift order
+ORD-00122,2025-12-02 12:15:00,CUST-0037,East,mobile,Home,Chair,1,637.74,15,542.08,351.14,completed,credit_card,False,35,4,VIP,,priority customer
+ORD-00123,2025-05-17 20:53:00,CUST-0197,East,store,Books,Finance 101,3,286.99,0,-860.97,476.21,refunded,bank_transfer,False,21,5,,,delayed shipment
+ORD-00124,2025-04-23 12:46:00,CUST-0239,West,partner,Books,Python Basics,2,69.7,10,125.46,99.6,completed,bank_transfer,True,18,4,SUMMER25,Alice,
+ORD-00125,2025-07-03 21:49:00,CUST-0189,South,partner,Sports,Basketball,5,650.41,20,2601.64,1774.46,pending,apple_pay,True,59,5,SUMMER25,,
+ORD-00126,2025-08-05 20:19:00,CUST-0197,Central,store,Books,Statistics,3,415.85,20,998.04,643.68,completed,credit_card,True,64,,VIP,,
+ORD-00127,2025-02-24 18:34:00,CUST-0152,Central,web,Electronics,Webcam,1,282.6,0,282.6,189.6,pending,paypal,False,34,4,,Evan,address corrected
+ORD-00128,2025-05-15 22:36:00,CUST-0004,East,web,Electronics,Headphones,4,224.04,25,0.0,0.0,cancelled,credit_card,True,47,5,SUMMER25,Chen,gift order
+ORD-00129,2026-04-11 19:15:00,CUST-0132,South,partner,Electronics,Headphones,4,838.1,5,3184.78,2404.62,completed,paypal,False,26,4,WELCOME10,Evan,
+ORD-00130,2026-01-18 15:56:00,CUST-0053,West,mobile,Home,Lamp,4,74.35,15,252.79,137.76,pending,bank_transfer,False,42,3,,Evan,
+ORD-00131,2026-01-16 21:23:00,CUST-0098,North,store,Home,Storage Box,2,386.1,5,733.59,576.37,completed,apple_pay,True,44,3,,Evan,gift order
+ORD-00132,2025-03-02 13:17:00,CUST-0025,East,mobile,Home,Lamp,4,192.26,15,0.0,0.0,cancelled,apple_pay,False,65,,WELCOME10,Evan,gift order
+ORD-00133,2025-02-18 11:48:00,CUST-0186,South,store,Books,Statistics,5,734.18,0,3670.9,2838.43,pending,bank_transfer,True,72,5,,Diana,delayed shipment
+ORD-00134,2025-01-09 17:47:00,CUST-0179,North,web,Sports,Yoga Mat,2,445.47,15,0.0,0.0,cancelled,credit_card,True,59,2,,,delayed shipment
+ORD-00135,2025-08-06 17:48:00,CUST-0149,Central,web,Books,Data Engineering,2,360.77,10,649.39,312.91,pending,paypal,False,63,3,,Evan,priority customer
+ORD-00136,2025-03-31 14:25:00,CUST-0009,North,mobile,Electronics,Webcam,4,516.08,0,2064.32,1128.67,completed,paypal,False,68,,,,delayed shipment
+ORD-00137,2026-06-11 09:13:00,CUST-0085,North,store,Electronics,Headphones,5,672.94,5,3196.47,2342.78,completed,apple_pay,False,48,5,SUMMER25,Chen,
+ORD-00138,2025-02-11 08:51:00,CUST-0082,North,mobile,Books,Python Basics,3,629.54,10,0.0,0.0,cancelled,apple_pay,True,56,5,WELCOME10,Chen,address corrected
+ORD-00139,2025-11-15 18:14:00,CUST-0017,Central,store,Home,Kettle,5,22.11,5,-105.02,65.62,refunded,credit_card,True,30,3,,Alice,gift order
+ORD-00140,2026-04-29 15:00:00,CUST-0002,North,web,Electronics,Webcam,6,12.37,0,74.22,42.21,completed,apple_pay,False,30,3,,Alice,
+ORD-00141,2025-02-26 22:23:00,CUST-0088,West,store,Home,Storage Box,4,364.1,10,1310.76,648.57,completed,bank_transfer,True,19,3,,,
+ORD-00142,2025-09-12 11:46:00,CUST-0042,West,mobile,Electronics,Headphones,1,476.19,0,476.19,303.02,pending,apple_pay,False,21,,SUMMER25,Bob,
+ORD-00143,2025-07-09 19:55:00,CUST-0199,South,mobile,Home,Chair,5,443.75,0,0.0,0.0,cancelled,bank_transfer,True,64,1,,Alice,delayed shipment
+ORD-00144,2025-08-02 21:44:00,CUST-0033,East,partner,Books,Finance 101,3,153.27,0,459.81,350.22,pending,bank_transfer,False,28,5,VIP,Evan,priority customer
+ORD-00145,2025-11-12 19:37:00,CUST-0229,Central,partner,Books,Finance 101,4,760.01,25,-2280.03,1682.66,refunded,apple_pay,True,48,3,,,
+ORD-00146,2025-08-24 20:32:00,CUST-0228,East,partner,Electronics,Mouse,2,48.74,0,97.48,53.3,completed,paypal,False,20,4,,Alice,delayed shipment
+ORD-00147,2025-02-02 12:25:00,CUST-0062,South,store,Electronics,Keyboard,5,25.45,0,127.25,100.08,pending,apple_pay,False,51,5,,,
+ORD-00148,2025-06-17 20:07:00,CUST-0017,East,mobile,Home,Kettle,1,272.06,5,258.46,182.83,completed,credit_card,False,56,,WELCOME10,Diana,
+ORD-00149,2026-01-06 09:18:00,CUST-0086,North,partner,Sports,Running Shoes,1,390.83,20,312.66,162.81,completed,credit_card,True,48,1,,Diana,
+ORD-00150,2025-02-25 12:12:00,CUST-0014,South,store,Electronics,Headphones,5,557.66,15,2370.05,1560.37,completed,bank_transfer,True,70,4,,Evan,
+ORD-00151,2026-01-14 10:05:00,CUST-0194,North,mobile,Electronics,Webcam,3,555.94,0,1667.82,1214.62,completed,credit_card,False,62,5,,Evan,
+ORD-00152,2025-02-13 19:02:00,CUST-0117,West,web,Electronics,Mouse,1,752.0,0,0.0,0.0,cancelled,bank_transfer,True,65,5,,Evan,
+ORD-00153,2025-01-27 20:52:00,CUST-0037,West,web,Electronics,Webcam,3,156.7,10,423.09,314.53,pending,paypal,True,39,,,Chen,
+ORD-00154,2026-06-23 18:52:00,CUST-0074,West,mobile,Electronics,Headphones,4,803.58,5,3053.6,1625.94,completed,credit_card,True,68,4,SUMMER25,Alice,address corrected
+ORD-00155,2025-02-14 14:37:00,CUST-0208,North,web,Books,Statistics,3,754.61,10,2037.45,1127.13,completed,bank_transfer,False,60,,,Alice,address corrected
+ORD-00156,2025-07-24 09:37:00,CUST-0041,Central,partner,Home,Desk,2,840.26,20,0.0,0.0,cancelled,bank_transfer,False,56,5,,Evan,address corrected
+ORD-00157,2025-06-09 17:50:00,CUST-0053,South,mobile,Electronics,Headphones,4,705.47,20,0.0,0.0,cancelled,paypal,True,52,1,,,gift order
+ORD-00158,2025-01-21 16:32:00,CUST-0118,North,store,Home,Storage Box,3,288.62,0,-865.86,579.31,refunded,paypal,True,56,4,,Chen,address corrected
+ORD-00159,2025-02-22 09:44:00,CUST-0187,North,mobile,Electronics,Headphones,5,385.07,25,1444.01,1100.97,completed,apple_pay,False,45,2,VIP,,gift order
+ORD-00160,2025-09-25 14:58:00,CUST-0158,Central,mobile,Sports,Basketball,3,132.6,0,397.8,315.36,completed,apple_pay,True,37,4,WELCOME10,Bob,delayed shipment
+ORD-00161,2026-02-05 18:48:00,CUST-0239,Central,store,Sports,Dumbbell,3,246.44,0,739.32,345.87,completed,paypal,True,65,5,,Diana,delayed shipment
+ORD-00162,2026-01-18 14:39:00,CUST-0026,Central,mobile,Electronics,Webcam,4,247.02,15,839.87,423.43,completed,credit_card,False,36,4,,Bob,delayed shipment
+ORD-00163,2026-03-05 15:30:00,CUST-0160,East,web,Books,Statistics,6,717.3,0,4303.8,2846.67,completed,apple_pay,False,46,4,,Alice,
+ORD-00164,2025-06-28 10:05:00,CUST-0104,North,store,Books,Finance 101,6,313.63,10,1693.6,1282.26,completed,apple_pay,False,22,3,VIP,,
+ORD-00165,2025-09-12 08:56:00,CUST-0188,West,store,Sports,Water Bottle,1,811.53,0,0.0,0.0,cancelled,bank_transfer,False,65,3,SUMMER25,Evan,priority customer
+ORD-00166,2025-02-01 09:30:00,CUST-0087,West,mobile,Electronics,Webcam,3,501.36,15,0.0,0.0,cancelled,bank_transfer,False,67,4,WELCOME10,Alice,
+ORD-00167,2025-07-04 22:20:00,CUST-0038,West,store,Electronics,Keyboard,6,185.36,5,-1056.55,616.95,refunded,apple_pay,True,73,5,SUMMER25,,
+ORD-00168,2025-10-01 08:11:00,CUST-0096,West,mobile,Books,Data Engineering,1,430.0,20,344.0,158.86,completed,credit_card,True,63,2,WELCOME10,Bob,priority customer
+ORD-00169,2025-03-31 12:09:00,CUST-0117,East,store,Books,Machine Learning,5,580.86,15,0.0,0.0,cancelled,bank_transfer,False,71,5,,Diana,gift order
+ORD-00170,2025-03-26 09:24:00,CUST-0126,South,mobile,Books,Data Engineering,6,531.08,15,2708.51,1359.67,completed,apple_pay,True,38,4,VIP,,
+ORD-00171,2025-05-05 12:56:00,CUST-0124,West,web,Sports,Dumbbell,3,113.3,15,288.91,212.04,pending,credit_card,False,22,2,WELCOME10,Bob,priority customer
+ORD-00172,2026-03-28 17:51:00,CUST-0125,Central,store,Home,Lamp,6,773.89,0,4643.34,2576.69,completed,credit_card,True,37,3,WELCOME10,Alice,delayed shipment
+ORD-00173,2026-03-30 22:04:00,CUST-0141,Central,store,Sports,Running Shoes,1,467.66,0,467.66,263.78,completed,paypal,False,40,1,,,address corrected
+ORD-00174,2025-05-26 09:33:00,CUST-0055,South,mobile,Sports,Dumbbell,6,118.0,20,566.4,390.29,completed,credit_card,True,66,5,VIP,Diana,
+ORD-00175,2025-11-01 12:37:00,CUST-0170,Central,partner,Home,Kettle,1,101.94,0,101.94,63.62,completed,credit_card,False,54,4,,,
+ORD-00176,2026-05-22 10:38:00,CUST-0196,Central,store,Sports,Basketball,3,211.37,15,538.99,311.57,pending,credit_card,True,30,5,WELCOME10,Alice,priority customer
+ORD-00177,2026-03-13 13:18:00,CUST-0008,North,store,Sports,Basketball,3,105.55,0,316.65,219.79,completed,bank_transfer,True,72,4,VIP,Diana,
+ORD-00178,2025-07-08 13:52:00,CUST-0158,West,partner,Home,Lamp,3,324.11,15,826.48,557.0,completed,bank_transfer,True,62,5,,,delayed shipment
+ORD-00179,2026-03-09 21:20:00,CUST-0080,North,web,Sports,Yoga Mat,5,162.5,20,0.0,0.0,cancelled,apple_pay,False,64,4,,Chen,address corrected
+ORD-00180,2025-03-05 16:19:00,CUST-0210,South,mobile,Home,Lamp,3,689.13,0,-2067.39,1074.03,refunded,paypal,False,36,5,,Evan,
+ORD-00181,2026-04-27 19:15:00,CUST-0157,West,partner,Electronics,Headphones,1,345.16,0,-345.16,217.37,refunded,paypal,True,44,4,SUMMER25,Chen,delayed shipment
+ORD-00182,2025-08-01 15:27:00,CUST-0040,West,mobile,Home,Desk,5,639.97,0,0.0,0.0,cancelled,apple_pay,True,26,5,,Chen,
+ORD-00183,2026-03-07 20:23:00,CUST-0007,East,web,Books,Python Basics,3,413.86,5,1179.5,584.96,pending,credit_card,True,57,4,,Chen,address corrected
+ORD-00184,2025-04-28 22:46:00,CUST-0006,West,store,Sports,Dumbbell,4,532.59,25,1597.77,1092.38,pending,paypal,True,21,4,SUMMER25,Bob,address corrected
+ORD-00185,2025-10-02 12:27:00,CUST-0195,Central,web,Electronics,Mouse,2,97.6,0,0.0,0.0,cancelled,bank_transfer,True,37,4,WELCOME10,Diana,
+ORD-00186,2026-05-12 19:07:00,CUST-0041,South,web,Books,Python Basics,1,680.06,0,680.06,487.88,completed,bank_transfer,False,18,4,,Diana,priority customer
+ORD-00187,2026-01-18 08:59:00,CUST-0179,South,web,Electronics,Headphones,1,828.71,25,621.53,402.47,pending,bank_transfer,False,37,,WELCOME10,,
+ORD-00188,2025-12-20 09:52:00,CUST-0068,Central,partner,Sports,Water Bottle,2,110.45,20,176.72,91.01,completed,credit_card,False,58,4,WELCOME10,Diana,delayed shipment
+ORD-00189,2025-01-15 11:50:00,CUST-0050,East,partner,Electronics,Webcam,2,844.71,25,1267.07,1023.28,completed,bank_transfer,False,58,3,,Diana,address corrected
+ORD-00190,2026-03-03 20:04:00,CUST-0155,West,mobile,Sports,Yoga Mat,3,10.41,0,31.23,14.18,completed,credit_card,False,59,5,VIP,Alice,address corrected
+ORD-00191,2025-05-02 21:56:00,CUST-0101,North,partner,Books,Finance 101,6,352.67,20,1692.82,1349.68,completed,apple_pay,False,73,2,VIP,Diana,
+ORD-00192,2026-01-27 16:13:00,CUST-0019,North,store,Sports,Water Bottle,2,327.26,25,0.0,0.0,cancelled,bank_transfer,True,39,1,,Bob,gift order
+ORD-00193,2026-03-03 22:38:00,CUST-0052,East,mobile,Sports,Yoga Mat,4,404.75,15,-1376.15,798.6,refunded,apple_pay,False,65,4,,Diana,address corrected
+ORD-00194,2025-03-31 21:59:00,CUST-0060,East,web,Sports,Basketball,4,729.84,0,2919.36,2251.32,completed,bank_transfer,False,35,4,WELCOME10,,address corrected
+ORD-00195,2025-07-14 15:15:00,CUST-0182,South,mobile,Home,Storage Box,3,142.01,15,362.13,242.06,pending,apple_pay,False,67,4,WELCOME10,,
+ORD-00196,2025-02-24 14:10:00,CUST-0079,North,store,Books,Python Basics,2,121.57,0,-243.14,139.67,refunded,apple_pay,True,22,1,,Bob,priority customer
+ORD-00197,2026-03-21 22:22:00,CUST-0085,West,web,Books,Python Basics,5,736.47,0,-3682.35,2189.25,refunded,credit_card,False,52,5,,Chen,
+ORD-00198,2025-06-14 20:04:00,CUST-0119,West,partner,Books,Python Basics,1,44.3,15,37.65,28.17,completed,credit_card,False,60,3,,Alice,gift order
+ORD-00199,2026-03-16 16:12:00,CUST-0144,Central,web,Electronics,Headphones,3,156.68,0,470.04,213.5,completed,apple_pay,False,20,4,,Evan,gift order
+ORD-00200,2025-11-01 22:20:00,CUST-0141,North,partner,Books,Python Basics,2,478.31,0,956.62,673.71,completed,apple_pay,True,58,5,SUMMER25,Alice,address corrected
+ORD-00201,2025-11-08 18:27:00,CUST-0102,Central,web,Electronics,Webcam,5,757.03,20,3028.12,1432.93,completed,bank_transfer,True,47,4,SUMMER25,Diana,
+ORD-00202,2026-03-31 11:45:00,CUST-0137,West,mobile,Electronics,Headphones,6,141.58,15,722.06,520.42,completed,paypal,False,40,5,,Chen,
+ORD-00203,2026-03-30 15:35:00,CUST-0033,South,web,Home,Kettle,4,116.31,25,0.0,0.0,cancelled,paypal,False,48,4,SUMMER25,Diana,priority customer
+ORD-00204,2026-06-02 11:39:00,CUST-0117,North,mobile,Electronics,Mouse,1,15.54,0,15.54,7.37,completed,paypal,False,34,5,,Chen,address corrected
+ORD-00205,2026-05-07 10:25:00,CUST-0128,Central,store,Electronics,Headphones,6,524.66,20,2518.37,1145.95,completed,paypal,False,42,1,,Chen,delayed shipment
+ORD-00206,2025-06-09 20:19:00,CUST-0090,West,partner,Home,Kettle,5,794.06,0,3970.3,1987.02,completed,bank_transfer,True,67,4,SUMMER25,Diana,delayed shipment
+ORD-00207,2026-05-07 12:04:00,CUST-0154,North,web,Home,Storage Box,2,404.4,20,647.04,477.76,completed,paypal,True,23,,WELCOME10,Bob,
+ORD-00208,2026-02-03 10:46:00,CUST-0015,East,web,Books,Finance 101,4,147.65,0,0.0,0.0,cancelled,credit_card,False,35,5,,Alice,
+ORD-00209,2025-10-01 22:58:00,CUST-0033,Central,partner,Sports,Yoga Mat,4,142.19,0,-568.76,447.65,refunded,credit_card,False,44,4,WELCOME10,Alice,
+ORD-00210,2026-04-18 10:12:00,CUST-0102,Central,web,Books,Machine Learning,5,301.65,15,-1282.01,904.88,refunded,paypal,False,38,5,SUMMER25,Diana,address corrected
+ORD-00211,2026-02-02 15:26:00,CUST-0122,West,store,Home,Lamp,5,31.21,0,156.05,105.28,completed,apple_pay,True,38,3,VIP,Diana,priority customer
+ORD-00212,2025-05-30 17:48:00,CUST-0115,West,mobile,Books,Python Basics,1,364.31,0,364.31,262.74,completed,bank_transfer,True,35,2,,Chen,
+ORD-00213,2025-09-14 21:37:00,CUST-0001,South,partner,Sports,Dumbbell,6,13.85,5,0.0,0.0,cancelled,credit_card,False,52,4,WELCOME10,Alice,priority customer
+ORD-00214,2026-01-01 13:25:00,CUST-0130,South,partner,Books,Finance 101,1,630.48,0,630.48,375.75,pending,paypal,True,44,4,SUMMER25,Bob,delayed shipment
+ORD-00215,2025-06-08 19:36:00,CUST-0200,South,partner,Electronics,Webcam,4,565.54,5,2149.05,1245.85,completed,bank_transfer,False,62,2,WELCOME10,Diana,delayed shipment
+ORD-00216,2026-05-01 22:47:00,CUST-0140,West,store,Sports,Water Bottle,2,145.34,10,261.61,190.76,completed,apple_pay,True,42,4,,Bob,
+ORD-00217,2025-03-06 16:08:00,CUST-0109,East,web,Books,Data Engineering,5,847.94,10,0.0,0.0,cancelled,paypal,True,32,5,,Bob,address corrected
+ORD-00218,2025-05-15 17:36:00,CUST-0190,South,store,Sports,Water Bottle,6,729.54,0,0.0,0.0,cancelled,credit_card,True,44,3,,Alice,gift order
+ORD-00219,2026-01-26 20:49:00,CUST-0065,South,partner,Books,Statistics,5,564.74,10,2541.33,2033.53,completed,bank_transfer,True,68,5,WELCOME10,Chen,address corrected
+ORD-00220,2025-04-13 15:56:00,CUST-0072,South,web,Sports,Water Bottle,4,789.02,0,3156.08,2203.42,pending,credit_card,True,62,1,SUMMER25,,
+ORD-00221,2025-02-21 19:40:00,CUST-0090,Central,mobile,Home,Lamp,3,448.18,0,1344.54,610.13,completed,apple_pay,False,64,1,WELCOME10,Evan,
+ORD-00222,2025-04-05 18:32:00,CUST-0117,South,partner,Books,Statistics,4,531.55,5,2019.89,949.48,pending,credit_card,False,55,4,,Diana,
+ORD-00223,2025-12-03 22:26:00,CUST-0012,Central,mobile,Home,Storage Box,4,341.89,5,1299.18,719.73,completed,apple_pay,False,45,1,,Alice,delayed shipment
+ORD-00224,2026-01-06 15:30:00,CUST-0020,East,partner,Books,Machine Learning,4,28.32,0,113.28,83.07,pending,bank_transfer,False,24,5,WELCOME10,Alice,
+ORD-00225,2025-10-31 09:47:00,CUST-0069,South,store,Electronics,Keyboard,6,548.8,0,3292.8,1895.48,pending,bank_transfer,False,72,,,Bob,
+ORD-00226,2025-10-13 21:32:00,CUST-0077,East,partner,Sports,Water Bottle,3,346.14,0,1038.42,805.06,completed,bank_transfer,True,22,5,WELCOME10,Bob,address corrected
+ORD-00227,2025-05-29 21:53:00,CUST-0125,South,store,Home,Lamp,5,469.72,25,-1761.45,836.38,refunded,credit_card,True,47,5,,Alice,address corrected
+ORD-00228,2026-05-26 11:49:00,CUST-0174,Central,web,Sports,Running Shoes,1,184.63,0,184.63,138.3,completed,bank_transfer,False,36,3,VIP,Chen,
+ORD-00229,2025-06-14 09:11:00,CUST-0192,North,partner,Electronics,Mouse,5,825.12,0,-4125.6,2921.05,refunded,apple_pay,True,60,5,,Bob,address corrected
+ORD-00230,2025-04-24 20:15:00,CUST-0156,Central,store,Electronics,Keyboard,4,810.25,20,2592.8,1726.32,completed,bank_transfer,True,73,5,,Chen,delayed shipment
+ORD-00231,2025-05-19 16:41:00,CUST-0120,West,mobile,Sports,Basketball,5,618.05,0,3090.25,1852.53,completed,credit_card,False,58,5,,,address corrected
+ORD-00232,2025-10-06 17:27:00,CUST-0025,Central,web,Electronics,Keyboard,2,254.94,20,407.9,241.42,pending,bank_transfer,True,71,1,WELCOME10,Evan,
+ORD-00233,2025-08-01 17:30:00,CUST-0200,East,partner,Sports,Basketball,3,371.55,20,-891.72,491.92,refunded,bank_transfer,False,32,4,,Bob,delayed shipment
+ORD-00234,2025-03-08 18:37:00,CUST-0147,Central,web,Electronics,Headphones,6,844.64,10,4561.06,2135.47,completed,bank_transfer,True,23,4,SUMMER25,Evan,
+ORD-00235,2025-04-14 12:22:00,CUST-0229,North,mobile,Home,Storage Box,4,778.15,10,2801.34,2025.41,completed,bank_transfer,False,31,,VIP,Evan,gift order
+ORD-00236,2025-08-31 21:55:00,CUST-0068,Central,mobile,Home,Chair,4,766.37,20,2452.38,1111.46,completed,paypal,True,29,4,WELCOME10,Evan,gift order
+ORD-00237,2026-02-11 20:26:00,CUST-0114,East,web,Books,Finance 101,2,228.91,0,457.82,287.73,pending,bank_transfer,True,29,5,,,gift order
+ORD-00238,2026-04-03 11:27:00,CUST-0236,West,store,Electronics,Headphones,5,309.36,20,-1237.44,764.87,refunded,apple_pay,True,44,3,,,delayed shipment
+ORD-00239,2025-07-20 18:53:00,CUST-0153,East,store,Sports,Yoga Mat,4,47.72,0,-190.88,98.17,refunded,bank_transfer,False,64,4,,Bob,
+ORD-00240,2025-11-03 16:10:00,CUST-0076,North,partner,Electronics,Mouse,3,50.09,20,120.22,68.22,pending,paypal,True,39,5,VIP,Evan,address corrected
+ORD-00241,2026-03-10 14:28:00,CUST-0147,North,web,Sports,Basketball,4,701.87,0,2807.48,2198.89,completed,apple_pay,True,21,2,,Alice,priority customer
+ORD-00242,2025-06-04 18:55:00,CUST-0041,South,web,Electronics,Keyboard,2,627.37,15,1066.53,668.17,completed,apple_pay,True,51,4,SUMMER25,Alice,address corrected
+ORD-00243,2026-01-16 18:40:00,CUST-0009,South,mobile,Home,Lamp,3,232.95,0,-698.85,396.52,refunded,credit_card,False,35,2,,Diana,
+ORD-00244,2025-02-05 10:33:00,CUST-0076,East,web,Home,Desk,1,567.37,0,567.37,346.99,completed,paypal,False,42,1,SUMMER25,,address corrected
+ORD-00245,2025-08-19 17:29:00,CUST-0205,East,store,Home,Lamp,6,67.94,5,387.26,285.87,pending,paypal,True,56,5,,Evan,gift order
+ORD-00246,2025-07-05 16:05:00,CUST-0111,East,partner,Sports,Basketball,4,416.11,20,0.0,0.0,cancelled,paypal,False,56,5,VIP,Diana,delayed shipment
+ORD-00247,2025-09-12 20:01:00,CUST-0122,West,partner,Books,Finance 101,5,38.23,15,0.0,0.0,cancelled,bank_transfer,True,57,3,,,
+ORD-00248,2025-05-27 20:52:00,CUST-0183,West,web,Sports,Basketball,2,476.38,10,857.48,555.8,completed,paypal,False,32,5,,Alice,priority customer
+ORD-00249,2025-10-29 13:49:00,CUST-0231,West,mobile,Electronics,Webcam,5,170.61,0,853.05,445.26,completed,credit_card,False,20,3,VIP,,priority customer
+ORD-00250,2026-04-10 13:32:00,CUST-0198,East,partner,Electronics,Keyboard,6,37.37,25,168.16,116.49,completed,bank_transfer,True,999,5,VIP,Bob,
+ORD-00251,2025-09-24 10:26:00,CUST-0058,East,partner,Home,Kettle,6,328.66,0,-1971.96,1117.28,refunded,apple_pay,False,40,1,SUMMER25,Diana,delayed shipment
+ORD-00252,2025-06-18 10:30:00,CUST-0086,West,mobile,Home,Desk,2,311.88,0,-623.76,313.42,refunded,paypal,False,55,4,WELCOME10,Evan,priority customer
+ORD-00253,2025-02-11 09:29:00,CUST-0049,North,mobile,Home,Lamp,5,636.19,25,-2385.71,1526.42,refunded,paypal,True,43,1,,,
+ORD-00254,2025-08-23 14:48:00,CUST-0129,Central,store,Electronics,Keyboard,2,51.52,20,82.43,44.66,pending,bank_transfer,True,28,4,WELCOME10,Alice,delayed shipment
+ORD-00255,2025-01-13 16:08:00,CUST-0086,North,store,Home,Kettle,3,297.67,20,714.41,393.69,completed,bank_transfer,True,36,4,,Diana,
+ORD-00256,2026-06-23 08:43:00,CUST-0203,South,store,Sports,Yoga Mat,5,233.51,0,1167.55,528.88,pending,apple_pay,True,22,1,WELCOME10,Diana,address corrected
+ORD-00257,2025-09-12 12:03:00,CUST-0184,North,web,Home,Chair,5,722.08,10,3249.36,1526.84,completed,apple_pay,False,45,,,Diana,priority customer
+ORD-00258,2025-03-31 17:29:00,CUST-0110,South,partner,Books,Python Basics,2,648.73,0,1297.46,814.68,completed,bank_transfer,True,54,5,WELCOME10,,
+ORD-00259,2026-04-24 19:49:00,CUST-0110,North,partner,Home,Storage Box,5,636.79,5,3024.75,2470.53,completed,apple_pay,True,65,4,VIP,Diana,gift order
+ORD-00260,2025-04-22 20:00:00,CUST-0184,West,web,Books,Machine Learning,2,506.58,0,1013.16,503.85,completed,apple_pay,False,66,3,SUMMER25,Alice,
+ORD-00261,2025-12-20 20:40:00,CUST-0004,East,web,Sports,Running Shoes,3,11.68,5,-33.29,25.23,refunded,bank_transfer,False,47,4,SUMMER25,Bob,address corrected
+ORD-00262,2026-03-19 08:51:00,CUST-0237,Central,store,Home,Kettle,1,33.06,25,24.8,16.0,completed,paypal,False,64,1,,Evan,gift order
+ORD-00263,2026-04-15 14:55:00,CUST-0234,North,web,Sports,Dumbbell,4,146.49,15,0.0,0.0,cancelled,paypal,False,61,,,Alice,address corrected
+ORD-00264,2026-05-23 09:43:00,CUST-0168,West,web,Home,Storage Box,5,326.08,0,1630.4,1154.58,completed,paypal,True,34,1,WELCOME10,Chen,
+ORD-00265,2026-06-12 12:43:00,CUST-0211,South,web,Sports,Running Shoes,5,296.96,0,1484.8,722.04,completed,bank_transfer,False,52,1,,Alice,delayed shipment
+ORD-00266,2025-01-27 13:40:00,CUST-0111,Central,web,Books,Finance 101,4,809.24,10,2913.26,2189.32,completed,apple_pay,False,62,5,SUMMER25,Bob,gift order
+ORD-00267,2025-05-29 15:25:00,CUST-0018,Central,partner,Books,Finance 101,5,485.72,5,0.0,0.0,cancelled,bank_transfer,True,26,4,WELCOME10,Chen,gift order
+ORD-00268,2025-01-01 22:02:00,CUST-0164,North,web,Electronics,Monitor,6,203.16,0,0.0,0.0,cancelled,credit_card,True,70,4,WELCOME10,Bob,gift order
+ORD-00269,2026-06-15 11:09:00,CUST-0041,North,web,Home,Lamp,1,532.19,10,478.97,225.85,completed,credit_card,True,44,4,,Alice,
+ORD-00270,2025-07-17 20:43:00,CUST-0035,East,store,Home,Lamp,5,406.66,10,1829.97,1229.11,completed,bank_transfer,False,37,4,,Chen,priority customer
+ORD-00271,2025-11-07 14:09:00,CUST-0045,West,partner,Books,Finance 101,1,748.73,0,748.73,342.06,completed,bank_transfer,True,20,3,SUMMER25,Alice,delayed shipment
+ORD-00272,2025-06-17 22:28:00,CUST-0130,North,store,Home,Kettle,6,746.03,0,4476.18,2224.74,completed,apple_pay,True,36,4,WELCOME10,,priority customer
+ORD-00273,2025-10-14 19:35:00,CUST-0186,North,web,Home,Chair,2,610.53,5,1160.01,738.46,pending,paypal,False,61,3,WELCOME10,Evan,
+ORD-00274,2026-04-02 21:38:00,CUST-0161,East,partner,Electronics,Monitor,1,110.58,25,82.94,57.18,pending,apple_pay,False,20,,,,delayed shipment
+ORD-00275,2025-06-28 15:16:00,CUST-0067,North,store,Books,Finance 101,4,139.24,5,529.11,281.29,completed,credit_card,True,32,5,VIP,Chen,
+ORD-00276,2025-05-28 09:42:00,CUST-0070,North,mobile,Electronics,Keyboard,6,663.55,5,0.0,0.0,cancelled,apple_pay,False,20,,,Chen,gift order
+ORD-00277,2026-03-20 12:29:00,CUST-0108,South,store,Home,Chair,6,59.62,0,357.72,169.23,completed,apple_pay,True,48,2,,Diana,priority customer
+ORD-00278,2025-03-04 12:08:00,CUST-0017,Central,partner,Sports,Dumbbell,1,603.49,10,543.14,440.4,completed,credit_card,True,65,3,,Evan,address corrected
+ORD-00279,2025-12-27 17:46:00,CUST-0008,South,partner,Home,Chair,1,311.12,5,0.0,0.0,cancelled,credit_card,False,41,5,VIP,Bob,delayed shipment
+ORD-00280,2025-07-02 11:38:00,CUST-0104,Central,partner,Books,Finance 101,3,577.16,25,1298.61,762.59,completed,bank_transfer,False,51,4,SUMMER25,,gift order
+ORD-00281,2026-02-03 22:24:00,CUST-0080,Central,store,Home,Desk,1,465.55,0,465.55,250.1,completed,bank_transfer,False,47,2,,,
+ORD-00282,2026-05-02 12:41:00,CUST-0029,East,web,Home,Lamp,3,156.52,25,352.17,273.31,completed,apple_pay,False,60,5,VIP,Evan,priority customer
+ORD-00283,2025-03-19 14:05:00,CUST-0174,South,partner,Books,Python Basics,6,521.05,10,0.0,0.0,cancelled,bank_transfer,False,55,4,,Chen,
+ORD-00284,2026-03-30 12:27:00,CUST-0058,West,partner,Home,Kettle,5,839.82,10,3779.19,2719.01,completed,credit_card,True,44,3,VIP,Alice,priority customer
+ORD-00285,2025-11-08 11:49:00,CUST-0129,West,partner,Home,Lamp,6,455.58,20,0.0,0.0,cancelled,paypal,True,44,3,SUMMER25,Bob,
+ORD-00286,2026-02-05 13:12:00,CUST-0183,North,partner,Books,Data Engineering,1,728.45,0,-728.45,362.08,refunded,bank_transfer,False,51,,,Bob,
+ORD-00287,2025-06-05 10:51:00,CUST-0016,North,mobile,Books,Finance 101,1,582.73,10,524.46,237.27,pending,credit_card,True,50,5,,,priority customer
+ORD-00288,2026-03-02 16:04:00,CUST-0145,East,store,Home,Kettle,6,280.38,0,0.0,0.0,cancelled,credit_card,False,51,1,VIP,Chen,gift order
+ORD-00289,2026-01-10 13:46:00,CUST-0061,South,partner,Electronics,Keyboard,1,650.0,20,0.0,0.0,cancelled,bank_transfer,False,51,3,WELCOME10,,gift order
+ORD-00290,2025-10-11 18:48:00,CUST-0128,South,mobile,Sports,Yoga Mat,3,333.88,15,851.39,410.26,completed,paypal,False,36,2,,Chen,
+ORD-00291,2025-10-19 15:01:00,CUST-0213,South,store,Sports,Basketball,5,44.91,0,224.55,180.43,pending,credit_card,True,43,1,,Diana,delayed shipment
+ORD-00292,2026-04-24 14:27:00,CUST-0077,East,partner,Home,Lamp,6,647.36,25,2913.12,2383.07,completed,apple_pay,False,51,4,WELCOME10,Alice,priority customer
+ORD-00293,2026-03-24 19:57:00,CUST-0222,East,store,Home,Chair,5,32.09,20,128.36,67.76,completed,apple_pay,False,22,1,SUMMER25,Alice,priority customer
+ORD-00294,2025-09-05 08:59:00,CUST-0043,South,store,Sports,Water Bottle,4,344.21,0,1376.84,922.31,completed,bank_transfer,True,61,4,VIP,,address corrected
+ORD-00295,2025-09-19 12:02:00,CUST-0143,West,partner,Sports,Running Shoes,4,471.95,25,1415.85,789.64,completed,paypal,False,31,,VIP,Bob,gift order
+ORD-00296,2025-05-05 10:19:00,CUST-0181,West,web,Sports,Yoga Mat,1,147.99,10,133.19,104.09,completed,bank_transfer,False,28,5,SUMMER25,Bob,address corrected
+ORD-00297,2026-06-18 11:31:00,CUST-0168,West,partner,Books,Finance 101,3,64.39,5,-183.51,84.44,refunded,bank_transfer,True,59,5,,,delayed shipment
+ORD-00298,2025-01-16 14:25:00,CUST-0045,East,partner,Books,Machine Learning,4,800.3,0,3201.2,2585.07,completed,credit_card,True,48,,,,gift order
+ORD-00299,2025-03-30 19:42:00,CUST-0108,North,partner,Home,Desk,1,352.72,0,352.72,173.09,pending,bank_transfer,False,36,5,,,gift order
+ORD-00300,2026-06-15 20:38:00,CUST-0010,Central,store,Home,Kettle,5,401.38,0,2006.9,1281.74,completed,apple_pay,False,58,5,,Diana,address corrected
+ORD-00301,2025-04-13 08:44:00,CUST-0032,East,web,Home,Chair,2,172.05,0,344.1,265.89,pending,credit_card,False,29,5,,,priority customer
+ORD-00302,2025-06-21 12:42:00,CUST-0220,East,web,Home,Storage Box,5,809.81,20,3239.24,2193.62,completed,bank_transfer,True,27,4,SUMMER25,Evan,priority customer
+ORD-00303,2026-05-26 14:41:00,CUST-0020,South,store,Home,Lamp,1,622.04,20,497.63,255.2,completed,bank_transfer,True,57,4,SUMMER25,Evan,delayed shipment
+ORD-00304,2025-12-24 17:30:00,CUST-0003,South,web,Books,Statistics,2,290.68,25,0.0,0.0,cancelled,credit_card,False,34,5,,Diana,priority customer
+ORD-00305,2025-10-22 12:07:00,CUST-0076,East,web,Sports,Water Bottle,1,21.3,5,-20.23,12.68,refunded,bank_transfer,False,69,4,,Evan,
+ORD-00306,2026-04-23 08:31:00,CUST-0170,North,partner,Home,Storage Box,3,690.18,10,1863.49,1203.41,pending,bank_transfer,True,45,4,VIP,Chen,priority customer
+ORD-00307,2025-07-29 10:39:00,CUST-0119,Central,mobile,Electronics,Headphones,5,814.48,15,3461.54,2616.66,completed,paypal,False,29,3,,Alice,
+ORD-00308,2026-03-26 16:26:00,CUST-0098,East,store,Home,Lamp,1,818.2,10,736.38,439.93,completed,paypal,False,64,,,Bob,address corrected
+ORD-00309,2026-02-16 17:19:00,CUST-0036,Central,store,Books,Data Engineering,2,511.52,20,-818.43,565.63,refunded,credit_card,False,44,3,WELCOME10,,delayed shipment
+ORD-00310,2025-08-17 18:42:00,CUST-0011,West,store,Books,Python Basics,1,364.07,20,291.26,212.49,pending,credit_card,True,61,4,VIP,Diana,gift order
+ORD-00311,2025-09-27 17:13:00,CUST-0049,Central,store,Books,Data Engineering,2,515.18,0,0.0,0.0,cancelled,paypal,True,51,4,SUMMER25,Evan,gift order
+ORD-00312,2025-02-20 13:00:00,CUST-0117,Central,partner,Electronics,Mouse,2,499.92,20,799.87,388.53,completed,paypal,False,31,3,,Diana,priority customer
+ORD-00313,2025-08-25 22:57:00,CUST-0144,West,web,Books,Python Basics,6,460.23,10,2485.24,1573.87,completed,paypal,False,26,5,,Alice,address corrected
+ORD-00314,2025-09-16 16:10:00,CUST-0129,West,store,Home,Kettle,6,518.69,0,-3112.14,1525.24,refunded,apple_pay,True,19,4,SUMMER25,Evan,
+ORD-00315,2025-02-19 19:04:00,CUST-0186,Central,mobile,Electronics,Mouse,5,641.95,25,2407.31,1686.62,completed,paypal,True,47,1,SUMMER25,Evan,gift order
+ORD-00316,2025-09-17 14:24:00,CUST-0041,North,partner,Home,Storage Box,3,473.81,15,1208.22,773.73,pending,paypal,True,45,5,,Bob,priority customer
+ORD-00317,2025-02-14 17:36:00,CUST-0164,West,partner,Home,Chair,4,844.53,0,3378.12,2063.1,pending,apple_pay,True,66,5,,Chen,priority customer
+ORD-00318,2025-11-03 18:28:00,CUST-0216,West,partner,Home,Desk,2,200.16,5,0.0,0.0,cancelled,apple_pay,True,59,2,WELCOME10,Bob,delayed shipment
+ORD-00319,2026-05-28 22:25:00,CUST-0237,Central,store,Home,Storage Box,4,576.19,5,2189.52,1488.58,pending,credit_card,False,63,5,,,
+ORD-00320,2026-03-20 19:39:00,CUST-0037,Central,web,Electronics,Headphones,5,437.79,10,1970.06,1330.05,completed,bank_transfer,False,30,3,,Alice,
+ORD-00321,2025-05-09 14:15:00,CUST-0184,East,partner,Sports,Basketball,3,734.85,0,2204.55,1480.81,completed,credit_card,False,54,2,,Diana,
+ORD-00322,2025-03-24 18:03:00,CUST-0111,Central,web,Books,Python Basics,1,312.2,0,-312.2,154.62,refunded,bank_transfer,True,29,1,VIP,,
+ORD-00323,2025-03-15 11:42:00,CUST-0019,Central,web,Books,Statistics,1,299.71,0,299.71,136.32,pending,bank_transfer,True,70,1,,Evan,delayed shipment
+ORD-00324,2026-01-30 09:39:00,CUST-0218,West,mobile,Home,Lamp,4,271.37,0,1085.48,774.72,completed,apple_pay,True,32,2,SUMMER25,Chen,delayed shipment
+ORD-00325,2025-12-18 12:51:00,CUST-0227,West,partner,Books,Machine Learning,2,794.26,20,0.0,0.0,cancelled,paypal,True,22,2,VIP,,gift order
+ORD-00326,2025-10-16 19:23:00,CUST-0024,South,mobile,Home,Storage Box,2,795.82,0,1591.64,725.81,completed,credit_card,True,56,4,WELCOME10,Evan,
+ORD-00327,2025-05-03 12:19:00,CUST-0138,East,web,Home,Lamp,2,741.45,25,1112.18,570.25,completed,bank_transfer,True,40,3,SUMMER25,Evan,
+ORD-00328,2025-03-14 20:59:00,CUST-0201,West,web,Sports,Dumbbell,4,110.6,0,0.0,0.0,cancelled,apple_pay,False,45,5,,Bob,priority customer
+ORD-00329,2026-05-15 17:54:00,CUST-0198,North,mobile,Home,Lamp,5,357.61,25,0.0,0.0,cancelled,paypal,True,30,5,,Chen,gift order
+ORD-00330,2026-03-22 14:39:00,CUST-0170,South,store,Sports,Water Bottle,6,158.04,0,948.24,749.61,completed,paypal,True,26,1,VIP,,address corrected
+ORD-00331,2026-02-07 10:01:00,CUST-0083,Central,store,Sports,Water Bottle,3,12.09,0,36.27,29.23,completed,apple_pay,True,72,3,SUMMER25,,
+ORD-00332,2025-05-08 10:21:00,CUST-0181,North,web,Electronics,Keyboard,4,796.64,5,3027.23,2115.82,pending,credit_card,False,44,5,WELCOME10,Alice,delayed shipment
+ORD-00333,2026-01-24 09:35:00,CUST-0236,Central,partner,Sports,Basketball,2,32.89,10,59.2,42.81,pending,credit_card,True,70,2,,Evan,
+ORD-00334,2026-01-11 09:57:00,CUST-0155,East,web,Home,Desk,3,434.42,15,-1107.77,843.99,refunded,credit_card,True,43,2,VIP,Chen,
+ORD-00335,2025-02-23 14:16:00,CUST-0072,East,mobile,Home,Kettle,3,39.89,10,107.7,82.3,completed,apple_pay,False,51,1,,Diana,
+ORD-00336,2025-12-03 18:37:00,CUST-0032,West,web,Electronics,Headphones,3,684.68,10,1848.64,883.98,completed,bank_transfer,True,43,5,VIP,Diana,address corrected
+ORD-00337,2026-04-12 18:35:00,CUST-0047,East,mobile,Sports,Yoga Mat,3,291.7,25,656.32,313.57,completed,apple_pay,True,57,1,,Chen,address corrected
+ORD-00338,2025-08-03 11:16:00,CUST-0166,South,partner,Sports,Running Shoes,4,728.93,25,2186.79,1416.57,completed,credit_card,True,28,,,Alice,gift order
+ORD-00339,2025-04-09 18:56:00,CUST-0149,South,web,Sports,Basketball,5,338.95,15,1440.54,677.53,completed,bank_transfer,False,42,1,,Diana,
+ORD-00340,2025-12-24 17:39:00,CUST-0025,South,web,Electronics,Mouse,1,302.91,10,272.62,195.21,completed,credit_card,True,47,4,,Bob,delayed shipment
+ORD-00341,2025-11-15 19:34:00,CUST-0122,North,mobile,Sports,Yoga Mat,2,468.45,10,843.21,681.35,pending,paypal,False,74,,SUMMER25,Evan,priority customer
+ORD-00342,2026-01-24 22:38:00,CUST-0109,West,partner,Sports,Dumbbell,1,493.64,10,0.0,0.0,cancelled,apple_pay,True,21,4,VIP,Diana,delayed shipment
+ORD-00343,2025-12-02 22:59:00,CUST-0198,Central,store,Sports,Dumbbell,3,551.6,5,1572.06,1101.48,pending,paypal,True,36,5,WELCOME10,Evan,priority customer
+ORD-00344,2025-11-28 12:25:00,CUST-0035,East,mobile,Home,Kettle,2,761.63,0,1523.26,692.68,completed,apple_pay,False,46,3,VIP,Bob,
+ORD-00345,2026-03-17 14:24:00,CUST-0121,North,web,Electronics,Webcam,3,225.65,25,507.71,311.01,pending,credit_card,False,40,4,,Chen,delayed shipment
+ORD-00346,2025-12-06 10:38:00,CUST-0161,West,mobile,Home,Desk,5,364.79,10,1641.56,1232.29,completed,apple_pay,True,44,4,SUMMER25,Alice,
+ORD-00347,2026-03-14 21:34:00,CUST-0129,East,store,Books,Machine Learning,5,758.36,25,-2843.85,2053.82,refunded,bank_transfer,True,47,4,,Chen,delayed shipment
+ORD-00348,2025-11-15 17:45:00,CUST-0165,North,web,Home,Storage Box,2,147.17,25,220.75,109.51,completed,credit_card,True,31,5,,Alice,priority customer
+ORD-00349,2025-11-13 11:05:00,CUST-0238,North,mobile,Electronics,Mouse,3,232.53,0,697.59,444.45,pending,paypal,False,52,5,,Evan,
+ORD-00350,2026-06-09 13:53:00,CUST-0160,West,mobile,Home,Desk,5,786.18,0,0.0,0.0,cancelled,paypal,True,33,,,,
+ORD-00351,2025-03-29 12:48:00,CUST-0024,East,web,Sports,Water Bottle,2,667.93,25,-1001.89,738.82,refunded,paypal,True,26,1,WELCOME10,Diana,delayed shipment
+ORD-00352,2026-05-01 20:05:00,CUST-0069,North,web,Home,Chair,1,687.61,0,687.61,376.7,completed,paypal,False,46,5,,Diana,gift order
+ORD-00353,2025-09-16 15:13:00,CUST-0187,Central,store,Electronics,Headphones,3,91.29,0,273.87,207.57,completed,apple_pay,False,64,4,WELCOME10,Alice,
+ORD-00354,2026-05-20 12:32:00,CUST-0155,West,partner,Electronics,Keyboard,5,349.86,20,1399.44,1135.49,completed,apple_pay,False,57,3,,Chen,
+ORD-00355,2025-03-12 14:12:00,CUST-0196,East,partner,Sports,Yoga Mat,2,415.87,0,831.74,381.95,completed,paypal,False,36,4,WELCOME10,Diana,priority customer
+ORD-00356,2025-06-20 21:53:00,CUST-0240,Central,mobile,Electronics,Monitor,6,568.24,25,2557.08,1582.4,completed,apple_pay,True,29,4,SUMMER25,,priority customer
+ORD-00357,2025-05-30 19:52:00,CUST-0142,North,partner,Sports,Basketball,4,440.32,25,1320.96,716.78,pending,bank_transfer,True,39,2,,Chen,
+ORD-00358,2025-10-12 10:34:00,CUST-0072,West,web,Sports,Running Shoes,4,703.02,20,-2249.66,1772.48,refunded,bank_transfer,False,37,1,SUMMER25,Diana,delayed shipment
+ORD-00359,2025-09-14 11:56:00,CUST-0106,South,partner,Books,Finance 101,2,515.65,15,876.6,635.67,completed,bank_transfer,False,58,5,,,delayed shipment
+ORD-00360,2026-04-26 08:02:00,CUST-0179,West,web,Electronics,Keyboard,3,473.71,5,1350.07,886.91,completed,bank_transfer,False,67,3,,Diana,priority customer
+ORD-00361,2026-01-20 18:32:00,CUST-0180,Central,partner,Home,Lamp,4,14.08,0,56.32,29.07,completed,credit_card,False,61,1,,Alice,address corrected
+ORD-00362,2026-05-16 15:56:00,CUST-0138,South,partner,Electronics,Keyboard,2,440.51,20,704.82,472.94,pending,apple_pay,True,23,1,,Bob,
+ORD-00363,2025-02-04 15:01:00,CUST-0032,South,store,Books,Statistics,4,543.05,15,1846.37,1000.53,completed,apple_pay,True,59,4,VIP,Diana,
+ORD-00364,2025-06-24 11:02:00,CUST-0037,North,mobile,Books,Finance 101,3,525.13,10,1417.85,1123.59,completed,apple_pay,False,46,3,WELCOME10,Chen,priority customer
+ORD-00365,2026-01-28 22:37:00,CUST-0192,North,mobile,Books,Statistics,2,685.34,10,0.0,0.0,cancelled,bank_transfer,False,30,1,VIP,Chen,address corrected
+ORD-00366,2025-09-30 17:25:00,CUST-0044,Central,store,Books,Python Basics,3,204.84,0,614.52,471.38,pending,credit_card,False,24,5,,Evan,priority customer
+ORD-00367,2026-05-12 22:34:00,CUST-0133,East,web,Electronics,Webcam,4,46.32,25,138.96,103.88,completed,credit_card,False,56,,VIP,Chen,
+ORD-00368,2025-12-28 09:20:00,CUST-0037,East,store,Sports,Yoga Mat,3,328.97,10,-888.22,677.84,refunded,apple_pay,False,20,3,,Evan,
+ORD-00369,2025-10-10 20:25:00,CUST-0079,South,web,Books,Python Basics,1,425.46,0,-425.46,282.64,refunded,credit_card,True,64,4,VIP,Chen,delayed shipment
+ORD-00370,2025-09-21 10:06:00,CUST-0060,East,store,Home,Chair,1,542.89,0,-542.89,244.83,refunded,apple_pay,True,58,5,,Chen,
+ORD-00371,2025-01-08 17:30:00,CUST-0094,Central,web,Electronics,Keyboard,6,465.83,25,2096.24,969.96,pending,paypal,True,42,4,VIP,Chen,gift order
+ORD-00372,2026-06-01 17:22:00,CUST-0172,North,web,Electronics,Webcam,1,599.84,0,0.0,0.0,cancelled,bank_transfer,True,19,,,,priority customer
+ORD-00373,2025-06-03 20:02:00,CUST-0170,North,mobile,Electronics,Webcam,3,361.83,0,1085.49,718.77,pending,paypal,True,30,,,Bob,priority customer
+ORD-00374,2026-03-16 16:37:00,CUST-0053,Central,partner,Sports,Running Shoes,3,346.27,0,-1038.81,477.31,refunded,apple_pay,True,74,5,,Diana,gift order
+ORD-00375,2025-09-11 20:31:00,CUST-0140,North,web,Electronics,Headphones,2,38.86,0,77.72,55.0,completed,credit_card,True,54,3,SUMMER25,Bob,gift order
+ORD-00376,2026-01-28 10:26:00,CUST-0106,West,partner,Home,Lamp,1,296.51,0,296.51,240.75,completed,apple_pay,False,40,2,SUMMER25,,delayed shipment
+ORD-00377,2026-06-27 21:10:00,CUST-0218,South,partner,Books,Data Engineering,5,384.79,0,1923.95,1468.36,completed,bank_transfer,False,65,,WELCOME10,Bob,
+ORD-00378,2025-05-23 17:01:00,CUST-0096,Central,store,Home,Storage Box,5,74.19,20,-296.76,175.76,refunded,apple_pay,False,57,5,WELCOME10,Alice,address corrected
+ORD-00379,2025-11-25 15:02:00,CUST-0051,North,web,Electronics,Webcam,6,545.43,0,3272.58,2663.66,completed,bank_transfer,True,66,2,WELCOME10,Diana,priority customer
+ORD-00380,2025-05-29 14:24:00,CUST-0176,North,web,Books,Finance 101,4,804.42,5,3056.8,2237.62,pending,credit_card,True,30,1,SUMMER25,Diana,
+ORD-00381,2025-05-16 20:32:00,CUST-0060,Central,mobile,Home,Chair,6,671.52,25,3021.84,1594.99,completed,credit_card,False,63,5,SUMMER25,Bob,
+ORD-00382,2025-10-20 22:35:00,CUST-0174,East,partner,Books,Data Engineering,2,734.96,20,-1175.94,735.64,refunded,bank_transfer,False,33,5,,Bob,
+ORD-00383,2025-04-09 18:42:00,CUST-0171,Central,mobile,Electronics,Headphones,1,285.08,5,270.83,158.8,pending,bank_transfer,True,18,5,SUMMER25,Diana,
+ORD-00384,2025-04-01 11:04:00,CUST-0050,West,mobile,Sports,Yoga Mat,2,690.13,25,1035.19,761.36,pending,paypal,False,50,4,,Bob,priority customer
+ORD-00385,2025-01-30 18:29:00,CUST-0070,East,mobile,Electronics,Monitor,1,552.94,20,442.35,220.87,pending,paypal,False,64,,,Alice,address corrected
+ORD-00386,2026-01-08 13:35:00,CUST-0109,North,partner,Electronics,Mouse,6,430.21,10,-2323.13,1879.85,refunded,apple_pay,True,20,3,,Evan,gift order
+ORD-00387,2026-01-02 13:26:00,CUST-0012,North,partner,Electronics,Monitor,5,775.51,0,3877.55,1878.27,completed,apple_pay,True,50,,SUMMER25,Diana,priority customer
+ORD-00388,2026-02-03 09:15:00,CUST-0215,North,partner,Sports,Yoga Mat,5,745.37,25,2795.14,1344.76,completed,credit_card,True,28,4,,Chen,priority customer
+ORD-00389,2025-11-28 18:07:00,CUST-0044,North,web,Electronics,Mouse,1,836.64,25,627.48,380.61,pending,bank_transfer,True,43,5,,Diana,
+ORD-00390,2026-02-19 17:13:00,CUST-0103,East,partner,Electronics,Webcam,4,598.84,25,1796.52,1420.93,completed,bank_transfer,True,38,2,VIP,Diana,delayed shipment
+ORD-00391,2026-04-13 22:01:00,CUST-0162,North,mobile,Sports,Basketball,1,465.64,0,465.64,328.29,completed,credit_card,True,68,2,WELCOME10,,gift order
+ORD-00392,2025-11-04 15:56:00,CUST-0016,Central,partner,Sports,Basketball,6,233.38,20,1120.22,563.56,completed,bank_transfer,True,25,5,,,
+ORD-00393,2025-10-01 12:51:00,CUST-0137,West,web,Electronics,Monitor,5,672.93,10,3028.18,2445.37,completed,paypal,False,65,5,,Alice,
+ORD-00394,2026-05-23 10:22:00,CUST-0010,South,web,Books,Statistics,5,707.52,5,0.0,0.0,cancelled,apple_pay,False,23,3,WELCOME10,Bob,
+ORD-00395,2025-07-09 17:40:00,CUST-0008,North,store,Books,Statistics,2,734.3,5,1395.17,722.74,completed,bank_transfer,True,71,3,SUMMER25,Diana,address corrected
+ORD-00396,2025-06-30 22:22:00,CUST-0206,East,mobile,Books,Machine Learning,3,588.03,20,0.0,0.0,cancelled,bank_transfer,False,63,,WELCOME10,Bob,delayed shipment
+ORD-00397,2025-02-20 14:20:00,CUST-0196,West,mobile,Books,Machine Learning,6,389.17,15,-1984.77,1487.17,refunded,credit_card,True,29,5,,Diana,delayed shipment
+ORD-00398,2026-04-26 22:42:00,CUST-0195,West,mobile,Sports,Water Bottle,1,235.31,10,211.78,134.0,completed,apple_pay,True,26,4,,Evan,address corrected
+ORD-00399,2025-02-19 10:05:00,CUST-0144,East,mobile,Electronics,Webcam,3,541.03,0,0.0,0.0,cancelled,bank_transfer,True,50,2,,Alice,
+ORD-00400,2025-04-27 21:35:00,CUST-0109,North,mobile,Electronics,Headphones,5,,5,1825.61,1431.54,pending,apple_pay,True,73,1,WELCOME10,Chen,address corrected
+ORD-00401,2026-06-14 11:39:00,CUST-0148,East,store,Sports,Running Shoes,3,89.07,0,267.21,158.26,completed,bank_transfer,False,19,5,,Chen,address corrected
+ORD-00402,2025-01-03 08:16:00,CUST-0032,South,web,Sports,Running Shoes,6,427.8,25,0.0,0.0,cancelled,paypal,True,67,2,,Diana,
+ORD-00403,2025-12-11 13:18:00,CUST-0058,North,mobile,Home,Kettle,3,196.82,0,590.46,479.96,completed,credit_card,False,55,5,,Diana,gift order
+ORD-00404,2025-03-08 09:50:00,CUST-0152,Central,store,Sports,Dumbbell,1,200.63,10,-180.57,144.97,refunded,credit_card,True,37,3,VIP,Bob,address corrected
+ORD-00405,2025-08-01 21:47:00,CUST-0104,East,web,Books,Machine Learning,4,54.52,15,185.37,125.82,completed,bank_transfer,False,24,5,,Alice,address corrected
+ORD-00406,2025-02-05 11:51:00,CUST-0041,Central,web,Electronics,Keyboard,5,506.56,0,-2532.8,2016.12,refunded,credit_card,True,67,4,,Bob,
+ORD-00407,2025-01-22 11:19:00,CUST-0159,Central,web,Books,Python Basics,2,831.85,10,1497.33,1156.45,pending,paypal,False,62,,,Diana,priority customer
+ORD-00408,2026-02-23 22:05:00,CUST-0033,Central,mobile,Home,Chair,4,512.68,15,0.0,0.0,cancelled,paypal,True,34,,SUMMER25,Evan,gift order
+ORD-00409,2025-02-05 14:39:00,CUST-0113,North,mobile,Books,Statistics,6,463.22,15,2362.42,1157.9,pending,bank_transfer,False,43,2,SUMMER25,Bob,priority customer
+ORD-00410,2025-12-26 10:00:00,CUST-0031,South,partner,Electronics,Monitor,1,77.98,25,58.48,35.9,completed,bank_transfer,False,52,1,VIP,Chen,address corrected
+ORD-00411,2026-06-16 20:03:00,CUST-0166,South,mobile,Electronics,Monitor,6,559.53,0,3357.18,2386.06,completed,credit_card,True,46,5,SUMMER25,Alice,
+ORD-00412,2025-10-31 12:42:00,CUST-0204,South,partner,Sports,Dumbbell,3,560.02,10,1512.05,761.35,completed,paypal,True,67,4,SUMMER25,Chen,delayed shipment
+ORD-00413,2025-12-14 21:35:00,CUST-0060,Central,mobile,Electronics,Monitor,5,405.45,15,1723.16,1139.16,pending,bank_transfer,False,31,4,,Evan,
+ORD-00414,2025-02-06 22:05:00,CUST-0079,South,mobile,Books,Python Basics,2,598.01,0,1196.02,581.41,completed,credit_card,False,37,5,,Diana,
+ORD-00415,2026-03-14 17:41:00,CUST-0129,East,store,Books,Machine Learning,6,295.63,0,1773.78,849.58,completed,bank_transfer,True,39,5,,Evan,
+ORD-00416,2026-04-30 22:11:00,CUST-0164,East,mobile,Books,Machine Learning,6,34.89,0,209.34,142.49,completed,credit_card,True,43,3,VIP,Evan,gift order
+ORD-00417,2025-10-21 19:01:00,CUST-0123,West,store,Books,Statistics,1,214.97,10,-193.47,99.62,refunded,credit_card,True,25,4,SUMMER25,Bob,priority customer
+ORD-00418,2025-04-11 15:21:00,CUST-0016,South,web,Home,Desk,2,509.36,20,814.98,531.99,completed,bank_transfer,False,62,5,SUMMER25,,delayed shipment
+ORD-00419,2026-06-23 17:58:00,CUST-0020,North,web,Home,Storage Box,3,813.31,0,2439.93,1288.21,completed,bank_transfer,True,51,5,,Alice,
+ORD-00420,2025-11-30 19:41:00,CUST-0012,East,mobile,Home,Storage Box,6,156.41,0,938.46,476.39,pending,bank_transfer,False,56,5,WELCOME10,Alice,gift order
+ORD-00421,2025-12-01 10:18:00,CUST-0067,East,store,Books,Data Engineering,3,207.08,5,590.18,427.97,completed,paypal,True,23,,WELCOME10,Bob,delayed shipment
+ORD-00422,2025-12-25 11:38:00,CUST-0189,South,web,Electronics,Monitor,3,668.96,0,0.0,0.0,cancelled,apple_pay,False,37,5,,Evan,
+ORD-00423,2025-02-02 22:06:00,CUST-0009,Central,mobile,Electronics,Keyboard,2,388.05,0,0.0,0.0,cancelled,paypal,True,71,,,Alice,
+ORD-00424,2025-08-01 18:12:00,CUST-0130,East,web,Sports,Water Bottle,5,497.43,0,2487.15,1497.64,completed,paypal,True,60,4,,Diana,priority customer
+ORD-00425,2026-02-01 10:09:00,CUST-0086,East,web,Home,Desk,4,812.28,10,2924.21,2303.79,completed,credit_card,True,58,1,,Evan,priority customer
+ORD-00426,2025-04-22 12:16:00,CUST-0009,West,web,Home,Lamp,6,353.54,0,2121.24,1028.5,completed,bank_transfer,True,31,2,VIP,Bob,
+ORD-00427,2026-02-11 08:14:00,CUST-0043,South,mobile,Books,Data Engineering,2,46.11,20,73.78,49.66,completed,credit_card,False,66,5,,Alice,address corrected
+ORD-00428,2026-03-03 11:06:00,CUST-0203,East,store,Books,Finance 101,6,721.76,5,4114.03,2223.23,pending,paypal,False,21,2,VIP,Diana,priority customer
+ORD-00429,2025-09-25 20:40:00,CUST-0212,North,store,Electronics,Monitor,6,756.71,0,4540.26,3685.48,completed,bank_transfer,False,23,,SUMMER25,Bob,
+ORD-00430,2025-11-27 20:07:00,CUST-0170,North,web,Home,Kettle,2,309.1,20,494.56,343.63,completed,paypal,True,48,2,WELCOME10,Bob,
+ORD-00431,2025-12-31 13:37:00,CUST-0006,West,store,Electronics,Webcam,6,256.48,25,1154.16,840.71,completed,credit_card,False,26,4,,,delayed shipment
+ORD-00432,2025-12-31 13:14:00,CUST-0173,South,partner,Home,Kettle,4,546.83,0,2187.32,1291.93,completed,apple_pay,False,32,1,,Diana,address corrected
+ORD-00433,2026-03-30 18:54:00,CUST-0019,Central,web,Electronics,Webcam,3,312.92,15,-797.95,521.9,refunded,paypal,False,45,,SUMMER25,Chen,delayed shipment
+ORD-00434,2026-03-10 19:25:00,CUST-0164,West,web,Books,Statistics,5,229.21,25,859.54,649.82,completed,paypal,True,43,4,,,
+ORD-00435,2025-02-25 16:24:00,CUST-0199,Central,web,Books,Machine Learning,2,699.7,0,0.0,0.0,cancelled,paypal,False,49,5,,Chen,delayed shipment
+ORD-00436,2026-01-16 12:41:00,CUST-0120,West,store,Electronics,Webcam,6,64.92,10,0.0,0.0,cancelled,paypal,False,20,2,,,address corrected
+ORD-00437,2025-03-25 10:44:00,CUST-0141,Central,web,Books,Python Basics,1,840.48,10,756.43,522.8,pending,apple_pay,True,42,1,,Diana,delayed shipment
+ORD-00438,2025-04-19 12:25:00,CUST-0206,Central,partner,Electronics,Mouse,5,510.07,5,2422.83,1536.18,completed,bank_transfer,True,55,2,SUMMER25,Diana,delayed shipment
+ORD-00439,2026-01-13 15:52:00,CUST-0160,North,mobile,Sports,Yoga Mat,4,206.11,25,618.33,301.26,completed,credit_card,True,74,5,,Evan,gift order
+ORD-00440,2025-11-04 21:20:00,CUST-0055,Central,store,Books,Machine Learning,6,347.78,20,0.0,0.0,cancelled,credit_card,False,20,4,,Bob,
+ORD-00441,2025-06-27 08:21:00,CUST-0005,North,mobile,Electronics,Keyboard,4,280.6,0,1122.4,882.8,completed,bank_transfer,True,73,2,VIP,Diana,
+ORD-00442,2025-11-04 18:45:00,CUST-0030,West,mobile,Books,Data Engineering,1,202.98,20,0.0,0.0,cancelled,credit_card,True,69,,,Evan,delayed shipment
+ORD-00443,2025-01-28 14:50:00,CUST-0102,East,store,Home,Storage Box,4,450.99,20,1443.17,745.77,completed,bank_transfer,False,73,1,,Alice,
+ORD-00444,2025-12-14 09:32:00,CUST-0075,North,partner,Sports,Dumbbell,4,512.02,5,-1945.68,1120.53,refunded,credit_card,False,20,3,,Bob,priority customer
+ORD-00445,2026-06-09 18:38:00,CUST-0195,South,partner,Home,Desk,2,312.22,5,593.22,284.11,completed,bank_transfer,False,39,5,,Chen,address corrected
+ORD-00446,2025-07-20 11:22:00,CUST-0146,South,partner,Books,Finance 101,5,454.38,0,2271.9,1058.85,completed,paypal,False,33,4,,Chen,address corrected
+ORD-00447,2025-11-14 16:31:00,CUST-0109,Central,store,Sports,Yoga Mat,2,789.36,25,1184.04,770.26,completed,paypal,True,18,,,Evan,gift order
+ORD-00448,2025-01-31 18:38:00,CUST-0154,North,mobile,Sports,Water Bottle,2,318.76,5,0.0,0.0,cancelled,bank_transfer,False,61,4,SUMMER25,Diana,priority customer
+ORD-00449,2025-09-04 13:04:00,CUST-0130,Central,partner,Sports,Yoga Mat,3,480.48,15,-1225.22,741.59,refunded,bank_transfer,False,25,1,SUMMER25,Evan,
+ORD-00450,2026-03-21 14:03:00,CUST-0202,South,partner,Home,Desk,2,61.1,5,0.0,0.0,cancelled,apple_pay,False,64,,,Chen,gift order
+ORD-00451,2025-01-03 13:27:00,CUST-0082,West,partner,Home,Lamp,6,123.52,0,741.12,532.47,pending,credit_card,False,22,3,,Bob,gift order
+ORD-00452,2025-05-04 11:59:00,CUST-0185,South,store,Books,Statistics,5,736.15,5,3496.71,2121.86,completed,apple_pay,True,20,4,,Chen,delayed shipment
+ORD-00453,2025-05-23 09:00:00,CUST-0112,West,mobile,Books,Statistics,5,18.89,20,75.56,54.64,pending,apple_pay,False,61,2,,,
+ORD-00454,2025-11-11 21:44:00,CUST-0061,North,partner,Books,Statistics,6,34.2,20,-164.16,87.81,refunded,bank_transfer,False,54,5,,Bob,delayed shipment
+ORD-00455,2025-01-03 20:45:00,CUST-0104,East,partner,Sports,Dumbbell,3,410.72,5,1170.55,862.85,pending,apple_pay,True,62,5,VIP,Chen,address corrected
+ORD-00456,2025-08-09 09:36:00,CUST-0049,North,store,Home,Kettle,1,757.4,25,0.0,0.0,cancelled,credit_card,True,38,4,SUMMER25,Bob,gift order
+ORD-00457,2025-12-15 11:22:00,CUST-0166,East,partner,Books,Statistics,1,357.82,0,357.82,288.48,pending,paypal,True,50,4,,Evan,priority customer
+ORD-00458,2025-03-01 18:31:00,CUST-0105,South,mobile,Electronics,Headphones,3,104.16,0,312.48,230.99,completed,paypal,True,19,4,SUMMER25,Evan,
+ORD-00459,2025-05-26 08:16:00,CUST-0108,West,mobile,Sports,Running Shoes,3,689.03,0,-2067.09,990.14,refunded,bank_transfer,False,19,4,VIP,Chen,
+ORD-00460,2025-04-20 13:23:00,CUST-0065,Central,web,Home,Kettle,5,173.58,20,694.32,400.64,completed,bank_transfer,False,73,,,Alice,address corrected
+ORD-00461,2025-09-13 09:04:00,CUST-0107,East,mobile,Home,Desk,1,762.94,25,572.21,450.16,pending,apple_pay,False,72,4,,,priority customer
+ORD-00462,2025-08-12 17:53:00,CUST-0027,West,partner,Home,Chair,2,747.36,0,1494.72,960.44,pending,credit_card,False,72,4,SUMMER25,Diana,delayed shipment
+ORD-00463,2025-12-22 16:29:00,CUST-0096,South,web,Electronics,Keyboard,1,278.49,15,236.72,187.27,completed,credit_card,False,69,5,SUMMER25,Evan,delayed shipment
+ORD-00464,2026-01-17 19:44:00,CUST-0238,Central,store,Sports,Dumbbell,5,366.18,15,1556.27,788.69,completed,paypal,False,21,1,,Bob,address corrected
+ORD-00465,2025-06-16 12:43:00,CUST-0088,North,mobile,Books,Statistics,4,479.16,25,1437.48,937.02,completed,credit_card,True,68,2,VIP,,
+ORD-00466,2025-09-08 20:55:00,CUST-0118,East,web,Electronics,Mouse,3,564.15,15,0.0,0.0,cancelled,paypal,True,67,5,,,
+ORD-00467,2026-06-05 20:54:00,CUST-0063,South,web,Electronics,Mouse,3,394.06,10,1063.96,790.11,completed,credit_card,False,31,5,SUMMER25,Chen,gift order
+ORD-00468,2025-04-01 11:22:00,CUST-0124,East,partner,Books,Finance 101,5,337.0,25,1263.75,582.43,completed,apple_pay,False,26,2,,Diana,delayed shipment
+ORD-00469,2025-01-31 22:48:00,CUST-0166,South,store,Home,Lamp,2,409.65,10,737.37,551.95,pending,credit_card,False,24,3,SUMMER25,Alice,delayed shipment
+ORD-00470,2025-05-28 09:58:00,CUST-0045,East,store,Home,Chair,6,740.23,20,3553.1,2646.56,completed,paypal,False,59,3,VIP,,
+ORD-00471,2025-02-15 15:00:00,CUST-0183,North,web,Electronics,Mouse,1,370.86,0,-370.86,213.93,refunded,bank_transfer,True,46,1,,,gift order
+ORD-00472,2025-05-16 17:57:00,CUST-0192,Central,web,Home,Storage Box,3,71.92,0,215.76,124.75,completed,apple_pay,False,50,2,,Evan,priority customer
+ORD-00473,2025-08-27 16:17:00,CUST-0091,South,partner,Sports,Dumbbell,1,837.75,10,-753.98,609.2,refunded,bank_transfer,True,49,4,,Evan,
+ORD-00474,2025-06-02 17:13:00,CUST-0057,Central,partner,Sports,Yoga Mat,6,165.17,25,0.0,0.0,cancelled,apple_pay,True,58,4,WELCOME10,Evan,
+ORD-00475,2025-05-17 20:10:00,CUST-0005,South,store,Sports,Water Bottle,5,140.26,25,0.0,0.0,cancelled,apple_pay,False,55,5,,Diana,gift order
+ORD-00476,2026-05-13 15:02:00,CUST-0209,South,mobile,Electronics,Keyboard,5,451.3,0,2256.5,1487.32,pending,apple_pay,False,41,2,WELCOME10,Alice,address corrected
+ORD-00477,2025-02-04 21:24:00,CUST-0141,North,partner,Sports,Dumbbell,1,192.03,0,192.03,148.6,completed,credit_card,True,70,5,SUMMER25,,delayed shipment
+ORD-00478,2025-08-20 19:14:00,CUST-0229,North,web,Books,Statistics,5,640.43,5,3042.04,1443.85,completed,paypal,False,30,,SUMMER25,Diana,address corrected
+ORD-00479,2026-01-19 22:13:00,CUST-0093,East,store,Electronics,Keyboard,2,623.4,5,1184.46,656.43,completed,paypal,False,18,1,WELCOME10,,priority customer
+ORD-00480,2026-05-02 08:00:00,CUST-0040,Central,store,Home,Lamp,6,765.93,10,4136.02,3053.71,completed,apple_pay,False,41,5,VIP,Diana,priority customer
+ORD-00481,2025-09-17 19:59:00,CUST-0088,Central,partner,Electronics,Mouse,3,121.6,25,0.0,0.0,cancelled,apple_pay,True,23,5,SUMMER25,Evan,
+ORD-00482,2025-05-07 14:07:00,CUST-0082,West,mobile,Electronics,Monitor,2,755.82,20,0.0,0.0,cancelled,paypal,True,67,,SUMMER25,Evan,
+ORD-00483,2026-06-11 21:32:00,CUST-0169,North,web,Home,Storage Box,1,849.93,0,-849.93,440.58,refunded,paypal,False,74,5,SUMMER25,,priority customer
+ORD-00484,2025-08-21 13:30:00,CUST-0228,South,partner,Electronics,Monitor,4,685.85,20,2194.72,1651.81,completed,credit_card,True,34,5,,Evan,priority customer
+ORD-00485,2025-12-26 20:19:00,CUST-0109,South,partner,Home,Desk,5,405.98,0,-2029.9,1208.06,refunded,apple_pay,False,52,2,VIP,Alice,gift order
+ORD-00486,2025-03-08 10:46:00,CUST-0088,Central,store,Books,Finance 101,2,350.6,0,-701.2,454.93,refunded,apple_pay,False,64,4,VIP,Alice,priority customer
+ORD-00487,2025-11-14 19:34:00,CUST-0097,East,partner,Sports,Water Bottle,5,375.37,0,1876.85,1444.03,pending,credit_card,True,73,,SUMMER25,Alice,priority customer
+ORD-00488,2025-05-12 21:28:00,CUST-0072,West,store,Books,Machine Learning,4,806.19,15,-2741.05,1601.09,refunded,credit_card,True,71,,,Evan,delayed shipment
+ORD-00489,2025-04-13 20:58:00,CUST-0225,North,partner,Sports,Dumbbell,2,467.86,0,935.72,689.53,completed,bank_transfer,True,28,3,SUMMER25,Diana,delayed shipment
+ORD-00490,2025-02-06 22:21:00,CUST-0147,Central,store,Home,Kettle,5,725.28,0,-3626.4,1645.48,refunded,bank_transfer,False,28,2,,Evan,priority customer
+ORD-00491,2025-01-28 11:10:00,CUST-0205,East,web,Books,Statistics,4,205.74,10,0.0,0.0,cancelled,bank_transfer,False,56,4,,,gift order
+ORD-00492,2025-04-19 20:23:00,CUST-0097,East,partner,Sports,Yoga Mat,5,640.6,15,-2722.55,1302.35,refunded,bank_transfer,True,29,,WELCOME10,Evan,priority customer
+ORD-00493,2026-02-25 21:08:00,CUST-0192,West,partner,Books,Python Basics,6,157.23,25,707.53,318.43,pending,credit_card,True,38,4,,Bob,delayed shipment
+ORD-00494,2025-11-22 15:23:00,CUST-0173,North,mobile,Electronics,Mouse,6,583.27,25,2624.72,1395.29,completed,paypal,False,29,,,,delayed shipment
+ORD-00495,2025-05-11 21:29:00,CUST-0056,Central,mobile,Books,Data Engineering,6,18.12,0,108.72,64.88,completed,paypal,False,54,4,,Evan,
+ORD-00496,2026-04-30 15:21:00,CUST-0008,East,store,Electronics,Webcam,6,274.7,0,1648.2,987.52,completed,credit_card,False,20,5,,Evan,
+ORD-00497,2026-01-17 20:20:00,CUST-0037,East,partner,Electronics,Webcam,6,99.31,10,0.0,0.0,cancelled,bank_transfer,True,39,4,VIP,,delayed shipment
+ORD-00498,2025-10-13 16:53:00,CUST-0062,West,store,Home,Kettle,1,19.13,0,-19.13,8.74,refunded,bank_transfer,True,29,,,,delayed shipment
+ORD-00499,2025-12-05 12:00:00,CUST-0037,South,mobile,Books,Machine Learning,4,763.94,20,2444.61,1769.56,pending,apple_pay,True,58,4,,Evan,delayed shipment
+ORD-00500,2025-05-29 10:41:00,CUST-0101,North,store,Home,Kettle,6,26.51,15,135.2,68.03,completed,bank_transfer,False,37,,WELCOME10,Diana,priority customer
+ORD-00501,2025-04-22 22:42:00,CUST-0118,West,mobile,Books,Machine Learning,6,386.07,0,2316.42,1247.66,completed,credit_card,True,55,3,,Alice,
+ORD-00502,2025-10-24 14:29:00,CUST-0215,East,store,Home,Desk,1,698.2,15,593.47,327.03,completed,paypal,True,38,5,,Diana,delayed shipment
+ORD-00503,2026-01-04 09:52:00,CUST-0098,South,store,Electronics,Mouse,5,813.47,0,4067.35,2337.11,pending,paypal,True,54,5,WELCOME10,Diana,
+ORD-00504,2025-08-30 14:19:00,CUST-0031,South,store,Home,Lamp,2,55.96,0,0.0,0.0,cancelled,credit_card,True,66,,,Diana,
+ORD-00505,2026-02-10 09:44:00,CUST-0046,Central,mobile,Electronics,Keyboard,5,96.1,0,480.5,234.62,completed,apple_pay,True,54,,,Bob,address corrected
+ORD-00506,2025-09-12 18:12:00,CUST-0167,West,partner,Electronics,Monitor,2,157.06,15,267.0,131.4,pending,credit_card,False,64,2,VIP,Alice,
+ORD-00507,2026-06-16 10:13:00,CUST-0089,East,web,Sports,Dumbbell,1,132.26,0,132.26,102.94,pending,credit_card,False,47,1,,Bob,
+ORD-00508,2025-01-08 13:17:00,CUST-0172,East,store,Books,Statistics,3,505.08,15,1287.95,636.21,pending,paypal,True,66,1,SUMMER25,Evan,address corrected
+ORD-00509,2026-05-22 10:01:00,CUST-0027,North,partner,Sports,Running Shoes,2,797.97,0,0.0,0.0,cancelled,bank_transfer,False,70,3,VIP,Chen,
+ORD-00510,2025-12-02 14:09:00,CUST-0066,Central,mobile,Sports,Yoga Mat,1,488.62,0,-488.62,301.63,refunded,credit_card,True,31,1,,,priority customer
+ORD-00511,2025-11-09 19:31:00,CUST-0182,South,web,Electronics,Headphones,2,96.96,15,-164.83,134.7,refunded,credit_card,False,25,4,SUMMER25,Alice,delayed shipment
+ORD-00512,2025-02-28 15:21:00,CUST-0128,Central,store,Books,Statistics,1,276.35,10,248.72,160.84,completed,bank_transfer,False,26,3,SUMMER25,Alice,address corrected
+ORD-00513,2026-01-06 18:00:00,CUST-0048,South,store,Home,Storage Box,5,304.11,0,1520.55,1167.6,completed,apple_pay,True,51,1,WELCOME10,Diana,priority customer
+ORD-00514,2026-04-12 21:04:00,CUST-0081,Central,store,Sports,Running Shoes,1,263.27,0,263.27,170.37,completed,bank_transfer,False,50,1,,Diana,gift order
+ORD-00515,2025-01-21 13:57:00,CUST-0032,East,store,Sports,Basketball,1,645.74,0,645.74,379.76,completed,bank_transfer,False,23,3,,,priority customer
+ORD-00516,2026-05-22 17:42:00,CUST-0169,East,web,Sports,Water Bottle,2,584.88,10,1052.78,651.51,pending,apple_pay,False,56,4,,,address corrected
+ORD-00517,2025-05-01 19:37:00,CUST-0219,Central,store,Books,Finance 101,2,127.78,20,204.45,106.74,completed,credit_card,True,69,,SUMMER25,Alice,address corrected
+ORD-00518,2025-01-02 16:38:00,CUST-0175,North,partner,Books,Finance 101,1,300.14,20,-240.11,154.69,refunded,credit_card,True,33,4,,,gift order
+ORD-00519,2025-08-06 18:15:00,CUST-0152,North,partner,Home,Storage Box,2,596.14,0,0.0,0.0,cancelled,paypal,False,24,5,SUMMER25,Alice,delayed shipment
+ORD-00520,2025-06-13 09:22:00,CUST-0212,South,web,Sports,Dumbbell,3,466.52,20,-1119.65,591.1,refunded,bank_transfer,True,55,,,Diana,
+ORD-00521,2025-01-05 19:27:00,CUST-0180,Central,mobile,Books,Finance 101,3,425.73,20,-1021.75,561.26,refunded,apple_pay,False,46,,SUMMER25,,priority customer
+ORD-00522,2026-06-18 10:05:00,CUST-0174,West,mobile,Sports,Water Bottle,3,601.83,0,1805.49,934.08,completed,paypal,False,67,,,,
+ORD-00523,2025-05-08 22:44:00,CUST-0181,South,mobile,Sports,Dumbbell,6,103.52,10,559.01,423.74,pending,bank_transfer,False,64,4,WELCOME10,,
+ORD-00524,2025-08-06 11:52:00,CUST-0234,East,store,Home,Storage Box,6,451.73,5,2574.86,1998.38,completed,credit_card,True,26,3,,,delayed shipment
+ORD-00525,2026-01-21 22:30:00,CUST-0087,West,mobile,Home,Chair,3,642.24,0,1926.72,1250.84,completed,bank_transfer,True,53,2,VIP,,
+ORD-00526,2025-08-07 13:58:00,CUST-0085,South,store,Sports,Basketball,1,34.76,10,31.28,20.29,completed,credit_card,False,36,4,,,
+ORD-00527,2025-12-12 15:51:00,CUST-0141,North,store,Sports,Dumbbell,3,73.64,5,209.87,145.19,pending,bank_transfer,False,53,5,,Diana,gift order
+ORD-00528,2026-03-27 08:43:00,CUST-0165,South,store,Home,Chair,5,349.9,15,1487.08,992.86,completed,apple_pay,False,26,4,VIP,Bob,gift order
+ORD-00529,2025-02-07 10:46:00,CUST-0208,Central,web,Electronics,Webcam,5,527.62,0,2638.1,1510.14,completed,credit_card,True,44,4,WELCOME10,Bob,address corrected
+ORD-00530,2025-03-21 20:10:00,CUST-0078,East,web,Sports,Water Bottle,5,553.72,5,2630.17,1332.54,completed,paypal,False,67,5,WELCOME10,,priority customer
+ORD-00531,2026-02-22 15:27:00,CUST-0214,West,web,Sports,Water Bottle,6,784.61,0,0.0,0.0,cancelled,credit_card,True,53,5,WELCOME10,Alice,
+ORD-00532,2025-05-27 12:09:00,CUST-0184,South,store,Home,Desk,2,40.97,0,81.94,43.97,pending,paypal,False,18,5,SUMMER25,Diana,
+ORD-00533,2025-08-05 11:55:00,CUST-0150,West,web,Sports,Basketball,2,202.76,15,344.69,172.67,completed,bank_transfer,False,26,3,,,
+ORD-00534,2025-11-18 11:46:00,CUST-0033,Central,mobile,Sports,Basketball,4,231.24,25,-693.72,504.14,refunded,bank_transfer,True,35,3,,Alice,gift order
+ORD-00535,2025-04-30 13:12:00,CUST-0233,North,mobile,Books,Python Basics,4,72.16,0,0.0,0.0,cancelled,bank_transfer,True,52,4,,Alice,address corrected
+ORD-00536,2025-07-01 08:57:00,CUST-0092,North,partner,Home,Lamp,5,801.57,15,3406.67,1931.04,completed,apple_pay,True,51,2,WELCOME10,Diana,delayed shipment
+ORD-00537,2026-01-29 22:11:00,CUST-0044,Central,mobile,Sports,Yoga Mat,6,350.57,10,1893.08,1493.2,completed,credit_card,True,51,4,,Bob,priority customer
+ORD-00538,2025-09-24 11:28:00,CUST-0045,West,partner,Electronics,Headphones,4,428.83,5,1629.55,1021.82,completed,apple_pay,False,40,3,SUMMER25,,
+ORD-00539,2025-08-14 22:17:00,CUST-0199,North,web,Home,Kettle,1,162.69,0,162.69,130.19,completed,bank_transfer,True,64,2,WELCOME10,Alice,
+ORD-00540,2026-01-20 14:46:00,CUST-0134,West,partner,Books,Data Engineering,6,48.81,0,292.86,186.04,pending,apple_pay,False,41,5,SUMMER25,Bob,priority customer
+ORD-00541,2026-03-05 17:59:00,CUST-0066,North,partner,Sports,Water Bottle,1,675.46,20,0.0,0.0,cancelled,bank_transfer,False,65,4,SUMMER25,Chen,delayed shipment
+ORD-00542,2026-03-04 09:16:00,CUST-0165,East,mobile,Sports,Dumbbell,4,791.82,10,2850.55,1774.48,completed,paypal,False,58,3,WELCOME10,,delayed shipment
+ORD-00543,2026-01-25 22:28:00,CUST-0036,West,web,Home,Kettle,6,246.45,15,1256.89,979.84,completed,apple_pay,True,44,3,,Alice,priority customer
+ORD-00544,2025-01-19 16:44:00,CUST-0210,North,partner,Books,Python Basics,4,659.28,15,-2241.55,1829.54,refunded,apple_pay,False,30,4,,,gift order
+ORD-00545,2026-03-12 08:34:00,CUST-0064,North,web,Books,Data Engineering,4,293.39,0,1173.56,696.43,completed,paypal,True,50,,SUMMER25,,
+ORD-00546,2025-11-07 19:39:00,CUST-0176,South,store,Home,Storage Box,6,498.17,0,2989.02,1677.38,completed,bank_transfer,True,61,4,,,priority customer
+ORD-00547,2025-05-19 12:41:00,CUST-0033,South,partner,Books,Machine Learning,4,660.05,15,-2244.17,1320.69,refunded,bank_transfer,False,61,3,,Alice,
+ORD-00548,2025-08-15 18:38:00,CUST-0127,North,web,Sports,Water Bottle,2,736.16,15,-1251.47,977.2,refunded,credit_card,False,19,,SUMMER25,,
+ORD-00549,2025-08-30 12:20:00,CUST-0070,Central,partner,Sports,Water Bottle,4,510.68,5,1940.58,955.71,completed,paypal,False,53,2,VIP,Evan,
+ORD-00550,invalid-date,CUST-0053,Central,web,Home,Desk,1,484.14,0,-484.14,274.54,refunded,apple_pay,True,50,5,,Diana,delayed shipment
+ORD-00551,2025-05-25 16:42:00,CUST-0193,South,web,Home,Kettle,2,832.59,0,-1665.18,1363.66,refunded,apple_pay,False,34,,WELCOME10,Bob,
+ORD-00552,2025-11-18 18:23:00,CUST-0053,Central,web,Home,Kettle,4,730.0,0,-2920.0,2365.59,refunded,apple_pay,True,28,5,WELCOME10,Bob,gift order
+ORD-00553,2025-09-15 11:54:00,CUST-0231,North,mobile,Sports,Yoga Mat,2,548.48,0,1096.96,771.23,pending,paypal,True,24,5,,Evan,gift order
+ORD-00554,2026-03-19 16:24:00,CUST-0038,Central,store,Home,Chair,1,597.36,20,477.89,301.21,completed,credit_card,True,29,5,SUMMER25,,gift order
+ORD-00555,2026-06-13 12:51:00,CUST-0122,Central,mobile,Electronics,Monitor,5,8.89,20,35.56,23.51,completed,apple_pay,False,26,4,SUMMER25,Evan,gift order
+ORD-00556,2026-01-28 20:49:00,CUST-0176,Central,mobile,Sports,Basketball,3,651.26,25,1465.34,947.67,completed,apple_pay,False,51,3,,Diana,priority customer
+ORD-00557,2025-07-17 17:20:00,CUST-0143,North,store,Home,Storage Box,5,234.2,20,936.8,638.47,completed,credit_card,False,57,1,,,gift order
+ORD-00558,2025-04-28 20:00:00,CUST-0017,Central,mobile,Books,Statistics,6,171.09,5,975.21,658.22,completed,apple_pay,True,73,5,,Alice,priority customer
+ORD-00559,2025-07-06 17:25:00,CUST-0201,North,store,Books,Python Basics,4,210.55,0,0.0,0.0,cancelled,credit_card,True,64,4,VIP,Evan,priority customer
+ORD-00560,2025-07-16 17:45:00,CUST-0107,Central,partner,Books,Data Engineering,2,508.82,0,1017.64,464.69,completed,credit_card,False,58,,,,address corrected
+ORD-00561,2026-03-04 19:56:00,CUST-0207,Central,mobile,Electronics,Keyboard,4,764.41,0,0.0,0.0,cancelled,bank_transfer,True,48,5,,Bob,
+ORD-00562,2026-02-26 19:41:00,CUST-0184,South,web,Sports,Basketball,5,574.34,10,2584.53,1520.32,completed,apple_pay,True,68,5,SUMMER25,Chen,
+ORD-00563,2026-03-08 09:57:00,CUST-0114,East,partner,Sports,Running Shoes,2,407.66,0,815.32,568.05,completed,credit_card,False,56,1,,Chen,
+ORD-00564,2025-05-05 13:37:00,CUST-0232,South,web,Books,Machine Learning,5,469.23,20,0.0,0.0,cancelled,credit_card,False,43,,WELCOME10,Bob,
+ORD-00565,2025-05-18 22:22:00,CUST-0043,East,web,Home,Chair,5,185.69,0,928.45,582.43,completed,paypal,True,50,,,Bob,address corrected
+ORD-00566,2025-06-11 18:06:00,CUST-0083,East,store,Sports,Basketball,4,157.43,10,566.75,309.07,pending,bank_transfer,False,23,5,WELCOME10,Evan,delayed shipment
+ORD-00567,2026-03-25 15:29:00,CUST-0158,South,store,Books,Python Basics,2,376.89,10,-678.4,520.52,refunded,apple_pay,True,49,4,,Chen,priority customer
+ORD-00568,2025-10-22 21:46:00,CUST-0092,West,store,Home,Lamp,2,92.84,5,176.4,107.04,pending,credit_card,True,59,4,VIP,Alice,gift order
+ORD-00569,2025-05-01 09:38:00,CUST-0057,South,partner,Books,Statistics,4,174.32,10,627.55,368.48,completed,apple_pay,False,45,,,Alice,
+ORD-00570,2026-03-20 09:38:00,CUST-0180,Central,web,Books,Machine Learning,1,366.58,0,366.58,252.96,completed,bank_transfer,True,69,4,,Evan,gift order
+ORD-00571,2025-08-20 10:18:00,CUST-0216,Central,partner,Sports,Water Bottle,6,403.51,0,2421.06,1952.48,completed,paypal,False,58,4,,Evan,delayed shipment
+ORD-00572,2026-04-14 09:13:00,CUST-0202,Central,store,Sports,Yoga Mat,1,375.17,25,281.38,197.64,pending,bank_transfer,False,33,5,WELCOME10,Bob,
+ORD-00573,2025-12-15 14:57:00,CUST-0074,North,store,Home,Desk,1,297.24,0,297.24,197.14,completed,apple_pay,False,19,5,VIP,Bob,delayed shipment
+ORD-00574,2025-03-01 14:00:00,CUST-0084,East,store,Books,Machine Learning,4,699.56,10,0.0,0.0,cancelled,paypal,False,48,5,,Chen,gift order
+ORD-00575,2025-03-11 15:15:00,CUST-0161,East,web,Sports,Basketball,2,586.55,15,997.13,757.05,completed,apple_pay,True,23,5,SUMMER25,Alice,priority customer
+ORD-00576,2026-02-10 15:43:00,CUST-0076,East,partner,Books,Python Basics,2,662.72,0,-1325.44,783.15,refunded,bank_transfer,False,24,3,SUMMER25,,
+ORD-00577,2025-12-28 09:54:00,CUST-0148,South,web,Sports,Dumbbell,5,530.33,5,2519.07,1168.61,completed,bank_transfer,True,32,4,,Chen,gift order
+ORD-00578,2026-05-17 13:28:00,CUST-0120,South,mobile,Home,Storage Box,6,715.86,5,0.0,0.0,cancelled,bank_transfer,False,65,4,VIP,Alice,address corrected
+ORD-00579,2025-02-24 22:43:00,CUST-0131,Central,mobile,Home,Lamp,2,750.02,0,1500.04,828.42,completed,paypal,True,55,4,,,priority customer
+ORD-00580,2025-07-27 21:47:00,CUST-0001,Central,store,Books,Finance 101,4,804.51,0,3218.04,1985.84,completed,apple_pay,True,49,4,,Diana,address corrected
+ORD-00581,2025-01-11 10:40:00,CUST-0118,South,store,Electronics,Monitor,5,509.46,5,2419.93,1365.47,completed,apple_pay,True,32,1,WELCOME10,Evan,
+ORD-00582,2025-06-16 21:09:00,CUST-0102,West,partner,Sports,Dumbbell,5,785.17,10,-3533.26,2209.58,refunded,apple_pay,True,21,5,,Chen,address corrected
+ORD-00583,2025-07-05 22:21:00,CUST-0233,Central,mobile,Home,Desk,3,114.15,0,342.45,268.95,completed,paypal,True,54,2,SUMMER25,Chen,address corrected
+ORD-00584,2025-12-28 11:48:00,CUST-0057,Central,partner,Electronics,Webcam,2,147.25,0,294.5,165.66,completed,credit_card,True,63,1,,Diana,
+ORD-00585,2026-03-01 18:12:00,CUST-0112,North,mobile,Electronics,Monitor,1,733.64,5,-696.96,433.21,refunded,apple_pay,True,21,1,VIP,,address corrected
+ORD-00586,2025-03-21 14:31:00,CUST-0136,Central,store,Sports,Yoga Mat,2,475.46,0,0.0,0.0,cancelled,paypal,False,71,4,,Alice,priority customer
+ORD-00587,2025-10-25 22:59:00,CUST-0059,South,mobile,Home,Storage Box,3,176.9,0,-530.7,389.76,refunded,apple_pay,False,40,5,SUMMER25,Bob,
+ORD-00588,2026-05-02 13:23:00,CUST-0152,East,web,Books,Machine Learning,5,455.92,0,2279.6,1306.24,pending,paypal,False,29,4,,Bob,address corrected
+ORD-00589,2026-06-20 19:15:00,CUST-0049,South,web,Home,Chair,1,646.01,5,613.71,295.14,completed,paypal,False,69,1,VIP,Bob,
+ORD-00590,2025-12-13 15:47:00,CUST-0233,South,store,Electronics,Mouse,2,837.58,10,1507.64,770.32,completed,paypal,False,29,2,WELCOME10,Diana,gift order
+ORD-00591,2026-06-22 09:19:00,CUST-0023,West,mobile,Electronics,Webcam,5,197.57,15,839.67,446.77,completed,credit_card,False,19,,,Bob,
+ORD-00592,2026-05-12 17:09:00,CUST-0091,East,mobile,Electronics,Mouse,3,214.9,0,644.7,317.26,pending,apple_pay,False,34,1,,Bob,priority customer
+ORD-00593,2026-05-17 22:50:00,CUST-0191,West,partner,Books,Data Engineering,3,389.68,10,1052.14,485.37,completed,paypal,True,23,2,,Bob,
+ORD-00594,2026-06-29 08:42:00,CUST-0068,East,web,Books,Machine Learning,6,755.65,25,-3400.42,2689.96,refunded,credit_card,False,48,5,VIP,,priority customer
+ORD-00595,2025-07-21 12:33:00,CUST-0006,Central,web,Books,Statistics,5,29.66,20,0.0,0.0,cancelled,paypal,False,30,4,VIP,Chen,gift order
+ORD-00596,2025-09-25 20:58:00,CUST-0103,West,mobile,Books,Data Engineering,5,502.15,0,0.0,0.0,cancelled,bank_transfer,True,56,1,SUMMER25,Bob,
+ORD-00597,2025-06-23 16:46:00,CUST-0031,Central,store,Electronics,Keyboard,1,798.99,10,719.09,408.94,pending,apple_pay,False,57,5,WELCOME10,,address corrected
+ORD-00598,2026-06-02 21:59:00,CUST-0153,East,web,Home,Kettle,5,709.8,15,3016.65,2220.02,completed,bank_transfer,False,62,,,Bob,delayed shipment
+ORD-00599,2025-03-24 14:32:00,CUST-0219,Central,store,Sports,Basketball,4,840.4,15,2857.36,1299.09,completed,bank_transfer,True,33,5,SUMMER25,Chen,gift order
+ORD-00600,2025-08-09 18:45:00,CUST-0139,South,mobile,Books,Machine Learning,1,46.15,25,34.61,17.81,completed,credit_card,False,58,4,,Chen,delayed shipment
+ORD-00601,2025-06-20 15:32:00,CUST-0237,East,partner,Sports,Basketball,6,74.83,0,448.98,349.45,completed,credit_card,True,38,1,VIP,,priority customer
+ORD-00602,2025-08-20 18:55:00,CUST-0074,West,partner,Sports,Dumbbell,3,244.31,20,586.34,354.59,completed,credit_card,True,38,5,,Chen,
+ORD-00603,2026-01-31 11:50:00,CUST-0081,Central,partner,Books,Data Engineering,6,749.43,0,4496.58,2288.88,completed,credit_card,True,69,2,VIP,Diana,delayed shipment
+ORD-00604,2026-02-09 11:03:00,CUST-0106,Central,store,Sports,Basketball,4,240.1,15,816.34,429.25,completed,credit_card,False,72,,SUMMER25,,
+ORD-00605,2025-07-23 10:16:00,CUST-0116,South,partner,Electronics,Headphones,3,67.7,15,0.0,0.0,cancelled,paypal,True,24,5,WELCOME10,Bob,delayed shipment
+ORD-00606,2026-03-31 10:37:00,CUST-0080,North,web,Electronics,Monitor,6,176.19,5,-1004.28,554.76,refunded,apple_pay,True,72,,,Chen,priority customer
+ORD-00607,2025-12-31 16:52:00,CUST-0099,West,mobile,Books,Machine Learning,5,727.06,15,3090.0,1717.07,completed,bank_transfer,False,44,4,,Bob,gift order
+ORD-00608,2026-03-04 09:54:00,CUST-0154,West,web,Home,Desk,3,752.4,5,-2144.34,1278.22,refunded,paypal,True,45,5,VIP,Chen,
+ORD-00609,2025-04-14 18:19:00,CUST-0004,South,partner,Home,Storage Box,3,143.19,0,-429.57,346.74,refunded,bank_transfer,False,42,4,WELCOME10,Chen,delayed shipment
+ORD-00610,2025-03-13 10:27:00,CUST-0069,North,mobile,Electronics,Webcam,6,569.05,0,3414.3,1964.24,completed,credit_card,False,45,3,SUMMER25,Diana,address corrected
+ORD-00611,2025-01-30 16:58:00,CUST-0130,Central,store,Home,Storage Box,4,323.12,10,1163.23,524.69,completed,credit_card,False,48,5,WELCOME10,Bob,
+ORD-00612,2026-03-14 18:16:00,CUST-0129,West,partner,Sports,Dumbbell,4,827.92,20,-2649.34,2095.77,refunded,apple_pay,False,72,4,SUMMER25,,gift order
+ORD-00613,2025-11-25 11:09:00,CUST-0128,West,partner,Sports,Yoga Mat,2,808.57,15,0.0,0.0,cancelled,bank_transfer,True,38,2,,Evan,address corrected
+ORD-00614,2025-12-07 14:40:00,CUST-0089,Central,store,Sports,Basketball,5,533.45,10,0.0,0.0,cancelled,bank_transfer,True,67,3,WELCOME10,Chen,delayed shipment
+ORD-00615,2025-06-22 17:44:00,CUST-0024,Central,web,Books,Statistics,4,8.36,20,0.0,0.0,cancelled,apple_pay,False,40,1,,,gift order
+ORD-00616,2026-05-05 11:46:00,CUST-0077,East,store,Electronics,Keyboard,4,698.91,0,2795.64,1534.26,completed,bank_transfer,False,36,2,WELCOME10,,address corrected
+ORD-00617,2025-05-08 15:36:00,CUST-0010,North,web,Sports,Yoga Mat,5,585.71,15,0.0,0.0,cancelled,bank_transfer,True,25,1,WELCOME10,,priority customer
+ORD-00618,2026-01-06 18:14:00,CUST-0206,West,partner,Books,Data Engineering,2,546.36,15,928.81,618.53,completed,apple_pay,False,38,4,VIP,Alice,gift order
+ORD-00619,2025-12-28 11:31:00,CUST-0135,Central,mobile,Sports,Water Bottle,1,541.8,10,0.0,0.0,cancelled,apple_pay,False,45,5,,,address corrected
+ORD-00620,2025-09-02 15:47:00,CUST-0096,North,mobile,Electronics,Mouse,6,261.84,25,1178.28,654.72,completed,paypal,False,72,1,WELCOME10,,
+ORD-00621,2025-01-25 20:45:00,CUST-0189,North,web,Home,Chair,4,539.51,10,1942.24,1000.64,completed,bank_transfer,True,26,4,SUMMER25,Diana,gift order
+ORD-00622,2025-06-13 14:46:00,CUST-0216,East,mobile,Home,Chair,4,167.29,15,568.79,360.27,pending,paypal,True,41,5,WELCOME10,Chen,
+ORD-00623,2025-09-07 08:48:00,CUST-0102,West,store,Sports,Water Bottle,6,552.03,25,2484.13,1245.1,completed,bank_transfer,True,27,4,,Evan,
+ORD-00624,2025-10-12 09:35:00,CUST-0130,South,store,Home,Kettle,1,22.03,0,0.0,0.0,cancelled,bank_transfer,False,48,2,VIP,,priority customer
+ORD-00625,2025-06-11 21:42:00,CUST-0009,Central,web,Sports,Dumbbell,2,641.93,0,-1283.86,690.62,refunded,apple_pay,False,43,5,,Evan,
+ORD-00626,2025-10-25 09:12:00,CUST-0016,North,store,Sports,Running Shoes,6,347.96,0,0.0,0.0,cancelled,apple_pay,True,65,4,,Chen,
+ORD-00627,2025-12-04 10:41:00,CUST-0202,South,store,Books,Data Engineering,3,582.98,0,1748.94,1273.82,completed,paypal,False,48,3,,Diana,gift order
+ORD-00628,2025-09-17 13:21:00,CUST-0165,East,store,Electronics,Keyboard,6,478.91,25,-2155.1,1599.03,refunded,apple_pay,False,57,1,,Chen,priority customer
+ORD-00629,2025-01-30 20:57:00,CUST-0095,Central,store,Electronics,Headphones,2,253.42,10,456.16,322.52,completed,bank_transfer,False,26,4,,Evan,gift order
+ORD-00630,2025-12-08 11:05:00,CUST-0164,West,partner,Electronics,Headphones,3,300.31,0,900.93,406.08,completed,apple_pay,True,50,4,,Alice,delayed shipment
+ORD-00631,2025-11-09 09:47:00,CUST-0237,Central,mobile,Sports,Dumbbell,2,650.41,0,1300.82,882.61,pending,apple_pay,False,70,5,,Chen,
+ORD-00632,2025-05-10 09:08:00,CUST-0074,South,partner,Sports,Water Bottle,6,90.07,15,459.36,286.99,pending,bank_transfer,False,23,4,,,gift order
+ORD-00633,2026-03-25 13:01:00,CUST-0179,West,store,Home,Kettle,2,759.99,15,0.0,0.0,cancelled,credit_card,True,29,4,,,
+ORD-00634,2026-05-13 13:31:00,CUST-0096,East,store,Sports,Basketball,3,611.05,5,1741.49,1163.52,completed,bank_transfer,False,45,1,,Diana,address corrected
+ORD-00635,2025-01-07 20:53:00,CUST-0069,South,partner,Home,Desk,6,389.39,0,2336.34,1111.05,completed,bank_transfer,False,53,4,,Chen,address corrected
+ORD-00636,2025-05-16 19:11:00,CUST-0007,South,mobile,Electronics,Mouse,2,376.55,20,602.48,358.5,pending,credit_card,False,70,4,SUMMER25,Chen,
+ORD-00637,2026-01-27 22:55:00,CUST-0214,Central,web,Books,Data Engineering,2,440.45,0,880.9,454.41,completed,credit_card,False,67,2,WELCOME10,Diana,priority customer
+ORD-00638,2026-01-10 08:33:00,CUST-0119,South,store,Books,Python Basics,5,142.34,0,711.7,387.25,pending,apple_pay,False,62,4,WELCOME10,Diana,gift order
+ORD-00639,2025-07-31 08:16:00,CUST-0123,East,store,Books,Machine Learning,3,657.29,5,-1873.28,1185.96,refunded,paypal,True,68,4,WELCOME10,Evan,gift order
+ORD-00640,2025-03-25 18:58:00,CUST-0065,East,web,Electronics,Keyboard,5,776.26,25,2910.98,2340.48,completed,credit_card,True,28,2,VIP,Alice,priority customer
+ORD-00641,2026-05-23 15:03:00,CUST-0054,East,partner,Sports,Water Bottle,6,599.09,0,3594.54,2218.85,completed,credit_card,True,53,1,VIP,Evan,gift order
+ORD-00642,2025-05-23 18:34:00,CUST-0108,East,partner,Home,Kettle,5,794.19,15,3375.31,1790.02,completed,paypal,True,29,2,,Evan,gift order
+ORD-00643,2026-02-05 09:46:00,CUST-0035,West,store,Home,Chair,3,263.24,0,789.72,522.59,completed,apple_pay,True,19,,,Bob,gift order
+ORD-00644,2025-06-08 21:04:00,CUST-0229,Central,partner,Electronics,Webcam,1,279.2,5,-265.24,183.38,refunded,credit_card,True,29,,,Bob,priority customer
+ORD-00645,2025-06-07 17:59:00,CUST-0061,West,web,Home,Chair,4,661.7,0,0.0,0.0,cancelled,credit_card,True,35,5,VIP,Chen,priority customer
+ORD-00646,2025-08-08 18:46:00,CUST-0072,South,web,Electronics,Monitor,6,35.03,0,0.0,0.0,cancelled,apple_pay,True,33,5,SUMMER25,Alice,priority customer
+ORD-00647,2026-06-12 15:45:00,CUST-0075,South,web,Home,Desk,5,743.29,10,3344.8,2193.73,completed,paypal,True,23,5,SUMMER25,Evan,
+ORD-00648,2025-07-24 21:12:00,CUST-0212,East,store,Electronics,Monitor,3,565.22,20,1356.53,986.12,completed,credit_card,True,37,5,,Alice,priority customer
+ORD-00649,2025-08-04 19:50:00,CUST-0003,South,web,Books,Finance 101,5,280.65,20,1122.6,548.09,pending,apple_pay,False,25,5,VIP,Chen,priority customer
+ORD-00650,2025-06-09 17:31:00,CUST-0072,East,store,Books,Python Basics,4,229.3,0,917.2,417.61,completed,apple_pay,True,24,,,Chen,
+ORD-00651,2025-08-07 18:23:00,CUST-0131,Central,partner,Home,Chair,2,776.89,5,0.0,0.0,cancelled,paypal,True,19,4,SUMMER25,Diana,delayed shipment
+ORD-00652,2025-11-15 08:29:00,CUST-0135,South,partner,Home,Lamp,4,128.52,10,0.0,0.0,cancelled,bank_transfer,False,43,3,VIP,,delayed shipment
+ORD-00653,2025-11-13 18:11:00,CUST-0220,South,partner,Books,Data Engineering,3,599.05,10,1617.43,1090.71,completed,paypal,False,35,,VIP,Bob,
+ORD-00654,2025-08-18 12:31:00,CUST-0208,East,web,Electronics,Webcam,6,716.09,0,4296.54,3324.45,completed,paypal,False,19,5,,Diana,delayed shipment
+ORD-00655,2025-01-01 20:25:00,CUST-0126,Central,store,Books,Finance 101,5,530.05,10,2385.22,1190.75,pending,paypal,False,55,4,,Evan,delayed shipment
+ORD-00656,2025-03-08 16:40:00,CUST-0123,East,partner,Electronics,Monitor,5,632.74,0,3163.7,2352.34,completed,apple_pay,True,44,,SUMMER25,Alice,
+ORD-00657,2025-10-11 08:08:00,CUST-0094,East,mobile,Sports,Dumbbell,4,601.8,0,2407.2,1589.87,completed,paypal,True,24,5,,Evan,
+ORD-00658,2026-04-14 14:38:00,CUST-0118,North,partner,Electronics,Mouse,6,140.38,20,673.82,338.34,completed,credit_card,True,31,5,,Bob,priority customer
+ORD-00659,2026-03-01 15:31:00,CUST-0089,West,web,Home,Chair,2,174.72,5,331.97,164.97,completed,paypal,True,23,2,SUMMER25,Chen,gift order
+ORD-00660,2025-02-03 20:15:00,CUST-0113,North,store,Electronics,Headphones,4,592.27,5,2250.63,1263.26,completed,credit_card,True,34,4,,Bob,address corrected
+ORD-00661,2026-05-24 13:42:00,CUST-0231,West,partner,Books,Machine Learning,6,760.96,5,4337.47,1985.16,completed,paypal,True,50,4,VIP,,gift order
+ORD-00662,2025-02-16 22:51:00,CUST-0208,West,web,Sports,Water Bottle,6,238.38,20,1144.22,919.78,completed,apple_pay,True,66,3,,Evan,
+ORD-00663,2026-06-27 22:01:00,CUST-0223,East,mobile,Sports,Water Bottle,4,216.76,0,867.04,439.24,completed,credit_card,True,46,1,WELCOME10,Chen,address corrected
+ORD-00664,2025-12-15 11:01:00,CUST-0081,East,partner,Electronics,Headphones,2,78.72,0,-157.44,73.2,refunded,bank_transfer,True,51,,,Alice,priority customer
+ORD-00665,2025-03-15 08:32:00,CUST-0069,Central,partner,Books,Finance 101,3,357.37,0,1072.11,678.5,completed,paypal,False,53,2,WELCOME10,,delayed shipment
+ORD-00666,2025-09-27 13:59:00,CUST-0100,East,mobile,Home,Kettle,1,509.9,0,509.9,351.95,pending,credit_card,False,54,4,SUMMER25,Bob,priority customer
+ORD-00667,2025-06-24 20:36:00,CUST-0221,North,mobile,Home,Chair,6,467.25,20,-2242.8,1797.34,refunded,apple_pay,True,58,5,SUMMER25,Chen,
+ORD-00668,2025-01-03 20:11:00,CUST-0235,Central,mobile,Books,Python Basics,5,343.95,0,1719.75,842.4,completed,bank_transfer,True,65,4,VIP,Alice,
+ORD-00669,2026-04-10 20:24:00,CUST-0206,North,web,Home,Desk,1,684.73,0,0.0,0.0,cancelled,apple_pay,True,58,3,WELCOME10,Evan,priority customer
+ORD-00670,2025-03-30 21:26:00,CUST-0100,East,partner,Home,Kettle,2,350.88,25,-526.32,286.63,refunded,paypal,False,46,4,,Diana,address corrected
+ORD-00671,2025-02-24 12:44:00,CUST-0232,North,web,Books,Statistics,6,261.96,0,1571.76,752.96,completed,paypal,False,22,4,WELCOME10,Diana,
+ORD-00672,2026-02-16 11:52:00,CUST-0014,South,store,Books,Statistics,1,203.47,5,-193.3,107.81,refunded,credit_card,True,52,3,WELCOME10,Bob,delayed shipment
+ORD-00673,2026-03-02 10:44:00,CUST-0107,Central,web,Books,Data Engineering,6,525.12,15,2678.11,1815.73,completed,paypal,True,44,5,VIP,Bob,
+ORD-00674,2026-01-07 22:19:00,CUST-0139,North,web,Books,Finance 101,2,768.38,5,1459.92,774.02,completed,credit_card,False,46,2,,Chen,address corrected
+ORD-00675,2025-03-25 10:37:00,CUST-0057,East,store,Books,Data Engineering,4,738.92,5,2807.9,1462.12,completed,credit_card,True,26,3,VIP,Chen,delayed shipment
+ORD-00676,2025-04-10 21:31:00,CUST-0162,West,web,Home,Lamp,1,72.14,15,61.32,34.56,pending,credit_card,False,37,3,,Diana,
+ORD-00677,2026-01-16 21:27:00,CUST-0096,North,partner,Home,Storage Box,4,277.96,15,945.06,697.04,completed,apple_pay,False,62,4,,Chen,
+ORD-00678,2025-08-07 08:08:00,CUST-0118,South,store,Sports,Basketball,3,367.63,0,1102.89,703.38,completed,bank_transfer,True,54,1,VIP,Evan,delayed shipment
+ORD-00679,2025-12-26 20:14:00,CUST-0044,West,mobile,Home,Kettle,2,800.67,0,-1601.34,927.19,refunded,bank_transfer,True,62,3,,Alice,priority customer
+ORD-00680,2025-11-01 20:03:00,CUST-0012,West,partner,Books,Python Basics,2,542.55,20,868.08,479.97,pending,apple_pay,False,33,4,,Chen,gift order
+ORD-00681,2025-06-20 20:52:00,CUST-0178,East,mobile,Home,Storage Box,2,830.64,0,1661.28,886.2,completed,paypal,True,55,,,,
+ORD-00682,2026-04-24 18:25:00,CUST-0202,Central,store,Home,Storage Box,4,83.88,15,285.19,216.05,pending,credit_card,True,37,3,WELCOME10,Alice,delayed shipment
+ORD-00683,2025-07-29 17:49:00,CUST-0102,North,web,Books,Finance 101,2,756.33,0,1512.66,1039.19,completed,apple_pay,True,69,5,SUMMER25,Evan,priority customer
+ORD-00684,2025-01-23 10:10:00,CUST-0149,South,partner,Books,Data Engineering,2,111.48,20,178.37,128.96,completed,paypal,True,58,,WELCOME10,Bob,priority customer
+ORD-00685,2026-04-25 10:14:00,CUST-0173,West,partner,Books,Finance 101,1,284.78,5,270.54,166.94,completed,paypal,True,70,5,,Alice,
+ORD-00686,2026-06-09 21:37:00,CUST-0033,East,mobile,Home,Kettle,1,199.69,0,199.69,123.92,completed,bank_transfer,False,45,4,SUMMER25,Bob,
+ORD-00687,2025-08-03 14:15:00,CUST-0177,East,web,Books,Data Engineering,3,391.66,10,0.0,0.0,cancelled,apple_pay,False,66,2,VIP,Bob,
+ORD-00688,2025-02-26 14:23:00,CUST-0197,North,mobile,Electronics,Keyboard,2,259.49,20,415.18,327.87,completed,apple_pay,True,46,4,,Alice,
+ORD-00689,2025-04-01 11:03:00,CUST-0091,North,mobile,Sports,Basketball,4,309.06,0,0.0,0.0,cancelled,bank_transfer,True,45,4,WELCOME10,Chen,priority customer
+ORD-00690,2025-05-30 12:23:00,CUST-0063,East,partner,Electronics,Webcam,2,708.02,25,-1062.03,660.96,refunded,apple_pay,True,30,4,,,
+ORD-00691,2025-10-26 13:39:00,CUST-0233,South,partner,Books,Python Basics,2,288.91,0,-577.82,308.77,refunded,paypal,False,41,2,WELCOME10,Evan,address corrected
+ORD-00692,2026-02-22 13:01:00,CUST-0203,Central,partner,Sports,Dumbbell,2,679.64,25,1019.46,786.1,pending,credit_card,False,20,,,,
+ORD-00693,2026-01-28 09:31:00,CUST-0097,West,mobile,Sports,Basketball,6,120.46,20,578.21,326.52,completed,credit_card,True,55,2,,,delayed shipment
+ORD-00694,2026-01-01 08:23:00,CUST-0010,North,partner,Books,Machine Learning,6,636.5,0,0.0,0.0,cancelled,paypal,True,18,4,WELCOME10,Diana,
+ORD-00695,2025-05-05 12:24:00,CUST-0231,South,partner,Home,Chair,4,327.73,15,1114.28,519.33,pending,credit_card,True,72,3,,Chen,delayed shipment
+ORD-00696,2025-03-08 15:07:00,CUST-0008,East,partner,Home,Kettle,6,696.87,0,4181.22,1951.45,completed,bank_transfer,True,36,,,Evan,delayed shipment
+ORD-00697,2025-03-17 15:04:00,CUST-0012,South,mobile,Books,Finance 101,6,788.73,15,0.0,0.0,cancelled,apple_pay,False,74,3,,,address corrected
+ORD-00698,2025-03-23 21:01:00,CUST-0027,North,partner,Books,Machine Learning,4,583.46,5,2217.15,1528.79,completed,apple_pay,True,35,4,,Alice,
+ORD-00699,2025-08-29 21:42:00,CUST-0031,South,store,Home,Kettle,5,340.06,20,0.0,0.0,cancelled,credit_card,True,57,4,WELCOME10,,
+ORD-00700,2026-04-09 16:19:00,CUST-0099,South,partner,Sports,Unknown,3,515.22,10,1391.09,835.42,completed,paypal,False,28,1,,Bob,
+ORD-00701,2025-05-16 12:56:00,CUST-0085,Central,mobile,Home,Desk,1,805.81,5,765.52,529.74,pending,bank_transfer,True,19,4,VIP,Chen,
+ORD-00702,2026-02-10 10:18:00,CUST-0021,East,partner,Sports,Basketball,6,332.87,0,1997.22,1377.19,completed,paypal,False,21,1,,Alice,delayed shipment
+ORD-00703,2026-01-21 11:49:00,CUST-0143,West,web,Electronics,Mouse,4,66.75,0,-267.0,217.13,refunded,bank_transfer,False,36,4,,,delayed shipment
+ORD-00704,2026-05-11 22:18:00,CUST-0009,Central,web,Sports,Yoga Mat,3,355.34,10,959.42,573.02,completed,apple_pay,False,40,3,WELCOME10,Evan,address corrected
+ORD-00705,2026-02-06 09:06:00,CUST-0011,North,web,Electronics,Headphones,5,354.22,0,-1771.1,961.94,refunded,bank_transfer,False,19,1,SUMMER25,Chen,delayed shipment
+ORD-00706,2025-09-10 14:22:00,CUST-0108,North,mobile,Sports,Water Bottle,1,459.81,0,459.81,218.59,pending,bank_transfer,True,36,3,,Evan,
+ORD-00707,2026-03-12 10:16:00,CUST-0205,West,partner,Books,Python Basics,5,651.07,10,2929.82,1762.09,completed,paypal,False,51,4,SUMMER25,Chen,gift order
+ORD-00708,2025-02-19 22:11:00,CUST-0183,East,web,Sports,Water Bottle,1,130.69,10,0.0,0.0,cancelled,credit_card,False,64,5,SUMMER25,Evan,priority customer
+ORD-00709,2025-10-14 20:24:00,CUST-0212,East,web,Home,Storage Box,1,185.8,15,157.93,107.55,completed,bank_transfer,False,66,3,SUMMER25,Chen,
+ORD-00710,2025-08-24 13:44:00,CUST-0037,South,partner,Electronics,Webcam,1,503.12,20,0.0,0.0,cancelled,apple_pay,True,50,4,VIP,Bob,delayed shipment
+ORD-00711,2025-11-25 14:46:00,CUST-0034,North,store,Electronics,Monitor,6,617.67,25,2779.51,2196.69,completed,paypal,True,38,5,,Diana,priority customer
+ORD-00712,2025-12-30 09:57:00,CUST-0023,West,mobile,Books,Machine Learning,4,344.82,25,1034.46,645.12,pending,apple_pay,True,44,5,,Bob,
+ORD-00713,2025-12-26 09:48:00,CUST-0087,West,partner,Home,Desk,6,321.62,25,1447.29,1121.01,completed,paypal,False,52,5,VIP,,gift order
+ORD-00714,2025-06-09 15:17:00,CUST-0088,North,web,Sports,Water Bottle,6,462.29,25,2080.31,1323.38,completed,apple_pay,True,35,5,WELCOME10,Bob,gift order
+ORD-00715,2026-04-20 16:23:00,CUST-0125,Central,store,Electronics,Keyboard,2,694.97,25,1042.45,810.2,completed,paypal,False,38,4,WELCOME10,Bob,priority customer
+ORD-00716,2026-05-11 13:10:00,CUST-0153,South,mobile,Sports,Yoga Mat,3,520.64,25,1171.44,756.67,pending,paypal,True,29,3,,Evan,priority customer
+ORD-00717,2025-01-28 09:02:00,CUST-0004,North,store,Electronics,Monitor,2,264.89,0,-529.78,371.66,refunded,apple_pay,False,26,2,SUMMER25,Bob,gift order
+ORD-00718,2025-02-17 21:21:00,CUST-0130,East,web,Electronics,Webcam,3,517.63,0,1552.89,1001.18,pending,credit_card,False,53,4,,Chen,address corrected
+ORD-00719,2025-11-28 20:20:00,CUST-0044,North,store,Sports,Basketball,3,249.83,25,562.12,448.29,completed,bank_transfer,True,68,5,WELCOME10,Diana,address corrected
+ORD-00720,2026-01-29 14:34:00,CUST-0071,West,web,Electronics,Monitor,4,550.24,25,1650.72,1161.41,pending,bank_transfer,False,40,4,WELCOME10,Diana,delayed shipment
+ORD-00721,2025-08-13 22:41:00,CUST-0208,East,store,Sports,Basketball,5,389.35,5,-1849.41,912.53,refunded,paypal,True,74,2,SUMMER25,Diana,delayed shipment
+ORD-00722,2025-07-23 21:21:00,CUST-0065,Central,store,Home,Lamp,5,431.57,5,-2049.96,1129.47,refunded,credit_card,False,64,5,VIP,Alice,
+ORD-00723,2026-02-24 21:51:00,CUST-0114,West,mobile,Sports,Basketball,3,696.83,25,1567.87,1176.55,pending,credit_card,False,41,3,,,gift order
+ORD-00724,2025-07-04 21:34:00,CUST-0082,West,store,Home,Kettle,6,663.02,25,2983.59,1840.52,completed,bank_transfer,True,20,5,,Evan,gift order
+ORD-00725,2025-12-02 10:00:00,CUST-0231,South,partner,Books,Data Engineering,4,520.14,0,-2080.56,1362.29,refunded,paypal,False,31,4,SUMMER25,Evan,
+ORD-00726,2026-05-18 11:47:00,CUST-0066,Central,mobile,Books,Machine Learning,4,478.48,0,-1913.92,1244.14,refunded,paypal,False,52,,VIP,Evan,delayed shipment
+ORD-00727,2025-10-25 18:30:00,CUST-0218,South,mobile,Books,Statistics,5,361.41,10,1626.35,1231.35,completed,paypal,True,61,2,SUMMER25,Evan,delayed shipment
+ORD-00728,2025-04-12 20:59:00,CUST-0040,East,store,Books,Finance 101,3,758.99,5,0.0,0.0,cancelled,paypal,True,39,4,,Alice,delayed shipment
+ORD-00729,2026-05-02 11:06:00,CUST-0063,South,web,Sports,Running Shoes,4,592.42,0,-2369.68,1203.69,refunded,apple_pay,False,52,4,,Evan,
+ORD-00730,2026-05-19 19:31:00,CUST-0083,North,store,Sports,Dumbbell,2,564.89,10,0.0,0.0,cancelled,bank_transfer,False,56,4,WELCOME10,Evan,priority customer
+ORD-00731,2025-01-20 14:30:00,CUST-0204,East,web,Books,Statistics,4,498.26,15,1694.08,1099.9,pending,apple_pay,True,61,5,VIP,Diana,
+ORD-00732,2025-09-17 15:00:00,CUST-0133,West,store,Electronics,Monitor,5,492.54,0,2462.7,1403.66,completed,bank_transfer,True,34,2,,Bob,
+ORD-00733,2025-10-02 14:28:00,CUST-0088,North,store,Home,Chair,1,757.25,15,0.0,0.0,cancelled,paypal,True,28,3,,Bob,gift order
+ORD-00734,2025-06-30 11:47:00,CUST-0154,North,mobile,Sports,Running Shoes,5,586.67,5,2786.68,1300.98,completed,paypal,False,19,4,,Bob,address corrected
+ORD-00735,2025-02-26 14:51:00,CUST-0019,Central,web,Sports,Basketball,3,370.85,0,1112.55,682.08,completed,paypal,False,26,4,,Evan,address corrected
+ORD-00736,2025-04-02 10:42:00,CUST-0068,Central,store,Sports,Running Shoes,1,731.61,15,621.87,285.37,pending,bank_transfer,True,46,4,,Evan,
+ORD-00737,2025-04-26 13:13:00,CUST-0172,Central,web,Books,Python Basics,1,387.27,25,-290.45,197.7,refunded,apple_pay,True,74,4,SUMMER25,Alice,
+ORD-00738,2026-06-08 08:47:00,CUST-0102,West,store,Sports,Basketball,3,730.38,20,0.0,0.0,cancelled,paypal,False,52,5,WELCOME10,Alice,
+ORD-00739,2025-06-26 18:30:00,CUST-0155,West,mobile,Sports,Yoga Mat,5,157.16,5,746.51,407.02,completed,bank_transfer,False,56,5,,Evan,delayed shipment
+ORD-00740,2025-02-23 18:16:00,CUST-0193,Central,mobile,Home,Lamp,6,175.74,0,1054.44,811.38,completed,apple_pay,False,48,2,,Alice,address corrected
+ORD-00741,2026-04-16 10:37:00,CUST-0207,North,partner,Electronics,Keyboard,5,100.34,20,401.36,225.31,completed,credit_card,False,70,4,,Bob,priority customer
+ORD-00742,2025-09-01 20:05:00,CUST-0082,North,store,Books,Python Basics,4,404.96,25,1214.88,560.61,pending,apple_pay,False,46,4,VIP,Chen,address corrected
+ORD-00743,2026-01-15 08:00:00,CUST-0028,South,mobile,Sports,Dumbbell,2,307.15,10,552.87,410.06,completed,paypal,True,29,5,VIP,,
+ORD-00744,2025-08-03 17:42:00,CUST-0011,West,partner,Home,Desk,3,753.06,10,2033.26,1430.25,pending,apple_pay,False,29,5,SUMMER25,Bob,
+ORD-00745,2025-07-09 21:10:00,CUST-0136,South,partner,Sports,Yoga Mat,4,613.05,0,2452.2,1769.11,completed,paypal,False,44,5,WELCOME10,,
+ORD-00746,2026-03-12 09:54:00,CUST-0021,East,web,Books,Machine Learning,4,304.13,15,1034.04,843.06,completed,credit_card,True,63,4,VIP,,address corrected
+ORD-00747,2026-06-27 10:00:00,CUST-0144,North,partner,Sports,Yoga Mat,1,644.36,25,483.27,391.4,completed,apple_pay,False,37,4,SUMMER25,Alice,priority customer
+ORD-00748,2025-11-15 08:59:00,CUST-0020,West,web,Sports,Running Shoes,2,334.66,25,501.99,393.21,completed,apple_pay,True,55,5,WELCOME10,Bob,delayed shipment
+ORD-00749,2026-06-09 20:52:00,CUST-0103,North,mobile,Home,Storage Box,1,228.2,25,171.15,85.3,completed,paypal,False,39,4,SUMMER25,Bob,
+ORD-00750,2026-02-14 19:44:00,CUST-0044,South,mobile,Books,Python Basics,5,487.55,20,1950.2,1151.75,completed,bank_transfer,False,42,3,WELCOME10,Bob,
+ORD-00751,2026-06-02 09:33:00,CUST-0130,East,web,Sports,Basketball,6,538.05,0,3228.3,2042.38,completed,apple_pay,False,45,3,SUMMER25,Chen,
+ORD-00752,2025-06-21 15:38:00,CUST-0117,Central,store,Electronics,Keyboard,6,445.15,15,0.0,0.0,cancelled,paypal,True,47,4,,Chen,priority customer
+ORD-00753,2026-05-15 13:01:00,CUST-0014,South,web,Electronics,Keyboard,6,737.09,10,3980.29,2242.9,completed,apple_pay,True,33,5,,Chen,
+ORD-00754,2025-04-28 11:41:00,CUST-0065,East,store,Electronics,Keyboard,6,493.8,0,-2962.8,1481.05,refunded,bank_transfer,True,32,,WELCOME10,Bob,address corrected
+ORD-00755,2026-06-02 11:48:00,CUST-0234,North,web,Sports,Running Shoes,3,820.78,0,2462.34,1955.32,completed,credit_card,False,59,5,SUMMER25,Diana,delayed shipment
+ORD-00756,2025-03-03 12:49:00,CUST-0235,West,store,Books,Statistics,5,320.42,25,-1201.58,806.4,refunded,bank_transfer,False,58,,VIP,Evan,address corrected
+ORD-00757,2025-05-05 12:32:00,CUST-0143,South,store,Sports,Dumbbell,4,471.6,0,1886.4,869.24,pending,credit_card,True,58,2,WELCOME10,Evan,
+ORD-00758,2026-05-04 09:25:00,CUST-0086,West,mobile,Electronics,Keyboard,3,149.19,0,0.0,0.0,cancelled,bank_transfer,True,37,1,,Evan,
+ORD-00759,2025-12-18 21:50:00,CUST-0090,West,store,Sports,Water Bottle,1,174.97,10,157.47,117.97,completed,credit_card,True,34,1,,Alice,
+ORD-00760,2025-05-23 12:14:00,CUST-0166,East,store,Books,Data Engineering,4,80.02,0,320.08,170.66,completed,apple_pay,True,34,4,VIP,Diana,
+ORD-00761,2026-03-02 16:46:00,CUST-0009,North,web,Home,Storage Box,4,339.2,0,1356.8,638.15,completed,apple_pay,False,24,5,,Evan,
+ORD-00762,2026-05-21 15:27:00,CUST-0147,North,store,Books,Data Engineering,3,273.97,5,780.81,609.7,completed,paypal,True,46,5,,Diana,
+ORD-00763,2026-02-20 11:30:00,CUST-0082,South,partner,Electronics,Headphones,3,194.28,10,524.56,305.59,completed,credit_card,False,51,5,SUMMER25,Diana,
+ORD-00764,2025-02-27 17:21:00,CUST-0226,North,store,Books,Python Basics,1,716.86,0,716.86,584.76,completed,credit_card,False,57,2,,Bob,delayed shipment
+ORD-00765,2026-03-04 22:42:00,CUST-0111,West,store,Sports,Dumbbell,6,209.66,0,1257.96,1004.98,pending,apple_pay,False,47,,,Bob,gift order
+ORD-00766,2025-02-15 22:01:00,CUST-0238,North,partner,Home,Lamp,6,296.53,0,0.0,0.0,cancelled,credit_card,False,43,1,,Diana,
+ORD-00767,2026-05-01 19:41:00,CUST-0156,East,web,Electronics,Mouse,6,646.32,25,2908.44,2146.75,pending,paypal,False,56,5,,Bob,priority customer
+ORD-00768,2026-04-14 19:55:00,CUST-0001,Central,mobile,Sports,Running Shoes,2,233.06,0,-466.12,304.97,refunded,bank_transfer,False,19,1,,,delayed shipment
+ORD-00769,2025-01-27 14:22:00,CUST-0140,West,web,Electronics,Headphones,1,281.82,5,267.73,162.47,completed,apple_pay,True,45,4,VIP,Evan,
+ORD-00770,2025-11-11 22:04:00,CUST-0032,South,web,Electronics,Keyboard,1,558.07,15,-474.36,241.76,refunded,bank_transfer,True,30,4,,Evan,
+ORD-00771,2025-11-05 18:24:00,CUST-0115,North,partner,Home,Kettle,2,376.53,5,0.0,0.0,cancelled,credit_card,True,48,5,VIP,Evan,
+ORD-00772,2025-08-22 12:57:00,CUST-0074,West,partner,Electronics,Monitor,4,562.28,0,2249.12,1602.87,pending,paypal,False,27,5,SUMMER25,,address corrected
+ORD-00773,2025-11-21 17:48:00,CUST-0028,East,store,Sports,Yoga Mat,3,68.88,0,206.64,119.73,completed,paypal,False,19,2,,Bob,
+ORD-00774,2025-12-25 08:07:00,CUST-0024,Central,partner,Books,Statistics,1,529.24,20,0.0,0.0,cancelled,paypal,True,39,4,WELCOME10,Evan,delayed shipment
+ORD-00775,2025-02-27 17:22:00,CUST-0020,East,web,Home,Storage Box,2,596.96,5,1134.22,835.91,completed,apple_pay,True,33,5,WELCOME10,Diana,gift order
+ORD-00776,2026-02-14 20:09:00,CUST-0211,East,partner,Electronics,Headphones,3,664.89,0,0.0,0.0,cancelled,paypal,False,32,5,VIP,,delayed shipment
+ORD-00777,2026-04-18 10:19:00,CUST-0202,East,store,Home,Kettle,6,814.36,25,0.0,0.0,cancelled,apple_pay,False,29,5,VIP,Bob,
+ORD-00778,2025-07-07 14:32:00,CUST-0030,North,mobile,Home,Lamp,4,465.26,0,1861.04,959.52,completed,paypal,True,38,3,WELCOME10,Alice,
+ORD-00779,2025-03-16 17:07:00,CUST-0073,East,web,Books,Statistics,2,55.75,0,111.5,59.45,pending,paypal,False,63,5,VIP,Alice,
+ORD-00780,2025-05-25 19:16:00,CUST-0004,West,mobile,Books,Python Basics,2,594.28,0,0.0,0.0,cancelled,credit_card,True,37,,,Diana,
+ORD-00781,2026-03-07 17:27:00,CUST-0238,Central,mobile,Sports,Basketball,2,342.04,5,-649.88,300.63,refunded,bank_transfer,False,49,3,,Diana,address corrected
+ORD-00782,2026-01-10 14:16:00,CUST-0233,West,partner,Electronics,Monitor,2,347.54,10,625.57,348.87,completed,apple_pay,False,37,2,,Evan,priority customer
+ORD-00783,2026-05-08 18:08:00,CUST-0008,North,mobile,Electronics,Webcam,4,603.46,0,2413.84,1521.73,completed,apple_pay,True,55,4,,Chen,
+ORD-00784,2026-04-30 12:45:00,CUST-0045,Central,web,Sports,Dumbbell,1,596.94,15,0.0,0.0,cancelled,bank_transfer,False,19,1,,,priority customer
+ORD-00785,2025-02-10 16:53:00,CUST-0095,East,mobile,Sports,Basketball,2,339.57,20,0.0,0.0,cancelled,bank_transfer,False,22,3,WELCOME10,Diana,delayed shipment
+ORD-00786,2026-02-18 22:23:00,CUST-0106,North,web,Sports,Yoga Mat,4,172.04,25,0.0,0.0,cancelled,bank_transfer,False,59,1,,Chen,gift order
+ORD-00787,2025-06-13 22:52:00,CUST-0072,Central,partner,Electronics,Webcam,5,11.34,20,45.36,21.94,pending,bank_transfer,True,23,1,VIP,Bob,delayed shipment
+ORD-00788,2025-01-15 09:04:00,CUST-0035,East,mobile,Sports,Basketball,3,499.64,0,1498.92,839.17,completed,credit_card,False,70,5,,Diana,delayed shipment
+ORD-00789,2025-02-05 09:33:00,CUST-0154,East,partner,Electronics,Headphones,5,639.54,0,3197.7,2216.79,completed,credit_card,False,39,1,WELCOME10,Evan,
+ORD-00790,2025-06-15 11:03:00,CUST-0041,West,partner,Sports,Running Shoes,4,845.28,0,-3381.12,2673.29,refunded,apple_pay,True,63,1,VIP,Chen,delayed shipment
+ORD-00791,2025-11-27 16:22:00,CUST-0055,West,web,Home,Storage Box,4,801.79,5,3046.8,2061.2,completed,paypal,True,25,5,VIP,Chen,delayed shipment
+ORD-00792,2025-12-16 08:53:00,CUST-0084,West,web,Books,Machine Learning,4,740.58,5,2814.2,1533.23,completed,apple_pay,True,41,4,VIP,Evan,address corrected
+ORD-00793,2025-12-12 22:38:00,CUST-0108,West,web,Electronics,Webcam,6,213.29,15,0.0,0.0,cancelled,paypal,False,55,4,,Diana,
+ORD-00794,2026-06-23 22:48:00,CUST-0212,East,mobile,Home,Desk,4,44.57,5,0.0,0.0,cancelled,credit_card,True,21,3,WELCOME10,,delayed shipment
+ORD-00795,2026-03-30 08:41:00,CUST-0203,South,store,Books,Finance 101,6,784.42,10,-4235.87,2449.87,refunded,paypal,True,69,4,SUMMER25,Alice,delayed shipment
+ORD-00796,2025-02-20 14:48:00,CUST-0113,East,web,Home,Desk,2,431.25,0,862.5,536.6,pending,bank_transfer,True,23,4,,Diana,
+ORD-00797,2025-11-25 11:15:00,CUST-0125,West,web,Home,Storage Box,4,196.09,5,-745.14,593.79,refunded,bank_transfer,False,25,,,,
+ORD-00798,2026-01-05 12:07:00,CUST-0053,Central,web,Sports,Water Bottle,4,644.02,0,2576.08,1293.42,completed,bank_transfer,False,53,5,VIP,,
+ORD-00799,2026-03-28 21:49:00,CUST-0094,South,partner,Books,Python Basics,3,298.3,0,894.9,548.09,completed,apple_pay,True,55,1,,,priority customer
+ORD-00800,2025-02-21 19:24:00,CUST-0002,West,store,Home,Storage Box,1,685.58,0,685.58,335.64,pending,apple_pay,True,18,5,SUMMER25,Alice,
+ORD-00801,2025-01-29 17:55:00,CUST-0045,Central,web,Sports,Yoga Mat,1,508.38,0,508.38,247.16,completed,credit_card,False,58,1,,Evan,
+ORD-00802,2025-01-13 19:45:00,CUST-0067,East,partner,Home,Storage Box,1,153.03,20,0.0,0.0,cancelled,apple_pay,True,62,1,,Bob,delayed shipment
+ORD-00803,2025-07-11 20:28:00,CUST-0201,East,store,Electronics,Webcam,3,599.5,0,1798.5,964.47,completed,paypal,True,70,1,,Evan,
+ORD-00804,2025-11-22 20:57:00,CUST-0192,Central,partner,Home,Desk,3,173.45,0,520.35,277.23,pending,bank_transfer,True,66,,VIP,Diana,priority customer
+ORD-00805,2025-10-26 21:54:00,CUST-0198,South,mobile,Sports,Yoga Mat,3,805.36,15,2053.67,1315.86,pending,paypal,True,39,4,VIP,Alice,
+ORD-00806,2026-01-07 15:20:00,CUST-0148,North,partner,Sports,Dumbbell,5,356.08,15,1513.34,1216.04,completed,paypal,True,29,2,WELCOME10,Chen,
+ORD-00807,2025-02-28 09:02:00,CUST-0188,South,store,Home,Chair,4,399.6,0,1598.4,986.54,pending,apple_pay,False,27,4,VIP,Bob,address corrected
+ORD-00808,2026-06-12 15:54:00,CUST-0151,Central,partner,Home,Desk,2,145.56,15,247.45,180.75,completed,credit_card,True,48,5,WELCOME10,Bob,priority customer
+ORD-00809,2025-02-28 17:37:00,CUST-0235,North,store,Books,Statistics,5,108.49,0,542.45,274.9,pending,credit_card,True,48,4,,Chen,
+ORD-00810,2026-06-19 16:52:00,CUST-0143,South,mobile,Sports,Yoga Mat,4,540.46,0,2161.84,1502.98,completed,paypal,True,52,4,,Chen,address corrected
+ORD-00811,2025-11-03 08:30:00,CUST-0183,South,partner,Sports,Yoga Mat,4,356.67,10,0.0,0.0,cancelled,paypal,True,52,1,,Evan,priority customer
+ORD-00812,2025-04-02 18:05:00,CUST-0035,South,partner,Home,Desk,4,540.61,15,1838.07,903.33,completed,credit_card,False,70,,WELCOME10,Bob,priority customer
+ORD-00813,2025-12-25 11:23:00,CUST-0210,East,store,Books,Data Engineering,4,790.67,0,3162.68,1668.08,completed,paypal,False,25,2,SUMMER25,Diana,delayed shipment
+ORD-00814,2026-05-22 09:53:00,CUST-0071,Central,partner,Books,Machine Learning,5,738.07,20,0.0,0.0,cancelled,bank_transfer,True,20,5,VIP,Chen,
+ORD-00815,2026-02-11 19:38:00,CUST-0068,East,partner,Sports,Water Bottle,2,513.67,15,873.24,492.85,completed,paypal,True,63,5,SUMMER25,Evan,address corrected
+ORD-00816,2025-05-27 17:07:00,CUST-0184,East,mobile,Home,Lamp,4,524.06,0,-2096.24,1111.79,refunded,bank_transfer,True,51,1,,Alice,
+ORD-00817,2026-03-27 09:33:00,CUST-0154,South,web,Books,Data Engineering,3,715.39,20,0.0,0.0,cancelled,credit_card,True,50,5,,Chen,priority customer
+ORD-00818,2025-09-05 10:23:00,CUST-0008,North,store,Electronics,Mouse,2,712.96,10,0.0,0.0,cancelled,paypal,True,71,,,Evan,priority customer
+ORD-00819,2026-05-26 22:37:00,CUST-0131,East,mobile,Electronics,Keyboard,3,354.29,0,0.0,0.0,cancelled,credit_card,True,57,1,,Alice,gift order
+ORD-00820,2025-08-20 10:18:00,CUST-0188,East,mobile,Home,Kettle,4,321.6,0,-1286.4,714.83,refunded,apple_pay,False,24,5,WELCOME10,,gift order
+ORD-00821,2025-11-23 09:01:00,CUST-0188,North,mobile,Home,Lamp,3,543.15,0,1629.45,1230.67,completed,apple_pay,True,71,4,VIP,Diana,priority customer
+ORD-00822,2025-10-02 12:00:00,CUST-0155,East,store,Electronics,Headphones,6,42.42,10,0.0,0.0,cancelled,apple_pay,True,50,3,,Evan,
+ORD-00823,2025-02-07 13:16:00,CUST-0186,North,web,Electronics,Headphones,3,538.38,15,0.0,0.0,cancelled,bank_transfer,True,73,2,,Alice,
+ORD-00824,2025-06-04 09:27:00,CUST-0028,South,web,Electronics,Mouse,2,737.13,10,-1326.83,895.27,refunded,paypal,True,45,3,,,
+ORD-00825,2025-12-13 08:38:00,CUST-0021,Central,web,Home,Kettle,2,603.98,25,0.0,0.0,cancelled,apple_pay,True,26,5,VIP,Diana,priority customer
+ORD-00826,2025-06-24 17:54:00,CUST-0219,West,partner,Electronics,Monitor,4,761.43,0,3045.72,1794.18,completed,bank_transfer,False,67,2,SUMMER25,Diana,
+ORD-00827,2025-05-22 11:48:00,CUST-0240,North,store,Home,Chair,2,605.48,15,1029.32,643.02,completed,paypal,True,62,,,Diana,gift order
+ORD-00828,2025-10-01 22:22:00,CUST-0137,East,partner,Sports,Basketball,2,319.78,0,639.56,329.48,completed,bank_transfer,False,48,5,SUMMER25,Alice,delayed shipment
+ORD-00829,2026-04-04 10:05:00,CUST-0195,West,web,Home,Lamp,6,708.93,5,4040.9,3156.87,completed,bank_transfer,True,38,,WELCOME10,Chen,
+ORD-00830,2025-03-11 18:17:00,CUST-0215,West,mobile,Sports,Basketball,3,120.12,10,324.32,169.7,completed,apple_pay,True,54,5,,Chen,delayed shipment
+ORD-00831,2025-11-09 11:29:00,CUST-0227,West,web,Electronics,Headphones,3,166.12,0,498.36,373.85,pending,bank_transfer,False,74,,WELCOME10,Alice,
+ORD-00832,2025-01-16 09:47:00,CUST-0205,West,partner,Books,Statistics,2,445.05,15,756.59,490.2,completed,bank_transfer,True,60,2,,,delayed shipment
+ORD-00833,2026-06-28 09:18:00,CUST-0180,Central,partner,Electronics,Monitor,3,400.44,0,-1201.32,699.54,refunded,credit_card,False,51,5,SUMMER25,,delayed shipment
+ORD-00834,2025-10-30 21:57:00,CUST-0067,Central,mobile,Home,Lamp,6,441.3,25,1985.85,1501.17,pending,bank_transfer,True,49,5,,Alice,
+ORD-00835,2026-03-11 22:20:00,CUST-0133,Central,web,Books,Python Basics,2,418.81,0,837.62,549.87,completed,bank_transfer,False,18,1,VIP,Diana,gift order
+ORD-00836,2025-06-15 19:57:00,CUST-0058,North,store,Electronics,Webcam,2,786.49,0,-1572.98,1227.29,refunded,bank_transfer,True,40,2,,Chen,delayed shipment
+ORD-00837,2026-03-21 09:59:00,CUST-0198,East,store,Electronics,Monitor,3,100.47,0,301.41,148.52,pending,credit_card,False,74,5,,,priority customer
+ORD-00838,2025-11-05 17:17:00,CUST-0146,North,partner,Electronics,Webcam,2,297.38,0,594.76,357.19,completed,credit_card,False,27,3,WELCOME10,Diana,delayed shipment
+ORD-00839,2025-04-17 13:45:00,CUST-0027,West,mobile,Books,Finance 101,3,555.16,20,-1332.38,784.93,refunded,paypal,True,54,4,VIP,Evan,priority customer
+ORD-00840,2026-03-15 14:46:00,CUST-0092,West,web,Electronics,Keyboard,5,62.62,15,-266.13,148.91,refunded,apple_pay,True,33,4,VIP,Chen,gift order
+ORD-00841,2025-01-06 12:26:00,CUST-0209,South,store,Books,Statistics,2,146.52,0,0.0,0.0,cancelled,paypal,True,28,3,SUMMER25,Bob,address corrected
+ORD-00842,2025-10-14 21:55:00,CUST-0151,East,mobile,Electronics,Headphones,2,414.29,10,745.72,554.67,completed,apple_pay,False,72,3,WELCOME10,Alice,
+ORD-00843,2026-03-19 09:57:00,CUST-0228,West,mobile,Sports,Basketball,1,488.07,0,488.07,251.55,completed,credit_card,True,58,4,VIP,Alice,delayed shipment
+ORD-00844,2025-12-27 08:51:00,CUST-0153,South,web,Electronics,Headphones,3,322.53,0,967.59,678.7,pending,credit_card,False,53,,VIP,,
+ORD-00845,2025-12-21 17:31:00,CUST-0011,West,store,Books,Finance 101,4,508.81,20,1628.19,974.8,completed,apple_pay,False,37,4,,Bob,address corrected
+ORD-00846,2025-11-29 08:19:00,CUST-0072,North,mobile,Books,Data Engineering,5,282.57,0,1412.85,1019.82,pending,credit_card,True,29,4,,Evan,gift order
+ORD-00847,2025-07-07 11:57:00,CUST-0007,North,partner,Sports,Water Bottle,1,773.93,10,-696.54,515.25,refunded,bank_transfer,False,68,1,,Diana,
+ORD-00848,2025-07-10 15:00:00,CUST-0095,South,web,Sports,Dumbbell,5,326.03,15,1385.63,748.26,completed,credit_card,True,33,5,,Diana,
+ORD-00849,2026-01-28 15:39:00,CUST-0043,East,partner,Electronics,Monitor,5,569.85,0,2849.25,1425.23,completed,credit_card,False,74,5,,Chen,priority customer
+ORD-00850,2026-03-31 20:28:00,CUST-0122,West,partner,Electronics,Headphones,3,257.62,120,656.93,404.36,completed,apple_pay,True,22,,SUMMER25,Bob,priority customer
+ORD-00851,2026-04-20 18:12:00,CUST-0240,East,partner,Books,Data Engineering,6,689.57,0,4137.42,2414.94,completed,bank_transfer,True,26,3,SUMMER25,Chen,
+ORD-00852,2026-05-14 14:07:00,CUST-0177,West,store,Electronics,Webcam,5,642.11,0,-3210.55,1893.18,refunded,paypal,True,44,5,,Alice,
+ORD-00853,2025-11-23 09:09:00,CUST-0068,Central,web,Sports,Basketball,2,435.07,25,652.61,298.15,completed,apple_pay,True,19,4,VIP,,delayed shipment
+ORD-00854,2025-04-25 22:07:00,CUST-0114,South,mobile,Sports,Yoga Mat,5,192.13,5,912.62,637.98,pending,apple_pay,True,29,4,,,
+ORD-00855,2025-09-16 12:24:00,CUST-0168,Central,web,Books,Machine Learning,3,645.01,10,0.0,0.0,cancelled,bank_transfer,False,57,2,WELCOME10,,delayed shipment
+ORD-00856,2025-04-20 16:43:00,CUST-0154,North,mobile,Home,Storage Box,2,166.13,0,332.26,180.14,completed,apple_pay,False,42,2,VIP,,address corrected
+ORD-00857,2025-05-23 13:38:00,CUST-0141,East,mobile,Electronics,Monitor,2,113.9,15,193.63,148.07,pending,paypal,False,63,4,,,
+ORD-00858,2026-01-30 12:35:00,CUST-0007,South,web,Sports,Running Shoes,4,627.9,0,2511.6,1989.38,completed,apple_pay,False,31,1,,Bob,address corrected
+ORD-00859,2025-04-08 17:21:00,CUST-0016,East,web,Home,Kettle,3,630.05,0,-1890.15,889.85,refunded,apple_pay,True,61,3,,Evan,
+ORD-00860,2025-02-20 12:24:00,CUST-0157,East,partner,Books,Statistics,3,506.73,10,1368.17,794.71,pending,paypal,True,35,5,,Chen,
+ORD-00861,2025-09-28 21:03:00,CUST-0011,Central,partner,Home,Storage Box,3,607.4,0,1822.2,1141.92,completed,paypal,True,49,5,,Diana,priority customer
+ORD-00862,2026-04-10 19:31:00,CUST-0134,West,mobile,Books,Data Engineering,4,490.74,0,1962.96,978.38,completed,bank_transfer,False,34,2,WELCOME10,Alice,priority customer
+ORD-00863,2025-10-06 22:12:00,CUST-0186,East,mobile,Home,Lamp,6,235.69,20,1131.31,774.25,completed,paypal,True,52,2,VIP,,
+ORD-00864,2025-05-08 13:46:00,CUST-0218,North,mobile,Home,Storage Box,5,741.68,20,0.0,0.0,cancelled,paypal,True,39,2,,Chen,delayed shipment
+ORD-00865,2025-04-08 13:54:00,CUST-0045,East,store,Books,Data Engineering,5,779.34,20,3117.36,1947.76,completed,apple_pay,False,27,5,,Alice,priority customer
+ORD-00866,2026-03-07 21:13:00,CUST-0223,Central,store,Electronics,Headphones,4,663.37,0,2653.48,1528.4,completed,paypal,True,49,,,Evan,delayed shipment
+ORD-00867,2025-04-26 11:29:00,CUST-0001,East,mobile,Electronics,Mouse,5,674.19,0,3370.95,1838.57,pending,credit_card,False,36,2,SUMMER25,Chen,delayed shipment
+ORD-00868,2026-02-08 21:33:00,CUST-0209,East,store,Books,Statistics,2,645.01,10,-1161.02,812.15,refunded,bank_transfer,True,70,,SUMMER25,Alice,priority customer
+ORD-00869,2025-06-30 16:53:00,CUST-0183,Central,mobile,Sports,Yoga Mat,3,437.83,20,1050.79,833.38,completed,credit_card,True,69,,,Bob,
+ORD-00870,2025-09-10 09:06:00,CUST-0199,North,store,Sports,Dumbbell,1,321.88,25,241.41,167.77,completed,bank_transfer,False,39,4,VIP,Diana,
+ORD-00871,2026-05-03 10:28:00,CUST-0084,South,mobile,Sports,Water Bottle,3,485.22,20,1164.53,557.99,completed,paypal,True,62,5,,,delayed shipment
+ORD-00872,2025-03-17 22:51:00,CUST-0096,West,web,Home,Storage Box,5,299.36,0,1496.8,1085.12,completed,credit_card,False,46,,SUMMER25,Chen,priority customer
+ORD-00873,2025-06-24 12:57:00,CUST-0188,West,partner,Electronics,Keyboard,6,729.38,0,4376.28,3506.05,completed,credit_card,True,53,4,SUMMER25,Bob,priority customer
+ORD-00874,2026-04-20 21:14:00,CUST-0169,North,mobile,Books,Data Engineering,4,684.4,0,2737.6,1526.04,pending,bank_transfer,True,74,2,VIP,,gift order
+ORD-00875,2025-12-04 17:27:00,CUST-0146,North,partner,Electronics,Keyboard,6,395.0,20,1896.0,1161.8,pending,credit_card,False,21,4,,,
+ORD-00876,2025-03-08 10:14:00,CUST-0030,South,mobile,Books,Statistics,1,814.17,10,732.75,538.59,completed,bank_transfer,True,25,4,SUMMER25,Diana,delayed shipment
+ORD-00877,2026-05-05 22:17:00,CUST-0220,West,mobile,Electronics,Mouse,6,628.66,0,3771.96,2048.2,completed,apple_pay,True,47,3,VIP,Bob,
+ORD-00878,2025-02-07 16:45:00,CUST-0103,East,store,Sports,Dumbbell,2,206.22,0,0.0,0.0,cancelled,credit_card,False,32,5,,Alice,gift order
+ORD-00879,2025-09-08 22:11:00,CUST-0088,East,web,Home,Desk,2,29.13,15,0.0,0.0,cancelled,bank_transfer,False,22,1,SUMMER25,Diana,gift order
+ORD-00880,2026-04-08 10:16:00,CUST-0030,West,mobile,Electronics,Webcam,3,217.93,0,653.79,401.83,completed,paypal,False,50,1,SUMMER25,Diana,priority customer
+ORD-00881,2025-05-05 21:13:00,CUST-0202,Central,partner,Sports,Basketball,6,632.57,20,3036.34,1616.66,pending,credit_card,True,45,,SUMMER25,Diana,delayed shipment
+ORD-00882,2026-02-14 18:21:00,CUST-0144,West,mobile,Books,Statistics,3,677.58,0,2032.74,1602.48,completed,credit_card,True,35,5,VIP,Bob,address corrected
+ORD-00883,2025-12-07 14:47:00,CUST-0031,North,partner,Sports,Dumbbell,6,253.55,0,1521.3,1026.69,completed,bank_transfer,True,53,1,,Bob,priority customer
+ORD-00884,2025-03-10 10:13:00,CUST-0206,West,partner,Books,Data Engineering,4,456.68,0,1826.72,1495.27,completed,credit_card,False,41,1,WELCOME10,Evan,
+ORD-00885,2025-08-10 19:08:00,CUST-0034,North,partner,Home,Chair,1,514.94,5,489.19,284.54,completed,paypal,False,58,4,SUMMER25,Evan,priority customer
+ORD-00886,2025-01-15 20:51:00,CUST-0063,South,store,Books,Statistics,4,392.58,0,1570.32,879.0,pending,bank_transfer,False,69,5,,,
+ORD-00887,2025-04-02 21:38:00,CUST-0041,West,store,Home,Kettle,4,594.63,0,0.0,0.0,cancelled,paypal,True,38,,,Bob,
+ORD-00888,2025-05-07 12:29:00,CUST-0175,South,mobile,Electronics,Monitor,6,36.79,0,220.74,138.48,completed,apple_pay,True,74,3,SUMMER25,Bob,
+ORD-00889,2025-07-25 11:00:00,CUST-0052,East,partner,Books,Machine Learning,4,75.37,0,-301.48,226.81,refunded,apple_pay,False,40,5,,Bob,gift order
+ORD-00890,2026-01-13 10:28:00,CUST-0142,Central,partner,Sports,Water Bottle,3,519.29,0,1557.87,728.99,completed,bank_transfer,True,39,4,,Diana,delayed shipment
+ORD-00891,2025-02-03 21:11:00,CUST-0011,South,mobile,Books,Machine Learning,2,235.77,5,0.0,0.0,cancelled,credit_card,False,43,5,,Alice,
+ORD-00892,2025-05-22 17:11:00,CUST-0158,North,mobile,Books,Machine Learning,4,614.84,10,0.0,0.0,cancelled,paypal,True,44,1,,,gift order
+ORD-00893,2025-10-16 13:46:00,CUST-0171,West,store,Books,Python Basics,5,795.69,10,3580.61,2709.85,pending,apple_pay,True,71,4,,Bob,address corrected
+ORD-00894,2025-06-01 16:30:00,CUST-0010,East,web,Electronics,Monitor,5,320.62,5,1522.94,1185.65,completed,paypal,True,43,4,VIP,Diana,
+ORD-00895,2025-01-16 15:45:00,CUST-0070,South,web,Home,Kettle,5,802.75,0,0.0,0.0,cancelled,apple_pay,False,49,5,,Evan,
+ORD-00896,2025-04-19 12:46:00,CUST-0220,East,store,Electronics,Headphones,4,201.46,15,684.96,355.17,completed,paypal,True,31,1,,Chen,delayed shipment
+ORD-00897,2025-03-06 11:59:00,CUST-0108,East,partner,Home,Lamp,3,639.49,25,1438.85,1114.69,pending,bank_transfer,True,66,5,VIP,Bob,gift order
+ORD-00898,2026-06-05 22:46:00,CUST-0201,South,mobile,Books,Data Engineering,2,685.2,10,1233.36,846.95,completed,apple_pay,True,26,3,,Evan,delayed shipment
+ORD-00899,2025-02-17 09:28:00,CUST-0129,East,web,Electronics,Monitor,5,152.19,20,608.76,351.88,completed,credit_card,True,66,3,SUMMER25,Chen,
+ORD-00900,2025-09-13 13:20:00,CUST-0006,East,web,Home,Desk,4,186.31,5,707.98,479.94,completed,apple_pay,True,42,5,,Alice,delayed shipment
+ORD-00901,2025-01-13 20:33:00,CUST-0234,North,store,Home,Desk,6,514.1,0,3084.6,2365.39,completed,apple_pay,True,44,2,,Evan,
+ORD-00902,2025-08-28 17:35:00,CUST-0202,East,store,Home,Kettle,6,427.65,10,-2309.31,1188.24,refunded,apple_pay,False,42,5,WELCOME10,Chen,priority customer
+ORD-00903,2025-12-11 11:05:00,CUST-0047,North,store,Home,Chair,2,139.92,10,-251.86,145.25,refunded,bank_transfer,True,47,4,SUMMER25,Diana,
+ORD-00904,2025-12-22 08:52:00,CUST-0151,West,partner,Sports,Dumbbell,4,45.76,0,183.04,133.24,pending,bank_transfer,True,52,3,WELCOME10,Bob,
+ORD-00905,2025-03-09 21:59:00,CUST-0167,North,mobile,Books,Data Engineering,1,671.9,20,0.0,0.0,cancelled,credit_card,False,51,4,,Diana,priority customer
+ORD-00906,2026-05-22 21:20:00,CUST-0228,Central,partner,Sports,Dumbbell,6,103.35,10,558.09,270.89,completed,credit_card,False,38,,,Bob,delayed shipment
+ORD-00907,2025-03-26 20:23:00,CUST-0138,West,partner,Sports,Basketball,3,488.1,0,1464.3,1120.66,pending,paypal,False,21,2,WELCOME10,Evan,address corrected
+ORD-00908,2025-09-28 22:53:00,CUST-0079,West,mobile,Books,Python Basics,2,314.03,25,0.0,0.0,cancelled,bank_transfer,False,45,5,,Chen,priority customer
+ORD-00909,2025-09-28 15:02:00,CUST-0086,South,mobile,Home,Lamp,6,382.08,0,2292.48,1791.62,completed,credit_card,False,31,3,,,address corrected
+ORD-00910,2025-05-06 22:37:00,CUST-0084,North,mobile,Electronics,Monitor,4,791.03,5,-3005.91,1573.37,refunded,apple_pay,False,52,5,,Evan,priority customer
+ORD-00911,2025-03-24 11:45:00,CUST-0118,South,store,Home,Storage Box,1,732.29,20,585.83,440.82,pending,credit_card,True,70,5,SUMMER25,Evan,delayed shipment
+ORD-00912,2025-07-24 16:52:00,CUST-0187,North,web,Home,Lamp,2,591.65,5,1124.13,592.57,pending,credit_card,True,69,3,,,gift order
+ORD-00913,2025-06-05 19:31:00,CUST-0193,East,partner,Sports,Running Shoes,1,400.42,10,360.38,210.81,completed,apple_pay,True,37,1,,Evan,gift order
+ORD-00914,2026-04-15 12:50:00,CUST-0148,West,mobile,Electronics,Headphones,5,455.11,5,-2161.77,1328.0,refunded,paypal,True,62,1,,,delayed shipment
+ORD-00915,2026-02-27 15:28:00,CUST-0075,Central,partner,Home,Lamp,1,846.89,0,846.89,444.58,pending,paypal,False,66,4,VIP,Evan,gift order
+ORD-00916,2025-04-14 11:32:00,CUST-0112,West,web,Home,Desk,4,143.99,0,575.96,366.18,completed,bank_transfer,True,60,5,VIP,Alice,address corrected
+ORD-00917,2026-05-24 09:23:00,CUST-0069,East,web,Electronics,Keyboard,5,797.82,0,3989.1,2367.22,pending,apple_pay,True,32,1,SUMMER25,Evan,priority customer
+ORD-00918,2025-06-04 21:52:00,CUST-0008,North,mobile,Sports,Water Bottle,6,102.7,25,462.15,255.34,completed,bank_transfer,True,55,4,,Diana,delayed shipment
+ORD-00919,2025-03-16 22:49:00,CUST-0139,South,web,Home,Desk,4,711.68,25,2135.04,1019.34,completed,credit_card,True,20,2,,Chen,address corrected
+ORD-00920,2025-11-23 09:05:00,CUST-0093,South,partner,Home,Desk,5,681.63,20,2726.52,1865.07,pending,credit_card,False,27,4,,Evan,
+ORD-00921,2026-04-04 20:25:00,CUST-0101,East,store,Electronics,Webcam,5,259.65,25,973.69,591.75,completed,apple_pay,False,49,4,WELCOME10,Chen,priority customer
+ORD-00922,2025-12-29 11:42:00,CUST-0232,South,partner,Electronics,Monitor,5,201.72,10,907.74,725.04,completed,credit_card,False,36,,,,
+ORD-00923,2025-07-12 14:56:00,CUST-0144,East,partner,Books,Statistics,1,685.13,15,582.36,340.76,pending,apple_pay,False,26,4,VIP,Diana,priority customer
+ORD-00924,2025-07-04 22:30:00,CUST-0107,East,mobile,Electronics,Mouse,3,544.68,15,-1388.93,758.34,refunded,paypal,False,46,,,Bob,
+ORD-00925,2025-09-22 19:30:00,CUST-0057,Central,partner,Sports,Water Bottle,5,507.82,15,0.0,0.0,cancelled,paypal,True,18,3,,,
+ORD-00926,2025-08-04 19:19:00,CUST-0002,Central,web,Sports,Running Shoes,4,290.59,15,988.01,665.43,completed,credit_card,False,48,1,WELCOME10,Evan,address corrected
+ORD-00927,2026-05-14 15:32:00,CUST-0112,East,store,Sports,Dumbbell,6,782.15,0,4692.9,3062.24,completed,credit_card,True,46,4,WELCOME10,Chen,gift order
+ORD-00928,2025-12-27 19:01:00,CUST-0131,Central,web,Sports,Yoga Mat,3,280.0,5,798.0,549.58,completed,credit_card,True,65,4,WELCOME10,,gift order
+ORD-00929,2025-10-23 08:18:00,CUST-0078,West,store,Home,Kettle,2,223.24,0,446.48,349.49,completed,bank_transfer,False,57,2,,Evan,
+ORD-00930,2026-03-11 13:13:00,CUST-0204,North,web,Sports,Water Bottle,3,207.29,0,621.87,311.28,completed,bank_transfer,True,45,4,,Bob,delayed shipment
+ORD-00931,2025-02-23 12:05:00,CUST-0064,Central,web,Books,Statistics,3,111.01,0,333.03,263.24,completed,bank_transfer,False,60,5,,,
+ORD-00932,2026-06-28 20:11:00,CUST-0061,Central,store,Electronics,Webcam,2,603.23,0,1206.46,711.87,pending,apple_pay,False,21,,VIP,Chen,priority customer
+ORD-00933,2025-06-27 10:38:00,CUST-0192,West,mobile,Home,Desk,3,236.94,0,710.82,437.66,completed,bank_transfer,True,37,3,,Chen,
+ORD-00934,2025-01-17 12:24:00,CUST-0165,South,store,Electronics,Webcam,1,751.16,20,-600.93,363.1,refunded,apple_pay,False,50,3,VIP,,gift order
+ORD-00935,2026-04-14 09:53:00,CUST-0062,North,partner,Home,Storage Box,6,230.9,25,1039.05,624.84,completed,paypal,True,27,3,WELCOME10,,gift order
+ORD-00936,2025-12-02 13:16:00,CUST-0001,South,store,Sports,Yoga Mat,6,446.72,0,2680.32,1555.48,completed,paypal,True,60,2,SUMMER25,Alice,gift order
+ORD-00937,2025-07-16 09:53:00,CUST-0147,East,partner,Sports,Dumbbell,3,97.21,5,277.05,182.73,completed,bank_transfer,False,51,5,,,priority customer
+ORD-00938,2026-04-20 09:58:00,CUST-0012,North,partner,Books,Statistics,6,533.48,25,-2400.66,1127.08,refunded,apple_pay,False,55,5,,,gift order
+ORD-00939,2025-06-21 10:38:00,CUST-0167,North,mobile,Home,Lamp,2,293.71,20,469.94,232.93,pending,bank_transfer,True,41,3,WELCOME10,Diana,
+ORD-00940,2025-07-12 18:01:00,CUST-0061,South,store,Books,Data Engineering,5,166.73,0,833.65,429.79,pending,bank_transfer,False,64,5,VIP,Evan,priority customer
+ORD-00941,2025-02-03 15:59:00,CUST-0121,Central,store,Books,Finance 101,5,351.01,20,0.0,0.0,cancelled,apple_pay,True,49,,,Alice,
+ORD-00942,2025-07-10 22:30:00,CUST-0075,East,store,Sports,Yoga Mat,6,754.33,0,4525.98,2657.92,completed,apple_pay,False,40,,,Diana,
+ORD-00943,2026-04-27 15:26:00,CUST-0002,Central,store,Electronics,Monitor,4,694.63,25,2083.89,1365.06,completed,paypal,True,25,4,WELCOME10,Chen,gift order
+ORD-00944,2025-05-09 17:39:00,CUST-0178,West,web,Books,Statistics,5,741.72,15,0.0,0.0,cancelled,paypal,True,74,3,WELCOME10,Chen,priority customer
+ORD-00945,2025-03-09 10:24:00,CUST-0197,West,store,Electronics,Webcam,1,135.86,20,108.69,59.09,completed,paypal,True,71,3,,Evan,address corrected
+ORD-00946,2025-03-07 21:02:00,CUST-0039,South,web,Sports,Running Shoes,2,448.47,0,896.94,412.71,completed,apple_pay,False,33,1,,Chen,
+ORD-00947,2025-08-20 20:28:00,CUST-0079,West,mobile,Electronics,Headphones,6,418.77,25,1884.46,942.59,completed,apple_pay,True,68,1,WELCOME10,Diana,delayed shipment
+ORD-00948,2026-03-18 19:23:00,CUST-0189,West,partner,Electronics,Headphones,2,496.59,25,0.0,0.0,cancelled,credit_card,False,46,4,,Chen,
+ORD-00949,2025-01-18 22:41:00,CUST-0087,East,web,Electronics,Monitor,4,471.39,0,1885.56,1521.12,pending,apple_pay,True,56,4,,Alice,address corrected
+ORD-00950,2026-01-04 14:43:00,CUST-0151,Central,partner,Books,Machine Learning,4,366.63,0,-1466.52,799.82,refunded,bank_transfer,False,61,2,,Evan,delayed shipment
+ORD-00951,2026-05-05 17:46:00,CUST-0061,East,mobile,Books,Data Engineering,5,219.49,15,0.0,0.0,cancelled,paypal,False,67,4,VIP,Alice,
+ORD-00952,2025-06-28 18:48:00,CUST-0068,South,web,Home,Storage Box,3,678.03,10,1830.68,1468.6,pending,paypal,False,53,3,SUMMER25,Chen,address corrected
+ORD-00953,2026-06-01 16:41:00,CUST-0016,East,partner,Electronics,Monitor,1,116.79,15,99.27,73.53,completed,apple_pay,True,66,2,VIP,Bob,priority customer
+ORD-00954,2025-02-07 16:11:00,CUST-0062,South,web,Sports,Water Bottle,4,180.11,25,540.33,269.79,pending,credit_card,True,52,3,,Bob,
+ORD-00955,2026-04-07 10:37:00,CUST-0024,Central,partner,Electronics,Mouse,1,328.11,0,-328.11,155.53,refunded,credit_card,False,45,4,WELCOME10,,
+ORD-00956,2026-03-12 10:22:00,CUST-0222,West,web,Sports,Yoga Mat,2,536.98,5,1020.26,811.76,completed,paypal,False,39,4,WELCOME10,,
+ORD-00957,2025-03-21 18:14:00,CUST-0186,North,mobile,Home,Chair,3,461.77,25,1038.98,557.62,completed,paypal,True,62,,WELCOME10,Bob,address corrected
+ORD-00958,2025-11-24 15:39:00,CUST-0019,South,partner,Books,Statistics,1,819.42,25,614.56,477.06,pending,apple_pay,False,64,3,,Chen,priority customer
+ORD-00959,2025-04-29 16:05:00,CUST-0048,North,partner,Sports,Water Bottle,3,528.14,15,0.0,0.0,cancelled,apple_pay,True,28,4,WELCOME10,Chen,
+ORD-00960,2025-07-08 22:39:00,CUST-0023,North,web,Electronics,Mouse,6,789.76,0,4738.56,2625.75,pending,paypal,False,41,4,VIP,,priority customer
+ORD-00961,2025-11-16 18:41:00,CUST-0204,Central,partner,Sports,Yoga Mat,1,175.41,15,149.1,101.48,completed,credit_card,True,57,1,VIP,Diana,address corrected
+ORD-00962,2026-06-10 22:24:00,CUST-0025,Central,store,Sports,Basketball,4,402.22,10,1447.99,1140.08,completed,bank_transfer,True,69,4,VIP,Diana,address corrected
+ORD-00963,2025-02-04 21:53:00,CUST-0224,South,store,Books,Data Engineering,3,722.2,0,2166.6,1554.23,completed,bank_transfer,True,62,5,WELCOME10,,gift order
+ORD-00964,2025-10-05 12:19:00,CUST-0021,North,mobile,Electronics,Keyboard,3,805.24,0,2415.72,1765.62,pending,apple_pay,False,33,1,,Diana,delayed shipment
+ORD-00965,2025-01-20 14:37:00,CUST-0062,Central,partner,Electronics,Keyboard,2,699.44,25,1049.16,651.03,completed,apple_pay,True,72,4,,Chen,gift order
+ORD-00966,2025-05-22 21:04:00,CUST-0130,North,store,Home,Lamp,4,239.46,20,766.27,536.76,completed,apple_pay,False,18,5,,Bob,delayed shipment
+ORD-00967,2025-06-23 13:14:00,CUST-0238,West,store,Sports,Dumbbell,3,56.52,15,0.0,0.0,cancelled,credit_card,True,63,,,Evan,priority customer
+ORD-00968,2025-06-26 13:00:00,CUST-0061,Central,store,Books,Finance 101,3,726.14,10,0.0,0.0,cancelled,credit_card,True,35,1,SUMMER25,Diana,delayed shipment
+ORD-00969,2025-09-11 16:07:00,CUST-0107,East,partner,Electronics,Webcam,3,55.98,10,-151.15,113.02,refunded,bank_transfer,False,69,5,,Evan,address corrected
+ORD-00970,2025-08-27 21:50:00,CUST-0140,South,store,Sports,Yoga Mat,5,400.58,0,2002.9,1463.02,completed,paypal,False,63,4,,,gift order
+ORD-00971,2026-05-27 13:58:00,CUST-0079,East,store,Sports,Basketball,6,559.91,20,2687.57,2157.65,completed,apple_pay,True,72,,SUMMER25,,
+ORD-00972,2025-02-26 08:13:00,CUST-0059,South,store,Books,Statistics,5,65.42,25,245.33,133.73,completed,credit_card,True,32,,,Bob,
+ORD-00973,2025-10-17 12:39:00,CUST-0156,South,store,Electronics,Headphones,2,560.71,0,-1121.42,891.24,refunded,bank_transfer,False,56,5,,Alice,address corrected
+ORD-00974,2025-06-13 09:09:00,CUST-0197,West,store,Electronics,Mouse,5,424.37,10,-1909.66,1240.15,refunded,bank_transfer,True,65,3,,Evan,
+ORD-00975,2025-01-17 13:28:00,CUST-0085,West,web,Sports,Dumbbell,6,789.42,15,4026.04,2120.95,completed,bank_transfer,True,22,3,VIP,Diana,
+ORD-00976,2025-02-06 14:25:00,CUST-0119,East,store,Sports,Basketball,1,481.86,0,-481.86,392.64,refunded,paypal,True,40,4,,Alice,address corrected
+ORD-00977,2025-12-13 22:31:00,CUST-0013,West,web,Electronics,Webcam,1,467.1,25,350.33,207.79,completed,credit_card,True,23,4,VIP,Chen,priority customer
+ORD-00978,2026-04-22 18:22:00,CUST-0206,Central,web,Books,Data Engineering,2,282.3,25,-423.45,319.71,refunded,bank_transfer,False,23,1,SUMMER25,Diana,priority customer
+ORD-00979,2025-04-22 11:40:00,CUST-0218,North,web,Sports,Dumbbell,3,545.05,5,1553.39,1088.1,completed,credit_card,True,46,5,SUMMER25,Chen,address corrected
+ORD-00980,2025-01-04 08:12:00,CUST-0012,East,mobile,Books,Data Engineering,4,26.72,10,96.19,43.74,completed,paypal,True,68,2,VIP,Chen,priority customer
+ORD-00981,2026-04-08 10:38:00,CUST-0222,North,store,Books,Machine Learning,6,710.36,0,4262.16,3414.81,completed,bank_transfer,True,74,4,,Bob,delayed shipment
+ORD-00982,2026-04-10 09:06:00,CUST-0002,Central,web,Sports,Running Shoes,5,466.43,10,2098.93,1291.58,completed,credit_card,True,66,,SUMMER25,Chen,
+ORD-00983,2026-02-05 22:45:00,CUST-0087,Central,mobile,Home,Chair,2,394.9,10,710.82,549.89,completed,credit_card,True,37,,VIP,Diana,address corrected
+ORD-00984,2025-10-02 18:24:00,CUST-0069,South,mobile,Books,Data Engineering,5,580.24,0,0.0,0.0,cancelled,bank_transfer,True,33,5,VIP,Evan,
+ORD-00985,2025-08-13 12:22:00,CUST-0164,West,mobile,Electronics,Mouse,4,500.27,10,1800.97,1421.22,completed,credit_card,True,42,4,,Evan,delayed shipment
+ORD-00986,2026-06-20 14:08:00,CUST-0134,East,store,Books,Machine Learning,6,546.45,10,2950.83,1904.78,completed,credit_card,True,39,5,SUMMER25,Diana,address corrected
+ORD-00987,2025-03-10 09:18:00,CUST-0139,West,partner,Electronics,Monitor,3,700.85,25,1576.91,873.56,completed,credit_card,False,23,2,,Chen,gift order
+ORD-00988,2025-06-21 21:06:00,CUST-0158,South,partner,Electronics,Keyboard,6,609.71,0,3658.26,2325.71,completed,bank_transfer,True,43,4,,Chen,address corrected
+ORD-00989,2025-04-16 22:56:00,CUST-0048,Central,partner,Books,Statistics,4,318.03,0,-1272.12,976.65,refunded,credit_card,False,60,5,WELCOME10,Alice,delayed shipment
+ORD-00990,2026-04-01 15:04:00,CUST-0168,North,store,Sports,Water Bottle,6,222.74,25,1002.33,480.95,completed,apple_pay,True,18,5,SUMMER25,,
+ORD-00991,2025-04-13 19:08:00,CUST-0030,West,store,Home,Desk,3,374.9,20,-899.76,555.84,refunded,paypal,True,67,1,,Alice,delayed shipment
+ORD-00992,2025-09-28 09:32:00,CUST-0064,West,partner,Electronics,Headphones,6,430.75,0,2584.5,1331.97,completed,credit_card,False,30,5,,,
+ORD-00993,2026-01-09 16:02:00,CUST-0169,South,web,Books,Machine Learning,1,771.24,0,771.24,431.35,completed,bank_transfer,False,46,4,,Alice,delayed shipment
+ORD-00994,2026-02-11 10:41:00,CUST-0038,Central,web,Books,Statistics,6,467.44,25,2103.48,1608.28,completed,apple_pay,True,54,2,,Diana,
+ORD-00995,2026-01-07 14:12:00,CUST-0005,South,web,Electronics,Keyboard,4,184.62,0,738.48,515.88,pending,paypal,False,26,5,WELCOME10,Chen,address corrected
+ORD-00996,2026-05-27 19:44:00,CUST-0160,East,store,Electronics,Monitor,2,760.75,0,1521.5,716.87,completed,bank_transfer,True,43,5,,,gift order
+ORD-00997,2025-07-12 08:11:00,CUST-0164,North,web,Electronics,Monitor,2,76.23,0,0.0,0.0,cancelled,bank_transfer,False,28,4,VIP,Bob,
+ORD-00998,2025-03-27 13:24:00,CUST-0024,East,store,Home,Chair,1,163.82,15,139.25,103.96,completed,paypal,False,48,3,,Diana,
+ORD-00999,2025-12-31 20:45:00,CUST-0156,Central,mobile,Books,Data Engineering,3,68.94,20,-165.46,127.01,refunded,apple_pay,False,27,5,WELCOME10,,gift order
+ORD-01000,2026-02-05 15:33:00,CUST-0024,East,web,Books,Data Engineering,6,456.4,0,2738.4,1303.19,completed,bank_transfer,False,57,4,VIP,Diana,
+ORD-00100,2026-03-04 21:49:00,CUST-0126,West,partner,Books,Data Engineering,6,411.72,20,0.0,0.0,cancelled,apple_pay,True,45,2,SUMMER25,Evan,
+ORD-00500,2025-05-29 10:41:00,CUST-0101,North,store,Home,Kettle,6,26.51,15,135.2,68.03,completed,bank_transfer,False,37,,WELCOME10,Diana,priority customer
+ORD-00800,2025-02-21 19:24:00,CUST-0002,West,store,Home,Storage Box,1,685.58,0,685.58,335.64,pending,apple_pay,True,18,5,SUMMER25,Alice,
