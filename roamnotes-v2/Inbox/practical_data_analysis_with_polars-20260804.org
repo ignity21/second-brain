@@ -1,0 +1,71 @@
+:PROPERTIES:
+:ID:       497eaecd-8769-498f-8869-50923fef8901
+:END:
+#+title: Practical Data Analysis with Polars
+
+* TOC :TOC_1:
+- [[#missing-values][Missing Values]]
+- [[#duplicates][Duplicates]]
+- [[#value-counts][Value Counts]]
+- [[#grouping-and-aggregating][Grouping and Aggregating]]
+- [[#pivoting-and-unpivoting][Pivoting and Unpivoting]]
+
+* Missing Values
+** Finding nulls
+- Count nulls in every column with ~df.null_count()~
+- Find rows where a column is null using ~df.filter(pl.col("price").is_null())~
+
+** Removing nulls
+- ~df.drop_nulls()~ removes rows containing a null in any column.
+- ~df.drop_nulls(subset="singles")~ check only selected columns
+
+** Filling nulls
+- ~df.with_columns(pl.col("singles").fill_null(0))~
+- ~df.with_columns(pl.col("review").fill_null(pl.col("review").mean()))~
+
+* Duplicates
+** Finding Duplicates
+- ~df.filter(df.is_duplicated())~: display duplicated rows
+- ~df.filter(pl.col("name").is_duplicated())~
+
+** Removing Duplicates
+- ~df.unique()~ keeps one copy of each fully duplicated row.
+- ~df.unique(subset=["name", "gender"])~
+
+* Value Counts
+- ~series.value_counts(sort=True)~
+
+** Visualization
+#+begin_src python
+import plotly.express as px
+count_data = sales["category"].value_counts()
+px.bar(count_data, x="category", y="count", title="...")
+#+end_src
+* Grouping and Aggregating
+#+begin_src python
+df.group_by("type", maintain_order=True).agg(
+    pl.col("price").mean()
+).sort("price")
+
+df.group_by("type").agg(
+    pl.col("price").mean().name.suffix("_mean"),
+    pl.col("price").max().name.suffix("_max"),
+)
+
+# Grouping by multiple columns
+df.group_by("type", "bedrooms").agg(
+    pl.col("price").mean(),
+    pl.len(), # count rows in group
+)
+#+end_src
+
+** Lazy Mode Example
+#+begin_src python
+(
+    pl.scan_csv("rentals.csv")
+    .group_by("type", "bedrooms")
+    .agg(pl.col("price").mean())
+    .explain() # .collect()
+)
+#+end_src
+* Pivoting and Unpivoting

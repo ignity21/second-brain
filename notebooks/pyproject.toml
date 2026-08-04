@@ -25,6 +25,7 @@ dependencies = [
     # "tensorflow>=2.10.0",
     # "tensorflow-io-gcs-filesystem>=0.27.0",
     "polars>=1.43.2",
+    "plotly>=6.9.0",
 ]
 
 [tool.uv]
