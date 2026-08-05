@@ -2,6 +2,7 @@
 :ID:       497eaecd-8769-498f-8869-50923fef8901
 :END:
 #+title: Practical Data Analysis with Polars
+#+filetags: :PyLibs:
 
 * TOC :TOC_1:
 - [[#missing-values][Missing Values]]
@@ -69,3 +70,96 @@ df.group_by("type", "bedrooms").agg(
 )
 #+end_src
 * Pivoting and Unpivoting
+** Core Idea
+
+~pivot~ and ~unpivot~ convert data between two common layouts:
+
+#+begin_example
+Long format --pivot--> Wide format
+Wide format --unpivot--> Long format
+#+end_example
+
+Long format: categories are stored as values in a column.
+Wide format: categories are spread across multiple columns.
+
+#+begin_quote
+Use long format for analysis and wide format for presentation.
+#+end_quote
+
+** Pivot
+
+- Turn the unique values of one column into new columns.
+
+*** Before: Long Format
+
+| Month | Product | Sales |
+|-------+---------+-------|
+| Jan   | Apple   |   100 |
+| Jan   | Banana  |    80 |
+| Feb   | Apple   |   120 |
+| Feb   | Banana  |    90 |
+
+*** After: Wide Format
+
+| Month | Apple | Banana |
+|-------+-------+--------|
+| Jan   |   100 |     80 |
+| Feb   |   120 |     90 |
+
+#+begin_src python
+df.pivot(
+    on="Product",
+    index="Month",
+    values="Sales",
+    # aggregate_function=...
+)
+#+end_src
+
+Pivoted data is commonly used for
+- reports
+- dashboards
+- spreadsheets
+- comparison tables.
+
+Think of ~pivot~ as expanding categories into columns.
+
+** Unpivot
+
+- Reverse a pivot by collecting multiple columns into rows.
+
+#+begin_src python
+df.unpivot(
+    on=["Apple", "Banana"],
+    index="Month",
+    variable_name="Product", 
+    value_name="Sales",
+)
+#+end_src
+
+This converts the data back into long format:
+
+| Month | Product | Sales |
+|-------+---------+-------|
+| Jan   | Apple   |   100 |
+| Jan   | Banana  |    80 |
+| Feb   | Apple   |   120 |
+| Feb   | Banana  |    90 |
+
+** Summary
+~pivot~: categories become columns.
+~unpivot~: columns become category values.
+
+*** Long Format is Usually Better for
+- Filtering
+- Grouping
+- Aggregation
+- Visualization
+- Statistical analysis
+- Machine learning
+  
+*** Wide Format is Usually Better for
+- Reports
+- Spreadsheets
+- Dashboards
+- Pivot tables
+- Human-readable comparisons
