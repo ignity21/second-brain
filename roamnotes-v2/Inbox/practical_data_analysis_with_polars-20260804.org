@@ -10,6 +10,7 @@
 - [[#value-counts][Value Counts]]
 - [[#grouping-and-aggregating][Grouping and Aggregating]]
 - [[#pivoting-and-unpivoting][Pivoting and Unpivoting]]
+- [[#text-transformation][Text Transformation]]
 
 * Missing Values
 ** Finding nulls
@@ -163,3 +164,83 @@ This converts the data back into long format:
 - Dashboards
 - Pivot tables
 - Human-readable comparisons
+* Text Transformation
+** Casting Data Type
+  - ~df.with_columns(pl.col("rating").cast(pl.Int64))~
+  - Cast multiple column types: ~df.cast({pl.Float64: pl.Int64})~
+
+** Cleaning Text
+- String operations are available through the ~.str~ namespace.
+  - ~df.with_columns(pl.col("business").str.strip_chars_start())~
+
+** Creating an Unique Identifier
+#+begin_src python
+df.with_columns(
+    pl.concat_str(
+        "business",
+        "location",
+        separator=", "
+    ).alias("id")
+)
+#+end_src
+
+** Searching Text
+
+~str.contains()~ checks whether each string contains a matching pattern.
+The pattern is case-sensitive by default.
+
+#+begin_src python
+rating.with_columns(
+    pl.col("business")
+    .str.contains("Burger")
+    .alias("is_burger"),
+
+    pl.col("business")
+    .str.to_lowercase()
+    .str.contains("burger")
+    .alias("is_burger_case_insensitive"),
+)
+#+end_src
+
+- ~"Burger"~ only matches text with the same capitalization.
+- For case-insensitive matching, convert both the text and the search pattern to lowercase.
+- ~str.contains()~ treats its argument as a regular expression by default.
+
+** Extracting Text
+
+~str.extract()~ extracts text matched by a regular-expression capture group.
+
+#+begin_src python
+rating.with_columns(
+    pl.col("business")
+    .str.extract(r"(burger|coffee)")
+    .alias("food"),
+)
+#+end_src
+
+- ~(burger|coffee)~ is a regular expression.
+- Parentheses define the capture group to extract.
+- Rows without a match return ~null~.
+
+** Filtering Text Matches
+
+Use ~filter()~ with ~str.contains()~ to keep only rows whose text matches the pattern.
+
+#+begin_src python
+ratings.filter(
+    pl.col("business")
+    .str.to_lowercase()
+    .str.contains("burger")
+)
+#+end_src
+
+** Replacing Text
+#+begin_src python
+df.with_columns(
+    pl.col("location")
+    .str.replace("Rd.", "Road"),
+    # or replacing multiple strings
+    pl.col("location")
+    .str.replace_many(["Rd.", "St."], ["Road", "Street"]),
+)
+#+end_src
