@@ -1,0 +1,5 @@
+:PROPERTIES:
+:ID:       cf33e3fa-b1bd-428e-811d-6489d66db882
+:END:
+#+title: Time Series with Polars
+

@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       497eaecd-8769-498f-8869-50923fef8901
 :END:
-#+title: Practical Data Analysis with Polars
+#+title: Practical Data Transformation with Polars
 #+filetags: :PyLibs:
 
 * TOC :TOC_1:
@@ -237,10 +237,32 @@ ratings.filter(
 ** Replacing Text
 #+begin_src python
 df.with_columns(
-    pl.col("location")
-    .str.replace("Rd.", "Road"),
-    # or replacing multiple strings
-    pl.col("location")
-    .str.replace_many(["Rd.", "St."], ["Road", "Street"]),
+    # Replace part of each string
+    pl.col("location").str.replace("Rd.", "Road"),
+    
+    # Replace multiple substrings
+    pl.col("address").str.replace_many(["Rd.", "St."], ["Road", "Street"]),
+
+    # Replace an entire value (Value replacement)
+    pl.col("type").replace("café", "restaurant")
+)
+#+end_src
+
+** *Categorizing Numeric Values*
+- ~when-then-otherwise~: like ~if-elif-else~
+#+begin_src python
+ratings.with_columns(
+    pl.when(pl.col("rating") == 5)
+    .then(pl.lit("Highly Rated"))
+    .otherwise(pl.lit("Needs Improvement"))
+    .alias("quality")
+)
+ratings.with_columns(
+    pl.when(pl.col("capacity") > 100)
+    .then(pl.lit("Large"))
+    .when(pl.col("capacity") >= 20)
+    .then(pl.lit("Medium"))
+    .otherwise(pl.lit("Small"))
+    .alias("venue_size")
 )
 #+end_src

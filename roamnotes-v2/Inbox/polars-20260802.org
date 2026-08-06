@@ -18,7 +18,8 @@
 - [[#sorting][Sorting]]
 - [[#summarizing][Summarizing]]
 - [[#lazy-mode][Lazy Mode]]
-- [[#practical-data-analysis-with-polars][Practical Data Analysis with Polars]]
+- [[#practical-data-transformation][Practical Data Transformation]]
+- [[#time-series][Time Series]]
 
 * Schema
 - Shape: ~df.shape~
@@ -92,4 +93,5 @@ pl.scan_csv("data.csv").select("name", "price")
 # .collect() actually executes the optimized plan.
 #+end_src
 
-* [[id:497eaecd-8769-498f-8869-50923fef8901][Practical Data Analysis with Polars]]
+* [[id:497eaecd-8769-498f-8869-50923fef8901][Practical Data Transformation]]
+* [[id:cf33e3fa-b1bd-428e-811d-6489d66db882][Time Series]]
