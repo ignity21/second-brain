@@ -3,3 +3,93 @@
 :END:
 #+title: Time Series with Polars
 
+* Manipulating Datetime
+** Temporal Data Types
+Polars provides four main temporal ~dtypes~:
+
+- pl.Date: calendar date only
+- pl.Datetime: date and time
+- pl.Time: time of day only
+- pl.Duration: a length of time, such as three hours
+
+** Parsing Datetime
+- Read CSV with ~try_parse_dates=True~
+  
+*** ~.str.strptime()~
+#+begin_src python
+pl.col("time").str.strptime(
+    pl.Datetime,
+    "%d/%m/%Y %H:%M",
+)
+#+end_src
+
+** Extracting Datetime Components
+#+begin_src python
+df.with_columns(
+    pl.col("time").dt.date().alias("date"),
+    pl.col("time").dt.time().alias("time_of_day"),
+    pl.col("time").dt.hour().alias("hour"),
+)
+#+end_src
+
+** Adjusting Datetime
+#+begin_src python
+df.with_columns(
+    pl.col("time").dt.offset_by("1h").alias("time_end"), # forward
+    pl.col("time").dt.offset_by("30m").alias("mins_end"), # backward
+)
+#+end_src
+* Filtering by Time
+- By Time
+#+begin_src python
+prices.filter(
+    pl.col("time") == pl.datetime(year=2026, month=10, day=1, hour=12),
+)
+#+end_src
+- By Date: ~pl.col("time").dt.date() == pl.date(...)~
+- By Range: ~pl.col("time").is_between(pl.datetime(...), pl.datetime(...))~ 
+
+* Aggregating by Time
+#+begin_src python
+ohlc = prices.sort("time").group_by_dynamic("time", every="6h").agg(
+    pl.col("price").first().alias("open"),
+    pl.col("price").max().alias("high"),
+    pl.col("price").min().alias("low"),
+    pl.col("price").last().alias("close"),
+    pl.col("volumn").sum().alias("volumn"),
+)
+#+end_src
+
+** Controlling Window Size
+- every :: Controls *how often a new window starts*.
+- period :: Controls *how long each window lasts*. (default = every)
+#+begin_src python
+prices.group_by_dynamic(
+    "time",
+    every="1h",
+    period="2h",
+)
+#+end_src
+
+* Rolling Window
+- Rolling by Window Size
+#+begin_src python
+prices.with_columns(
+    pl.col("price").rolling_mean(window_size=7).alias("ma7")
+)
+#+end_src
+- Built-in ~rolling_*~: mean, std, sum, max, min, etc...
+- Rolling by Time
+#+begin_src python
+prices.rolling(index_column="time", period="3h").agg(
+    pl.all().mean(),
+    pl.col("price").max().alias("max_price"),
+)
+#+end_src
+
+* Cumulative Statistics
+#+begin_src python
+prices.with_columns(
+    pl.col("precipitation").cum_sum().("total_precipitation")
+)
+#+end_src
