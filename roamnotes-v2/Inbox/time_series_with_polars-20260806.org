@@ -93,3 +93,37 @@ prices.with_columns(
     pl.col("precipitation").cum_sum().("total_precipitation")
 )
 #+end_src
+* Group-level Statistics
+#+begin_src python
+prices.with_columns(
+    pl.col("time").dt.hour().alias("hour"),
+)
+prices.with_columns(
+    pl.col("price").mean().over("hour").alias("hourly_avg"),
+)
+
+prices = prices.with_columns(
+    pl.when(pl.col("market_cap") >= 200_000_000_000)
+    .then(pl.lit("large"))
+    .when(pl.col("market_cap") >= 10_000_000_000)
+    .then(pl.lit("mid"))
+    .otherwise(pl.lit("small"))
+    .alias("cap_category")
+)
+
+prices.with_columns(
+    pl.col("price").mean().over("hour", "cap_category").alias("hourly_avg"),
+)
+
+
+#+end_src
+- Use ~.over()~ to define the grouping columns
+- ~.over()~ works with: ~sum()~, ~max()~, ~count()~, etc.
+
+** Comparing to Group Statistics
+#+begin_src python
+prices.with_columns(
+    (pl.col("price") - pl.col("price").mean().over("hour"))
+    .alias("diff_from_hourly_avg")
+)
+#+end_src
