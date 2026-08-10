@@ -2,7 +2,7 @@
 :ID:       190bfd1c-68ae-4f32-baab-cc98490c71e9
 :END:
 #+title: Polars
-#+filetags: :PyLibs:
+#+filetags: :PyLibs:Polars:
 
 
 * TOC :TOC_2:

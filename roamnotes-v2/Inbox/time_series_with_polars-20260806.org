@@ -2,6 +2,9 @@
 :ID:       cf33e3fa-b1bd-428e-811d-6489d66db882
 :END:
 #+title: Time Series with Polars
+#+filetags: :PyLibs:Polars:
+
+See [[id:190bfd1c-68ae-4f32-baab-cc98490c71e9][Polars]] for the overview and related topics.
 
 * Manipulating Datetime
 ** Temporal Data Types
@@ -36,7 +39,7 @@ df.with_columns(
 #+begin_src python
 df.with_columns(
     pl.col("time").dt.offset_by("1h").alias("time_end"), # forward
-    pl.col("time").dt.offset_by("30m").alias("mins_end"), # backward
+    pl.col("time").dt.offset_by("-30m").alias("time_start"), # backward
 )
 #+end_src
 * Filtering by Time
@@ -56,7 +59,7 @@ ohlc = prices.sort("time").group_by_dynamic("time", every="6h").agg(
     pl.col("price").max().alias("high"),
     pl.col("price").min().alias("low"),
     pl.col("price").last().alias("close"),
-    pl.col("volumn").sum().alias("volumn"),
+    pl.col("volume").sum().alias("volume"),
 )
 #+end_src
 
@@ -81,8 +84,8 @@ prices.with_columns(
 - Built-in ~rolling_*~: mean, std, sum, max, min, etc...
 - Rolling by Time
 #+begin_src python
-prices.rolling(index_column="time", period="3h").agg(
-    pl.all().mean(),
+prices.sort("time").rolling(index_column="time", period="3h").agg(
+    pl.col("price").mean().alias("mean_price"),
     pl.col("price").max().alias("max_price"),
 )
 #+end_src
@@ -90,15 +93,15 @@ prices.rolling(index_column="time", period="3h").agg(
 * Cumulative Statistics
 #+begin_src python
 prices.with_columns(
-    pl.col("precipitation").cum_sum().("total_precipitation")
+    pl.col("precipitation").cum_sum().alias("total_precipitation")
 )
 #+end_src
 * Group-level Statistics
 #+begin_src python
-prices.with_columns(
+prices = prices.with_columns(
     pl.col("time").dt.hour().alias("hour"),
 )
-prices.with_columns(
+prices = prices.with_columns(
     pl.col("price").mean().over("hour").alias("hourly_avg"),
 )
 
@@ -111,8 +114,8 @@ prices = prices.with_columns(
     .alias("cap_category")
 )
 
-prices.with_columns(
-    pl.col("price").mean().over("hour", "cap_category").alias("hourly_avg"),
+prices = prices.with_columns(
+    pl.col("price").mean().over("hour", "cap_category").alias("hourly_avg_by_cap"),
 )
 
 

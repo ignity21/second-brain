@@ -2,7 +2,9 @@
 :ID:       497eaecd-8769-498f-8869-50923fef8901
 :END:
 #+title: Practical Data Transformation with Polars
-#+filetags: :PyLibs:
+#+filetags: :PyLibs:Polars:
+
+See [[id:190bfd1c-68ae-4f32-baab-cc98490c71e9][Polars]] for the overview and related topics.
 
 * TOC :TOC_1:
 - [[#missing-values][Missing Values]]
@@ -173,7 +175,7 @@ This converts the data back into long format:
 - String operations are available through the ~.str~ namespace.
   - ~df.with_columns(pl.col("business").str.strip_chars_start())~
 
-** Creating an Unique Identifier
+** Creating an Identifier
 #+begin_src python
 df.with_columns(
     pl.concat_str(
@@ -183,6 +185,9 @@ df.with_columns(
     ).alias("id")
 )
 #+end_src
+- This creates a composite identifier, not automatically a unique ID. Uniqueness
+  depends on the ~business~/~location~ pair being unique and the separator not
+  creating collisions.
 
 ** Searching Text
 
@@ -190,7 +195,7 @@ df.with_columns(
 The pattern is case-sensitive by default.
 
 #+begin_src python
-rating.with_columns(
+ratings.with_columns(
     pl.col("business")
     .str.contains("Burger")
     .alias("is_burger"),
@@ -211,7 +216,7 @@ rating.with_columns(
 ~str.extract()~ extracts text matched by a regular-expression capture group.
 
 #+begin_src python
-rating.with_columns(
+ratings.with_columns(
     pl.col("business")
     .str.extract(r"(burger|coffee)")
     .alias("food"),
@@ -237,8 +242,8 @@ ratings.filter(
 ** Replacing Text
 #+begin_src python
 df.with_columns(
-    # Replace part of each string
-    pl.col("location").str.replace("Rd.", "Road"),
+    # Replace the first literal occurrence in each string
+    pl.col("location").str.replace("Rd.", "Road", literal=True),
     
     # Replace multiple substrings
     pl.col("address").str.replace_many(["Rd.", "St."], ["Road", "Street"]),
