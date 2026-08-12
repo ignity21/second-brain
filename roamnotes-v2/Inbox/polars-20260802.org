@@ -15,7 +15,12 @@
   - [[#renaming][Renaming]]
   - [[#deleting][Deleting]]
   - [[#multiple-columns-same-expression][Multiple Columns (same expression)]]
+  - [[#custom-transformation][Custom Transformation]]
+  - [[#reusable-expressions][Reusable Expressions]]
 - [[#sorting][Sorting]]
+- [[#concatenation--join][Concatenation & Join]]
+  - [[#concatenation][Concatenation]]
+  - [[#join][Join]]
 - [[#summarizing][Summarizing]]
 - [[#lazy-mode][Lazy Mode]]
 - [[#practical-data-transformation][Practical Data Transformation]]
@@ -76,10 +81,80 @@ df.with_columns(
 - with dtypes: ~df.with_columns(pl.col(pl.String).str.len_chars())~
 - Exclude columns: ~df.with_columns(pl.exclude("beach").cast(pl.String))~
 
-* Sorting
+** Custom Transformation
+#+begin_src python
+def rescale_review(x):
+    return x * 2
 
+df.with_columns(
+    pl.col("review").map_elements(
+        rescale_review,
+        return_dtype=pl.Float64,
+    ).alias("review")
+)
+
+# But prefer this:
+df.with_columns(
+    (pl.col("review") * 2).alias("review")
+)
+#+end_src
+- Use ~map_elements~ when:
+  - the logic is easier to express as a Python function
+  - performance is not important
+  - you need to call a third-party Python function
+
+** Reusable Expressions
+#+begin_src python
+standardize_locations_expr = (
+    pl.col("location")
+    .str.replace_many(["Rd.", "St."], ["Road", "Street"])
+    .str.to_uppercase()
+    .alias("location_clean")
+)
+
+df.with_columns(standardize_locations_expr)
+#+end_src
+* Sorting
 - ~df.sort("quantity", descending=True)~ # default ascending
 - By multiple columns: ~df.sort("quantity", "product")~
+
+* Concatenation & Join
+** Concatenation
+- ~pl.concat([df1, df2], how="vertical")~
+| Method     | Direction | Typical use                                  |
+|------------+-----------+----------------------------------------------|
+| vertical   | Rows      | Combine DataFrames with the same schema      |
+| diagonal   | Rows      | Combine DataFrames with different columns    |
+| horizontal | Columns   | Add columns                                  |
+| extend()   | Rows      | Efficient when adding small batches in place |
+
+** Join
+- ~df1.join(df2, on=["key1", "key2"], how="full", coalesce=True)~
+  - Use ~coalesce=True~ to avoid duplicate join columns
+
+*** Conditional Join
+#+begin_src python
+restaurants.join_where(
+    users,
+    pl.col("type") == pl.col("type_right"),
+    pl.col("price") <= pl.col("budget"),
+)
+#+end_src
+
+*** Timeseries Conditional Join
+- ~join_asof~: means "join as of" a certain date
+#+begin_src python
+result = trades.sort("time").join_asof(
+    quotes.sort("time"),
+    on="time",
+    strategy="backward",
+)
+#+end_src
+- Strategy:
+  - backward: latest matching value before or equal to the left value *It never matches with future data*
+  - forward: earliest matching value after or equal to the left value
+  - nearest: value with the smallest distance
+
 
 * Summarizing
 
