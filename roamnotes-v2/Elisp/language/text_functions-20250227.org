@@ -1,8 +1,0 @@
-:PROPERTIES:
-:ID:       bd1b877d-a05f-4fb2-91f9-f37c98e88ce8
-:END:
-#+title: Text Functions
-
-- ~(zap-to-char (NTH CHAR))~
-- ~(kill-region)~ It clips text from a region and copies that text to the kill ring.
-- ~(copy-region-as-kill)~: copies a region of text from a buffer and saves it in the kill-ring.

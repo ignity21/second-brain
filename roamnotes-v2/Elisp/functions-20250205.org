@@ -1,0 +1,55 @@
+:PROPERTIES:
+:ID:       ec44d0cc-b1d2-4de0-8658-aea41bdd6156
+:END:
+#+title: Functions
+
+* Function Definitions
+#+begin_src elisp
+(defun greet (name)
+  "Return a greeting for NAME."
+  (format "Hello, %s!" name))
+#+end_src
+
+* Arguments
+** Optional Arguments
+- Use ~&optional~ for positional arguments that callers may omit.
+#+begin_src elisp
+(defun greet (name &optional greeting)
+  (format "%s, %s!" (or greeting "Hello") name))
+#+end_src
+
+** Rest Arguments
+- Use ~&rest~ to collect the remaining arguments in a list, as in ~(concat &rest SEQUENCES)~.
+
+** Keyword Arguments
+- Plain ~defun~ does not support ~&key~. Use ~cl-defun~ from ~cl-lib~.
+#+begin_src elisp
+(require 'cl-lib)
+
+(cl-defun greet (&key name (greeting "Hello"))
+  (format "%s, %s!" greeting name))
+
+(greet :name "Jerry" :greeting "Hi")
+#+end_src
+
+* Local Variables
+#+begin_src elisp
+(let ((variable value)
+      uninitialized-variable)
+  body...)
+#+end_src
+
+- Use ~let*~ when a later binding depends on an earlier binding.
+
+* Output with ~(message)~
+#+begin_src elisp
+(message "There are %d %s in the office!"
+         (- fill-column 14) "pink elephants")
+#+end_src
+
+* Inline Functions
+:PROPERTIES:
+:ID:       792a006c-552e-418e-8fbe-0be91a7c36f0
+:END:
+
+Use ~defsubst~ instead of ~defun~ to tell the byte compiler that it may inline a small function.

@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       8cf97c59-f3e8-40ed-a265-3c28d1ecabb7
+:END:
+#+title: Docker in Doom Emacs
+
+* Command
+- ~C-c o d~: ~M-x docker~
+- ~C-c o d C~: ~docker-compose~
+
+* Bindings
+- ~docker-*-mode-map~
+| Key     | Description           |
+|---------+-----------------------|
+| ?       | List actions          |
+| m/u     | Mark/Unmark           |
+| t       | Toggle mark-all       |
+| s       | Sort                  |
+| </>     | Shrink/Enlarge column |
+| C-c C-e | Export to CSV         |
+
+
+* TRAMP Local Container
+- ~C-x C-f /docker:[$USER@]$CONTAINER:/path/to/file~

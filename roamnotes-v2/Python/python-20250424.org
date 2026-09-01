@@ -1,8 +1,0 @@
-:PROPERTIES:
-:ID:       64b0c34d-0990-490f-b6ee-e8a09e5efb82
-:END:
-#+title: Python
-
-* [[id:5e637aa5-ddd8-4493-9b9f-becf82417b60][Package Management]]
-* [[id:1f0ac131-8d1e-439d-83d3-204d0bec4222][Coding]]
-* [[id:ae79085a-8eea-4197-ab45-9b25c3b60307][Useful Modules]]

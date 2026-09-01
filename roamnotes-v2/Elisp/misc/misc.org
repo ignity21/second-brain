@@ -1,7 +1,0 @@
-:PROPERTIES:
-:ID:       738ad0b3-64ee-4711-a86d-c9cbd85fc0dc
-:END:
-#+title: Miscellaneous
-
-* [[id:964c2294-759f-4758-84ff-be9887557496][aider]]
-* [[id:9c419268-56d9-45df-b0e5-c278c61956c9][C++]] — disassembly notes

@@ -1,0 +1,35 @@
+:PROPERTIES:
+:ID:       2d1b02f1-0a07-4253-a311-1ade09a3df14
+:END:
+#+title: Doom Configuration and Load Order
+#+filetags: :Doom:
+
+* Load Order
+- Interactive session: the typical session
+- Batch session: emacs commands
+- CLI session: ~/bin/doom~ commands
+| File                     | Interactive | Batch | CLI |
+|--------------------------+-------------+-------+-----|
+| =.emacs.d/early-init.el= | ✔         | ❌   | ❌ |
+| =.emacs.d/init.el=       | ✔         | ❌   | ❌ |
+| =$DOOMDIR/init.el=       | ✔         | ✔   | ✔ |
+| Module's =init.el=       | ✔         | ✔   | ✔ |
+| =$DOOMDIR/cli.el=        | ❌         | ❌   | ✔ |
+| Module's =cli.el=        | ❌         | ❌   | ✔ |
+| Module's =config.el=     | ✔         | ❌   | ❌ |
+| =$DOOMDIR/config.el=     | ✔         | ❌   | ❌ |
+
+* Configuration
+- =init.el=
+  - ~doom!~ block to control what Doom modules are enabled
+  - and in what order they will be loaded
+  - Evaluated early *when Emacs is starting up*
+- =config.el=
+  - Evaluated after *all other modules have loaded*
+
+** Configuring Packages
+- ~use-package!~, ~after!~, ~add-hook!~, ~setq-hook!~
+- ~use-package-hook!~ allows you to disable, append/prepend to and/or overwrite ~use-package!~ blocks
+  - must be used before that ~use-package!~ block (in =init.el=)
+
+Related: [[id:8e3d9b83-691a-43cc-95fc-22375cd003c2][Writing Doom Modules]].

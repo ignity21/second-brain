@@ -1,9 +1,0 @@
-:PROPERTIES:
-:ID:       b4568c34-28e1-4795-a7b9-c14539022412
-:END:
-#+title: editorconfig
-
-* Indentations of Major Modes
-- ~editorconfig-indentation-alist~
-- ~C-c p e~: open =.editorconfig= of current project
-- [[https://editorconfig.org/#example-file][Example .editorconfig]]

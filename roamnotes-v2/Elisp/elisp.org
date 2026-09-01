@@ -1,16 +1,10 @@
 :PROPERTIES:
 :ID:       df73ce4b-4bbf-4d63-b9ab-42bf6b4cc68e
+:ROAM_ALIASES: Elisp
 :END:
-#+title: Elisp
+#+title: Emacs Lisp
 
-* [[id:16c59c67-4d27-46c3-a45b-80d1a0322e06][Language]]
-  Fundamentals of Emacs Lisp — symbols, functions, macros, evaluation, control flow, data structures.
-
-* [[id:27b3dfa2-e65e-4759-bb70-c4982f2196d6][Emacs Environment]]
-  Editor essentials — keybindings, variables, debugging, profiling, dired, tips.
-
+* [[id:16c59c67-4d27-46c3-a45b-80d1a0322e06][Language Fundamentals]]
+* [[id:27b3dfa2-e65e-4759-bb70-c4982f2196d6][Emacs APIs and Workflows]]
 * [[id:3f728fab-0070-4674-a664-17a6fa174b96][Doom Emacs]]
-  Doom framework — module system, completion, UI, editing, developer tools.
-
-* [[id:738ad0b3-64ee-4711-a86d-c9cbd85fc0dc][Miscellaneous]]
-  Other topics — aider, C++ disassembly.
+* [[id:7b02a3bd-435e-44f1-9a33-1c30c61e0984][Learning Resources]]

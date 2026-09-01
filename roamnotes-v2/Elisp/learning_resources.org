@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       7b02a3bd-435e-44f1-9a33-1c30c61e0984
+:END:
+#+title: Learning Resources
+
+* Tutorials
+** [[file:learn-elisp.el][Learn Emacs Lisp in 15 Minutes]]

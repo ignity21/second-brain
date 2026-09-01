@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       30e08ef0-a17e-462c-aae4-ea71ed3b8ad6
+:END:
+#+title: Dired
+
+* Useful Keybindings
+
+| Key | Description                          |
+|-----+--------------------------------------|
+| (   | Toggle visibility of details         |
+| ?   | Quick help                           |
+| m   | Mark a file                          |
+| M-m | Marking and actions                  |
+| D   | Delete a file                        |
+| s,S | Sorting                              |
+| M-f | Jump to next dired history entry     |
+| M-b | Jump to previous dired history entry |

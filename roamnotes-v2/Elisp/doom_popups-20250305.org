@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       27be00b6-ada3-4820-a650-980aff005f95
+:END:
+#+title: Doom Popups
+
+* Useful Commands
+- ~+popup/quit-window~, ~+popup/close-all~
+- ~+popup/raise~ Raise the current popup window into a regular window
+
+| Keybinding | Description        |
+|------------+--------------------|
+| C-c g p c  | ~+popup/close-all~ |
+| C-c g p p  | ~+popup/raise~     |

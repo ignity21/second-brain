@@ -1,7 +1,0 @@
-:PROPERTIES:
-:ID:       792a006c-552e-418e-8fbe-0be91a7c36f0
-:END:
-#+title: Inline Functions
-
-* Overveiw
-The simple way to define an inline function, is to write ~defsubst~ instead of ~defun~

@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       d12fbf8b-b9bc-4201-968f-f3ec77937f1a
+:END:
+#+title: ~nil~
+
+* Overview
+- The symbol ~nil~ has two meanings:
+  - the empty list, can be written as ~()~
+  - the only false value in Emacs Lisp
+
+Every non-~nil~ value is true, including the symbol ~'false~.

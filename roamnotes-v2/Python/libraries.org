@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       067b59f7-27a6-4070-b9de-95a4f208f3cc
 :END:
-#+title: Libraries
+#+title: Python Libraries
 #+filetags: :PyLibs:
 
 * TOC :TOC_1:
@@ -10,34 +10,41 @@
 - [[#logging][Logging]]
 - [[#gui][GUI]]
 - [[#network-protocols][Network Protocols]]
+- [[#data-analysis][Data Analysis]]
 
-* Code Analysis Utilities :PyLibs:
+* Code Analysis Utilities
 :PROPERTIES:
 :ID:       74655713-faa8-46d3-a960-c82c269616c6
 :END:
 - [[id:d7ff1cd4-8d7e-4d16-a6a0-3eab08f5cf3a][radon]]: code complexity analysis
 
-* Code Helpers :PyLibs:
+* Code Helpers
 :PROPERTIES:
 :ID:       e1387f6b-9771-4359-a7e0-9294f83a5d53
 :END:
 - [[id:ffb4d5cb-79fe-4565-a40a-a8ef50de415a][wrapt]]: decorator library
 - [[id:56c54cf4-674f-4940-ae1e-bf0f0981cd3b][python-statemachine]]
 
-* Logging :PyLibs:
+* Logging
 :PROPERTIES:
 :ID:       bcd16a74-9180-4015-9be2-de2b97c1d651
 :END:
 - [[id:311759eb-82a6-4f6c-a09c-6eec896e20d6][loguru]]
 
-* GUI :PyLibs:
+* GUI
 :PROPERTIES:
 :ID:       bb6e87a9-1134-4be4-8208-32448b748e32
 :END:
 - [[id:e6c611fd-1796-463f-a844-2e2935996aba][Qt]]
 
-* Network Protocols :PyLibs:
+* Network Protocols
 :PROPERTIES:
 :ID:       41f5a230-9196-41c9-b4b9-75a76822cdc9
 :END:
 - [[id:70f106c0-7601-4c43-9d97-4f0f28b5c47a][websockets]]
+
+* Data Analysis
+:PROPERTIES:
+:ID:       2d0b26a1-20fb-47c7-8e5d-70a810989bf4
+:END:
+- [[id:190bfd1c-68ae-4f32-baab-cc98490c71e9][Polars]]

@@ -1,6 +1,0 @@
-:PROPERTIES:
-:ID:       e9340ee9-2f0b-4d90-9f1f-2465fbad8288
-:END:
-#+title: Useful Functions
-
-* [[id:fd832357-7836-485f-90ad-f7360b25fcce][Buffer Functions]]
