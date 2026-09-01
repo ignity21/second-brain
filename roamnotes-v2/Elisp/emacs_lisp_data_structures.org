@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       568a1513-def9-42e3-9cb0-378f2dd1a18a
+:END:
+#+title: Emacs Lisp Data Structures
+
+* [[id:526a68e0-3df6-483b-b4f8-749d92983f85][List Functions]]

@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       ec44d0cc-b1d2-4de0-8658-aea41bdd6156
 :END:
-#+title: Functions
+#+title: Emacs Lisp Functions
 
 * Function Definitions
 #+begin_src elisp

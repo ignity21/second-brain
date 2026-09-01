@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       bcb4ec09-2d9e-428b-9f67-074e7336ab55
 :END:
-#+title: Macros
+#+title: Emacs Lisp Macros
 
 * Overview
 A Lisp macro enables you to define new *control constructs* and other *language features*.

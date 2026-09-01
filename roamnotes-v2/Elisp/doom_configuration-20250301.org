@@ -4,6 +4,10 @@
 #+title: Doom Configuration and Load Order
 #+filetags: :Doom:
 
+* TOC :TOC_1:
+- [[#load-order][Load Order]]
+- [[#configuration][Configuration]]
+
 * Load Order
 - Interactive session: the typical session
 - Batch session: emacs commands

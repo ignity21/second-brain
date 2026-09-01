@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       03c58b55-8c1b-47c1-a48a-bf1d428476a4
 :END:
-#+title: Variables and Autoloading
+#+title: Emacs Variables and Autoloading
 
 * Variables
 - ~setq~

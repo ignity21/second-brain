@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       9eb7ecc9-7aa6-4da7-89a6-a2f192a93f16
 :END:
-#+title: Profiling
+#+title: Emacs Profiling
 
 * CPU
 1. ~M-x profiler-start~

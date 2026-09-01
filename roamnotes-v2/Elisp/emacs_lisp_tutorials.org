@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       0fa72f40-4463-4288-adea-07bb5d97910d
+:END:
+#+title: Emacs Lisp Tutorials
+
+* [[file:learn-elisp.el][Learn Emacs Lisp in 15 Minutes]]

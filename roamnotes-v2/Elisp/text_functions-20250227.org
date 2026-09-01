@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       bd1b877d-a05f-4fb2-91f9-f37c98e88ce8
 :END:
-#+title: Text Functions
+#+title: Emacs Text Functions
 
 * Regions and the Kill Ring
 - ~(zap-to-char (NTH CHAR))~

@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       1e498661-87ae-45a4-9c58-d7fa4a5518bf
+:END:
+#+title: Emacs Debugging and Navigation Tools
+
+* [[id:e28fe170-8733-448f-9911-2f785b901549][Debugging]]
+* [[id:9eb7ecc9-7aa6-4da7-89a6-a2f192a93f16][Profiling]]
+* [[id:30e08ef0-a17e-462c-aae4-ea71ed3b8ad6][Dired]]
+* [[id:e19ead80-8836-42bb-a9cb-c9f538ef7d1a][Emacs Tips]]

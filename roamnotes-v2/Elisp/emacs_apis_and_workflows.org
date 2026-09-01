@@ -3,14 +3,5 @@
 :END:
 #+title: Emacs APIs and Workflows
 
-* Core APIs
-** [[id:fd832357-7836-485f-90ad-f7360b25fcce][Buffer Functions]]
-** [[id:bd1b877d-a05f-4fb2-91f9-f37c98e88ce8][Text Functions]]
-** [[id:03c58b55-8c1b-47c1-a48a-bf1d428476a4][Variables and Autoloading]]
-** [[id:1df107b4-38f9-4451-8d0c-e86d8e2a802a][Keybindings]]
-
-* Tools and Navigation
-** [[id:e28fe170-8733-448f-9911-2f785b901549][Debugging]]
-** [[id:9eb7ecc9-7aa6-4da7-89a6-a2f192a93f16][Profiling]]
-** [[id:30e08ef0-a17e-462c-aae4-ea71ed3b8ad6][Dired]]
-** [[id:e19ead80-8836-42bb-a9cb-c9f538ef7d1a][Emacs Tips]]
+* [[id:253bf2f6-3e4c-46de-8a1e-4bc99b47f3bb][Core APIs]]
+* [[id:1e498661-87ae-45a4-9c58-d7fa4a5518bf][Debugging and Navigation]]

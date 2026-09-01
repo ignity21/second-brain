@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       7b02a3bd-435e-44f1-9a33-1c30c61e0984
+:END:
+#+title: Emacs Lisp Learning Resources
+
+* [[id:0fa72f40-4463-4288-adea-07bb5d97910d][Tutorials]]

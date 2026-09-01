@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       1df107b4-38f9-4451-8d0c-e86d8e2a802a
 :END:
-#+title: Keybindings
+#+title: Emacs Keybindings
 
 * Overview
 - ~keymap-global-set~ set global bindings

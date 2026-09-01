@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       bdbf8e5a-4c70-4b10-b853-957141cd1288
+:END:
+#+title: Doom Emacs User Interface
+
+* [[id:27be00b6-ada3-4820-a650-980aff005f95][Popups]]
+* [[id:14ae397e-cc44-4edd-8fe3-faab2a122332][Workspaces]]

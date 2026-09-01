@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       a3fddb82-8703-43f8-8ce3-22d3a684c0cb
+:END:
+#+title: Doom Emacs Core Configuration
+
+* [[id:2d1b02f1-0a07-4253-a311-1ade09a3df14][Doom Configuration and Load Order]]
+* [[id:8e3d9b83-691a-43cc-95fc-22375cd003c2][Writing Doom Modules]]

@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       e28fe170-8733-448f-9911-2f785b901549
 :END:
-#+title: Debugging
+#+title: Emacs Debugging
 
 * Two Debuggers
 - debug
