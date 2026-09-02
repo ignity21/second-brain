@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       eb8bcc8b-f176-49cc-9cb9-f08ea26bdd3f
 :END:
-#+title: Emacs Lisp Recursion
+#+title: ELisp Recursion
 
 * TOC :TOC_2:
 

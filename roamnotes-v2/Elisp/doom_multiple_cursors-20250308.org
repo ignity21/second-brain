@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       24b27ea3-68d5-46a0-958e-d455da49fdc3
 :END:
-#+title: Multiple Cursors in Doom Emacs
+#+title: Multiple Cursors
 
 * Overview
 - To get out of multiple-cursors-mode, press =<return>= or =C-g=

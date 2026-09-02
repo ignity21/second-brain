@@ -2,7 +2,7 @@
 :ID:       42daa5a3-235b-4876-af69-17f8d7428523
 :ROAM_ALIASES: 面向对象
 :END:
-#+title: OO
+#+title: Python Object-Oriented Programming
 
 * [[id:95feb43d-d5a4-41de-8c70-40fedf3f6265][Metaclass]]
 * [[id:734c0052-0cd7-49c7-badf-10019a558773][Abstract Class / Interface]]

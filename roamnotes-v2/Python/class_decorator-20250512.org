@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       02d375d4-d851-40b2-bb71-831ea66659e4
+:END:
+#+title: Class Decorator
+
+* Overview
+- 可替换较简单的 ~metaclass~
+
+#+begin_src python :results output
+_validators = {}
+def register(cls):
+    global _validators
+    _validators[cls.name] = cls
+    return cls
+
+def get_validator(name):
+    return _validators.get(name)
+
+@register
+class StringValidator:
+    name = "string"
+
+@register
+class IntegerValidator:
+    name = "int"
+
+print(get_validator("string"))
+#+end_src
+
+#+RESULTS:
+: <class '__main__.StringValidator'>

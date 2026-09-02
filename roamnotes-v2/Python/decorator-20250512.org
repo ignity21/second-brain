@@ -1,16 +1,24 @@
 :PROPERTIES:
 :ID:       40d506d8-6dab-477f-8beb-9a4029ce2b2b
-:TOC_2:
 :END:
 #+title: Decorator
 
-* 目录 :TOC_1:
+* TOC :TOC_2:
 - [[#用途][用途]]
 - [[#函数装饰器][函数装饰器]]
+  - [[#装饰器无参数][装饰器无参数]]
 - [[#装饰器有参数][装饰器有参数]]
+  - [[#解决有参数括号问题][解决有参数括号问题]]
 - [[#类实现装饰器][类实现装饰器]]
+  - [[#函数替换][函数替换]]
+  - [[#实例替换][实例替换]]
 - [[#class-decorator][Class Decorator]]
 - [[#类装饰器和函数装饰器的区别][类装饰器和函数装饰器的区别]]
+  - [[#1-实现方式][1. 实现方式]]
+  - [[#2-状态管理][2. 状态管理]]
+  - [[#3-可读性与扩展性][3. 可读性与扩展性]]
+  - [[#4-装饰对象][4. 装饰对象]]
+  - [[#总结何时用哪个][总结：何时用哪个？]]
 - [[#用-wrapt-装饰类成员函数][用 wrapt 装饰类成员函数]]
 
 * 用途
@@ -235,34 +243,7 @@ print(f"get_time_taken: {sleep_a_while.get_time_taken()}")
 : "sleep_a_while", args: (1,), kwargs: {}
 : time cost: 1.0001554489135742s
 : get_time_taken: 1.0001554489135742
-* Class Decorator
-:PROPERTIES:
-:ID:       02d375d4-d851-40b2-bb71-831ea66659e4
-:END:
-- 可替换较简单的 ~metaclass~
-#+begin_src python :results output
-_validators = {}
-def register(cls):
-    global _validators
-    _validators[cls.name] = cls
-    return cls
-
-def get_validator(name):
-    return _validators.get(name)
-
-@register
-class StringValidator:
-    name = "string"
-
-@register
-class IntegerValidator:
-    name = "int"
-
-print(get_validator("string"))
-#+end_src
-
-#+RESULTS:
-: <class '__main__.StringValidator'>
+* [[id:02d375d4-d851-40b2-bb71-831ea66659e4][Class Decorator]]
 
 * 类装饰器和函数装饰器的区别
 *函数装饰器* 和 *类装饰器* 的核心区别在于实现方式、状态管理和适用场景：

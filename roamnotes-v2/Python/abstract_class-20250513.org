@@ -2,7 +2,7 @@
 :ID:       734c0052-0cd7-49c7-badf-10019a558773
 :ROAM_ALIASES: Interface
 :END:
-#+title: Abstract Class
+#+title: Python Abstract Class
 #+filetags: :OO:
 
 * 子类化机制

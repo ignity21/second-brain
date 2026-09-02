@@ -4,15 +4,34 @@
 #+title: Practical Data Transformation with Polars
 #+filetags: :PyLibs:Polars:
 
-See [[id:190bfd1c-68ae-4f32-baab-cc98490c71e9][Polars]] for the overview and related topics.
-
-* TOC :TOC_1:
+* TOC :TOC_2:
 - [[#missing-values][Missing Values]]
+  - [[#finding-nulls][Finding nulls]]
+  - [[#removing-nulls][Removing nulls]]
+  - [[#filling-nulls][Filling nulls]]
 - [[#duplicates][Duplicates]]
+  - [[#finding-duplicates][Finding Duplicates]]
+  - [[#removing-duplicates][Removing Duplicates]]
 - [[#value-counts][Value Counts]]
+  - [[#visualization][Visualization]]
 - [[#grouping-and-aggregating][Grouping and Aggregating]]
+  - [[#lazy-mode-example][Lazy Mode Example]]
 - [[#pivoting-and-unpivoting][Pivoting and Unpivoting]]
+  - [[#core-idea][Core Idea]]
+  - [[#pivot][Pivot]]
+  - [[#unpivot][Unpivot]]
+  - [[#summary][Summary]]
 - [[#text-transformation][Text Transformation]]
+  - [[#casting-data-type][Casting Data Type]]
+  - [[#cleaning-text][Cleaning Text]]
+  - [[#creating-an-identifier][Creating an Identifier]]
+  - [[#searching-text][Searching Text]]
+  - [[#extracting-text][Extracting Text]]
+  - [[#filtering-text-matches][Filtering Text Matches]]
+  - [[#replacing-text][Replacing Text]]
+  - [[#categorizing-numeric-values][Categorizing Numeric Values]]
+
+See [[id:190bfd1c-68ae-4f32-baab-cc98490c71e9][Polars]] for the overview and related topics.
 
 * Missing Values
 ** Finding nulls

@@ -26,4 +26,3 @@ print(Validator._validators)
 : StringValidator registered, extra kwargs: {'foo': 'bar'}
 : IntegerValidator registered, extra kwargs: {}
 : {'StringValidator': <class '__main__.StringValidator'>, 'IntegerValidator': <class '__main__.IntegerValidator'>}
-

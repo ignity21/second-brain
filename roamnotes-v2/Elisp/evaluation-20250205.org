@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       48e0f197-f367-4a40-89bd-d9f2c4339057
 :END:
-#+title: Emacs Lisp Evaluation
+#+title: ELisp Evaluation
 
 * Eval Last Sexp
 - ~C-x C-e~: show result in the echo area.

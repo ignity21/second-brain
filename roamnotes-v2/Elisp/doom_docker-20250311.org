@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       8cf97c59-f3e8-40ed-a265-3c28d1ecabb7
 :END:
-#+title: Docker in Doom Emacs
+#+title: Docker in Doom
 
 * Command
 - ~C-c o d~: ~M-x docker~

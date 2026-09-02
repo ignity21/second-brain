@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       bbb6b1f6-6e74-424b-86c5-a5790f71d9cb
 :END:
-#+title: Emacs Lisp Control Flow and Error Handling
+#+title: ELisp Control Flow and Error Handling
 
 * [[id:0017ea45-edd4-4ef9-aaca-f59caddea636][Error Handling with ~condition-case~]]
 * [[id:3874f863-df85-43b5-8eec-e5e3a6c49810][Loops]]

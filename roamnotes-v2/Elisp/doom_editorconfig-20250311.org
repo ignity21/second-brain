@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       b4568c34-28e1-4795-a7b9-c14539022412
 :END:
-#+title: EditorConfig in Doom Emacs
+#+title: EditorConfig in Doom
 
 * Indentations of Major Modes
 - ~editorconfig-indentation-alist~

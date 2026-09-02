@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       5e637aa5-ddd8-4493-9b9f-becf82417b60
 :END:
-#+title: Package Management
+#+title: Python Packaging Management
 
 - [[id:196944f7-2304-448c-9f27-4e3a6d2892f7][~uv~]] recommended
 - [[id:0f708bdd-acb3-419f-a4b3-8a8e8546c7bf][=pyproject.toml=]]

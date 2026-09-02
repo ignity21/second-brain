@@ -1,13 +1,7 @@
 :PROPERTIES:
 :ID:       fd832357-7836-485f-90ad-f7360b25fcce
 :END:
-#+title: Emacs Buffer Functions
-
-* TOC :TOC_1:
-- [[#buffer-names][Buffer Names]]
-- [[#useful-functions][Useful Functions]]
-- [[#examples][Examples]]
-- [[#narrowing][Narrowing]]
+#+title: ELisp Buffer Functions
 
 * Buffer Names
 #+begin_src elisp

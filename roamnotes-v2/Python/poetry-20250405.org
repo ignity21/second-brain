@@ -4,6 +4,14 @@
 #+title: ~poetry~
 #+filetags: :Project:
 
+* TOC :TOC_1:
+- [[#installation][Installation]]
+- [[#basic-usage][Basic Usage]]
+- [[#specify-python-version][Specify Python Version]]
+- [[#configuration][Configuration]]
+- [[#ide-integration][IDE Integration]]
+- [[#editable-dependency][Editable Dependency]]
+
 * Installation
 - ~pipx install poetry~
 

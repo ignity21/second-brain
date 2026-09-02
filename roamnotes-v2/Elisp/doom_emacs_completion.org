@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       b80ae92b-8c5a-40bc-9f08-92566b333781
 :END:
-#+title: Doom Emacs Completion
+#+title: Doom Completion
 
 * [[id:f0e95f32-7d9c-4faa-ad96-6e6057d5f52c][Vertico]]
 * [[id:44d52adb-7a9a-44ea-b73f-ab0e4682f1f4][Corfu]]

@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       f0e95f32-7d9c-4faa-ad96-6e6057d5f52c
 :END:
-#+title: Vertico in Doom Emacs
+#+title: Vertico
 
 * Overview
 - Enhancing the built-in ~completing-read~ interface

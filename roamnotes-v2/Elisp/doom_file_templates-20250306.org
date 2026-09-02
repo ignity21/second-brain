@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       1efb8520-f472-465f-9fad-beec10c84e66
 :END:
-#+title: File Templates in Doom Emacs
+#+title: File Templates in Doom
 
 * Overview
 - Use ~set-file-template!~ to add new or change existing one.

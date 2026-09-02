@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       bb6e87a9-1134-4be4-8208-32448b748e32
+:END:
+#+title: Python GUI Libraries
+
+* [[id:e6c611fd-1796-463f-a844-2e2935996aba][Qt]]
+* [[id:0687e6c8-53b6-4aba-baa4-ccf6b17ea193][Model/View]]
+* [[id:2d8c01d9-ed79-4af6-b18d-3ea846da454e][PyQt5]]
+* [[id:fd46841b-5f7c-410f-b7bb-bf2c5a28456b][PySide6]]

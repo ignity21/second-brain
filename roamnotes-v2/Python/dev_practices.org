@@ -2,9 +2,8 @@
 :ID:       9caeb97a-3a07-4652-be52-63a1a4d92d8d
 :ROAM_ALIASES: 开发实践
 :END:
-#+title: Development Practices
+#+title: Python Development Practices
 
 * [[id:9a2b4b47-bdcb-4930-9a22-5705cafbde1e][Style Guide]]
 * [[id:3b513038-1dc5-4cb6-a644-58a5510e46f4][Practical Advice]]
-* Testing
-* Logging
+* [[id:033e4cf9-68b6-4d8c-98c4-eac2c3a7c507][Testing]]

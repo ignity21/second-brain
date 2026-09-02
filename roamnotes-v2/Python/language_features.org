@@ -2,13 +2,10 @@
 :ID:       0f4bb4ee-12f8-46c4-b5eb-2be0d1bb2af5
 :ROAM_ALIASES: 语言特性
 :END:
-#+title: Language Features
+#+title: Python Language Features
 
 * [[id:40d506d8-6dab-477f-8beb-9a4029ce2b2b][Decorator]]
 * [[id:48cbf16f-048a-4bd3-9561-4c4566f6b204][asyncio]]
 * [[id:d9f8970a-d0a6-4fd4-984f-ca5fb413b4ac][Exceptions]]
 * [[id:a7b8622b-68f5-4482-923e-c551386a13c0][Type System]]
 * [[id:42daa5a3-235b-4876-af69-17f8d7428523][OO]]
-* Iterator & Generator
-* Context Manager
-* dataclasses

@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       ab63fc36-bd8c-42c9-bd68-2f256e19903b
 :END:
-#+title: Doom Emacs Editing Tools
+#+title: Doom Editing Tools
 
 * [[id:1efb8520-f472-465f-9fad-beec10c84e66][File Templates]]
 * [[id:da6a0a07-cfcd-4f63-852e-4c2d13c9f135][Formatting]]

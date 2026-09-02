@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       526a68e0-3df6-483b-b4f8-749d92983f85
 :END:
-#+title: Emacs Lisp List Functions
+#+title: ELisp List Functions
 
 * Names
 - car :: Contents of the Address part of the Register

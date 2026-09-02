@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       d9f8970a-d0a6-4fd4-984f-ca5fb413b4ac
 :END:
-#+title: Exceptions
+#+title: Python Exceptions
 
 * Exception hierarchy
 #+begin_verse

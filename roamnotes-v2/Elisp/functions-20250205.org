@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       ec44d0cc-b1d2-4de0-8658-aea41bdd6156
 :END:
-#+title: Emacs Lisp Functions
+#+title: ELisp Functions
 
 * Function Definitions
 #+begin_src elisp
@@ -47,9 +47,4 @@
          (- fill-column 14) "pink elephants")
 #+end_src
 
-* Inline Functions
-:PROPERTIES:
-:ID:       792a006c-552e-418e-8fbe-0be91a7c36f0
-:END:
-
-Use ~defsubst~ instead of ~defun~ to tell the byte compiler that it may inline a small function.
+* [[id:792a006c-552e-418e-8fbe-0be91a7c36f0][Inline Functions]]

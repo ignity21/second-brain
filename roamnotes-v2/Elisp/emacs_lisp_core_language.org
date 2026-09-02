@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       224bc2ff-1c2f-4b0b-a415-3bf140a90f16
 :END:
-#+title: Emacs Lisp Core Language
+#+title: ELisp Core Language
 
 * [[id:c84a722b-6419-4d6d-9224-802bb2dfbe96][Symbols]]
 * [[id:d12fbf8b-b9bc-4201-968f-f3ec77937f1a][~nil~]]

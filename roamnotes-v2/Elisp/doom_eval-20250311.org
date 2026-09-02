@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       e174a908-f87e-4c23-bc49-52897aef089e
 :END:
-#+title: Code Evaluation in Doom Emacs
+#+title: Code Evaluation in Doom
 
 * Register a REPL for a major-mode
 - ~+eval-repls~: list of available REPLs

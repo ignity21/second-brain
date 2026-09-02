@@ -6,5 +6,5 @@
 
 * [[id:16c59c67-4d27-46c3-a45b-80d1a0322e06][Language Fundamentals]]
 * [[id:27b3dfa2-e65e-4759-bb70-c4982f2196d6][Emacs APIs and Workflows]]
-* [[id:3f728fab-0070-4674-a664-17a6fa174b96][Doom Emacs]]
+* [[id:3f728fab-0070-4674-a664-17a6fa174b96][Doom]]
 * [[id:7b02a3bd-435e-44f1-9a33-1c30c61e0984][Learning Resources]]

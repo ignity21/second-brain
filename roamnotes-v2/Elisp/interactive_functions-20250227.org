@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       67ee9921-b986-40d1-a2ca-45fce97f4a48
 :END:
-#+title: Emacs Lisp Interactive Functions
+#+title: ELisp Interactive Functions
 
 * The ~interactive~ Declaration
 - Call interactive function for its *side effects*

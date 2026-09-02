@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       792a006c-552e-418e-8fbe-0be91a7c36f0
+:END:
+#+title: Inline Functions
+
+Use ~defsubst~ instead of ~defun~ to tell the byte compiler that it may inline a small function.

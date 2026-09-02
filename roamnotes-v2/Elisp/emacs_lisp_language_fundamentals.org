@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       16c59c67-4d27-46c3-a45b-80d1a0322e06
 :END:
-#+title: Emacs Lisp Language Fundamentals
+#+title: ELisp Language Fundamentals
 
 * [[id:224bc2ff-1c2f-4b0b-a415-3bf140a90f16][Core Language]]
 * [[id:bbb6b1f6-6e74-424b-86c5-a5790f71d9cb][Control Flow and Error Handling]]

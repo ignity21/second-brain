@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       0017ea45-edd4-4ef9-aaca-f59caddea636
 :END:
-#+title: Emacs Lisp Error Handling with ~condition-case~
+#+title: ELisp Error Handling with ~condition-case~
 
 * Overview
 Just like try...catch...

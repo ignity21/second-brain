@@ -4,6 +4,20 @@
 #+title: Time Series with Polars
 #+filetags: :PyLibs:Polars:
 
+* TOC :TOC_2:
+- [[#manipulating-datetime][Manipulating Datetime]]
+  - [[#temporal-data-types][Temporal Data Types]]
+  - [[#parsing-datetime][Parsing Datetime]]
+  - [[#extracting-datetime-components][Extracting Datetime Components]]
+  - [[#adjusting-datetime][Adjusting Datetime]]
+- [[#filtering-by-time][Filtering by Time]]
+- [[#aggregating-by-time][Aggregating by Time]]
+  - [[#controlling-window-size][Controlling Window Size]]
+- [[#rolling-window][Rolling Window]]
+- [[#cumulative-statistics][Cumulative Statistics]]
+- [[#group-level-statistics][Group-level Statistics]]
+  - [[#comparing-to-group-statistics][Comparing to Group Statistics]]
+
 See [[id:190bfd1c-68ae-4f32-baab-cc98490c71e9][Polars]] for the overview and related topics.
 
 * Manipulating Datetime

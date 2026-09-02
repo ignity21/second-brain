@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       44d52adb-7a9a-44ea-b73f-ab0e4682f1f4
 :END:
-#+title: Corfu in Doom Emacs
+#+title: Corfu
 
 * Keybindings
 - ~corfu-map~

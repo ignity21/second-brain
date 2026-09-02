@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       565c2448-3742-4f92-bc41-9e539e083fc3
 :END:
-#+title: Doom Emacs Development Tools
+#+title: Doom Development Tools
 
 * [[id:e174a908-f87e-4c23-bc49-52897aef089e][Code Evaluation]]
 * [[id:35b271c9-61cf-4644-81f8-4433493fb246][LSP]]

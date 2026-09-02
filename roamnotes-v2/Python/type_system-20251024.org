@@ -1,19 +1,7 @@
 :PROPERTIES:
 :ID:       a7b8622b-68f5-4482-923e-c551386a13c0
 :END:
-#+title: Type System
-
-* TOC :TOC_2:
-- [[#alias][Alias]]
-- [[#newtype][NewType]]
-- [[#callable][Callable]]
-  - [[#protocol][Protocol]]
-- [[#generators-and-coroutines][Generators and Coroutines]]
-  - [[#generators][Generators]]
-  - [[#coroutines][Coroutines]]
-- [[#generics][Generics]]
-  - [[#bounded-type][Bounded Type]]
-  - [[#variable-length-generic-class][Variable-Length Generic Class]]
+#+title: Python Type System
 
 * Alias
 #+begin_src python
@@ -150,4 +138,3 @@ class MyTuple[*Ts]:
     def __init__(self, *args: *Ts) -> None:
         self.values: tuple[*Ts, ...] = args
 #+end_src
-

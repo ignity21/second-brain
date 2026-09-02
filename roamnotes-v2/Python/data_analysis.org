@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       2d0b26a1-20fb-47c7-8e5d-70a810989bf4
+:END:
+#+title: Python Data Analysis Libraries
+
+* [[id:190bfd1c-68ae-4f32-baab-cc98490c71e9][Polars]]
+* [[id:497eaecd-8769-498f-8869-50923fef8901][Practical Data Transformation with Polars]]
+* [[id:cf33e3fa-b1bd-428e-811d-6489d66db882][Time Series with Polars]]

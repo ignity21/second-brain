@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       da6a0a07-cfcd-4f63-852e-4c2d13c9f135
 :END:
-#+title: Formatting in Doom Emacs
+#+title: Formatting in Doom
 
 * Overview
 - ~+format-with~: decide which formatter will be used.

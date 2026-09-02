@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       0687e6c8-53b6-4aba-baa4-ccf6b17ea193
 :END:
-#+title: Model/View
+#+title: Python Qt Model/View
 
 * Overview
 - View: 界面组件，如 ~QListView~, ~QTreeView~, ~QTableView~
