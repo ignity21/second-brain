@@ -9,90 +9,201 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740539763658
-:ANKI_NOTE_HASH: 24fc61afac2b6bdcc191a27c089a6b07
+:ANKI_NOTE_HASH: 5e4ab61cfbc82ce6a302f710ef4f81ba
 :END:
-- function: ~exchange-point-and-mark~
-- example:
-  - ~M-<~ move point to beginning of the buffer, push mark at previous position
-  - ~C-x C-x~ select the region from beginning to current position
+*** Front
+在 Emacs 中，如何交换 point 和 mark 的位置？
+
+*** Back
+按 ~C-x C-x~，调用 ~exchange-point-and-mark~。
+来源：[[id:e19ead80-8836-42bb-a9cb-c9f538ef7d1a][Emacs Tips]]。
 
 ** M-h
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740539764688
-:ANKI_NOTE_HASH: 2226a53bbe1e659d8f4742319f9bafd7
+:ANKI_NOTE_HASH: d7e32b57e2a35301f60828409e64a493
 :END:
-- mark-paragraph: Put point at beginning of this paragraph, mark at end.
+*** Front
+在 Emacs 中，如何选中当前段落？
+
+*** Back
+按 ~M-h~，调用 ~mark-paragraph~。
 
 ** ~save-excursion~
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740539765693
-:ANKI_NOTE_HASH: bc609c51c7028f4b879bff33ede51a6b
+:ANKI_NOTE_HASH: a264b6838f51b2b4c68b19e5fbce48ed
 :END:
-- Save point, and current buffer; execute BODY; restore those things.
-#+begin_src elisp
-(let ((var val))
-  (save-excursion
-    BODY))
-#+end_src
+*** Front
+在 Emacs Lisp 中，临时移动 point 执行操作，结束后恢复 point 和当前 buffer，应使用什么？
+
+*** Back
+使用 ~save-excursion~ 包住操作。它在退出时恢复 point 和当前 buffer。
+来源：[[id:f21f0312-15cd-4a7a-8176-7c89e220f0d3][~save-excursion~]]。
 
 ** M-.
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740540768688
-:ANKI_NOTE_HASH: 676c17189de6ec0dd0cb13d2106bb96b
+:ANKI_NOTE_HASH: 83591a0c9de84d84f390347ca8d39767
 :END:
-- xref-find-definitions
-- Use ~M-,~ to jump backward
+*** Front
+在 Emacs 中，如何跳转到光标处符号的定义？
+
+*** Back
+按 ~M-.~，调用 ~xref-find-definitions~；按 ~M-,~ 返回。
 
 ** C-x h
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740540940353
-:ANKI_NOTE_HASH: 07f8b250e89487f910308cc5c9019d1e
+:ANKI_NOTE_HASH: 95dc0f5ac1ab534eda1cab2f51f78935
 :END:
-- mark-whole-buffer: Mark the whole buffer as a region
+*** Front
+在 Emacs 中，如何选中整个 buffer？
+
+*** Back
+按 ~C-x h~，调用 ~mark-whole-buffer~。
 
 ** Narrowing
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740618021304
-:ANKI_NOTE_HASH: db367c74316e933a88a7ab1c6880738a
+:ANKI_NOTE_HASH: f660f041830204b2528f1ae9d0cb655f
 :END:
-- ~C-x n~
-- ~C-x n w~ widen
-- Use case: replace a word in one part of a buffer but not in another
+*** Front
+在 Emacs 中，操作完缩窄的 buffer 后，如何恢复显示全部内容？
+
+*** Back
+按 ~C-x n w~，调用 ~widen~。
+来源：[[id:fd832357-7836-485f-90ad-f7360b25fcce][ELisp Buffer Functions]]。
 
 ** M-y
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740703084489
-:ANKI_NOTE_HASH: 6e23481147e6cd0c528e9ec4c6cd283d
+:ANKI_NOTE_HASH: 677a45d70c45b536156008e521867976
 :END:
-- yank loop over the kill-*ring*
+*** Front
+在 Emacs 中，粘贴后如何换成 kill ring 中的另一项？
+
+*** Back
+紧接着按 ~M-y~，循环替换刚粘贴的内容。
 ** indent region
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1745466731599
 :ANKI_NOTE_HASH: 0cc82854daeb710a613ccb629744262d
+:ANKI_FAILURE_REASON: Note was not found: 1745466731599
 :END:
-- ~C-x <tab>~
+*** Front
+在 Emacs 中，如何调整选中区域的缩进？
+
+*** Back
+按 ~C-x TAB~，调用 ~indent-rigidly~。
 
 ** embark
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1741060392230
-:ANKI_NOTE_HASH: 27837e5dcaec15c015c1d14354b519ee
+:ANKI_NOTE_HASH: c328057293db2cee5128fe309ba2086c
 :END:
-- ~C-c a e~: ~embark-dwim~
-- ~C-c a ;~: ~embark-act~
+*** Front
+在当前 Doom 个人配置中，如何打开 Embark 的候选操作菜单？
+
+*** Back
+按 ~C-c a ;~，调用 ~embark-act~。
+来源：[[id:f0e95f32-7d9c-4faa-ad96-6e6057d5f52c][Vertico]]。
 
 ** vertico groups
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1741060392234
-:ANKI_NOTE_HASH: 8daebbbba15108fda70f9487b7994d77
+:ANKI_NOTE_HASH: 7b52b1f9e49859709daabc4b5afba22b
 :END:
-- ~C-M-p~: previous group
-- ~C-M-n~: next group
+*** Front
+在当前 Doom 个人配置的 Vertico 候选列表中，如何切换到下一组？
+
+*** Back
+按 ~C-M-n~；上一组用 ~C-M-p~。
+来源：[[id:f0e95f32-7d9c-4faa-ad96-6e6057d5f52c][Vertico]]。
+
+** ~let~ vs ~let*~
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789285640698
+:ANKI_NOTE_HASH: 97d0891421ec3e97fc3515218fe0c2e3
+:END:
+*** Front
+在 Emacs Lisp 中，后一个局部变量的初始值需要引用前一个刚绑定的变量，应使用 ~let~ 还是 ~let*~？
+
+*** Back
+用 ~let*~，因为它按顺序建立绑定；~let~ 的初始值在这些新绑定生效前求值。
+来源：[[id:f61b8e2e-f3e3-4954-b9ef-b2a8f72ca68c][ELisp Special Forms]]。
+
+** Keyword arguments
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789285640701
+:ANKI_NOTE_HASH: 90d8f049cac1863e55d34e9e9965e565
+:END:
+*** Front
+在 Emacs Lisp 中，想用 ~:name~ 这样的关键字参数定义函数，应使用 ~defun~ 还是 ~cl-defun~？
+
+*** Back
+用 ~cl-lib~ 的 ~cl-defun~ 和 ~&key~；普通 ~defun~ 不支持 ~&key~。
+来源：[[id:ec44d0cc-b1d2-4de0-8658-aea41bdd6156][ELisp Functions]]。
+
+** Unquote splicing
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789285640703
+:ANKI_NOTE_HASH: afeb13c2d013e8f9acf3b6184c2594d9
+:END:
+*** Front
+在 Emacs Lisp 的反引号列表中，如何把 ~(+ 3 4)~ 的结果作为一个元素插入？若结果本身是列表，如何展开为多个元素？
+
+*** Back
+单个元素用 ~,~，如 ~`(1 ,(+ 3 4))~ 得到 ~(1 7)~；展开列表用 ~,@~，如 ~`(1 ,@'(2 3))~ 得到 ~(1 2 3)~。
+来源：[[id:48e0f197-f367-4a40-89bd-d9f2c4339057][ELisp Evaluation]]。
+
+** Current buffer
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789285640706
+:ANKI_NOTE_HASH: 69e6ab268a67028b7fb5c01aff58b902
+:END:
+*** Front
+在 Emacs Lisp 中，想在另一个 buffer 内执行一段操作，并在结束后恢复原来的当前 buffer，应使用什么？
+
+*** Back
+用 ~with-current-buffer~。它只临时切换执行体的当前 buffer。
+来源：[[id:fd832357-7836-485f-90ad-f7360b25fcce][ELisp Buffer Functions]]。
+
+** Preserve narrowing
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789285640710
+:ANKI_NOTE_HASH: 53330cc8309d6b7b3962440fb1d2fe41
+:END:
+*** Front
+在 Emacs Lisp 中，想临时 ~widen~ 来处理整个 buffer，结束后恢复原来的 narrowing，应使用什么？
+
+*** Back
+用 ~save-restriction~ 包住 ~widen~ 和处理代码；退出时恢复原来的 narrowing。
+来源：[[id:fd832357-7836-485f-90ad-f7360b25fcce][ELisp Buffer Functions]]。
+
+** Interactive prefix argument
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789285640712
+:ANKI_NOTE_HASH: 50299a6fba68e5a7b32bfc52599e17a5
+:END:
+*** Front
+在 Emacs Lisp 的 ~interactive~ 声明中，哪种代码字母会把数字前缀参数传给函数？
+
+*** Back
+~p~，例如 ~(interactive "p")~。
+来源：[[id:67ee9921-b986-40d1-a2ca-45fce97f4a48][ELisp Interactive Functions]]。
