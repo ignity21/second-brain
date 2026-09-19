@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       cb74cf5c-48b9-4509-a967-c8489ac9c14a
+:END:
+#+title: Classification Models
+
+* [[id:a3762245-595d-4b5e-b317-4eafd2a45c7f][Softmax Regression]]
+* [[id:91264f10-9a71-4d15-9b63-09c2a6566d75][Multi-class Classification]]
+* [[id:a3f7682e-3cde-4879-b314-f6220f8cc3c7][Multi-label Classification]]
+* [[id:264851aa-8984-4615-8d8f-e243a43b74a0][Binary Classification]]

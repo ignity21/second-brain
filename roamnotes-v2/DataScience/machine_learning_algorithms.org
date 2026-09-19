@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       ad4241b3-e7ef-46c8-8da3-5b9031d68d38
+:END:
+#+title: Machine Learning Algorithms
+
+* [[id:54000b3b-4c78-4adc-8499-483bfc472da5][Linear Models and Regression]]
+* [[id:cb74cf5c-48b9-4509-a967-c8489ac9c14a][Classification Models]]
+* [[id:2e1dde7d-4dc5-46d6-9864-b1cbf4b7f527][Tree and Ensemble Models]]
+* [[id:4476c146-9655-4c5e-9fa9-f9528beb9056][Neighbor-based Models]]
+* [[id:419da3f0-f61d-4b04-a660-abcb4100c390][Unsupervised Learning Models]]
+* [[id:e7884e68-66ee-474c-9d48-2c165c792b52][Model Evaluation]]

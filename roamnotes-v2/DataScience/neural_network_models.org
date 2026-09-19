@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       9e8d47cc-2f6c-4abd-a02e-991e674726a5
+:END:
+#+title: Neural Network Models
+
+* [[id:31b71a06-0592-444b-b410-916ee717b488][Neural Network]]
+* [[id:bbe0d8aa-27a7-4833-9d54-1fa917b96c2d][Activation Functions]]
+* [[id:e1a528d4-0948-4f04-b114-48dd128863a1][Cost Function]]
+* [[id:f9f93acb-54e3-4702-9ba4-8233e4606e9d][Loss Function]]

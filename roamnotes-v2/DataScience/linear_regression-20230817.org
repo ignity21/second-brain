@@ -1,0 +1,134 @@
+:PROPERTIES:
+:ID:       b6f03e6b-8850-4f2d-8d2d-f337029fe1e7
+:END:
+#+title: Linear Regression
+#+filetags: ML
+
+* Concept
+** Parameters
+- Weights $\bm{w}$: $w_1, w_2, \cdots, w_n$ (slope)
+- Bias: $b$ (intercept)
+
+** Model
+\[\hat{y}^{(i)}=f_{\bm{w}, b}(\bm{x})= w_1 x_1 + w_2 x_2 + \cdots + w_n x_n + b=\bm{w}\cdot\bm{x}+b=\bm{w}^T\bm{x} + b\]
+*** Coding Hint
+- Vector dot product: ~f = np.dot(w, x) + b~
+- Matrix product: ~f = w.T @ x + b~
+  - ~w.T~ is $1\times n$ matrix
+  - ~x~ is $n\times 1$ matrix
+
+** Cost Function
+- Loss Function: Mean Squared Error
+\[J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^{m}(\hat{y}^{(i)}-y^{(i)})^{2}=\frac{1}{m}\sum_{i=1}^m(\bm{w}^T\bm{x^{(i)}}+b-y^{(i)})^2\]
+
+** Training Goal: Minimize $J(\bm{w}, b)$
+*** [[id:bffd4dcf-0fb1-4480-9338-956d156b97b9][Gradient Descent]]
+\[w_j=w_j-\alpha\frac{\partial}{\partial w_j}J(\bm{w}, b)\]
+
+\[b=b-\alpha\frac{\partial}{\partial b}J(\bm{w}, b)\]
+
+**** Details
+\[\frac{\partial}{\partial{w_j}}J(\bm{w}, b)=\frac{2}{m}\sum_{i=1}^{m} (f_{\bm{w}, b}(\bm{x^{(i)}}) -y^{(i)})x_{j}^{(i)}\]
+
+\[\frac{\partial}{\partial{b}}J(\bm{w}, b)=\frac{2}{m}\sum_{i=1}^{m} (f_{\bm{w}, b}(\bm{x^{(i)}}) -y^{(i)})\]
+
+*** [[id:1800f8d6-afdd-48f6-a680-fd8460bd1f2e][Normal Equation]]
+
+* Vectorization
+- Hypothesis vector $\bm{\hat{y}} = \bm{Xw} + \bm{b}$
+** Cost Function
+- $J = \frac{1}{m}(\bm{Xw}+\bm{b}-y)^T(\bm{Xw}+\bm{b}-y)$
+#+begin_src python
+  import numpy as np
+  J = (1/m) * np.matmul(error.T, error)
+#+end_src
+** Gradient Descent
+- Gradient (partial derivatives)
+
+\[\frac{\partial}{\partial{w_j}}J(\bm{w}, b)=\frac{2}{m}\sum_{i=1}^m(\bm{w}^T\bm{x^{(i)}}+b-y^{(i)})x_j^{(i)}\]
+
+\[\frac{\partial}{\partial{b}}J(\bm{w}, b)=\frac{2}{m}\sum_{i=1}^m(\bm{w}^T\bm{x^{(i)}}+b-y^{(i)})\]
+
+
+- Gradient Vector for *w*
+
+\[\frac{2}{m} \bm{X}^T(\bm{Xw}+\bm{b}-\bm{y})\]
+
+- Gradient for b
+
+\[\frac{2}{m} \vec{1}(\bm{Xw}+\bm{b}-\bm{y})\]
+
+
+- repeat until convergence
+\[\bm{w}=\bm{w}-\alpha\frac{2}{m}\bm{X}^T(\bm{X}\bm{w} +\bm{b}-\bm{y})\]
+
+\[b = b - \alpha\frac{2}{m}\vec{1}(\bm{X}\bm{w} +\bm{b}-\bm{y})\]
+
+** Normal Equation($\theta$ version)
+\[\hat{\theta}=(\bm{X}^T\bm{X})^{-1}\bm{X}^T\bm{y}\]
+#+begin_src python
+  # X.T @ X calls np.matmul(X.T, X)
+  theta_best = (np.linalg.pinv(X.T @ X) @ X.T).dot(y) # pseudoinverse
+  y_predict = np.dot(X_test, theta_best)
+#+end_src
+- [[file:../../notebooks/ML/linear_regression.ipynb][Code]]
+
+* [[id:7ac9ccb4-374e-4c58-b932-7704b3c86381][Regularized Linear Regression]]
+* Comparison of algorithms for Linear Regression
+| Algorithm       | Large m | Out-of-core support | Large n | Hyperparams | Scaling required | Scikit-Learn     |
+|-----------------+---------+---------------------+---------+-------------+------------------+------------------|
+| Normal Equation | Fast    | No                  | Slow    |           0 | No               | N/A              |
+| SVD             | Fast    | No                  | Slow    |           0 | No               | LinearRegression |
+| Batch GD        | Slow    | No                  | Fast    |           2 | Yes              | SGDRegressor     |
+| Stochastic GD   | Fast    | Yes                 | Fast    |       $\ge 2$ | Yes              | SGDRegressor     |
+| Mini-batch GD   | Fast    | Yes                 | Fast    |       $\ge 2$ | Yes              | SGDRegressor     |
+
+* [[id:8038235d-fdb1-44b6-b2b9-76c38e740f0e][Regression Metrics]]
+* Python Code
+** Single Feature
+#+begin_src python
+# Creating feature and target arrays
+X = df.drop('house_price', axis=1).values
+y = df['house_price'].values
+
+# Making predictions from a single feature
+X_bedrooms = X[:, 1] # shape (n, )
+X_bedrooms = X_bedrooms.reshape(-1, 1) # shape (n, 1)
+
+# Plotting scatter plot
+plt.scatter(X_bedrooms, y, alpha=0.5)
+
+# Fitting a linear regression model
+from sklearn.linear_model import LinearRegression
+reg = LinearRegression()
+reg.fit(X_bedrooms, y)
+
+# Plotting the regression line
+prediction = reg.predict(x_Bedrooms)
+plt.plot(X_bedrooms, prediction, color='red')
+plt.show()
+#+end_src
+
+** Multiple Features
+#+begin_src python
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+reg = LinearRegression()
+reg.fit(X_train, y_train)
+y_pred = reg.predict(X_test)
+
+# Quantifing the quality of the model
+# 1. R-squared (0~1)
+r2 = reg.score(X_test, y_test) # 1 is perfect, 0 is random
+
+# 2. Mean Squared Error (MSE)
+from sklearn.metrics import mean_squared_error
+mse = mean_squared_error(y_test, y_pred, squared=True)
+
+# 3. Root Mean Squared Error (RMSE)
+rmse = mean_squared_error(y_test, y_pred, squared=False)
+#+end_src
+- [[id:ba10e7ca-778d-4e4b-8251-e398cf189a83][statsmodels/Linear Regression/Quantifying Model Fit]]

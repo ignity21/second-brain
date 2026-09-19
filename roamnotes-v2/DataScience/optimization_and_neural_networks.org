@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       e629cd3b-6558-4c72-aa8c-f8d7ea9ebd07
+:END:
+#+title: Optimization and Neural Networks
+
+* [[id:9e8d47cc-2f6c-4abd-a02e-991e674726a5][Neural Network Models]]
+* [[id:c0df9093-7359-4b41-854c-c51e0c8afbe1][Gradient Descent Algorithms]]
+* [[id:09f5ad2c-aece-46a3-b75a-b29bd12d2e30][Advanced Optimization]]

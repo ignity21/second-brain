@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       a77e95fe-83b5-4ae1-a091-adcc524317db
+:END:
+#+title: Linear Algebra Foundations
+
+* [[id:faf37b18-c831-4be4-9a62-306c4a0fbb20][Linear Algebra Basics]]
+* [[id:f5882fb8-4aec-413b-997d-b36673558c6b][Advanced Linear Algebra]]

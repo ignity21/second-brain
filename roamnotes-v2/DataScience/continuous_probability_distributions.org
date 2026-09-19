@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       1438adb1-20fd-43f8-b86f-e4a4e1214a84
+:END:
+#+title: Continuous Probability Distributions
+
+* [[id:6ec38f0c-dde2-44f7-94b2-b5a7d4096a06][Normal Distribution]]
+* [[id:6b3723fd-b1c2-432e-9176-feaec1d9b8b5][Exponential Distribution]]
+* [[id:9a78a66a-28e8-4a94-8297-7ef16b48f72d][Log-normal Distribution]]
+* [[id:408f940c-5870-4c00-b54c-6d4aea4809d6][Uniform Distribution]]
+* [[id:41fc96ca-d4b5-44fc-ad46-c8783a7253ff][Uniform Distribution (C)]]
+* [[id:1bf89458-2878-4fbf-a0b9-9a59a8fdc486][T-Distribution]]
+* [[id:e671c7ff-b03d-47a3-aa8a-91277e0e80c3][Z-Distribution]]
+* [[id:ac892808-1336-492f-9992-63cb00ea646a][Chi-squared Distribution]]

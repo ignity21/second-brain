@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       79c981e4-0aa7-4c49-baf4-e8715ad4bd6e
+:END:
+#+title: ML Foundations
+
+* [[id:100afd1e-d695-4a89-b583-12bbad2e1733][Machine Learning]]
+* [[id:1fbfa73e-c1a7-42c6-ad6a-03bd91b75c80][ML Algos]]
+* [[id:79bd8eb3-154b-470d-bbcb-ff6ae9c507db][Supervised Learning]]
+* [[id:8b7a21ee-1fc3-4566-9cd9-1865de8b6e46][Unsupervised Learning]]
+* [[id:01741dd5-e612-4c76-832c-3760642b34ea][Reinforcement Learning]]
+* [[id:18561ec5-17e3-4b2f-bb7d-66cd033a203b][Recommender System]]
+* [[id:c333e044-3b51-4604-b7f9-0295cd412189][Bias/Variance]]
+* [[id:4a034a17-5a7f-4003-a2fb-4c833e76cc98][Overfitting/Underfitting]]
+* [[id:1c60f0fb-302d-4a1c-b95e-a89d533afbe7][Learning Curve]]
+* [[id:c9015b85-170d-45ae-b514-496351e5a923][ML Data Sources]]

@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       bc5d7dc4-6658-4b4a-9e4b-2b5e338bef95
+:END:
+#+title: Data Analysis and Visualization
+
+* [[id:0669cf34-1246-433d-a39b-fa4858531068][Data Analysis Workflow]]
+* [[id:7f5b0fab-f94b-4fc1-b0c0-5ba4e971401d][Data Quality and Constraints]]
+* [[id:dba49314-c6f2-4c41-bef5-b4cb842ec625][Data Manipulation]]
+* [[id:502b0636-52aa-457b-b028-9489a758ce36][Data Visualization and Reporting]]

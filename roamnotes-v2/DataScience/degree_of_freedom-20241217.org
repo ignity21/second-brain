@@ -1,0 +1,29 @@
+:PROPERTIES:
+:ID:       80cef9fb-e3b0-4903-85a9-ca96efd96428
+:END:
+#+title: Degrees of Freedom
+#+filetags: :Statistics:
+
+* Concept
+- Dataset has 5 independent observations
+- Four of the values are 2, 6, 8, and 5
+- The sample mean is 5
+- The last value is no longer independent, it must be 4
+
+- Even though all five observations in the sample were independent,
+  because we know an additional fact about the sample.
+  - It has a mean of 5 -> we only have 4 degrees of freedom
+
+* Degrees of Freedom
+- Example1: You have to choose n numbers from all natural numbers.($DF=n$)
+- Example2: You have n numbers that must sum to 10. ($DF=n-1$)
+- Example3:
+  [[file:../assets/Statistics/DegreesOfFreedom.png]]
+  - $DF=4$
+
+- Related to estimated population sd
+  - $x_1+x_2+...+x_n=\bar{x}\cdot{n}$ (to get $\bar{x}\cdot{n}$ -> $DF=n-1$)
+  - Only $n-1$ values are independent *after* we know the mean.
+
+* Bessel's correction
+- $\hat\sigma=\sqrt\frac{\sum_{i=1}^n(x_i-\bar{x})}{n-1}$

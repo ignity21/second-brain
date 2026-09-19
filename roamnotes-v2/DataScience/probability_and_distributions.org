@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       0cf739b5-1325-40dd-97c6-98c186a8fd02
+:END:
+#+title: Probability and Distributions
+
+* [[id:896be7f3-0067-41e1-ae5b-1985b2c40849][Probability Foundations]]
+* [[id:1438adb1-20fd-43f8-b86f-e4a4e1214a84][Continuous Probability Distributions]]

@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       896be7f3-0067-41e1-ae5b-1985b2c40849
+:END:
+#+title: Probability Foundations
+
+* [[id:0cd40c78-f1e1-4408-962c-f54770bf0606][Probability]]
+* [[id:5c108829-17e1-4980-9268-6e3eb555b857][Discrete Distributions]]
+* [[id:9c332f14-b4f7-4bd5-bd8a-2fdebcdae27c][Continuous Distributions]]
+* [[id:32b3ad6c-b0e1-4f27-a1bf-f7e08b509f2d][Generating Samples]]
+* [[id:85ef2d1a-c912-46c7-a4b1-3af274c4fd4c][Poisson Process]]
+* [[id:0a97c486-67fb-40a4-b1ff-e1229a387064][Binomial Distribution]]
+* [[id:5233b01c-750c-481c-a853-b61b48eac54c][Poisson Distribution]]

@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       09f5ad2c-aece-46a3-b75a-b29bd12d2e30
+:END:
+#+title: Advanced Optimization
+
+* [[id:19d770b1-8772-4e7f-b068-ab083ad03baa][Conjugate Gradient]]
+* [[id:7935b98b-7aab-49bf-b118-c342c17b04a4][BFGS]]
+* [[id:7bae157d-785e-40be-8a74-e8784dc4bd03][L-BFGS]]

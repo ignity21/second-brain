@@ -1,0 +1,62 @@
+:PROPERTIES:
+:ID:       61297403-6903-4513-90c7-2b5fc0b49e11
+:END:
+#+title: Hypothesis Testing
+#+filetags: :Python:DataScience:Math:Statistics:
+
+* Steps
+1. [[Define Hypothesis][Define null(H0) and alternative(H1) hypothesis]]
+2. [[Choose Test][Choose the appropriate statistical test]]
+3. Calculate the p-value
+4. Determine the statistical significance -- p value is then compared against the significance level.
+
+* Concepts
+** [[id:fd7b8935-0094-403b-ac49-a61c8df0a733][Confidence Intervals]]
+** [[id:4946fa5a-e743-4270-bee9-82e029890d7c][P-Values]]
+** Significance Level \(\alpha\)
+The significance level of a hypothesis test is the threshold point of "beyond a reasonable doubt"
+- Cutoff point between a small p-value and a large one
+- Should be set prior to conducting the hypothesis test
+- Common values of \(\alpha\) are 0.2, 0.1, *0.05* and 0.01
+- Common to choose CI level of \(1-\alpha\)
+
+** Critical Value
+- z-score of the \(\alpha\) level
+
+* Define Hypothesis
+<<Define Hypothesis>>
+- $H_0$ (Null Hypothesis): $\mu_{1}\approx\mu_{2}$ (no significant difference)
+  - $\mu_{2}$ is not in critical region
+
+- $H_a$ (Alternative Hypothesis), or $H_{1}$
+  - $\mu_{2}$ is in critical region
+  - $\mu_{1}\not\approx\mu_{2}$
+  - $\mu_{1}\lt\mu_{2}$  $\mu_2$ is in the one-tailed right critical region
+  - $\mu_{1}\gt\mu_{2}$ one-tailed left critical region
+  - $\mu_{1}\neq\mu_{2}$ two-tailed
+
+* Choose the Appropriate Test (2 Groups)
+<<Choose Test>>
+[[file:../assets/Statistics/InferentialStats_1.png]]
+
+- Z-Test: compare two groups/categories of numeric variables with large sample size
+- T-Test: compare two groups/categories of numeric variables with small sample size
+- ANOVA test: compare the difference between two or more groups/categories of numeric variables
+- Chi-Squared test: examine the relationship between two categorical variables
+- Correlation test: examine the relationship between two numeric variables
+
+** Example
+- $H_0$: Most dogs have four legs. (Most = more than 50%)
+- $H_A$: Most dogs have less than four legs.(one-tailed Test)
+  - Sample: 10 dogs, all have four legs. (fail to reject $H_0$)
+  - Sample: 10 dogs, 6 dogs have three legs. (reject $H_0$)
+
+** Statistical Decision Errors
+|                  | actual \(H_{0}\)             | actual \(H_{A}\)              |
+| chosen \(H_{0}\) | Correct                      | False negative(Type II Error) |
+| chosen \(H_{A}\) | False positive(Type I Error) | Correct                       |
+
+* Tests
+** [[id:3c158478-8d52-4fa3-9262-f0267d6c48c8][Z-Test]]
+** [[id:7c802e9e-8fc0-41fd-8078-1e09ee72378f][T-Test]]
+** [[id:802be368-002c-4591-b6a9-3f14c71f0467][ANOVA]]

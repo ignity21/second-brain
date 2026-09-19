@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       4476c146-9655-4c5e-9fa9-f9528beb9056
+:END:
+#+title: Neighbor-based Models
+
+* [[id:4dec577e-c1d9-4b01-9a95-63e3413b42a9][K-Nearest Neighbors]]
+* [[id:4e603b85-7e9e-47ca-b3f4-b7747cd6019a][K-Neighbors Regression]]

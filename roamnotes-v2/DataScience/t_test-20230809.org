@@ -1,0 +1,108 @@
+:PROPERTIES:
+:ID:       7c802e9e-8fc0-41fd-8078-1e09ee72378f
+:END:
+#+title: T-Test
+#+filetags: :Statistics:Math:
+
+* Overview
+- t statistic follows a [[id:1bf89458-2878-4fbf-a0b9-9a59a8fdc486][T-Distribution]]
+
+* Types
+- One sample t-test :: test the mean of one group against a constant value.
+- Two sample t-test :: test the difference of means between two groups.
+- Paired sample t-test :: test the difference of means between two measurements of the same subject.
+
+* One-sample t-test
+Since we don't know the population standard deviation $\sigma$, we use sample standard deviation $\hat\sigma$ to calculate $SE$. (use bootstrapping)
+- It's more prone to error.
+- It's more spread out and thicker in the tails than a normal distribution.
+[[file:../assets/Statistics/t-Distribution.png]]
+$$t=\frac{\hat\mu-\mu_0}{\hat\sigma/\sqrt{n}}$$
+- $\mu_0$ is some specified value.
+- $H_0$: $\mu = \mu_0$
+- $H_A$: $\mu < \mu_0$, $\mu > \mu_0$, $\mu \neq \mu_0$
+  - Cohen's d: $d=\frac{\hat\mu-\mu_0}{\hat\sigma}$
+
+* Two Sample t-test
+- \(H_{0}\): \(\mu_{1} - \mu_{2} = 0\)
+- \(H_{A}\):
+  - two-tailed: \(\mu_{1} - \mu_{2} \ne 0\)
+  - left-tailed: \(\mu_{1} - \mu_{2} < 0\)
+  - right-tailed: \(\mu_{1} - \mu_{2} > 0\)
+- \(t=\frac{\text{diff in sample stats}-\text{diff in pop stats}}{\text{standard error}}\)
+  - \(t=\frac{(\bar{x}_{1} - \bar{x}_{2}) - (\mu_{1} - \mu_{2})}{SE(\bar{x}_{1} - \bar{x}_{2})}\)
+  - Assume \(H_{0}\) is True: \(t=\frac{(\bar{x}_{1} - \bar{x}_{2})}{SE(\bar{x}_{1} - \bar{x}_{2})}\)
+** Calculating SE
+  - Bootstrapping is a good option
+  - Easier way to use an *approximation*: \(SE(\bar{x}_{1} - \bar{x}_{2})\approx\sqrt{\frac{s^{2}_{1}}{n_{1}}+\frac{s^{2}_{2}}{n_{2}}}\)
+    - \(s\) is the std of the variable
+    - \(n\) is the sample size (num of observations/rows in sample)
+
+** T Statistic
+\[t=\frac{(\bar{x}_{1} - \bar{x}_{2})}{\sqrt{\frac{s^{2}_{1}}{n_{1}}+\frac{s^{2}_{2}}{n_{2}}}}\]
+
+** Degree of Freedom
+\[DF=n_{1} + n_{2} - 2\]
+- because we know two sample statistics, the means for each group.
+
+** Calculating P-values
+- left-tailed: ~p_value = t.cdf(t_stat, df)~
+- right-tailed: ~p_value = 1 - t.cdf(t_stat, df)~
+- two-tailed: use critical value
+
+* Paired Sample t-test
+- Dependent t-test
+  - Compares the means of two measurements taken from the same individual, object, or related units
+  - e.g. pre-, post-tests are given to the same random sample of students
+- \(\mu_{diff}=\mu_{1}-\mu_{2}\)
+- \(H_{0}\): \(\mu_{diff}=0\)
+- \(H_{A}\): \(\mu_{diff}<0\) left-tailed
+- \(t=\frac{\bar{x}_{diff}-\mu_{diff}}{\sqrt{\frac{s^{2}_{diff}}{n_{diff}}}}\)
+  - \(df=n_{diff} - 1\): only have one statistic
+
+* Examples
+** Two Sample Right-tailed
+- ~converted_comp~ is a numerical variable
+- ~age_first_code_cut~ is a categorical variable with levels ("child" and "adult")
+- Compare sample across groups ~age_first_code_cut~
+- Question: Are users in "child" group compensated higher than "adult"
+- \(H_{0}\): The mean compensation is the same \(\mu_{child}=\mu_{adult}\)
+  - \(\mu_{child}-\mu_{adult}=0\)
+- \(H_{A}\): The mean compensation in "child" group is greater than in "adult" \(\mu_{child}>\mu_{adult}\)
+  - \(\mu_{child}-\mu_{adult}>0\)
+- Test statistic is \(\mu_{child} - \mu_{adult}\)
+#+begin_src python
+# Two sample means 'child' and 'adult'
+xbar = stack_overflow.groupby('age_first_code_cut')['converted_comp'].mean()
+s = stack_overflow.groupby('age_first_code_cut')['converted_comp'].std()
+n = stack_overflow.groupby('age_first_code_cut')['converted_comp'].count()
+
+t_numerator = xbar.loc['child'] - xbar.loc['adult']
+t_denominator = np.sqrt(s.loc['child']**2/n.loc['child'] + s.loc['adult']**2/n.loc['adult'])
+t_stat = t_numerator / t_denominator
+
+degrees_of_freedom = n.loc['child'] + n.loc['adult'] - 2
+
+p_value = 1 - stats.t.cdf(t_stat, df=degrees_of_freedom)
+# if p_value < 0.05, we reject the null hypothesis
+#+end_src
+
+** Paired Sample Left-tailed
+#+begin_src python
+# paired t-test
+sample_data['diff'] = sample_data['2024'] - sample_data['2021']
+xbar_diff = sample_data['diff'].mean()
+n_diff = len(sample_data['diff'])
+s_diff = sample_data['diff'].std(df=1)
+t_stat = (xbar_diff - 0) / np.sqrt(s_diff**2/n_diff)
+degrees_of_freedom = n_diff - 1
+
+# left-tailed
+p_value = t.cdf(t_stat, df=degrees_of_freedom)
+#+end_src
+
+** [[id:ffde831f-5883-4dd5-b406-caa135d0e53b][pingouin]]
+* Compare with [[id:3c158478-8d52-4fa3-9262-f0267d6c48c8][Z-Test]]
+- z-statistic: needed when using one sample statistic to estimate a population parameter
+- t-statistic: needed when using multiple sample statistics to estimate a population parameter
+  - e.g. use a sample standard deviation to estimate a SE

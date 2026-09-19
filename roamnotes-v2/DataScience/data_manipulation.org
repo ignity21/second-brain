@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       dba49314-c6f2-4c41-bef5-b4cb842ec625
+:END:
+#+title: Data Manipulation
+
+* [[id:5ff02ad6-b7d0-4a8b-9543-b96188c68280][Manipulating Numerical Data]]
+* [[id:c73b007a-f41e-4f9e-b2b9-41be79452544][Manipulating Categorical Data]]
+* [[id:2d34ce40-09a1-48ab-978e-3779d9114f78][Date and Time]]

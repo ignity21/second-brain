@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       e7884e68-66ee-474c-9d48-2c165c792b52
+:END:
+#+title: Model Evaluation
+
+* [[id:91a5b0fd-48cd-47aa-8fff-cb9cb0fd520c][Classification Metrics]]
+* [[id:8038235d-fdb1-44b6-b2b9-76c38e740f0e][Regression Metrics]]
+* [[id:21f0b9c3-bda5-47cd-82e2-a885400f71c1][Precision and Recall]]
+* [[id:04e7b7cf-d5d3-4e31-b06b-ba66204c56d8][R-squared]]
+* [[id:5461b659-bc1a-4594-b7fb-8388345187d3][Cross-validation]]
+* [[id:547d873f-e138-4c01-a2ee-af59848e2912][Cross Field Validation]]

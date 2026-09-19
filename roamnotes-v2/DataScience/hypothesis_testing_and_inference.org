@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       b4a23552-0a7e-43a8-92c4-93726f08cd85
+:END:
+#+title: Hypothesis Testing and Inference
+
+* [[id:bc202bb0-0793-4e92-8316-1186e5525c97][Inferential Statistics]]
+* [[id:61297403-6903-4513-90c7-2b5fc0b49e11][Hypothesis Testing]]
+* [[id:7c802e9e-8fc0-41fd-8078-1e09ee72378f][T-Test]]
+* [[id:3c158478-8d52-4fa3-9262-f0267d6c48c8][Z-Test]]
+* [[id:802be368-002c-4591-b6a9-3f14c71f0467][ANOVA]]
+* [[id:4946fa5a-e743-4270-bee9-82e029890d7c][P-Values]]
+* [[id:fd7b8935-0094-403b-ac49-a61c8df0a733][Confidence Intervals]]
+* [[id:80cef9fb-e3b0-4903-85a9-ca96efd96428][Degrees of Freedom]]
+* [[id:889cc76c-cbfa-4f3a-b4c7-7ba4acaaf8e6][Statistic Experiments]]

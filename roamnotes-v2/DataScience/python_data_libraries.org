@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       de405245-1a6e-4385-be5b-cd645861a131
+:END:
+#+title: Python Data Libraries
+
+* [[id:992ab6a0-4710-45b4-a211-1be0e1207703][Core Data Libraries]]
+* [[id:10094858-f435-4c62-8b83-eea1af37f4f1][Statistics and ML Libraries]]

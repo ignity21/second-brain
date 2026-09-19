@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       992ab6a0-4710-45b4-a211-1be0e1207703
+:END:
+#+title: Core Data Libraries
+
+* [[id:595c863f-d7c9-41b0-ade8-9416418b2c31][Python DA Modules]]
+* [[id:99384a8d-1cd7-45e6-9913-01a96e895630][NumPy]]
+* [[id:05ef9aaa-7fa2-45b4-9ed9-d8d01c8abff2][Pandas]]
+* [[id:6aed921f-bc66-49aa-b021-a2b9435f1a15][Pandas Basics]]
+* [[id:0ee22c36-ad34-4f8e-bfdd-c7e902657f1c][Pandas Advanced]]
+* [[id:a707e96d-102d-4549-8abe-ffeb9a8c3e9e][Pandas Datetime]]
+* [[id:c3f9e9e6-b7ed-45f0-86a5-35c8e84d96f9][Pandas Timeseries]]

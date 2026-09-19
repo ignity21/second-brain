@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       5c407aed-c32d-4901-9f6b-bb80236306b2
+:END:
+#+title: AI Tools and Resources
+
+* [[id:7cc1ec96-9add-44b4-b28e-30c76ec789c1][AI Tools]]
+* [[id:f072b323-cea7-459f-8ef4-b4508031388b][OpenManus]]

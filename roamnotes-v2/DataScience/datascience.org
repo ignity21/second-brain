@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       e67e7407-3452-41c6-8e0d-7ed4cfae075b
+:END:
+#+title: Data Science
+:ROAM_ALIASES: DataScience
+
+* [[id:793a5e8f-5ee4-4c03-a8f2-7334f36f29eb][Statistics]]
+* [[id:0cf739b5-1325-40dd-97c6-98c186a8fd02][Probability & Distributions]]
+* [[id:a77e95fe-83b5-4ae1-a091-adcc524317db][Linear Algebra]]
+* [[id:2337a23b-ebbd-4902-989e-45a368e65439][Machine Learning]]
+* [[id:ad4241b3-e7ef-46c8-8da3-5b9031d68d38][ML Algorithms]]
+* [[id:e629cd3b-6558-4c72-aa8c-f8d7ea9ebd07][Optimization & Neural Networks]]
+* [[id:bc5d7dc4-6658-4b4a-9e4b-2b5e338bef95][Data Analysis]]
+* [[id:de405245-1a6e-4385-be5b-cd645861a131][Python Libraries]]

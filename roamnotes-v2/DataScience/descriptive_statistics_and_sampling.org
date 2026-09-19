@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       255180a2-d3a8-4db9-b7ac-8b0d56e4886b
+:END:
+#+title: Descriptive Statistics and Sampling
+
+* [[id:cf78ad70-6034-4224-80e5-eaf0610ad882][Statistics]]
+* [[id:925a0f11-b567-4e43-a9a7-41006a814c33][Descriptive Statistics]]
+* [[id:69c30551-e3b1-4d83-87a9-784dfe71f189][Types of Data]]
+* [[id:4514ee9e-86ef-4f32-bfc3-151320f23d97][Sampling Distribution]]
+* [[id:193270c8-6738-48fb-b728-8462f10de3c5][Central Limit Theorem]]
+* [[id:2be62d58-9f1c-4c6e-a20e-5722a4e0c4e7][Data Sampling]]
+* [[id:a200c616-3de2-4340-bb77-8bb77ff2980c][Bootstrap Distribution]]
+* [[id:b80406e2-60b3-4607-9dc2-6791405020cc][Correlation]]
+* [[id:881a87d5-754b-4791-b398-3345c88fdcb2][IQR]]
+* [[id:0afb7034-f053-47d7-aea2-8d71eb45c627][Relative Error]]

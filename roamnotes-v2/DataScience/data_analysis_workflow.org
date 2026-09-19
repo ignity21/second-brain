@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       0669cf34-1246-433d-a39b-fa4858531068
+:END:
+#+title: Data Analysis Workflow
+
+* [[id:63c07a9b-2388-455a-8db7-d7cb66f6c6c7][Data Analysis]]
+* [[id:d31a2f5c-51c6-4742-8248-8d3c8904011a][Exploratory Data Analysis]]
+* [[id:16fff215-ce9c-45ca-a5d3-5e509f647732][Data Importing]]
+* [[id:de66c696-5ca1-4fbc-a9b2-097ee7bf4ccd][Data Cleaning]]
+* [[id:d1d65fac-3a72-4095-8a05-17f4fb073475][Data Transforming]]

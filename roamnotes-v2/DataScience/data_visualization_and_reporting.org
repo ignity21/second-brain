@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       502b0636-52aa-457b-b028-9489a758ce36
+:END:
+#+title: Data Visualization and Reporting
+
+* [[id:41c5482c-9098-4b60-a2ff-e3c13bfb4486][Data Visualization]]
+* [[id:6eed31dd-a6eb-41f6-95b5-6125b86b3536][Data Reporting]]
+* [[id:c78f636f-88e8-4cb8-8e28-0dc34bfbaf3a][Matplotlib]]
+* [[id:f86e4126-bb1a-45f1-b9b7-b00c2d98672e][Seaborn]]

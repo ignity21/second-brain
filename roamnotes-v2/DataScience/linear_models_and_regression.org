@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       54000b3b-4c78-4adc-8499-483bfc472da5
+:END:
+#+title: Linear Models and Regression
+
+* [[id:b6f03e6b-8850-4f2d-8d2d-f337029fe1e7][Linear Regression]]
+* [[id:9db494ed-d782-4bfe-b9d2-52c768251490][Logistic Regression]]
+* [[id:10b0fc16-06fe-4725-ac6a-738f6842ce84][Polynomial Regression]]
+* [[id:f6fb8e17-c115-4aba-91ec-894cca2f3106][Ridge Linear Regression]]
+* [[id:a5a11c25-1ea0-4f97-a1c2-ebae8a524c61][Lasso Linear Regression]]
+* [[id:28980177-1875-4360-8ea8-6800da4fe576][Elastic Net]]
+* [[id:7ac9ccb4-374e-4c58-b932-7704b3c86381][Regularized Linear Regression]]
+* [[id:5c390dc6-4c36-4f33-8a41-0b8dba9cee79][Regularized Logistic Regression]]
+* [[id:1800f8d6-afdd-48f6-a680-fd8460bd1f2e][Normal Equation]]
+* [[id:6503d65e-a254-4599-8985-bad245a553a8][Regularization]]

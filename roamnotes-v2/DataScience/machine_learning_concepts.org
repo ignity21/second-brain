@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       2337a23b-ebbd-4902-989e-45a368e65439
+:END:
+#+title: Machine Learning Concepts
+
+* [[id:79c981e4-0aa7-4c49-baf4-e8715ad4bd6e][ML Foundations]]
+* [[id:6def0fe5-154c-4fe3-abde-eabf8b68cb1a][ML Project and Workflow]]
+* [[id:c3cde13f-2f65-4036-b80e-9f4cd5d8988f][Feature and Model Selection]]
+* [[id:5c407aed-c32d-4901-9f6b-bb80236306b2][AI Tools and Resources]]
