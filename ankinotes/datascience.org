@@ -1,0 +1,79 @@
+#+title: DataScience
+
+* Deck
+  :PROPERTIES:
+  :ANKI_DECK: CS::DataScience
+  :END:
+
+** Bias/Variance diagnosis
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789812762985
+:ANKI_NOTE_HASH: 8dd325201add67f26cfff18c0b2949ce
+:END:
+
+*** Front
+After training a polynomial regression model, J_train is high and J_cv ≈ J_train (both are high). Is this high bias or high variance?
+
+*** Back
+High bias (underfitting). High bias shows up as J_train itself being high, with J_cv close to J_train; high variance instead shows a low J_train but a J_cv much larger than J_train.
+
+Source [[id:c333e044-3b51-4604-b7f9-0295cd412189][Bias/Variance]]
+
+** Raising the classification threshold's effect on Precision/Recall
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789812762988
+:ANKI_NOTE_HASH: f4de9c97ed473ef2e990fa48e8372a15
+:END:
+
+*** Front
+In a logistic regression rare-disease classifier, raising the prediction threshold from 0.5 to 0.7 — how do precision and recall change, and why?
+
+*** Back
+Precision goes up, recall goes down. A higher threshold means the model only predicts positive when very confident (predicted probability ≥ 0.7), so false positives drop (precision ↑), but more actual positive cases that fall below the confidence bar get missed, so false negatives rise (recall ↓).
+
+Source [[id:21f0b9c3-bda5-47cd-82e2-a885400f71c1][Precision and Recall]]
+
+** F1 score formula
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Cloze
+:ANKI_NOTE_ID: 1789812762992
+:ANKI_NOTE_HASH: 3a1465537c16fec6c8e69f311caed0c3
+:END:
+
+*** Text
+The F1 score is the {{c1::harmonic mean}} of precision (P) and recall (R), computed as {{c2::F1 = 2PR/(P+R)}}, used to trade off the two automatically instead of picking a threshold by hand.
+
+*** Back
+Source [[id:21f0b9c3-bda5-47cd-82e2-a885400f71c1][Precision and Recall]]
+
+** Shrinkage term in regularized gradient descent
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789812762994
+:ANKI_NOTE_HASH: e5e2364cc6fd0a0fcd6d835e7ac792a4
+:END:
+
+*** Front
+The gradient descent update for regularized linear regression can be rewritten as $\theta_j=\theta_j(1-\alpha\lambda)-\frac{\alpha}{n}\sum_{i=1}^n(h_\theta(x^{(i)})-y^{(i)})x_j^{(i)}$. How does this form make regularization's "penalize large coefficients" effect intuitive?
+
+*** Back
+Before applying the usual gradient descent update, $\theta_j$ is first multiplied by a shrinkage factor (1-αλ), slightly less than 1, shrinking the parameter a bit on every step; the larger λ is, the stronger the shrinkage, keeping coefficients from growing too large.
+
+Source [[id:bffd4dcf-0fb1-4480-9338-956d156b97b9][Gradient Descent]]
+
+** Choosing between GridSearchCV and RandomizedSearchCV
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789812762996
+:ANKI_NOTE_HASH: e1a4cf99b211fb7e2b7ae1ca9f2b23c3
+:END:
+
+*** Front
+When there are many hyperparameters and each has many candidate values, why is RandomizedSearchCV usually preferred over GridSearchCV?
+
+*** Back
+GridSearchCV exhaustively fits every combination, so the number of fits grows fast with the number of combinations; RandomizedSearchCV instead samples a fixed number of random combinations from the space, reaching a near-optimal result with far fewer fits, making it a better fit for high-dimensional searches with many candidate values.
+
+Source [[id:5461b659-bc1a-4594-b7fb-8388345187d3][Cross-validation]]
