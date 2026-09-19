@@ -8,7 +8,7 @@
 - 在用户请求范围内完成编辑、必要的索引和链接更新、相关验证，并修复本次改动引入的问题，无需在每一步重复确认。发现无关历史问题时说明即可。
 - 保留用户已有改动。`pages/`、`logseq/` 是 Logseq 专用目录，不改动。
 - 多轮或大型改动前，在 `.agents/tasks/` 建立任务文件（Markdown 检查清单 + 状态），进度记录写入该文件；不使用工具私有的 todo 存储（如 `.pi/`）。
-- 按需阅读：迁移旧笔记时读 [迁移说明](docs/note-migration.md)；创建或修改 Anki 卡片时读 [Anki 规则](docs/anki.md)。
+- 仓库级 skills 放 `.agents/skills/<name>/SKILL.md`。迁移旧笔记时用 `note-migration` skill；创建或修改 Anki 卡片时用 `anki-cards` skill。
 
 ## org-roam 文件与节点
 
@@ -17,7 +17,7 @@
 - 笔记间引用使用 `[[id:...][Title]]`，不用文件链接。笔记创建后，将对应的纯文本占位替换为 ID 链接。
 - 笔记文件的 `:ID:` 使用 UUID v4；新 ID 用 `uuid.uuid4()` 随机生成，不使用人为可读 ID。节点语义未变时，移动、改标题或调整层级都保留原 ID。遇到旧 ID 不合规范时，不在无关编辑中直接重建身份。
 - 标题尽量用英语；`#+title` 带足领域上下文，避免全库出现含义不清的通用标题或不必要的重名。索引链接描述可简短，例如节点标题为 `Emacs Lisp Core Language`，链接描述为 `Core Language`。
-- 中文别名写入文件的 `:PROPERTIES:` 抽屉中的 `:ROAM_ALIASES:`。
+- 中文别名写入文件的 `:PROPERTIES:` 抽屉中的 `:ROAM_ALIASES:`。不要为不同笔记设置相同的 `:ROAM_ALIASES:`；真正跨语言、跨领域的通用主题单独建一个主题节点，由具体笔记链接到它。
 
 ## 主索引树
 

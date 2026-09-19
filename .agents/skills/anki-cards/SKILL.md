@@ -1,3 +1,8 @@
+---
+name: anki-cards
+description: Create or modify Anki cards in ankinotes/*.org. Use when the user asks to make or add Anki cards, distill cards from org-roam notes, or edit existing Anki notes. These files are Anki notes and do not follow the org-roam index/TOC conventions.
+---
+
 # Anki 卡片
 
 创建或修改 `ankinotes/*.org` 时使用；这些文件默认是 Anki 笔记，不套用 org-roam 主索引和 TOC 结构。

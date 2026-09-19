@@ -1,6 +1,11 @@
+---
+name: note-migration
+description: Migrate old org-roam notes from the legacy library (roamnotes/) into roamnotes-v2/. Use when the user asks to migrate, port, or move old notes or a whole category (e.g. "迁移 C++ 笔记", "迁移下一个笔记", "迁移 DataScience"), or to clean up already-migrated source notes, images, or shared assets.
+---
+
 # 旧笔记迁移
 
-仅在将 `roamnotes/` 的内容迁往 `roamnotes-v2/` 时使用；笔记组织遵循根目录 [AGENTS.md](../AGENTS.md)。
+仅在将 `roamnotes/` 的内容迁往 `roamnotes-v2/` 时使用。笔记的一般组织规则遵循根目录 [AGENTS.md](../../../AGENTS.md)（索引树、ID、资源、验证约定），本 skill 只覆盖迁移特有的步骤。
 
 ## 目标与映射
 
