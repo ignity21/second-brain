@@ -52,16 +52,16 @@ Source [[id:21f0b9c3-bda5-47cd-82e2-a885400f71c1][Precision and Recall]]
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1789812762994
-:ANKI_NOTE_HASH: e5e2364cc6fd0a0fcd6d835e7ac792a4
+:ANKI_NOTE_HASH: e439ac824a039cd891ab218c6ccfaf31
 :END:
 
 *** Front
-The gradient descent update for regularized linear regression can be rewritten as $\theta_j=\theta_j(1-\alpha\lambda)-\frac{\alpha}{n}\sum_{i=1}^n(h_\theta(x^{(i)})-y^{(i)})x_j^{(i)}$. How does this form make regularization's "penalize large coefficients" effect intuitive?
+For j ≥ 1, the gradient descent update for regularized linear regression can be rewritten as $\theta_j \leftarrow (1 - \alpha\lambda)\theta_j - \frac{\alpha}{n}\sum_{i=1}^n \bigl(h_\theta(x^{(i)}) - y^{(i)}\bigr)x_j^{(i)}$. How does this form make regularization's “penalize large coefficients” effect intuitive?
 
 *** Back
-Before applying the usual gradient descent update, $\theta_j$ is first multiplied by a shrinkage factor (1-αλ), slightly less than 1, shrinking the parameter a bit on every step; the larger λ is, the stronger the shrinkage, keeping coefficients from growing too large.
+Before the usual gradient update, $\theta_j$ is multiplied by the shrinkage factor $(1 - \alpha\lambda)$, which is slightly less than 1. This pulls $\theta_j$ a little toward zero at every step; a larger $\lambda$ produces stronger shrinkage and therefore resists large coefficients.
 
-Source [[id:bffd4dcf-0fb1-4480-9338-956d156b97b9][Gradient Descent]]
+Source: Gradient Descent
 
 ** Choosing between GridSearchCV and RandomizedSearchCV
 :PROPERTIES:

@@ -9,26 +9,26 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740539763658
-:ANKI_NOTE_HASH: 5e4ab61cfbc82ce6a302f710ef4f81ba
+:ANKI_NOTE_HASH: cfc6002d7d305dc69a54d2f88bdcb04c
 :END:
 *** Front
 在 Emacs 中，如何交换 point 和 mark 的位置？
 
 *** Back
-按 ~C-x C-x~，调用 ~exchange-point-and-mark~。
+按 ~C-x C-x~ ，调用 ~exchange-point-and-mark~ 。
 来源：[[id:e19ead80-8836-42bb-a9cb-c9f538ef7d1a][Emacs Tips]]。
 
 ** M-h
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740539764688
-:ANKI_NOTE_HASH: d7e32b57e2a35301f60828409e64a493
+:ANKI_NOTE_HASH: a69c0044d915925527a2ec7cbc37bfd4
 :END:
 *** Front
 在 Emacs 中，如何选中当前段落？
 
 *** Back
-按 ~M-h~，调用 ~mark-paragraph~。
+按 ~M-h~ ，调用 ~mark-paragraph~ 。
 
 ** ~save-excursion~
 :PROPERTIES:
@@ -47,50 +47,50 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740540768688
-:ANKI_NOTE_HASH: 83591a0c9de84d84f390347ca8d39767
+:ANKI_NOTE_HASH: 7c23d60453f64dbe15f0b9abe63f07f9
 :END:
 *** Front
 在 Emacs 中，如何跳转到光标处符号的定义？
 
 *** Back
-按 ~M-.~，调用 ~xref-find-definitions~；按 ~M-,~ 返回。
+按 ~M-.~ ，调用 ~xref-find-definitions~ ；按 ~M-,~ 返回 。
 
 ** C-x h
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740540940353
-:ANKI_NOTE_HASH: 95dc0f5ac1ab534eda1cab2f51f78935
+:ANKI_NOTE_HASH: b642e54c2dbe3bca210da54c4ab30f2a
 :END:
 *** Front
 在 Emacs 中，如何选中整个 buffer？
 
 *** Back
-按 ~C-x h~，调用 ~mark-whole-buffer~。
+按 ~C-x h~ ，调用 ~mark-whole-buffer~ 。
 
 ** Narrowing
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740618021304
-:ANKI_NOTE_HASH: f660f041830204b2528f1ae9d0cb655f
+:ANKI_NOTE_HASH: 649969fffd55ebe640d2a4d0f526349c
 :END:
 *** Front
 在 Emacs 中，操作完缩窄的 buffer 后，如何恢复显示全部内容？
 
 *** Back
-按 ~C-x n w~，调用 ~widen~。
+按 ~C-x n w~ ，调用 ~widen~ 。
 来源：[[id:fd832357-7836-485f-90ad-f7360b25fcce][ELisp Buffer Functions]]。
 
 ** M-y
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740703084489
-:ANKI_NOTE_HASH: 677a45d70c45b536156008e521867976
+:ANKI_NOTE_HASH: a08094273539a13958bcabc5fe24a25e
 :END:
 *** Front
 在 Emacs 中，粘贴后如何换成 kill ring 中的另一项？
 
 *** Back
-紧接着按 ~M-y~，循环替换刚粘贴的内容。
+紧接着按 ~M-y~ ，循环替换刚粘贴的内容。
 ** indent region
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
@@ -102,84 +102,84 @@
 在 Emacs 中，如何调整选中区域的缩进？
 
 *** Back
-按 ~C-x TAB~，调用 ~indent-rigidly~。
+按 ~C-x TAB~ ，调用 ~indent-rigidly~ 。
 
 ** embark
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1741060392230
-:ANKI_NOTE_HASH: c328057293db2cee5128fe309ba2086c
+:ANKI_NOTE_HASH: 5aee2266a87efc98d1dba4eaf6b6c742
 :END:
 *** Front
 在当前 Doom 个人配置中，如何打开 Embark 的候选操作菜单？
 
 *** Back
-按 ~C-c a ;~，调用 ~embark-act~。
+按 ~C-c a ;~ ，调用 ~embark-act~ 。
 来源：[[id:f0e95f32-7d9c-4faa-ad96-6e6057d5f52c][Vertico]]。
 
 ** vertico groups
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1741060392234
-:ANKI_NOTE_HASH: 7b52b1f9e49859709daabc4b5afba22b
+:ANKI_NOTE_HASH: 577eb9973e2b7c793488976c348e451f
 :END:
 *** Front
 在当前 Doom 个人配置的 Vertico 候选列表中，如何切换到下一组？
 
 *** Back
-按 ~C-M-n~；上一组用 ~C-M-p~。
+按 ~C-M-n~ ；上一组用 ~C-M-p~ 。
 来源：[[id:f0e95f32-7d9c-4faa-ad96-6e6057d5f52c][Vertico]]。
 
 ** ~let~ vs ~let*~
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1789285640698
-:ANKI_NOTE_HASH: 97d0891421ec3e97fc3515218fe0c2e3
+:ANKI_NOTE_HASH: d2c3225f72451841169a2e9bfbe1835e
 :END:
 *** Front
-在 Emacs Lisp 中，后一个局部变量的初始值需要引用前一个刚绑定的变量，应使用 ~let~ 还是 ~let*~？
+在 Emacs Lisp 中，后一个局部变量的初始值需要引用前一个刚绑定的变量，应使用 ~let~ 还是 ~let*~ ？
 
 *** Back
-用 ~let*~，因为它按顺序建立绑定；~let~ 的初始值在这些新绑定生效前求值。
+用 ~let*~ ，因为它按顺序建立绑定； ~let~ 的初始值在这些新绑定生效前求值。
 来源：[[id:f61b8e2e-f3e3-4954-b9ef-b2a8f72ca68c][ELisp Special Forms]]。
 
 ** Keyword arguments
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1789285640701
-:ANKI_NOTE_HASH: 90d8f049cac1863e55d34e9e9965e565
+:ANKI_NOTE_HASH: feeaf4c628d7611d41be2bb542b88e9a
 :END:
 *** Front
-在 Emacs Lisp 中，想用 ~:name~ 这样的关键字参数定义函数，应使用 ~defun~ 还是 ~cl-defun~？
+在 Emacs Lisp 中，想用 ~:name~ 这样的关键字参数定义函数，应使用 ~defun~ 还是 ~cl-defun~ ？
 
 *** Back
-用 ~cl-lib~ 的 ~cl-defun~ 和 ~&key~；普通 ~defun~ 不支持 ~&key~。
+用 ~cl-lib~ 的 ~cl-defun~ 和 ~&key~ ；普通 ~defun~ 不支持 ~&key~ 。
 来源：[[id:ec44d0cc-b1d2-4de0-8658-aea41bdd6156][ELisp Functions]]。
 
 ** Unquote splicing
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1789285640703
-:ANKI_NOTE_HASH: afeb13c2d013e8f9acf3b6184c2594d9
+:ANKI_NOTE_HASH: fb350bcb7954c1b46f511bd061252c0e
 :END:
 *** Front
 在 Emacs Lisp 的反引号列表中，如何把 ~(+ 3 4)~ 的结果作为一个元素插入？若结果本身是列表，如何展开为多个元素？
 
 *** Back
-单个元素用 ~,~，如 ~`(1 ,(+ 3 4))~ 得到 ~(1 7)~；展开列表用 ~,@~，如 ~`(1 ,@'(2 3))~ 得到 ~(1 2 3)~。
+单个元素用 ~,~ ，如 ~`(1 ,(+ 3 4))~ 得到 ~(1 7)~ ；展开列表用 ~,@~ ，如 ~`(1 ,@'(2 3))~ 得到 ~(1 2 3)~ 。
 来源：[[id:48e0f197-f367-4a40-89bd-d9f2c4339057][ELisp Evaluation]]。
 
 ** Current buffer
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1789285640706
-:ANKI_NOTE_HASH: 69e6ab268a67028b7fb5c01aff58b902
+:ANKI_NOTE_HASH: 93bf41b931516a5dfbbd1f90be091305
 :END:
 *** Front
 在 Emacs Lisp 中，想在另一个 buffer 内执行一段操作，并在结束后恢复原来的当前 buffer，应使用什么？
 
 *** Back
-用 ~with-current-buffer~。它只临时切换执行体的当前 buffer。
+用 ~with-current-buffer~ 。它只临时切换执行体的当前 buffer。
 来源：[[id:fd832357-7836-485f-90ad-f7360b25fcce][ELisp Buffer Functions]]。
 
 ** Preserve narrowing
@@ -199,11 +199,11 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1789285640712
-:ANKI_NOTE_HASH: 50299a6fba68e5a7b32bfc52599e17a5
+:ANKI_NOTE_HASH: 8b3ea31679075e29747a28e185463030
 :END:
 *** Front
 在 Emacs Lisp 的 ~interactive~ 声明中，哪种代码字母会把数字前缀参数传给函数？
 
 *** Back
-~p~，例如 ~(interactive "p")~。
+~p~ ，例如 ~(interactive "p")~ 。
 来源：[[id:67ee9921-b986-40d1-a2ca-45fce97f4a48][ELisp Interactive Functions]]。
