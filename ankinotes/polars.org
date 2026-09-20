@@ -1,0 +1,320 @@
+* Deck
+:PROPERTIES:
+:ANKI_DECK: CS::Python
+:END:
+
+** Select vs Filter
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789878621189
+:ANKI_NOTE_HASH: 2ded62abe37b155fb16e9beaf5dba9d3
+:ANKI_FAILURE_REASON: Note was not found: 1789878621189
+:END:
+
+*** Front
+In Polars, which operation should you use to keep only rows whose =price= is below 500, and which should you use to produce a DataFrame containing selected or computed columns?
+
+*** Back
+Use =df.filter(pl.col("price") < 500)= to retain matching rows. Use =df.select(...)= to select or compute the output columns.
+
+[[id:190bfd1c-68ae-4f32-baab-cc98490c71e9][Polars]]
+
+** Alias a Computed Column
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789878621193
+:ANKI_NOTE_HASH: 26dc0097e194c3f0414f07b6850e6285
+:ANKI_FAILURE_REASON: Note was not found: 1789878621193
+:END:
+
+*** Front
+How can a =select= expression create a rounded 20%-discounted =price= column named =discounted_price=?
+
+*** Back
+=df.select((pl.col("price") * 0.8).round(0).alias("discounted_price"))=
+
+=alias= gives a computed expression its output-column name.
+
+[[id:190bfd1c-68ae-4f32-baab-cc98490c71e9][Polars]]
+
+** Update or Add Columns
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789878621196
+:ANKI_NOTE_HASH: 2c10b7f7be95edb41df7abe0890279df
+:ANKI_FAILURE_REASON: Note was not found: 1789878621196
+:END:
+
+*** Front
+Which Polars method should you use to add or replace columns from expressions, for example to cast =bedrooms= to =Int16=?
+
+*** Back
+Use =with_columns=:
+
+#+begin_src python
+df.with_columns(pl.col("bedrooms").cast(pl.Int16))
+#+end_src
+
+It returns a DataFrame with the expression results added or replacing same-named columns.
+
+[[id:190bfd1c-68ae-4f32-baab-cc98490c71e9][Polars]]
+
+** Avoid Python UDFs for Simple Expressions
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789878621199
+:ANKI_NOTE_HASH: 5e42d7967abe43c869689dffd2bc4582
+:ANKI_FAILURE_REASON: Note was not found: 1789878621199
+:END:
+
+*** Front
+You need to double every value in a Polars =review= column. Why is =(pl.col("review") * 2)= usually preferable to =map_elements= with a Python function?
+
+*** Back
+The native expression stays in Polars' optimized execution path and is clearer. Reserve =map_elements= for logic that is genuinely easier in Python, requires a third-party Python function, or does not need performance.
+
+[[id:190bfd1c-68ae-4f32-baab-cc98490c71e9][Polars]]
+
+** Concatenate Different Schemas
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789878621202
+:ANKI_NOTE_HASH: d23b9571e20470cef2c7e86dcdff3f87
+:ANKI_FAILURE_REASON: Note was not found: 1789878621202
+:END:
+
+*** Front
+Which =pl.concat= strategy combines DataFrames by rows when their column sets differ?
+
+*** Back
+Use =pl.concat([df1, df2], how="diagonal")=. It combines rows while accommodating differing columns. Use =how="vertical"= when the schemas are the same.
+
+[[id:190bfd1c-68ae-4f32-baab-cc98490c71e9][Polars]]
+
+** Coalesce Join Keys
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789878621205
+:ANKI_NOTE_HASH: 1dffc541b0f983c53ed93a13c54dfe5b
+:ANKI_FAILURE_REASON: Note was not found: 1789878621205
+:END:
+
+*** Front
+After a full Polars join on shared key columns, how can you avoid retaining duplicate left/right key columns?
+
+*** Back
+Pass =coalesce=True= to =join=, for example:
+
+#+begin_src python
+df1.join(df2, on=["key1", "key2"], how="full", coalesce=True)
+#+end_src
+
+[[id:190bfd1c-68ae-4f32-baab-cc98490c71e9][Polars]]
+
+** As-of Join Strategy
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789878621208
+:ANKI_NOTE_HASH: 5a0212b156b094412cd02a0854200613
+:ANKI_FAILURE_REASON: Note was not found: 1789878621208
+:END:
+
+*** Front
+For a time-series =join_asof=, what does the =backward= strategy match for each left-side timestamp?
+
+*** Back
+It matches the latest right-side value at or before the left timestamp; it never matches future data. Sort both inputs on the join key before the join.
+
+[[id:190bfd1c-68ae-4f32-baab-cc98490c71e9][Polars]]
+
+** Lazy Execution Boundary
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789878621210
+:ANKI_NOTE_HASH: 0bec3268eb64df435a5913a5d07b1f2b
+:ANKI_FAILURE_REASON: Note was not found: 1789878621210
+:END:
+
+*** Front
+With =pl.scan_csv("data.csv").select(...)=, which method shows the optimized query plan and which method actually runs it?
+
+*** Back
+=.explain()= displays the optimized plan. =.collect()= executes that optimized lazy query and returns the result.
+
+[[id:190bfd1c-68ae-4f32-baab-cc98490c71e9][Polars]]
+
+** Drop Nulls by Scope
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789878621212
+:ANKI_NOTE_HASH: 41b7555d7d8d68a90081e3288d590923
+:ANKI_FAILURE_REASON: Note was not found: 1789878621212
+:END:
+
+*** Front
+What is the difference between =df.drop_nulls()= and =df.drop_nulls(subset="singles")=?
+
+*** Back
+The first removes rows with a null in any column. The second considers nulls only in the =singles= column.
+
+[[id:497eaecd-8769-498f-8869-50923fef8901][Practical Data Transformation with Polars]]
+
+** Fill Nulls with a Statistic
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789878621214
+:ANKI_NOTE_HASH: 51f7edd0188007f01034f926faa8ea13
+:ANKI_FAILURE_REASON: Note was not found: 1789878621214
+:END:
+
+*** Front
+How can you replace null values in =review= with the mean of the non-null =review= values using Polars?
+
+*** Back
+#+begin_src python
+df.with_columns(pl.col("review").fill_null(pl.col("review").mean()))
+#+end_src
+
+[[id:497eaecd-8769-498f-8869-50923fef8901][Practical Data Transformation with Polars]]
+
+** Deduplicate by Key
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789878621216
+:ANKI_NOTE_HASH: ca72686b7cd8af7c9c7df5a626ba293c
+:ANKI_FAILURE_REASON: Note was not found: 1789878621216
+:END:
+
+*** Front
+How do =df.unique()= and =df.unique(subset=["name", "gender"])= differ?
+
+*** Back
+=df.unique()= keeps one copy of each fully duplicated row. With =subset=, rows are considered duplicates when those specified columns have the same values.
+
+[[id:497eaecd-8769-498f-8869-50923fef8901][Practical Data Transformation with Polars]]
+
+** Count Rows per Group
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789878621218
+:ANKI_NOTE_HASH: 94e7ce75bc6ad04b66de16bac228a91c
+:ANKI_FAILURE_REASON: Note was not found: 1789878621218
+:END:
+
+*** Front
+Inside =df.group_by("type", "bedrooms").agg(...)=, which expression counts the rows in each group?
+
+*** Back
+Use =pl.len()=.
+
+[[id:497eaecd-8769-498f-8869-50923fef8901][Practical Data Transformation with Polars]]
+
+** Pivot and Unpivot
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789878621220
+:ANKI_NOTE_HASH: cbd4ff124042ef7cedeea172930cee04
+:ANKI_FAILURE_REASON: Note was not found: 1789878621220
+:END:
+
+*** Front
+In Polars data reshaping, what do =pivot= and =unpivot= do, and when is each layout commonly useful?
+
+*** Back
+=pivot= converts long data to wide data by expanding category values into columns; wide data suits reports, dashboards, and comparisons. =unpivot= collects columns into category/value rows, producing long data; long data generally suits filtering, grouping, aggregation, visualization, and statistical analysis.
+
+[[id:497eaecd-8769-498f-8869-50923fef8901][Practical Data Transformation with Polars]]
+
+** Pivot Arguments
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789878621223
+:ANKI_NOTE_HASH: a51599a434dbdb96405d074f3a44b3c5
+:ANKI_FAILURE_REASON: Note was not found: 1789878621223
+:END:
+
+*** Front
+Given long-form columns =Month=, =Product=, and =Sales=, how do you pivot so each product becomes a column and each month stays a row?
+
+*** Back
+#+begin_src python
+df.pivot(on="Product", index="Month", values="Sales")
+#+end_src
+
+Use =aggregate_function= too when multiple input rows would map to the same output cell.
+
+[[id:497eaecd-8769-498f-8869-50923fef8901][Practical Data Transformation with Polars]]
+
+** Composite Identifier Caveat
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789878621225
+:ANKI_NOTE_HASH: 73787c883e03f72303f645ba0a3c7140
+:ANKI_FAILURE_REASON: Note was not found: 1789878621225
+:END:
+
+*** Front
+Does =pl.concat_str("business", "location", separator=", ")= automatically create a unique identifier? What must hold for it to be unique?
+
+*** Back
+No. It creates a composite string. The =business=/=location= pair must itself be unique, and the separator must not allow ambiguous combinations that collide.
+
+[[id:497eaecd-8769-498f-8869-50923fef8901][Practical Data Transformation with Polars]]
+
+** Literal String Replacement
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789878621227
+:ANKI_NOTE_HASH: fa49462bbab930a88b982d97ca3246f3
+:ANKI_FAILURE_REASON: Note was not found: 1789878621227
+:END:
+
+*** Front
+Why might =pl.col("location").str.replace("Rd.", "Road")= give an unexpected result, and how do you make it replace the literal text =Rd.= ?
+
+*** Back
+=str.replace= treats its pattern as a regular expression by default, where =.= is a wildcard. Pass =literal=True=:
+
+#+begin_src python
+pl.col("location").str.replace("Rd.", "Road", literal=True)
+#+end_src
+
+[[id:497eaecd-8769-498f-8869-50923fef8901][Practical Data Transformation with Polars]]
+
+** Extract a Regex Capture Group
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789878621231
+:ANKI_NOTE_HASH: 6c4fd21c3d4ffa46aef874ccf07810c4
+:ANKI_FAILURE_REASON: Note was not found: 1789878621231
+:END:
+
+*** Front
+What does =pl.col("business").str.extract(r"(burger|coffee)")= return for a string that matches neither alternative?
+
+*** Back
+It returns =null=. =str.extract= returns the text matched by the regular expression capture group in parentheses.
+
+[[id:497eaecd-8769-498f-8869-50923fef8901][Practical Data Transformation with Polars]]
+
+** Case-insensitive Text Search
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1789878621234
+:ANKI_NOTE_HASH: 397c3bc0cdb2c9d2516abc9f9b791094
+:ANKI_FAILURE_REASON: Note was not found: 1789878621234
+:END:
+
+*** Front
+How can you make a Polars =str.contains= search for =burger= case-insensitive when the source column may contain mixed capitalization?
+
+*** Back
+Normalize the text and pattern to the same case, for example:
+
+#+begin_src python
+pl.col("business").str.to_lowercase().str.contains("burger")
+#+end_src
+
+=str.contains= is case-sensitive by default and interprets its pattern as a regular expression.
+
+[[id:497eaecd-8769-498f-8869-50923fef8901][Practical Data Transformation with Polars]]

@@ -37,7 +37,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1778730929296
-:ANKI_NOTE_HASH: 1ce1633828a73b4a4f3ac43ce370ca63
+:ANKI_NOTE_HASH: 425ae9bdfdfad6ad783d8f05c33465b8
 :END:
 
 *** Front
@@ -52,6 +52,7 @@ VLAN 用途
 大网络不划分 VLAN 的问题：
 - 广播风暴，整个网络都会收到奇怪协议 mDNS、NetBIOS、Windows 广播、某些发现协议等等
 - 不同部门之间可以直接访问, 容易实现 ARP 欺骗、中间人攻击、广播嗅探
+- 二层攻击就被限制在各自 VLAN 内；而跨 VLAN 流量必须经过三层设备，路由端可以做访问控制。
 
 * 3 层交换机
 :PROPERTIES:
