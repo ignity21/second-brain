@@ -5,7 +5,57 @@
 
 * Overview
 [[https://pypi.org/project/radon/][Radon]] is a Python tool that computes various metrics from the source code.
-- McCabe’s complexity, i.e. cyclomatic complexity
+- McCabe's complexity, i.e. cyclomatic complexity
 - raw metrics (these include SLOC, comment lines, blank lines, &c.)
 - Halstead metrics (all of them)
 - Maintainability Index (the one used in Visual Studio)
+
+* 指标说明
+
+** 圈复杂度（McCabe's Complexity / Cyclomatic Complexity）
+圈复杂度用于衡量代码中独立执行路径的数量，主要受 =if= 、 =for= 、 =while= 、 =except= 、布尔短路表达式等分支结构影响。
+
+- 复杂度越高，意味着函数需要覆盖的测试路径越多，也通常更难理解和修改。
+- 可将其粗略理解为：函数的“决策点”越多，复杂度越高。
+- Radon 通常以字母等级展示结果：A 表示简单，等级越靠后则越复杂。
+
+一般而言，复杂度较高的函数可以考虑拆分为更小的函数，或通过提前返回、减少嵌套等方式简化控制流。
+
+** 原始指标（Raw Metrics）
+原始指标描述代码文件的行数构成，不直接判断代码逻辑是否复杂。
+
+- =LOC= ：总代码行数（Lines Of Code）。
+- =LLOC= ：逻辑代码行数（Logical Lines Of Code），即实际语句的数量。
+- =SLOC= ：源代码行数，通常指非空的代码行。
+- =comments= ：注释行数。
+- =multi= ：多行字符串或多行注释占用的行数。
+- =blank= ：空白行数。
+- =single_comments= ：单行注释数。
+
+这些数据适合用于观察模块规模、注释密度和代码布局。例如，代码规模很大但注释极少的模块，往往值得额外关注。
+
+** Halstead 指标 
+Halstead 指标从运算符与操作数的使用情况分析代码的词汇复杂度。
+
+- 运算符（operator）：如赋值、加法、函数调用、关键字等。
+- 操作数（operand）：如变量名、常量、字面量等。
+- =vocabulary= ：不同运算符和操作数的总数，反映代码使用的词汇种类。
+- =length= ：运算符和操作数出现次数的总和，反映代码长度。
+- =volume= ：代码表达的信息量；数值越大，通常表示理解代码所需的认知负担越高。
+- =difficulty= ：根据运算符与操作数的重复使用情况估计理解难度。
+- =effort= ：理解或实现该代码所需工作的估计值。
+- =bugs= ：根据代码体积推算的潜在缺陷数量，仅适合作为统计参考。
+
+Halstead 指标更适合横向比较相似模块或跟踪同一模块的长期变化，不宜将某个绝对阈值视为严格标准。
+
+** 可维护性指数（Maintainability Index）
+可维护性指数（MI）综合了 Halstead Volume、圈复杂度和代码行数等因素，用一个分数概括代码的可维护程度；Radon 使用与 Visual Studio 相关的计算模型。
+
+- 分数越高，通常表示代码越容易维护。
+- 分数下降通常意味着代码变长、分支增多，或表达复杂度提高。
+- MI 是综合性指标，适合用于快速发现需要进一步检查的模块，而不能替代具体的代码审查。
+
+使用时应结合圈复杂度和原始指标判断：MI 较低的文件不一定有问题，但它提示我们应检查其中是否存在过长函数、复杂条件分支或职责混杂的模块。
+
+
+
