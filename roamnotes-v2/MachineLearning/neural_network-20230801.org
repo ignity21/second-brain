@@ -4,9 +4,11 @@
 #+title: Neural Network
 #+filetags: ML
 
+* TOC :TOC_1:
+
 * Concept
 Used for Non-linear Hypotheses
-[[file:../assets/ML/NeuralNetworkIdea.png]]
+[[file:images/ML/NeuralNetworkIdea.png]]
 
 * Notations
 - \(\bm{w_j^{(l)}}, b_i^{(l)}\): the parameters of /jth/ unit/activation in layer /l/
@@ -20,7 +22,7 @@ Used for Non-linear Hypotheses
 
 * Activation Value
 #+CAPTION: Layer Computation
-[[file:../assets/ML/NNLayerComputation.png]]
+[[file:images/ML/NNLayerComputation.png]]
 - Activation Function(sigmoid): \(a_j^{[l]}=g(\bm{w_j^{[l]}}\cdot\bm{a^{[l-1]}} + b_j^{[l]})\)
   - example: \(a_2^{[3]}=g(\bm{w_2^{[3]}}\cdot\bm{a^{[2]}}+b_2^{[3]})\)
 
@@ -100,7 +102,7 @@ Each neuron output is a function of *all* the activation outputs of the previous
 Each neuron only looks at part of the previous layer's inputs.
 - Faster computation
 - Need less training data (less prone to overfitting)
-[[file:../assets/ML/ConvolutionalNN.png]]
+[[file:images/ML/ConvolutionalNN.png]]
 
 * [[id:bbe0d8aa-27a7-4833-9d54-1fa917b96c2d][Activation Functions]]
 * [[id:2b884159-5c23-4eb5-bc76-c15dd508adef][Roundoff Errors]]

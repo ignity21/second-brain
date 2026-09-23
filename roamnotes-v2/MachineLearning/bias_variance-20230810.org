@@ -19,13 +19,13 @@
 * Application
 - Choosing the degree of polynomial
 
-[[file:../assets/ML/BiasVariance_1.png]]
+[[file:images/ML/BiasVariance_1.png]]
 
 - Choosing the regularization parameter $\lambda$
 
-[[file:../assets/ML/BiasVariance_2.png]]
+[[file:images/ML/BiasVariance_2.png]]
 
 * Neural Networks and Bias/Variance
-[[file:../assets/ML/NNBiasVariance.png]]
+[[file:images/ML/NNBiasVariance.png]]
 - Larger Neural Networks will usually do better than a smaller one
   so long as regularization is chosen appropriately.

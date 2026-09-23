@@ -4,7 +4,7 @@
 #+title: Learning Curve
 #+filetags: ML
 
-[[file:../assets/ML/LearningCurve.png]]
+[[file:images/ML/LearningCurve.png]]
 
 * Application
 - To identify problem with gradient descent.
@@ -17,12 +17,12 @@
 
 * Troubleshooting [[id:4a034a17-5a7f-4003-a2fb-4c833e76cc98][Overfitting/Underfitting]]
 ** Normal
-[[file:../assets/ML/NormalLearningCurve.png]]
+[[file:images/ML/NormalLearningCurve.png]]
 
 ** High Bias
-[[file:../assets/ML/HighBiasLearningCurve.png]]
+[[file:images/ML/HighBiasLearningCurve.png]]
 - Note: Getting more training data will not help much.
 
 ** High Variance
-[[file:../assets/ML/HighVarianceLearningCurve.png]]
+[[file:images/ML/HighVarianceLearningCurve.png]]
 - Note: Getting more training data is likely to help.

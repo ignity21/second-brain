@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       9158c4c8-ce38-4747-b4f7-ee1b6317d1b5
+:END:
+#+title: Statistics
+
+* [[id:793a5e8f-5ee4-4c03-a8f2-7334f36f29eb][Statistical Foundations]]
+* [[id:0cf739b5-1325-40dd-97c6-98c186a8fd02][Probability and Distributions]]

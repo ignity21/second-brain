@@ -56,4 +56,4 @@ print(scores)
 - /penalty/ sets the type of regularization term to use
 
 * Comparison with Linear Regression
-[[file:../assets/ML/Ridge_1.png]]
+[[file:images/ML/Ridge_1.png]]

@@ -6,6 +6,8 @@
 * [[id:8ff66d66-2df2-4dad-b09a-9ba4e42736d9][Linear Algebra]]
 * [[id:e38dcf6b-8443-4706-ad9d-01376d79379d][Matrix]]
 * [[id:f8567531-6fee-42d1-a78b-c085a3ff4978][Vector]]
+* [[id:a20a85ad-d459-477f-bbcc-1df064e9720c][Eigenvectors]]
+* [[id:500581c8-ecbd-4fcb-b503-f2f405e6b262][Orthonormal Basis]]
 * [[id:c015c573-bc64-472f-9145-06efacfb6dff][Identity Matrix]]
 * [[id:038c5241-9cfe-4217-9639-5a7d878da899][Linear Transformation]]
 * [[id:aab9cba4-722a-457c-82b1-931e9a4fc0dd][Rotation Matrix]]

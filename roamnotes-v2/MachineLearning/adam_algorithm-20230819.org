@@ -7,7 +7,7 @@
 Adam: Adaptive Moment Estimation
 - adjust the learning rate automatically
 - not just single global learning rate $\alpha$
-[[file:../assets/ML/AdamAlgoIntuition.png]]
+[[file:images/ML/AdamAlgoIntuition.png]]
 
 - If $w_j$ (or $b$) keeps moving in same direction, increase $\alpha_j$
 - If $w_j$ (or $b$) keeps oscillating, reduce $\alpha_j$

@@ -5,7 +5,7 @@
 #+filetags: ML
 
 * Cycle of Development Process
-[[file:../assets/ML/MLDevelopment.png]]
+[[file:images/ML/MLDevelopment.png]]
 
 * Span Classifier Example
 - Supervised Learning
@@ -28,7 +28,7 @@
 5. Model evaluation
 6. Model deployment
 7. Model monitoring
-[[file:../assets/ML/BuildingMLModel.jpeg]]
+[[file:images/ML/BuildingMLModel.jpeg]]
 
 * ML Packages
 :PROPERTIES:

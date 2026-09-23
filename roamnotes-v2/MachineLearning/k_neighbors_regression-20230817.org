@@ -27,4 +27,4 @@
 * Important Parameters
 See [[id:4dec577e-c1d9-4b01-9a95-63e3413b42a9][K-Nearest Neighbors]]
 ** N-Neighbors Comparison
-[[file:../assets/ML/KNR_1.png]]
+[[file:images/ML/KNR_1.png]]

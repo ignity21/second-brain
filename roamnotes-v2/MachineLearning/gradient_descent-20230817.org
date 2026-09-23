@@ -4,6 +4,8 @@
 #+title: Gradient Descent
 #+filetags: :ML:
 
+* TOC :TOC_1:
+
 * [[id:e1a528d4-0948-4f04-b114-48dd128863a1][Cost Function]]
 
 * [[id:da701a4c-988e-427b-bf36-33cbe7a470c2][Learning Rate]]
@@ -18,7 +20,7 @@
 ** [[id:0162f9f2-271d-4a2d-8b18-5e86b8a5cc8c][Early Stopping]]
 
 * Pitfalls
-[[file:../assets/ML/GradientDescentPitfalls.png]]
+[[file:images/ML/GradientDescentPitfalls.png]]
 - Random initialization
 - [[id:4a034a17-5a7f-4003-a2fb-4c833e76cc98][Overfitting/Underfitting]]
 - How to choose [[id:da701a4c-988e-427b-bf36-33cbe7a470c2][Learning Rate]]

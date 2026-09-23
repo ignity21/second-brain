@@ -7,12 +7,12 @@
 The softmax regression model is a generalization of logistic regression to support multiclass classification.
 
 * Idea
-[[file:../assets/ML/SoftmaxIdea.png]]
+[[file:images/ML/SoftmaxIdea.png]]
 ** Cost Function
-[[file:../assets/ML/SoftmaxCostIdea.png]]
+[[file:images/ML/SoftmaxCostIdea.png]]
 
 * Softmax Output Layer in [[id:31b71a06-0592-444b-b410-916ee717b488][Neural Network]]
-[[file:../assets/ML/SoftmaxLayer.png]]
+[[file:images/ML/SoftmaxLayer.png]]
 
 ** Code
 *** Basic Implementation

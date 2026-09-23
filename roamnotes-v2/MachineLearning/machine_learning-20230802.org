@@ -2,8 +2,10 @@
 :ID:       100afd1e-d695-4a89-b583-12bbad2e1733
 :ROAM_ALIASES: ML
 :END:
-#+title: Machine Learning
+#+title: Machine Learning Fundamentals
 #+filetags: ML
+
+* TOC :TOC_1:
 
 * Math Prerequisites
 :PROPERTIES:

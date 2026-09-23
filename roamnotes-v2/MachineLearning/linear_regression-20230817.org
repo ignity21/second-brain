@@ -4,6 +4,8 @@
 #+title: Linear Regression
 #+filetags: ML
 
+* TOC :TOC_1:
+
 * Concept
 ** Parameters
 - Weights $\bm{w}$: $w_1, w_2, \cdots, w_n$ (slope)

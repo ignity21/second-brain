@@ -12,4 +12,4 @@ computes the gradients on small random sets of instances called mini-batches.
   especially when using GPUs.
 
 #+CAPTION: Gradient Descent paths in parameter space
-[[file:../assets/ML/GradientDescentPath.png]]
+[[file:images/ML/GradientDescentPath.png]]

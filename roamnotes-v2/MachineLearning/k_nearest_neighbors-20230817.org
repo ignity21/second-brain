@@ -5,6 +5,8 @@
 #+title: K-Nearest Neighbors
 #+filetags: ML
 
+* TOC :TOC_1:
+
 * Overview
 - Predict the label of a data point by
   - Looking at the *k* closest data points
@@ -37,14 +39,14 @@ plt.xlabel('n_neighbors')
 plt.ylabel('Accuracy')
 plt.show()
 #+end_src
-[[file:../assets/ML/KNN_1.png]]
+[[file:images/ML/KNN_1.png]]
 - As k increases beyond 6 we see underfitting
 
 * How to Choose k?
 In practice, using a small number of neighbors like *three or five* often works well.
 - k=1 -> overfitting
 - large k -> underfitting
-[[file:../assets/ML/KNN_2.png]]
+[[file:images/ML/KNN_2.png]]
 
 * Advantages
 - Easy to understand, often gives reasonable performance.

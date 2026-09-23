@@ -4,6 +4,8 @@
 #+title: Activation Functions
 #+filetags: ML
 
+* TOC :TOC_1:
+
 * Overview
 [[file:images/screenshots/Overview/2024-09-15_18-35-53_screenshot.png]]
 
@@ -13,12 +15,12 @@
 * ReLU
 Rectified Linear Unit
 - $g(z)=max(0, z)$
-[[file:../assets/ML/ReLUFunction.png]]
+[[file:images/ML/ReLUFunction.png]]
 
 * Linear Activation Function
 - "No activation function"
 - If all nodes uses linear activation function, then it's equivalent to linear regression.
-[[file:../assets/ML/LinearActivationFunction.png]]
+[[file:images/ML/LinearActivationFunction.png]]
 
 * Choosing for Output Layer
 - Binary Classification: Sigmoid

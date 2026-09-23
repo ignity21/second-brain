@@ -5,7 +5,7 @@
 #+filetags: ML
 
 #+caption: The trade-off between overfitting and underfitting
-[[file:../assets/ML/Overfitting_1.png]]
+[[file:images/ML/Overfitting_1.png]]
 
 * Generalization
 A model is able to make accurate predictions on unseen data.

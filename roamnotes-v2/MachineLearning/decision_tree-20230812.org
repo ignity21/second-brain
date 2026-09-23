@@ -13,17 +13,17 @@
   - $p_0=1-p_1$
   - $H(p_1)=-p_1 \log_2(p_1)-p_0\log_2(p_0)$
 
-[[file:../assets/ML/EntropyFunction.png]]
+[[file:images/ML/EntropyFunction.png]]
 
 **** Alternative Function
 - [[id:45ae2e59-a5f5-4d4e-bdb2-42c4c81a5d40][Gini Criteria]]
 *** Key idea
 Choose the feature that *reduces impurity(entropy) the most* (Information Gain).
 
-[[file:../assets/ML/InformationGain.png]]
+[[file:images/ML/InformationGain.png]]
 
 *** Example
-[[file:../assets/ML/ChoosingASplit.png]]
+[[file:images/ML/ChoosingASplit.png]]
 - Combining left and right entropy into a single measure by taking the weighted average
 - *Parent node entropy* is $H(0.5)=1$ The Reduction in entropy is:
   - $H(0.5)-\text{weighted entropy of sub-trees}$
@@ -51,7 +51,7 @@ Choose the feature that *reduces impurity(entropy) the most* (Information Gain).
   - If a categorical feature can take on /k/ values, create /k/ binary features (0 or 1 valued).
 
 ** Continuous Feature
-[[file:../assets/ML/SplitContinuousFeature.png]]
+[[file:images/ML/SplitContinuousFeature.png]]
 1. Plotting
 2. Trying different thresholds
 2. Calculating left and right entropy
@@ -62,5 +62,5 @@ Choose the feature that *reduces impurity(entropy) the most* (Information Gain).
 - Choosing a split
   - Reduce the variance instead of entropy(impurity)
 
-[[file:../assets/ML/ChooseASplitRegressionTree.png]]
+[[file:images/ML/ChooseASplitRegressionTree.png]]
 * [[id:6f6fe3d6-daff-4dde-94fb-1ce36dc43af3][Tree Ensembles]]
