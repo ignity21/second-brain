@@ -1,6 +1,6 @@
 # 发布 org-roam-ui 到 GitHub Pages
 
-- 状态: 部署中
+- 状态: 完成
 - 日期: 2026-09-27
 - 计划: 静态化自用 fork（`ignity21/org-roam-ui` 的 `search` 分支），发布 `roamnotes-v2/` 全部笔记到
   `https://ignity21.github.io/second-brain/`。
@@ -12,7 +12,7 @@
 - [x] `publish/build.sh`：导出数据、构建 UI、组装 `site/`
 - [x] 本地预览验证（图谱、正文、图片、搜索、LaTeX、无 localhost 请求）
 - [x] `.github/workflows/publish-roam-ui.yml` 部署到 Pages
-- [ ] push fork 与 second-brain，确认线上页面
+- [x] push fork 与 second-brain，确认线上页面
 
 ## 进度
 
@@ -22,4 +22,4 @@
 - `publish/export.el` 用 org-roam-ui 自身函数导出 307 个节点、509 条链接；用 Doom 已装包与 MELPA 安装两种方式输出一致。
 - 本地 `/second-brain/` 子路径预览：图谱、全文搜索、侧栏正文、KaTeX、代码块、反链、`images/` 与 `../assets/`
   图片均正常；无 localhost 请求，唯一 404 是站点根 `/favicon.ico`。
-- 待办：提交并推送 fork `static` 分支与本仓库改动，观察 Actions 与线上页面。
+- 已推送（second-brain `71af752`），Actions 运行 36256014352 成功；线上图谱、搜索、正文与图片检查通过。搜索首次打开会并发请求约 300 个笔记文本，偶见单个 503，重试即恢复。
