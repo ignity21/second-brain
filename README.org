@@ -1,4 +1,4 @@
-在线图谱：https://ignity21.github.io/second-brain/ （push =roamnotes-v2/= 后由 =publish/= 与 GitHub Actions 自动发布）
+在线图谱：https://roam.ignity.xyz/ （push =roamnotes-v2/= 后由 =publish/= 与 GitHub Actions 自动发布）
 
 * 分类、索引与重名约定
 

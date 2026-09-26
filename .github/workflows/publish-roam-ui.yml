@@ -51,6 +51,9 @@ jobs:
 
       - name: Build site
         run: publish/build.sh .org-roam-ui site
+        env:
+          # Served from the root of the custom domain roam.ignity.xyz.
+          BASE_PATH: ""
 
       - uses: actions/upload-pages-artifact@v3
         with:
