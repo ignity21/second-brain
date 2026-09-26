@@ -1,0 +1,67 @@
+name: Publish org-roam-ui
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "roamnotes-v2/**"
+      - "publish/**"
+      - ".github/workflows/publish-roam-ui.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  # Commit of ignity21/org-roam-ui (`static` branch) to build.
+  ORG_ROAM_UI_REF: 58f720fcd1e0deed746651d72d91486344fd9f18
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Checkout org-roam-ui
+        uses: actions/checkout@v4
+        with:
+          repository: ignity21/org-roam-ui
+          ref: ${{ env.ORG_ROAM_UI_REF }}
+          path: .org-roam-ui
+
+      - uses: purcell/setup-emacs@master
+        with:
+          version: "30.1"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: yarn
+          cache-dependency-path: .org-roam-ui/yarn.lock
+
+      - name: Install org-roam-ui dependencies
+        working-directory: .org-roam-ui
+        run: yarn install --frozen-lockfile --ignore-engines
+
+      - name: Build site
+        run: publish/build.sh .org-roam-ui site
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

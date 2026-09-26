@@ -1,3 +1,5 @@
+在线图谱：https://ignity21.github.io/second-brain/ （push =roamnotes-v2/= 后由 =publish/= 与 GitHub Actions 自动发布）
+
 * 分类、索引与重名约定
 
 - 一级目录是笔记的主要入口，不是互斥的身份标签；应作为主题的粗粒度分类使用，而非依赖大量 tag。

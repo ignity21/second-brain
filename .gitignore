@@ -16,3 +16,6 @@ org-roam.db
 datasets/
 journals/
 .aider*
+
+# org-roam-ui static site
+site/
