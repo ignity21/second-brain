@@ -9,7 +9,6 @@
 - [[#schema][Schema]]
 - [[#selection][Selection]]
   - [[#dfselect][~df.select()~]]
-  - [[#plselectors][~pl.selectors~]]
 - [[#editing-columns][Editing Columns]]
   - [[#updating][Updating]]
   - [[#renaming][Renaming]]
@@ -17,6 +16,7 @@
   - [[#multiple-columns-same-expression][Multiple Columns (same expression)]]
   - [[#custom-transformation][Custom Transformation]]
   - [[#reusable-expressions][Reusable Expressions]]
+  - [[#attaching-custom-methods-to-plexpr][Attaching Custom Methods to ~pl.Expr~]]
 - [[#sorting][Sorting]]
 - [[#concatenation--join][Concatenation & Join]]
   - [[#concatenation][Concatenation]]
@@ -40,29 +40,31 @@
   - Useful boolean expressions: ~is_in()~, ~not_()~, ~is_between()~
 
 ** ~df.select()~
+- Used to select columns or transform them to create new columns.
 #+begin_src python
 df.select(
     "name",
     (pl.col("price") * 0.8).round(0).alias("discounted_price"), # Chaining
     pl.col("price").mean().alias("average_price"), # Aggregation
     pl.lit(True).alias("available"), # Creating Columns from Constants
-    pl.col("price").rank(), # Built-in Functions 
+    pl.col("price").rank(), # Built-in Functions
     pl.col("type").str.to_lowercase(), # Data-Type-Specific Expressions
     pl.col("price", "review").min().name.suffix("_min"),
 )
 #+end_src
 
-** ~pl.selectors~
+*** ~pl.selectors~
 #+begin_src python
 import polars.selectors as cs
 df.select(
-    # Select the string columns together with the columns ending with "s"
-    cs.string() | cs.ends_with("s") 
+    # Select string columns together with columns ending in "s"
+    cs.string() | cs.ends_with("s")
 )
 #+end_src
 
 * Editing Columns
 ** Updating
+- ~col.cast(dtype)~: change type
 #+begin_src python
 df.with_columns(
     pl.col("price").mean().alias("average_price"),
@@ -82,6 +84,7 @@ df.with_columns(
 - Exclude columns: ~df.with_columns(pl.exclude("beach").cast(pl.String))~
 
 ** Custom Transformation
+- ~map_elements(func)~
 #+begin_src python
 def rescale_review(x):
     return x * 2
@@ -104,6 +107,7 @@ df.with_columns(
   - you need to call a third-party Python function
 
 ** Reusable Expressions
+
 #+begin_src python
 standardize_locations_expr = (
     pl.col("location")
@@ -114,6 +118,34 @@ standardize_locations_expr = (
 
 df.with_columns(standardize_locations_expr)
 #+end_src
+
+- Expressions can be stored in variables and reused.
+- This keeps complex transformations readable and avoids repeating the same logic.
+
+** Attaching Custom Methods to ~pl.Expr~
+
+#+begin_src python
+def per_listener(self):
+    return self / pl.col("monthly_listeners")
+
+pl.Expr.per_listener = per_listener
+#+end_src
+
+Now it can be called like a built-in method:
+
+#+begin_src python
+pl.col("streams").per_listener()
+#+end_src
+
+This is **monkey patching**: adding a method to an existing class at runtime.
+
+- ~self~ is the ~pl.Expr~ object before ~.per_listener()~.
+- Equivalent to ~per_listener(pl.col("streams"))~.
+- It modifies ~pl.Expr~ globally and makes the method look like a native Polars API.
+- This can make code harder to understand, discover, and maintain.
+
+Usually prefer a normal function unless method-style syntax provides a clear benefit.
+  
 * Sorting
 - ~df.sort("quantity", descending=True)~ # default ascending
 - By multiple columns: ~df.sort("quantity", "product")~
@@ -121,18 +153,42 @@ df.with_columns(standardize_locations_expr)
 * Concatenation & Join
 ** Concatenation
 - ~pl.concat([df1, df2], how="vertical")~
-| Method     | Direction | Typical use                                  |
-|------------+-----------+----------------------------------------------|
-| vertical   | Rows      | Combine DataFrames with the same schema      |
-| diagonal   | Rows      | Combine DataFrames with different columns    |
-| horizontal | Columns   | Add columns                                  |
-| extend()   | Rows      | Efficient when adding small batches in place |
+| How        | Direction | Typical use                                                |
+|------------+-----------+------------------------------------------------------------|
+| vertical   | Rows      | Stack DataFrames with the same columns                     |
+| diagonal   | Rows      | Stack DataFrames; union columns and fill missing with null |
+| horizontal | Columns   | Place DataFrames side by side, matching rows by position   |
+- ~df.extend(other)~
+  - Append rows to ~df~ in place.
+  - Efficient when repeatedly adding small batches.
 
 ** Join
 - ~df1.join(df2, on=["key1", "key2"], how="full", coalesce=True)~
-  - Use ~coalesce=True~ to avoid duplicate join columns
 
-*** Conditional Join
+*** Coalesce Join Keys
+- ~coalesce=True~ merges the left and right join-key columns into one column.
+- Especially useful for ~full~ joins, where unmatched rows may have the key on only one side.
+- Without coalescing, both join-key columns are kept.
+#+begin_example
+df1                 df2
+key   value1        key   value2
+A     10            B     20
+#+end_example
+
+Without ~coalesce~:
+| key  | value1 | key_right | value2 |
+|------+--------+-----------+--------|
+| A    | 10     | null      | null   |
+| null | null   | B         | 20     |
+
+With ~coalesce=True~:
+| key | value1 | value2 |
+|-----+--------+--------|
+| A   | 10     | null   |
+| B   | null   | 20     |
+That is, use the left key when available; otherwise use the right key.
+
+*** Conditional Join (Where)
 #+begin_src python
 restaurants.join_where(
     users,
@@ -142,7 +198,8 @@ restaurants.join_where(
 #+end_src
 
 *** Timeseries Conditional Join
-- ~join_asof~: means "join as of" a certain date
+- ~join_asof~: for each row, find the closest matching row in time.
+- *Prerequisite*: both DataFrames *must be sorted* by the join key. (like binary search)
 #+begin_src python
 result = trades.sort("time").join_asof(
     quotes.sort("time"),
@@ -151,14 +208,14 @@ result = trades.sort("time").join_asof(
 )
 #+end_src
 - Strategy:
-  - backward: latest matching value before or equal to the left value *It never matches with future data*
+  - *backward*: latest matching value before or equal to the left value *It never matches with future data*
   - forward: earliest matching value after or equal to the left value
   - nearest: value with the smallest distance
 
 
 * Summarizing
 
-- Finding extreme values: ~df.top_k(3, by="quantity")~ or ~bottom_k~
+- *Finding extreme values*: ~df.top_k(3, by="quantity")~ or ~bottom_k~
 - ~df.describe()~
 
 * Lazy Mode
