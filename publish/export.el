@@ -7,6 +7,7 @@
 ;;   graphdata.json   payload of org-roam-ui's `graphdata' websocket message
 ;;   variables.json   payload of its `variables' message
 ;;   notes/<id>.org   what its `/node/:id' servlet returns for each node
+;;   notes.json       all of those texts by id, for search
 ;; File paths are made relative to ROAM-DIR, so the UI's static mode can
 ;; resolve note resources under `files/'.
 ;;
@@ -111,11 +112,15 @@
   (export--write-json graphdata (expand-file-name "graphdata.json" export-out-dir))
   (export--write-json (export--variables)
                       (expand-file-name "variables.json" export-out-dir))
-  (dolist (node (alist-get 'nodes graphdata))
-    (unless (alist-get 'FILELESS (alist-get 'properties node))
-      (let ((id (alist-get 'id node)))
-        (with-temp-file (expand-file-name (concat "notes/" id ".org") export-out-dir)
-          (insert (org-roam-ui--get-text id))))))
+  (let ((texts (make-hash-table :test #'equal)))
+    (dolist (node (alist-get 'nodes graphdata))
+      (unless (alist-get 'FILELESS (alist-get 'properties node))
+        (let* ((id (alist-get 'id node))
+               (text (org-roam-ui--get-text id)))
+          (puthash id text texts)
+          (with-temp-file (expand-file-name (concat "notes/" id ".org") export-out-dir)
+            (insert text)))))
+    (export--write-json texts (expand-file-name "notes.json" export-out-dir)))
   (message "Exported %d nodes and %d links to %s"
            (length (alist-get 'nodes graphdata))
            (length (alist-get 'links graphdata))

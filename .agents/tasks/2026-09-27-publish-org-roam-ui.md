@@ -29,7 +29,7 @@
 
 ## 后续
 
-- [ ] 搜索改为一次读取 `data/notes.json`，避免约 300 个并发请求偶发 503
-- [ ] Actions 升级到 Node 24 版本；`runs-on` 固定 `ubuntu-24.04`
+- [x] 搜索改为一次读取 `data/notes.json`，避免约 300 个并发请求偶发 503（fork `f82a941`，同时修复无标签节点显示空标签）
+- [x] Actions 升级到 Node 24 版本（checkout/setup-node v7、upload-pages-artifact/deploy-pages v5、setup-emacs v8.0，构建用 Node 24）；`runs-on` 固定 `ubuntu-24.04`
 - [ ] （可选）GitHub 账户验证 `ignity.xyz` 域名
 - 暂缓：线上主题、`file:~/…ipynb` 链接、`static` 与 `search` 分支合并
