@@ -29,13 +29,14 @@
 
 ## 后续
 
-- [x] 搜索改为一次读取 `data/notes.json`，避免约 300 个并发请求偶发 503（fork `f82a941`，同时修复无标签节点显示空标签）
+- [x] 搜索改为一次读取 `data/notes.json`，避免约 300 个并发请求偶发 503（fork `static` 的 `5837906`；无标签节点空标签与失败请求重试已移到 `search` 的 `c1f026d`）
 - [x] Actions 升级到 Node 24 版本（checkout/setup-node v7、upload-pages-artifact/deploy-pages v5、setup-emacs v8.0，构建用 Node 24）；`runs-on` 固定 `ubuntu-24.04`
 - [x] GitHub 账户验证 `ignity.xyz` 域名（Cloudflare TXT `_github-pages-challenge-ignity21`，已 verified）
-- [x] 设置面板透明、图谱透出：内置 `ayu-light` 用了 Ayu 原生键名，缺 `bg-alt`、`base0`–`8`；按 doom-ayu-light 重建（base 改为浅到深，适配 `gray.100`–`900` 映射），已存旧主题按名刷新颜色（fork `834b2ea`）
-- [x] 静态站默认主题 `ayu-light`，Directory filters 默认 allowlist `Inbox/`（已访问过的浏览器需点设置面板的重置按钮才会用上新的过滤默认值）
-- [x] 笔记侧栏一键撑满页面，再次点击或 Esc 恢复原宽度（fork `d0250f8`，设计见下）
-- 暂缓：`file:~/…ipynb` 链接、`static` 与 `search` 分支合并
+- [x] 设置面板透明、图谱透出：内置 `ayu-light` 用了 Ayu 原生键名，缺 `bg-alt`、`base0`–`8`；按 doom-ayu-light 重建（base 改为浅到深，适配 `gray.100`–`900` 映射），已存旧主题按名刷新颜色（fork `search` 的 `ce01911`）
+- [x] 静态站默认主题 `ayu-light`，Directory filters 默认 allowlist `Inbox/`（fork `static` 的 `02628ac`；已访问过的浏览器需点设置面板的重置按钮才会用上新的过滤默认值）
+- [x] 笔记侧栏一键撑满页面，再次点击或 Esc 恢复原宽度（fork `search` 的 `1da9368`，设计见下）
+- [x] 整理 fork 分支：通用功能（搜索、主题修复、侧栏全屏）在 `search` 上开发，`static` = `search` + 3 个静态化提交（`b64faff` 静态模式、`5837906` `notes.json`、`02628ac` 静态默认值），以 rebase 同步；工作流固定 `02628ac`。旧 `static` 提交（`58f720f`…`d0250f8`）已被 force-push 替换
+- 暂缓：`file:~/…ipynb` 链接
 
 ## 设计：笔记侧栏全屏切换
 
