@@ -20,7 +20,7 @@ concurrency:
 
 env:
   # Commit of ignity21/org-roam-ui (`static` branch) to build.
-  ORG_ROAM_UI_REF: f82a941c7d56109b2491bb9c01cf3471ec94b89c
+  ORG_ROAM_UI_REF: 834b2eaea1bf4c4288940ae9bfa63bb9ba444032
 
 jobs:
   build:
