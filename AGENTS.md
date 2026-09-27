@@ -37,6 +37,16 @@
 - 中文与嵌入的英文单词或短语之间留一个半角空格；中文标点前不额外加空格，例如：`你说 he 是谁？他是 Jerry。`
 - 中文修饰沿用仓库约定：`** 中文 **`、`~~ 中文 ~~`、`= 中文 =`、`~ 中文 ~`，标记与中文之间留空格。
 
+## org-roam-ui 发布
+
+修改笔记站前端或发布流程时适用。站点由 `.github/workflows/publish-roam-ui.yml` 按 `ORG_ROAM_UI_REF` 固定的 fork `ignity21/org-roam-ui` 提交构建，导出与构建脚本在 `publish/`。fork 分支约定：
+
+- `main` 跟随上游 `org-roam/org-roam-ui`，不放自有改动。
+- `search` 是自用开发分支，Doom 从它安装并使用其中的 `out/`。Emacs 与静态站都需要的功能（搜索、主题、侧栏等）在这里开发，提交时一并重建 `out/`。
+- `static` = `search` + 仅静态化提交（`NEXT_PUBLIC_STATIC` 模式、快照数据、静态默认值）。`search` 更新后把 `static` rebase 到 `search`，用 `--force-with-lease` 推送，不反向合并；再把 `ORG_ROAM_UI_REF` 改为新的 `static` 提交。
+- `pr/search` 对应上游 PR，只含搜索功能；其他通用功能另开 PR 分支。
+- 本机 Node 26 构建需设 `NODE_OPTIONS=--openssl-legacy-provider`。完成标准：受影响分支 `tsc --noEmit` 通过且 `next build && next export` 成功；推送了新的 `ORG_ROAM_UI_REF` 时，确认 Publish 工作流部署成功。
+
 ## 按改动验证
 
 - 内容编辑：检查受影响笔记的 TOC、Org block、property drawer 和链接语法。
