@@ -34,14 +34,14 @@
 - [x] GitHub 账户验证 `ignity.xyz` 域名（Cloudflare TXT `_github-pages-challenge-ignity21`，已 verified）
 - [x] 设置面板透明、图谱透出：内置 `ayu-light` 用了 Ayu 原生键名，缺 `bg-alt`、`base0`–`8`；按 doom-ayu-light 重建（base 改为浅到深，适配 `gray.100`–`900` 映射），已存旧主题按名刷新颜色（fork `834b2ea`）
 - [x] 静态站默认主题 `ayu-light`，Directory filters 默认 allowlist `Inbox/`（已访问过的浏览器需点设置面板的重置按钮才会用上新的过滤默认值）
-- [ ] 笔记侧栏一键撑满页面，再次点击恢复原宽度（计划见下）
+- [x] 笔记侧栏一键撑满页面，再次点击或 Esc 恢复原宽度（fork `d0250f8`，设计见下）
 - 暂缓：`file:~/…ipynb` 链接、`static` 与 `search` 分支合并
 
-## 计划：笔记侧栏全屏切换
+## 设计：笔记侧栏全屏切换
 
-- 状态放 `components/Sidebar/index.tsx`：`isFullscreen`（不持久化）。全屏时 `Resizable` 的 `size.width` 取 `windowWidth`，
+- 状态 `isNoteFullscreen` 放 `pages/index.tsx`（不持久化），头部栏、设置面板与侧栏共用。全屏时 `Resizable` 的 `size.width` 取 `windowWidth`，
   `maxWidth` 放开、`enable` 关闭拖拽；持久化的 `sidebarWidth` 不改写，退出全屏自然回到原宽度。
 - `Toolbar.tsx` 加一个 `IconButton`（展开/收起图标，Tooltip 随状态切换），`Esc` 也退出全屏。
-- 全屏时隐藏主页面头部栏（搜索、侧栏开关），或把它们并入侧栏工具栏，避免 `zIndex={4}` 的头部栏盖住笔记；图谱保持渲染但不可见即可。
+- 全屏时隐藏主页面头部栏（搜索、侧栏开关）并卸载设置面板（其开合状态已持久化）；笔记正文限宽 `4xl` 居中。
 - 关闭侧栏时重置全屏状态；窗口尺寸变化时跟随 `windowWidth`。
-- 验证：静态构建后在 Chromium、Firefox 截图检查进入、退出、拖拽宽度保持、切换笔记后状态保持。
+- 验证：静态构建后 Chromium、Firefox 实测进入（1400px 满宽、设置面板隐藏），按钮与 Esc 退出均恢复原 450px，持久化宽度未改。
