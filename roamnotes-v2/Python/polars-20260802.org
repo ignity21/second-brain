@@ -212,7 +212,6 @@ result = trades.sort("time").join_asof(
   - forward: earliest matching value after or equal to the left value
   - nearest: value with the smallest distance
 
-
 * Summarizing
 
 - *Finding extreme values*: ~df.top_k(3, by="quantity")~ or ~bottom_k~

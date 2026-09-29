@@ -30,8 +30,14 @@
   - [[#filtering-text-matches][Filtering Text Matches]]
   - [[#replacing-text][Replacing Text]]
   - [[#categorizing-numeric-values][Categorizing Numeric Values]]
-
-See [[id:190bfd1c-68ae-4f32-baab-cc98490c71e9][Polars]] for the overview and related topics.
+  - [[#when-then-otherwise][~when-then-otherwise~]]
+  - [[#fixed-thresholds--cut][Fixed Thresholds — ~cut~]]
+  - [[#quantile-thresholds--qcut][Quantile Thresholds — ~qcut~]]
+  - [[#comparison][Comparison]]
+- [[#ranks-correlations-and-summary-statistics][Ranks, Correlations and Summary Statistics]]
+  - [[#ranking][Ranking]]
+  - [[#correlation-matrix][Correlation Matrix]]
+  - [[#custom-summary-statistics][Custom Summary Statistics]]
 
 * Missing Values
 ** Finding nulls
@@ -272,15 +278,15 @@ df.with_columns(
 )
 #+end_src
 
-** *Categorizing Numeric Values*
-- ~when-then-otherwise~: like ~if-elif-else~
+** Categorizing Numeric Values
+
+Convert numerical values into discrete categories.
+
+** ~when-then-otherwise~
+
+General conditional categorization, similar to ~if-elif-else~.
+
 #+begin_src python
-ratings.with_columns(
-    pl.when(pl.col("rating") == 5)
-    .then(pl.lit("Highly Rated"))
-    .otherwise(pl.lit("Needs Improvement"))
-    .alias("quality")
-)
 ratings.with_columns(
     pl.when(pl.col("capacity") > 100)
     .then(pl.lit("Large"))
@@ -290,3 +296,167 @@ ratings.with_columns(
     .alias("venue_size")
 )
 #+end_src
+
+Useful when the conditions are complex or not purely based on numeric intervals.
+
+For simple numeric ranges, ~cut~ / ~qcut~ are cleaner.
+
+** Fixed Thresholds — ~cut~
+
+Split values using predefined numeric boundaries.
+
+#+begin_src python
+df.with_columns(
+    pl.col("score").cut(
+        [40, 70],
+        labels=["low", "medium", "high"]
+    ).alias("category")
+)
+#+end_src
+
+#+begin_example
+score <= 40        → low
+40 < score <= 70   → medium
+score > 70         → high
+#+end_example
+
+The thresholds stay the same regardless of the data distribution.
+
+Use ~cut~ when boundaries have real meaning, such as:
+
+#+begin_example
+age    → child / adult / senior
+income → low / medium / high
+rating → poor / average / good
+#+end_example
+
+** Quantile Thresholds — ~qcut~
+
+Split values according to their position in the data distribution.
+
+#+begin_src python
+df.with_columns(
+    pl.col("score").qcut(
+        [0.25, 0.75],
+        labels=["low", "medium", "high"]
+    ).alias("category")
+)
+#+end_src
+
+- ~0.25~ → 25th percentile
+- ~0.75~ → 75th percentile
+
+#+begin_example
+bottom 25% → low
+middle 50% → medium
+top 25%    → high
+#+end_example
+
+The actual numeric boundaries are calculated from the data and may change when the dataset changes.
+
+** Comparison
+
+| Method                  | Thresholds        | Use Case                          |
+|-------------------------+-------------------+-----------------------------------|
+| ~when-then-otherwise~   | arbitrary logic   | complex/custom conditions         |
+| ~cut~                   | fixed values      | meaningful absolute boundaries    |
+| ~qcut~                  | quantiles         | relative position / ranking       |
+
+#+begin_example
+cut  = divide by actual values
+qcut = divide by position in the distribution
+#+end_example
+* Ranks, Correlations and Summary Statistics
+** Ranking
+
+Use ~rank()~ to calculate the position of each value.
+
+#+begin_src python
+df.with_columns(
+    pl.col("price")
+    .rank(descending=False) # method=average
+    .alias("rank_default"),
+    pl.col("price")
+    .rank(method="min", descending=False)
+    .alias("rank_min"),
+)
+#+end_src
+
+- ~descending=False~: smallest value gets rank 1.
+- Default tie handling uses the *average rank*. It's good for analytics
+
+Example:
+
+#+begin_example
+price   rank
+10      1.5
+10      1.5
+20      3.0
+#+end_example
+- ~method="min"~: tied values receive the lowest rank they occupy.
+- ~min~ is useful for top-N displays
+
+** Correlation Matrix
+
+~corr()~ calculates pairwise correlations between numeric columns.
+
+#+begin_src python
+corr = (
+user_reviews
+.select(pl.selectors.integer())
+.corr()
+)
+#+end_src
+
+The result is a square matrix:
+
+#+begin_example
+user_1  user_2  user_3
+1.00    0.82    0.15
+0.82    1.00    0.30
+0.15    0.30    1.00
+#+end_example
+
+The columns identify the variables, but Polars does not automatically create a corresponding row-label column.
+
+To make the matrix easier to read:
+
+#+begin_src python
+corr = corr.with_columns(
+pl.Series("user", corr.columns)
+)
+#+end_src
+
+Now the result becomes conceptually:
+
+#+begin_example
+user    user_1  user_2  user_3
+user_1  1.00    0.82    0.15
+user_2  0.82    1.00    0.30
+user_3  0.15    0.30    1.00
+#+end_example
+
+Why does ~pl.Series("user", corr.columns)~ work?
+
+~corr.columns~ returns the column names:
+#+begin_src python
+["user_1", "user_2", "user_3"]
+#+end_src
+
+Correlation values range from ~-1~ to ~1~:
+
+- ~1~ → strong positive linear relationship
+- ~0~ → little/no linear relationship
+- ~-1~ → strong negative linear relationship
+
+** Custom Summary Statistics
+
+~describe()~ can use custom percentiles:
+
+#+begin_src python
+spotify.select("popularity", "monthly_listeners").describe(
+    percentiles=[0.1, 0.9]
+)
+#+end_src
+
+Useful when the analysis already uses specific quantile thresholds and the summary should show the same cut points.
