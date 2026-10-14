@@ -12,10 +12,10 @@
 :END:
 
 *** Front
-In Polars, which operation should you use to keep only rows whose =price= is below 500, and which should you use to produce a DataFrame containing selected or computed columns?
+In Polars, which operation should you use to keep only rows whose ~price~ is below 500, and which should you use to produce a DataFrame containing selected or computed columns?
 
 *** Back
-Use =df.filter(pl.col("price") < 500)= to retain matching rows. Use =df.select(...)= to select or compute the output columns.
+Use ~df.filter(pl.col("price") < 500)~ to retain matching rows. Use ~df.select(...)~ to select or compute the output columns.
 
 Source: Polars
 
@@ -47,12 +47,12 @@ Source: Polars
 :END:
 
 *** Front
-How can a =select= expression create a rounded 20%-discounted =price= column named =discounted_price=?
+How can a ~select~ expression create a rounded 20%-discounted ~price~ column named ~discounted_price~?
 
 *** Back
-=df.select((pl.col("price") * 0.8).round(0).alias("discounted_price"))=
+~df.select((pl.col("price") * 0.8).round(0).alias("discounted_price"))~
 
-=alias= gives a computed expression its output-column name.
+~alias~ gives a computed expression its output-column name.
 
 Source: Polars
 
@@ -65,10 +65,10 @@ Source: Polars
 :END:
 
 *** Front
-Which Polars method should you use to add or replace columns from expressions, for example to cast =bedrooms= to =Int16=?
+Which Polars method should you use to add or replace columns from expressions, for example to cast ~bedrooms~ to ~Int16~?
 
 *** Back
-Use =with_columns=:
+Use ~with_columns~:
 
 #+begin_src python
 df.with_columns(pl.col("bedrooms").cast(pl.Int16))
@@ -87,10 +87,10 @@ Source: Polars
 :END:
 
 *** Front
-You need to double every value in a Polars =review= column. Why is =(pl.col("review") * 2)= usually preferable to =map_elements= with a Python function?
+You need to double every value in a Polars ~review~ column. Why is ~(pl.col("review") * 2)~ usually preferable to ~map_elements~ with a Python function?
 
 *** Back
-The native expression stays in Polars' optimized execution path and is clearer. Reserve =map_elements= for logic that is genuinely easier in Python, requires a third-party Python function, or does not need performance.
+The native expression stays in Polars' optimized execution path and is clearer. Reserve ~map_elements~ for logic that is genuinely easier in Python, requires a third-party Python function, or does not need performance.
 
 Source: Polars
 
@@ -103,10 +103,10 @@ Source: Polars
 :END:
 
 *** Front
-Which =pl.concat= strategy combines DataFrames by rows when their column sets differ?
+Which ~pl.concat~ strategy combines DataFrames by rows when their column sets differ?
 
 *** Back
-Use =pl.concat([df1, df2], how="diagonal")=. It combines rows while accommodating differing columns. Use =how="vertical"= when the schemas are the same.
+Use ~pl.concat([df1, df2], how="diagonal")~. It combines rows while accommodating differing columns. Use ~how="vertical"~ when the schemas are the same.
 
 Source: Polars
 
@@ -114,14 +114,14 @@ Source: Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428292
-:ANKI_NOTE_HASH: 27dfbe54959b5ded868f04670ea31665
+:ANKI_NOTE_HASH: a1756e02d13e21669bd55b6ecd09d062
 :END:
 
 *** Front
-Two Polars DataFrames have rows in the intended order, and you want to place their columns side by side without joining on a key. What is the key =pl.concat= form, and what determines row alignment?
+Two Polars DataFrames have rows in the intended order, and you want to place their columns side by side without joining on a key. What is the key ~pl.concat~ form, and what determines row alignment?
 
 *** Back
-=pl.concat([df1, df2], how="horizontal")=. Rows align by position, not by a key. In current Polars, the frames must have equal heights; use =how="horizontal_extend"= if you want shorter frames padded with nulls.
+~pl.concat([df1, df2], how="horizontal")~. Rows align by position, not by a key. In current Polars, the frames must have equal heights; use ~how="horizontal_extend"~ if you want shorter frames padded with nulls.
 
 Source: Polars
 
@@ -137,7 +137,7 @@ Source: Polars
 After a full Polars join on shared key columns, how can you avoid retaining duplicate left/right key columns?
 
 *** Back
-Pass =coalesce=True= to =join=, for example:
+Pass ~coalesce=True~ to ~join~, for example:
 
 #+begin_src python
 df1.join(df2, on=["key1", "key2"], how="full", coalesce=True)
@@ -149,14 +149,14 @@ Source: Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428295
-:ANKI_NOTE_HASH: 1ab24a88ecbc086d17922f6acc50dbf7
+:ANKI_NOTE_HASH: 99a7906e3ab881ea24d9cdd81ff40235
 :END:
 
 *** Front
-You need restaurant/user pairs with matching =type= and =price <= budget=. Which Polars join handles these equality and inequality conditions together?
+You need restaurant/user pairs with matching ~type~ and ~price <= budget~. Which Polars join handles these equality and inequality conditions together?
 
 *** Back
-Use =join_where= with both predicates:
+Use ~join_where~ with both predicates:
 
 #+begin_src python
 restaurants.join_where(
@@ -179,7 +179,7 @@ Source: Polars
 :END:
 
 *** Front
-For a time-series =join_asof=, what does the =backward= strategy match for each left-side timestamp?
+For a time-series ~join_asof~, what does the ~backward~ strategy match for each left-side timestamp?
 
 *** Back
 It matches the latest right-side value at or before the left timestamp; it never matches future data. Sort both inputs on the join key before the join.
@@ -190,14 +190,14 @@ Source: Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428299
-:ANKI_NOTE_HASH: 88687045633213a94434bcb09dfbcd5a
+:ANKI_NOTE_HASH: c8ae2aeb867f0c860c14ff27873366ea
 :END:
 
 *** Front
 You want Polars to optimize a CSV transformation before reading and executing it. What should you start the query with?
 
 *** Back
-Start with =pl.scan_csv("data.csv")=, then chain expressions and call =.collect()= when you need the result. This creates a lazy query that Polars can optimize before execution.
+Start with ~pl.scan_csv("data.csv")~, then chain expressions and call ~.collect()~ when you need the result. This creates a lazy query that Polars can optimize before execution.
 
 Source: Polars
 
@@ -210,10 +210,10 @@ Source: Polars
 :END:
 
 *** Front
-With =pl.scan_csv("data.csv").select(...)=, which method shows the optimized query plan and which method actually runs it?
+With ~pl.scan_csv("data.csv").select(...)~, which method shows the optimized query plan and which method actually runs it?
 
 *** Back
-=.explain()= displays the optimized plan. =.collect()= executes that optimized lazy query and returns the result.
+~.explain()~ displays the optimized plan. ~.collect()~ executes that optimized lazy query and returns the result.
 
 Source: Polars
 
@@ -221,14 +221,14 @@ Source: Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428302
-:ANKI_NOTE_HASH: cc7f107314df5029a038754c904372b5
+:ANKI_NOTE_HASH: 84e151718fe4a834fcb12128e63cce3e
 :END:
 
 *** Front
-How do you keep only rows where the Polars =price= column is null?
+How do you keep only rows where the Polars ~price~ column is null?
 
 *** Back
-=df.filter(pl.col("price").is_null())=
+~df.filter(pl.col("price").is_null())~
 
 Source: Practical Data Transformation with Polars
 
@@ -241,10 +241,10 @@ Source: Practical Data Transformation with Polars
 :END:
 
 *** Front
-What is the difference between =df.drop_nulls()= and =df.drop_nulls(subset="singles")=?
+What is the difference between ~df.drop_nulls()~ and ~df.drop_nulls(subset="singles")~?
 
 *** Back
-The first removes rows with a null in any column. The second considers nulls only in the =singles= column.
+The first removes rows with a null in any column. The second considers nulls only in the ~singles~ column.
 
 Source: Practical Data Transformation with Polars
 
@@ -257,7 +257,7 @@ Source: Practical Data Transformation with Polars
 :END:
 
 *** Front
-How can you replace null values in =review= with the mean of the non-null =review= values using Polars?
+How can you replace null values in ~review~ with the mean of the non-null ~review~ values using Polars?
 
 *** Back
 #+begin_src python
@@ -275,10 +275,10 @@ Source: Practical Data Transformation with Polars
 :END:
 
 *** Front
-How do =df.unique()= and =df.unique(subset=["name", "gender"])= differ?
+How do ~df.unique()~ and ~df.unique(subset=["name", "gender"])~ differ?
 
 *** Back
-=df.unique()= keeps one copy of each fully duplicated row. With =subset=, rows are considered duplicates when those specified columns have the same values. By default, Polars does not guarantee which duplicate row is kept; specify =keep="first"= or =keep="last"= when that matters.
+~df.unique()~ keeps one copy of each fully duplicated row. With ~subset~, rows are considered duplicates when those specified columns have the same values. By default, Polars does not guarantee which duplicate row is kept; specify ~keep="first"~ or ~keep="last"~ when that matters.
 
 Source: Practical Data Transformation with Polars
 
@@ -291,10 +291,10 @@ Source: Practical Data Transformation with Polars
 :END:
 
 *** Front
-Inside =df.group_by("type", "bedrooms").agg(...)=, which expression counts the rows in each group?
+Inside ~df.group_by("type", "bedrooms").agg(...)~, which expression counts the rows in each group?
 
 *** Back
-Use =pl.len()=.
+Use ~pl.len()~.
 
 Source: Practical Data Transformation with Polars
 
@@ -302,11 +302,11 @@ Source: Practical Data Transformation with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428305
-:ANKI_NOTE_HASH: ceb6738cae9862ef04f1c0c82bdf52be
+:ANKI_NOTE_HASH: afc35d1c0147dc9daf436cf28f95bdae
 :END:
 
 *** Front
-For each =type= in a Polars DataFrame, how do you calculate both the mean and maximum =price= as separate named columns?
+For each ~type~ in a Polars DataFrame, how do you calculate both the mean and maximum ~price~ as separate named columns?
 
 *** Back
 #+begin_src python
@@ -322,14 +322,14 @@ Source: Practical Data Transformation with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428307
-:ANKI_NOTE_HASH: fea7dac97127486484e95e45fa803c1c
+:ANKI_NOTE_HASH: 79d8bcf2ce1b9e1df8825382d88dcfd2
 :END:
 
 *** Front
-How do you produce a frequency table for the values in the Polars =category= column, with the most frequent values first?
+How do you produce a frequency table for the values in the Polars ~category~ column, with the most frequent values first?
 
 *** Back
-=df["category"].value_counts(sort=True)= returns each value and its count, sorted by count descending.
+~df["category"].value_counts(sort=True)~ returns each value and its count, sorted by count descending.
 
 Source: Practical Data Transformation with Polars
 
@@ -342,14 +342,14 @@ Source: Practical Data Transformation with Polars
 :END:
 
 *** Front
-Given long-form columns =Month=, =Product=, and =Sales=, how do you pivot so each product becomes a column and each month stays a row?
+Given long-form columns ~Month~, ~Product~, and ~Sales~, how do you pivot so each product becomes a column and each month stays a row?
 
 *** Back
 #+begin_src python
 df.pivot(on="Product", index="Month", values="Sales")
 #+end_src
 
-Use =aggregate_function= too when multiple input rows would map to the same output cell.
+Use ~aggregate_function~ too when multiple input rows would map to the same output cell.
 
 Source: Practical Data Transformation with Polars
 
@@ -362,7 +362,7 @@ Source: Practical Data Transformation with Polars
 :END:
 
 *** Front
-The columns =Month=, =Apple=, and =Banana= hold monthly sales in wide form. How do you turn them into long-form =Month=, =Product=, and =Sales= columns?
+The columns ~Month~, ~Apple~, and ~Banana~ hold monthly sales in wide form. How do you turn them into long-form ~Month~, ~Product~, and ~Sales~ columns?
 
 *** Back
 #+begin_src python
@@ -374,7 +374,7 @@ df.unpivot(
 )
 #+end_src
 
-=unpivot= turns selected columns into category/value rows.
+~unpivot~ turns selected columns into category/value rows.
 
 Source: Practical Data Transformation with Polars
 
@@ -382,14 +382,14 @@ Source: Practical Data Transformation with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428310
-:ANKI_NOTE_HASH: 89e7558cf5c46293f98e93a401d57afa
+:ANKI_NOTE_HASH: 58f2c1183583ce720b0e1aebf05c4158
 :END:
 
 *** Front
-Scores must use fixed bands at 40 and 70, regardless of the dataset's distribution. How do you label the three bands =low=, =medium=, and =high= in Polars?
+Scores must use fixed bands at 40 and 70, regardless of the dataset's distribution. How do you label the three bands ~low~, ~medium~, and ~high~ in Polars?
 
 *** Back
-=pl.col("score").bin_intervals([40, 70], labels=["low", "medium", "high"], right_closed=True)=. Then 40 belongs to =low= and 70 to =medium=. The source notes use =cut=, which Polars 2.0 deprecates in favor of =bin_intervals=.
+~pl.col("score").bin_intervals([40, 70], labels=["low", "medium", "high"], right_closed=True)~. Then 40 belongs to ~low~ and 70 to ~medium~. The source notes use ~cut~, which Polars 2.0 deprecates in favor of ~bin_intervals~.
 
 Source: Practical Data Transformation with Polars
 
@@ -397,14 +397,14 @@ Source: Practical Data Transformation with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428312
-:ANKI_NOTE_HASH: d28eb8902658deadcd822cf6066d7b16
+:ANKI_NOTE_HASH: 827c577d2c19a08e7c048bcb9419ed25
 :END:
 
 *** Front
-You want score bands based on the dataset's 25th and 75th percentiles. Which Polars expression fits, and how does it differ from fixed-threshold =cut= as the data changes?
+You want score bands based on the dataset's 25th and 75th percentiles. Which Polars expression fits, and how does it differ from fixed-threshold ~cut~ as the data changes?
 
 *** Back
-=pl.col("score").bin_quantiles([0.25, 0.75], labels=["low", "medium", "high"], right_closed=True)=. Its numeric breakpoints depend on the data; fixed-interval binning uses specified values. The source notes use =qcut=, which Polars 2.0 deprecates in favor of =bin_quantiles=.
+~pl.col("score").bin_quantiles([0.25, 0.75], labels=["low", "medium", "high"], right_closed=True)~. Its numeric breakpoints depend on the data; fixed-interval binning uses specified values. The source notes use ~qcut~, which Polars 2.0 deprecates in favor of ~bin_quantiles~.
 
 Source: Practical Data Transformation with Polars
 
@@ -412,14 +412,14 @@ Source: Practical Data Transformation with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428314
-:ANKI_NOTE_HASH: 0f7499a3d461c667214221a624f74766
+:ANKI_NOTE_HASH: 582a37368f6957ad9407ff1eb99651e1
 :END:
 
 *** Front
-A =capacity= of 120 satisfies both =capacity > 100= and =capacity >= 20=. In a Polars =when(...).then(...).when(...).then(...)= chain, how do you ensure it is labeled =Large= rather than =Medium=?
+A ~capacity~ of 120 satisfies both ~capacity > 100~ and ~capacity >= 20~. In a Polars ~when(...).then(...).when(...).then(...)~ chain, how do you ensure it is labeled ~Large~ rather than ~Medium~?
 
 *** Back
-Put the =capacity > 100= condition first. Polars takes the result from the first true condition; later conditions do not override it.
+Put the ~capacity > 100~ condition first. Polars takes the result from the first true condition; later conditions do not override it.
 
 Source: Practical Data Transformation with Polars
 
@@ -427,14 +427,14 @@ Source: Practical Data Transformation with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428316
-:ANKI_NOTE_HASH: 2f739f8639c5666589ac0d389a2b8ae7
+:ANKI_NOTE_HASH: 8bdad85bb0e994c7410b684acead7d9c
 :END:
 
 *** Front
-For ascending Polars values =10, 10, 20=, what ranks do the two 10s receive with the default =rank()= tie method, and what do they receive with =rank(method="min")=?
+For ascending Polars values ~10, 10, 20~, what ranks do the two 10s receive with the default ~rank()~ tie method, and what do they receive with ~rank(method="min")~?
 
 *** Back
-Default =average= gives both 10s rank =1.5=; =method="min"= gives both rank =1=. The 20 gets rank =3= in either case.
+Default ~average~ gives both 10s rank ~1.5~; ~method="min"~ gives both rank ~1~. The 20 gets rank ~3~ in either case.
 
 Source: Practical Data Transformation with Polars
 
@@ -447,10 +447,10 @@ Source: Practical Data Transformation with Polars
 :END:
 
 *** Front
-Does =pl.concat_str("business", "location", separator=", ")= automatically create a unique identifier? What must hold for it to be unique?
+Does ~pl.concat_str("business", "location", separator=", ")~ automatically create a unique identifier? What must hold for it to be unique?
 
 *** Back
-No. It creates a composite string. The =business=/=location= pair must itself be unique, and the separator must not allow ambiguous combinations that collide.
+No. It creates a composite string. The combination of ~business~ and ~location~ must itself be unique, and the separator must not allow ambiguous combinations that collide.
 
 Source: Practical Data Transformation with Polars
 
@@ -463,10 +463,10 @@ Source: Practical Data Transformation with Polars
 :END:
 
 *** Front
-Why might =pl.col("location").str.replace("Rd.", "Road")= give an unexpected result, and how do you make it replace the literal text =Rd.= ?
+Why might ~pl.col("location").str.replace("Rd.", "Road")~ give an unexpected result, and how do you make it replace the literal text ~Rd.~ ?
 
 *** Back
-=str.replace= treats its pattern as a regular expression by default, where =.= is a wildcard. Pass =literal=True=:
+~str.replace~ treats its pattern as a regular expression by default, where ~.~ is a wildcard. Pass ~literal=True~:
 
 #+begin_src python
 pl.col("location").str.replace("Rd.", "Road", literal=True)
@@ -483,10 +483,10 @@ Source: Practical Data Transformation with Polars
 :END:
 
 *** Front
-What does =pl.col("business").str.extract(r"(burger|coffee)")= return for a string that matches neither alternative?
+What does ~pl.col("business").str.extract(r"(burger|coffee)")~ return for a string that matches neither alternative?
 
 *** Back
-It returns =null=. =str.extract= returns the text matched by the regular expression capture group in parentheses.
+It returns ~null~. ~str.extract~ returns the text matched by the regular expression capture group in parentheses.
 
 Source: Practical Data Transformation with Polars
 
@@ -499,7 +499,7 @@ Source: Practical Data Transformation with Polars
 :END:
 
 *** Front
-How can you make a Polars =str.contains= search for =burger= case-insensitive when the source column may contain mixed capitalization?
+How can you make a Polars ~str.contains~ search for ~burger~ case-insensitive when the source column may contain mixed capitalization?
 
 *** Back
 Normalize the text and pattern to the same case, for example:
@@ -508,7 +508,7 @@ Normalize the text and pattern to the same case, for example:
 pl.col("business").str.to_lowercase().str.contains("burger")
 #+end_src
 
-=str.contains= is case-sensitive by default and interprets its pattern as a regular expression.
+~str.contains~ is case-sensitive by default and interprets its pattern as a regular expression.
 
 Source: Practical Data Transformation with Polars
 
@@ -516,11 +516,11 @@ Source: Practical Data Transformation with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428319
-:ANKI_NOTE_HASH: f25b1cb73d0cf2f983b6d181eee71bea
+:ANKI_NOTE_HASH: b288025e7c6e3dd960c8250012edc43b
 :END:
 
 *** Front
-The string column =time= contains values like =01/10/2026 12:30=. How do you parse it as a Polars =Datetime= using the day/month/year format?
+The string column ~time~ contains values like ~01/10/2026 12:30~. How do you parse it as a Polars ~Datetime~ using the day/month/year format?
 
 *** Back
 #+begin_src python
@@ -533,14 +533,14 @@ Source: Time Series with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428321
-:ANKI_NOTE_HASH: 1627686f8416de5b615b2144c38c5fd5
+:ANKI_NOTE_HASH: 05a41efc5f9cbd57a1ce5beba3aa820c
 :END:
 
 *** Front
-How do you derive a =date= column from a Polars =Datetime= column named =time= while dropping the time-of-day component?
+How do you derive a ~date~ column from a Polars ~Datetime~ column named ~time~ while dropping the time-of-day component?
 
 *** Back
-=df.with_columns(pl.col("time").dt.date().alias("date"))=
+~df.with_columns(pl.col("time").dt.date().alias("date"))~
 
 Source: Time Series with Polars
 
@@ -548,14 +548,14 @@ Source: Time Series with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428323
-:ANKI_NOTE_HASH: be50086bc82ded930cce194243d175fb
+:ANKI_NOTE_HASH: 113a115bbbe4219fbccc6a5b954d2319
 :END:
 
 *** Front
-You need one aggregate row per six-hour time window from timestamped =prices=. Which Polars grouping form creates the windows, and what ordering must the input have?
+You need one aggregate row per six-hour time window from timestamped ~prices~. Which Polars grouping form creates the windows, and what ordering must the input have?
 
 *** Back
-=prices.sort("time").group_by_dynamic("time", every="6h").agg(...)=. The time index must be sorted ascending before dynamic grouping.
+~prices.sort("time").group_by_dynamic("time", every="6h").agg(...)~. The time index must be sorted ascending before dynamic grouping.
 
 Source: Time Series with Polars
 
@@ -563,14 +563,14 @@ Source: Time Series with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428326
-:ANKI_NOTE_HASH: 3f530a6dc418e678c4678e9a71d90609
+:ANKI_NOTE_HASH: d4a63a735888775c3d8bece3f66b772f
 :END:
 
 *** Front
-In =group_by_dynamic("time", every="1h", period="2h")=, how often do windows start, how long is each window, and can one row belong to two windows?
+In ~group_by_dynamic("time", every="1h", period="2h")~, how often do windows start, how long is each window, and can one row belong to two windows?
 
 *** Back
-Windows start every hour and each lasts two hours. They overlap, so a row can belong to multiple windows. If =period= is omitted, it defaults to =every=.
+Windows start every hour and each lasts two hours. They overlap, so a row can belong to multiple windows. If ~period~ is omitted, it defaults to ~every~.
 
 Source: Time Series with Polars
 
@@ -578,14 +578,14 @@ Source: Time Series with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428328
-:ANKI_NOTE_HASH: dcf505060966c0cb7c96f4ec70daf6cf
+:ANKI_NOTE_HASH: 4001aa669ce271e28f5e30c67ff79057
 :END:
 
 *** Front
 For prices already in time order, how do you add a moving average over the current and six preceding rows, regardless of elapsed time?
 
 *** Back
-=prices.with_columns(pl.col("price").rolling_mean(window_size=7).alias("ma7"))=. The window uses seven observations; it is not a seven-day window.
+~prices.with_columns(pl.col("price").rolling_mean(window_size=7).alias("ma7"))~. The window uses seven observations; it is not a seven-day window.
 
 Source: Time Series with Polars
 
@@ -593,11 +593,11 @@ Source: Time Series with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428330
-:ANKI_NOTE_HASH: 21329eae49d1e9b81a4e4a3b5a747450
+:ANKI_NOTE_HASH: 7e12f8bc122cd32f35f83ceb6c6396a1
 :END:
 
 *** Front
-Observations arrive at irregular times. How do you calculate a mean =price= over a trailing three-hour window at each timestamp in Polars?
+Observations arrive at irregular times. How do you calculate a mean ~price~ over a trailing three-hour window at each timestamp in Polars?
 
 *** Back
 #+begin_src python
@@ -606,7 +606,7 @@ prices.sort("time").rolling(index_column="time", period="3h").agg(
 )
 #+end_src
 
-This uses elapsed time, while =rolling_mean(window_size=7)= uses a count of observations.
+This uses elapsed time, while ~rolling_mean(window_size=7)~ uses a count of observations.
 
 Source: Time Series with Polars
 
@@ -614,14 +614,14 @@ Source: Time Series with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428334
-:ANKI_NOTE_HASH: e08067bf7403b9af8bd7cd6e03e84ad3
+:ANKI_NOTE_HASH: 7d1e1367e3aa9b6da3ff4d68da9e2766
 :END:
 
 *** Front
-How do you add the mean =price= for each =hour= to every original row, without collapsing the rows into groups?
+How do you add the mean ~price~ for each ~hour~ to every original row, without collapsing the rows into groups?
 
 *** Back
-=prices.with_columns(pl.col("price").mean().over("hour").alias("hourly_avg"))=. The =over("hour")= window broadcasts each group result to its rows.
+~prices.with_columns(pl.col("price").mean().over("hour").alias("hourly_avg"))~. The ~over("hour")~ window broadcasts each group result to its rows.
 
 Source: Time Series with Polars
 
@@ -629,14 +629,14 @@ Source: Time Series with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428337
-:ANKI_NOTE_HASH: aaba57b412f157bd2501d15342452ba8
+:ANKI_NOTE_HASH: c6dcb8fb21c9f338dfd0e8c2248c2d2d
 :END:
 
 *** Front
-For rows already in the intended order, how do you add a running total of =precipitation= in Polars?
+For rows already in the intended order, how do you add a running total of ~precipitation~ in Polars?
 
 *** Back
-=prices.with_columns(pl.col("precipitation").cum_sum().alias("total_precipitation"))=. The cumulative sum follows the current row order, so sort first if order matters.
+~prices.with_columns(pl.col("precipitation").cum_sum().alias("total_precipitation"))~. The cumulative sum follows the current row order, so sort first if order matters.
 
 Source: Time Series with Polars
 
@@ -644,11 +644,11 @@ Source: Time Series with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428341
-:ANKI_NOTE_HASH: 5207c46f39fb45b23b373ff972c859f4
+:ANKI_NOTE_HASH: 4fdcda7a56b1f8a1edf35f7beb60d221
 :END:
 
 *** Front
-How do you add each row's =price= minus the mean =price= of its =hour= group?
+How do you add each row's ~price~ minus the mean ~price~ of its ~hour~ group?
 
 *** Back
 #+begin_src python
