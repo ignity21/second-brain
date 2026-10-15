@@ -1,5 +1,20 @@
 在线图谱：https://roam.ignity.xyz/ （push =roamnotes-v2/= 后由 =publish/= 与 GitHub Actions 自动发布）
 
+* 目录
+
+- =roamnotes-v2/= ：org-roam 笔记库；=roamnotes/= 是待迁移的旧版笔记。
+- =ankinotes/= ：Anki 卡片。
+- =projects/= 、=notebooks/= ：配合笔记的示例代码与 notebook。
+- =inbox/= ：学习材料暂存区（gitignore），处理后清空。
+- =publish/= ：在线图谱的导出与构建脚本。
+- =.agents/= ：AI 协作用的 skills 与任务记录；协作约定见 =AGENTS.md= 。
+
+* 学习流程
+
+1. 读网页时，把 [[https://github.com/ignity21/second-brain/blob/master/.agents/skills/inbox-processing/web-capture-prompt.md][网页采集提示词]] 中代码块的内容粘贴到浏览器侧边栏或 claude.ai，按提示回答疑问。
+2. 把输出的 =source.md= 和 =questions.md= 存到 =inbox/<日期>-<slug>/= 。非网页材料（文稿、幻灯片）也放成这样一个目录，并自己写 =questions.md= 。
+3. 在仓库里对 AI 说「处理收件箱」，只围绕 =questions.md= 中的疑问提取笔记和 Anki 卡片。
+
 * 分类、索引与重名约定
 
 - 一级目录是笔记的主要入口，不是互斥的身份标签；应作为主题的粗粒度分类使用，而非依赖大量 tag。
