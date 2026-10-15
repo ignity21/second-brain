@@ -34,7 +34,7 @@ rm -rf "$out/ui"
 
 # Note resources (images, attachments), addressed by path from the roam root.
 rsync -a --prune-empty-dirs \
-  --exclude='.*' --exclude='logseq/' --exclude='*.org' --exclude='*.org_archive' \
+  --exclude='.*' --exclude='*.org' --exclude='*.org_archive' \
   "$roam/" "$out/files/"
 
 touch "$out/.nojekyll"

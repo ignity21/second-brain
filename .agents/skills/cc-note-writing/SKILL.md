@@ -1,6 +1,6 @@
 ---
 name: cc-note-writing
-description: Decide what an org-roam note in roamnotes-v2/ should contain, by note type (library/tool, language feature, algorithm, theory, practice, experience). Use when writing a new note, organizing the user's key points or drafts into a note, or rewriting/slimming an existing note's content. Not for legacy migration (note-migration) or Anki cards (anki-cards).
+description: Decide what an org-roam note in roamnotes-v2/ should contain, by note type (library/tool, language feature, algorithm, theory, practice, experience, misconception/decision). Use when writing a new note, organizing the user's key points or drafts into a note, or rewriting/slimming an existing note's content. Not for legacy migration (note-migration) or Anki cards (anki-cards).
 ---
 
 # 笔记写作
@@ -21,6 +21,7 @@ description: Decide what an org-roam note in roamnotes-v2/ should contain, by no
    | 理论 / 数学 | 梯度下降、假设检验、特征值 | [theory.md](references/theory.md) |
    | 方法 / 实践 | 代码风格、数据清洗流程 | [practice.md](references/practice.md) |
    | 经验 / 坑 | 一次调试经历 | [experience.md](references/experience.md) |
+   | 误解 / 判断 | 原来以为 X 其实是 Y、选型决策 | [misconception.md](references/misconception.md) |
 
 2. **收集材料**：用户的关键点或草稿、要改写的现有笔记、全库相关笔记（用 ID 链接，不重复写）、官方文档。用户的书籍和视频原始资料不引用；需要时可在正文用一行纯文本注明书名或课程名。
 3. **逐条做准入测试**（见下节），决定每条内容的去留和位置。
@@ -32,6 +33,7 @@ description: Decide what an org-roam note in roamnotes-v2/ should contain, by no
 
 对每条候选内容按顺序判断，命中即停：
 
+0a. **回应了用户的疑问或被纠正的误解吗？**（来自 `questions.md`、对话或草稿）→ 优先保留；用户没卡住的内容默认不展开。
 0. **用户需要能脱手写出来吗？**（高频操作、面试、算法模板、语言核心惯用法）→ 保留，放入「核心词汇」或模板代码，作为 Anki 候选。范围要刻意收窄。
 1. **能随时可靠地查到，且不需要脱手写？** → 不记，或在能力地图里留名字和一句话用途。
 2. **推理、审查或选型时必须装在脑子里？** → 写进核心模型、对比或坑。

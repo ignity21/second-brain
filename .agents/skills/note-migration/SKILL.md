@@ -9,7 +9,7 @@ description: Migrate old org-roam notes from the legacy library (roamnotes/) int
 
 ## 目标与映射
 
-- `Default/` → `Inbox/`。
+- `Default/` → `Unsorted/`。
 - `C++/`、`DataScience/`、`Games/`、`Python/`、`Trading/` 默认迁入同名大类。
 - 旧备忘录将 `EmacsLisp/` 映射为同名目录；当前目标已有 `Elisp/`，迁移相关内容时先核对现有索引和语义，避免另建重复大类。
 - 分类图片迁入目标分类的 `images/`，共享 `assets/` 迁入目标库根目录的 `assets/`。
@@ -31,4 +31,4 @@ description: Migrate old org-roam notes from the legacy library (roamnotes/) int
 - 共享资源：旧 `[[../assets/CPP/example.svg]]` 统一为 `[[file:../assets/CPP/example.svg]]` → `roamnotes-v2/assets/CPP/example.svg`。
 - 此处不能写成 `file:assets/...`，否则会指向 `C++/assets/`。从更深目录移出笔记时，重新计算所有受影响的相对路径。
 
-缓存和忽略配置以目标库实际配置为准，不迁移生成的 org-roam 数据库作为笔记内容。保留 `pages/`、`logseq/`。
+缓存和忽略配置以目标库实际配置为准，不迁移生成的 org-roam 数据库作为笔记内容。不迁移 `pages/`、`logseq/`（Logseq 已弃用）。

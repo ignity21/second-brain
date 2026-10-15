@@ -1,7 +1,3 @@
-# logseq
-**/logseq/bak/
-**/logseq/.recycle/
-
 # org-mode
 ltximg/
 .cache/
@@ -19,3 +15,7 @@ journals/
 
 # org-roam-ui static site
 site/
+
+# learning inbox (raw materials, processed then removed)
+inbox/*
+!inbox/.gitkeep
