@@ -9,7 +9,7 @@ description: Process learning materials in the repo-root inbox/ into org-roam no
 
 ## 材料约定
 
-一份材料一个子目录，如 `inbox/2026-10-15-tcp-handshake/`：正文或文稿 Markdown、幻灯片 PDF（可选）、侧边栏问答（可选），以及必需的 `questions.md`（用户的疑问、没看懂之处、原来的理解）。没有 `questions.md` 的材料先向用户索取，不对整篇材料直接做笔记。
+一份材料一个子目录，如 `inbox/2026-10-15-tcp-handshake/`：正文或文稿 Markdown、幻灯片 PDF（可选）、侧边栏问答（可选），以及必需的 `questions.md`（用户的疑问、没看懂之处、原来的理解）。没有 `questions.md` 的材料先向用户索取，不对整篇材料直接做笔记。网页材料用 [web-capture-prompt.md](web-capture-prompt.md) 采集；`questions.md` 写「无」时不提取。
 
 ## 流程
 
@@ -19,7 +19,13 @@ description: Process learning materials in the repo-root inbox/ into org-roam no
    - **判断**：技术选择及理由、放弃的方案。
    - **故障**：触发条件、排查证据、确认原因的方法。
    概念定义、API、语法、按原文结构的复述不收。宁可少，不要把整篇材料重新整理一遍。
-3. 按 `cc-note-writing` 写入或合并到已有笔记（优先合并，不重复新建），索引与验证遵循 AGENTS.md。
-4. 为「误解」类内容生成 Anki 卡片（`anki-cards` skill；目标 Deck 的规则以该 skill 为准）。
-5. 材料处理完后删除（不归档进知识库）；若用户要保留，移到 `inbox/_archive/`。
-6. 回复列出：新增或修改的笔记、生成的卡片、没有提取出内容的材料及原因。
+   `[预测题]` 先对照材料批改：答错的作为「误解」候选，答对的不收。
+3. **粒度**：一个疑问最多对应一条内容，不按材料章节切分。逐条判断：
+   - 换个时间问 AI 一次就能答对 → 不收。
+   - 会改变技术选择或排查方式 → 收（判断 / 故障）。
+   - 纠正了用户原来的理解 → 收，并做卡片（误解）。
+   每条写一个结论 + 理由或证据 + 最小例子；一份材料通常 0–3 条，0 条是正常结果。
+4. 按 `cc-note-writing` 写入或合并到已有笔记（优先合并，不重复新建），索引与验证遵循 AGENTS.md。
+5. 为「误解」类内容生成 Anki 卡片（`anki-cards` skill；目标 Deck 的规则以该 skill 为准）。
+6. 材料处理完后删除（不归档进知识库）；若用户要保留，移到 `inbox/_archive/`。
+7. 回复列出：新增或修改的笔记、生成的卡片、没有提取出内容的材料及原因。
