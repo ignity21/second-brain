@@ -11,9 +11,9 @@
 
 * 学习流程
 
-1. 读网页时，把 [[https://github.com/ignity21/second-brain/blob/master/.agents/skills/inbox-processing/web-capture-prompt.md][网页采集提示词]] 中代码块的内容粘贴到浏览器侧边栏或 claude.ai，按提示回答疑问。
-2. 把输出的 =source.md= 和 =questions.md= 存到 =inbox/<日期>-<slug>/= 。非网页材料（文稿、幻灯片）也放成这样一个目录，并自己写 =questions.md= 。
-3. 在仓库里对 AI 说「处理收件箱」，只围绕 =questions.md= 中的疑问提取笔记和 Anki 卡片。
+1. 读网页时，用浏览器的「summarize page」生成总结，存为 =inbox/<日期>-<slug>/source.md= 。非网页材料（文稿、幻灯片）也放成这样一个目录。
+2. 在仓库里对 AI 说「处理收件箱」。AI 按该领域的学习目标（ =.agents/learning-goals.md= ）写笔记，必要时先问几个问题：目标、卡点、冲突。
+3. 写完笔记后 AI 按笔记出题，题目做成 Anki 卡片。
 
 * 分类、索引与重名约定
 
