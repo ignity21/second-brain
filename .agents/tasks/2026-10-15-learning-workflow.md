@@ -27,6 +27,6 @@ Status: Done（待用户首次实验反馈）
 - [x] 删除 `pdfnotes/`（org-noter 已不用）
 - [x] `roamnotes-v2/Inbox/` 改名 `Unsorted/`，同步仓库文档与 Doom 配置（默认类别、README）
 - [x] `inbox/.gitkeep`
-- [ ] fork `ignity21/org-roam-ui` 的 `static` 默认 allowlist 仍是 `Inbox/`，需改为 `Unsorted/` 并更新 `ORG_ROAM_UI_REF`
+- [x] fork `static` 默认 allowlist 改为 `Unsorted/`（`a5bb99b`），`ORG_ROAM_UI_REF` 已更新；待 Publish 工作流部署确认
 - [ ] Doom：`init.el` 与 `+roam.el` 中仍有 dailies 目录派生；org-noter / PDF 相关配置（`+noter`）按需移除
 - [ ] 讨论书籍类学习流程：如何从 PDF 摘录或书签提取内容作为笔记原料；org-noter 作为备选方案
