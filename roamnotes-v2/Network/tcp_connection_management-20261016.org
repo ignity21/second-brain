@@ -110,7 +110,7 @@ note over B : 收到 ACK 后 LAST_ACK → CLOSED
 #+end_src
 
 #+RESULTS:
-: /tmp/babel-YCbUEj/plantuml-d8UduE.png
+[[file:/tmp/babel-YCbUEj/plantuml-n5RV9P.png]]
 
 FIN 与 SYN 一样各占一个序列号：B 的 FIN 序号 = B 最后发出的数据字节 + 1，A 用 ~w+1~ 确认它。
 
@@ -150,6 +150,9 @@ CLOSE_WAIT --> LAST_ACK : 应用 close()，发 FIN
 LAST_ACK --> CLOSED : 收 ACK
 @enduml
 #+end_src
+
+#+RESULTS:
+[[file:/tmp/babel-YCbUEj/plantuml-ehYRfu.png]]
 
 两条转移链比记整张表省事：
 
