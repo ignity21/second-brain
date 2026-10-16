@@ -6,7 +6,7 @@
 
 - 按任务读取相关笔记、索引和说明；普通文字修改无需预读全库或执行迁移检查。
 - 在用户请求范围内完成编辑、必要的索引和链接更新、相关验证，并修复本次改动引入的问题，无需在每一步重复确认。发现无关历史问题时说明即可。
-- 保留用户已有改动。`inbox/` 是 gitignore 的学习材料暂存区，处理后清空，不属于知识库。
+- 保留用户已有改动。`inbox/` 是 gitignore 的学习材料暂存区，只处理根下文件，处理后的材料移到 `inbox/archive/`（按 `YYYYmmdd` 分目录，同样 gitignore），不属于知识库。
 - 多轮或大型改动前，在 `.agents/tasks/` 建立任务文件（Markdown 检查清单 + 状态），进度记录写入该文件；不使用工具私有的 todo 存储（如 `.pi/`）。
 - 仓库级 skills 放 `.agents/skills/<name>/SKILL.md`。撰写、整理或改写笔记内容时用 `cc-note-writing` skill；迁移旧笔记时用 `note-migration` skill；创建或修改 Anki 卡片时用 `anki-cards` skill；用户说「处理收件箱」或要从 `inbox/` 材料提取笔记时用 `inbox-processing` skill；修改 `AGENTS.md`、`CLAUDE.md` 或 `.agents/skills/` 下的指导内容时用 `cc-agent-instructions` skill（用户级）。
 

@@ -5,15 +5,17 @@
 - =roamnotes-v2/= ：org-roam 笔记库；=roamnotes/= 是待迁移的旧版笔记。
 - =ankinotes/= ：Anki 卡片。
 - =projects/= 、=notebooks/= ：配合笔记的示例代码与 notebook。
-- =inbox/= ：学习材料暂存区（gitignore），处理后清空。
+- =inbox/= ：学习材料暂存区（gitignore）；处理后的材料移到 =inbox/archive/= 。
 - =publish/= ：在线图谱的导出与构建脚本。
 - =.agents/= ：AI 协作用的 skills 与任务记录；协作约定见 =AGENTS.md= 。
 
 * 学习流程
 
-1. 读网页时，用浏览器的「summarize page」生成总结，存为 =inbox/<日期>-<slug>/source.md= 。非网页材料（文稿、幻灯片）也放成这样一个目录。
-2. 在仓库里对 AI 说「处理收件箱」。AI 按该领域的学习目标（ =.agents/learning-goals.md= ）写笔记，必要时先问几个问题：目标、卡点、冲突。
-3. 写完笔记后 AI 按笔记出题，题目做成 Anki 卡片。
+1. 读网页时，用浏览器的「summarize page」生成总结，直接存为 =inbox/<名字>.md= 。非网页材料（文稿、幻灯片）也存成单个文件，放在 =inbox/= 根下，不建子目录。
+2. 在仓库里对 AI 说「处理收件箱」。根下有多个文件时，AI 会列出来让你选，子目录不管。
+3. AI 逐段 review 原材料，一次给一段；有问题的部分你提出来讨论，没问题就下一段。走完后 AI 确认卡点是否都提完了。领域目标、档位这类问题会一次问清。
+4. AI 按学习目标（ =.agents/learning-goals.md= ）写笔记（必要时并入已有笔记），写完再按笔记出题，题目做成 Anki 卡片。
+5. 处理完成后，材料从 =inbox/= 移到 =inbox/archive/YYYYmmdd/= ；超过 10 天的归档会被删除。
 
 * 分类、索引与重名约定
 

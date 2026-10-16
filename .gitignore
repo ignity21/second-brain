@@ -16,6 +16,10 @@ journals/
 # org-roam-ui static site
 site/
 
-# learning inbox (raw materials, processed then removed)
+# learning inbox (raw materials, processed then archived)
 inbox/*
 !inbox/.gitkeep
+inbox/archive/
+
+# inbox-processing trial mirror (temporary, delete after trial)
+test/
