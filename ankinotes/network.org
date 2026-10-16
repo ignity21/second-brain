@@ -109,3 +109,18 @@ TCP 建立连接为什么必须三次握手？只用两次会出什么问题？
 另一个问题：两次握手时服务端一发出 SYN + ACK 就认为连接已建立，延迟到达的旧 SYN 会让它凭空建出一条谁也不认的连接。
 
 Source: TCP Connection Management
+
+** TCP TIME_WAIT 2MSL
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+TIME_WAIT 为什么要等 2MSL？为什么不是 1MSL？
+
+*** Back
+- 1 个 MSL 留给最终 ACK 传到对端（若丢失，对端会重传 FIN）。
+- 另 1 个 MSL 留给对端可能重传的 FIN 返回本端。
+两者加起来正好覆盖「ACK 丢失、对端重传 FIN」这一轮往返。
+
+Source: TCP Connection Management
