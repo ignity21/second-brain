@@ -32,4 +32,7 @@
 
 ## 试用记录
 
-（试用后在此补充实际遇到的问题）
+- 2026-10-16 处理 `inbox/tcp.md`（TCP 连接管理）：
+  - AI 给完一块的反馈后直接抛出下一块，用户要回翻找反馈。已在「Review 原材料」加「逐块确认」，并去掉「就地修改」里重复的「再进入下一块」。
+  - Markdown 预处理稿本身能渲染 PlantUML，review 时直接画图、写笔记时搬运即可。已在 `inbox-processing` 和 AGENTS.md 记录：笔记正文用 PlantUML、不放 ASCII 图，对话 / 反馈里可用 ASCII 草图。
+  - 验证阶段发现 AI 拟写的「Keepalive 默认 2 小时」与本机 `tcp_keepalive_time`（120 秒）不符，改为不依赖具体数值的表述。→ 「每块附 AI 的判断」里的默认值也要实测，不能照搬印象。
