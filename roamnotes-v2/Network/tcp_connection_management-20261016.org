@@ -167,6 +167,10 @@ MSL（Maximum Segment Lifetime）是报文段在网络中的最大生存时间�
 
 原来答不上来。1 个 MSL 留给最终 ACK 传到对端（若丢失，对端会重传 FIN），另 1 个 MSL 留给对端可能重传的 FIN 返回本端，加起来正好覆盖一轮往返。
 
+** CLOSE_WAIT 堆积说明什么？
+
+原来答不上来。收到 FIN 的那一方应用没 close()：内核已回 ACK 并停在 CLOSE_WAIT 等应用关闭，属应用 bug、不是网络问题；对端停在 FIN_WAIT_2。
+
 * My Take :mine:
 
 > 连接不是真正的物理连接，而是两端各自维护一个状态机。

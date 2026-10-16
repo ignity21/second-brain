@@ -119,8 +119,25 @@ Source: TCP Connection Management
 TIME_WAIT 为什么要等 2MSL？为什么不是 1MSL？
 
 *** Back
+MSL = Maximum Segment Lifetime，报文段在网络中的最大生存时间。
 - 1 个 MSL 留给最终 ACK 传到对端（若丢失，对端会重传 FIN）。
 - 另 1 个 MSL 留给对端可能重传的 FIN 返回本端。
 两者加起来正好覆盖「ACK 丢失、对端重传 FIN」这一轮往返。
+
+Source: TCP Connection Management
+
+** TCP CLOSE_WAIT 堆积
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+用 ss 查看，某个服务大量连接堆积在 CLOSE_WAIT，说明什么问题？怎么处理？
+
+*** Back
+被动关闭方（收到 FIN 的一方）的应用代码没有 close() 这个连接：内核已回 ACK 并进入 CLOSE_WAIT，等应用关闭。
+- 属于应用 bug，不是网络问题，调内核参数没用。
+- 处理：检查所有代码路径都能关闭 socket（with / context manager、try-finally、连接池归还）。
+- 对端镜像现象：主动关闭方同时停在 FIN_WAIT_2。
 
 Source: TCP Connection Management
