@@ -77,22 +77,6 @@ VLAN 用途
 | VLAN间通信  | ❌        | ✔️         | ✔️      |
 | 有无 WAN 口 | ❌        | ❌        | ✔️      |
 
-** TCP 四次挥手
-:PROPERTIES:
-:ANKI_NOTE_TYPE: CC Basic
-:END:
-
-*** Front
-TCP 关闭连接为什么通常需要四次交互？什么情况下三次就够？
-
-*** Back
-一条连接是两个独立方向，各自独立关闭，每个方向一轮「FIN + ACK」，所以是 2 FIN + 2 ACK = 4。
-- 不是固定三次：被动关闭方收到 FIN 时可能还有数据没发完，要先 ACK，把剩余数据发完，再发自己的 FIN。
-- 被动关闭方恰好没有待发数据时，它的 ACK 和 FIN 合并进同一个包，就只需要三个报文。
-- 不是「主动方给被动方一个窗口期」：主动方的 FIN 只表示自己不再发数据，不影响被动方照常发送。
-
-Source: TCP Connection Management
-
 ** TCP 三次握手
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
@@ -102,11 +86,40 @@ Source: TCP Connection Management
 TCP 建立连接为什么必须三次握手？只用两次会出什么问题？
 
 *** Back
-两次只确认了一个方向：服务端发出的 SYN + ACK 有没有被收到，它并不知道，也就是缺少「客户端能收」这条回路，无法确认双方收发能力都正常。
-- 第 1 次（SYN）：服务端知道「客户端能发」。
-- 第 2 次（SYN + ACK）：客户端知道「服务端能发，也能收」。
-- 第 3 次（ACK）：服务端才知道「客户端能收」。
-另一个问题：两次握手时服务端一发出 SYN + ACK 就认为连接已建立，延迟到达的旧 SYN 会让它凭空建出一条谁也不认的连接。
+两次握手时，服务端一发出 SYN + ACK 就认为连接已建立：网络里迟到的旧 SYN 会让它凭空建出一条谁也不要的连接。有了第 3 次 ACK，客户端对不认识的 SYN + ACK 回 RST，服务端就能丢掉它。
+- 同一件事换个角度：第 3 次 ACK 是服务端唯一能确认「客户端能收」的信号。
+- 第 1 次后服务端知道「客户端能发」；第 2 次后客户端知道「服务端能收也能发」；第 3 次后服务端才知道「客户端能收」。
+
+Source: TCP Connection Management
+
+** TCP 四次挥手
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+TCP 关闭连接为什么通常需要四次交互？什么情况下只有三个报文？
+
+*** Back
+一条连接是两个独立方向，各自关闭，每个方向一轮「FIN + ACK」，所以是 2 FIN + 2 ACK = 4。
+- 被动关闭方收到 FIN 时可能还有数据没发完：先 ACK，发完剩余数据，再发自己的 FIN。
+- 被动关闭方恰好没有待发数据时，ACK 和 FIN 合进同一个报文，就只有三个报文。
+
+Source: TCP Connection Management
+
+** TCP 挥手中 ACK 与 FIN 的间隔
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+四次挥手中，被动关闭方先回 ACK、过一会儿才发 FIN。这段间隔是谁决定的？主动关闭方的 FIN 会限制被动方继续发数据吗？
+
+*** Back
+间隔完全由被动方自己决定：它还有数据要发，发完才发 FIN。
+- 主动方的 FIN 只关闭自己的发送方向，不限制对方；不是主动方「给」被动方留时间。
+- 被动方的 FIN 序号排在它最后的数据之后，主动方据此知道数据已收全。
+- 例子：客户端发完请求后 ~shutdown(SHUT_WR)~ ，服务端照常发完整个响应，再发 FIN。
 
 Source: TCP Connection Management
 
@@ -116,13 +129,14 @@ Source: TCP Connection Management
 :END:
 
 *** Front
-TIME_WAIT 为什么要等 2MSL？为什么不是 1MSL？
+主动关闭方为什么要在 TIME_WAIT 等 2MSL？为什么不是 1MSL？
 
 *** Back
-MSL = Maximum Segment Lifetime，报文段在网络中的最大生存时间。
-- 1 个 MSL 留给最终 ACK 传到对端（若丢失，对端会重传 FIN）。
-- 另 1 个 MSL 留给对端可能重传的 FIN 返回本端。
-两者加起来正好覆盖「ACK 丢失、对端重传 FIN」这一轮往返。
+两个目的：
+- 可靠关闭：最终 ACK 丢失时，对端会重传 FIN，本端还留着状态，能再回 ACK（否则只能回 RST）。
+- 清除旧报文：等本连接滞留的报文消失，同一四元组的新连接不会收到它们。
+2MSL：最终 ACK 最多 1 个 MSL 到达对端（或丢失），对端重传的 FIN 再最多 1 个 MSL 回到本端，合起来覆盖这一轮往返。
+（MSL = Maximum Segment Lifetime；Linux 实际固定等 60 秒。）
 
 Source: TCP Connection Management
 
@@ -132,12 +146,44 @@ Source: TCP Connection Management
 :END:
 
 *** Front
-用 ss 查看，某个服务大量连接堆积在 CLOSE_WAIT，说明什么问题？怎么处理？
+用 ~ss~ 查看，某个服务有大量连接堆积在 CLOSE_WAIT，说明什么问题？怎么处理？
 
 *** Back
-被动关闭方（收到 FIN 的一方）的应用代码没有 close() 这个连接：内核已回 ACK 并进入 CLOSE_WAIT，等应用关闭。
-- 属于应用 bug，不是网络问题，调内核参数没用。
-- 处理：检查所有代码路径都能关闭 socket（with / context manager、try-finally、连接池归还）。
-- 对端镜像现象：主动关闭方同时停在 FIN_WAIT_2。
+这个服务收到了对端的 FIN，但应用代码没有 ~close()~ 这些连接：内核已回 ACK，停在 CLOSE_WAIT 等应用关闭。
+- 属于应用 bug，不是网络问题；CLOSE_WAIT 没有内核超时，调参数没用。
+- 处理：检查所有代码路径（异常分支、连接池归还）都会关闭 socket，例如用 ~with~ 或 ~try~ / ~finally~ 。
+- 对端：若用 ~close()~ 关闭，它的孤儿 FIN_WAIT_2 会在 ~tcp_fin_timeout~ （默认 60 秒）后被回收；只有用 ~shutdown(SHUT_WR)~ 半关闭时才会一直陪着停在 FIN_WAIT_2。
+
+Source: TCP Connection Management
+
+** TCP TIME_WAIT 堆积
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+一个客户端程序高频地向同一个后端 ~IP:端口~ 发起短连接，一段时间后 ~connect()~ 报 ~EADDRNOTAVAIL~ 。原因是什么？怎么解决？
+
+*** Back
+客户端是主动关闭方，每条连接关闭后在 TIME_WAIT 停 60 秒；连同一目标时四元组只有本地端口在变，本地端口范围（默认约 2.8 万个）被占满。
+- 根本办法：复用连接（keep-alive、连接池），不要每次新建。
+- 补充：客户端开 ~tcp_tw_reuse~ ，让新的出站连接复用 TIME_WAIT 端口。
+- 不要：调小 ~tcp_fin_timeout~ （它不管 TIME_WAIT）、 ~tcp_tw_recycle~ （NAT 下出错，已从内核删除）。
+- 对比：服务端的 TIME_WAIT 不消耗端口，一般无害。
+
+Source: TCP Connection Management
+
+** TCP 半开连接
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+TCP 连接的对端主机突然断电，本端连接仍是 ESTABLISHED。本端分别在「持续发数据」和「只阻塞等读」时，多久、怎样才能发现？
+
+*** Back
+- 持续发数据：收不到 ACK，指数退避重传，约 15 分钟（ ~tcp_retries2~ ）后报 ~ETIMEDOUT~ ；若对端已重启，会回 RST，立刻报 ~ECONNRESET~ 。
+- 只等读：TCP 本身永远发现不了。需要 Keepalive 或应用层心跳。
+- Keepalive 每个 socket 默认关闭，要设 ~SO_KEEPALIVE~ ；内核默认空闲 2 小时才开始探测，而且只能证明对端内核还在，所以要快速发现断线时用应用层心跳。
 
 Source: TCP Connection Management
