@@ -1,6 +1,6 @@
 # inbox-processing 试用观察
 
-状态：第一份材料（`tcp.md`）已完成并复审，产出与 skill 改进于 2026-10-16 合并回 `master`；后续材料直接在 `master` 上处理，本文件继续记录观察。
+状态：第一份材料（`tcp.md`）已完成并复审，产出与 skill 改进于 2026-10-16 合并回 `master`；第二轮用 `inbox/tcp2.md` 在 `trial/inbox` 上验证改进后的 skill（开始时确认分支与 `master` 一致），本文件继续记录观察。
 
 ## 已知可能的问题
 

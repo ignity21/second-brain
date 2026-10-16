@@ -7,6 +7,24 @@
 #+filetags: :Network:TCP:
 
 * TOC :TOC_2:
+- [[#intuition][Intuition]]
+- [[#三次握手][三次握手]]
+  - [[#为什么是三次][为什么是三次]]
+  - [[#初始序列号为什么不能固定][初始序列号为什么不能固定]]
+- [[#连接关闭四次挥手][连接关闭（四次挥手）]]
+  - [[#为什么是四次][为什么是四次]]
+  - [[#时序与序号][时序与序号]]
+- [[#连接状态][连接状态]]
+  - [[#time_wait-为什么等-2msl][TIME_WAIT 为什么等 2MSL]]
+- [[#异常与排查][异常与排查]]
+  - [[#close_wait-与-fin_wait_2-堆积][CLOSE_WAIT 与 FIN_WAIT_2 堆积]]
+  - [[#time_wait-堆积][TIME_WAIT 堆积]]
+  - [[#半开连接与-keepalive][半开连接与 Keepalive]]
+  - [[#syn-flood-与两个队列][SYN Flood 与两个队列]]
+- [[#misconceptions][Misconceptions]]
+  - [[#ack-和-fin-分开发是给对方留窗口期吗][ACK 和 FIN 分开发，是给对方留窗口期吗？]]
+- [[#my-take][My Take]]
+- [[#connections][Connections]]
 
 * Intuition
 
@@ -90,6 +108,9 @@ note over A : TIME_WAIT，等 2MSL 后 CLOSED
 note over B : 收到 ACK 后 LAST_ACK → CLOSED
 @enduml
 #+end_src
+
+#+RESULTS:
+: /tmp/babel-YCbUEj/plantuml-d8UduE.png
 
 FIN 与 SYN 一样各占一个序列号：B 的 FIN 序号 = B 最后发出的数据字节 + 1，A 用 ~w+1~ 确认它。
 
