@@ -76,3 +76,19 @@ VLAN 用途
 | 处理协议    | MAC       | MAC / IP  | IP     |
 | VLAN间通信  | ❌        | ✔️         | ✔️      |
 | 有无 WAN 口 | ❌        | ❌        | ✔️      |
+
+** TCP 四次挥手
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+TCP 关闭连接为什么通常需要四次交互？什么情况下三次就够？
+
+*** Back
+一条连接是两个独立方向，各自独立关闭，每个方向一轮「FIN + ACK」，所以是 2 FIN + 2 ACK = 4。
+- 不是固定三次：被动关闭方收到 FIN 时可能还有数据没发完，要先 ACK，把剩余数据发完，再发自己的 FIN。
+- 被动关闭方恰好没有待发数据时，它的 ACK 和 FIN 合并进同一个包，就只需要三个报文。
+- 不是「主动方给被动方一个窗口期」：主动方的 FIN 只表示自己不再发数据，不影响被动方照常发送。
+
+Source: TCP Connection Management
