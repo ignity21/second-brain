@@ -84,7 +84,6 @@ description: Decide what an org-roam note in roamnotes-v2/ should contain, by no
 
 ## 完成标准
 
-- 按 AGENTS.md「按改动验证」检查受影响的笔记。
-- 新增或改动了 PlantUML 块的笔记已运行 `python3 scripts/render_plantuml.py <笔记>`，图片和 `#+RESULTS:` 链接已生成，无报错。
+- 按 AGENTS.md「按改动验证」检查受影响的笔记（含生成 PlantUML 图片）。
 - 笔记中的代码已在 `:VERIFIED_WITH:` 所写的版本上运行通过，或标记了 `TODO verify`。
 - `:mine:` 内容与改写前一致（可用 `git diff` 检查）。
