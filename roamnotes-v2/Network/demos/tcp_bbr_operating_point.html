@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BBR 工作点</title>
+<style>
+:root {
+  --bg: #fafaf7; --fg: #1f2328; --muted: #6b7280; --line: #d0d4da; --card: #ffffff; --grid: #eceef1;
+  --pipe: #4fb37a; --queue: #f2b544; --drop: #dc2626; --curve: #2563eb; --cursor: #c2410c; --bbr: #16a34a; --loss: #7c3aed;
+  --z1: rgba(79,179,122,.08); --z2: rgba(242,181,68,.12); --z3: rgba(220,38,38,.08);
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #16181c; --fg: #e6e8eb; --muted: #9aa1ab; --line: #3a3f47; --card: #1f2227; --grid: #2a2e34;
+    --pipe: #2f8a57; --queue: #c99228; --drop: #f87171; --curve: #60a5fa; --cursor: #fb923c; --bbr: #4ade80; --loss: #a78bfa;
+    --z1: rgba(79,179,122,.10); --z2: rgba(242,181,68,.12); --z3: rgba(248,113,113,.10); }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg);
+  font: 16px/1.6 system-ui, "Noto Sans CJK SC", "PingFang SC", sans-serif; }
+main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+h1 { font-size: 1.3rem; margin: 0 0 4px; }
+.sub { color: var(--muted); margin: 0 0 16px; font-size: .92rem; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 12px; margin-bottom: 14px; }
+label { display: block; font-size: .9rem; margin-top: 8px; }
+input[type=range] { width: 100%; }
+.pipe { display: flex; align-items: stretch; height: 34px; margin-top: 10px; font-size: .78rem; }
+.seg { position: relative; border: 2px solid var(--line); overflow: hidden; }
+.seg .fill { position: absolute; inset: 0 auto 0 0; transition: width .15s; }
+.seg span { position: relative; padding: 0 6px; line-height: 30px; white-space: nowrap; }
+.pipeSeg { border-radius: 6px 0 0 6px; } .pipeSeg .fill { background: var(--pipe); }
+.queueSeg { border-left: 0; border-radius: 0 6px 6px 0; } .queueSeg .fill { background: var(--queue); }
+.dropSeg { margin-left: 6px; color: var(--drop); font-weight: 600; line-height: 34px; white-space: nowrap; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-top: 12px; }
+.stat { border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; }
+.stat b { display: block; font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+.stat small { color: var(--muted); }
+.state { margin-top: 10px; font-weight: 600; }
+svg { width: 100%; height: auto; display: block; }
+svg text { fill: var(--fg); font-size: 12px; font-family: inherit; }
+svg .muted { fill: var(--muted); }
+ul { margin: 6px 0 0; padding-left: 1.2em; }
+</style>
+</head>
+<body>
+<main>
+  <h1>在途数据量 → 交付速率与 RTT：BBR 和基于丢包的算法各停在哪</h1>
+  <p class="sub">单条流、固定瓶颈、没有其他流量的理想模型（BBR 论文的经典图）。瓶颈带宽 BtlBw = 100 Mbps，RTprop = 40 ms，所以 BDP = 500 KB。拖动滑块看各指标怎么变。</p>
+
+  <div class="card">
+    <label>在途数据量（inflight）：<b id="xv"></b></label>
+    <input id="x" type="range" min="0" max="1600" step="10" value="300">
+    <label>瓶颈缓存大小：<b id="bv"></b></label>
+    <input id="b" type="range" min="125" max="1000" step="25" value="500">
+
+    <div class="pipe">
+      <div class="seg pipeSeg" id="pipeSeg"><div class="fill" id="pipeFill"></div><span>管道（BDP 500 KB）</span></div>
+      <div class="seg queueSeg" id="queueSeg"><div class="fill" id="queueFill"></div><span id="queueLabel"></span></div>
+      <div class="dropSeg" id="drop"></div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><small>交付速率</small><b id="rate"></b></div>
+      <div class="stat"><small>RTT</small><b id="rtt"></b></div>
+      <div class="stat"><small>排队数据</small><b id="queue"></b></div>
+      <div class="stat"><small>丢弃</small><b id="lost"></b></div>
+    </div>
+    <div class="state" id="state"></div>
+  </div>
+
+  <div class="card">
+    <svg id="chart" viewBox="0 0 800 430" role="img" aria-label="在途数据量与交付速率、RTT 的关系"></svg>
+    <ul>
+      <li><b style="color:var(--bbr)">BBR</b> 把在途数据维持在 BDP 附近：速率已经到顶，RTT 还是 RTprop。ProbeBW 周期性按 1.25 / 0.75 倍速率小幅摆动，探测带宽有没有变大，再把排起的队排掉。</li>
+      <li><b style="color:var(--loss)">基于丢包的算法</b>（Reno、CUBIC）一直加窗口直到丢包，也就是 BDP + 缓存处：速率并没有更高，RTT 却多了整整一个缓存的排队时间。缓存越大（拖第二个滑块），延迟越高：这就是 bufferbloat。</li>
+    </ul>
+  </div>
+</main>
+<script>
+const NS = "http://www.w3.org/2000/svg";
+const el = (tag, attrs, parent, text) => { const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; parent.appendChild(e); return e; };
+const BTLBW = 100, RTPROP = 40, BDP = 500, XMAX = 1600;   // Mbps, ms, KB
+const BYTES_PER_MS = BTLBW * 1e6 / 8 / 1000 / 1000;       // KB per ms = 12.5
+const model = (x, buf) => {
+  const queue = Math.min(Math.max(0, x - BDP), buf);
+  return {
+    rtt: RTPROP + queue / BYTES_PER_MS,
+    queue, lost: Math.max(0, x - BDP - buf),
+  };
+};
+const rateOf = x => Math.min(x / RTPROP * 8, BTLBW);    // 1 KB/ms = 8 Mbps
+const svg = document.getElementById("chart");
+const L = 56, R = 16, W = 800;
+const top1 = 16, h1 = 160, top2 = 230, h2 = 160;
+const X = v => L + v / XMAX * (W - L - R);
+const Y1 = v => top1 + h1 - v / 120 * h1;
+const Y2 = v => top2 + h2 - v / 140 * h2;
+const zones = el("g", {}, svg);
+for (let v = 0; v <= 120; v += 25) { el("line", { x1: L, x2: W - R, y1: Y1(v), y2: Y1(v), stroke: "var(--grid)" }, svg); el("text", { x: L - 6, y: Y1(v) + 4, "text-anchor": "end", class: "muted" }, svg, v); }
+for (let v = 0; v <= 140; v += 20) { el("line", { x1: L, x2: W - R, y1: Y2(v), y2: Y2(v), stroke: "var(--grid)" }, svg); el("text", { x: L - 6, y: Y2(v) + 4, "text-anchor": "end", class: "muted" }, svg, v); }
+el("text", { x: L, y: top1 - 4, class: "muted" }, svg, "交付速率（Mbps）");
+el("text", { x: L, y: top2 - 4, class: "muted" }, svg, "RTT（ms）");
+for (let v = 0; v <= XMAX; v += 200) el("text", { x: X(v), y: top2 + h2 + 18, "text-anchor": "middle", class: "muted" }, svg, v);
+el("text", { x: W - R, y: top2 + h2 + 34, "text-anchor": "end", class: "muted" }, svg, "在途数据量（KB）");
+const rateLine = el("polyline", { fill: "none", stroke: "var(--curve)", "stroke-width": 2.5 }, svg);
+const rttLine = el("polyline", { fill: "none", stroke: "var(--curve)", "stroke-width": 2.5 }, svg);
+const marks = el("g", {}, svg);
+const cursor = el("g", {}, svg);
+const xs = document.getElementById("x"), bs = document.getElementById("b");
+function render() {
+  const x = +xs.value, buf = +bs.value;
+  const m = model(x, buf), rate = rateOf(x);
+  // 区域
+  zones.innerHTML = "";
+  [[0, BDP, "var(--z1)", "管道未满"], [BDP, BDP + buf, "var(--z2)", "排队"], [BDP + buf, XMAX, "var(--z3)", "缓存满，丢包"]].forEach(([a, b, c, t]) => {
+    [[top1, h1], [top2, h2]].forEach(([tp, hh]) => el("rect", { x: X(a), y: tp, width: X(b) - X(a), height: hh, fill: c }, zones));
+    el("text", { x: (X(a) + X(b)) / 2, y: top1 + 14, "text-anchor": "middle", class: "muted", "font-size": 11 }, zones, t);
+  });
+  // 曲线
+  const pts = [0, BDP, BDP + buf, XMAX];
+  rateLine.setAttribute("points", pts.map(v => `${X(v)},${Y1(rateOf(v))}`).join(" "));
+  rttLine.setAttribute("points", pts.map(v => `${X(v)},${Y2(model(v, buf).rtt)}`).join(" "));
+  // 工作点
+  marks.innerHTML = "";
+  [[BDP, "var(--bbr)", "BBR"], [BDP + buf, "var(--loss)", "基于丢包"]].forEach(([v, c, t], i) => {
+    el("line", { x1: X(v), x2: X(v), y1: top1, y2: top2 + h2, stroke: c, "stroke-dasharray": "5 4", "stroke-width": 1.5 }, marks);
+    el("circle", { cx: X(v), cy: Y2(model(v, buf).rtt), r: 5, fill: c }, marks);
+    el("text", { x: X(v) + 6, y: Y2(model(v, buf).rtt) - 8, fill: c, "font-weight": 600 }, marks, t);
+  });
+  // 当前位置
+  cursor.innerHTML = "";
+  el("line", { x1: X(x), x2: X(x), y1: top1, y2: top2 + h2, stroke: "var(--cursor)", "stroke-width": 2 }, cursor);
+  el("circle", { cx: X(x), cy: Y1(rate), r: 5, fill: "var(--cursor)" }, cursor);
+  el("circle", { cx: X(x), cy: Y2(m.rtt), r: 5, fill: "var(--cursor)" }, cursor);
+  // 管道条
+  const total = BDP + buf;
+  document.getElementById("pipeSeg").style.flex = `${BDP / total}`;
+  document.getElementById("queueSeg").style.flex = `${buf / total}`;
+  document.getElementById("pipeFill").style.width = `${Math.min(x, BDP) / BDP * 100}%`;
+  document.getElementById("queueFill").style.width = `${m.queue / buf * 100}%`;
+  document.getElementById("queueLabel").textContent = `瓶颈缓存 ${buf} KB`;
+  document.getElementById("drop").textContent = m.lost > 0 ? `溢出 ${m.lost} KB` : "";
+  // 数值
+  document.getElementById("xv").textContent = `${x} KB（${(x / BDP).toFixed(2)} × BDP）`;
+  document.getElementById("bv").textContent = `${buf} KB（满时多排队 ${(buf / BYTES_PER_MS).toFixed(0)} ms）`;
+  document.getElementById("rate").textContent = `${rate.toFixed(0)} Mbps`;
+  document.getElementById("rtt").textContent = `${m.rtt.toFixed(0)} ms`;
+  document.getElementById("queue").textContent = `${m.queue} KB`;
+  document.getElementById("lost").textContent = m.lost > 0 ? `${m.lost} KB` : "无";
+  document.getElementById("state").textContent =
+    x < BDP ? "管道没填满：多发一点，速率就上去，RTT 不变。" :
+    x === BDP ? "刚好填满管道：速率到顶，RTT 仍是 RTprop。这就是 BBR 瞄准的点。" :
+    m.lost === 0 ? "管道已满：多发的数据只在瓶颈排队，速率不再增加，RTT 上升。" :
+    "缓存也满了：多出来的数据被丢弃。基于丢包的算法直到这里才知道该减速。";
+}
+xs.oninput = bs.oninput = render;
+render();
+</script>
+</body>
+</html>

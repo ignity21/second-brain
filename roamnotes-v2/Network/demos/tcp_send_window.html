@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TCP 发送滑动窗口</title>
+<style>
+:root {
+  --bg: #fafaf7; --fg: #1f2328; --muted: #6b7280; --line: #d0d4da; --card: #ffffff;
+  --r1: #b8bec7; --r2: #f2b544; --r3: #4fb37a; --r4: #ffffff;
+  --mark: #c2410c; --accent: #2563eb;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #16181c; --fg: #e6e8eb; --muted: #9aa1ab; --line: #3a3f47; --card: #1f2227;
+    --r1: #545b66; --r2: #c99228; --r3: #2f8a57; --r4: #1f2227; --mark: #fb923c; --accent: #60a5fa; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg);
+  font: 16px/1.6 system-ui, "Noto Sans CJK SC", "PingFang SC", sans-serif; }
+main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+h1 { font-size: 1.3rem; margin: 0 0 4px; }
+.sub { color: var(--muted); margin: 0 0 20px; font-size: .92rem; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px 16px; }
+.stream { position: relative; }
+.cells { display: grid; grid-template-columns: repeat(8, 1fr); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.cell { padding: 10px 2px; text-align: center; border-right: 1px solid var(--line); transition: background .35s; }
+.cell:last-child { border-right: 0; }
+.cell b { display: block; font-size: 1.05rem; }
+.cell span { font-size: .72rem; color: var(--fg); opacity: .75; font-variant-numeric: tabular-nums; }
+.r1 { background: var(--r1); } .r2 { background: var(--r2); } .r3 { background: var(--r3); }
+.r4 { background: repeating-linear-gradient(45deg, var(--r4), var(--r4) 6px, var(--line) 6px, var(--line) 7px); }
+.marks { position: relative; height: 96px; margin-top: 4px; }
+.mk { position: absolute; transform: translateX(-50%); transition: left .35s; text-align: center; white-space: nowrap;
+  font-size: .78rem; color: var(--mark); font-family: ui-monospace, monospace; }
+.mk::before { content: ""; display: block; margin: 0 auto; width: 2px; background: var(--mark); }
+.mk.a { top: 0; } .mk.a::before { height: 10px; }
+.mk.s { top: 0; } .mk.s::before { height: 38px; }
+.mk.w { top: 0; } .mk.w::before { height: 66px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 14px 0 0; font-size: .85rem; }
+.legend i { display: inline-block; width: 14px; height: 14px; border: 1px solid var(--line); border-radius: 3px; vertical-align: -2px; margin-right: 6px; }
+.event { margin-top: 18px; font-weight: 600; color: var(--accent); }
+.explain { margin: 6px 0 0; }
+.calc { margin-top: 10px; font-family: ui-monospace, monospace; font-size: .85rem; color: var(--muted); line-height: 1.7; }
+.nav { display: flex; align-items: center; gap: 10px; margin-top: 18px; }
+button { font: inherit; padding: 6px 14px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: var(--fg); cursor: pointer; }
+button:disabled { opacity: .4; cursor: default; }
+.step { color: var(--muted); font-size: .9rem; }
+.note { margin-top: 20px; font-size: .85rem; color: var(--muted); }
+@media (max-width: 560px) { .cell span { font-size: .6rem; } .mk { font-size: .66rem; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>TCP 发送滑动窗口（含流量控制调整）</h1>
+  <p class="sub">演示的是 <b>发送方</b> 的发送窗口（send window）。8 个报文段 A–H，每段 100 字节，字节编号 1–800。窗口大小取接收方通告的 rwnd：第 1–5 步 rwnd 不变，只看窗口随 ACK 滑动；第 6–7 步 rwnd 变小直到 0，属于流量控制。实际发送窗口 = min(rwnd, cwnd)，这里假设 cwnd 足够大、不起限制作用。← / → 键或按钮翻页。</p>
+
+  <div class="card">
+    <div class="stream">
+      <div class="cells" id="cells"></div>
+      <div class="marks">
+        <div class="mk a" id="mkA"></div>
+        <div class="mk s" id="mkS"></div>
+        <div class="mk w" id="mkW"></div>
+      </div>
+    </div>
+    <div class="legend">
+      <span><i class="r1"></i>① 已发送、已确认</span>
+      <span><i class="r2"></i>② 已发送、未确认</span>
+      <span><i class="r3"></i>③ 未发送、允许发送</span>
+      <span><i class="r4"></i>④ 未发送、不能发送</span>
+    </div>
+    <div class="event" id="event"></div>
+    <p class="explain" id="explain"></p>
+    <div class="calc" id="calc"></div>
+    <div class="nav">
+      <button id="prev">← 上一步</button>
+      <button id="next">下一步 →</button>
+      <span class="step" id="step"></span>
+    </div>
+  </div>
+
+  <p class="note">要点：收到 ACK 时左边界（LastByteAcked）右移；右边界 = LastByteAcked + rwnd，所以右边界移不移、移多少，看 ACK 带回来的 rwnd。在途数据 LastByteSent − LastByteAcked 不能超过 rwnd。</p>
+</main>
+<script>
+const SEG = 100, N = 8, TOTAL = SEG * N;
+const steps = [
+  { acked: 0, sent: 0, rwnd: 400, ev: "连接建立，接收端通告 rwnd = 400",
+    ex: "还什么都没发。右边界 = 0 + 400 = 400，A–D 落在窗口里，可以发；E 之后不能发。" },
+  { acked: 0, sent: 300, rwnd: 400, ev: "发出 A、B、C",
+    ex: "LastByteSent 移到 300。A–C 变成「已发送、未确认」，只剩 D 还能发。" },
+  { acked: 0, sent: 400, rwnd: 400, ev: "发出 D",
+    ex: "在途 400 字节 = rwnd，窗口用完，区域 ③ 为空。E 必须等 ACK。" },
+  { acked: 200, sent: 400, rwnd: 400, ev: "收到 ACK = 201，rwnd = 400",
+    ex: "ACK = 201 表示 200 之前全收到：A、B 确认，左边界右移到 200。右边界 = 200 + 400 = 600，整个窗口向右滑了 200，E、F 可以发。" },
+  { acked: 200, sent: 600, rwnd: 400, ev: "发出 E、F",
+    ex: "在途 C–F 共 400 字节，窗口又用完了。" },
+  { acked: 400, sent: 600, rwnd: 200, ev: "收到 ACK = 401，rwnd = 200（接收端应用读得慢）",
+    ex: "C、D 确认，左边界移到 400；但 rwnd 变小，右边界 = 400 + 200 = 600 没动。窗口从 400 缩到 200：这就是流量控制（块 3）。" },
+  { acked: 600, sent: 600, rwnd: 0, ev: "收到 ACK = 601，rwnd = 0",
+    ex: "全部确认，但右边界 = 600 + 0 = 600，G 一个字节也不能发：零窗口。发送端改为定期发窗口探测（块 3）。" },
+];
+const regionOf = (end, s) => end <= s.acked ? 1 : end <= s.sent ? 2 : end <= s.acked + s.rwnd ? 3 : 4;
+const cells = document.getElementById("cells");
+for (let i = 0; i < N; i++) {
+  const d = document.createElement("div");
+  d.className = "cell";
+  d.innerHTML = `<b>${String.fromCharCode(65 + i)}</b><span>${i * SEG + 1}–${(i + 1) * SEG}</span>`;
+  cells.appendChild(d);
+}
+const pct = v => `${Math.min(v, TOTAL) / TOTAL * 100}%`;
+let k = 0;
+function render() {
+  const s = steps[k], right = s.acked + s.rwnd;
+  [...cells.children].forEach((c, i) => c.className = "cell r" + regionOf((i + 1) * SEG, s));
+  const set = (id, v, label) => { const m = document.getElementById(id); m.style.left = pct(v); m.textContent = `${label} = ${v}`; };
+  set("mkA", s.acked, "LastByteAcked");
+  set("mkS", s.sent, "LastByteSent");
+  set("mkW", right, "右边界");
+  document.getElementById("event").textContent = s.ev;
+  document.getElementById("explain").textContent = s.ex;
+  const inflight = s.sent - s.acked;
+  document.getElementById("calc").innerHTML =
+    `右边界 = LastByteAcked + rwnd = ${s.acked} + ${s.rwnd} = ${right}<br>` +
+    `在途 = LastByteSent − LastByteAcked = ${s.sent} − ${s.acked} = ${inflight}（≤ rwnd ${s.rwnd}）<br>` +
+    `还能发 = 右边界 − LastByteSent = ${right - s.sent}`;
+  document.getElementById("step").textContent = `${k + 1} / ${steps.length}`;
+  document.getElementById("prev").disabled = k === 0;
+  document.getElementById("next").disabled = k === steps.length - 1;
+}
+document.getElementById("prev").onclick = () => { if (k > 0) { k--; render(); } };
+document.getElementById("next").onclick = () => { if (k < steps.length - 1) { k++; render(); } };
+document.addEventListener("keydown", e => {
+  if (e.key === "ArrowLeft") document.getElementById("prev").click();
+  if (e.key === "ArrowRight") document.getElementById("next").click();
+});
+render();
+</script>
+</body>
+</html>

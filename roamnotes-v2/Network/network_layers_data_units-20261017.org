@@ -1,0 +1,38 @@
+:PROPERTIES:
+:ID:       72d3cced-60c4-4109-bc8c-a4ccbec10039
+:ROAM_ALIASES: "网络分层与数据单位"
+:END:
+#+title: Network Layers and Data Units
+#+filetags: :Network:
+
+* Intuition
+
+数据从应用往下传，每一层在外面套一层自己的头（封装，encapsulation），各层对这一层的数据单位有不同的叫法：
+
+| 层     | 数据单位                                    | 这一层做什么                             |
+|--------+---------------------------------------------+------------------------------------------|
+| 应用层 | 消息（message）                             | 对 TCP 来说只是一串字节，消息边界不保留  |
+| 传输层 | 报文段（segment）；UDP 叫数据报（datagram） | TCP 在这里按 MSS 把字节流切段，加 TCP 头 |
+| 网络层 | 包 / 分组（packet）                         | 加 IP 头，一个 segment 对应一个 packet   |
+| 链路层 | 帧（frame），如以太网帧（Ethernet frame）   | 加帧头和帧尾                             |
+| 物理层 | 比特（bit）                                 |                                          |
+
+* 切分发生在哪一层
+
+- 真正切分的是 TCP：按 MSS（maximum segment size）切，让一个 segment 加上 IP 头后正好放进链路允许的最大载荷 MTU（maximum transmission unit，以太网 1500 字节）。所以 MSS 通常是 1500 − 20（IP 头）− 20（TCP 头）= 1460 字节。
+- 往下各层只封装、不切分。IP 层也能分片（fragmentation），但 TCP 用 MSS 尽量避免分片。
+- 应用层的消息边界在 TCP 字节流里不保留，见 [[id:d43414ac-35ca-4f1d-a603-8026943a9801][TCP Reliable Delivery and Flow Control]] 的「粘包」。
+
+* Misconceptions
+
+** IP 层把 segment 再分成 packet？
+
+原来以为：应用层发出字节流，TCP 分成 segment，IP 再把它分成 packet。
+
+实际：IP 只是给每个 segment 套上 IP 头，一个 segment 对应一个 packet。切分只在 TCP 按 MSS 发生，MSS 本身就是为了让封装后的 packet 不超过 MTU。
+
+例：以太网上发 3000 字节，TCP 切成 1460 + 1460 + 80 三个 segment，IP 层得到 3 个 packet，链路层得到 3 个帧。
+
+* Connections
+
+- [[id:d43414ac-35ca-4f1d-a603-8026943a9801][TCP Reliable Delivery and Flow Control]]

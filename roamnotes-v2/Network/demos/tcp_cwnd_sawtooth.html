@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TCP cwnd 锯齿</title>
+<style>
+:root {
+  --bg: #fafaf7; --fg: #1f2328; --muted: #6b7280; --line: #d0d4da; --card: #ffffff; --grid: #eceef1;
+  --cw: #2563eb; --cw-now: #c2410c; --ss: #16a34a; --cap: #9ca3af; --cubic: #c2410c; --reno: #2563eb;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #16181c; --fg: #e6e8eb; --muted: #9aa1ab; --line: #3a3f47; --card: #1f2227; --grid: #2a2e34;
+    --cw: #60a5fa; --cw-now: #fb923c; --ss: #4ade80; --cap: #6b7280; --cubic: #fb923c; --reno: #60a5fa; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg);
+  font: 16px/1.6 system-ui, "Noto Sans CJK SC", "PingFang SC", sans-serif; }
+main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+h1 { font-size: 1.3rem; margin: 0 0 4px; }
+h2 { font-size: 1.1rem; margin: 32px 0 4px; }
+.sub { color: var(--muted); margin: 0 0 16px; font-size: .92rem; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 12px; }
+svg { width: 100%; height: auto; display: block; }
+svg text { fill: var(--fg); font-size: 12px; font-family: inherit; }
+svg .muted { fill: var(--muted); }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: .85rem; margin-top: 6px; }
+.legend i { display: inline-block; width: 18px; height: 0; border-top: 3px solid; vertical-align: 4px; margin-right: 6px; }
+.event { margin-top: 14px; font-weight: 600; color: var(--cw-now); }
+.explain { margin: 4px 0 0; }
+.nav { display: flex; align-items: center; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+button { font: inherit; padding: 6px 14px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: var(--fg); cursor: pointer; }
+button:disabled { opacity: .4; cursor: default; }
+.step { color: var(--muted); font-size: .9rem; }
+ul { margin: 8px 0 0; padding-left: 1.2em; }
+</style>
+</head>
+<body>
+<main>
+  <h1>TCP 拥塞窗口 cwnd 随时间变化（Reno 模型）</h1>
+  <p class="sub">横轴是第几个 RTT，纵轴是 cwnd（单位 MSS）。初始窗口 10；在途数据超过网络容量（BDP + 瓶颈缓存，这里设 75 MSS）就丢一个包。第 95 个 RTT 人为安排一次超时，对比两种丢包反应。← / → 键或按钮按阶段推进。</p>
+
+  <div class="card">
+    <svg id="chart1" viewBox="0 0 800 340" role="img" aria-label="Reno cwnd 随 RTT 变化"></svg>
+    <div class="legend">
+      <span><i style="border-color:var(--cw)"></i>cwnd</span>
+      <span><i style="border-color:var(--cw-now)"></i>当前阶段</span>
+      <span><i style="border-color:var(--ss);border-top-style:dashed"></i>ssthresh</span>
+      <span><i style="border-color:var(--cap);border-top-style:dotted"></i>网络容量</span>
+    </div>
+    <div class="event" id="event"></div>
+    <p class="explain" id="explain"></p>
+    <div class="nav">
+      <button id="prev">← 上一阶段</button>
+      <button id="next">下一阶段 →</button>
+      <span class="step" id="step"></span>
+    </div>
+  </div>
+
+  <h2>高 BDP 链路上一次丢包后的恢复：Reno vs CUBIC</h2>
+  <p class="sub">假设 RTT = 100 ms，上次丢包时 cwnd = 1000 MSS（约 117 Mbps 的链路）。横轴是秒。</p>
+  <div class="card">
+    <svg id="chart2" viewBox="0 0 800 320" role="img" aria-label="Reno 与 CUBIC 丢包后恢复对比"></svg>
+    <div class="legend">
+      <span><i style="border-color:var(--reno)"></i>Reno：减半到 500，每 RTT +1</span>
+      <span><i style="border-color:var(--cubic)"></i>CUBIC：降到 0.7 × 1000 = 700，沿三次曲线回升</span>
+      <span><i style="border-color:var(--ss);border-top-style:dashed"></i>上次丢包点 W<sub>max</sub></span>
+    </div>
+    <ul>
+      <li>Reno 每个 RTT 只加 1，回到 1000 要 500 个 RTT ≈ 50 秒；RTT 越长、窗口越大越慢。</li>
+      <li>CUBIC 按距上次丢包的 <b>时间</b> 增长：W(t) = 0.4·(t − K)³ + W<sub>max</sub>，K ≈ 9 秒。离 W<sub>max</sub> 远时涨得快，接近时放缓（在这附近最可能再丢包），越过后再加速试探更大的容量。</li>
+      <li>窗口小、RTT 短时（如上图那种 75 MSS 的场景），CUBIC 会切到 TCP 友好模式（TCP-friendly region），按接近 Reno 的线性速度增长，所以上图只画 Reno。</li>
+    </ul>
+  </div>
+</main>
+<script>
+const NS = "http://www.w3.org/2000/svg";
+const el = (tag, attrs, parent, text) => { const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; parent.appendChild(e); return e; };
+
+// ---------- 图 1：Reno 模拟 ----------
+const CAP = 75, TIMEOUT_AT = 95, ROUNDS = 120;
+const pts = [], ssPts = [], events = [];
+let cw = 10, ss = Infinity;
+for (let r = 0; r <= ROUNDS; r++) {
+  if (r === TIMEOUT_AT) {
+    pts.push([r, cw]); ss = Math.max(Math.floor(cw / 2), 2); cw = 1; events.push([r, "超时"]);
+  } else if (r > 0 && cw > CAP) {
+    pts.push([r, cw]); ss = Math.floor(cw / 2); cw = ss; events.push([r, "3 个重复 ACK"]);
+  } else if (r > 0) {
+    cw = cw < ss ? Math.min(2 * cw, ss) : cw + 1;
+  }
+  pts.push([r, cw]); ssPts.push([r, ss]);
+}
+const phases = [
+  { to: 3, ev: "慢启动（slow start）", ex: "cwnd 从 10 开始，每个 RTT 翻倍：10 → 20 → 40 → 80。ssthresh 初始为无穷大，所以第一次慢启动一直翻倍到丢包为止；80 已经冲过网络容量 75。" },
+  { to: 4, ev: "第 4 个 RTT：3 个重复 ACK → 快速恢复（fast recovery）", ex: "冲过容量的那部分被丢弃。ssthresh = 80 / 2 = 40，cwnd = ssthresh = 40，不回到慢启动。" },
+  { to: 40, ev: "拥塞避免（congestion avoidance）", ex: "cwnd ≥ ssthresh，每个 RTT 只加 1：40 → 76，慢慢逼近容量。" },
+  { to: 94, ev: "加性增、乘性减（AIMD）的锯齿", ex: "76 再次超过容量 → 3 个重复 ACK → 减半到 38 → 线性爬回 76 → 再减半……每次丢包只减半，网络始终在用。" },
+  { to: 95, ev: "第 95 个 RTT：超时", ex: "什么 ACK 都没回来，判定拥塞严重：ssthresh = 52 / 2 = 26，cwnd 直接降到 1。" },
+  { to: 100, ev: "重新慢启动，到 ssthresh 封顶", ex: "1 → 2 → 4 → 8 → 16 → 26：翻倍到 ssthresh 就停，不再翻倍到丢包。" },
+  { to: 120, ev: "回到拥塞避免", ex: "从 26 开始每个 RTT 加 1。对比第 4 个 RTT 的重复 ACK：同样一次丢包，超时的代价大得多。" },
+];
+const c1 = document.getElementById("chart1");
+const P = { l: 44, r: 16, t: 14, b: 34 }, W = 800, H = 340, YMAX = 90;
+const x1 = r => P.l + r / ROUNDS * (W - P.l - P.r), y1 = v => H - P.b - Math.min(v, YMAX) / YMAX * (H - P.t - P.b);
+for (let v = 0; v <= YMAX; v += 15) { el("line", { x1: P.l, x2: W - P.r, y1: y1(v), y2: y1(v), stroke: "var(--grid)" }, c1); el("text", { x: P.l - 6, y: y1(v) + 4, "text-anchor": "end", class: "muted" }, c1, v); }
+for (let r = 0; r <= ROUNDS; r += 20) el("text", { x: x1(r), y: H - P.b + 18, "text-anchor": "middle", class: "muted" }, c1, r);
+el("text", { x: W - P.r, y: H - 4, "text-anchor": "end", class: "muted" }, c1, "RTT 轮次");
+el("line", { x1: P.l, x2: W - P.r, y1: y1(CAP), y2: y1(CAP), stroke: "var(--cap)", "stroke-dasharray": "2 4", "stroke-width": 2 }, c1);
+el("text", { x: W - P.r - 4, y: y1(CAP) - 6, "text-anchor": "end", class: "muted" }, c1, "网络容量 75");
+const ssLine = el("polyline", { fill: "none", stroke: "var(--ss)", "stroke-dasharray": "6 4", "stroke-width": 1.5 }, c1);
+const ssInf = el("text", { x: x1(0.3), y: y1(YMAX) + 12, fill: "var(--ss)" }, c1, "ssthresh = ∞");
+const done = el("polyline", { fill: "none", stroke: "var(--cw)", "stroke-width": 2.5, "stroke-linejoin": "round" }, c1);
+const now = el("polyline", { fill: "none", stroke: "var(--cw-now)", "stroke-width": 3.5, "stroke-linejoin": "round" }, c1);
+const evLayer = el("g", {}, c1);
+const poly = list => list.map(([r, v]) => `${x1(r).toFixed(1)},${y1(v).toFixed(1)}`).join(" ");
+let k = 0;
+function render() {
+  const from = k === 0 ? -1 : phases[k - 1].to, to = phases[k].to;
+  done.setAttribute("points", poly(pts.filter(p => p[0] <= from)));
+  now.setAttribute("points", poly(pts.filter(p => p[0] >= Math.max(from, 0) && p[0] <= to)));
+  const ssShown = ssPts.filter(p => p[0] <= to && isFinite(p[1]));
+  const ssStep = []; ssShown.forEach((p, i) => { if (i > 0) ssStep.push([p[0], ssShown[i - 1][1]]); ssStep.push(p); });
+  ssLine.setAttribute("points", poly(ssStep));
+  ssInf.style.display = k === 0 ? "" : "none";
+  evLayer.innerHTML = "";
+  events.filter(e => e[0] <= to).forEach(([r, label]) => {
+    const top = pts.find(p => p[0] === r)[1];
+    el("circle", { cx: x1(r), cy: y1(top), r: 4, fill: "var(--cw-now)" }, evLayer);
+    el("text", { x: x1(r) + 6, y: y1(top) - 6, "font-size": 11 }, evLayer, label);
+  });
+  document.getElementById("event").textContent = phases[k].ev;
+  document.getElementById("explain").textContent = phases[k].ex;
+  document.getElementById("step").textContent = `${k + 1} / ${phases.length}`;
+  document.getElementById("prev").disabled = k === 0;
+  document.getElementById("next").disabled = k === phases.length - 1;
+}
+document.getElementById("prev").onclick = () => { if (k > 0) { k--; render(); } };
+document.getElementById("next").onclick = () => { if (k < phases.length - 1) { k++; render(); } };
+document.addEventListener("keydown", e => {
+  if (e.key === "ArrowLeft") document.getElementById("prev").click();
+  if (e.key === "ArrowRight") document.getElementById("next").click();
+});
+render();
+
+// ---------- 图 2：Reno vs CUBIC ----------
+const c2 = document.getElementById("chart2");
+const H2 = 320, TMAX = 60, Y2MIN = 400, Y2MAX = 1100, WMAX = 1000, C = 0.4, BETA = 0.7;
+const K = Math.cbrt(WMAX * (1 - BETA) / C);
+const x2 = t => P.l + t / TMAX * (W - P.l - P.r), y2 = v => H2 - P.b - (Math.min(v, Y2MAX) - Y2MIN) / (Y2MAX - Y2MIN) * (H2 - P.t - P.b);
+for (let v = Y2MIN; v <= Y2MAX; v += 100) { el("line", { x1: P.l, x2: W - P.r, y1: y2(v), y2: y2(v), stroke: "var(--grid)" }, c2); el("text", { x: P.l - 6, y: y2(v) + 4, "text-anchor": "end", class: "muted" }, c2, v); }
+for (let t = 0; t <= TMAX; t += 10) el("text", { x: x2(t), y: H2 - P.b + 18, "text-anchor": "middle", class: "muted" }, c2, t + " s");
+el("line", { x1: P.l, x2: W - P.r, y1: y2(WMAX), y2: y2(WMAX), stroke: "var(--ss)", "stroke-dasharray": "6 4", "stroke-width": 1.5 }, c2);
+el("text", { x: x2(TMAX) - 4, y: y2(WMAX) - 6, "text-anchor": "end", fill: "var(--ss)" }, c2, "Wmax = 1000");
+const reno = []; for (let t = 0; t <= 50; t += 0.5) reno.push([t, 500 + t / 0.1]);
+const cubic = []; let tEnd = 0;
+for (let t = 0; t <= TMAX; t += 0.1) { const w = C * Math.pow(t - K, 3) + WMAX; cubic.push([t, w]); tEnd = t; if (w >= 1050) break; }
+const poly2 = list => list.map(([t, v]) => `${x2(t).toFixed(1)},${y2(v).toFixed(1)}`).join(" ");
+el("polyline", { points: poly2(reno), fill: "none", stroke: "var(--reno)", "stroke-width": 2.5 }, c2);
+el("polyline", { points: poly2(cubic), fill: "none", stroke: "var(--cubic)", "stroke-width": 2.5 }, c2);
+el("circle", { cx: x2(K), cy: y2(WMAX), r: 4, fill: "var(--cubic)" }, c2);
+el("text", { x: x2(K), y: y2(WMAX) + 18, "text-anchor": "middle", "font-size": 11 }, c2, `t = K ≈ ${K.toFixed(1)} s 回到 Wmax`);
+el("circle", { cx: x2(tEnd), cy: y2(1050), r: 4, fill: "var(--cubic)" }, c2);
+el("text", { x: x2(tEnd) + 6, y: y2(1050) - 6, "font-size": 11 }, c2, "越过后加速试探，再次丢包");
+el("circle", { cx: x2(50), cy: y2(1000), r: 4, fill: "var(--reno)" }, c2);
+el("text", { x: x2(50), y: y2(1000) + 18, "text-anchor": "middle", "font-size": 11 }, c2, "Reno 50 s 才回到 Wmax");
+</script>
+</body>
+</html>

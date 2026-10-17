@@ -1,6 +1,8 @@
 :PROPERTIES:
 :ID:       ac00f69d-971b-4c18-a7f1-82b008ee6dc9
 :END:
-#+title: TCP
+#+title: TCP Protocol
 
 * [[id:1ece815b-5c13-4d67-b816-b2ff98f34696][Connection Management]]
+* [[id:d43414ac-35ca-4f1d-a603-8026943a9801][Reliable Delivery and Flow Control]]
+* [[id:41d8d73a-dcd2-40f5-b168-d7582aa77737][Congestion Control]]

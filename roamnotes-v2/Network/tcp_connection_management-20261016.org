@@ -258,4 +258,5 @@ TCP Keepalive：
 
 * Connections
 
-- 后续：TCP 可靠传输与拥塞控制（重传、滑动窗口、流量控制、拥塞控制），待建笔记。
+- 重传、滑动窗口、流量控制：[[id:d43414ac-35ca-4f1d-a603-8026943a9801][TCP Reliable Delivery and Flow Control]]
+- 拥塞控制：[[id:41d8d73a-dcd2-40f5-b168-d7582aa77737][TCP Congestion Control]]
