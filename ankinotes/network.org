@@ -58,7 +58,7 @@ VLAN 用途
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1778731536244
-:ANKI_NOTE_HASH: 78c9d9727650e1534c8162c971ebb05e
+:ANKI_NOTE_HASH: 46fb1632dd28d0692ee20ec5735fcb2c
 :END:
 
 *** Front
@@ -80,6 +80,8 @@ VLAN 用途
 ** TCP 三次握手
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210223675
+:ANKI_NOTE_HASH: 496e4f1e94a0ec075eab786d2fbca65c
 :END:
 
 *** Front
@@ -95,6 +97,8 @@ Source: TCP Connection Management
 ** TCP 四次挥手
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210223690
+:ANKI_NOTE_HASH: d9381b1cc8840448cc28bd59b15dd26d
 :END:
 
 *** Front
@@ -110,6 +114,8 @@ Source: TCP Connection Management
 ** TCP 挥手中 ACK 与 FIN 的间隔
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210223725
+:ANKI_NOTE_HASH: c44607bd62b1aac048dc013f12837590
 :END:
 
 *** Front
@@ -126,10 +132,12 @@ Source: TCP Connection Management
 ** TCP TIME_WAIT 2MSL
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210223759
+:ANKI_NOTE_HASH: c632114414523783782b398d345ad2e9
 :END:
 
 *** Front
-主动关闭方为什么要在 TIME_WAIT 等 2MSL？为什么不是 1MSL？
+主动关闭方为什么要在 ~TIME_WAIT~ 等 2MSL？为什么不是 1MSL？
 
 *** Back
 两个目的：
@@ -143,39 +151,45 @@ Source: TCP Connection Management
 ** TCP CLOSE_WAIT 堆积
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210223792
+:ANKI_NOTE_HASH: 535399153c982f87991550a329fe92f9
 :END:
 
 *** Front
-用 ~ss~ 查看，某个服务有大量连接堆积在 CLOSE_WAIT，说明什么问题？怎么处理？
+用 ~ss~ 查看，某个服务有大量连接堆积在 ~CLOSE_WAIT~ ，说明什么问题？怎么处理？
 
 *** Back
-这个服务收到了对端的 FIN，但应用代码没有 ~close()~ 这些连接：内核已回 ACK，停在 CLOSE_WAIT 等应用关闭。
-- 属于应用 bug，不是网络问题；CLOSE_WAIT 没有内核超时，调参数没用。
+这个服务收到了对端的 FIN，但应用代码没有 ~close()~ 这些连接：内核已回 ACK，停在 ~CLOSE_WAIT~ 等应用关闭。
+- 属于应用 bug，不是网络问题； ~CLOSE_WAIT~ 没有内核超时，调参数没用。
 - 处理：检查所有代码路径（异常分支、连接池归还）都会关闭 socket，例如用 ~with~ 或 ~try~ / ~finally~ 。
-- 对端：若用 ~close()~ 关闭，它的孤儿 FIN_WAIT_2 会在 ~tcp_fin_timeout~ （默认 60 秒）后被回收；只有用 ~shutdown(SHUT_WR)~ 半关闭时才会一直陪着停在 FIN_WAIT_2。
+- 对端：若用 ~close()~ 关闭，它的孤儿 ~FIN_WAIT_2~ 会在 ~tcp_fin_timeout~ （默认 60 秒）后被回收；只有用 ~shutdown(SHUT_WR)~ 半关闭时才会一直陪着停在 ~FIN_WAIT_2~ 。
 
 Source: TCP Connection Management
 
 ** TCP TIME_WAIT 堆积
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210223842
+:ANKI_NOTE_HASH: fd686f4acf76c63dd33af20e02b5cf82
 :END:
 
 *** Front
 一个客户端程序高频地向同一个后端 ~IP:端口~ 发起短连接，一段时间后 ~connect()~ 报 ~EADDRNOTAVAIL~ 。原因是什么？怎么解决？
 
 *** Back
-客户端是主动关闭方，每条连接关闭后在 TIME_WAIT 停 60 秒；连同一目标时四元组只有本地端口在变，本地端口范围（默认约 2.8 万个）被占满。
+客户端是主动关闭方，每条连接关闭后在 ~TIME_WAIT~ 停 60 秒；连同一目标时四元组只有本地端口在变，本地端口范围（默认约 2.8 万个）被占满。
 - 根本办法：复用连接（keep-alive、连接池），不要每次新建。
-- 补充：客户端开 ~tcp_tw_reuse~ ，让新的出站连接复用 TIME_WAIT 端口。
-- 不要：调小 ~tcp_fin_timeout~ （它不管 TIME_WAIT）、 ~tcp_tw_recycle~ （NAT 下出错，已从内核删除）。
-- 对比：服务端的 TIME_WAIT 不消耗端口，一般无害。
+- 补充：客户端开 ~tcp_tw_reuse~ ，让新的出站连接复用 ~TIME_WAIT~ 端口。
+- 不要：调小 ~tcp_fin_timeout~ （它不管 ~TIME_WAIT~ ）、 ~tcp_tw_recycle~ （NAT 下出错，已从内核删除）。
+- 对比：服务端的 ~TIME_WAIT~ 不消耗端口，一般无害。
 
 Source: TCP Connection Management
 
 ** TCP 半开连接
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210223876
+:ANKI_NOTE_HASH: df2a3d9a435d6024a2a1b2303c75add0
 :END:
 
 *** Front
@@ -191,6 +205,8 @@ Source: TCP Connection Management
 ** TCP 序号按字节编号
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210223909
+:ANKI_NOTE_HASH: d24487708334947c981e26064c8f5952
 :END:
 
 *** Front
@@ -206,6 +222,8 @@ Source: TCP Reliable Delivery and Flow Control
 ** TCP 为什么按字节而不按包编号
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210223943
+:ANKI_NOTE_HASH: 8ba2052fbcae28ffe05ad8cb2cce8443
 :END:
 
 *** Front
@@ -219,6 +237,8 @@ Source: TCP Reliable Delivery and Flow Control
 ** 各层数据单位与切分
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210223976
+:ANKI_NOTE_HASH: e23b911a195d86dea1acf86d7fbd84ee
 :END:
 
 *** Front
@@ -235,6 +255,8 @@ Source: Network Layers and Data Units
 ** TCP 发送窗口、rwnd 与 cwnd
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210224011
+:ANKI_NOTE_HASH: 47ec7d33992bd901d0d5a918e21050ff
 :END:
 
 *** Front
@@ -251,6 +273,8 @@ Source: TCP Reliable Delivery and Flow Control
 ** TCP 粘包
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210224043
+:ANKI_NOTE_HASH: 16a31f39cc3219a0ea4508e8ce96208a
 :END:
 
 *** Front
@@ -269,6 +293,8 @@ Source: TCP Reliable Delivery and Flow Control
 ** TCP 快速重传为什么等 3 个重复 ACK
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210224078
+:ANKI_NOTE_HASH: 8f685eb30b90e0b277d29050168a2454
 :END:
 
 *** Front
@@ -284,6 +310,8 @@ Source: TCP Reliable Delivery and Flow Control
 ** TCP SACK
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210224125
+:ANKI_NOTE_HASH: a9fb8ceb661bc53c6a387d1952d78e68
 :END:
 
 *** Front
@@ -300,6 +328,8 @@ Source: TCP Reliable Delivery and Flow Control
 ** TCP RTO 与 Karn 算法
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210224158
+:ANKI_NOTE_HASH: 19e051ca9223ef31453f3a25bf166907
 :END:
 
 *** Front
@@ -315,6 +345,8 @@ Source: TCP Reliable Delivery and Flow Control
 ** Nagle 与延迟确认
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210224191
+:ANKI_NOTE_HASH: 20e26a026019c71f022f94360c7a8011
 :END:
 
 *** Front
@@ -331,6 +363,8 @@ Source: TCP Reliable Delivery and Flow Control
 ** SO_RCVBUF 关闭自动调优
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210224225
+:ANKI_NOTE_HASH: 477d831db38303edc7bf6a5c3e65d8ab
 :END:
 
 *** Front
@@ -346,6 +380,8 @@ Source: TCP Reliable Delivery and Flow Control
 ** TCP 慢启动
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210224259
+:ANKI_NOTE_HASH: 35b41ab7d8a5150ee2032c1be8b7f9be
 :END:
 
 *** Front
@@ -361,6 +397,8 @@ Source: TCP Congestion Control
 ** TCP 两种丢包反应
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210224276
+:ANKI_NOTE_HASH: 8978089f1fa850436387412d9ec136dc
 :END:
 
 *** Front
@@ -376,6 +414,8 @@ Source: TCP Congestion Control
 ** TCP 空闲后重新慢启动
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210224307
+:ANKI_NOTE_HASH: 0377f504aca00554a96e55dd3b7d6e8f
 :END:
 
 *** Front
@@ -389,6 +429,8 @@ Source: TCP Congestion Control
 ** BBR 怎么找到工作点
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210224342
+:ANKI_NOTE_HASH: ab3d14e4e187fe3a7393e09086fd2433
 :END:
 
 *** Front
@@ -404,6 +446,8 @@ Source: TCP Congestion Control
 ** BBR 与基于丢包算法的工作点
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210224363
+:ANKI_NOTE_HASH: 3c61c1b1e458b7ef4a1a9590f33bd314
 :END:
 
 *** Front
@@ -419,6 +463,8 @@ Source: TCP Congestion Control
 ** BBR 的代价
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210224378
+:ANKI_NOTE_HASH: e74b32029a011edbb325b12ba4f7d18a
 :END:
 
 *** Front
@@ -436,6 +482,8 @@ Source: TCP Congestion Control
 ** 带宽时延积与窗口缩放
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210224408
+:ANKI_NOTE_HASH: 5532a23c26047f53b31438adf5c601b6
 :END:
 
 *** Front
@@ -451,6 +499,8 @@ Source: TCP Congestion Control
 ** TCP 零窗口探测
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210224442
+:ANKI_NOTE_HASH: 56b969105273fc84ee2a4cb3188965f1
 :END:
 
 *** Front
@@ -465,6 +515,8 @@ Source: TCP Reliable Delivery and Flow Control
 ** Reno 与 CUBIC 的丢包后恢复
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1792210224476
+:ANKI_NOTE_HASH: f8e0fffc1402ec28870f573ae3db08dc
 :END:
 
 *** Front

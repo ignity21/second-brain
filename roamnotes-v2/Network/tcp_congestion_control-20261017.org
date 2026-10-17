@@ -63,7 +63,7 @@ cwnd 以 MSS 为单位。
 | 超时         | 什么都没回来，很可能堵死                     | 在途数据 / 2               | 1 个 MSS（RFC 5681） | 重新慢启动，到 ssthresh 后转拥塞避免    |
 | 3 个重复 ACK | 后面的段还在陆续到达，网络仍通，只丢了个别段 | cwnd / 2（CUBIC 为 × 0.7） | = ssthresh           | 快速恢复（fast recovery），然后拥塞避免 |
 
-#+begin_src plantuml
+#+begin_src plantuml :file images/tcp_congestion_states.png
 @startuml
 [*] --> SlowStart
 SlowStart : cwnd 每 RTT 翻倍
@@ -80,9 +80,12 @@ FastRecovery --> SlowStart : 超时\nssthresh = cwnd / 2, cwnd = 1
 @enduml
 #+end_src
 
+#+RESULTS:
+[[file:images/tcp_congestion_states.png]]
+
 Reno 的 cwnd 随时间变化（初始窗口 10，网络容量 30 MSS，第 40 个 RTT 人为安排一次超时）：
 
-#+begin_src plantuml
+#+begin_src plantuml :file images/tcp_reno_cwnd_chart.png
 @startchart
 scale 1200 width
 title Reno：cwnd（MSS）随 RTT 轮次变化
@@ -93,6 +96,9 @@ line "网络容量" [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30,
 legend top
 @endchart
 #+end_src
+
+#+RESULTS:
+[[file:images/tcp_reno_cwnd_chart.png]]
 
 - 0–2：慢启动 10 → 20 → 40，冲过容量（ssthresh 初始无穷大）。
 - 3、15、32：3 个重复 ACK，减半后线性爬升，形成 AIMD 锯齿。
@@ -105,8 +111,8 @@ legend top
 Linux 从 2.6.19 起默认用 CUBIC：
 
 - 丢包后 cwnd 乘 0.7（Reno 是 0.5）。
-- 增长不按 RTT 轮次线性加，而是按「距上次丢包过了多久」走三次曲线：离上次丢包时的窗口 W_max 远时涨得快，接近时放缓（在这附近最可能再丢包），越过后加速试探更大的容量。
-- 增长只取决于时间，所以高 BDP 链路上恢复快得多，也不依赖 RTT。例：RTT 100 ms、W_max = 1000 MSS，Reno 减半后每 RTT 加 1，要约 50 秒回到 1000；CUBIC 约 9 秒。
+- 增长不按 RTT 轮次线性加，而是按「距上次丢包过了多久」走三次曲线：离上次丢包时的窗口 ~W_max~ 远时涨得快，接近时放缓（在这附近最可能再丢包），越过后加速试探更大的容量。
+- 增长只取决于时间，所以高 BDP 链路上恢复快得多，也不依赖 RTT。例：RTT 100 ms、 ~W_max~ = 1000 MSS，Reno 减半后每 RTT 加 1，要约 50 秒回到 1000；CUBIC 约 9 秒。
 - 窗口小、RTT 短时切到 TCP 友好模式（TCP-friendly region），按接近 Reno 的速度增长。
 
 * BBR
@@ -128,7 +134,7 @@ BBR（Bottleneck Bandwidth and RTT）不把丢包当拥塞信号，而是主动�
   - ProbeBW：周期性按 1.25 倍速率发一个 RTT 试探带宽是否变大，再按 0.75 倍发一个 RTT 把排起的队排掉，其余时间 1 倍。
   - ProbeRTT：约每 10 秒把在途数据压到 4 个包、持续约 200 ms，重新测最小 RTT。
 
-#+begin_src plantuml
+#+begin_src plantuml :file images/tcp_bbr_probing.png
 @startuml
 participant "BBR 发送端" as S
 participant "瓶颈" as B
@@ -143,11 +149,14 @@ note over S : 队列排空，更新 RTprop
 @enduml
 #+end_src
 
+#+RESULTS:
+[[file:images/tcp_bbr_probing.png]]
+
 ** 两种工作点
 
 单条流、瓶颈带宽 100 Mbps、RTprop 40 ms（BDP 500 KB）、瓶颈缓存 500 KB：
 
-#+begin_src plantuml
+#+begin_src plantuml :file images/tcp_bbr_operating_points.png
 @startchart
 scale 900 width
 title 在途数据量（KB）→ 交付速率与 RTT
@@ -158,6 +167,9 @@ line "RTT（ms）" [40, 40, 40, 40, 40, 40, 48, 56, 64, 72, 80, 80, 80, 80, 80, 
 legend top
 @endchart
 #+end_src
+
+#+RESULTS:
+[[file:images/tcp_bbr_operating_points.png]]
 
 | 在途数据                | 交付速率         | RTT                 | 谁停在这里                    |
 |-------------------------+------------------+---------------------+-------------------------------|

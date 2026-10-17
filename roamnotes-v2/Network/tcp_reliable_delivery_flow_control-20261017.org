@@ -80,8 +80,8 @@ TCP 给 *每个字节* 编号（序号，sequence number），不给包编号：
 
 发送端的字节流分四段，由三个位置分开：
 
-| 区域               | 范围                                           |
-|--------------------+------------------------------------------------|
+| 区域                | 范围                                           |
+|---------------------+------------------------------------------------|
 | ① 已发送、已确认   | ≤ ~LastByteAcked~                              |
 | ② 已发送、未确认   | ~LastByteAcked~ ～ ~LastByteSent~ ，即在途数据 |
 | ③ 未发送、允许发送 | ~LastByteSent~ ～ 右边界                       |
@@ -128,7 +128,7 @@ TCP 给 *每个字节* 编号（序号，sequence number），不给包编号：
 
 每段 100 字节，第 2 段丢失：
 
-#+begin_src plantuml
+#+begin_src plantuml :file images/tcp_fast_retransmit_sack.png
 @startuml
 participant 发送端 as S
 participant 接收端 as R
@@ -148,6 +148,9 @@ note over R : 缺口补齐，ACK 一次跳到 501
 @enduml
 #+end_src
 
+#+RESULTS:
+[[file:images/tcp_fast_retransmit_sack.png]]
+
 丢包之后发送速率怎么调整（快速恢复、超时后重新慢启动）属于拥塞控制，见 [[id:41d8d73a-dcd2-40f5-b168-d7582aa77737][TCP Congestion Control]]。
 
 * 流量控制
@@ -162,7 +165,7 @@ rwnd = 接收缓存大小 − 已收到但应用还没读走的字节数。应�
 - 发送端若干等就是死锁：发送端等窗口打开，接收端以为已经通知过了。
 - 所以零窗口时发送端启动坚持定时器（persist timer），定期发零窗口探测（zero window probe），逼接收端回报当前窗口；探测间隔按指数退避。
 
-#+begin_src plantuml
+#+begin_src plantuml :file images/tcp_zero_window_probe.png
 @startuml
 participant 发送端 as S
 participant 接收端 as R
@@ -176,6 +179,9 @@ R -> S : ACK, rwnd=4000
 note over S : 恢复发送
 @enduml
 #+end_src
+
+#+RESULTS:
+[[file:images/tcp_zero_window_probe.png]]
 
 ** Silly Window Syndrome
 
