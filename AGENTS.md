@@ -1,6 +1,6 @@
 # 知识库协作约定
 
-本仓库以 `roamnotes-v2/` 为 org-roam 笔记库，`roamnotes/` 为旧版迁移来源，`ankinotes/` 存放 Anki 卡片，`projects/` 存放配合笔记的简单示例代码（如 C++ 多线程、zmq 客户端 + 服务端），每个示例一个子目录并自带依赖说明，由对应笔记链接。org-roam 的 Emacs 配置在 `~/.config/doom/modules/cc/notes`，笔记库目录约定变化（如类别目录名、忽略目录）时需同步修改。
+本仓库以 `roamnotes-v2/` 为 org-roam 笔记库，`roamnotes/` 为旧版迁移来源，`ankinotes/` 存放 Anki 卡片，`projects/` 存放配合笔记的简单示例代码（如 C++ 多线程、zmq 客户端 + 服务端），每个示例一个子目录并自带依赖说明，由对应笔记链接；`scripts/` 存放笔记维护脚本。org-roam 的 Emacs 配置在 `~/.config/doom/modules/cc/notes`，笔记库目录约定变化（如类别目录名、忽略目录）时需同步修改。
 
 ## 工作范围与完成标准
 
@@ -45,7 +45,7 @@
 - 中文与嵌入的英文单词或短语之间留一个半角空格；中文标点前不额外加空格，例如：`你说 he 是谁？他是 Jerry。`
 - 中文内容里加行内标记时，标记贴住内容、空格留在标记外侧，与相邻的中文文字或中文标点之间各留一个半角空格，否则 Org 不识别：`*粗体*`、`/斜体/`、`_下划线_`、`+删除线+`、`=等宽=`、`~代码~`，例如 `他是 *两端* 中的一端。`、`用 ~close()~ 关闭。`。
 - 含下划线的标识符（状态名、选项名、变量名，如 `~CLOSE_WAIT~`、`~tcp_rmem~`）一律用 `~...~` 包裹，标题和卡片里也一样；裸写时 `_` 后面的部分会被渲染成下标。
-- 笔记正文里的流程、时序、状态等结构用 PlantUML 画图，写进 `#+begin_src plantuml :file images/<name>.png ... #+end_src`（本机支持 PlantUML）。必须写 `:file`：不写时 Doom 把结果图写到 `/tmp`，换机或发布后链接失效；生成的图片放本大类 `images/`，随笔记一起提交。不放 ASCII 图；数据曲线用 PlantUML 的 `@startchart`（本机 1.2026 支持，点多时加 `scale <宽度> width`）。对话 / review 反馈里为便于即时查看，用 ASCII 草图可以。
+- 笔记正文里的流程、时序、状态等结构用 PlantUML 画图，写进 `#+begin_src plantuml :file images/<name>.png ... #+end_src`（本机支持 PlantUML）。必须写 `:file`：不写时 Doom 把结果图写到 `/tmp`，换机或发布后链接失效；生成的图片放本大类 `images/`，随笔记一起提交。写完或改动块后运行 `python3 scripts/render_plantuml.py <笔记>` 生成图片，缺 `#+RESULTS:` 时它会补上结果链接（org-roam-ui 对带结果的 plantuml 块只显示图、不显示源码）；报错时修正块后重跑。不放 ASCII 图；数据曲线用 PlantUML 的 `@startchart`（本机 1.2026 支持，点多时加 `scale <宽度> width`）。对话 / review 反馈里为便于即时查看，用 ASCII 草图可以。
 
 ## org-roam-ui 发布
 
