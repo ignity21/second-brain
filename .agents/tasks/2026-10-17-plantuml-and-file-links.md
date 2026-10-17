@@ -1,6 +1,6 @@
 # PlantUML 渲染与 org-roam-ui 文件链接
 
-- 状态: 进行中（待 Publish 工作流确认）
+- 状态: 完成
 - 日期: 2026-10-17
 - 计划: UI 隐藏带 `:file` 的 plantuml 代码块；`file:` 资源链接（如 show-me 的 `demos/*.html`）可在新标签页打开；
   写笔记时由 agent 用 PlantUML CLI 生成图片。
@@ -11,7 +11,7 @@
 - [x] fork `enhanced`：`Link.tsx` 为 `file:` 链接（非 `.org`）生成新标签页链接，实时模式走 `/img/`
 - [x] `enhanced` 的 `tsc --noEmit`、`next build && next export` 通过，重建 `out/` 并推送（`5e18a7e`）
 - [x] `static` rebase 到 `enhanced`，静态模式 `file:` 链接走 `files/`，构建通过后 `--force-with-lease` 推送（`fac42a9`）
-- [ ] 更新 `ORG_ROAM_UI_REF`，确认 Publish 工作流部署成功
+- [x] 更新 `ORG_ROAM_UI_REF`，确认 Publish 工作流部署成功（run 39014598272；线上重跑同一 Playwright 检查通过）
 - [x] 本仓库加 `scripts/render_plantuml.py`，AGENTS.md 写入生成图片的步骤
 - [x] Doom 的 org-roam-ui checkout 快进到新 `enhanced`
 
