@@ -5,6 +5,19 @@
 #+filetags: :Doom:
 
 * TOC :TOC_2:
+- [[#overview][Overview]]
+- [[#files][Files]]
+  - [[#initel][=init.el=]]
+  - [[#configel][=config.el=]]
+  - [[#packagesel][=packages.el=]]
+  - [[#autoloadel-or-autoloadel][=autoload.el= or =autoload/*.el=]]
+  - [[#doctorel][=doctor.el=]]
+  - [[#cliel][=cli.el=]]
+  - [[#testtest-el][=test/**/test-*.el=]]
+- [[#cookies][Cookies]]
+  - [[#if][~;;;###if~]]
+  - [[#package][~;;;###package~]]
+  - [[#autodef][~;;;###autodef~]]
 
 * Overview
 - =packages.el= declare all the packages it will install

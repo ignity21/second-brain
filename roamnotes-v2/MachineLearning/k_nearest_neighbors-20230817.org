@@ -6,6 +6,13 @@
 #+filetags: ML
 
 * TOC :TOC_1:
+- [[#overview][Overview]]
+- [[#two-important-parameters][Two Important Parameters]]
+- [[#measuring-model-performance][Measuring Model Performance]]
+- [[#how-to-choose-k][How to Choose k?]]
+- [[#advantages][Advantages]]
+- [[#drawbacks][Drawbacks]]
+- [[#code][Code]]
 
 * Overview
 - Predict the label of a data point by

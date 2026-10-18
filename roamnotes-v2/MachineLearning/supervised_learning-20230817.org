@@ -5,6 +5,13 @@
 #+filetags: ML
 
 * TOC :TOC_1:
+- [[#overview][Overview]]
+- [[#data-requirements][Data Requirements]]
+- [[#regression][Regression]]
+- [[#classification][Classification]]
+- [[#examples][Examples]]
+- [[#important-algorithms][Important Algorithms]]
+- [[#evaluating-multiple-models][Evaluating Multiple Models]]
 
 * Overview
 In supervised learning, we are given a data set and already *know what our correct output should look like*,

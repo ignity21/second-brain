@@ -5,6 +5,15 @@
 #+filetags: ML
 
 * TOC :TOC_1:
+- [[#concept][Concept]]
+- [[#notations][Notations]]
+- [[#cost-function][Cost Function]]
+- [[#activation-value][Activation Value]]
+- [[#tensorflow-implementation][Tensorflow Implementation]]
+- [[#numpy-dense-implementation][NumPy ~dense~ Implementation]]
+- [[#layer-type][Layer Type]]
+- [[#activation-functions][Activation Functions]]
+- [[#roundoff-errors][Roundoff Errors]]
 
 * Concept
 Used for Non-linear Hypotheses

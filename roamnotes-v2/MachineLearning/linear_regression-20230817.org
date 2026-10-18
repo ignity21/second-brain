@@ -5,6 +5,12 @@
 #+filetags: ML
 
 * TOC :TOC_1:
+- [[#concept][Concept]]
+- [[#vectorization][Vectorization]]
+- [[#regularized-linear-regression][Regularized Linear Regression]]
+- [[#comparison-of-algorithms-for-linear-regression][Comparison of algorithms for Linear Regression]]
+- [[#regression-metrics][Regression Metrics]]
+- [[#python-code][Python Code]]
 
 * Concept
 ** Parameters

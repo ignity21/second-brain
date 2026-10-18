@@ -5,6 +5,12 @@
 #+filetags: ML
 
 * TOC :TOC_1:
+- [[#overview][Overview]]
+- [[#sigmoid][Sigmoid]]
+- [[#relu][ReLU]]
+- [[#linear-activation-function][Linear Activation Function]]
+- [[#choosing-for-output-layer][Choosing for Output Layer]]
+- [[#choosing-for-hidden-layer][Choosing for Hidden Layer]]
 
 * Overview
 [[file:images/screenshots/Overview/2024-09-15_18-35-53_screenshot.png]]

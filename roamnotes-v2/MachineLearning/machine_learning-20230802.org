@@ -6,6 +6,16 @@
 #+filetags: ML
 
 * TOC :TOC_1:
+- [[#math-prerequisites][Math Prerequisites]]
+- [[#definition][Definition]]
+- [[#ml-terminology][ML Terminology]]
+- [[#questions-before-building-a-ml-solution][Questions Before Building a ML Solution]]
+- [[#categories][Categories]]
+- [[#ml-algos][ML Algos]]
+- [[#ml-optimization-algorithms][ML Optimization Algorithms]]
+- [[#ml-project][ML Project]]
+- [[#ml-development][ML Development]]
+- [[#ml-resources][ML Resources]]
 
 * Math Prerequisites
 :PROPERTIES:

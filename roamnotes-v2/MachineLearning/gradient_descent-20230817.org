@@ -5,6 +5,12 @@
 #+filetags: :ML:
 
 * TOC :TOC_1:
+- [[#cost-function][Cost Function]]
+- [[#learning-rate][Learning Rate]]
+- [[#gradient-descent][Gradient Descent]]
+- [[#pitfalls][Pitfalls]]
+- [[#regularized-linear-regression][Regularized Linear Regression]]
+- [[#alternative-approaches][Alternative Approaches]]
 
 * [[id:e1a528d4-0948-4f04-b114-48dd128863a1][Cost Function]]
 

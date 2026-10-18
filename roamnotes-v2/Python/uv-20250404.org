@@ -5,6 +5,17 @@
 #+filetags: :Project:Python:
 
 * TOC :TOC_2:
+- [[#python-interpreter][Python Interpreter]]
+- [[#projects][Projects]]
+  - [[#work-flow][Work Flow]]
+  - [[#commands][Commands]]
+  - [[#dependencies][Dependencies]]
+  - [[#example][Example]]
+  - [[#migration][Migration]]
+- [[#uv-tool][~uv tool~]]
+- [[#virtual-environments][Virtual Environments]]
+  - [[#uv-pip][~uv pip~]]
+- [[#others][Others]]
 
 * Python Interpreter
 - ~uv python list~ shows the list of all available Python interpreters.

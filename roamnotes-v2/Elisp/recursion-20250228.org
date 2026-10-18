@@ -4,6 +4,16 @@
 #+title: ELisp Recursion
 
 * TOC :TOC_2:
+- [[#overview][Overview]]
+- [[#common-patterns][Common Patterns]]
+  - [[#simple-pattern][Simple Pattern]]
+  - [[#using-cond][using ~cond~]]
+  - [[#every][every]]
+  - [[#accumulate][accumulate]]
+  - [[#keep][keep]]
+- [[#tail-recursive][Tail Recursive]]
+  - [[#recursion-with-deferments][Recursion with Deferments]]
+  - [[#no-deferment][No Deferment]]
 
 * Overview
 A recursive function typically contains a conditional expression which has three parts:
