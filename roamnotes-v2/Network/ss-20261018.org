@@ -1,0 +1,190 @@
+:PROPERTIES:
+:ID:       75c05e0a-5afe-41a8-ad39-10223bb86902
+:ROAM_ALIASES: "ss 命令"
+:VERIFIED_WITH: iproute2 7.2.0 (Linux 7.2.9 CachyOS, 2026-10-18)
+:END:
+#+title: ss (Linux Socket Statistics)
+#+filetags: :Network:Linux:
+
+* TOC :TOC_2:
+- [[#positioning][Positioning]]
+- [[#mental-model][Mental Model]]
+- [[#core-vocabulary][Core Vocabulary]]
+- [[#过滤条件][过滤条件]]
+  - [[#状态过滤][状态过滤]]
+  - [[#表达式][表达式]]
+- [[#读输出][读输出]]
+  - [[#recv-q-与-send-q][Recv-Q 与 Send-Q]]
+  - [[#计时器--o-][计时器（ ~-o~ ）]]
+  - [[#tcp-内部信息--i-][TCP 内部信息（ ~-i~ ）]]
+- [[#distinctions][Distinctions]]
+- [[#pitfalls][Pitfalls]]
+- [[#capability-map][Capability Map]]
+- [[#my-take][My Take]]
+- [[#connections][Connections]]
+
+* Positioning
+
+Linux 上查看 socket 的首选工具，属于 iproute2，取代 net-tools 的 ~netstat~ 。程序员常用它确认服务是否在监听、端口被谁占用、连接卡在哪个 TCP 状态，以及单条连接的 RTT、cwnd 和重传情况。
+
+它只能看到 socket 层的状态；要看报文内容，用 tcpdump 或 Wireshark。
+
+* Mental Model
+
+一条 ss 命令由四部分组成：哪类 socket、哪些状态、过滤表达式、显示哪些列。
+
+| 部分        | 写法                                                              | 不写时                                  |
+|-------------+-------------------------------------------------------------------+-----------------------------------------|
+| socket 类型 | ~-t~ TCP、 ~-u~ UDP、 ~-x~ Unix； ~-4~ / ~-6~ 限定地址族          | 所有类型都列，Unix socket 会刷屏        |
+| 状态集合    | ~-l~ 只看监听， ~-a~ 看全部；用 ~state~ / ~exclude~ 精确指定      | 不含 LISTEN 和 TIME-WAIT                |
+| 过滤表达式  | ~sport~ 、 ~dport~ 、 ~src~ 、 ~dst~ 等谓词，用 and、or、not 组合 | 不过滤                                  |
+| 显示        | ~-n~ 数字端口、 ~-p~ 进程、 ~-o~ 计时器、 ~-i~ TCP 内部信息       | 端口显示成服务名（443 显示为 ~https~ ） |
+
+所以 ~-tan~ 就是「TCP + 全部状态 + 数字端口」， ~-tlnp~ 就是「TCP + 只看监听 + 数字端口 + 进程」。
+
+* Core Vocabulary
+
+| 任务                                        | 命令                                         |
+|---------------------------------------------+----------------------------------------------|
+| 看所有 TCP socket 及状态                    | ~ss -tan~                                    |
+| 看监听端口及对应进程                        | ~sudo ss -tlnp~                              |
+| 看 UDP 绑定的端口及进程                     | ~sudo ss -ulnp~                              |
+| 端口 8080 被谁占了                          | ~sudo ss -tanp sport = :8080~                |
+| 只看已建立的连接                            | ~ss -tn state established~                   |
+| 与 443 端口有关的连接（不论哪端）           | ~ss -tan '( sport = :443 or dport = :443 )'~ |
+| 本机连到某个服务的连接                      | ~ss -tn dst 10.0.0.5:6379~                   |
+| 看计时器（重传、Keepalive、TIME-WAIT 剩余） | ~ss -tano~                                   |
+| 看单条连接的 RTT、cwnd、重传                | ~ss -tni dst 10.0.0.5~                       |
+| 各类 socket 总数                            | ~ss -s~                                      |
+
+统计状态分布和数量（ ~-H~ 去掉表头）：
+
+#+begin_src sh
+# 各状态的连接数，排查 CLOSE-WAIT / TIME-WAIT 堆积时先看这个
+ss -tanH | awk '{print $1}' | sort | uniq -c | sort -rn
+
+# TIME-WAIT 数量
+ss -tanH state time-wait | wc -l
+#+end_src
+
+* 过滤条件
+
+完整形式是 ~ss [选项] [state 状态 ...] [表达式]~ ，状态过滤写在表达式前面。
+
+** 状态过滤
+
+- ~state <名字>~ 只看该状态，可以写多次取并集； ~exclude <名字>~ 排除某个状态。
+- 状态名用小写加连字符： ~established~ 、 ~syn-sent~ 、 ~syn-recv~ 、 ~fin-wait-1~ 、 ~fin-wait-2~ 、 ~time-wait~ 、 ~close-wait~ 、 ~last-ack~ 、 ~closing~ 、 ~closed~ 、 ~listening~ 。
+- 状态组：
+
+  | 组名           | 包含                                            |
+  |----------------+-------------------------------------------------|
+  | ~all~          | 所有状态                                        |
+  | ~connected~    | 除 listening 和 closed 外的状态（含 TIME-WAIT） |
+  | ~synchronized~ | ~connected~ 去掉 syn-sent                       |
+  | ~bucket~       | time-wait 和 syn-recv                           |
+  | ~big~          | ~bucket~ 以外的状态                             |
+
+#+begin_src sh
+ss -tn state close-wait state fin-wait-2   # 两个状态取并集
+ss -tan exclude established                # 除 ESTAB 外的全部
+ss -tn state connected                     # 含 TIME-WAIT，不含 LISTEN
+#+end_src
+
+** 表达式
+
+| 条件     | 写法                                                        |
+|----------+-------------------------------------------------------------|
+| 本端端口 | ~sport = :443~                                              |
+| 对端端口 | ~dport = :443~ ，也可以写服务名 ~dport = :https~            |
+| 端口范围 | ~'dport >= :8000 and dport <= :9000'~ ，或 ~dport ge :8000~ |
+| 排除     | ~'not dport = :22'~                                         |
+| 对端地址 | ~dst 10.0.0.5~ 、 ~dst 10.0.0.0/8~ 、 ~dst 10.0.0.5:6379~   |
+| 本端地址 | ~src 127.0.0.1~                                             |
+| 网卡     | ~dev eth0~                                                  |
+| 组合     | ~and~ 、 ~or~ 、 ~not~ ，括号分组；相邻条件默认按 and 组合  |
+
+写法要点：
+
+- *s / d 指本端 / 对端* ，不是客户端 / 服务端。服务端上，进来的连接 ~sport~ 是 443；客户端上，连出去的连接 ~dport~ 是 443。不确定在哪一端时，像上表那样用 ~or~ 两个都写。
+- 括号、 ~<~ 、 ~>~ 、 ~!~ 、 ~&~ 都是 shell 元字符，整个表达式用单引号包住。不包时 bash 报 =syntax error near unexpected token `('= ，zsh 报 ~no matches found~ 。
+- 括号两侧要留空格： ~'(sport = :443)'~ 报 ~an inet prefix is expected rather than "(sport"~ 。
+- 端口前的冒号可以省略（ ~sport = 443~ 也能用），但地址带端口时要写成 ~addr:port~ 。
+
+* 读输出
+
+** Recv-Q 与 Send-Q
+
+两列的含义随状态不同：
+
+| 状态             | Recv-Q                         | Send-Q                                             |
+|------------------+--------------------------------+----------------------------------------------------|
+| LISTEN           | accept 队列当前长度            | accept 队列上限 ~min(backlog, somaxconn)~          |
+| 其他（ESTAB 等） | 已收到、本方应用还没读走的字节 | 已写入发送缓存、对端还没确认的字节（含尚未发出的） |
+
+- Recv-Q 持续增长：本方应用读得慢；Send-Q 持续增长：对端读得慢（窗口小）或网络慢。
+- LISTEN 行 Recv-Q 接近 Send-Q：accept 队列快满了，见 [[id:1ece815b-5c13-4d67-b816-b2ff98f34696][TCP Connection Management]] 的「SYN Flood 与两个队列」。
+- CLOSE-WAIT 行的 Recv-Q 常是 1：FIN 占一个序号，也计入了未读量（本机实测）。
+
+** 计时器（ ~-o~ ）
+
+格式为 ~timer:(名字,剩余时间,重传次数)~ ：
+
+| 名字        | 计时器                           |
+|-------------+----------------------------------|
+| ~on~        | 重传计时器（含 tail loss probe） |
+| ~keepalive~ | TCP Keepalive                    |
+| ~timewait~  | TIME-WAIT 等待                   |
+| ~persist~   | 零窗口探测                       |
+
+孤儿 ~FIN_WAIT_2~ （应用已 ~close()~ ）也显示 ~timewait~ 计时器（本机实测）：内核把它转成和 TIME-WAIT 一样的轻量 socket 管理，60 秒后回收。
+
+** TCP 内部信息（ ~-i~ ）
+
+每条连接多一行详情。字段含义分别记在用到它们的笔记里：
+
+- ~rtt~ 、 ~rto~ 、 ~retrans~ 、 ~wscale~ 、 ~ato~ ：[[id:d43414ac-35ca-4f1d-a603-8026943a9801][TCP Reliable Delivery and Flow Control]] 的「Linux 相关选项」。
+- 拥塞控制算法名、 ~cwnd~ 、 ~ssthresh~ 、 ~bbr:(...)~ ：[[id:41d8d73a-dcd2-40f5-b168-d7582aa77737][TCP Congestion Control]] 的「Linux 相关选项」。
+
+想用 grep 筛选时加 ~-O~ ，每条连接输出成一行。
+
+* Distinctions
+
+| 工具      | 什么时候用                                                                                        |
+|-----------+---------------------------------------------------------------------------------------------------|
+| ~ss~      | 默认选择。通过内核 netlink 接口取数据，过滤在内核里做，连接多时也快；有 ~-i~ 的 TCP 内部信息      |
+| ~netstat~ | 只在旧脚本和旧文档里见。net-tools 已停止维护，很多发行版不再预装；读 ~/proc/net/tcp~ ，连接多时慢 |
+| ~lsof -i~ | 以进程为中心：某个进程开了哪些连接、文件。ss 是以 socket 为中心                                   |
+| ~nstat~   | 全局协议计数器（累计重传数、丢包数等），对应旧的 ~netstat -s~ ；ss 只看单个 socket                |
+
+* Pitfalls
+
+- 不加 ~-a~ 看不到 TIME-WAIT 和 LISTEN → ~ss -tn~ 只列 LISTEN、TIME-WAIT 以外的状态，排查 TIME-WAIT 堆积时会漏掉 → 用 ~-a~ ，或直接 ~state time-wait~ 。
+- 查端口占用只用 ~-l~ 会漏 → 已 ~bind()~ 未 ~listen()~ 的 socket（显示为 ~UNCONN~ ）和残留的 TIME-WAIT 连接也占着端口，但都不在 LISTEN 里（后者让未设 ~SO_REUSEADDR~ 的 ~bind()~ 报 ~EADDRINUSE~ ） → 用 ~-a~ ，UDP 端口另用 ~-u~ 查。
+- 不加 ~-n~ 时 grep 端口号搜不到 → 端口默认显示成服务名（ ~:https~ ） → 加 ~-n~ 。
+- 状态名写错 → 输出里是 ~ESTAB~ 、 ~TIME-WAIT~ ，笔记里常写 ~TIME_WAIT~ ，但过滤只认 ~established~ 、 ~time-wait~ 、 ~listening~ ；写 ~time_wait~ 或 ~listen~ 报 ~wrong state name~ → 用小写连字符的全名。
+- 只指定一个 ~state~ 时输出没有 State 列 → awk 取列时列号会变 → 写脚本时按实际表头取列。
+- ~-p~ 的 Process 列为空 → 非 root 只能看到自己进程的 socket 归属 → 加 ~sudo~ 。
+
+* Capability Map
+
+| 名字                      | 用途                                                     | 何时想到它                        |
+|---------------------------+----------------------------------------------------------+-----------------------------------|
+| ~-m~                      | socket 内存， ~skmem:(...)~ 里有收发缓存上限 ~rb~ / ~tb~ | 调 ~tcp_rmem~ / ~tcp_wmem~ 后核对 |
+| ~-e~                      | uid、inode、socket cookie                                | 把 socket 和进程的 fd 对应起来    |
+| ~-K~                      | 强制关闭匹配的连接；需要 root 和内核支持                 | 不重启进程就踢掉某些连接          |
+| ~-E~                      | 持续输出被销毁的 socket                                  | 观察短连接                        |
+| ~-x~ / ~-w~ / ~-M~        | Unix、raw、MPTCP socket                                  | 排查本机进程间通信等              |
+| ~-B~                      | 已 ~bind()~ 但未监听、未连接的 socket                    | 只想列出这类 socket               |
+| ~cgroup~ 、 ~fwmark~ 过滤 | 按 cgroup 路径、防火墙标记过滤                           | 容器、策略路由环境                |
+
+非 root 时 ~-K~ 只打印 ~SOCK_DESTROY answers: Operation not permitted~ ，退出码仍是 0（本机实测），脚本里不能靠退出码判断是否关掉了。
+
+* My Take :mine:
+
+- 最常用的场景是查本地端口有没有被占用。
+
+* Connections
+
+- TCP 状态与异常排查：[[id:1ece815b-5c13-4d67-b816-b2ff98f34696][TCP Connection Management]]
+- ~-i~ 字段的含义：[[id:d43414ac-35ca-4f1d-a603-8026943a9801][TCP Reliable Delivery and Flow Control]]、[[id:41d8d73a-dcd2-40f5-b168-d7582aa77737][TCP Congestion Control]]
