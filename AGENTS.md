@@ -1,6 +1,18 @@
 # 知识库协作约定
 
-本仓库以 `roamnotes-v2/` 为 org-roam 笔记库，`roamnotes/` 为旧版迁移来源，`ankinotes/` 存放 Anki 卡片，`projects/` 存放配合笔记的简单示例代码（如 C++ 多线程、zmq 客户端 + 服务端），每个示例一个子目录并自带依赖说明，由对应笔记链接；`scripts/` 存放笔记维护脚本。org-roam 的 Emacs 配置在 `~/.config/doom/modules/cc/notes`，笔记库目录约定变化（如类别目录名、忽略目录）时需同步修改。
+## 仓库结构
+
+- `roamnotes-v2/`：org-roam 笔记库；`roamnotes/`：旧版迁移来源。
+- `ankinotes/`：Anki 卡片。
+- `projects/`：配合笔记的简单示例代码（如 C++ 多线程、zmq 客户端 + 服务端），每个示例一个子目录并自带依赖说明，由对应笔记链接。
+- `scripts/`：笔记维护脚本；`publish/`：笔记站导出与构建脚本。
+
+## 相关项目
+
+仓库之外、与本库配套的项目：
+
+- `~/.config/doom`：Doom Emacs 配置，org-roam 的主要配置在 `~/.config/doom/modules/cc/notes`。笔记库目录约定变化（如类别目录名、忽略目录）时需同步修改。
+- `~/repos/org-roam-ui`：笔记站前端 fork `ignity21/org-roam-ui` 的本地仓库，分支约定见「org-roam-ui 发布」。
 
 ## 工作范围与完成标准
 
