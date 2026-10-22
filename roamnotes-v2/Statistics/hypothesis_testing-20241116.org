@@ -11,8 +11,7 @@
 4. Determine the statistical significance -- p value is then compared against the significance level.
 
 * Concepts
-** [[id:fd7b8935-0094-403b-ac49-a61c8df0a733][Confidence Intervals]]
-** [[id:4946fa5a-e743-4270-bee9-82e029890d7c][P-Values]]
+- 第 3 步算出的 p 值见 P-Values；与之对偶的区间估计见 [[id:fd7b8935-0094-403b-ac49-a61c8df0a733][Confidence Intervals]]，置信水平取 \(1-\alpha\)
 ** Significance Level \(\alpha\)
 The significance level of a hypothesis test is the threshold point of "beyond a reasonable doubt"
 - Cutoff point between a small p-value and a large one
@@ -56,7 +55,7 @@ The significance level of a hypothesis test is the threshold point of "beyond a 
 | chosen \(H_{0}\) | Correct                      | False negative(Type II Error) |
 | chosen \(H_{A}\) | False positive(Type I Error) | Correct                       |
 
-* Tests
-** [[id:3c158478-8d52-4fa3-9262-f0267d6c48c8][Z-Test]]
-** [[id:7c802e9e-8fc0-41fd-8078-1e09ee72378f][T-Test]]
-** [[id:802be368-002c-4591-b6a9-3f14c71f0467][ANOVA]]
+* [[id:4946fa5a-e743-4270-bee9-82e029890d7c][P-Values]]
+* [[id:3c158478-8d52-4fa3-9262-f0267d6c48c8][Z-Test]]
+* [[id:7c802e9e-8fc0-41fd-8078-1e09ee72378f][T-Test]]
+* [[id:802be368-002c-4591-b6a9-3f14c71f0467][ANOVA]]

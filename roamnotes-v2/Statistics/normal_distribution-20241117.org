@@ -11,8 +11,9 @@
 - 99.7%: within 3 std
 
 * Python Examples
-** [[id:32b3ad6c-b0e1-4f27-a1bf-f7e08b509f2d][Generating Samples]]
+** Generating Samples
 - ~norm.rvs(mean, std, size=n)~
+- 其他分布见 [[id:32b3ad6c-b0e1-4f27-a1bf-f7e08b509f2d][Generating Samples with SciPy]]
 
 ** Calculating CDF & PPF
 #+begin_src python

@@ -14,4 +14,5 @@
 
 - $M=\frac{1}{n}\sum_{i=1}^{n}\bar{X_i}$
 - Ratio of $\sigma$ to $SE$: $\frac{\sigma}{SE}=\sqrt{n}$
-  - [[id:193270c8-6738-48fb-b728-8462f10de3c5][Central Limit Theorem]]
+
+* [[id:193270c8-6738-48fb-b728-8462f10de3c5][Central Limit Theorem]]

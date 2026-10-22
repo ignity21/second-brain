@@ -5,6 +5,20 @@
 #+title: Descriptive Statistics
 #+filetags: :Math:Statistics:
 
+* TOC :TOC_2:
+- [[#measure-of-central][Measure of Central]]
+  - [[#mean][mean]]
+  - [[#mode][mode]]
+  - [[#median][median]]
+- [[#measure-of-spread][Measure of Spread]]
+  - [[#variance][Variance]]
+  - [[#standard-deviation][Standard Deviation]]
+  - [[#mean-absolute-deviation][Mean Absolute Deviation]]
+  - [[#median-absolute-deviation-robust][Median Absolute Deviation (Robust)]]
+  - [[#quantiles-robust][Quantiles (Robust)]]
+  - [[#range-max---min][Range (Max - Min)]]
+- [[#iqr][IQR]]
+
 * Measure of Central
 ** mean
 - *Mean is subject to extreme values*
@@ -78,3 +92,5 @@ upper_threshold = np.percentile(data, 75) + 1.5 * iqr
 
 ** Range (Max - Min)
 - ~sns.catplot(..., whis=[0, 100])~
+
+* [[id:881a87d5-754b-4791-b398-3345c88fdcb2][IQR]]

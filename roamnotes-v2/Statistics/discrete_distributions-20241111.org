@@ -11,5 +11,5 @@
 - Negative Skewed == Left Skewed
 
 * [[id:0a97c486-67fb-40a4-b1ff-e1229a387064][Binomial Distribution]]
-* [[id:408f940c-5870-4c00-b54c-6d4aea4809d6][Uniform Distribution(D)]]
+* [[id:408f940c-5870-4c00-b54c-6d4aea4809d6][Discrete Uniform Distribution]]
 * [[id:5233b01c-750c-481c-a853-b61b48eac54c][Poisson Distribution]]

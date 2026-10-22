@@ -1,8 +1,7 @@
 :PROPERTIES:
 :ID:       41fc96ca-d4b5-44fc-ad46-c8783a7253ff
-:ROAM_ALIASES: "Continious Uniform Distribution"
 :END:
-#+title: Uniform Distribution(C)
+#+title: Continuous Uniform Distribution
 #+filetags: :Probability:Statistics:Math:
 
 * Examples

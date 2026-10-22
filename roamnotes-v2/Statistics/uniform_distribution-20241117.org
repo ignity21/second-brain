@@ -1,8 +1,7 @@
 :PROPERTIES:
 :ID:       408f940c-5870-4c00-b54c-6d4aea4809d6
-:ROAM_ALIASES: "Discrete Uniform Distribution"
 :END:
-#+title: Uniform Distribution(D)
+#+title: Discrete Uniform Distribution
 #+filetags: :Statistics:Probability:Math:
 
 * Examples

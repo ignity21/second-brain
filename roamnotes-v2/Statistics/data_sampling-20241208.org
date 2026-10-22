@@ -4,6 +4,17 @@
 #+title: Data Sampling
 #+filetags: :DataScience:Python:Statistics:
 
+* TOC :TOC_2:
+- [[#sampling][Sampling]]
+  - [[#simple-random-sampling][Simple Random Sampling]]
+  - [[#systematic-sampling][Systematic Sampling]]
+  - [[#stratified-sampling][Stratified Sampling]]
+  - [[#weighted-random-sampling][Weighted Random Sampling]]
+  - [[#clustering-sampling][Clustering Sampling]]
+  - [[#examples][Examples]]
+- [[#sampling-distribution][Sampling Distribution]]
+- [[#bootstrap-distribution][Bootstrap Distribution]]
+
 * Sampling
 ** Simple Random Sampling
 #+begin_src python
@@ -118,5 +129,3 @@ pop['mean_roll'].value_counts(sort=False).plot(kind='bar')
 
 * [[id:4514ee9e-86ef-4f32-bfc3-151320f23d97][Sampling Distribution]]
 * [[id:a200c616-3de2-4340-bb77-8bb77ff2980c][Bootstrap Distribution]]
-* Metrics
-** [[id:fd7b8935-0094-403b-ac49-a61c8df0a733][Confidence Intervals]]
