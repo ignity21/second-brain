@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       f6ce40bf-224e-42a9-97f7-49cc084e1167
 :END:
-#+title: Mixin Class
+#+title: Python Mixin Classes
 #+filetags: :OO:
 
 * 概述

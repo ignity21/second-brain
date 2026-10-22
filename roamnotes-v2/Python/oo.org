@@ -8,4 +8,4 @@
 * [[id:734c0052-0cd7-49c7-badf-10019a558773][Abstract Class / Interface]]
 * [[id:f6ce40bf-224e-42a9-97f7-49cc084e1167][Mixin]]
 * [[id:0c108061-bce6-4dba-b1ce-c610aeecdcc8][MRO]]
-* [[id:d588e609-9006-4532-a187-2c253df73c0a][__init__subclass__]]
+* [[id:d588e609-9006-4532-a187-2c253df73c0a][~__init_subclass__~]]

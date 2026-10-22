@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       95feb43d-d5a4-41de-8c70-40fedf3f6265
 :END:
-#+title: metaclass
+#+title: Python Metaclass
 #+filetags: :OO:
 
 * 概述
@@ -52,5 +52,5 @@ print(myinst.created_at)
 - ~MyClass~ 的方法 ~value(self)~ 被转换为属性
 * 用其它方式替代元类
 1. [[id:02d375d4-d851-40b2-bb71-831ea66659e4][Class Decorator]]
-2. [[id:d588e609-9006-4532-a187-2c253df73c0a][~__init__subclass__~]] 钩子方法
+2. [[id:d588e609-9006-4532-a187-2c253df73c0a][~__init_subclass__~]] 钩子方法
 3. 描述符

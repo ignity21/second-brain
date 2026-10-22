@@ -9,7 +9,8 @@
 - [[#qt-modules][Qt Modules]]
 - [[#modelview][Model/View]]
 - [[#qevent][QEvent]]
-- [[#python-modules][Python Modules]]
+- [[#pyqt5][PyQt5]]
+- [[#pyside6][PySide6]]
 
 * Overview
 * 组件
@@ -40,6 +41,5 @@
 3. 分派到具体处理函数，如： ~mouseDoubleClickEvent()~
 4. 处理函数中触发信号 ~qtsingal.emit()~ (signal 是对事件的封装)
 
-* Python Modules
-- [[id:2d8c01d9-ed79-4af6-b18d-3ea846da454e][PyQt5]]
-- [[id:fd46841b-5f7c-410f-b7bb-bf2c5a28456b][PySide6]]
+* [[id:2d8c01d9-ed79-4af6-b18d-3ea846da454e][PyQt5]]
+* [[id:fd46841b-5f7c-410f-b7bb-bf2c5a28456b][PySide6]]

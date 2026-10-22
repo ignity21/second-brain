@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       40d506d8-6dab-477f-8beb-9a4029ce2b2b
 :END:
-#+title: Decorator
+#+title: Python Decorators
 
 * TOC :TOC_2:
 - [[#用途][用途]]

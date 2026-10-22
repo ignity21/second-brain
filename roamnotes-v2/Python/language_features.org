@@ -4,7 +4,7 @@
 :END:
 #+title: Python Language Features
 
-* [[id:40d506d8-6dab-477f-8beb-9a4029ce2b2b][Decorator]]
+* [[id:40d506d8-6dab-477f-8beb-9a4029ce2b2b][Decorators]]
 * [[id:48cbf16f-048a-4bd3-9561-4c4566f6b204][asyncio]]
 * [[id:d9f8970a-d0a6-4fd4-984f-ca5fb413b4ac][Exceptions]]
 * [[id:a7b8622b-68f5-4482-923e-c551386a13c0][Type System]]

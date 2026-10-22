@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       3b513038-1dc5-4cb6-a644-58a5510e46f4
 :END:
-#+title: Practical Advice
+#+title: Python Practical Advice
 #+filetags: :Style:
 
 * TOC :TOC_2:
@@ -253,7 +253,7 @@ query(5, kwarg1=1, kwarg2=2)
 
 ** 圈复杂度
 - Cyclomatic Complexity
-- ~uv tool install radon~
+- 用 [[id:d7ff1cd4-8d7e-4d16-a6a0-3eab08f5cf3a][radon]] 计算： ~uv tool install radon~
   - ~radon cc xxx.py -s~
 - ~flake8~ 中的 ~mccabe~ 模块也提供圈复杂度检查
 

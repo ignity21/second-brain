@@ -22,6 +22,6 @@ Status: In progress
 - [x] Statistics（`2026-10-22-statistics-tree.md`）
 - [x] LinearAlgebra（`2026-10-22-linear-algebra-tree.md`）
 - [ ] MachineLearning（依赖 Statistics、LinearAlgebra 的结果，最后做）
-- [ ] Python
+- [x] Python（`2026-10-22-python-tree.md`）
 - [ ] Network
 - [ ] Elisp

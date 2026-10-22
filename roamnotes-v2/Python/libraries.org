@@ -4,13 +4,8 @@
 #+title: Python Third-Party Libraries
 #+filetags: :PyLibs:
 
-* [[id:74655713-faa8-46d3-a960-c82c269616c6][Code Analysis Utilities]]
-
-* [[id:e1387f6b-9771-4359-a7e0-9294f83a5d53][Code Helpers]]
-
-* [[id:bcd16a74-9180-4015-9be2-de2b97c1d651][Logging]]
-
-* [[id:bb6e87a9-1134-4be4-8208-32448b748e32][GUI]]
-
-* [[id:41f5a230-9196-41c9-b4b9-75a76822cdc9][Network Protocols]]
-
+* [[id:ffb4d5cb-79fe-4565-a40a-a8ef50de415a][wrapt]]
+* [[id:56c54cf4-674f-4940-ae1e-bf0f0981cd3b][python-statemachine]]
+* [[id:311759eb-82a6-4f6c-a09c-6eec896e20d6][loguru]]
+* [[id:70f106c0-7601-4c43-9d97-4f0f28b5c47a][websockets]]
+* [[id:e6c611fd-1796-463f-a844-2e2935996aba][Qt]]

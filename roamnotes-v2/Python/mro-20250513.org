@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       0c108061-bce6-4dba-b1ce-c610aeecdcc8
 :END:
-#+title: MRO
+#+title: Python Method Resolution Order (MRO)
 #+filetags: :OO:
 
 * Overview
