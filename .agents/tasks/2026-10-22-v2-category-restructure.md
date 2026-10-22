@@ -20,7 +20,7 @@ Status: In progress
 
 - [x] DataScience（`2026-10-22-datascience-tree-and-link-rules.md`、`2026-10-22-polars-concepts-restructure.md`）
 - [x] Statistics（`2026-10-22-statistics-tree.md`）
-- [ ] LinearAlgebra
+- [x] LinearAlgebra（`2026-10-22-linear-algebra-tree.md`）
 - [ ] MachineLearning（依赖 Statistics、LinearAlgebra 的结果，最后做）
 - [ ] Python
 - [ ] Network

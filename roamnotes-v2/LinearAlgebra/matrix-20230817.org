@@ -4,6 +4,20 @@
 #+title: Matrix
 #+filetags: :Math:LinearAlgebra:
 
+* TOC :TOC_2:
+- [[#concept][Concept]]
+- [[#matrix-laws][Matrix Laws]]
+  - [[#addition][Addition]]
+  - [[#scale-multiplication][Scale Multiplication]]
+  - [[#matrix-multiplication][Matrix multiplication]]
+  - [[#inverse][Inverse]]
+- [[#determinant][Determinant]]
+  - [[#properties][Properties]]
+- [[#special-matrices][Special Matrices]]
+  - [[#rotation-matrix][Rotation Matrix]]
+  - [[#identity-matrix][Identity Matrix]]
+- [[#references][References]]
+
 * Concept
 Matrices make transformations on vectors, potentially changing their magnitude and direction.
 - Square matrix: a $n\times n$ matrix
@@ -94,7 +108,8 @@ g & h & i \end{bmatrix}\]
   - e.g. reflection matrices, or a rotation by 180°
 - Test if a matrix can be inversed ~assert LA.inv(M) != 0~
   - If the determinant is equal to 0, then the matrix cannot be inversed. (it is a singular matrix)
-- links ::  [[id:5c4865c6-143e-4351-a1b6-1589464e135e][Pseudoinverse]]
+
+*** [[id:5c4865c6-143e-4351-a1b6-1589464e135e][Pseudoinverse]]
 
 * Determinant
 The determinant of a transformation represents the scale factor by which *areas* are transformed by the Matrix.

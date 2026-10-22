@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       8ff66d66-2df2-4dad-b09a-9ba4e42736d9
 :END:
-#+title: Linear Algebra
+#+title: Linear Algebra Overview
 #+filetags: :LinearAlgebra:Math:
 
 * Concepts
@@ -14,13 +14,9 @@
   - Rank :: The number of dimensions in the output of a linear transformation. i.e. in the column space.
   - Column Space :: "Column Space" of $A$ is the set of all possible outputs $A\bm{v}$
   - Null Space / Kernel :: The set of vectors that lands on *the origin* in a linear transformation is called the "null space" or the "kernel".
-  - Eigenvectors :: Eigenvector is a vector that changes *at most* by a *scalar* factor when that linear transformation is applied to it.
+  - Eigenvectors :: Eigenvector is a vector that changes *at most* by a *scalar* factor when that linear transformation is applied to it. [[id:a20a85ad-d459-477f-bbcc-1df064e9720c][Eigenvectors]] works out how to find them.
   - Eigenvalues :: Eigenvalue is the factor by which the eigenvector is scaled, denoted by $\lambda$
 
-* [[id:f8567531-6fee-42d1-a78b-c085a3ff4978][Vector]]
-* [[id:e38dcf6b-8443-4706-ad9d-01376d79379d][Matrix]]
-* [[id:e6dd9e1a-e20b-4bdc-98e7-49565d33db98][Cross Product]]
-* [[id:038c5241-9cfe-4217-9639-5a7d878da899][Linear Transformation]]
 * Basis Transformation
 - $B$ is the new basis written in old basis language.
 - $B^{-1}$ is the old basis written in new basis language.
@@ -29,8 +25,4 @@
 
 \[B^{-1}\cdot \begin{bmatrix} x_{old} \\ y_{old} \end{bmatrix}=\begin{bmatrix} x_{new} \\ y_{new} \end{bmatrix}\]
 
-** [[id:a20a85ad-d459-477f-bbcc-1df064e9720c][Eigenvectors]]
-** [[id:500581c8-ecbd-4fcb-b503-f2f405e6b262][Orthonormal Basis]]
-* TODO
-- [[id:661e1889-ce72-4cbe-a0ca-7a88944a72e5][The Jacobian]]
-- [[id:87392b85-d13e-4923-ab0f-938e1c50a18f][The Hessian]]
+- When $B$ is an orthonormal basis, $B^{-1}=B^T$; [[id:500581c8-ecbd-4fcb-b503-f2f405e6b262][Orthonormal Basis]] builds one with the Gram–Schmidt process.

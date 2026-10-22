@@ -3,4 +3,5 @@
 :END:
 #+title: Linear Algebra
 
-* [[id:a77e95fe-83b5-4ae1-a091-adcc524317db][Linear Algebra Foundations]]
+* [[id:faf37b18-c831-4be4-9a62-306c4a0fbb20][Basics]]
+* [[id:f5882fb8-4aec-413b-997d-b36673558c6b][Matrix Calculus]]

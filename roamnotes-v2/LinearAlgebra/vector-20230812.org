@@ -70,6 +70,8 @@
   # Should clips the value first
 #+end_src
 
+* [[id:e6dd9e1a-e20b-4bdc-98e7-49565d33db98][Cross Product]]
+
 * Norm(Magnitudes)
 :PROPERTIES:
 :ID:       2963e2dc-7b96-47f1-aa18-26960815fc4a
