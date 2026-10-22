@@ -6,6 +6,7 @@
 * Overview
 - Special forms are something like built-in macros
   - e.g. ~if~, ~progn~, ~setq!~
+- ~condition-case~ ([[id:0017ea45-edd4-4ef9-aaca-f59caddea636][ELisp Error Handling with ~condition-case~]]) and ~interactive~ ([[id:67ee9921-b986-40d1-a2ca-45fce97f4a48][ELisp Interactive Functions]]) are special forms too
 
 * ~let~
 #+begin_src elisp
@@ -27,7 +28,3 @@ Variables in the latter part of the varlist can make use of the values to which 
 #+end_src
 
 * [[id:f21f0312-15cd-4a7a-8176-7c89e220f0d3][~save-excursion~]]
-
-* [[id:0017ea45-edd4-4ef9-aaca-f59caddea636][~condition-case~]]
-
-* [[id:67ee9921-b986-40d1-a2ca-45fce97f4a48][~interactive~ Special Forms]]

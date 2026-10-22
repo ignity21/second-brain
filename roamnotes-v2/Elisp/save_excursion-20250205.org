@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       f21f0312-15cd-4a7a-8176-7c89e220f0d3
 :END:
-#+title: ~save-excursion~
+#+title: ELisp ~save-excursion~
 
 * Overview
 1. It *saves the location of point*

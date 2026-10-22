@@ -5,4 +5,4 @@
 
 * [[id:224bc2ff-1c2f-4b0b-a415-3bf140a90f16][Core Language]]
 * [[id:bbb6b1f6-6e74-424b-86c5-a5790f71d9cb][Control Flow and Error Handling]]
-* [[id:568a1513-def9-42e3-9cb0-378f2dd1a18a][Data Structures]]
+* [[id:526a68e0-3df6-483b-b4f8-749d92983f85][List Functions]]

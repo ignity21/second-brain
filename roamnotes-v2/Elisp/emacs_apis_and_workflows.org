@@ -1,7 +1,0 @@
-:PROPERTIES:
-:ID:       27b3dfa2-e65e-4759-bb70-c4982f2196d6
-:END:
-#+title: Emacs APIs and Workflows
-
-* [[id:253bf2f6-3e4c-46de-8a1e-4bc99b47f3bb][Core APIs]]
-* [[id:1e498661-87ae-45a4-9c58-d7fa4a5518bf][Debugging and Navigation]]

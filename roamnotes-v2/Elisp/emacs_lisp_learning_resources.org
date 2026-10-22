@@ -3,4 +3,4 @@
 :END:
 #+title: ELisp Learning Resources
 
-* [[id:0fa72f40-4463-4288-adea-07bb5d97910d][Tutorials]]
+- [[file:learn-elisp.el][Learn Emacs Lisp in 15 Minutes]]: a runnable tutorial file covering the core syntax.

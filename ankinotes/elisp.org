@@ -41,7 +41,7 @@
 
 *** Back
 使用 ~save-excursion~ 包住操作。它在退出时恢复 point 和当前 buffer。
-来源：[[id:f21f0312-15cd-4a7a-8176-7c89e220f0d3][~save-excursion~]]。
+来源：[[id:f21f0312-15cd-4a7a-8176-7c89e220f0d3][ELisp ~save-excursion~]]。
 
 ** M-.
 :PROPERTIES:
@@ -115,7 +115,7 @@
 
 *** Back
 按 ~C-c a ;~ ，调用 ~embark-act~ 。
-来源：[[id:f0e95f32-7d9c-4faa-ad96-6e6057d5f52c][Vertico]]。
+来源：[[id:f0e95f32-7d9c-4faa-ad96-6e6057d5f52c][Vertico in Doom]]。
 
 ** vertico groups
 :PROPERTIES:
@@ -128,7 +128,7 @@
 
 *** Back
 按 ~C-M-n~ ；上一组用 ~C-M-p~ 。
-来源：[[id:f0e95f32-7d9c-4faa-ad96-6e6057d5f52c][Vertico]]。
+来源：[[id:f0e95f32-7d9c-4faa-ad96-6e6057d5f52c][Vertico in Doom]]。
 
 ** ~let~ vs ~let*~
 :PROPERTIES:

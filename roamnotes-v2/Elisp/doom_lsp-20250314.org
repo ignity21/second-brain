@@ -7,4 +7,4 @@
 - Use ~M-x lsp-doctor~ to validate if your lsp-mode is properly configured.
 - [[https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/][A guide on disabling/enabling lsp-mode features]]
 - [[https://emacs-lsp.github.io/lsp-mode/page/performance/#tuning][Tuning]]
-- [[id:9eb7ecc9-7aa6-4da7-89a6-a2f192a93f16][Profiling]]
+- Find what makes LSP slow with the CPU profiler ([[id:9eb7ecc9-7aa6-4da7-89a6-a2f192a93f16][Emacs Profiling]]).
