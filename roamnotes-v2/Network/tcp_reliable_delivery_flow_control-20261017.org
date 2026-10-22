@@ -43,7 +43,7 @@ TCP 在不可靠的网络上提供有序、可靠的字节流。各机制分工�
 | 拥塞窗口 cwnd                    | 拥塞控制：别把网络塞满               |
 | 发送窗口 = min(rwnd, cwnd)       | 限制在途（已发未确认）的数据量       |
 
-连接的建立与关闭见 [[id:1ece815b-5c13-4d67-b816-b2ff98f34696][TCP Connection Management]]，cwnd 与拥塞控制见 [[id:41d8d73a-dcd2-40f5-b168-d7582aa77737][TCP Congestion Control]]。本笔记讲序号、重传和流量控制。
+本笔记讲序号、重传和流量控制；连接的建立与关闭、cwnd 与拥塞控制不在这里展开。
 
 * 序号与累计确认
 
@@ -74,7 +74,7 @@ TCP 给 *每个字节* 编号（序号，sequence number），不给包编号：
 - 滑动窗口（sliding window）是机制：窗口左边界随 ACK 右移，右边界随之推进。有边界、会「滑」的是发送方的发送窗口，以及接收方的接收窗口（接收方用它判断哪些序号可以收下）；cwnd 只是一个数值上限，没有边界。
 - TCP 全双工，两个方向独立，每一端同时有一个发送窗口和一个接收窗口。
 - 平时说「TCP 滑动窗口」「窗口大小」，通常指流量控制这一套：发送窗口按对方通告的 rwnd 滑动。抓包里的 ~win=~ 、TCP 头的窗口字段都是 rwnd。
-- 窗口字段只有 16 位（最大 65535 字节）。更大的窗口靠窗口缩放选项（window scale）：两端在 SYN 里各自声明一个 2 的幂作为倍数。高带宽、高时延的链路必须开，原因见 [[id:41d8d73a-dcd2-40f5-b168-d7582aa77737][TCP Congestion Control]] 的带宽时延积。
+- 窗口字段只有 16 位（最大 65535 字节）。更大的窗口靠窗口缩放选项（window scale）：两端在 SYN 里各自声明一个 2 的幂作为倍数。高带宽、高时延的链路必须开：窗口要装得下带宽时延积（bandwidth-delay product，带宽 × RTT）才能跑满链路。
 
 ** 发送端的四个区域
 
@@ -151,7 +151,7 @@ note over R : 缺口补齐，ACK 一次跳到 501
 #+RESULTS:
 [[file:images/tcp_fast_retransmit_sack.png]]
 
-丢包之后发送速率怎么调整（快速恢复、超时后重新慢启动）属于拥塞控制，见 [[id:41d8d73a-dcd2-40f5-b168-d7582aa77737][TCP Congestion Control]]。
+丢包之后发送速率怎么调整（快速恢复、超时后重新慢启动）属于拥塞控制。
 
 * 流量控制
 
@@ -266,6 +266,3 @@ socket 选项：
 * Connections
 
 - 前置：[[id:72d3cced-60c4-4109-bc8c-a4ccbec10039][Network Layers and Data Units]]（报文段、MSS 与封装）
-- 连接建立与关闭、ISN：[[id:1ece815b-5c13-4d67-b816-b2ff98f34696][TCP Connection Management]]
-- 拥塞控制与 BBR：[[id:41d8d73a-dcd2-40f5-b168-d7582aa77737][TCP Congestion Control]]
-- 查看 socket 状态、计时器和 ~-i~ 详情的工具：[[id:75c05e0a-5afe-41a8-ad39-10223bb86902][ss (Linux Socket Statistics)]]

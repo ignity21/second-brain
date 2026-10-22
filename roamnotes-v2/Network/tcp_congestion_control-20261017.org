@@ -205,5 +205,3 @@ legend top
 * Connections
 
 - 序号、重传、三种窗口、流量控制：[[id:d43414ac-35ca-4f1d-a603-8026943a9801][TCP Reliable Delivery and Flow Control]]
-- 连接管理：[[id:1ece815b-5c13-4d67-b816-b2ff98f34696][TCP Connection Management]]
-- 查看 socket 状态、计时器和 ~-i~ 详情的工具：[[id:75c05e0a-5afe-41a8-ad39-10223bb86902][ss (Linux Socket Statistics)]]
