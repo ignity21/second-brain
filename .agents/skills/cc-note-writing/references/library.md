@@ -23,7 +23,7 @@
 * My Take :mine:   ; 用户的取舍和经验
 ```
 
-库较大时按主题拆成多篇（例如「Time Series with Polars」）。主题笔记沿用同一模板，省略 `Positioning` 和 `Coming from`（除非该主题有特有的迁移问题），开头链接到主笔记。
+库较大时按主题拆成多篇（例如「Time Series with Polars」）。主题笔记沿用同一模板，省略 `Positioning` 和 `Coming from`（除非该主题有特有的迁移问题），由主笔记或其下的 APIs 索引收录，开头不回链主笔记（见 AGENTS.md「笔记间链接」）。
 
 ## 各章节要求
 
