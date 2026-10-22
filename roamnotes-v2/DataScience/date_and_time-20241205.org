@@ -68,4 +68,5 @@ second_1am = tz.enfold(second_1am) # enfold: this time belongs to the second 1am
 print((second_1am - first_1am).total_seconds()) # 0
 print((second_1am.astimezone(tz.UTC) - first_1am.astimezone(tz.UTC)).total_seconds()) # 3600
 #+end_src
-* [[id:a707e96d-102d-4549-8abe-ffeb9a8c3e9e][Pandas Datetime]]
+* In Pandas
+- Parsing timestamps and converting time zones with pandas: [[id:a707e96d-102d-4549-8abe-ffeb9a8c3e9e][Pandas Datetime]]

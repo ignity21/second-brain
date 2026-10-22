@@ -1,10 +1,8 @@
 :PROPERTIES:
 :ID:       e67e7407-3452-41c6-8e0d-7ed4cfae075b
+:ROAM_ALIASES: DataScience
 :END:
 #+title: Data Science
-:ROAM_ALIASES: DataScience
 
-* [[id:9158c4c8-ce38-4747-b4f7-ee1b6317d1b5][Statistics]]
-* [[id:21f7d5f1-68b1-4050-ae81-eda39cdd8843][Linear Algebra]]
-* [[id:bc5d7dc4-6658-4b4a-9e4b-2b5e338bef95][Data Analysis]]
-* [[id:de405245-1a6e-4385-be5b-cd645861a131][Python Libraries]]
+* [[id:0669cf34-1246-433d-a39b-fa4858531068][Data Analysis Workflow]]
+* [[id:de405245-1a6e-4385-be5b-cd645861a131][Python Data Libraries]]

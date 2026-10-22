@@ -1,8 +1,0 @@
-:PROPERTIES:
-:ID:       10094858-f435-4c62-8b83-eea1af37f4f1
-:END:
-#+title: Statistical Python Libraries
-
-* [[id:c6961658-1c4b-4f9d-8a52-e919562d6277][SciPy]]
-* [[id:ba10e7ca-778d-4e4b-8251-e398cf189a83][statsmodels]]
-* [[id:ffde831f-5883-4dd5-b406-caa135d0e53b][pingouin]]

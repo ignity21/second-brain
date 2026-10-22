@@ -20,4 +20,4 @@
     - Almost all pairwise t-testing situations choosing a correction is more appropriate.
 
 * Example
-** [[id:ffde831f-5883-4dd5-b406-caa135d0e53b][pingouin]]
+- One-way ANOVA with [[id:ffde831f-5883-4dd5-b406-caa135d0e53b][pingouin]]

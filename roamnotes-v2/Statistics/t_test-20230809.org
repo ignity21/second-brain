@@ -4,6 +4,21 @@
 #+title: T-Test
 #+filetags: :Statistics:Math:
 
+* TOC :TOC_2:
+- [[#overview][Overview]]
+- [[#types][Types]]
+- [[#one-sample-t-test][One-sample t-test]]
+- [[#two-sample-t-test][Two Sample t-test]]
+  - [[#calculating-se][Calculating SE]]
+  - [[#t-statistic][T Statistic]]
+  - [[#degree-of-freedom][Degree of Freedom]]
+  - [[#calculating-p-values][Calculating P-values]]
+- [[#paired-sample-t-test][Paired Sample t-test]]
+- [[#examples][Examples]]
+  - [[#two-sample-right-tailed][Two Sample Right-tailed]]
+  - [[#paired-sample-left-tailed][Paired Sample Left-tailed]]
+- [[#compare-with-z-test][Compare with Z-Test]]
+
 * Overview
 - t statistic follows a [[id:1bf89458-2878-4fbf-a0b9-9a59a8fdc486][T-Distribution]]
 
@@ -101,7 +116,7 @@ degrees_of_freedom = n_diff - 1
 p_value = t.cdf(t_stat, df=degrees_of_freedom)
 #+end_src
 
-** [[id:ffde831f-5883-4dd5-b406-caa135d0e53b][pingouin]]
+- The paired t-test in one call: [[id:ffde831f-5883-4dd5-b406-caa135d0e53b][pingouin]]
 * Compare with [[id:3c158478-8d52-4fa3-9262-f0267d6c48c8][Z-Test]]
 - z-statistic: needed when using one sample statistic to estimate a population parameter
 - t-statistic: needed when using multiple sample statistics to estimate a population parameter

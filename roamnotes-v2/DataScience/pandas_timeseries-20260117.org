@@ -4,7 +4,8 @@
 #+title: Pandas Timeseries
 #+filetags: :Pandas:
 
-* [[id:a707e96d-102d-4549-8abe-ffeb9a8c3e9e][Pandas Datetime]]
+Builds on [[id:a707e96d-102d-4549-8abe-ffeb9a8c3e9e][Pandas Datetime]] for parsing timestamps and converting time zones.
+
 * Time-series Merging
 - ~merge_ordered~ is really useful for time-series data
 #+begin_src python

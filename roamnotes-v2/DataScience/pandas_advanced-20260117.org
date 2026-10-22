@@ -4,6 +4,14 @@
 #+title: Pandas Advanced
 #+filetags: :Pandas:
 
+* TOC :TOC_1:
+- [[#aggregating][Aggregating]]
+- [[#sampling][Sampling]]
+- [[#merging][Merging]]
+- [[#concatenating][Concatenating]]
+- [[#widelong-format-reshaping][Wide/Long Format Reshaping]]
+- [[#categorical-data][Categorical Data]]
+
 * Aggregating
 - ~size()~
 - ~mean()~, ~median()~, ~mode()~
@@ -113,5 +121,5 @@ pd.concat([df1, df2],
 df = pd.melt(df, var_name="Country", value_name="population")
 #+end_src
 
-* [[id:c73b007a-f41e-4f9e-b2b9-41be79452544][Manipulating Categorical Data]]
-* [[id:c3f9e9e6-b7ed-45f0-86a5-35c8e84d96f9][Pandas Timeseries]]
+* Categorical Data
+- ~category~ dtype, the ~cat~ accessor and encoding: [[id:c73b007a-f41e-4f9e-b2b9-41be79452544][Manipulating Categorical Data]]

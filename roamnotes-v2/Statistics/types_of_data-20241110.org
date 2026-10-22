@@ -25,6 +25,8 @@
 - Somewhat agree
 - Strongly agree
 
-** [[id:c73b007a-f41e-4f9e-b2b9-41be79452544][Manipulating Categorical Data]]
+** In Pandas
+- Converting columns to categories and encoding them: [[id:c73b007a-f41e-4f9e-b2b9-41be79452544][Manipulating Categorical Data]]
 
-* [[id:2d34ce40-09a1-48ab-978e-3779d9114f78][Date and Time]]
+* Date and Time
+- Time zones and daylight saving time in Python: [[id:2d34ce40-09a1-48ab-978e-3779d9114f78][Date and Time]]

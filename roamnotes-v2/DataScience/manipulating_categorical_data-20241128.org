@@ -4,6 +4,16 @@
 #+title: Manipulating Categorical Data
 #+filetags: :DataScience:Python:
 
+* TOC :TOC_1:
+- [[#overview][Overview]]
+- [[#converting-to-categorical-data][Converting to Categorical Data]]
+- [[#cat-accessor][~cat~ Accessor]]
+- [[#reordering-categories][Reordering Categories]]
+- [[#categorical-pitfalls][Categorical Pitfalls]]
+- [[#label-encoding][Label Encoding]]
+- [[#one-hot-encoding][One-hot Encoding]]
+- [[#tricks][Tricks]]
+
 * Overview
 - Show all values: ~series.unique()~
 - Create nominal category

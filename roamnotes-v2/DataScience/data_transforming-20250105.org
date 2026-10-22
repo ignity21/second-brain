@@ -8,4 +8,5 @@
 ** SimpleImputer
 - to fill missing values
 
-* [[id:8dc25af2-f3bd-4ec4-b949-40958e167e75][Feature Scaling]]
+* Scaling
+- Rescaling features before modeling: [[id:8dc25af2-f3bd-4ec4-b949-40958e167e75][Feature Scaling]]

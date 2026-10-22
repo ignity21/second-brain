@@ -4,6 +4,19 @@
 #+title: statsmodels
 #+filetags: :Python:DataScience:
 
+* TOC :TOC_2:
+- [[#linear-regression][Linear Regression]]
+  - [[#numerical-explanatory-variable][Numerical Explanatory Variable]]
+  - [[#categorical-explanatory-variable][Categorical Explanatory Variable]]
+  - [[#making-predictions][Making Predictions]]
+  - [[#model-methods][Model Methods]]
+  - [[#visualizing-model-fit][Visualizing Model Fit]]
+- [[#outliers][Outliers]]
+  - [[#leverage--influence][Leverage & Influence]]
+- [[#logistic-regression][Logistic Regression]]
+  - [[#making-predictions][Making Predictions]]
+- [[#courses][Courses]]
+
 * Linear Regression
 ** Numerical Explanatory Variable
 #+begin_src python
@@ -47,7 +60,7 @@ prediction_data = explanatory_data.assign(price=price_vs_area.predict(explanator
   - equivalent to: ~df['actual'] - model.fittedvalues~
 - ~.summary()~
 
-** [[id:8038235d-fdb1-44b6-b2b9-76c38e740f0e][Regression Metrics]]
+- Judging the fit: [[id:8038235d-fdb1-44b6-b2b9-76c38e740f0e][Regression Metrics]]
 
 ** Visualizing Model Fit
 *** Residuals vs. Fitted
@@ -157,7 +170,7 @@ plt.axhline(y=1, linestyle='dotted')
 - "Changes easy to interpret" means:
   - It's easy to reason about how changes in the explanatory variable will change the response.
 
-** [[id:91a5b0fd-48cd-47aa-8fff-cb9cb0fd520c][Classification Metrics]]
+- Judging a classifier: [[id:91a5b0fd-48cd-47aa-8fff-cb9cb0fd520c][Classification Metrics]]
 * TODO Courses
 - Intermediate Regression with ~statsmodels~ in Python
 - Generalized Linear Models in Python

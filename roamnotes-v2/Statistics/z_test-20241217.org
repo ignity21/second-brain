@@ -4,6 +4,21 @@
 #+title: Z-Test
 #+filetags: :Statistics:Python:
 
+* TOC :TOC_2:
+- [[#overview][Overview]]
+- [[#steps][Steps]]
+- [[#one-sample-z-test][One Sample Z-Test]]
+  - [[#left-tailed][Left-tailed]]
+  - [[#right-tailed][Right-tailed]]
+  - [[#two-tailed][Two-tailed]]
+- [[#two-sample-z-test][Two Sample Z-Test]]
+- [[#proportion-z-test][Proportion Z-Test]]
+  - [[#one-proportion-z-test][One Proportion Z-Test]]
+  - [[#two-proportion-z-test][Two Proportion Z-Test]]
+  - [[#reference][Reference]]
+- [[#examples][Examples]]
+  -  [[#one-sample-right-tailed][One Sample Right-tailed]]
+
 * Overview
 A Z-Test is a statistical test:
 - Conduct on data that approximately *follows a normal distribution*.
@@ -120,4 +135,4 @@ p_value = 1 - stats.norm.cdf(z_score)
 z_critical = stats.norm.ppf(1 - alhpa)
 # z-score > 1.64485, reject the null hypothesis
 #+end_src
-** [[id:ffde831f-5883-4dd5-b406-caa135d0e53b][pingouin]]
+- Test examples (t-test, ANOVA) in [[id:ffde831f-5883-4dd5-b406-caa135d0e53b][pingouin]]

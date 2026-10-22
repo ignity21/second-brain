@@ -5,6 +5,15 @@
 #+title: Exploratory Data Analysis
 #+filetags: :Python:DataScience:
 
+* TOC :TOC_1:
+- [[#overview][Overview]]
+- [[#initial-exploration][Initial Exploration]]
+- [[#numerical-data][Numerical Data]]
+- [[#categorical-data][Categorical Data]]
+- [[#class-frequencies][Class Frequencies]]
+- [[#creating-features][Creating Features]]
+- [[#verifying-hypotheses][Verifying Hypotheses]]
+
 * Overview
 - Detecting patterns and relationships
 - Generating questions or hypotheses
@@ -20,6 +29,7 @@
 - Use ~sns.boxplot()~ to overview distribution, ~y~ axis could be a categorical column
 - Use ~astype(int)~ to convert data type
 - ~min~, ~max~, ~describe~ to see range of data
+- Converting strings to numbers and summarizing by group: [[id:5ff02ad6-b7d0-4a8b-9543-b96188c68280][Manipulating Numerical Data]]
 
 * Categorical Data
 - Previewing all categorical data: ~df.select_dtypes('object').head()~
@@ -50,7 +60,6 @@ salaries["Job_Category"] = np.select(conditions,
                                      default="Other")
 #+end_src
 
-* [[id:5ff02ad6-b7d0-4a8b-9543-b96188c68280][Manipulating Data]]
 * Class Frequencies
 - Sample should represents the population
 - Class imbalance: one class occurs more frequently than others

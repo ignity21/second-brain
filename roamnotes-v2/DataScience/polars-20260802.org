@@ -206,7 +206,7 @@ See [[id:05ef9aaa-7fa2-45b4-9ed9-d8d01c8abff2][Pandas]].
 | ~groupby().transform("mean")~     | ~pl.col("x").mean().over("g")~                          | Window expression keeps the original row count                      |
 
 * Core API Map
-The most important kinds of operation, ordered by the context they run in. Details live under [[id:bd3128d8-cecb-4f42-a846-9b8882e6e65e][Polars APIs]].
+The most important kinds of operation, ordered by the context they run in. Details live in the notes under Polars APIs.
 
 | Task                     | Context and output                                  | Key APIs                                       | Details                              |
 |--------------------------+-----------------------------------------------------+------------------------------------------------+--------------------------------------|

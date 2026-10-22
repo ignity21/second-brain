@@ -4,8 +4,6 @@
 #+title: Polars Core Operations
 #+filetags: :PyLibs:Polars:
 
-See [[id:190bfd1c-68ae-4f32-baab-cc98490c71e9][Polars]] for the expression model and how queries are optimized.
-
 * TOC :TOC_2:
 - [[#schema][Schema]]
 - [[#selecting-rows-and-columns-in-polars][Selecting Rows and Columns in Polars]]

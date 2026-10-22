@@ -4,8 +4,6 @@
 #+title: Time Series with Polars
 #+filetags: :PyLibs:Polars:
 
-See [[id:190bfd1c-68ae-4f32-baab-cc98490c71e9][Polars]] for the overview and related topics.
-
 * TOC :TOC_2:
 - [[#manipulating-datetime-in-polars][Manipulating Datetime in Polars]]
   - [[#temporal-data-types][Temporal Data Types]]

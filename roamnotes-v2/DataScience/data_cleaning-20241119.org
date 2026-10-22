@@ -4,26 +4,11 @@
 #+title: Data Cleaning
 #+filetags: :Wrangling:
 
-* Common Data Issues
-:PROPERTIES:
-:ID:       e6fd877e-7dce-4cd6-96ff-2ebf51d2313e
-:END:
-** [[id:7e7fbc3a-3109-4e49-a79e-60b33ae0469a][Missing Values]]
-** [[id:50086988-bef5-40c4-acc1-204572b05996][Data Consistency]]
-
-* Numerical Data
-:PROPERTIES:
-:ID:       fffb5dd8-d3d1-4c5b-a173-8b7ca31ddf0c
-:END:
-** [[id:a3a33881-04b9-47b7-a760-e5652b596887][Handling Outliers]]
-** [[id:b5cf039a-4e4d-41a4-8387-839c14291293][Range Constraints]]
-** ~df.round()~
-* Non-numerical Data
-:PROPERTIES:
-:ID:       ca3678b9-e2b7-4fcc-aa18-bd4041484a69
-:END:
-** [[id:995548b7-2f2c-4383-ac56-fe93c5ab70f7][Cleaning Text Data]]
-** [[id:67e8fd14-aa65-4037-8fc9-5ac6a9b0112b][Uniqueness Constraints]]
-** [[id:9475821e-6e1b-4bf0-b9f8-eaefb7bd538c][Categorical Constraints]]
-
+* [[id:7e7fbc3a-3109-4e49-a79e-60b33ae0469a][Missing Values]]
+* [[id:50086988-bef5-40c4-acc1-204572b05996][Data Uniformity]]
+* [[id:a3a33881-04b9-47b7-a760-e5652b596887][Handling Outliers]]
+* [[id:b5cf039a-4e4d-41a4-8387-839c14291293][Range Constraints]]
+* [[id:995548b7-2f2c-4383-ac56-fe93c5ab70f7][Cleaning Text Data]]
+* [[id:67e8fd14-aa65-4037-8fc9-5ac6a9b0112b][Uniqueness Constraints]]
+* [[id:9475821e-6e1b-4bf0-b9f8-eaefb7bd538c][Categorical Constraints]]
 * [[id:547d873f-e138-4c01-a2ee-af59848e2912][Cross Field Validation]]
