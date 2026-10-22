@@ -1,6 +1,6 @@
 # Network 层级与链接整理
 
-Status: Complete（用户 Emacs 的 org-roam-db-sync 待执行）
+Status: Complete
 
 总任务见 `2026-10-22-v2-category-restructure.md`。初始检查：深度 3，问题 9（Fundamentals、Tools 单子节点；笔记两两互链）。Network 以外无引用。
 
@@ -17,4 +17,4 @@ Status: Complete（用户 Emacs 的 org-roam-db-sync 待执行）
 - [x] Congestion Control：去掉 → Connection、ss
 - [x] 验证：检查脚本、行内标记、临时库 org-roam-db-sync
 
-Result: 问题 9→2，剩余 2 条是用户确认保留的单子节点索引（Networking Fundamentals、Linux Network Tools）。删除 10 条反向引用，Layers 的 Connections 段随之删除；Reliable Delivery 中指向拥塞控制的三处行内指引改成纯文字（窗口缩放一句补了带宽时延积的含义）。无行内标记问题；临时库 batch `org-roam-db-sync` 通过（305 节点，无悬空 ID 链接）；用户 Emacs 未运行 server，真实 DB 未同步。
+Result: 问题 9→2，剩余 2 条是用户确认保留的单子节点索引（Networking Fundamentals、Linux Network Tools）。删除 10 条反向引用，Layers 的 Connections 段随之删除；Reliable Delivery 中指向拥塞控制的三处行内指引改成纯文字（窗口缩放一句补了带宽时延积的含义）。无行内标记问题；临时库 batch `org-roam-db-sync` 通过（305 节点，无悬空 ID 链接）；2026-10-22 用 Doom daemon 对真实 DB 执行了 `org-roam-db-sync`（305 节点，无悬空 ID 链接）。

@@ -1,6 +1,6 @@
 # Statistics 层级重组
 
-Status: Complete（用户 Emacs 的 org-roam-db-sync 待执行）
+Status: Complete
 
 总任务见 `2026-10-22-v2-category-restructure.md`。用户 2026-10-22 确认：Generating Samples 放到 SciPy，Probability and Distributions 可正文引用；内容笔记 `Statistics` 改名 `Statistics Overview` 保留。
 
@@ -30,5 +30,5 @@ Statistics
 - [x] 改名：Statistics Overview；Discrete / Continuous Uniform Distribution
 - [x] 验证：检查脚本、入链、TOC、行内标记、file 链接、org-roam-db-sync
 
-Result: 深度 7→5，问题 34→0（剩余 8 条为允许的「笔记兼父节点」）；唯一主父节点，无互链、无指向祖先的引用。顺带给 Descriptive Statistics、Data Sampling 补了 TOC_2。临时库 batch `org-roam-db-sync` 通过（314 节点）；用户 Emacs 未运行 server，真实 DB 未同步。
+Result: 深度 7→5，问题 34→0（剩余 8 条为允许的「笔记兼父节点」）；唯一主父节点，无互链、无指向祖先的引用。顺带给 Descriptive Statistics、Data Sampling 补了 TOC_2。临时库 batch `org-roam-db-sync` 通过（314 节点）；2026-10-22 用 Doom daemon 对真实 DB 执行了 `org-roam-db-sync`（305 节点，无悬空 ID 链接）。
 另见：MachineLearning `supervised_learning-20230817.org` 有 4 个指向不存在 ID 的链接（既有问题，留给 ML 子任务）。

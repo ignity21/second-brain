@@ -1,6 +1,6 @@
 # Polars 概念笔记与 API 子树重组
 
-Status: Complete（用户 Emacs 的 org-roam-db-sync 待执行）
+Status: Complete
 
 目标：`Polars`（ID 190bfd1c）改写为概念 / 原理笔记；API 笔记移到新索引 `Polars APIs` 下。
 
@@ -26,4 +26,4 @@ Python → Third-Party Libraries → Polars → Polars APIs → {Core Operations
 - [x] Anki `Source:` 行更新
 - [x] 验证：TOC、PlantUML、行内标记、标题重名、入链、org-roam-db-sync
 
-Result: 概念笔记在 Polars 2.0.0 / pandas 3.0.6 上逐例运行核对；11 个标题级节点；Anki 10 张卡的 `Source:` 改为 Core Operations。临时库 batch `org-roam-db-sync` 通过；用户 Emacs 未运行 server，真实 DB 未同步。
+Result: 概念笔记在 Polars 2.0.0 / pandas 3.0.6 上逐例运行核对；11 个标题级节点；Anki 10 张卡的 `Source:` 改为 Core Operations。临时库 batch `org-roam-db-sync` 通过；2026-10-22 用 Doom daemon 对真实 DB 执行了 `org-roam-db-sync`（305 节点，无悬空 ID 链接）。
