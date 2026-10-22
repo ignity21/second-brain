@@ -14,4 +14,4 @@
 
 * [[id:41f5a230-9196-41c9-b4b9-75a76822cdc9][Network Protocols]]
 
-* [[id:2d0b26a1-20fb-47c7-8e5d-70a810989bf4][Data Analysis]]
+* [[id:190bfd1c-68ae-4f32-baab-cc98490c71e9][Polars]]

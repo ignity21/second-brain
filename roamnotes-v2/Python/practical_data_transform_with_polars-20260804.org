@@ -5,7 +5,7 @@
 #+filetags: :PyLibs:Polars:
 
 * TOC :TOC_2:
-- [[#missing-values][Missing Values]]
+- [[#missing-values-in-polars][Missing Values in Polars]]
   - [[#finding-nulls][Finding nulls]]
   - [[#removing-nulls][Removing nulls]]
   - [[#filling-nulls][Filling nulls]]
@@ -14,14 +14,14 @@
   - [[#removing-duplicates][Removing Duplicates]]
 - [[#value-counts][Value Counts]]
   - [[#visualization][Visualization]]
-- [[#grouping-and-aggregating][Grouping and Aggregating]]
+- [[#grouping-and-aggregating-in-polars][Grouping and Aggregating in Polars]]
   - [[#lazy-mode-example][Lazy Mode Example]]
-- [[#pivoting-and-unpivoting][Pivoting and Unpivoting]]
+- [[#pivoting-and-unpivoting-in-polars][Pivoting and Unpivoting in Polars]]
   - [[#core-idea][Core Idea]]
   - [[#pivot][Pivot]]
   - [[#unpivot][Unpivot]]
   - [[#summary][Summary]]
-- [[#text-transformation][Text Transformation]]
+- [[#text-transformation-in-polars][Text Transformation in Polars]]
   - [[#casting-data-type][Casting Data Type]]
   - [[#cleaning-text][Cleaning Text]]
   - [[#creating-an-identifier][Creating an Identifier]]
@@ -39,7 +39,10 @@
   - [[#correlation-matrix][Correlation Matrix]]
   - [[#custom-summary-statistics][Custom Summary Statistics]]
 
-* Missing Values
+* Missing Values in Polars
+:PROPERTIES:
+:ID:       ad8d98c6-4ff8-49e0-90f9-249bf3807a58
+:END:
 ** Finding nulls
 - Count nulls in every column with ~df.null_count()~
 - Find rows where a column is null using ~df.filter(pl.col("price").is_null())~
@@ -70,7 +73,10 @@ import plotly.express as px
 count_data = sales["category"].value_counts()
 px.bar(count_data, x="category", y="count", title="...")
 #+end_src
-* Grouping and Aggregating
+* Grouping and Aggregating in Polars
+:PROPERTIES:
+:ID:       19d91602-af13-42d0-b874-fd556e0c0969
+:END:
 #+begin_src python
 df.group_by("type", maintain_order=True).agg(
     pl.col("price").mean()
@@ -97,7 +103,10 @@ df.group_by("type", "bedrooms").agg(
     .explain() # .collect()
 )
 #+end_src
-* Pivoting and Unpivoting
+* Pivoting and Unpivoting in Polars
+:PROPERTIES:
+:ID:       401c9a7a-db51-4da4-a79f-17e95e7848b9
+:END:
 ** Core Idea
 
 ~pivot~ and ~unpivot~ convert data between two common layouts:
@@ -191,7 +200,10 @@ This converts the data back into long format:
 - Dashboards
 - Pivot tables
 - Human-readable comparisons
-* Text Transformation
+* Text Transformation in Polars
+:PROPERTIES:
+:ID:       a1ba25c4-e112-41d6-9bfc-f47c535b18ee
+:END:
 ** Casting Data Type
   - ~df.with_columns(pl.col("rating").cast(pl.Int64))~
   - Cast multiple column types: ~df.cast({pl.Float64: pl.Int64})~

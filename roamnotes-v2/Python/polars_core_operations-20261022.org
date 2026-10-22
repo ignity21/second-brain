@@ -1,0 +1,225 @@
+:PROPERTIES:
+:ID:       2bf4ceae-1928-41cc-b660-3a72f651e0bf
+:END:
+#+title: Polars Core Operations
+#+filetags: :PyLibs:Polars:
+
+See [[id:190bfd1c-68ae-4f32-baab-cc98490c71e9][Polars]] for the expression model and how queries are optimized.
+
+* TOC :TOC_2:
+- [[#schema][Schema]]
+- [[#selecting-rows-and-columns-in-polars][Selecting Rows and Columns in Polars]]
+  - [[#dfselect][~df.select()~]]
+- [[#editing-columns-in-polars][Editing Columns in Polars]]
+  - [[#updating][Updating]]
+  - [[#renaming][Renaming]]
+  - [[#deleting][Deleting]]
+  - [[#multiple-columns-same-expression][Multiple Columns (same expression)]]
+  - [[#custom-transformation][Custom Transformation]]
+  - [[#reusable-expressions][Reusable Expressions]]
+  - [[#attaching-custom-methods-to-plexpr][Attaching Custom Methods to ~pl.Expr~]]
+- [[#sorting][Sorting]]
+- [[#concatenating-and-joining-polars-dataframes][Concatenating and Joining Polars DataFrames]]
+  - [[#concatenation][Concatenation]]
+  - [[#join][Join]]
+- [[#summarizing][Summarizing]]
+
+* Schema
+- Shape: ~df.shape~
+- Column names and dtype: ~df.schema~
+- useful if we have many columns: ~df.glimpse()~
+
+* Selecting Rows and Columns in Polars
+:PROPERTIES:
+:ID:       a2c3f3b2-0cd5-45c1-b0a3-fb988e8c5b5b
+:END:
+
+- By Rows: ~df[0]~, ~df[-1]~, ~df[1:3]~
+- By Columns: ~df["region"]~, ~df[["region", "channel"]]~
+- By Both (row first, then columns): ~df[:3, ["region", "channel"]]~
+- Row Filter: ~df.filter(pl.col("price") < 500)~
+  - Useful boolean expressions: ~is_in()~, ~not_()~, ~is_between()~
+
+** ~df.select()~
+- Used to select columns or transform them to create new columns.
+#+begin_src python
+df.select(
+    "name",
+    (pl.col("price") * 0.8).round(0).alias("discounted_price"), # Chaining
+    pl.col("price").mean().alias("average_price"), # Aggregation
+    pl.lit(True).alias("available"), # Creating Columns from Constants
+    pl.col("price").rank(), # Built-in Functions
+    pl.col("type").str.to_lowercase(), # Data-Type-Specific Expressions
+    pl.col("price", "review").min().name.suffix("_min"),
+)
+#+end_src
+
+*** ~pl.selectors~
+#+begin_src python
+import polars.selectors as cs
+df.select(
+    # Select string columns together with columns ending in "s"
+    cs.string() | cs.ends_with("s")
+)
+#+end_src
+
+* Editing Columns in Polars
+:PROPERTIES:
+:ID:       5a248a1d-a8b5-48d1-9b0b-a87a5e7f27c6
+:END:
+** Updating
+- ~col.cast(dtype)~: change type
+#+begin_src python
+df.with_columns(
+    pl.col("price").mean().alias("average_price"),
+    pl.col("bedrooms").cast(pl.Int16), # Change data type
+)
+#+end_src
+
+** Renaming
+- ~df.rename({"old": "new"})~
+
+** Deleting
+- ~df.drop("review", "beach")~
+
+** Multiple Columns (same expression)
+- ~df.with_columns(pl.col("name", "type").str.len_chars())~
+- with dtypes: ~df.with_columns(pl.col(pl.String).str.len_chars())~
+- Exclude columns: ~df.with_columns(pl.exclude("beach").cast(pl.String))~
+
+** Custom Transformation
+- ~map_elements(func)~
+#+begin_src python
+def rescale_review(x):
+    return x * 2
+
+df.with_columns(
+    pl.col("review").map_elements(
+        rescale_review,
+        return_dtype=pl.Float64,
+    ).alias("review")
+)
+
+# But prefer this:
+df.with_columns(
+    (pl.col("review") * 2).alias("review")
+)
+#+end_src
+- Use ~map_elements~ when:
+  - the logic is easier to express as a Python function
+  - performance is not important
+  - you need to call a third-party Python function
+
+** Reusable Expressions
+
+#+begin_src python
+standardize_locations_expr = (
+    pl.col("location")
+    .str.replace_many(["Rd.", "St."], ["Road", "Street"])
+    .str.to_uppercase()
+    .alias("location_clean")
+)
+
+df.with_columns(standardize_locations_expr)
+#+end_src
+
+- Expressions can be stored in variables and reused.
+- This keeps complex transformations readable and avoids repeating the same logic.
+
+** Attaching Custom Methods to ~pl.Expr~
+
+#+begin_src python
+def per_listener(self):
+    return self / pl.col("monthly_listeners")
+
+pl.Expr.per_listener = per_listener
+#+end_src
+
+Now it can be called like a built-in method:
+
+#+begin_src python
+pl.col("streams").per_listener()
+#+end_src
+
+This is **monkey patching**: adding a method to an existing class at runtime.
+
+- ~self~ is the ~pl.Expr~ object before ~.per_listener()~.
+- Equivalent to ~per_listener(pl.col("streams"))~.
+- It modifies ~pl.Expr~ globally and makes the method look like a native Polars API.
+- This can make code harder to understand, discover, and maintain.
+
+Usually prefer a normal function unless method-style syntax provides a clear benefit.
+  
+* Sorting
+- ~df.sort("quantity", descending=True)~ # default ascending
+- By multiple columns: ~df.sort("quantity", "product")~
+
+* Concatenating and Joining Polars DataFrames
+:PROPERTIES:
+:ID:       7a28d393-82af-4d55-b3b7-eef7c159ee55
+:END:
+** Concatenation
+- ~pl.concat([df1, df2], how="vertical")~
+| How        | Direction | Typical use                                                |
+|------------+-----------+------------------------------------------------------------|
+| vertical   | Rows      | Stack DataFrames with the same columns                     |
+| diagonal   | Rows      | Stack DataFrames; union columns and fill missing with null |
+| horizontal | Columns   | Place DataFrames side by side, matching rows by position   |
+- ~df.extend(other)~
+  - Append rows to ~df~ in place.
+  - Efficient when repeatedly adding small batches.
+
+** Join
+- ~df1.join(df2, on=["key1", "key2"], how="full", coalesce=True)~
+
+*** Coalesce Join Keys
+- ~coalesce=True~ merges the left and right join-key columns into one column.
+- Especially useful for ~full~ joins, where unmatched rows may have the key on only one side.
+- Without coalescing, both join-key columns are kept.
+#+begin_example
+df1                 df2
+key   value1        key   value2
+A     10            B     20
+#+end_example
+
+Without ~coalesce~:
+| key  | value1 | key_right | value2 |
+|------+--------+-----------+--------|
+| A    | 10     | null      | null   |
+| null | null   | B         | 20     |
+
+With ~coalesce=True~:
+| key | value1 | value2 |
+|-----+--------+--------|
+| A   | 10     | null   |
+| B   | null   | 20     |
+That is, use the left key when available; otherwise use the right key.
+
+*** Conditional Join (Where)
+#+begin_src python
+restaurants.join_where(
+    users,
+    pl.col("type") == pl.col("type_right"),
+    pl.col("price") <= pl.col("budget"),
+)
+#+end_src
+
+*** Timeseries Conditional Join
+- ~join_asof~: for each row, find the closest matching row in time.
+- *Prerequisite*: both DataFrames *must be sorted* by the join key. (like binary search)
+#+begin_src python
+result = trades.sort("time").join_asof(
+    quotes.sort("time"),
+    on="time",
+    strategy="backward",
+)
+#+end_src
+- Strategy:
+  - *backward*: latest matching value before or equal to the left value *It never matches with future data*
+  - forward: earliest matching value after or equal to the left value
+  - nearest: value with the smallest distance
+
+* Summarizing
+
+- *Finding extreme values*: ~df.top_k(3, by="quantity")~ or ~bottom_k~
+- ~df.describe()~

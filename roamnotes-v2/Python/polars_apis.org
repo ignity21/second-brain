@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       bd3128d8-cecb-4f42-a846-9b8882e6e65e
+:END:
+#+title: Polars APIs
+#+filetags: :PyLibs:Polars:
+
+* [[id:2bf4ceae-1928-41cc-b660-3a72f651e0bf][Core Operations]]
+* [[id:497eaecd-8769-498f-8869-50923fef8901][Practical Data Transformation]]
+* [[id:cf33e3fa-b1bd-428e-811d-6489d66db882][Time Series]]

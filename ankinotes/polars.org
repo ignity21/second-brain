@@ -17,7 +17,7 @@ In Polars, which operation should you use to keep only rows whose ~price~ is bel
 *** Back
 Use ~df.filter(pl.col("price") < 500)~ to retain matching rows. Use ~df.select(...)~ to select or compute the output columns.
 
-Source: Polars
+Source: Polars Core Operations
 
 ** Select Columns by Data Type
 :PROPERTIES:
@@ -36,7 +36,7 @@ import polars.selectors as cs
 df.select(cs.string())
 #+end_src
 
-Source: Polars
+Source: Polars Core Operations
 
 ** Alias a Computed Column
 :PROPERTIES:
@@ -54,7 +54,7 @@ How can a ~select~ expression create a rounded 20%-discounted ~price~ column nam
 
 ~alias~ gives a computed expression its output-column name.
 
-Source: Polars
+Source: Polars Core Operations
 
 ** Update or Add Columns
 :PROPERTIES:
@@ -76,7 +76,7 @@ df.with_columns(pl.col("bedrooms").cast(pl.Int16))
 
 It returns a DataFrame with the expression results added or replacing same-named columns.
 
-Source: Polars
+Source: Polars Core Operations
 
 ** Avoid Python UDFs for Simple Expressions
 :PROPERTIES:
@@ -92,7 +92,7 @@ You need to double every value in a Polars ~review~ column. Why is ~(pl.col("rev
 *** Back
 The native expression stays in Polars' optimized execution path and is clearer. Reserve ~map_elements~ for logic that is genuinely easier in Python, requires a third-party Python function, or does not need performance.
 
-Source: Polars
+Source: Polars Core Operations, Polars
 
 ** Concatenate Different Schemas
 :PROPERTIES:
@@ -108,7 +108,7 @@ Which ~pl.concat~ strategy combines DataFrames by rows when their column sets di
 *** Back
 Use ~pl.concat([df1, df2], how="diagonal")~. It combines rows while accommodating differing columns. Use ~how="vertical"~ when the schemas are the same.
 
-Source: Polars
+Source: Polars Core Operations
 
 ** Concatenate Columns by Position
 :PROPERTIES:
@@ -123,7 +123,7 @@ Two Polars DataFrames have rows in the intended order, and you want to place the
 *** Back
 ~pl.concat([df1, df2], how="horizontal")~. Rows align by position, not by a key. In current Polars, the frames must have equal heights; use ~how="horizontal_extend"~ if you want shorter frames padded with nulls.
 
-Source: Polars
+Source: Polars Core Operations
 
 ** Coalesce Join Keys
 :PROPERTIES:
@@ -143,7 +143,7 @@ Pass ~coalesce=True~ to ~join~, for example:
 df1.join(df2, on=["key1", "key2"], how="full", coalesce=True)
 #+end_src
 
-Source: Polars
+Source: Polars Core Operations
 
 ** Join on Multiple Conditions
 :PROPERTIES:
@@ -168,7 +168,7 @@ restaurants.join_where(
 
 It returns only pairs satisfying both conditions; duplicate column names need the right-side suffix in predicates.
 
-Source: Polars
+Source: Polars Core Operations
 
 ** As-of Join Strategy
 :PROPERTIES:
@@ -184,7 +184,7 @@ For a time-series ~join_asof~, what does the ~backward~ strategy match for each 
 *** Back
 It matches the latest right-side value at or before the left timestamp; it never matches future data. Sort both inputs on the join key before the join.
 
-Source: Polars
+Source: Polars Core Operations
 
 ** Start a Lazy CSV Query
 :PROPERTIES:

@@ -7,20 +7,23 @@
 See [[id:190bfd1c-68ae-4f32-baab-cc98490c71e9][Polars]] for the overview and related topics.
 
 * TOC :TOC_2:
-- [[#manipulating-datetime][Manipulating Datetime]]
+- [[#manipulating-datetime-in-polars][Manipulating Datetime in Polars]]
   - [[#temporal-data-types][Temporal Data Types]]
   - [[#parsing-datetime][Parsing Datetime]]
   - [[#extracting-datetime-components][Extracting Datetime Components]]
   - [[#adjusting-datetime][Adjusting Datetime]]
 - [[#filtering-by-time][Filtering by Time]]
-- [[#aggregating-by-time][Aggregating by Time]]
+- [[#aggregating-by-time-in-polars][Aggregating by Time in Polars]]
   - [[#controlling-window-size][Controlling Window Size]]
-- [[#rolling-window][Rolling Window]]
+- [[#rolling-windows-in-polars][Rolling Windows in Polars]]
 - [[#cumulative-statistics][Cumulative Statistics]]
-- [[#group-level-statistics][Group-level Statistics]]
+- [[#group-level-statistics-in-polars][Group-level Statistics in Polars]]
   - [[#comparing-to-group-statistics][Comparing to Group Statistics]]
 
-* Manipulating Datetime
+* Manipulating Datetime in Polars
+:PROPERTIES:
+:ID:       c19385b4-9ec0-4b7d-9a82-454dcf034788
+:END:
 ** Temporal Data Types
 Polars provides four main temporal ~dtypes~:
 
@@ -66,7 +69,10 @@ prices.filter(
 - By Date: ~pl.col("time").dt.date() == pl.date(...)~
 - By Range: ~pl.col("time").is_between(pl.datetime(...), pl.datetime(...))~ 
 
-* Aggregating by Time
+* Aggregating by Time in Polars
+:PROPERTIES:
+:ID:       bc7c6665-834d-401c-b5ac-30883a1ac62d
+:END:
 #+begin_src python
 ohlc = prices.sort("time").group_by_dynamic("time", every="6h").agg(
     pl.col("price").first().alias("open"),
@@ -88,7 +94,10 @@ prices.group_by_dynamic(
 )
 #+end_src
 
-* Rolling Window
+* Rolling Windows in Polars
+:PROPERTIES:
+:ID:       3848f66e-9f41-4201-a213-c44e581b7e16
+:END:
 - Rolling by Window Size
 #+begin_src python
 prices.with_columns(
@@ -110,7 +119,10 @@ prices.with_columns(
     pl.col("precipitation").cum_sum().alias("total_precipitation")
 )
 #+end_src
-* Group-level Statistics
+* Group-level Statistics in Polars
+:PROPERTIES:
+:ID:       1484cd25-fd9e-4f91-916a-3dd762088fbe
+:END:
 #+begin_src python
 prices = prices.with_columns(
     pl.col("time").dt.hour().alias("hour"),
