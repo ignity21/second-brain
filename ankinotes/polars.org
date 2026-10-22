@@ -659,3 +659,300 @@ prices.with_columns(
 #+end_src
 
 Source: Time Series with Polars
+
+** Polars Expressions Do Not Touch Data
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~pl.col("nope")~ refers to a column that exists in no DataFrame. What happens when you run it, and when does a ~ColumnNotFoundError~ appear?
+
+*** Back
+Nothing fails: it just returns a ~pl.Expr~, a tree that describes a computation and reads no data. The error appears only when a context (~select~, ~filter~, ...) evaluates the expression against a real frame.
+
+Source: Polars
+
+** Same Polars Expression in select and with_columns
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~df~ has 3 rows with ~price~ = 1, 2, 6 and ~e = pl.col("price").mean()~. What is the shape and content of ~df.select(e)~ and of ~df.with_columns(m=e)~?
+
+*** Back
+~df.select(e)~: 1 row, only ~price~ = 3.0.
+~df.with_columns(m=e)~: 3 rows, all original columns plus ~m~ = 3.0 on every row, because the scalar is broadcast to the frame's length.
+
+The expression is the same; the context decides the output shape.
+
+Source: Polars
+
+** Aggregate Inside a Polars filter
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~df~ has ~price~ = 1, 2, 6. Which rows does ~df.filter(pl.col("price") > pl.col("price").mean())~ keep?
+
+*** Back
+Only the row with price 6. The mean (3.0) is computed over the whole frame inside the filter context and broadcast, so each price is compared with 3.0.
+
+Source: Polars
+
+** Referencing a Sibling Column in with_columns
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Why does ~df.with_columns(b=pl.col("a") + 1, c=pl.col("b") * 2)~ raise ~ColumnNotFoundError~ when ~df~ has no ~b~, and how do you fix it?
+
+*** Back
+Expressions in one context are independent and all evaluated against the input frame (which lets Polars run them in parallel), so ~c~ cannot see the ~b~ created next to it.
+
+Fix: chain a second ~with_columns~, or reuse the expression: ~c=(pl.col("a") + 1) * 2~.
+
+Source: Polars
+
+** Default Output Name of a Polars Expression
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+What is the output column name of ~df.select(pl.col("b") + pl.col("a"))~?
+
+*** Back
+~b~. An expression's output name defaults to the first column it references; rename with ~alias~ or a keyword argument such as ~total=...~.
+
+Source: Polars
+
+** Duplicate Output Names in Polars select
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Why does ~df.select(pl.col("a").sum(), pl.col("a").max())~ raise ~DuplicateError~, and what are the ways to fix it?
+
+*** Back
+Both outputs default to the name ~a~. Give them distinct names with ~alias~, keyword arguments (~a_sum=...~), or ~.name.suffix("_sum")~.
+
+Source: Polars
+
+** Memory Cost of Polars with_columns
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Polars DataFrames are immutable, so ~df.with_columns(...)~ returns a new frame. Does it copy the columns it leaves unchanged?
+
+*** Back
+No. The new frame points to the same memory buffers for unchanged columns; only the new or replaced columns are allocated.
+
+Source: Polars
+
+** Polars Eager Methods and the Lazy Engine
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Eager Polars methods such as ~DataFrame.with_columns~ are implemented as ~lazy()~ plus an immediate collect. Why is ~pl.read_csv(...)~ followed by ~select~ still worse than ~pl.scan_csv(...)...collect()~?
+
+*** Back
+Each eager call is a separate one-node query, so there is no whole pipeline for the optimizer to rearrange (plan-level optimizations are off). ~read_csv~ therefore parses every column first; the lazy query can push the column selection into the scan and parse only the needed columns.
+
+Expression evaluation itself is the same Rust code in both modes.
+
+Source: Polars
+
+** Reading Order of a Polars Query Plan
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Cloze
+:END:
+
+*** Text
+Polars ~explain()~ plans are read {{c1::bottom-up}}: the {{c2::scan}} is at the bottom, and the final result is at the top.
+
+*** Back
+Source: Polars
+
+** Predicate Pushdown in Polars explain
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Your lazy query has ~.filter(pl.col("price") < 500)~ after ~scan_csv~. In the optimized ~explain()~ output, the ~FILTER~ node is gone and the scan shows ~SELECTION: col("price") < 500~. What happened, and what is the benefit?
+
+*** Back
+Predicate pushdown moved the filter into the scan, so rows are dropped while the CSV is parsed instead of after the whole file is loaded.
+
+Source: Polars
+
+** Projection Pushdown in Polars explain
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+An optimized Polars plan shows ~Csv SCAN [data.csv]~ with ~PROJECT 2/4 COLUMNS~. What does it mean?
+
+*** Back
+Projection pushdown: later steps use only 2 of the file's 4 columns, so only those 2 are read and parsed.
+
+Source: Polars
+
+** Common-subexpression Elimination in Polars
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+In an optimized Polars plan you see a temporary column named like ~__POLARS_CSER_0x...~. Which optimization produced it, and what does it do?
+
+*** Back
+Common-subexpression elimination: a subexpression that appears more than once in the query is computed once into that temporary column and reused.
+
+Source: Polars
+
+** Collecting a LazyFrame Twice
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+You need two different results from one Polars ~LazyFrame~ source. What goes wrong if you call ~collect()~ on each, and what should you use instead?
+
+*** Back
+Each ~collect()~ runs the query from the source again, so shared work is done twice. Use ~pl.collect_all([q1, q2])~ to run them together.
+
+Also avoid collecting in the middle of a pipeline: optimization stops at each ~collect()~.
+
+Source: Polars
+
+** Streaming Engine in Polars 2.0
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+AI-generated code calls ~lf.collect(streaming=True)~. What happens in Polars 2.0, and what should you write instead?
+
+*** Back
+It raises ~ArgumentRemovedError~ (deprecated in 1.25, removed in 2.0). Write ~lf.collect(engine="streaming")~.
+
+In 2.0 the default ~engine="auto"~ already falls back to streaming; in 1.x it fell back to in-memory.
+
+Source: Polars
+
+** Python's Role in Polars Execution
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Polars is called from Python. Why doesn't the GIL limit its multi-core execution?
+
+*** Back
+Python runs only while the query is being built; ~pl.Expr~ and ~pl.DataFrame~ are wrappers around Rust objects. Execution happens in Rust on a thread pool without holding the GIL, parallel across independent expressions and across chunks or groups of a column.
+
+Source: Polars
+
+** Limit Polars Threads
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+How do you limit the number of threads Polars uses, and when must you do it?
+
+*** Back
+Set the ~POLARS_MAX_THREADS~ environment variable before ~import polars~; the thread pool size is fixed after import. Check it with ~pl.thread_pool_size()~.
+
+Source: Polars
+
+** Nulls in Integer Columns: Polars vs pandas
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~pd.Series([1, None])~ becomes ~float64~, but ~pl.Series([1, None])~ is ~Int64~. Why can Polars keep the integer type?
+
+*** Back
+Polars stores each column in the Arrow format: a buffer of values plus a validity bitmap (1 bit per row) that marks nulls. Missing values need no sentinel, so any type can hold nulls. pandas' default NumPy path uses NaN as the sentinel, which forces a float type.
+
+Source: Polars
+
+** Null vs NaN in a Polars Series
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+For ~s = pl.Series([1.0, None, float("nan")])~, what are ~s.null_count()~ and ~s.mean()~?
+
+*** Back
+~null_count()~ is 1 and ~mean()~ is NaN. The null lives in the validity bitmap and is skipped; NaN is an ordinary float value, so it takes part in the mean.
+
+Source: Polars
+
+** Treat NaN as Missing in Polars
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+A Polars float column contains NaN values. ~fill_null(0)~ leaves them unchanged. How do you make them count as missing?
+
+*** Back
+Convert them to null first: ~pl.col("x").fill_nan(None).fill_null(0)~. ~fill_null~ and ~drop_nulls~ only see nulls; use ~fill_nan~ and ~is_nan~ for NaN.
+
+Source: Polars
+
+** Chunked Columns After Polars concat
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+What does ~pl.concat([df1, df2], rechunk=False)~ do with the column memory, and when is a later ~rechunk()~ worth it?
+
+*** Back
+It only appends the inputs' Arrow arrays as extra chunks, without copying. ~rechunk()~ copies the chunks into one contiguous array; it is worth it when the frame will be scanned or randomly accessed repeatedly.
+
+Source: Polars
+
+** When Polars Is Not Faster Than pandas
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+In which three situations should you not expect Polars to beat pandas?
+
+*** Back
+1. Tiny data, where fixed overhead dominates.
+2. Per-row Python functions (~map_elements~), which run at Python speed in either library.
+3. Code that keeps converting between Polars and pandas or NumPy.
+
+Source: Polars
+
+** Replacing a pandas Index in Polars
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+pandas code uses ~set_index("id")~ and then ~df.loc[mask, cols]~. How do you express this in Polars?
+
+*** Back
+Polars has no row index: keep ~id~ as an ordinary column and use ~df.filter(mask_expr).select(cols)~. There is no index alignment, and none of its cost.
+
+Source: Polars
