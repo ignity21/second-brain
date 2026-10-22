@@ -13,6 +13,7 @@
 - [[#advantages][Advantages]]
 - [[#drawbacks][Drawbacks]]
 - [[#code][Code]]
+- [[#k-neighbors-regression][K-Neighbors Regression]]
 
 * Overview
 - Predict the label of a data point by
@@ -89,3 +90,5 @@ y_pred = clf.predict(X_test)
 print("Training set accuracy: {:.2f}".format(clf.score(X_train, y_train)))
 print("Test set accuracy: {:.2f}".format(clf.score(X_test, y_test)))
 #+end_src
+
+* [[id:4e603b85-7e9e-47ca-b3f4-b7747cd6019a][K-Neighbors Regression]]

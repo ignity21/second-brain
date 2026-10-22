@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       33846b1e-3e19-46a2-9158-6c9b3c06743b
 :END:
-#+title: ML System
+#+title: Types of Machine Learning Systems
 #+filetags: ML
 
 * Design

@@ -13,7 +13,7 @@
 - [[#numpy-dense-implementation][NumPy ~dense~ Implementation]]
 - [[#layer-type][Layer Type]]
 - [[#activation-functions][Activation Functions]]
-- [[#roundoff-errors][Roundoff Errors]]
+- [[#roundoff-errors-in-loss-computation][Roundoff Errors in Loss Computation]]
 
 * Concept
 Used for Non-linear Hypotheses
@@ -114,4 +114,4 @@ Each neuron only looks at part of the previous layer's inputs.
 [[file:images/ML/ConvolutionalNN.png]]
 
 * [[id:bbe0d8aa-27a7-4833-9d54-1fa917b96c2d][Activation Functions]]
-* [[id:2b884159-5c23-4eb5-bc76-c15dd508adef][Roundoff Errors]]
+* [[id:2b884159-5c23-4eb5-bc76-c15dd508adef][Roundoff Errors in Loss Computation]]

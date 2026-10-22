@@ -1,11 +1,11 @@
 :PROPERTIES:
-:ID:       c0df9093-7359-4b41-854c-c51e0c8afbe1
+:ID:       e629cd3b-6558-4c72-aa8c-f8d7ea9ebd07
 :END:
-#+title: Gradient Descent Algorithms
+#+title: Optimization in Machine Learning
 
+* [[id:e1a528d4-0948-4f04-b114-48dd128863a1][Cost Function]]
 * [[id:bffd4dcf-0fb1-4480-9338-956d156b97b9][Gradient Descent]]
 * [[id:e011fb83-ee66-4913-a4d8-9f5bbca3d863][Stochastic Gradient Descent]]
 * [[id:bb10d8b3-f42c-4541-96b6-8024f9a840e5][Mini-batch Gradient Descent]]
 * [[id:5765135f-eb1d-46f7-ac0d-627582a02b8e][Adam Algorithm]]
-* [[id:da701a4c-988e-427b-bf36-33cbe7a470c2][Learning Rate]]
-* [[id:0162f9f2-271d-4a2d-8b18-5e86b8a5cc8c][Early Stopping]]
+* [[id:09f5ad2c-aece-46a3-b75a-b29bd12d2e30][Advanced Optimization]]

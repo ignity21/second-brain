@@ -34,5 +34,7 @@
 :PROPERTIES:
 :ID:       68b04e22-0fea-4771-9a11-d77e0b73dd84
 :END:
-- [[id:f4ca75d9-362e-4d52-8e5c-0362c6882dc2][Scikit-Learn]]
-* [[id:33846b1e-3e19-46a2-9158-6c9b3c06743b][ML System]]
+- Examples in these notes use [[id:f4ca75d9-362e-4d52-8e5c-0362c6882dc2][Scikit-Learn]].
+
+* System Design
+- Choices such as batch versus online learning: [[id:33846b1e-3e19-46a2-9158-6c9b3c06743b][Types of Machine Learning Systems]]

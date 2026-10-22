@@ -4,7 +4,10 @@
 :END:
 #+title: Machine Learning
 
-* [[id:2337a23b-ebbd-4902-989e-45a368e65439][ML Concepts]]
-* [[id:ad4241b3-e7ef-46c8-8da3-5b9031d68d38][ML Algorithms]]
-* [[id:e629cd3b-6558-4c72-aa8c-f8d7ea9ebd07][Optimization & Neural Networks]]
-* [[id:201987d8-0d41-4fc4-9f40-ecc05aa888ac][ML Libraries]]
+* [[id:79c981e4-0aa7-4c49-baf4-e8715ad4bd6e][Foundations]]
+* [[id:ad4241b3-e7ef-46c8-8da3-5b9031d68d38][Algorithms]]
+* [[id:e629cd3b-6558-4c72-aa8c-f8d7ea9ebd07][Optimization]]
+* [[id:c3cde13f-2f65-4036-b80e-9f4cd5d8988f][Features]]
+* [[id:e7884e68-66ee-474c-9d48-2c165c792b52][Model Evaluation and Selection]]
+* [[id:6def0fe5-154c-4fe3-abde-eabf8b68cb1a][Project and Workflow]]
+* [[id:201987d8-0d41-4fc4-9f40-ecc05aa888ac][Libraries and Tools]]

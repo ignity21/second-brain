@@ -67,8 +67,7 @@ for k in ks:
 plt.plot(ks, inertias, '-o')
 #+end_src
 ** Improving Performance
-*** [[id:8dc25af2-f3bd-4ec4-b949-40958e167e75][Feature Scaling]]
-*** [[id:c76969a3-86b9-4225-abd0-160cfdc6b4ac][Normalizer]]
+- Scale the features first, or normalize each sample with a [[id:c76969a3-86b9-4225-abd0-160cfdc6b4ac][Normalizer]]:
 #+begin_src python
 from sklearn.preprocessing import Normalizer
 

@@ -9,6 +9,7 @@
 :PROPERTIES:
 :ID:       c496154c-f57c-4de7-b4ba-a89ad7472802
 :END:
-- Steps in order: [[id:de66c696-5ca1-4fbc-a9b2-097ee7bf4ccd][Data Cleaning]], [[id:f8088283-0154-4050-9cef-911f5ae69ef4][Feature Engineering]], [[id:8dc25af2-f3bd-4ec4-b949-40958e167e75][Feature Scaling]]
-* [[id:4f76535d-cab2-4465-bb8a-3abbc3dadfe5][ML Diagnostic]]
+- Steps in order: data cleaning, [[id:f8088283-0154-4050-9cef-911f5ae69ef4][Feature Engineering]], [[id:8dc25af2-f3bd-4ec4-b949-40958e167e75][Feature Scaling]]
+* Improving the Model
+- Find what to fix first with an [[id:4f76535d-cab2-4465-bb8a-3abbc3dadfe5][ML Diagnostic]].
 * [[id:56c41011-4424-42ee-b032-ebcb626a2506][ML Project Example]]

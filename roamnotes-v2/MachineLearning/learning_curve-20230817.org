@@ -15,7 +15,7 @@
   1. Choose a much smaller learning rate $\alpha$ to see if there is a bug. (debug process)
   2. Choose a appropriate $\alpha$.
 
-* Troubleshooting [[id:4a034a17-5a7f-4003-a2fb-4c833e76cc98][Overfitting/Underfitting]]
+* Troubleshooting Overfitting/Underfitting
 ** Normal
 [[file:images/ML/NormalLearningCurve.png]]
 

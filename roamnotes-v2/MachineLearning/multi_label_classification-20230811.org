@@ -4,7 +4,7 @@
 #+title: Multi-label Classification
 #+filetags: ML
 
-- links :: [[id:31b71a06-0592-444b-b410-916ee717b488][Neural Network]]
+Solved with one [[id:31b71a06-0592-444b-b410-916ee717b488][Neural Network]] that has an output unit per label.
 
 [[file:images/ML/MultilabelClassification.png]]
 

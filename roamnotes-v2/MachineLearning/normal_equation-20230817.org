@@ -5,7 +5,7 @@
 #+filetags: ML
 
 * Properties
-- Only for [[id:b6f03e6b-8850-4f2d-8d2d-f337029fe1e7][Linear Regression]]
+- Only for linear regression
 - Solve for $\bm{w}, b$ without iterations
 - No need to choose alpha
 - No feature scaling

@@ -23,7 +23,7 @@ variations in the training data.
 A model with *many degrees of freedom* (such as a high-degree polynomial model)
 is likely to have high variance and thus overfit the training data.
 
-- Solution: [[id:6503d65e-a254-4599-8985-bad245a553a8][Regularization]]
+- Solution: regularization
 
 *** Irreducible Error
 This part is due to the *noisiness of the data itself*. The only way to reduce this
@@ -39,7 +39,7 @@ part of the error is to clean up the data.
   according to the cross-validation metrics, then your model is overfitting.
 - If it performs poorly on both, then it is underfitting.
 
-*** See [[id:1c60f0fb-302d-4a1c-b95e-a89d533afbe7][Learning Curves]]
+*** [[id:1c60f0fb-302d-4a1c-b95e-a89d533afbe7][Learning Curve]]
 To generate the plots, train the model several times on different sized subsets of the training set.
 - [[file:~/second-brain/notebooks/ML/plot_learning_curves.ipynb][Plotting Learning Curves]]
 

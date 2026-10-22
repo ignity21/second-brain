@@ -30,4 +30,8 @@ Regularization means explicitly restricting a model to avoid [[id:4a034a17-5a7f-
 - Trade off: \(\lambda\) balances both goals.
 
 * Implementations
-- [[id:7ac9ccb4-374e-4c58-b932-7704b3c86381][Regularized Linear Regression]]
+** [[id:7ac9ccb4-374e-4c58-b932-7704b3c86381][Regularized Linear Regression]]
+** [[id:5c390dc6-4c36-4f33-8a41-0b8dba9cee79][Regularized Logistic Regression]]
+** [[id:f6fb8e17-c115-4aba-91ec-894cca2f3106][Ridge Linear Regression]]
+** [[id:a5a11c25-1ea0-4f97-a1c2-ebae8a524c61][Lasso Linear Regression]]
+** [[id:28980177-1875-4360-8ea8-6800da4fe576][Elastic Net]]

@@ -6,4 +6,6 @@
 
 \[J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^m Loss(f_{\bm{w},b}(\bm{x^{(i)}}), y^{(i)})\]
 
-- [[id:f9f93acb-54e3-4702-9ba4-8233e4606e9d][Loss Function]]
+Averages the per-example loss over the $m$ training examples.
+
+* [[id:f9f93acb-54e3-4702-9ba4-8233e4606e9d][Loss Function]]

@@ -4,14 +4,6 @@
 #+title: Linear Regression
 #+filetags: ML
 
-* TOC :TOC_1:
-- [[#concept][Concept]]
-- [[#vectorization][Vectorization]]
-- [[#regularized-linear-regression][Regularized Linear Regression]]
-- [[#comparison-of-algorithms-for-linear-regression][Comparison of algorithms for Linear Regression]]
-- [[#regression-metrics][Regression Metrics]]
-- [[#python-code][Python Code]]
-
 * Concept
 ** Parameters
 - Weights $\bm{w}$: $w_1, w_2, \cdots, w_n$ (slope)
@@ -29,8 +21,11 @@
 - Loss Function: Mean Squared Error
 \[J(\bm{w}, b)=\frac{1}{m}\sum_{i=1}^{m}(\hat{y}^{(i)}-y^{(i)})^{2}=\frac{1}{m}\sum_{i=1}^m(\bm{w}^T\bm{x^{(i)}}+b-y^{(i)})^2\]
 
+- Adding a penalty on large weights gives [[id:7ac9ccb4-374e-4c58-b932-7704b3c86381][Regularized Linear Regression]].
+
 ** Training Goal: Minimize $J(\bm{w}, b)$
-*** [[id:bffd4dcf-0fb1-4480-9338-956d156b97b9][Gradient Descent]]
+*** Gradient Descent
+Update rule of [[id:bffd4dcf-0fb1-4480-9338-956d156b97b9][Gradient Descent]]:
 \[w_j=w_j-\alpha\frac{\partial}{\partial w_j}J(\bm{w}, b)\]
 
 \[b=b-\alpha\frac{\partial}{\partial b}J(\bm{w}, b)\]
@@ -81,7 +76,6 @@
 #+end_src
 - [[file:../../notebooks/ML/linear_regression.ipynb][Code]]
 
-* [[id:7ac9ccb4-374e-4c58-b932-7704b3c86381][Regularized Linear Regression]]
 * Comparison of algorithms for Linear Regression
 | Algorithm       | Large m | Out-of-core support | Large n | Hyperparams | Scaling required | Scikit-Learn     |
 |-----------------+---------+---------------------+---------+-------------+------------------+------------------|
@@ -91,7 +85,6 @@
 | Stochastic GD   | Fast    | Yes                 | Fast    |       $\ge 2$ | Yes              | SGDRegressor     |
 | Mini-batch GD   | Fast    | Yes                 | Fast    |       $\ge 2$ | Yes              | SGDRegressor     |
 
-* [[id:8038235d-fdb1-44b6-b2b9-76c38e740f0e][Regression Metrics]]
 * Python Code
 ** Single Feature
 #+begin_src python
@@ -140,3 +133,4 @@ mse = mean_squared_error(y_test, y_pred, squared=True)
 rmse = mean_squared_error(y_test, y_pred, squared=False)
 #+end_src
 - [[id:ba10e7ca-778d-4e4b-8251-e398cf189a83][statsmodels/Linear Regression/Quantifying Model Fit]]
+- Metric definitions: [[id:8038235d-fdb1-44b6-b2b9-76c38e740f0e][Regression Metrics]]

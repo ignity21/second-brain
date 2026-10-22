@@ -25,6 +25,6 @@
   #+end_src
 
 * Important Parameters
-See [[id:4dec577e-c1d9-4b01-9a95-63e3413b42a9][K-Nearest Neighbors]]
+Same as for k-nearest neighbors classification: *k* and the distance measure.
 ** N-Neighbors Comparison
 [[file:images/ML/KNR_1.png]]

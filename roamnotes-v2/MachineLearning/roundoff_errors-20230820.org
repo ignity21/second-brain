@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       2b884159-5c23-4eb5-bc76-c15dd508adef
 :END:
-#+title: Roundoff Errors
+#+title: Roundoff Errors in Loss Computation
 #+filetags: ML
 
 * Logistic Regression

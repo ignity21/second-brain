@@ -19,5 +19,5 @@
 - We withhold the test set for final evaluation
 
 * Python Code
-** [[id:b035cde2-fde9-4b2a-84c9-28495f122ecc][GridSearchCV]]
-** [[id:7cddaa40-82f2-438e-92be-5d516d68db0c][RandomizedSearchCV]]
+- Grid search tries every combination: [[id:b035cde2-fde9-4b2a-84c9-28495f122ecc][GridSearchCV]]
+- Random search samples a fixed number of combinations: [[id:7cddaa40-82f2-438e-92be-5d516d68db0c][RandomizedSearchCV]]
