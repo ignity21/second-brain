@@ -89,5 +89,13 @@
 - 移动文件或调整资源引用：确认受影响的 `file:` 链接指向存在的文件，分类目录仍保持扁平。
 - 新增或改动笔记间链接：确认整行链接标题只连直接子节点，正文引用不指向祖先或索引，也不与对方互链。
 - 新增节点、迁移或重组索引：检查受影响主索引树的逐层连接、根节点和中间索引出度、可达性、唯一主父节点，并检查全库对相关 ID 的引用。
-- 完成文件移动或 ID 索引调整后，执行一次 `org-roam-db-sync`。若当前环境无法调用用户的 Emacs/org-roam，说明未完成的同步及原因，不把未执行的检查报告为通过。
+- 完成文件移动或 ID 索引调整后，对用户的 org-roam 数据库执行一次 `org-roam-db-sync`。没有运行中的 Emacs server 时，起一个命名的临时 daemon，用完关闭（命名 socket 不与用户 Emacs 的 `server-start` 冲突）：
+
+  ```sh
+  emacs --daemon=cc-sync
+  emacsclient -s cc-sync -e '(progn (require (quote org-roam)) (org-roam-db-sync))'
+  emacsclient -s cc-sync -e '(kill-emacs)'
+  ```
+
+  仍无法执行时，说明未完成的同步及原因，不把未执行的检查报告为通过。
 - 完成时简述修改结果、实际验证和剩余问题。仅编辑本说明或其他 Markdown 文档时，检查文档链接与差异即可。
