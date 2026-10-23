@@ -75,7 +75,7 @@
 - `main` 跟随上游 `org-roam/org-roam-ui`，不放自有改动。
 - `enhanced` 是自用开发分支，Doom 从它安装并使用其中的 `out/`。Emacs 与静态站都需要的功能（搜索、主题、侧栏等）在这里开发，提交时一并重建 `out/`。
 - `static` = `enhanced` + 仅静态化提交（`NEXT_PUBLIC_STATIC` 模式、快照数据、静态默认值）。`enhanced` 更新后把 `static` rebase 到 `enhanced`，用 `--force-with-lease` 推送，不反向合并；再把 `ORG_ROAM_UI_REF` 改为新的 `static` 提交。
-- `pr/search` 对应上游 PR，只含搜索功能；其他通用功能另开 PR 分支。
+- 上游已停止维护（最后一次合并 PR 在 2022 年），通用功能只在 `enhanced` 开发，不另开 `pr/*` 分支。现有 `pr/*` 分支及其上游 PR 只作记录保留，不再 rebase 或催审；上游恢复合并 PR 后，再从 `enhanced` 挑提交提 PR。
 - 本机 Node 26 构建需设 `NODE_OPTIONS=--openssl-legacy-provider`。完成标准：受影响分支 `tsc --noEmit` 通过且 `next build && next export` 成功；推送了新的 `ORG_ROAM_UI_REF` 时，确认 Publish 工作流部署成功。
 
 ## 按改动验证
