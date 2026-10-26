@@ -1,0 +1,67 @@
+:PROPERTIES:
+:ID:       c7ce9028-6f2b-467d-a4e2-989926573aa4
+:ROAM_ALIASES: "Linux 文件 I/O 缓冲"
+:VERIFIED_WITH: Linux 6.5, glibc 2.44, GCC 16.2.1, btrfs on HDD (2026-10-26)
+:END:
+#+title: Linux File I/O Buffering and Durability
+#+filetags: :Linux:
+
+* 三级缓冲
+~fprintf~ 写出的数据到磁盘要经过三层缓冲，每层的刷新手段和丢失条件不同：
+
+| 层 | 谁管 | 刷到下一层 | 什么情况下丢 |
+|---|---|---|---|
+| stdio 缓冲区 | 进程里的 C 库 | ~fflush~ 、缓冲区满、 ~exit~ | 进程崩溃、被 ~SIGKILL~ 、调用 ~_exit~ |
+| 页缓存 | 内核，见 [[id:a20150eb-3731-4848-8a33-c55c4a318b7b][Linux Page Cache and Writeback]] | 后台写回、 ~fsync~ | 断电、内核崩溃 |
+| 磁盘的写缓存 | 设备 | 内核在 ~fsync~ 时发出的 flush / FUA 命令 | 断电（带掉电保护的企业级 SSD 除外） |
+
+- ~fflush~ 只把数据交给内核，进程崩溃不再丢，但断电仍会丢； ~fsync~ 才到持久存储。
+- 磁盘写缓存：内核对 =/sys/block/<dev>/queue/write_cache= 为 =write back= 的设备（本机全部如此），在 ~fsync~ 时会要求设备清空写缓存，所以 ~fsync~ 返回后数据在持久存储上。旧资料说「磁盘有缓存时 ~O_SYNC~ 只送到磁盘缓存」，是没有写屏障时的情况。
+
+* stdio 的缓冲模式
+| 流 | 默认模式 | 本机缓冲区大小 |
+|---|---|---|
+| 指向终端的 =stdout= | 行缓冲：遇到换行就写出 | 1024 字节 |
+| 指向文件或管道的 =stdout= 、 ~fopen~ 打开的文件 | 全缓冲：满了才写出 | 4096 字节（文件系统的 =st_blksize= ） |
+| =stderr= | 不缓冲 | 0 |
+
+- 坑：程序的输出接到管道或重定向到文件后变成全缓冲，日志「迟迟不出现」，和 =stderr= 的先后顺序也变了；进程被杀时缓冲区里的内容直接丢失。解决：关键处 ~fflush~ ，用 ~setvbuf~ 改为行缓冲，或在命令外包一层 ~stdbuf -oL~ 。
+- stdio 的意义是把很多小写入攒成一次 ~write~ 系统调用。一次只写几个字节的 ~write~ 循环比 ~fprintf~ 慢得多，代价在系统调用次数上。
+
+* fsync 家族
+| 手段 | 落盘的内容 | 用法 |
+|---|---|---|
+| ~fsync(fd)~ | 文件数据 + 全部元数据 | 等到落盘才返回 |
+| ~fdatasync(fd)~ | 文件数据 + 读回数据必需的元数据（如文件大小），不含修改时间等 | 文件大小不变的覆盖写时少一次元数据写入 |
+| ~O_SYNC~ / ~O_DSYNC~ | 每次 ~write~ 都相当于其后调用了 ~fsync~ / ~fdatasync~ | ~open~ 时指定 |
+| ~sync()~ / ~syncfs(fd)~ | 整个系统 / 一个文件系统的脏数据 | Linux 上等写完才返回（POSIX 只要求排队） |
+
+- 代价：本机（btrfs，机械盘）写 1 字节再 ~fdatasync~ ，平均每次 54 ms。每条小记录都同步落盘，吞吐就被限制在每秒几十条。数据库的做法是攒一批再 ~fsync~ 一次（组提交，group commit），而不是对小写入用 ~O_SYNC~ 。
+- 坑： ~fsync~ 返回 ~EIO~ 后，内核可能已经把出错的脏页标为干净；再调用一次 ~fsync~ 会返回成功，但数据并没有写进去（2018 年 PostgreSQL 因此改为 ~fsync~ 失败即崩溃重启、从日志恢复）。 ~fsync~ 失败要当作数据已经丢失处理，不能重试了事。
+
+** 安全地替换一个文件
+要求崩溃后文件要么是完整的旧内容，要么是完整的新内容：
+
+1. 在 *同一目录* 下写临时文件；
+2. ~fsync~ 临时文件；
+3. ~rename~ 临时文件到目标名（同一文件系统内原子替换）；
+4. ~fsync~ 所在目录的 fd，让 ~rename~ 本身落盘。
+
+省掉第 2 步，崩溃后可能看到目标名已指向新文件、但内容是空的或不完整（ ~rename~ 的元数据先于数据落盘）；省掉第 4 步，崩溃后可能还是旧文件。
+
+* 绕过页缓存：O_DIRECT
+~open~ 时加 ~O_DIRECT~ ，读写直接在用户缓冲区和设备之间进行，不经过页缓存。
+
+- 用途：自己管理缓存的程序，如数据库（InnoDB 的 ~innodb_flush_method=O_DIRECT~ ），避免数据在页缓存和自己的缓冲池里存两份；也用于测量设备本身的性能。一般程序用了反而更慢：没有预读、没有写合并，每次都等设备。
+- 对齐：缓冲区地址、文件偏移量、长度都要是设备逻辑块大小（512 或 4096 字节）的整数倍。ext4、xfs 上不对齐返回 ~EINVAL~ ；本机 btrfs 上不对齐的请求静默退回为普通缓冲 I/O。Linux 6.1 起可用 ~statx~ 的 ~STATX_DIOALIGN~ 查询要求（本机 btrfs 不返回这一项）。
+- ~O_DIRECT~ 不等于持久：它不保证文件元数据落盘，也不清空磁盘写缓存；要持久仍需 ~fsync~ 或 ~O_DSYNC~ 。
+
+* 给内核的访问提示
+~posix_fadvise(fd, offset, len, advice)~ 只是建议：
+
+| advice | 效果 |
+|---|---|
+| ~POSIX_FADV_SEQUENTIAL~ | 预读窗口加倍 |
+| ~POSIX_FADV_RANDOM~ | 关闭预读，避免随机读时多读无用数据 |
+| ~POSIX_FADV_WILLNEED~ | 立即在后台把这段读进页缓存 |
+| ~POSIX_FADV_DONTNEED~ | 丢弃这段的干净页；顺序处理大文件（备份、日志归档）时边读边丢，不挤掉其他程序的缓存 |

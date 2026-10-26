@@ -412,3 +412,277 @@ OOM killer 按什么选择要杀的进程？如何让 sshd 永远不被杀？
 按 =/proc/<pid>/oom_score= ：进程内存占用（RSS + swap + 页表）占可用内存的比例，加上 ~oom_score_adj~ （-1000 到 1000），分最高者被杀；不考虑 CPU 时间。把 sshd 的 ~oom_score_adj~ 设为 -1000（systemd 用 ~OOMScoreAdjust=-1000~ ）。旧接口 ~oom_adj~ 已废弃。
 
 Source: Linux Memory Reclaim
+
+** dup、fork、再次 open 是否共享偏移量
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+进程用 fd 3 打开文件并读了 3 字节。以下三种方式得到的新 fd，当前偏移量各是多少？为什么？
+1. ~dup(3)~
+2. ~fork~ 后子进程中的 fd 3
+3. 对同一路径再 ~open~ 一次
+
+*** Back
+1、2 都是 3：它们和原 fd 指向同一个打开文件描述（open file description），偏移量存在描述里，一方读写另一方也跟着移动。
+3 是 0：每次 ~open~ 新建一个打开文件描述，只共享 inode。
+
+Source: Linux File Descriptors and Open Files
+
+** fd 标志与状态标志的作用范围
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+对一个 fd 分别设置 ~FD_CLOEXEC~ 和 ~O_NONBLOCK~ ，它 ~dup~ 出来的 fd 会受影响吗？为什么？
+
+*** Back
+~FD_CLOEXEC~ 不会：它是 fd 标志，存在进程 fd 表的这一项里。
+~O_NONBLOCK~ 会：它是状态标志，存在共享的打开文件描述里，连 fork 出去的其他进程中的 fd 也一起变成非阻塞。
+
+Source: Linux File Descriptors and Open Files
+
+** 为什么在 open 时就设 O_CLOEXEC
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+多线程程序中，为什么要用 ~open(path, flags | O_CLOEXEC)~ ，而不是 ~open~ 之后再 ~fcntl(fd, F_SETFD, FD_CLOEXEC)~ ？
+
+*** Back
+两步之间，另一个线程可能正好 ~fork~ + ~exec~ ，fd 就泄漏进了子程序。 ~O_CLOEXEC~ 在创建 fd 时原子地设好标志；socket 用 ~SOCK_CLOEXEC~ 、 ~accept4~ 。
+
+Source: Linux File Descriptors and Open Files
+
+** 多进程追加写同一日志
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+多个进程各自 ~open~ 同一个日志文件并写入，为什么会互相覆盖？怎么避免？
+
+*** Back
+各自 ~open~ 得到不同的打开文件描述，偏移量互相独立，都从自己记录的位置写。打开时加 ~O_APPEND~ ：内核把「移到文件末尾并写入」作为一步完成。
+
+Source: Linux File Descriptors and Open Files
+
+** 删除大文件后磁盘空间不释放
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~rm~ 掉一个 50 GiB 的日志文件后， ~df~ 显示的已用空间没有下降。原因是什么？怎么找到并处理？
+
+*** Back
+~unlink~ 只删目录项；inode 的链接数为 0 且没有进程打开它时，空间才释放。有进程（如仍在写日志的服务）还打开着它。
+用 ~lsof +L1~ 或 ~ls -l /proc/<pid>/fd~ 找标着 =(deleted)= 的文件；重启进程或让它重新打开日志，急需空间时 ~truncate -s 0 /proc/<pid>/fd/<n>~ 。
+
+Source: Linux File System Structure
+
+** df 还有空间却写不进文件
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+ext4 上创建文件报「No space left on device」，但 ~df -h~ 显示还有大量空间。最可能的原因是什么？怎么确认？
+
+*** Back
+inode 耗尽：ext4 的 inode 数在 ~mkfs~ 时固定，大量小文件会先用完它。用 ~df -i~ 确认。xfs、btrfs 动态分配 inode，没有这个问题。
+
+Source: Linux File System Structure
+
+** 硬链接与符号链接
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+硬链接和符号链接各自的本质是什么？能否跨文件系统？目标被删除后各会怎样？
+
+*** Back
+- 硬链接：指向同一 inode 的另一个目录项，inode 链接数加一。不能跨文件系统（inode 号只在本文件系统内有意义），不能指向目录。删掉其他名字后数据仍在。
+- 符号链接：独立的小文件，内容是目标路径。可以跨文件系统、指向目录。目标删除后变成悬空链接。
+
+Source: Linux File System Structure
+
+** write 返回后数据在哪
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~fprintf~ 写出的数据在以下三种情况下会不会丢：调用 ~fflush~ 后进程崩溃？调用 ~fflush~ 后机器断电？调用 ~fsync~ 后机器断电？
+
+*** Back
+- ~fflush~ 后进程崩溃：不丢，数据已在内核的页缓存里。
+- ~fflush~ 后断电：可能丢，页缓存中的脏页还没写回磁盘。
+- ~fsync~ 后断电：不丢， ~fsync~ 等数据落盘、并让磁盘清空易失性写缓存后才返回。
+
+（没有 ~fflush~ 时，数据还在进程的 stdio 缓冲区，进程崩溃就丢。）
+
+Source: Linux File I/O Buffering and Durability
+
+** 输出重定向后日志迟迟不出现
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+一个 C 程序用 ~printf~ 打日志，在终端运行时实时可见；改成 ~./prog > log.txt~ 或接管道后，日志很久才出现、进程被杀时还会丢一段。为什么？怎么改？
+
+*** Back
+指向终端的 =stdout= 是行缓冲，指向文件或管道时变成全缓冲（本机 4096 字节满了才写出），被杀时缓冲区内容直接丢失。关键处 ~fflush~ ，用 ~setvbuf~ 改为行缓冲，或运行时套 ~stdbuf -oL~ 。
+
+Source: Linux File I/O Buffering and Durability
+
+** 安全地替换一个文件
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+要更新一个配置文件，要求机器随时断电后它要么是完整的旧内容、要么是完整的新内容。写出步骤。
+
+*** Back
+1. 在同一目录下写临时文件；
+2. ~fsync~ 临时文件；
+3. ~rename~ 到目标名（同一文件系统内原子替换）；
+4. ~fsync~ 目录的 fd，让 ~rename~ 落盘。
+
+省掉第 2 步，崩溃后可能看到新名字指向空的或不完整的文件。
+
+Source: Linux File I/O Buffering and Durability
+
+** fsync 报错后能否重试
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~fsync~ 返回 ~EIO~ 后，再调用一次 ~fsync~ 成功了，能否认为数据已经落盘？
+
+*** Back
+不能。第一次失败后内核可能已把出错的脏页标为干净，第二次 ~fsync~ 没有东西可写所以「成功」，数据其实丢了。 ~fsync~ 失败要按数据已丢失处理（PostgreSQL 2018 年起改为直接崩溃、从日志恢复）。
+
+Source: Linux File I/O Buffering and Durability
+
+** O_DIRECT 的用途与误解
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+什么程序适合用 ~O_DIRECT~ ？用了 ~O_DIRECT~ 写入后，是否就不需要 ~fsync~ 了？
+
+*** Back
+自己管理缓存的程序，如数据库：避免数据在页缓存和自己的缓冲池里存两份。普通程序用了反而更慢（没有预读和写合并），且缓冲区地址、偏移、长度都要按逻辑块大小对齐。
+仍需要 ~fsync~ 或 ~O_DSYNC~ ： ~O_DIRECT~ 只绕过页缓存，不保证元数据落盘，也不清空磁盘写缓存。
+
+Source: Linux File I/O Buffering and Durability
+
+** 脏页的两个阈值
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~vm.dirty_background_ratio~ 和 ~vm.dirty_ratio~ （上游默认 10 和 20）被超过时分别发生什么？大内存机器上为什么会造成写入延迟尖峰？
+
+*** Back
+- 超过 ~dirty_background_ratio~ ：回写线程开始在后台写回，写入进程不受影响。
+- 超过 ~dirty_ratio~ ：执行 ~write~ 的进程自己被节流，睡眠等待写回。
+
+比例按可用内存算，大内存机器上可积压几 GiB 脏页，突发写入撞上上限时 ~write~ 卡住秒级。延迟敏感的机器改用较小的 ~dirty_background_bytes~ ，让写回早开始。
+
+Source: Linux Page Cache and Writeback
+
+** drop_caches 能否释放内存
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+有人看到 ~free~ 的 =free= 列只剩几百 MiB，就定时执行 ~echo 3 > /proc/sys/vm/drop_caches~ 。这样做对吗？
+
+*** Back
+不对。页缓存是可以随时让出的内存，应该看 =available= 。丢掉缓存后这些数据还得从磁盘读回来，反而变慢。 ~drop_caches~ 只用于测冷缓存的性能；它也不丢脏页，需要先 ~sync~ 。
+
+Source: Linux Page Cache and Writeback
+
+** I/O 调度器的选择
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+NVMe SSD 和机械盘分别适合哪个 I/O 调度器？为什么？旧资料中的 CFQ 现在还能选吗？
+
+*** Back
+- NVMe： ~none~ 。设备内部自己调度、并行度高，软件排序只增加开销。
+- 机械盘： ~mq-deadline~ （服务器）或 ~bfq~ （桌面、重交互）。按扇区排序合并以减少寻道。
+
+CFQ、deadline、noop 随旧的单队列块层在 5.0 移除，现在只有 none、mq-deadline、bfq、kyber。
+
+Source: Linux Block Layer and I/O Stack
+
+** 多路复用是同步还是异步
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+阻塞 / 非阻塞与同步 / 异步分别描述 I/O 的哪个方面？ ~epoll~ 多路复用属于同步 I/O 还是异步 I/O？
+
+*** Back
+一次输入分两段：等数据就绪、把数据从内核拷到用户空间。
+- 阻塞 / 非阻塞：数据未就绪时调用是睡眠还是立即返回 ~EAGAIN~ 。
+- 同步 / 异步：拷贝是应用自己调用 ~read~ 完成，还是内核做完后通知。
+
+~epoll~ 只是集中等待就绪，就绪后仍由应用 ~read~ ，属于同步 I/O。Linux 上真正的异步接口是 io_uring。
+
+Source: Linux I/O Models and Multiplexing
+
+** select、poll 与 epoll 的代价
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+1 万个长连接、每次只有几个活跃时，为什么 ~epoll~ 比 ~select~ / ~poll~ 快？ ~select~ 还有什么硬限制？
+
+*** Back
+~select~ / ~poll~ 每次调用都要把全部 fd 传入内核并逐个扫描，代价 O(n)； ~epoll~ 用 ~epoll_ctl~ 把关注集合登记在内核里， ~epoll_wait~ 只返回就绪的 fd，代价与就绪数成正比。 ~select~ 只能处理号码小于 ~FD_SETSIZE~ （1024）的 fd。
+
+Source: Linux I/O Models and Multiplexing
+
+** 边缘触发的读法
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+socket 到了 10 字节，用 ~EPOLLET~ （边缘触发）注册，收到通知后只读了 5 字节就回到 ~epoll_wait~ 。会怎样？正确的写法是什么？
+
+*** Back
+剩下的 5 字节不会再被通知，直到对端又发来新数据，连接看起来像卡住了（水平触发则会继续报告可读）。边缘触发要求 fd 设为非阻塞，收到通知后循环 ~read~ 直到返回 ~EAGAIN~ 。
+
+Source: Linux I/O Models and Multiplexing
+
+** 事件循环里读普通文件
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+在基于 ~epoll~ 的事件循环里，能否把普通文件设为 ~O_NONBLOCK~ 再加入 ~epoll~ 来避免读盘阻塞？应该怎么做？
+
+*** Back
+不能。普通文件加入 ~epoll~ 返回 ~EPERM~ ， ~O_NONBLOCK~ 对它也不起作用：页缓存未命中时 ~read~ 照样阻塞等磁盘。文件 I/O 交给线程池（libuv 的做法），或用 io_uring 做真正的异步读写。
+
+Source: Linux I/O Models and Multiplexing

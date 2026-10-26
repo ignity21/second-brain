@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       603a0f71-fd7e-4c20-8607-9a2998fc3d4c
+:ROAM_ALIASES: "Linux 文件与 I/O"
+:END:
+#+title: Linux Files and I/O
+#+filetags: :Linux:
+
+* [[id:72e5eb39-6c7e-41ea-9a28-86e0fb144c6f][File System Structure]]
+* [[id:937b44b4-497a-466a-924d-0a01a2228266][File Descriptors and Open Files]]
+* [[id:a20150eb-3731-4848-8a33-c55c4a318b7b][Page Cache and Writeback]]
+* [[id:c7ce9028-6f2b-467d-a4e2-989926573aa4][File I/O Buffering and Durability]]
+* [[id:d5d10c24-2f44-46a6-aa2d-1277d2af4fc6][Block Layer and I/O Stack]]
+* [[id:6a9a7f5c-361c-42f1-a284-d8f16d992040][I/O Models and Multiplexing]]

@@ -35,7 +35,7 @@ K --> P : 退出状态，PID 回收
 - ~fork~ 调用一次、返回两次：父进程得到子进程 PID，子进程得到 0，失败时父进程得到 -1。
 - *写时复制（copy-on-write, COW）* ： ~fork~ 不复制物理内存，只复制页表并把页标为只读，哪一方先写某页才复制那一页。所以 ~fork~ 便宜但不免费，页表复制的代价随父进程已映射的内存增长。本机实测 ~fork~ + ~_exit~ + ~waitpid~ 一轮：小进程约 96 µs，父进程触碰过 1 GiB 堆后约 21 ms。
 - 大进程只为启动外部程序时用 ~posix_spawn~ ：glibc 用 ~clone(CLONE_VM | CLONE_VFORK)~ 实现，子进程借用父进程地址空间直到 ~exec~ ，不复制页表。
-- ~exec~ 替换程序映像：PID、打开的文件描述符（未设 ~O_CLOEXEC~ / ~FD_CLOEXEC~ 的）保留；设置了处理函数的信号重置为默认动作（原来的处理函数代码已不存在），被忽略的信号仍然忽略。
+- ~exec~ 替换程序映像：PID、打开的文件描述符（未设 ~O_CLOEXEC~ / ~FD_CLOEXEC~ 的）保留，所以要在 ~open~ 时就设 ~O_CLOEXEC~ ，见 [[id:937b44b4-497a-466a-924d-0a01a2228266][Linux File Descriptors and Open Files]]；设置了处理函数的信号重置为默认动作（原来的处理函数代码已不存在），被忽略的信号仍然忽略。
 
 ** 多线程进程中的 fork
 子进程里只有调用 ~fork~ 的那一个线程。其他线程当时持有的锁（包括 ~malloc~ 内部的锁）被原样复制成「已加锁」，却再也没有线程会释放它们。因此多线程程序 ~fork~ 后、 ~exec~ 前只能调用 async-signal-safe 函数，不要 ~malloc~ 、不要用 ~printf~ 等 stdio 函数、不要碰 C++ 对象；只想起一个子程序时直接用 ~posix_spawn~ 。
