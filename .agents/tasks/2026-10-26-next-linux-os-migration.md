@@ -22,4 +22,4 @@ Status: Not started
 
 ## 上一轮遗留
 
-- [ ] Trading Anki 卡片：等用户提供完整的 Deck 名称后，新建 `ankinotes/trading.org`（约 20 张，候选见 Trading 迁移回复），提交并推送。
+C++ 和 Trading 的 Anki 卡片另见 `2026-10-26-cpp-trading-anki-cards.md`，与本轮迁移互不依赖。
