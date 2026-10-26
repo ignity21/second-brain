@@ -1,0 +1,67 @@
+:PROPERTIES:
+:ID:       894e26d6-8bae-49ab-ac0c-e9812dd08d9b
+:ROAM_ALIASES: "Linux perf 性能剖析"
+:END:
+#+title: Linux perf Profiler
+#+filetags: :Linux:
+
+perf 是内核 perf_events 子系统的用户态前端，一个工具有三种能力：读硬件性能计数器（PMU）、按时间或事件采样调用栈、记录 tracepoint。本机没有安装 perf，下文按手册和内核文档整理，未运行。
+
+* 子命令地图
+| 子命令 | 做什么 | 何时想到它 |
+|---|---|---|
+| ~perf stat~ | 计数：整个运行期间各事件的总数 | 看 IPC、缓存未命中、分支预测失败、上下文切换和迁移次数 |
+| ~perf top~ | 实时采样，按函数排序 | 快速看现在哪个函数最热 |
+| ~perf record~ / ~report~ | 采样存成 =perf.data= ，事后分析 | 找热点、生成火焰图；常用 ~-g~ （调用栈）、 ~-p <pid>~ 、 ~-a~ （全系统）、 ~-F 99~ （采样频率） |
+| ~perf annotate~ | 热点函数里每条指令的样本 | 定位到具体的循环或访存指令 |
+| ~perf trace~ | 系统调用跟踪 | strace 的低开销替代 |
+| ~perf sched~ | 记录调度事件， ~perf sched latency~ 给出每个任务从唤醒到运行的延迟 | 验证绑核、隔离和调度策略的效果，见 [[id:d525dfda-0943-4e82-b4a8-cad648ad48b5][Linux CPU Scheduling and Affinity]] |
+| ~perf c2c~ | 找被多个核争用的缓存行 | 多线程程序的伪共享（false sharing） |
+| ~perf list~ | 列出本机可用的事件 | 事件名随 CPU 型号不同 |
+
+~perf top~ 和 ~perf report~ 的列： =Overhead= 是该符号占全部样本的比例， =Shared Object= 是所在的二进制或库（ =[kernel.kallsyms]= 即内核）， =[.]= 表示用户态、 =[k]= 表示内核态，符号显示为十六进制地址说明缺符号。
+
+* 读 perf stat
+~perf stat -r 5 -- ./app~ 运行 5 次并给出各计数的波动范围。默认输出的读法：
+
+| 输出 | 含义 | 判断 |
+|---|---|---|
+| =task-clock= 、 =CPUs utilized= | 任务在 CPU 上的时间（毫秒），以及它与墙钟时间之比 | 单线程程序远小于 1 说明多数时间不在 CPU 上（等 I/O、锁、睡眠） |
+| =context-switches= 、 =cpu-migrations= | 上下文切换次数；任务被换到另一个核上运行的次数 | 迁移多意味着缓存经常是冷的，考虑绑核 |
+| =page-faults= | 缺页次数 | 首次触碰新分配的内存、 ~mmap~ 的文件 |
+| =cycles= 、 =instructions= 、 =insn per cycle= | 周期数、指令数和二者之比 IPC | IPC 的判断（多数周期在等内存）见 [[id:00e92d55-5469-4d5d-9566-e889d0b86ab3][Linux CPU Performance Analysis]] |
+| =cache-references= 、 =cache-misses= | x86 上对应末级缓存（LLC）的访问和未命中，不含 L1 / L2 | 未命中率高说明工作集超出 LLC 或访问模式不连续；看 L1 用 =L1-dcache-load-misses= |
+| =branches= 、 =branch-misses= | 分支数和预测失败数 | 每次预测失败浪费十几到二十几个周期；数据相关、无规律的分支是来源 |
+
+- IPC 高不等于快：向量化后指令变少、每条指令做更多事，IPC 可能下降而总时间更短。比较两个版本时看总周期数或耗时，IPC 只用来判断瓶颈在哪。
+- 超线程的两个硬件线程共享一个核的执行单元，每个线程的 IPC 通常比独占时低。
+
+* 采样与调用栈
+- 原理：每秒中断 N 次（ ~-F~ ，默认 4000 Hz），记录当时的指令地址和调用栈；某函数出现在样本中的比例约等于它占用 CPU 的时间比例。用 99 Hz 这类不整的频率，避免与周期性任务同步而一直采到同一处。
+- 只采到在 CPU 上运行的线程：睡眠、等 I/O、等锁的时间不在样本里，off-CPU 的分析用 bcc 的 ~offcputime~ 。
+- 火焰图（flame graph）： ~perf script~ 的输出经 FlameGraph 的 =stackcollapse-perf.pl= 、 =flamegraph.pl= 生成 SVG。横向宽度是样本占比， *不是时间顺序* ，左右顺序按函数名排序；纵向是调用深度。找顶层又宽又平的函数，那是 CPU 实际花在其中的地方。
+
+调用栈的获取方式（ ~--call-graph~ ）：
+
+| 方式 | 原理 | 代价与坑 |
+|---|---|---|
+| =fp= （ ~-g~ 的默认） | 沿帧指针链回溯 | GCC / Clang 在 ~-O2~ 下默认省略帧指针，栈只剩一两层或显示 =[unknown]= ；编译时加 ~-fno-omit-frame-pointer~ ，有些发行版已默认为系统包开启 |
+| =dwarf= | 每个样本拷贝一段用户栈（默认 8 KiB），事后按调试信息展开 | =perf.data= 很大、开销高；栈超过拷贝大小时被截断 |
+| =lbr= | Intel 的 Last Branch Record 硬件记录最近的分支 | 只限 Intel、只有用户态，深度有限（几十层） |
+
+解释器和 JIT 语言（Java、Node.js、Python 3.12 的 ~-X perf~ ）要由运行时写出 =/tmp/perf-<pid>.map= ，perf 才能把地址对应到函数名。
+
+* 权限与环境
+- =kernel.perf_event_paranoid= 控制非特权用户能用到什么，上游取值与默认：
+
+  | 值 | 非特权用户 |
+  |---|---|
+  | -1 | 几乎所有事件 |
+  | 0 | 不能用原始和 ftrace 函数 tracepoint |
+  | 1 | 另外不能做全系统（按 CPU）的采样 |
+  | 2（上游默认） | 另外不能采内核态，只能剖析自己进程的用户态 |
+
+  Debian 和 Ubuntu 的内核补丁加了 3（本机即为 3）：非特权用户完全不能用 perf_event。不要为了方便调成 -1；给需要的用户或 perf 二进制授予 ~CAP_PERFMON~ （5.8 起），或用 root 运行。内核符号还受 =kernel.kptr_restrict= 限制，非特权时显示为地址。
+- *容器* ：在宿主机上剖析容器内的进程时，二进制和符号在容器的 mount 命名空间里。较新的 perf 会自动进入该命名空间查找；仍显示为地址时，用 ~perf report --symfs=/proc/<pid>/root~ ，或把 =perf.data= 拷进容器里再 ~perf report~ 。
+- *虚拟机* ：许多云主机不向虚拟机暴露 PMU， ~perf stat~ 的 =cycles= 、 =instructions= 显示 =<not supported>= ； ~perf record~ 退回到软件事件 =cpu-clock= 采样，热点仍可用，但 IPC、缓存未命中这类数据拿不到。
+- *计数器复用* ：每个核只有少数几个通用硬件计数器。一次要的事件比计数器多时，perf 让事件轮流占用计数器，再按占用时间放大，输出中带百分比（如 =(66.67%)= ）的数值是估计值。要精确比较时减少一次统计的事件数。

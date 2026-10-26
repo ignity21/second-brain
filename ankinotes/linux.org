@@ -925,3 +925,174 @@ Source: Linux Resource Limits
 ~accept~ 返回 ~EMFILE~ 时新连接还留在监听队列里，epoll 一直报告监听 socket 可读，事件循环空转。常见做法：预先保留一个空闲 fd，出错时关掉它、 ~accept~ 后立即关闭这个连接，再重新保留；同时调大 ~RLIMIT_NOFILE~ 。
 
 Source: Linux Resource Limits
+
+** 三种观测方式的分工
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Linux 观测工具按数据来源分为计数器、跟踪、采样三类。各自回答什么问题、开销如何？排障时按什么顺序用？
+
+*** Back
+- 计数器（ ~vmstat~ 、 ~iostat~ 、 ~top~ ，读 ~/proc~ 中的累计值）：有多少、多快；开销几乎为零。
+- 跟踪（ ~strace~ 、ftrace、eBPF）：是谁、哪一次、参数和耗时分布；开销与事件频率成正比。
+- 采样（ ~perf record~ ）：CPU 时间花在哪些函数；开销与采样频率成正比，只看得到 on-CPU。
+
+先用计数器全局判断哪种资源有问题，再用跟踪或采样定位到进程、函数和调用。
+
+Source: Linux Performance Tools
+
+** strace 的代价
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+为什么不宜把 ~strace~ 长时间挂在延迟敏感的生产进程上？要跟踪系统调用用什么代替？
+
+*** Back
+strace 基于 ptrace：被跟踪线程每次进出系统调用都要停下、切到 strace 进程，系统调用密集的程序会慢几倍到几十倍。生产环境用基于 tracepoint 的 ~perf trace~ 或 eBPF 工具（bcc、bpftrace）。
+
+Source: Linux Performance Tools
+
+** strace 只看到 futex
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+对一个多线程服务执行 ~strace -p <pid>~ ，只看到一直阻塞的 ~futex~ 或 ~epoll_wait~ ，看不到读写调用。为什么？怎么改？
+
+*** Back
+~-p~ 只跟踪这个 ID 对应的那一个线程（主线程），它往往只是在等待；工作线程没有被跟踪。加 ~-f~ 跟踪所有线程和子进程。
+
+Source: Linux Performance Tools
+
+** eBPF 工具为何能用于生产
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+同样是跟踪高频事件，为什么 bcc / bpftrace 这类 eBPF 工具的开销远低于逐条输出事件的跟踪方式？
+
+*** Back
+eBPF 程序在内核事件点上运行，在内核里先聚合成计数或直方图，只把结果交给用户态；跟踪的主要代价正是把每个事件拷到用户态。
+
+Source: Linux Performance Tools
+
+** vmstat 的第一行
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~vmstat 1~ 、 ~iostat -x 1~ 输出的第一组数字和后面几组差别很大，应该看哪一组？为什么？
+
+*** Back
+从第二组开始看。第一组是开机以来的平均值，不是当前值（ ~iostat -y~ 可跳过第一组）。
+
+Source: Linux Performance Tools
+
+** perf 调用栈只有一两层
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+用 ~perf record -g~ 剖析一个 ~-O2~ 编译的 C++ 程序，调用栈只有一两层或大量 ~[unknown]~ 。原因是什么？有哪些解决办法？
+
+*** Back
+~-g~ 默认沿帧指针回溯，而 GCC / Clang 在 ~-O2~ 下默认省略帧指针。办法：编译时加 ~-fno-omit-frame-pointer~ ；或 ~--call-graph dwarf~ （拷贝用户栈事后展开，数据大、开销高）；Intel CPU 上可用 ~--call-graph lbr~ （仅用户态、深度有限）。
+
+Source: Linux perf Profiler
+
+** IPC 高是否更快
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~perf stat~ 显示优化后的版本 IPC 从 2.5 降到 1.8。能说明优化失败了吗？IPC 应该怎么用？
+
+*** Back
+不能。向量化等优化让指令变少、每条指令做更多事，IPC 可能下降而总时间更短。比较版本看总周期数或耗时；IPC 只用来判断瓶颈（很低时多数周期在等缓存未命中）。
+
+Source: Linux perf Profiler
+
+** perf 的 cache-misses 统计哪一级
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Cloze
+:END:
+
+*** Text
+x86 上 ~perf stat~ 的通用事件 ~cache-references~ 、 ~cache-misses~ 统计的是 {{c1::末级缓存（LLC）}}的访问和未命中；看 L1 数据缓存要用 {{c2::~L1-dcache-load-misses~}}。
+
+*** Back
+Source: Linux perf Profiler
+
+** 非特权用户用不了 perf
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+普通用户运行 ~perf record~ 报权限错误，网上建议把 ~kernel.perf_event_paranoid~ 设成 -1。这样做有什么问题？更好的做法是什么？
+
+*** Back
+-1 让所有用户几乎能用全部事件，包括采样内核。上游默认 2 只允许剖析自己进程的用户态；Debian / Ubuntu 内核补丁的 3 完全禁止非特权使用。更好的做法：给需要的用户或 perf 二进制授予 ~CAP_PERFMON~ （5.8 起），或用 root 运行。
+
+Source: Linux perf Profiler
+
+** 云主机上 perf stat 不支持
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+在云主机上运行 ~perf stat~ ， ~cycles~ 、 ~instructions~ 显示 ~<not supported>~ 。为什么？ ~perf record~ 还能用吗？
+
+*** Back
+虚拟机没有被暴露硬件性能计数器（PMU）。 ~perf record~ 会退回到软件事件 ~cpu-clock~ 采样，热点函数仍能找到，但拿不到 IPC、缓存未命中等硬件数据。
+
+Source: Linux perf Profiler
+
+** 火焰图的横轴
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+CPU 火焰图中，一个函数的框很宽、位于左侧。宽度和左右位置分别代表什么？该重点看哪里？
+
+*** Back
+宽度是该函数（含其调用的函数）占样本的比例，即占用 CPU 时间的比例；左右位置不是时间顺序，只是按函数名排序。重点看顶层又宽又平的框，那是 CPU 实际花在其中的地方。
+
+Source: Linux perf Profiler
+
+** dd 测出的磁盘速度
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+用 ~dd if=/dev/zero of=test bs=1M count=512~ 测出写入 1 GB/s，机械盘却不可能这么快。哪里出了问题？怎么测才对？
+
+*** Back
+两处：没有同步，测的是写进页缓存的速度；全零数据在开了压缩的文件系统或带压缩的 SSD 上几乎不写盘。加 ~conv=fdatasync~ 或 ~oflag=direct~ 并用随机数据，或直接用 ~fio --direct=1~ 。本机 btrfs（lzo 压缩）写 512 MiB：不同步 1.0 GB/s，全零加 ~fdatasync~ 357 MB/s，随机数据加 ~fdatasync~ 59.5 MB/s。
+
+Source: Linux Benchmarking and Load Generation
+
+** fio 的 iodepth 不起作用
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~fio~ 设了 ~--iodepth=32~ ，测出的 IOPS 却和 ~--iodepth=1~ 一样。可能的原因是什么？
+
+*** Back
+用的是同步 I/O 引擎（如 ~psync~ ），每个 job 一次只能有一个请求在途， ~iodepth~ 实际为 1。改用异步引擎（ ~libaio~ 、 ~io_uring~ ），或增加 ~numjobs~ 提高并发。
+
+Source: Linux Benchmarking and Load Generation

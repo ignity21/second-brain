@@ -1,0 +1,70 @@
+:PROPERTIES:
+:ID:       3eb94d17-33dd-4314-afb4-ee194cb82acd
+:ROAM_ALIASES: "Linux 基准测试与压测"
+:VERIFIED_WITH: Linux 6.5, btrfs (compress=lzo) on HDD, coreutils dd (2026-10-26)
+:END:
+#+title: Linux Benchmarking and Load Generation
+#+filetags: :Linux:
+
+* 两种用途
+| 用途 | 问题 | 工具 |
+|---|---|---|
+| 制造已知负载 | 模拟一个 CPU 密集、I/O 密集、大量进程或频繁切换的场景，看各指标怎么变；复现线上问题 | ~stress-ng~ 、 ~sysbench~ |
+| 测出上限 | 这块盘按我的负载能到多少 IOPS、这个服务能扛多少 QPS，用来判断现在离饱和多远 | ~fio~ 、 ~sysbench~ 、HTTP 压测工具 |
+
+后者的结果要和观测到的指标对照才有意义，例如 ~iostat~ 中的 IOPS 与 ~fio~ 测出的上限比较，见 [[id:f44727ab-e7c3-42cf-8d66-d0c595a352d6][Linux I/O Performance Analysis]]。
+
+* 工具地图
+| 工具 | 产生什么负载 | 注意 |
+|---|---|---|
+| ~stress~ | CPU（ ~-c~ ）、内存（ ~-m~ ）、 ~sync()~ （ ~-i~ ）、写文件（ ~-d~ ） | ~-i~ 只是反复调用 ~sync()~ ，页缓存中没有脏数据时几乎不产生 I/O，SSD 上更明显；用 stress-ng |
+| ~stress-ng~ | 数百种压力源：CPU、内存、磁盘（ ~--hdd~ ）、上下文切换（ ~--switch~ ）、 ~fork~ 、缺页等，可加 ~--metrics~ 输出每秒操作数 | 代替 stress |
+| ~sysbench~ | =cpu= 、 =memory= 、 =threads= （线程争锁，制造大量上下文切换）、 =mutex= 、 =fileio= ，以及数据库 OLTP 负载 | 1.0 起写成 ~sysbench threads --threads=10 --time=300 run~ ；旧写法 ~--test=threads~ 、 ~--max-time~ 已弃用 |
+| ~fio~ | 按指定模式发 I/O，测存储的 IOPS、吞吐和延迟分布 | 见下一节 |
+| [[id:17daaa09-1802-44ad-8c03-df1433858f5e][~dd~]] | 单线程顺序读写 | 只能粗看顺序吞吐，且很容易测到页缓存，见「坑」 |
+| [[id:49b1d0cc-0ea8-478d-8b29-f6006472c028][~ab~]] | HTTP 压测：并发数 ~-c~ 、总请求数 ~-n~ | 单线程，被测服务较快时 ab 自己先打满一个核；用 ~wrk~ 这类多线程工具 |
+
+* fio
+一个 job 描述一种 I/O 模式，以下参数决定测的是什么：
+
+| 参数 | 含义 | 怎么选 |
+|---|---|---|
+| ~rw~ | =read= 、 =write= 、 =randread= 、 =randwrite= 、 =randrw= | 与实际负载一致 |
+| ~bs~ | 每次 I/O 的大小 | 数据库页一般 4–16 KiB，顺序大 I/O 用 1 MiB |
+| ~ioengine~ | =psync= （同步）、 =libaio= 、 =io_uring= 、 =mmap= 等 | 只有异步引擎能让一个 job 同时有多个请求在途 |
+| ~iodepth~ | 每个 job 同时在途的请求上限 | 同步引擎下实际为 1；与 ~numjobs~ 一起决定总并发 |
+| ~numjobs~ | 并行的线程或进程数 | 加 ~group_reporting~ 合并成一份结果 |
+| ~direct=1~ | 用 ~O_DIRECT~ 绕过页缓存 | 测设备时必须 |
+| ~size~ 、 ~runtime~ 、 ~time_based~ 、 ~ramp_time~ | 数据量、时长、预热时间 | 不用 ~direct~ 时 ~size~ 要远大于内存 |
+| ~filename~ | 测试文件或块设备 | 写块设备会破坏上面的文件系统 |
+
+测一块盘的 4 KiB 随机读，队列深度 32：
+
+#+begin_src bash
+fio --name=randread --filename=/data/fio.test --size=4G \
+    --rw=randread --bs=4k --ioengine=libaio --iodepth=32 --direct=1 \
+    --runtime=60 --time_based --group_reporting
+#+end_src
+
+报告中的延迟：
+- =slat= ：提交延迟，把请求交给内核花的时间。
+- =clat= ：完成延迟，从提交到完成。
+- =lat= ：总延迟，约等于 =slat= + =clat= 。
+- 看 =clat percentiles= 中的 99、99.9 分位数，平均值掩盖长尾。
+
+* 坑
+- *测到的是页缓存* ：不绕过缓存时，写入只是拷进页缓存，读取命中缓存时根本不碰盘（机制见 [[id:a20150eb-3731-4848-8a33-c55c4a318b7b][Linux Page Cache and Writeback]]）。本机 512 MiB 随机数据：
+
+  | ~dd~ 测试 | 结果 |
+  |---|---|
+  | 写入，不同步 | 373 MB/s |
+  | 写入， ~conv=fdatasync~ （结束前刷盘） | 59.5 MB/s |
+  | 读取，数据在缓存中 | 7.5 GB/s |
+  | 读取， ~iflag=direct~ | 86 MB/s |
+
+  测设备用 ~fio --direct=1~ ，或 ~dd~ 加 ~oflag=direct~ / ~conv=fdatasync~ 。
+- *数据可压缩* ：本机根分区是 btrfs ~compress=lzo~ ，同样的 ~dd conv=fdatasync~ 写 512 MiB， =/dev/zero= 的数据 357 MB/s，随机数据 59.5 MB/s。开了压缩的文件系统、带压缩或去重的 SSD 上，全零数据几乎不写盘；fio 默认写随机数据。
+- *写块设备毁数据* ：常见示例中的 ~--filename=/dev/sdb~ 会直接覆盖这块盘；只对空盘这样测，其他情况测文件。
+- *并发与负载不符* ：同一块 NVMe，队列深度 1 和 32 的 IOPS 能差一个数量级。测上限用高并发，回答「我的服务够不够快」用与服务相同的块大小和并发。
+- *SSD 状态* ：新盘或刚 TRIM 过的盘写得快；持续写入耗尽 SLC 缓存、开始垃圾回收后会掉速。测持续写要先把盘写满一遍再长时间运行。
+- *压测端成了瓶颈* ：单线程压测工具或与被测服务在同一台机器上抢 CPU 时，测出的是压测端的上限。压测期间也看压测端的 CPU。
