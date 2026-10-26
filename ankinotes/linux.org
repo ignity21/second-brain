@@ -1,0 +1,414 @@
+#+title: Linux
+
+* Deck
+:PROPERTIES:
+:ANKI_DECK: RoamCards::Linux
+:END:
+
+** fork 的返回值
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~pid_t pid = fork();~ 之后，父进程和子进程各自看到的 ~pid~ 是什么？失败时呢？
+
+*** Back
+调用一次、返回两次：父进程得到子进程的 PID，子进程得到 0；失败时只有父进程返回，值为 -1。
+
+Source: Linux Process Lifecycle
+
+** fork 子进程用 exit 还是 _exit
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+父进程 ~printf("hello ");~ （无换行）后 ~fork()~ ，子进程不 ~exec~ 就退出。输出重定向到文件时，子进程调用 ~exit(0)~ 会出现什么问题？应该怎么写？
+
+*** Back
+=hello= 输出两次：子进程复制了父进程尚未刷出的 stdio 缓冲， ~exit~ 会再刷一遍。子进程应调用 ~_exit(0)~ ，它不刷 stdio 缓冲、不调 ~atexit~ 函数。
+
+Source: Linux Process Lifecycle
+
+** 各退出方式的清理差异
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+C++ 程序中，从 ~main~ 返回、调用 ~exit()~ 、调用 ~_exit()~ 三种方式，分别会执行哪些清理： ~atexit~ 函数、刷新 stdio、静态对象析构、当前栈上对象析构？
+
+*** Back
+| 方式 | ~atexit~ | 刷 stdio | 静态对象析构 | 栈上对象析构 |
+|---|---|---|---|---|
+| 从 ~main~ 返回 | 是 | 是 | 是 | 是 |
+| ~exit()~ | 是 | 是 | 是 | 否 |
+| ~_exit()~ | 否 | 否 | 否 | 否 |
+
+~abort()~ 和被信号杀死同 ~_exit~ ，什么都不清理。
+
+Source: Linux Process Lifecycle
+
+** 多线程进程中 fork 的限制
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+多线程程序调用 ~fork()~ 后、 ~exec~ 前，子进程里为什么不能调用 ~malloc~ 或 ~printf~ ？只想启动一个外部程序时用什么替代？
+
+*** Back
+子进程里只有调用 ~fork~ 的那一个线程。其他线程当时持有的锁（如 ~malloc~ 、stdio 内部的锁）被复制成「已加锁」，却没有线程会释放，再调用就可能死锁。 ~fork~ 后 ~exec~ 前只能调用 async-signal-safe 函数；只为启动外部程序时用 ~posix_spawn~ 。
+
+Source: Linux Process Lifecycle
+
+** 平均负载统计哪些状态
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+一台机器平均负载很高，CPU 使用率却不高。可能是什么原因？先查什么？
+
+*** Back
+Linux 的平均负载统计的是 =R= （可运行）和 =D= （不可中断睡眠）任务数，不只是 CPU 上的任务。负载高而 CPU 闲，多半是大量任务卡在 =D= ，在等磁盘、NFS 等 I/O：先找 =D= 状态的进程，看 iowait。
+
+Source: Linux Process States
+
+** D 状态进程为什么杀不掉
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+一个进程长时间处于 =D= 状态， ~kill -9~ 无效。为什么？常见原因是什么？
+
+*** Back
+=D= 是不可中断睡眠，信号（含 ~SIGKILL~ ）要等它醒来才处理。常见原因是卡死的 NFS 挂载或故障磁盘，要从 I/O 侧解决。
+
+Source: Linux Process States
+
+** 自愿与非自愿上下文切换
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~pidstat -w~ 显示某进程的自愿切换（ =cswch/s= ）明显变多，或非自愿切换（ =nvcswch/s= ）明显变多，各自说明什么？
+
+*** Back
+- 自愿切换多：任务拿不到资源主动睡眠，在等 I/O 或锁。
+- 非自愿切换多：时间片用完或被抢占，可运行任务多于 CPU，在争抢 CPU。
+
+Source: Linux Context Switching
+
+** 系统调用是不是上下文切换
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+一次不阻塞的系统调用（如 ~getppid~ ）算几次上下文切换？什么情况下系统调用才会引起真正的上下文切换？
+
+*** Back
+零次。它是同一任务的两次特权模式切换（进入、返回内核），不换任务， ~vmstat~ 的 =cs= 不计入。调用阻塞（等 I/O、等锁）使任务睡眠时，才会切换到别的任务。
+
+Source: Linux Context Switching; Linux System Calls
+
+** 硬中断与软中断的分工
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+网卡收包时，硬中断和软中断各做什么？软中断通常在哪里执行，什么时候交给 =ksoftirqd= ？
+
+*** Back
+- 硬中断（上半部）：只做最少的事，确认中断、关闭该队列中断、调度 NAPI 轮询。
+- 软中断 ~NET_RX~ （下半部）：批量取包、走协议栈、放入 socket 缓冲区并唤醒应用。
+
+软中断通常在硬中断返回时就地执行，不是单独的线程；积压超出一轮预算时，剩下的交给每 CPU 一个的 =ksoftirqd/N= 。 =ksoftirqd= CPU 占用高说明软中断过载。
+
+Source: Linux Interrupts and Softirqs
+
+** vDSO 退回系统调用
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~clock_gettime~ 平时经 vDSO 在用户态完成（约 20 ns）。什么情况下它会退回真正的系统调用？怎么检查？
+
+*** Back
+时钟源不支持在用户态读取时，例如某些虚拟机的时钟源不是 =tsc= 。此时每次打时间戳都要进内核，代价变成几倍。检查 =/sys/devices/system/clocksource/clocksource0/current_clocksource= 是否为 =tsc= 。
+
+Source: Linux System Calls
+
+** 只绑核不够
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+低延迟线程已用 ~taskset~ 绑到核 3，仍有延迟抖动。绑核没有挡住哪些干扰？还需要哪些手段？
+
+*** Back
+亲和性只约束被绑定的线程，其他任务和中断仍会来到核 3。还需要：
+- ~isolcpus=~ 或 cpuset：普通任务不调度到该核；
+- ~nohz_full=~ ：去掉单任务核上的时钟中断；
+- ~rcu_nocbs=~ ：RCU 回调移到别的核；
+- 中断亲和性：设备中断移离该核（并停用或配置 irqbalance）。
+
+Source: Linux CPU Scheduling and Affinity
+
+** 隔离核上的忙轮询线程用什么调度策略
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+隔离核上跑一个 100% 忙轮询的线程，为什么不宜把它设为 ~SCHED_FIFO~ ？
+
+*** Back
+保持 ~SCHED_OTHER~ 即可：隔离核上本来没有竞争者。设为 ~SCHED_FIFO~ 后它永不让出，必须在该核上运行的每核内核线程（如 kworker）被饿死，表现为系统其他部分卡顿。
+
+Source: Linux CPU Scheduling and Affinity
+
+** 每线程的 CPU 亲和性
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+程序启动时先把主线程绑到核 2，再创建 4 个工作线程。结果会怎样？应该怎么做？
+
+*** Back
+亲和性是每线程属性，新线程继承创建者的亲和性，4 个工作线程全挤在核 2 上。应在各线程创建后逐个设置（ ~pthread_setaffinity_np~ ），或先创建线程再绑主线程。
+
+Source: Linux CPU Scheduling and Affinity; Linux Processes vs Threads
+
+** malloc 之后何时占用物理内存
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~char *p = malloc(256 << 20);~ 成功返回后，进程的 RSS 增加了多少？什么时候才真正占用物理内存？
+
+*** Back
+几乎不增加。 ~malloc~ / ~mmap~ 只在地址空间登记一段范围；每页第一次被访问时触发缺页（page fault），内核才分配物理页并填页表。本机写 256 MiB 新内存触发 65,536 次次缺页，每次约 1.5 µs。
+
+Source: Linux Virtual Memory and Page Faults
+
+** 次缺页与主缺页
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+次缺页（minor fault）和主缺页（major fault）各在什么情形下发生？代价差多少？
+
+*** Back
+- 次缺页：页不用读盘，例如首次触碰匿名页、写时复制、映射的文件页已在页缓存中。微秒级。
+- 主缺页：页要从磁盘读，例如文件页不在页缓存、页被换出到 swap。一次磁盘 I/O，SSD 上数十到数百微秒，机械盘毫秒级。
+
+主缺页持续出现说明工作集放不下内存。
+
+Source: Linux Virtual Memory and Page Faults
+
+** 页表与 TLB
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Cloze
+:END:
+
+*** Text
+Linux 的页表存放在 {{c1::内存::位置}} 中，由内核为每个进程维护；MMU 翻译地址的结果缓存在 {{c2::TLB}} 中。切换到另一个进程要换页表，旧进程的 TLB 条目随之失效。
+
+*** Back
+Source: Linux Virtual Memory and Page Faults
+
+** RES 相加超过物理内存
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+把所有进程 ~top~ 中的 =RES= 加起来，超过了机器的物理内存。为什么？要算每个进程实际占多少该看什么？
+
+*** Back
+=RES= 包含已映射的共享库、共享内存等共享页（ =SHR= 是 =RES= 的一部分），多个进程映射同一页时被重复计算。看 =/proc/<pid>/smaps_rollup= 的 =Pss= ：共享页按共享进程数平摊。
+
+Source: Linux Virtual Memory and Page Faults
+
+** overcommit 与 malloc 失败
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+默认 ~vm.overcommit_memory=0~ 下，为什么 ~malloc~ 很少返回 =NULL= ？内存真不够时问题在哪里暴露？
+
+*** Back
+默认的启发式 overcommit 只拒绝明显不可能满足的单次分配（如超过内存 + swap），允许登记的虚拟内存总和超过物理内存。内存不够发生在之后 *触碰* 页时：先是回收变慢，最终 OOM killer 杀进程。
+
+Source: Linux Virtual Memory and Page Faults
+
+** 热路径上避免缺页
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+低延迟程序如何保证热路径上不发生缺页？列出启动时要做的事和运行时要避免的操作。
+
+*** Back
+- 启动时预缺页：把要用的内存写一遍，或 ~mmap~ 加 ~MAP_POPULATE~ 。
+- ~mlockall(MCL_CURRENT | MCL_FUTURE)~ 锁定内存、防止换出（受 ~RLIMIT_MEMLOCK~ 限制）。
+- 预分配对象池和缓冲区，运行时不向分配器要新内存；大表用 hugetlbfs 大页。
+- 运行时不 ~munmap~ / ~mprotect~ ：会触发 TLB shootdown IPI，打断其他核。
+
+Source: Linux Virtual Memory and Page Faults
+
+** 透明大页的延迟风险
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+为什么延迟敏感的程序不依赖透明大页（THP），而用 hugetlbfs 预留大页？
+
+*** Back
+THP 不保证拿到大页：内存碎片化时退回 4 KiB 页，而且缺页时可能同步做内存压缩，造成延迟尖峰（本机碎片化时 256 MiB 首次写入 612 ms，是 4 KiB 页的 5 倍多）。hugetlbfs 在启动时预留，预留成功后保证可用，也不会被换出。
+
+Source: Linux Virtual Memory and Page Faults
+
+** malloc 用 brk 还是 mmap
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+glibc ~malloc~ 何时从堆（ ~brk~ ）分配、何时单独 ~mmap~ ？「128 KiB」这个界限是固定的吗？
+
+*** Back
+小于 ~M_MMAP_THRESHOLD~ 从堆分配，大于等于时单独 ~mmap~ ，释放时直接 ~munmap~ 。阈值初始 128 KiB，但会动态上调：释放一个 ~mmap~ 块时阈值调到该块大小（64 位上限 32 MiB），所以同样大小的第二次分配可能走堆。用 ~mallopt~ 显式设定后不再动态调整。
+
+Source: Linux Memory Allocation with malloc
+
+** free 之后 RSS 不降
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+C/C++ 服务释放了大量小对象，RSS 却几乎不降。glibc ~malloc~ 层面有哪些原因？怎么缓解？
+
+*** Back
+- 堆只能从顶部用 ~brk~ 收缩：堆顶有一个存活的块，下面的空闲内存都还不回去。
+- 多线程使用多个 arena，空闲内存分散在各 arena 中。
+
+缓解： ~malloc_trim(0)~ 用 ~madvise~ 释放堆中间的空闲整页；用 ~MALLOC_ARENA_MAX~ 限制 arena 数；换 jemalloc、tcmalloc 等更主动归还内存的分配器。
+
+Source: Linux Memory Allocation with malloc
+
+** 线程栈与虚拟内存
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+一个进程有 1,000 个线程，默认栈大小 8 MiB。它的 =VIRT= 和 =RES= 大概会怎样？为什么？
+
+*** Back
+=VIRT= 至少多出约 8 GiB，但 =RES= 可能只有几十 MiB。线程栈是创建时 ~mmap~ 的固定大小地址范围，只有实际用到的页才分配物理内存。
+
+Source: Linux Process Address Space
+
+** 文件映射还是 read
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+什么场景适合用 ~mmap~ 访问文件，什么场景用 ~read~ / ~write~ 更好？ ~mmap~ 有哪些坑？
+
+*** Back
+- ~mmap~ ：反复随机访问的大文件、多个进程共享的只读数据；省去页缓存到用户缓冲区的拷贝。
+- ~read~ / ~write~ ：一次性顺序读写；内核预读，通常不比 ~mmap~ 慢。
+- ~mmap~ 的坑：每页首次访问缺页；建立、拆除映射要作废 TLB；文件被截断后访问收到 ~SIGBUS~ ，I/O 错误以信号出现而非返回值。
+
+Source: Linux Memory Mappings
+
+** 共享内存中的同步
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+两个进程通过 POSIX 共享内存交换数据。放在其中的锁和原子变量有什么要求？
+
+*** Back
+- 互斥锁要设为进程间共享（ ~PTHREAD_PROCESS_SHARED~ ）；持锁进程可能崩溃时用 robust mutex。
+- C++ 原子变量只有 lock-free（ ~std::atomic<T>::is_always_lock_free~ ）时才能跨进程使用。
+- 用完 ~shm_unlink~ ，否则 =/dev/shm= 中的对象一直占内存。
+
+Source: Linux Memory Mappings
+
+** 文件页与匿名页的回收
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+内存紧张时，内核分别怎样回收文件页和匿名页？没有 swap 会怎样？
+
+*** Back
+- 文件页（页缓存、代码、文件映射）：干净的直接丢弃，脏页先写回再丢弃。
+- 匿名页（堆、栈、共享内存）：只能写到 swap 后释放。
+
+没有 swap 时匿名页无法回收，只能不断挤压页缓存（反复读盘），直到 OOM。
+
+Source: Linux Memory Reclaim
+
+** 水位线与直接回收
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+空闲内存分别跌破 =low= 和 =min= 水位线时，内核怎么做？哪一种会直接造成应用延迟尖峰？
+
+*** Back
+- 跌破 =low= ：唤醒 =kswapd= 在后台回收，直到回到 =high= 以上。
+- 跌破 =min= ：申请内存的进程自己同步回收（直接回收），分配卡住直到回收出页。这是延迟尖峰的来源，看 =/proc/vmstat= 的 =allocstall_*= 。
+
+调大 ~watermark_scale_factor~ 或 ~min_free_kbytes~ 让 =kswapd= 早开始，减少直接回收。
+
+Source: Linux Memory Reclaim
+
+** swappiness 的含义
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~vm.swappiness~ 控制的是什么？设为 0 是否等于禁用 swap？
+
+*** Back
+它是回收时匿名页相对文件页的 I/O 代价权重（0–200，上游默认 60）：100 表示两者等价，越小越倾向回收文件页。设为 0 不等于禁用：文件页所剩无几时仍会换出。
+
+Source: Linux Memory Reclaim
+
+** OOM killer 选谁
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+OOM killer 按什么选择要杀的进程？如何让 sshd 永远不被杀？
+
+*** Back
+按 =/proc/<pid>/oom_score= ：进程内存占用（RSS + swap + 页表）占可用内存的比例，加上 ~oom_score_adj~ （-1000 到 1000），分最高者被杀；不考虑 CPU 时间。把 sshd 的 ~oom_score_adj~ 设为 -1000（systemd 用 ~OOMScoreAdjust=-1000~ ）。旧接口 ~oom_adj~ 已废弃。
+
+Source: Linux Memory Reclaim

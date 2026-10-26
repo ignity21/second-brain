@@ -1,0 +1,46 @@
+:PROPERTIES:
+:ID:       c2e41773-cd6c-4697-84fd-33a1178a0407
+:ROAM_ALIASES: "Linux 内存映射"
+:VERIFIED_WITH: Linux 6.5, glibc 2.44 (2026-10-26)
+:END:
+#+title: Linux Memory Mappings
+#+filetags: :Linux:
+
+* 两个维度
+进程地址空间里的每一段都是一个内存映射（memory mapping），由 ~mmap~ （或加载程序时内核代为）建立。映射按两个维度分成四类：
+
+| | 私有（ ~MAP_PRIVATE~ ） | 共享（ ~MAP_SHARED~ ） |
+|---|---|---|
+| *文件映射* | 可执行文件和共享库的代码、数据。写时复制，改动不写回文件 | 用 ~mmap~ 读写文件、通过文件共享数据。写入进入页缓存，之后回写到文件 |
+| *匿名映射* | 堆、栈、 ~malloc~ 的大块。 ~fork~ 后父子写时复制 | 父子进程间共享的内存；内核用 tmpfs 式的 shmem 支撑 |
+
+- 写时复制（copy-on-write）：私有映射被写时，内核复制出该页的私有副本再让写入继续，其他共享这一页的映射看不到改动。 ~fork~ 便宜、共享库只占一份物理内存，都靠它。
+- ~mmap~ 只登记地址范围，访问时才缺页分配或读入，见 [[id:4dc805d4-c007-4526-bd64-c9ca9af200a4][Linux Virtual Memory and Page Faults]]。
+- 回收时两类页的去处不同：文件页可以丢弃（干净的）或写回文件（脏的），匿名页只能换出到 swap。
+- 查看： =/proc/<pid>/maps= 每行一个映射，权限列末位 =p= 为私有、 =s= 为共享；有路径的是文件映射，没有的是匿名映射。
+
+* 文件映射还是 read / write
+| | ~mmap~ 文件 | ~read~ / ~write~ |
+|---|---|---|
+| 拷贝 | 直接访问页缓存中的页，省去一次内核到用户缓冲区的拷贝 | 每次在页缓存和用户缓冲区之间拷贝 |
+| 系统调用 | 建立映射后按普通内存访问 | 每块数据一次 |
+| 代价与坑 | 每页首次访问一次缺页；建立、拆除映射有 TLB 作废的代价；文件被其他进程截断后访问会收到 ~SIGBUS~ ；I/O 错误也以信号出现，不是返回值 | 错误通过返回值报告；顺序读大文件时内核预读，通常不比 ~mmap~ 慢 |
+
+适合 ~mmap~ ：反复随机访问的大文件（索引、数据库文件），多个进程共享只读数据。一次性顺序读写用 ~read~ / ~write~ 。
+
+* Linux Shared Memory
+:PROPERTIES:
+:ID:       681a06e2-6aad-4c49-881c-286cc53542f0
+:END:
+共享内存（shared memory）把同一批物理页映射进多个进程，是最快的进程间通信方式：数据交换就是普通的内存读写，不进内核、不拷贝。代价是同步要自己做。
+
+| 接口 | 做法 | 生命周期 |
+|---|---|---|
+| POSIX 共享内存 | ~shm_open~ + ~ftruncate~ + ~mmap(MAP_SHARED)~ ，对象出现在 =/dev/shm/= 下 | 直到 ~shm_unlink~ 或重启；进程全退出也不消失 |
+| ~memfd_create~ | 得到一个匿名的内存文件 fd，经 Unix socket 传给其他进程后各自 ~mmap~ | 最后一个 fd 和映射关闭时释放 |
+| 共享匿名映射 | ~mmap~ 时同时指定 ~MAP_SHARED~ 和 ~MAP_ANONYMOUS~ ，再 ~fork~ | 只在父子进程间 |
+| System V 共享内存 | ~shmget~ / ~shmat~ ，用 ~ipcs -m~ 查看 | 直到 ~IPC_RMID~ ；旧接口，新代码用 POSIX |
+
+- 同步：放在共享内存里的锁要设为进程间共享（ ~PTHREAD_PROCESS_SHARED~ ），持锁进程崩溃时用 robust mutex 才能恢复；C++ 原子变量只有在 lock-free（ ~std::atomic<T>::is_always_lock_free~ ）时才能跨进程使用。
+- 低延迟系统常在共享内存里放单生产者单消费者的环形队列，例如行情进程把数据分发给多个策略进程；队列本身的正确写法见 [[id:2569c73d-2087-4aad-89db-809f0ac3619a][C++ Lock-free Data Structures]]。
+- 坑： =/dev/shm= 是 tmpfs，容量有上限（Docker 容器默认只有 64 MiB，本机容器配置为 1 GiB）；其中的数据占用内存、计入 =/proc/meminfo= 的 =Shmem= ，忘记 ~shm_unlink~ 就一直占着。

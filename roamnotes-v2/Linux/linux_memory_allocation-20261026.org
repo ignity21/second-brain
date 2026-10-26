@@ -1,0 +1,35 @@
+:PROPERTIES:
+:ID:       f659b32b-4b09-46a7-818e-791ca3855765
+:ROAM_ALIASES: "Linux 内存分配与 malloc"
+:VERIFIED_WITH: Linux 6.5, glibc 2.44, GCC 16.2.1 (2026-10-26)
+:END:
+#+title: Linux Memory Allocation with malloc
+#+filetags: :Linux:
+
+* 两层分配
+- 内核只按页、按地址范围给内存，有两个系统调用：
+  - ~brk~ ：移动堆顶，扩大或缩小堆（[[id:c864c39e-2dd7-4c4d-ad24-9b541abc2f30][Linux Process Address Space]] 中的堆区）。 ~sbrk~ 是 glibc 在 ~brk~ 之上包的函数，不是系统调用。
+  - ~mmap~ ：在映射区新建一段私有匿名映射（见 [[id:c2e41773-cd6c-4697-84fd-33a1178a0407][Linux Memory Mappings]]）。
+- glibc 的 ~malloc~ （ptmalloc）从内核批量要来大块，再在用户态切成小块分配。多数 ~malloc~ / ~free~ 只是操作空闲链表，不进内核。
+
+* brk 还是 mmap
+请求大小小于 ~M_MMAP_THRESHOLD~ 时从堆中分配，大于等于时单独 ~mmap~ 一块，释放时直接 ~munmap~ 还给系统。
+
+- 阈值初始为 128 KiB，但是 *动态* 的：释放一个 ~mmap~ 分配的块时，阈值上调到该块的大小（64 位上限 32 MiB）。本机：第一次 ~malloc(200 KiB)~ 走 ~mmap~ ， ~free~ 后再申请同样大小就从堆里分配；40 MiB 仍走 ~mmap~ 。用 ~mallopt(M_MMAP_THRESHOLD, ...)~ 显式设定后不再动态调整。
+- 取舍：
+
+| | 堆（ ~brk~ ） | ~mmap~ |
+|---|---|---|
+| 再次分配 | 复用已经缺页过的内存，快 | 每次新映射：一次系统调用，每页首次访问都缺页 |
+| 释放 | 留在进程里供复用 | ~munmap~ 立即归还，同时要作废其他 CPU 的 TLB |
+| 风险 | 碎片，内存不一定还给系统 | 频繁分配释放大块时系统调用和缺页很多 |
+
+* 为什么 free 后 RSS 不降
+- *堆只能从顶部收缩* 。堆顶连续空闲超过 ~M_TRIM_THRESHOLD~ （初始 128 KiB，同样会动态调整）时 ~free~ 才用 ~brk~ 缩回；顶部只要有一个还活着的小块，下面的空闲内存都还不回去。
+- 本机：分配 100 个 100 KiB 的块，再在堆顶分配一个 64 KiB 的块；释放那 100 个块后 RSS 仍约 11.8 MB。调用 ~malloc_trim(0)~ 后 RSS 降到 1.9 MB：它对堆中间整页的空闲区调用 ~madvise~ 释放物理页，地址范围不变。
+- *多线程与 arena* ：为了减少锁竞争，不同线程倾向于使用不同的分配区（arena）。非主 arena 不用 ~brk~ ，而是 ~mmap~ 预留 64 MiB 的区域（本机线程中 ~malloc(1000)~ 返回的地址在映射区）；arena 数上限默认为 8 × 核数。线程多时 =VIRT= 很大、空闲内存分散在各 arena 中更难归还。可用环境变量 ~MALLOC_ARENA_MAX~ 限制 arena 数。
+- 长期运行、碎片严重的服务可换用 jemalloc、tcmalloc、mimalloc：它们按线程缓存小块，并更主动地把空闲页还给系统。
+
+* 观察
+- =/proc/<pid>/status= 的 =RssAnon= 看匿名内存（堆、栈、 ~malloc~ ）是否持续上涨；持续上涨而业务量不变时怀疑泄漏或碎片。
+- ~malloc_stats()~ 打印每个 arena 的用量， ~mallinfo2()~ 在程序内读取：已分配多少、空闲多少，区分「泄漏」（已分配一直涨）与「碎片」（空闲很多却还不回去）。

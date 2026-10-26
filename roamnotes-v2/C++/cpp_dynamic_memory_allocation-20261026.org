@@ -14,7 +14,7 @@
 | dynamic   | created with ~new~ (or ~malloc~)          | heap / free store       | until ~delete~, i.e. under program control      |
 | thread    | ~thread_local~                            | per-thread storage      | the thread's lifetime                          |
 
-Stack allocation is a pointer bump and is freed for free on return; its size must be known at compile time and the stack is small (8 MiB default on Linux). Heap allocation handles run-time sizes and lifetimes beyond a scope, at the cost of an allocator call that can take locks, touch new pages, and fragment memory.
+Stack allocation is a pointer bump and is freed for free on return; its size must be known at compile time and the stack is small (8 MiB default on Linux). Heap allocation handles run-time sizes and lifetimes beyond a scope, at the cost of an allocator call that can take locks, touch new pages, and fragment memory. Where these regions sit in a Linux process and how stack limits work: [[id:c864c39e-2dd7-4c4d-ad24-9b541abc2f30][Linux Process Address Space]].
 
 * ~new~ / ~delete~ vs ~malloc~ / ~free~
 ~new T(args)~ is two steps: call ~operator new(sizeof(T))~ to get raw memory, then run the constructor in it. ~delete p~ reverses them: destructor, then ~operator delete~.
@@ -42,7 +42,7 @@ std::free(mem);
 C++20 spells the two halves as ~std::construct_at(p, args...)~ and ~std::destroy_at(p)~. The raw buffer must be suitably aligned (~alignas(W) unsigned char buf[sizeof(W)]~).
 
 * Avoiding the Allocator on Hot Paths
-Latency-sensitive code allocates up front and reuses memory:
+Latency-sensitive code allocates up front and reuses memory, because a glibc ~malloc~ call can take an arena lock, enter the kernel through ~brk~ or ~mmap~, and fault in fresh pages ([[id:f659b32b-4b09-46a7-818e-791ca3855765][Linux Memory Allocation with malloc]]):
 - ~reserve()~ containers to their maximum size at startup.
 - Object pools / free lists for fixed-size objects.
 - Class-specific ~operator new~ / ~operator delete~ to route one type to a pool, or a replaced global ~operator new~ to count or track allocations.

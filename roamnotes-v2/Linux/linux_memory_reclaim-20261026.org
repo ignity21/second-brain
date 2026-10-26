@@ -1,0 +1,49 @@
+:PROPERTIES:
+:ID:       065d6f74-0113-4308-b158-b2333a6f7339
+:ROAM_ALIASES: "Linux 内存回收"
+:VERIFIED_WITH: Linux 6.5 (2026-10-26)
+:END:
+#+title: Linux Memory Reclaim
+#+filetags: :Linux:
+
+* 回收什么
+Linux 尽量把空闲内存用作页缓存，所以 =free= 列通常很小，这是正常的；要看的是 =available= 。内存紧张时，内核按 LRU（活跃 / 不活跃链表）回收最近不用的页：
+
+| 页 | 例子 | 怎么回收 |
+|---|---|---|
+| 文件页 | 页缓存、程序代码、文件映射 | 干净的直接丢弃，下次访问再从文件读；脏页先写回再丢弃 |
+| 匿名页 | 堆、栈、 ~malloc~ 的内存、共享内存 | 只能写到 swap 后释放；没有 swap 时无法回收 |
+
+两类页的区别来自映射的种类，见 [[id:c2e41773-cd6c-4697-84fd-33a1178a0407][Linux Memory Mappings]]。内核自己的可回收缓存（目录项、inode 缓存等 slab）也在回收范围内。
+
+* 何时回收：水位线
+每个内存区（zone）有三条水位线（watermark），在 =/proc/zoneinfo= 中为 =min= 、 =low= 、 =high= （单位：页）：
+
+| 空闲页 | 行为 |
+|---|---|
+| 高于 =high= | 无压力 |
+| 跌破 =low= | 唤醒内核线程 =kswapd= 在后台回收，直到回到 =high= 以上 |
+| 跌破 =min= | 申请内存的进程自己同步回收（直接回收，direct reclaim），分配卡住直到回收出页；只有特殊分配（如中断上下文中的）可以动用 =min= 以下的保留 |
+
+- 直接回收是延迟尖峰的来源：任何一次 ~malloc~ 后的缺页都可能卡在里面。从 =/proc/vmstat= 的 =allocstall_*= 、 ~sar -B~ 的 =pgscand/s= 看是否发生。
+- 间距： =min= 由 ~vm.min_free_kbytes~ 决定（按 zone 分摊）； =low= = =min= + max( =min= / 4, zone 内存 × ~watermark_scale_factor~ / 10000)， =high= = =low= + 同样的间距。本机 ~watermark_scale_factor~ 为默认的 10，Normal zone 的间距 7,705 页 ≈ zone 内存 7,707,816 页（约 29 GiB）× 0.1%。
+- =/proc/zoneinfo= 显示的水位线包含临时的 =boost= ：内存碎片化时内核短暂抬高水位线，让 =kswapd= 多回收一些。
+- 想让 =kswapd= 早点开始、少发生直接回收：调大 ~watermark_scale_factor~ 或 ~min_free_kbytes~ ，代价是平时多留一些空闲内存。
+- NUMA： ~vm.zone_reclaim_mode~ 为 0（默认）时，本节点内存不足就到其他节点分配，不先回收本地；非 0 时先回收本地内存以保持访问本地，但可能频繁回收。
+
+* Linux Swap
+:PROPERTIES:
+:ID:       0bff214a-a662-4ede-b114-26c968f9ceda
+:END:
+- 换出（swap out）：把不活跃的匿名页写到 swap 分区或文件，释放物理页；换入（swap in）：进程再次访问时缺页，从磁盘读回，是一次主缺页。
+- *swappiness* （ ~vm.swappiness~ ，0–200，上游默认 60，本机 100）：回收时匿名页相对文件页的 I/O 代价权重。100 表示两者等价；越小越倾向回收文件页。它不是「swap 的开关」：设为 0 时，文件页所剩无几时仍会换出。
+- 要不要 swap：有 swap 时，长期不用的匿名页可以换出，给页缓存腾出空间；没有 swap 时匿名页无法回收，内存紧张只能不断挤压页缓存（反复读盘），直到 OOM。
+- 判断：swap 用量大但 ~vmstat~ 的 =si= / =so= 接近 0，说明换出的是冷数据，无害； =si= / =so= 持续非零是颠簸（thrashing），工作集放不下。按 =/proc/<pid>/status= 的 =VmSwap= 排序找被换出最多的进程。
+- 延迟敏感的进程用 ~mlockall~ 锁定内存，防止被换出。
+
+* OOM killer
+回收不出内存时，内核调用 OOM killer，选一个进程用 ~SIGKILL~ 杀掉：
+- 评分 =/proc/<pid>/oom_score= （0–1000）：进程占用的内存（RSS + swap + 页表）占可用内存的比例，再加上 ~oom_score_adj~ （-1000 到 1000）。分最高者被杀。2.6.36 起不再考虑 CPU 时间、运行时长等因素。
+- ~oom_score_adj~ 设为 -1000 表示永不杀；systemd 服务用 ~OOMScoreAdjust=~ 设置。旧接口 ~oom_adj~ （-17 到 15）已废弃，仅为兼容保留。
+- 容器中的 OOM 通常是 cgroup 的内存上限（ =memory.max= ）触发的，只在该 cgroup 内选进程，机器整体内存可能还很充足。
+- 事后排查： ~dmesg~ 或 ~journalctl -k~ 中的 =Out of memory: Killed process= 记录了被杀进程和当时各进程的内存占用。

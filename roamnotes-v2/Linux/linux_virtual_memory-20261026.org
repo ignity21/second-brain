@@ -1,0 +1,66 @@
+:PROPERTIES:
+:ID:       4dc805d4-c007-4526-bd64-c9ca9af200a4
+:ROAM_ALIASES: "Linux 虚拟内存"
+:VERIFIED_WITH: Linux 6.5, glibc 2.44, GCC 16.2.1 (2026-10-26)
+:END:
+#+title: Linux Virtual Memory and Page Faults
+#+filetags: :Linux:
+
+* 核心模型
+- 程序使用的都是虚拟地址。内核为每个进程维护一套页表（page table），把虚拟页映射到物理页框；页的大小通常是 4 KiB。
+- *页表在内存里* ，不在 CPU 里。x86-64 用四级页表（可选五级）；CPU 的 MMU 在访问内存时按页表把虚拟地址翻译成物理地址，并把结果缓存在 TLB（Translation Lookaside Buffer）中。TLB 命中时翻译几乎免费，未命中时要遍历页表，多几次内存访问。
+- 进程之间靠各自的页表隔离；同一物理页也可以映射进多个进程，共享库、页缓存和共享内存都靠这一点。
+- 切换到另一个进程要换页表，TLB 中旧进程的映射随之失效，这是进程间切换比线程间切换贵的原因之一。
+
+* 按需分页与缺页
+~malloc~ 、 ~mmap~ 只是在地址空间里登记一段范围，不分配物理内存。第一次访问某页时 MMU 查不到映射，触发缺页（page fault），内核分配或找到物理页、填好页表，再让指令重新执行。
+
+| 类型 | 情形 | 代价 |
+|---|---|---|
+| 次缺页（minor fault） | 首次触碰匿名页（分配并清零一页）、写时复制、映射的文件页已在页缓存中 | 微秒级；本机写 256 MiB 新内存触发 65,536 次，平均每次约 1.5 µs |
+| 主缺页（major fault） | 页要从磁盘读：文件页不在页缓存，或页被换出到 swap | 一次磁盘 I/O，SSD 上数十到数百微秒，机械盘上毫秒级 |
+| 无效访问 | 地址不在任何映射范围内，或违反权限（写只读页） | 进程收到 ~SIGSEGV~ |
+
+- 本机：同一块 256 MiB 内存第一次写入 115 ms，第二次写入 12.7 ms，差的就是缺页。
+- 观察： ~ps -o min_flt,maj_flt -p <pid>~ ， ~pidstat -r~ 的 =minflt/s= 、 =majflt/s= 。主缺页持续出现说明工作集放不下，在读盘或换页。
+
+* 内存用量与 overcommit
+~top~ 、 ~ps~ 显示的几个量：
+
+| 列 | 含义 | 判断时注意 |
+|---|---|---|
+| =VIRT= / =VSZ= | 进程登记的全部虚拟地址范围 | 包括未触碰的预留（线程栈、malloc arena），很大也不代表用了内存 |
+| =RES= / =RSS= | 当前在物理内存中的页 | 包括已映射的共享库和共享内存页，多个进程的 RES 相加会重复计算 |
+| =SHR= | RES 中可能与其他进程共享的部分（文件页 + 共享内存） | 是 RES 的一部分，本机验证 =VmRSS= = ~RssAnon~ + ~RssFile~ + ~RssShmem~ |
+| =SWAP= | 被换出到 swap 的页（ =/proc/<pid>/status= 的 =VmSwap= ） | 换出不等于还在用 |
+
+按进程准确计算「独占多少内存」看 =/proc/<pid>/smaps_rollup= 的 =Pss= （共享页按共享进程数平摊）。
+
+由于按需分页，内核允许所有进程登记的虚拟内存之和超过物理内存，即 overcommit，由 ~vm.overcommit_memory~ 控制：
+
+| 值 | 策略 |
+|---|---|
+| 0（默认） | 启发式：只拒绝明显不可能满足的单次分配。本机 31 GiB 内存 + 32 GiB swap， ~mmap~ 60 GiB 成功、70 GiB 失败 |
+| 1 | 总是允许 |
+| 2 | 严格：总承诺量不超过 ~CommitLimit~ = swap + 内存 × ~overcommit_ratio~ % |
+
+后果：默认设置下 ~malloc~ 很少返回 =NULL= ，内存真正不够发生在之后 *触碰* 页的时候，表现为回收变慢，最终 OOM killer 杀进程，见 [[id:065d6f74-0113-4308-b158-b2333a6f7339][Linux Memory Reclaim]]。
+
+* 大页与 TLB
+TLB 条目有限，4 KiB 的页使大工作集（几 GiB 的哈希表、订单簿）频繁 TLB 未命中。2 MiB 的大页（huge page）一个条目覆盖 512 倍的范围，缺页次数也少 512 倍。
+
+| | 透明大页（THP） | hugetlbfs 预留大页 |
+|---|---|---|
+| 使用 | 内核自动对匿名内存使用；模式 =always= / =madvise= / =never= | 启动时预留（ ~vm.nr_hugepages~ 或启动参数 ~hugepages=~ ），程序用 ~MAP_HUGETLB~ 或 hugetlbfs 文件映射 |
+| 拿到大页 | 不保证：内存碎片化时退回 4 KiB 页 | 预留成功后保证 |
+| 延迟风险 | 缺页时可能同步做内存压缩（compaction）；后台 khugepaged 合并页时也会动页表 | 无；大页不会被换出 |
+
+- 本机 THP 为 =always= ，defrag 为 =madvise= 。在空闲内存只剩约 2 GiB 时，对 256 MiB 的区域 ~madvise(MADV_HUGEPAGE)~ 后写入：只拿到 4 MiB 大页，首次写入耗时 612 ms，是普通 4 KiB 页（115 ms）的 5 倍多，时间花在缺页时的同步压缩上。
+- 所以延迟敏感的程序不依赖 THP 的运气：要大页就用 hugetlbfs 预留；THP 用 =madvise= 模式，并让 defrag 不在缺页时同步压缩。查看： =/sys/kernel/mm/transparent_hugepage/= 下的 =enabled= 、 =defrag= ， =/proc/meminfo= 的 =AnonHugePages= 、 =HugePages_*= 。
+
+* 低延迟：热路径上不缺页
+一次次缺页约 1.5 µs，主缺页更是毫秒级，热路径上都不能接受：
+- *启动时预缺页* ：把要用的内存全部写一遍，或 ~mmap~ 时加 ~MAP_POPULATE~ （本机 256 MiB 的缺页全部发生在 ~mmap~ 调用里，之后写入 0 次缺页）。
+- *锁定内存* ： ~mlockall(MCL_CURRENT | MCL_FUTURE)~ 让现有和以后的映射都常驻内存、不被换出，以后的映射在建立时就分配好物理页。受 ~RLIMIT_MEMLOCK~ 限制（ ~ulimit -l~ ，本机 8 MiB），需要调大或有 ~CAP_IPC_LOCK~ 。
+- *预分配并复用* ：启动时分配好对象池和缓冲区，运行时不向分配器要新内存。
+- *热路径不改映射* ： ~munmap~ 、 ~mprotect~ 要让运行该进程其他线程的 CPU 作废 TLB，即 TLB shootdown IPI，会打断隔离核上的线程，见 [[id:18ebf2c0-c945-4bbc-ad58-9477849c7bbb][Linux Interrupts and Softirqs]]。
