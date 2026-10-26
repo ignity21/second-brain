@@ -1,0 +1,57 @@
+:PROPERTIES:
+:ID:       a2807e14-ea95-4d42-aa97-eebdc0798c95
+:ROAM_ALIASES: "C++ STL 容器与迭代器"
+:VERIFIED_WITH: GCC 16.2.1 (libstdc++), -std=c++23 (2026-10-26)
+:END:
+#+title: C++ STL Containers and Iterators
+#+filetags: :C++:STL:
+
+* Choosing a Container
+| Container                 | Layout                                   | Strong at                                         | Weak at                                        |
+|---------------------------+------------------------------------------+---------------------------------------------------+------------------------------------------------|
+| ~std::vector~             | one contiguous buffer                    | iteration, random access, push/pop at the back; cache-friendly. *The default* | insert/erase in the middle; growth copies or moves everything |
+| ~std::array<T, N>~        | inline fixed-size buffer                 | replaces C arrays: copyable, knows its size, no heap | size fixed at compile time                  |
+| ~std::deque~              | fixed-size blocks plus an index of blocks | push/pop at both ends; growth never moves existing elements | slower iteration and indexing than ~vector~ |
+| ~std::list~               | doubly linked nodes                      | splicing; iterators survive any other insert/erase | one allocation per node; poor cache behavior   |
+| ~std::map~ / ~std::set~   | red-black tree                           | ordered iteration; range queries (~lower_bound~)   | node allocations; O(log n) with pointer chasing |
+| ~std::unordered_map~ / ~set~ | hash buckets of nodes                 | average O(1) lookup                               | no order; rehash invalidates iterators; worst case O(n) |
+| ~std::flat_map~ (C++23)   | sorted ~vector~ of keys plus one of values | small/medium maps that are read far more than written | inserts shift elements                     |
+
+For low latency: prefer contiguous containers, ~reserve()~ up front, and measure before reaching for node-based ones. A linear search in a small ~vector~ often beats a ~map~.
+
+** ~std::vector~ Growth
+Capacities seen with libstdc++ while pushing 100 elements: =1 2 4 8 16 32 64 128=. Growth by a factor (2 here, 1.5 in MSVC) gives amortized O(1) ~push_back~. Each growth allocates a new buffer and moves the elements: *moves only if the move constructor is ~noexcept~*, otherwise copies ([[id:83aa38f7-a6de-42f0-bf0e-b4e2c9114869][C++ Value Categories and Move Semantics]]).
+
+- ~reserve(n)~ preallocates; ~size()~ vs ~capacity()~ differ by the unused tail.
+- ~emplace_back(args...)~ constructs in place; ~push_back(T{...})~ constructs then moves.
+- ~at(i)~ checks bounds and throws; ~operator[]~ does not.
+
+** Associative Containers
+- The element of a ~map~ is ~std::pair<const Key, T>~. Iterating with ~for (const std::pair<Key, T>& p : m)~ (no ~const~ on the key) makes a temporary copy per element; use ~const auto&~ or structured bindings.
+- ~m[key]~ *inserts* a default value when the key is missing, and so does not compile on a ~const map~. To test, use ~contains(key)~ (C++20) or ~find~.
+- Ordered lookups: ~lower_bound(k)~ is the first key ~>= k~, ~upper_bound(k)~ the first key ~> k~, ~equal_range(k)~ both. In ~{1.0, 2.1, 4.7, 6.5, 11.0}~: ~lower_bound(6.5)~ → 6.5, ~upper_bound(6.5)~ → 11.0, ~lower_bound(5)~ → 6.5.
+
+* Iterators
+An iterator is a generalized pointer; the iterator category (input, forward, bidirectional, random access, contiguous) decides which algorithms accept it. ~rbegin()~ / ~rend()~ iterate backwards; ~cbegin()~ gives a const iterator.
+
+** Invalidation
+| Container          | Insert invalidates                                    | Erase invalidates                       |
+|--------------------+-------------------------------------------------------+-----------------------------------------|
+| ~vector~, ~string~ | all, if capacity grew; otherwise those at and after the point | at and after the point          |
+| ~deque~            | all iterators (references stay valid when inserting at either end) | at the ends: only the erased; middle: all |
+| ~list~, ~map~, ~set~ | none                                                | only the erased element                 |
+| ~unordered_*~      | all iterators if a rehash happens (references stay valid) | only the erased element              |
+
+Pointers into a ~vector~ dangle after growth too: ~big.data()~ changed after one ~push_back~ on a full vector.
+
+** Erasing While Iterating
+#+begin_src cpp
+std::erase_if(v, [](int x) { return x % 2 == 0; });                    // C++20, all containers
+
+v.erase(std::remove_if(v.begin(), v.end(), pred), v.end());            // pre-C++20 erase-remove idiom
+
+for (auto it = m.begin(); it != m.end(); )                             // node containers, manual
+  it = pred(*it) ? m.erase(it) : std::next(it);
+#+end_src
+
+The loop ~it = v.erase(it); --it;~ followed by the loop's ~++it~ is undefined behavior when the first element is erased: it decrements ~begin()~. libstdc++'s debug mode (=-D_GLIBCXX_DEBUG=) reports "attempt to decrement a dereferenceable (start-of-sequence) iterator".

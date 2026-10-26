@@ -1,0 +1,101 @@
+:PROPERTIES:
+:ID:       10faff15-6db6-45ac-bae7-81f86753fa99
+:ROAM_ALIASES: "C++ 类型推导"
+:VERIFIED_WITH: GCC 16.2.1, -std=c++23 (2026-10-26)
+:END:
+#+title: C++ Type Deduction
+#+filetags: :C++:
+
+* TOC :TOC_1:
+- [[#template-type-deduction][Template Type Deduction]]
+- [[#auto][~auto~]]
+- [[#decltype][~decltype~]]
+- [[#braced-initialization][Braced Initialization]]
+- [[#inspecting-a-deduced-type][Inspecting a Deduced Type]]
+- [[#pitfalls][Pitfalls]]
+
+* Template Type Deduction
+For ~template<typename T> void f(ParamType param); f(expr);~ the compiler deduces both ~T~ and ~ParamType~. Three cases, by the form of ~ParamType~:
+
+| ~ParamType~                 | Rule                                                                                      | ~int x~ / ~const int cx~ / ~const int& rx~ / ~42~ |
+|-----------------------------+-------------------------------------------------------------------------------------------+------------------------------------|
+| ~T&~ or ~T*~ (also ~const T&~) | drop ~expr~'s reference, then pattern-match; ~const~ of the argument is kept in ~T~ unless ~ParamType~ already has it | ~T&~: ~int~ / ~const int~ / ~const int~ / does not compile |
+| ~T&&~ (forwarding reference) | lvalue → ~T~ is an lvalue reference (~U&~); rvalue → as the first row                    | ~int&~ / ~const int&~ / ~const int&~ / ~int~ |
+| ~T~ (by value)              | drop the reference, then drop top-level ~const~ / ~volatile~: the parameter is an independent copy | ~int~ / ~int~ / ~int~ / ~int~ |
+
+By value only the *top-level* const goes: for ~const char* const p~, ~T~ is ~const char*~ (the pointer copy is modifiable, the chars still are not).
+
+Arrays and functions *decay* to pointers when passed by value, but not by reference. That makes the array size deducible:
+
+#+begin_src cpp
+template <typename T, std::size_t N>
+constexpr std::size_t array_size(T (&)[N]) noexcept { return N; }   // std::size does this
+#+end_src
+
+How forwarding references use the second row: [[id:83aa38f7-a6de-42f0-bf0e-b4e2c9114869][C++ Value Categories and Move Semantics]].
+
+* ~auto~
+~auto~ in a variable declaration uses template deduction: ~auto~ plays ~T~ and the declared type (~auto~, ~const auto&~, ~auto&&~) plays ~ParamType~.
+
+#+begin_src cpp
+int i = 0; const int ci = 0; const int& rci = i;
+auto  a1 = rci;   // int           (by value: ref and const dropped)
+auto& a2 = ci;    // const int&
+auto&& a3 = i;    // int&          (lvalue → reference)
+auto&& a4 = 1;    // int&&
+const char name[] = "beep";
+auto  n1 = name;  // const char*   (decay)
+auto& n2 = name;  // const char (&)[5]
+#+end_src
+
+The one difference from templates: a braced initializer.
+| Declaration         | Type (C++17 and later)          |
+|---------------------+---------------------------------|
+| ~auto x = {1};~     | ~std::initializer_list<int>~    |
+| ~auto x{1};~        | ~int~                           |
+| ~auto x = {1, 2.0};~ | error: conflicting element types |
+| template ~f({1, 2})~ | error: ~T~ not deducible (unless the parameter is ~std::initializer_list<T>~) |
+
+~auto~ as a function return type and as a lambda parameter type uses *template* rules, so a braced return does not compile.
+
+Why prefer ~auto~: forces initialization, avoids type mismatches such as storing ~v.size()~ in an ~int~ or iterating a ~std::map~ with ~std::pair<K, V>~ instead of ~std::pair<const K, V>~ (a silent copy per element), and can hold a lambda's closure type directly.
+
+* ~decltype~
+| Operand                      | ~decltype~ gives                         |
+|------------------------------+------------------------------------------|
+| an unparenthesized name      | its declared type, references and ~const~ included |
+| lvalue expression            | ~T&~                                     |
+| xvalue expression            | ~T&&~                                    |
+| prvalue expression           | ~T~                                      |
+
+So ~decltype(i)~ is ~int~ but ~decltype((i))~ is ~int&~: ~(i)~ is an expression, and an lvalue. ~decltype(std::move(i))~ is ~int&&~, ~decltype(i + 1)~ is ~int~.
+
+~decltype(auto)~ (C++14) means "deduce, but with decltype rules". Its main use is returning exactly what an inner call returns, reference included:
+
+#+begin_src cpp
+template <typename Container, typename Index>
+decltype(auto) at(Container&& c, Index i) {
+  return std::forward<Container>(c)[i];   // T& for an lvalue container
+}
+#+end_src
+
+Plain ~auto~ here would strip the reference and return a copy. The C++11 spelling is a trailing return type: ~auto at(...) -> decltype(std::forward<Container>(c)[i])~.
+
+* Braced Initialization
+| Advantage                                   | Cost                                                                                         |
+|---------------------------------------------+----------------------------------------------------------------------------------------------|
+| works everywhere, including default member initializers | an ~std::initializer_list~ constructor wins overload resolution whenever it is viable: ~std::vector<int>(10, 20)~ has 10 elements, ~std::vector<int>{10, 20}~ has 2 |
+| rejects narrowing: ~int n{d}~ for a ~double d~ is ill-formed (GCC reports a =-Wnarrowing= warning for non-constants, an error for constants) | interacts with ~auto~ as in the table above |
+| immune to the most vexing parse: ~Widget w();~ declares a function, ~Widget w{};~ an object | |
+
+For class authors: add an ~std::initializer_list~ constructor only with care, since it hijacks every braced call. For callers: use parentheses when you mean "size and value".
+
+* Inspecting a Deduced Type
+- Compile time, most reliable: declare ~template <typename T> struct TD;~ (no definition) and write ~TD<decltype(x)> t;~. The error message names the type.
+- Compile-time assertion: ~static_assert(std::is_same_v<decltype(x), const int&>);~ (all claims in this note were checked this way).
+- Run time: ~typeid(x).name()~ is mangled and *drops references and cv-qualifiers*, so it is wrong for exactly the interesting cases. ~boost::typeindex::type_id_with_cvr<T>().pretty_name()~ keeps them.
+
+* Pitfalls
+- ~auto~ with proxy types: ~auto b = vec_of_bool[5];~ is a ~std::vector<bool>::reference~ into the vector, and dangles if the vector was a temporary. Same with expression-template libraries (Eigen). Write the type, or ~auto b = static_cast<bool>(...)~.
+- ~decltype(auto)~ returning ~(local)~ or a local by name in parentheses → ~T&~ to a dead local.
+- Expecting ~auto x{1, 2};~ to make a list: since C++17 it is an error (one element only).

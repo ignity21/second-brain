@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       ce669b17-3f02-4a00-b2df-4b8993863720
+:ROAM_ALIASES: "C++ 资源管理"
+:END:
+#+title: C++ Resource Management
+
+* [[id:474df27e-ed1f-42f0-997f-633339b91cb5][RAII and Smart Pointers]]
+* [[id:5efa3691-4464-4a11-9d52-1e83016d8bc1][Dynamic Memory Allocation]]

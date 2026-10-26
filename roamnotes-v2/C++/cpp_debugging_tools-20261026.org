@@ -1,0 +1,44 @@
+:PROPERTIES:
+:ID:       55c7e05b-9c7a-447e-8245-33f568b777d7
+:ROAM_ALIASES: "C++ 调试工具"
+:VERIFIED_WITH: GDB 18.1, GCC 16.2.1 (2026-10-26)
+:END:
+#+title: C++ Debugging Tools
+#+filetags: :C++:
+
+* Choosing a Tool
+| Symptom                                              | Tool                                                                 |
+|------------------------------------------------------+----------------------------------------------------------------------|
+| crash, wrong value: need to inspect state            | GDB on a ~-g -O0~ (or ~-Og~) build; a core dump for crashes in production |
+| memory corruption, use-after-free, overrun, leak     | AddressSanitizer (~-fsanitize=address~); Valgrind memcheck when you cannot recompile |
+| signed overflow, misaligned access, bad shift        | UndefinedBehaviorSanitizer (~-fsanitize=undefined~)                  |
+| data race                                            | ThreadSanitizer (~-fsanitize=thread~); cannot be combined with ASan  |
+| iterator misuse, out-of-range ~[]~ in containers     | libstdc++ debug mode (~-D_GLIBCXX_DEBUG~); changes ABI, rebuild everything |
+
+Sanitizers instrument the binary at compile time: ASan costs about 2× time and 2–3× memory, TSan 5–15× time; both are fine in tests and CI. Valgrind runs the unmodified binary on a synthetic CPU, roughly 20–50× slower. Messages seen while checking the C++ notes:
+- ASan: =heap-buffer-overflow= for ~strcpy~ of 9 bytes into ~malloc(4)~.
+- UBSan: =signed integer overflow: 2147483647 + 1 cannot be represented in type 'int'=.
+- Debug mode: =attempt to decrement a dereferenceable (start-of-sequence) iterator=.
+
+* GDB Core Vocabulary
+| Task                                | Command                                       |
+|-------------------------------------+-----------------------------------------------|
+| start with arguments                | ~gdb --args ./app arg1~, then ~run~           |
+| breakpoint / conditional            | ~break file.cpp:42~, ~break f if n == 3~      |
+| step over / into / out / continue   | ~next~, ~step~, ~finish~, ~continue~          |
+| call stack, switch frame            | ~bt~, ~frame 2~                               |
+| print a variable / expression       | ~print x~, ~print *ptr~, ~print v.size()~     |
+| examine raw memory                  | ~x/7xb str~ (hex bytes), ~x/7tb str~ (binary), ~x/s str~ (string) |
+| watch a variable change             | ~watch x~                                     |
+| all threads' stacks                 | ~thread apply all bt~                         |
+| post-mortem                         | ~gdb ./app core~ (enable cores: ~ulimit -c unlimited~ or ~coredumpctl gdb~ on systemd) |
+| scripted run                        | ~gdb -batch -ex 'break 4' -ex run -ex bt ./app~ |
+
+Format of ~x~: ~x/<count><format><unit>~; format ~x~ hex, ~t~ binary, ~d~ decimal, ~s~ string; unit ~b~ byte, ~h~ 2, ~w~ 4, ~g~ 8 bytes. For ~char str[] = "Udacity"~, ~x/7xb str~ printed =0x55 0x64 0x61 0x63 0x69 0x74 0x79=.
+
+* Valgrind Memcheck
+Not installed on this machine; the flags below are the commonly used set:
+~valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind.txt ./app~
+- ~--leak-check=full~ reports each leak with the allocation stack.
+- ~--show-leak-kinds=all~ includes "still reachable" and "possibly lost", not only "definitely lost".
+- ~--track-origins=yes~ shows where an uninitialized value came from (slower).

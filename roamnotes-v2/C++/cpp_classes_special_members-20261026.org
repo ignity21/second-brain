@@ -1,0 +1,74 @@
+:PROPERTIES:
+:ID:       0c48ecd1-63cc-43f3-bb43-652253a86f1b
+:ROAM_ALIASES: "C++ 类与特殊成员函数"
+:VERIFIED_WITH: GCC 16.2.1, -std=c++23 (2026-10-26)
+:END:
+#+title: C++ Classes and Special Member Functions
+#+filetags: :C++:
+
+* TOC :TOC_1:
+- [[#struct-or-class][Struct or Class]]
+- [[#construction][Construction]]
+- [[#other-members][Other Members]]
+- [[#operator-overloading][Operator Overloading]]
+- [[#inheritance-basics][Inheritance Basics]]
+- [[#pitfalls][Pitfalls]]
+
+* Struct or Class
+The two keywords differ only in default access (~struct~ public, ~class~ private). The C++ Core Guidelines (C.2) turn that into a convention: use ~class~ when members are tied together by an *invariant* that member functions maintain (a ~Date~ whose day must fit the month); use ~struct~ when members vary independently (a point, a config record) and can be public.
+
+* Construction
+** Member Initializer Lists
+- Members are initialized *before* the constructor body runs; assignments in the body overwrite already-initialized members. So initialize in the list.
+- ~const~ members, reference members and members without a default constructor *must* be initialized in the list.
+- Initialization follows *declaration order in the class*, not the order in the list:
+
+#+begin_src cpp
+struct Order {
+  int b; int a;
+  Order(int x) : a(x), b(a + 1) {}   // b is initialized first, from an uninitialized a
+};
+#+end_src
+GCC warns with =-Wreorder= and =-Wuninitialized= (both in =-Wall=).
+
+- Default member initializers (~int count_{0};~) cover the common case and keep constructors short.
+- Delegating constructors: ~Widget() : Widget(0, "") {}~.
+
+** ~explicit~
+A single-argument constructor is also an implicit conversion. ~explicit~ turns that off: with ~explicit E(int)~, both ~take(42)~ and ~E e = 1;~ fail to compile, while ~E e{1};~ works. Make single-argument constructors and conversion operators ~explicit~ by default; ~explicit operator bool()~ still works in ~if~ and ~while~ conditions.
+
+** ~= default~ and ~= delete~
+- ~= default~ asks for the compiler-generated version, keeping it trivial and ~noexcept~ where possible.
+- ~= delete~ removes a function, including inherited or implicitly generated ones: deleting copy operations is the standard way to make a type non-copyable. It also works on free functions to block unwanted overloads (~void f(double) = delete;~).
+- Which special members are generated, and why a user-declared destructor kills the moves: [[id:83aa38f7-a6de-42f0-bf0e-b4e2c9114869][C++ Value Categories and Move Semantics]].
+
+* Other Members
+- ~static~ data members belong to the class. Since C++17 define them in the class with ~inline static int count = 0;~ instead of a separate definition in a ~.cpp~.
+- ~mutable~ members may change inside ~const~ member functions. Legitimate uses: a cache, a mutex (locking is "logically const"), a counter of calls.
+- ~friend~ grants one function or class access to private members. Typical legitimate use: symmetric operators (~operator==~, ~operator<<~) defined as hidden friends inside the class.
+
+* Operator Overloading
+| Operator                 | Conventional signature                                       | Note                                                  |
+|--------------------------+--------------------------------------------------------------+-------------------------------------------------------|
+| copy / move assignment   | ~T& operator=(const T&)~, ~T& operator=(T&&) noexcept~        | return ~*this~                                       |
+| compound (~+=~)          | member, ~T& operator+=(const T&)~                             | implement ~+~ in terms of ~+=~                       |
+| binary (~+~, ~==~)       | non-member (or hidden friend) so both operands convert alike  | C++20: define ~operator<=>~ and ~operator==~, get the rest |
+| prefix / postfix ~++~    | ~T& operator++()~ / ~T operator++(int)~                       | the ~int~ is only a tag; postfix returns the old value, so prefer prefix |
+| call                     | ~R operator()(Args...)~                                       | makes a function object; lambdas generate this         |
+| dereference, member access | ~T& operator*() const~, ~T* operator->() const~             | smart pointers and iterators                           |
+| subscript                | ~T& operator[](size_t)~ plus a ~const~ overload               | C++23 allows several arguments: ~m[i, j]~             |
+| conversion               | ~explicit operator bool() const~                              |                                                       |
+| stream output            | ~std::ostream& operator<<(std::ostream&, const T&)~           | non-member; returns the stream for chaining           |
+
+Returning ~*this~ (or the stream) by reference is what makes chaining (~a = b = c~, ~os << x << y~, builder-style ~obj.add(x).add(y)~) work.
+
+* Inheritance Basics
+- Not inherited: constructors (unless ~using Base::Base;~), the destructor, the assignment operators, friends.
+- A derived member with the same name *hides* all base overloads of that name, virtual or not. Calling a non-virtual function through a ~Base*~ runs ~Base~'s version; see [[id:9bb46372-40a5-416c-9a00-b00009a3e663][C++ Polymorphism and Object Layout]] for dynamic dispatch.
+- Diamond: ~Final~ derives from ~Derived1~ and ~Derived2~, both deriving from ~Base~. Normally ~Final~ contains two ~Base~ subobjects, and ~Final::base_member~ is ambiguous. ~class Derived1 : virtual public Base~ (and the same for ~Derived2~) shares one ~Base~; the most-derived class then constructs it.
+- ~class Derived final~ forbids further derivation.
+
+* Pitfalls
+- Initializer list written in a different order from the declarations → members read uninitialized siblings.
+- Single-argument constructor without ~explicit~ → silent conversions at call sites.
+- Overloads in the base vanish after declaring one function of the same name in the derived class → add ~using Base::name;~.

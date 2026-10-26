@@ -1,0 +1,112 @@
+:PROPERTIES:
+:ID:       d0df6e46-ba6c-4edc-9105-01a8d7692d68
+:ROAM_ALIASES: "C++ 互斥锁与死锁"
+:VERIFIED_WITH: GCC 16.2.1, -std=c++23 (2026-10-26)
+:END:
+#+title: C++ Mutexes, Locks and Deadlock
+#+filetags: :C++:Concurrency:
+
+* TOC :TOC_1:
+- [[#mental-model][Mental Model]]
+- [[#getting-the-protection-right][Getting the Protection Right]]
+- [[#mutexes-and-lock-wrappers][Mutexes and Lock Wrappers]]
+- [[#deadlock][Deadlock]]
+- [[#thread-safe-lazy-initialization][Thread-safe Lazy Initialization]]
+- [[#pitfalls][Pitfalls]]
+
+* Mental Model
+- *Race condition*: the result depends on how operations of two threads interleave. Most are harmless; the problematic ones break an invariant, for example a list node that is linked from one side but not yet the other.
+- *Data race*: two threads access the same memory location without ordering, and at least one writes. In C++ this is *undefined behavior*, not just a wrong value (see [[id:9fb084bb-ba72-4136-8e91-60f0b7ba216f][C++ Memory Model and Atomics]]).
+- A mutex makes a set of operations *mutually exclusive*. It protects an *invariant over some data*, not a block of code: every access to that data, reads included, must hold the same mutex. Other threads then see the data either before or after a modification, never in the middle.
+- The alternatives to a mutex: design the structure so every change is one indivisible step ([[id:2569c73d-2087-4aad-89db-809f0ac3619a][lock-free]]), or treat updates as transactions that retry on conflict (software transactional memory, not in standard C++).
+
+* Getting the Protection Right
+** Keep Protected Data Inside
+- Group the mutex and the data in one class; make every member function lock.
+- Never let a pointer or reference to protected data escape the lock: not as a return value, not as an argument to a user callback.
+
+** Races in the Interface
+Locking each member function is not enough when the *interface* asks the caller to combine calls:
+
+#+begin_example
+Thread A                         Thread B
+if (!s.empty())                  if (!s.empty())
+    int v = s.top();                 int v = s.top();   // same element
+    s.pop();                         s.pop();           // pops a second element nobody read
+#+end_example
+
+Each call is atomic, but the check-then-act sequence is not. Fix the interface, not the locking: merge ~top()~ and ~pop()~ into one ~pop()~ that returns the value. Returning by value can throw while copying *after* the element was removed, so the classic thread-safe ~pop~ returns ~std::shared_ptr<T>~ or writes into a ~T&~ argument.
+
+** Lock Granularity
+- Hold a lock only for the operations that need it. Copy the data out, unlock, then do slow work (I/O, computation) on the copy.
+- Too coarse: threads serialize. Too fine: invariants spanning several items are unprotected, and more mutexes mean more deadlock opportunities.
+
+* Mutexes and Lock Wrappers
+Always lock through an RAII wrapper so that an exception or early return unlocks.
+
+| Wrapper            | Use                                                                                      |
+|--------------------+------------------------------------------------------------------------------------------|
+| ~std::lock_guard~  | lock one mutex for a whole scope; nothing else                                           |
+| ~std::scoped_lock~ | C++17; one or *several* mutexes, locked together with the deadlock-avoidance algorithm; the default choice |
+| ~std::unique_lock~ | movable, can ~unlock()~ early and relock, ~defer_lock~ / ~try_to_lock~ / ~adopt_lock~, timed locking; required by ~condition_variable::wait~ |
+| ~std::shared_lock~ | shared (reader) ownership of a ~shared_mutex~                                            |
+
+| Mutex                   | Use                                                                                       |
+|-------------------------+-------------------------------------------------------------------------------------------|
+| ~std::mutex~            | default                                                                                   |
+| ~std::timed_mutex~      | adds ~try_lock_for~ / ~try_lock_until~                                                     |
+| ~std::shared_mutex~     | C++17; many readers or one writer, for data that is read often and updated rarely. Writers lock with ~unique_lock~ / ~lock_guard~ |
+| ~std::recursive_mutex~  | same thread may lock repeatedly. Usually a sign that a public function calls another public function; extract a private unlocked helper instead |
+
+A ~std::unique_lock~ can be returned from a function, transferring the locked state to the caller. This is how a "gateway" object keeps data locked while the caller works with it, and how a helper waits for a condition and hands the still-held lock back (used in the fine-grained queue).
+
+* Deadlock
+Two threads each hold one mutex and wait for the other's. Rules, in order of preference:
+1. Avoid holding more than one lock; avoid nested locks.
+2. When you must hold several, acquire them *in one step*: ~std::scoped_lock lk(a.m, b.m);~. Before C++17: ~std::lock(a.m, b.m)~ followed by two ~lock_guard~ with ~std::adopt_lock~.
+3. When they are acquired separately (in different functions), use a *fixed global order*. A hierarchical mutex enforces it at run time: each mutex has a level, a ~thread_local~ records the level of the last lock the thread took, and locking a mutex whose level is not lower throws. The violation shows up on every run, not only when timing is unlucky.
+4. Never call user-supplied code while holding a lock: it may take another lock. This includes callbacks and also the copy/move constructors, assignment operators and ~operator new~ of a user's ~T~.
+
+Deadlock does not need mutexes: two threads that ~join()~ each other also deadlock.
+
+#+begin_src cpp
+friend void swap(X& lhs, X& rhs) {
+  if (&lhs == &rhs) return;          // locking the same mutex twice is UB
+  std::scoped_lock lk(lhs.m, rhs.m); // both or neither; order does not matter
+  swap(lhs.detail, rhs.detail);
+}
+#+end_src
+
+* Thread-safe Lazy Initialization
+Initialize a shared resource on first use, exactly once.
+
+| Approach                                   | Verdict                                                                                     |
+|--------------------------------------------+---------------------------------------------------------------------------------------------|
+| lock a mutex on every access, check, init  | correct, but every caller serializes                                                         |
+| double-checked locking on a plain pointer  | *broken*: the unlocked first check is a data race with the write inside the lock; a reader can see the pointer before the object it points to is constructed |
+| ~std::call_once(flag, init)~               | correct; cheap after the first call                                                         |
+| function-local ~static~                    | correct since C++11 ("magic statics"): initialization happens on first pass and other threads wait. Simplest |
+
+This is also the whole story of the thread-safe singleton. The Meyers singleton is the recommended form, and it /is/ lazy: ~instance~ is constructed on the first call, not at program start.
+
+#+begin_src cpp
+class Config {
+public:
+  static Config& instance() {
+    static Config c;    // thread-safe, on first call
+    return c;
+  }
+  Config(const Config&) = delete;
+  Config& operator=(const Config&) = delete;
+private:
+  Config() = default;
+};
+#+end_src
+
+The double-checked version with ~if (!instance) { lock; if (!instance) instance = ...; }~ seen in many singleton write-ups has the data race above. If a pointer really is needed, make it ~std::atomic<T*>~ with acquire / release, or just use ~std::call_once~.
+
+* Pitfalls
+- Returning a reference to protected data from a locked getter → the caller uses it unlocked.
+- ~std::lock_guard<std::mutex>{m};~ without a variable name → a temporary that unlocks at the end of the same statement.
+- Two-step check-then-act through a thread-safe interface (~if (!empty()) pop()~) → race in the interface, see above.
+- Calling callbacks while holding the lock → deadlock if the callback takes another lock in the opposite order.

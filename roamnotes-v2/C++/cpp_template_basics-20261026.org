@@ -1,0 +1,66 @@
+:PROPERTIES:
+:ID:       6c721a34-d7ff-451f-b29a-368692d2f8c8
+:ROAM_ALIASES: "C++ 模板基础"
+:VERIFIED_WITH: GCC 16.2.1, -std=c++23 (2026-10-26)
+:END:
+#+title: C++ Template Basics
+#+filetags: :C++:
+
+* TOC :TOC_1:
+- [[#mental-model][Mental Model]]
+- [[#specialization][Specialization]]
+- [[#variadic-templates][Variadic Templates]]
+- [[#constraining-templates-with-concepts][Constraining Templates with Concepts]]
+- [[#controlling-instantiation][Controlling Instantiation]]
+- [[#pitfalls][Pitfalls]]
+
+* Mental Model
+- A template is not code; it is a recipe the compiler uses to *generate* code. ~std::max<int>~ and ~std::max<double>~ are two separate functions, created on first use (*implicit instantiation*).
+- Generation needs the full definition, so templates live in headers. A template defined only in a ~.cpp~ links only for the types instantiated in that file.
+- Templates can produce functions, classes, variables (C++14, e.g. ~template <typename T> constexpr T pi = T(3.14159...)~) and aliases.
+- Template parameters can be types (~typename T~ and ~class T~ are interchangeable there), values (~int N~, since C++20 also floating point and simple class types), or templates (~template <typename...> class Container~).
+
+* Specialization
+| Form                          | Allowed for            | Example                                                                 |
+|-------------------------------+------------------------+-------------------------------------------------------------------------|
+| full (explicit) specialization | functions and classes | ~template <> struct Pair<double, int> { ... };~                        |
+| partial specialization        | classes and variables only | ~template <typename T2> struct Pair<int, T2> { ... };~             |
+
+Resolution checked: ~Pair<char, char>~ uses the primary template, ~Pair<int, char>~ the partial one, ~Pair<double, int>~ the full one.
+
+Function templates cannot be partially specialized. Instead of specializing a function template, *overload* it: specializations do not take part in overload resolution, which leads to surprises when both exist.
+
+* Variadic Templates
+~typename... Args~ is a *parameter pack*; ~args...~ expands it; ~sizeof...(args)~ counts it.
+
+| Technique                     | Code                                                                          |
+|-------------------------------+-------------------------------------------------------------------------------|
+| fold expression (C++17)       | ~return (args + ...);~                                                        |
+| fold over a comma, to run a statement per element | ~((std::cout << args << ' '), ...);~                       |
+| forward a pack                | ~f(std::forward<Args>(args)...)~                                               |
+| recursion (pre-C++17)         | ~void print() {}~ base case plus ~print(T first, Rest... rest) { use(first); print(rest...); }~ |
+
+~std::thread~, ~std::make_unique~ and ~emplace_back~ are all variadic templates that forward their pack to a constructor.
+
+* Constraining Templates with Concepts
+Without constraints, a template accepts any type and fails deep inside its body with a long error. C++20 concepts state the requirements up front:
+
+#+begin_src cpp
+template <std::integral T> T twice(T x) { return x * 2; }   // standard concept
+
+template <typename T>
+concept Addable = requires(T a, T b) { a + b; };             // custom concept
+
+auto add(Addable auto a, Addable auto b) { return a + b; }   // abbreviated syntax
+#+end_src
+
+~twice(1.5)~ now fails at the call with "constraints not satisfied". Concepts replace most uses of ~std::enable_if~ (SFINAE), which did the same thing far less readably.
+
+* Controlling Instantiation
+- Every translation unit that uses ~Foo<int>~ instantiates it; the linker discards duplicates. Compile time and object size grow.
+- ~extern template class Foo<int>;~ in the header tells other units *not* to instantiate it; one ~.cpp~ provides ~template class Foo<int>;~ (explicit instantiation definition). Worth it for heavy templates used with a few known types.
+
+* Pitfalls
+- Dependent names: inside a function template body, ~T::value_type x;~ does not compile (GCC: "need ~typename~ before ~T::value_type~"); write ~typename T::value_type~. C++20 made ~typename~ optional where only a type can appear (member declarations, return types, ~using~ aliases), so the same line compiles as a class member. Calling a member template of a dependent object needs ~obj.template get<0>()~.
+- Defining a member of a class template outside the class repeats the template header: ~template <typename T1, typename T2> T2 Pair<T1, T2>::second() const { ... }~.
+- A template template parameter written ~template <typename> class C~ does not accept ~std::vector~ before C++17 (it has an allocator parameter); ~template <typename...> class C~ always does.

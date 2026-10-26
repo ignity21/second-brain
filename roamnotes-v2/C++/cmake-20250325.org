@@ -1,0 +1,50 @@
+:PROPERTIES:
+:ID:       c21b1c17-614b-4fb3-b0d4-bf0f4acaa2f5
+:VERIFIED_WITH: CMake 4.4.4 (PyPI wheel via uvx), GCC 16.2.1 (2026-10-26)
+:END:
+#+title: CMake
+#+filetags: :C++:Build:
+
+* Positioning
+CMake does not build anything itself. It *generates* build files for a build tool (Make, Ninja, Visual Studio, Xcode) from a ~CMakeLists.txt~, so one description works across platforms and IDEs. It is the de facto standard for C++ projects, and package managers (Conan, vcpkg) integrate with it.
+
+* Mental Model
+- Three phases: *configure* (run the ~CMakeLists.txt~ scripts, fill the cache), *generate* (write build files into the build directory), *build* (the generator's tool compiles). ~cmake -S . -B build~ does the first two, ~cmake --build build~ the third.
+- *Targets* are the unit of everything: ~add_executable~ and ~add_library~ create them, and every setting (sources, include paths, compile flags, features, dependencies) is attached to a target.
+- *Usage requirements* propagate along ~target_link_libraries~:
+  | Keyword     | Applies to the target itself | Propagates to targets that link it |
+  |-------------+------------------------------+------------------------------------|
+  | ~PRIVATE~   | yes                          | no                                 |
+  | ~PUBLIC~    | yes                          | yes                                |
+  | ~INTERFACE~ | no                           | yes (header-only libraries)        |
+  So a library states once what its users need (~target_include_directories(foo PUBLIC include)~, ~target_compile_features(foo PUBLIC cxx_std_20)~), and ~target_link_libraries(app PRIVATE foo)~ gives ~app~ all of it. Checked: ~main.cpp~ found ~foo.h~ only through ~foo~'s ~PUBLIC~ include directory.
+
+* Core Vocabulary
+| Task                         | Code                                                                       |
+|------------------------------+----------------------------------------------------------------------------|
+| configure, choose generator  | ~cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release~                  |
+| build                        | ~cmake --build build -j~ (multi-config generators: ~--config Release~)     |
+| executable                   | ~add_executable(app main.cpp)~                                             |
+| library                      | ~add_library(foo foo.cpp)~ (static by default; ~SHARED~ / ~INTERFACE~)    |
+| more sources                 | ~target_sources(app PRIVATE a.cpp b.cpp)~                                  |
+| include paths                | ~target_include_directories(foo PUBLIC include)~                           |
+| language standard            | ~target_compile_features(foo PUBLIC cxx_std_20)~                           |
+| link                         | ~target_link_libraries(app PRIVATE foo Threads::Threads)~                 |
+| external package             | ~find_package(fmt REQUIRED)~ then link ~fmt::fmt~                          |
+| on/off switch                | ~option(BUILD_TESTS "Build tests" ON)~, set with ~-DBUILD_TESTS=OFF~       |
+
+* Variables
+| Kind                 | Set with                                         | Lives                                                         |
+|----------------------+--------------------------------------------------+---------------------------------------------------------------|
+| normal               | ~set(x value)~                                   | current directory / function / ~block()~ scope; copied into child scopes, changes do not flow back (unless ~PARENT_SCOPE~) |
+| cache                | ~set(x value CACHE STRING "doc")~, ~option()~, ~-Dx=...~ | ~CMakeCache.txt~ in the build directory; persists across runs; a normal variable of the same name shadows it |
+| environment          | ~set(ENV{PATH} ...)~, read with ~$ENV{PATH}~     | only the configure run; not seen by the build                 |
+
+Lists are strings separated by ~;~: ~set(lst a b c)~ is ~a;b;c~. Checked scoping: a variable changed inside ~block()~ or a ~function()~ keeps its outer value afterwards.
+
+* Pitfalls
+- Directory-wide commands (~include_directories~, ~add_compile_options~, editing ~CMAKE_CXX_FLAGS~) instead of ~target_*~ → settings leak to every target and do not propagate to consumers.
+- In-source builds (~cmake .~) litter the source tree; refuse them with ~if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR) message(FATAL_ERROR ...)~.
+- ~CMAKE_BUILD_TYPE~ is ignored by multi-config generators (Visual Studio, Xcode, Ninja Multi-Config); choose with ~--config~ at build time.
+- CMake 4 removed compatibility with ~cmake_minimum_required~ below 3.5; old third-party projects fail to configure until the minimum is raised (or ~-DCMAKE_POLICY_VERSION_MINIMUM=3.5~ is passed).
+- Changing a cached value in ~CMakeLists.txt~ has no effect on an existing build directory; pass ~-D~ or delete the cache entry.

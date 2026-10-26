@@ -1,0 +1,79 @@
+:PROPERTIES:
+:ID:       2569c73d-2087-4aad-89db-809f0ac3619a
+:ROAM_ALIASES: "C++ 无锁数据结构"
+:VERIFIED_WITH: GCC 16.2.1, -std=c++23, -fsanitize=thread (2026-10-26)
+:END:
+#+title: C++ Lock-free Data Structures
+#+filetags: :C++:Concurrency:
+
+* Progress Guarantees
+| Term          | Definition                                                                                   |
+|---------------+----------------------------------------------------------------------------------------------|
+| blocking      | uses mutexes, condition variables or futures: a thread can be suspended until another acts   |
+| non-blocking  | no blocking calls. A [[id:9fb084bb-ba72-4136-8e91-60f0b7ba216f][spin lock]] is non-blocking but still a lock |
+| lock-free     | if several threads operate on the structure, *some* thread completes within a bounded number of steps, even if others are suspended mid-operation |
+| wait-free     | *every* thread completes within a bounded number of steps, whatever the others do              |
+
+A CAS retry loop is lock-free (a failed CAS means someone else succeeded) but not wait-free: one unlucky thread can retry forever (starvation). Wait-free structures are much harder to write and rarely worth it.
+
+* Core Pattern
+1. Read the current shared state (usually one pointer).
+2. Prepare the new state *privately*, invisible to other threads.
+3. Publish it with one compare-and-swap. If the CAS fails, someone changed the state since step 1: go back to step 1 (the failed CAS has already reloaded the value).
+
+The hard part is never the CAS. It is (a) memory reclamation, (b) the ABA problem, and (c) picking memory orders, because there is no lock to provide them.
+
+* Lock-free Stack
+#+begin_src cpp
+struct node { std::shared_ptr<T> data; node* next; };
+std::atomic<node*> head{nullptr};
+
+void push(const T& v) {
+  node* const n = new node(v);                        // private: nobody sees it yet
+  n->next = head.load(std::memory_order_relaxed);
+  while (!head.compare_exchange_weak(n->next, n,      // failure refreshes n->next
+                                     std::memory_order_release,
+                                     std::memory_order_relaxed)) {}
+}
+
+std::shared_ptr<T> pop() {
+  node* old = head.load(std::memory_order_acquire);
+  while (old && !head.compare_exchange_weak(old, old->next,
+                                            std::memory_order_acquire,
+                                            std::memory_order_acquire)) {}
+  return old ? old->data : nullptr;                   // leaks old; see below
+}
+#+end_src
+
+- ~push~ is complete: the node is fully built before the release CAS publishes it.
+- ~compare_exchange_weak~ is right here: we loop anyway, and it can generate better code on LL/SC machines.
+- Data is stored as ~shared_ptr<T>~ so ~pop~ returns without copying ~T~ after the node was unlinked; a throwing copy would lose the element.
+- ~pop~ cannot simply ~delete old~: another thread may have loaded the same ~old~ and be about to read ~old->next~.
+
+** Memory Reclamation
+| Technique                         | Idea                                                                                   | Trade-off                                    |
+|-----------------------------------+----------------------------------------------------------------------------------------+----------------------------------------------|
+| count threads in ~pop~            | unlinked nodes go to a to-be-deleted list; delete the list when the calling thread is the only one inside ~pop~ | simple; under steady load the count never hits 1 and memory grows |
+| hazard pointers                   | each thread publishes the pointer it is about to dereference; a node is deleted only when no hazard pointer names it | bounded garbage; per-access cost of publishing and scanning |
+| reference counting                | split external / internal counts per node so the last reader deletes it               | needs double-width CAS or ~atomic<shared_ptr>~; usually not lock-free in practice |
+| epoch-based reclamation / RCU     | readers announce an epoch; nodes retired in an epoch are freed once all readers left it | very cheap reads; a stalled reader blocks reclamation |
+
+C++26 standardizes ~<hazard_pointer>~ and ~<rcu>~; libstdc++ in GCC 16 does not ship them yet. In production, use a library (folly, libcds, Boost.Lockfree's fixed-size structures).
+
+** ABA
+Thread 1 reads ~head == A~ and ~A->next == B~, then is suspended. Others pop ~A~, pop ~B~, free them, and push a new node that reuses ~A~'s address. Thread 1's CAS sees ~head == A~ and succeeds, installing the dangling ~B~. Fixes: never reuse a node while any thread may hold it (the reclamation schemes above prevent ABA as a side effect), or pair the pointer with a version counter updated by a double-width CAS.
+
+* Should You Go Lock-free?
+For:
+- Maximum concurrency: some thread always progresses; with a mutex, a descheduled holder stops everyone.
+- No deadlock; a thread killed mid-operation does not leave a held lock.
+- Latency-sensitive paths where a lock holder being preempted is unacceptable, e.g. single-producer single-consumer ring buffers in trading systems.
+
+Against:
+- Far harder to get right: invariants must hold after every single atomic step, and memory orders must be justified one by one.
+- Not automatically faster: contended atomics bounce cache lines, and an uncontended mutex is cheap. Measure worst-case and average latency and total throughput before and after.
+
+* Pitfalls
+- "Atomic index" queues such as ~pos = front.fetch_add(1); q[pos] = x;~ are not a publication: a reader can see the new ~front~ before ~q[pos]~ is written, and concurrent push and pop on the same counter collide. A correct ring buffer gives each slot its own sequence number or restricts itself to one producer and one consumer.
+- Deleting a popped node immediately → use-after-free in other poppers.
+- Testing on x86 only → too-weak memory orders survive there and fail on ARM.

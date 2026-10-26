@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       45a66f1c-ea7b-4607-a417-e8ae6d608ebe
+:ROAM_ALIASES: "C++ 模板"
+:END:
+#+title: C++ Templates
+
+* [[id:6c721a34-d7ff-451f-b29a-368692d2f8c8][Template Basics]]
+* [[id:8872bcad-77ba-4ddf-912d-b159c3d2f252][Compile-time Programming]]

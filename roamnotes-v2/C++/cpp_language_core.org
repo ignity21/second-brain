@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       f08a3b70-aa82-4ba8-b824-16dd3400878c
+:ROAM_ALIASES: "C++ 语言核心"
+:END:
+#+title: C++ Language Core
+
+* [[id:83aa38f7-a6de-42f0-bf0e-b4e2c9114869][Value Categories and Move Semantics]]
+* [[id:10faff15-6db6-45ac-bae7-81f86753fa99][Type Deduction]]
+* [[id:0c48ecd1-63cc-43f3-bb43-652253a86f1b][Classes and Special Member Functions]]
+* [[id:9bb46372-40a5-416c-9a00-b00009a3e663][Polymorphism and Object Layout]]
+* [[id:76959270-4bbe-4a53-ab41-942a492f734b][Callables]]
+* [[id:5e72dbf9-f281-4f99-9d26-c5a663e4c8a2][Language Basics]]

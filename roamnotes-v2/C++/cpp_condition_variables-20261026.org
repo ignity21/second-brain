@@ -1,0 +1,50 @@
+:PROPERTIES:
+:ID:       890f2b58-21c3-48b7-a975-c532eedc01ec
+:ROAM_ALIASES: "C++ 条件变量"
+:VERIFIED_WITH: GCC 16.2.1, -std=c++23, -fsanitize=thread (2026-10-26)
+:END:
+#+title: C++ Condition Variables
+#+filetags: :C++:Concurrency:
+
+* Mental Model
+- A condition variable is a *wake-up signal with no memory*. It does not record that ~notify~ happened: a notification sent while nobody waits is lost.
+- Therefore the real condition always lives in *shared state protected by a mutex* (~!queue.empty()~, ~ready == true~). The condition variable only saves the waiter from busy-polling that state.
+- ~cv.wait(lock)~ does two things atomically: unlock the mutex and go to sleep. On wake-up it relocks before returning. The waiter holds the lock before and after the call.
+- A waiter can wake with the condition still false: a *spurious wake-up*, or another consumer got there first. Always re-check in a loop. ~cv.wait(lock, pred)~ is exactly ~while (!pred()) cv.wait(lock);~.
+
+* Core Idioms
+#+begin_src cpp
+std::mutex m;
+std::condition_variable cv;
+std::queue<int> q;
+
+// producer
+{
+  std::lock_guard lk(m);
+  q.push(v);              // 1. change the state under the lock
+}
+cv.notify_one();          // 2. notify; holding the lock is allowed but not needed
+
+// consumer
+std::unique_lock lk(m);   // unique_lock: wait() must unlock and relock it
+cv.wait(lk, [] { return !q.empty(); });
+int v = q.front(); q.pop();
+lk.unlock();              // 3. do the slow work without the lock
+process(v);
+#+end_src
+
+Changing the state without the lock, even if the variable is atomic, can lose a wake-up: the change and the notify can both land between the waiter's predicate check and its going to sleep.
+
+* Distinctions
+| Question                         | Answer                                                                                     |
+|----------------------------------+--------------------------------------------------------------------------------------------|
+| ~notify_one~ or ~notify_all~?    | ~notify_one~ when any single waiter can handle the event (one item pushed); ~notify_all~ when the state change matters to all (shutdown flag) or waiters wait for different predicates |
+| condition variable or future?    | future for a one-shot event with a value; condition variable for a condition that becomes true repeatedly |
+| ~condition_variable~ or ~condition_variable_any~? | ~_any~ works with any lockable (e.g. ~shared_lock~) and, since C++20, has ~wait~ overloads taking a ~std::stop_token~; plain one is cheaper |
+| busy wait or condition variable? | spin only when the expected wait is shorter than a context switch (microseconds) and a core can be dedicated to it, as in low-latency loops; otherwise sleep |
+
+* Pitfalls
+- Predicate missing ~return~ or inverted, e.g. ~cv.wait(lk, [this]{ q.empty(); })~: without ~return~ it does not compile (the lambda returns ~void~); with it, the logic is backwards. The predicate means "may proceed": ~!q.empty()~.
+- ~wait(lk)~ without a loop → spurious wake-ups pop from an empty queue.
+- ~notify_one~ when the woken consumer can throw before taking the item (for example allocating the ~shared_ptr~ it returns) → the item stays and other consumers sleep on. Use ~notify_all~, or make the post-wake path non-throwing (store ~shared_ptr~ in the queue).
+- Bounded queue: the producer also waits, on "not full"; use a second condition variable rather than ~notify_all~ on one.

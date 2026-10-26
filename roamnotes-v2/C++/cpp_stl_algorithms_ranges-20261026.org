@@ -1,0 +1,42 @@
+:PROPERTIES:
+:ID:       a370c3b2-547e-4ab7-8f39-86c57d8cbfee
+:ROAM_ALIASES: "C++ STL 算法与 Ranges"
+:VERIFIED_WITH: GCC 16.2.1 (libstdc++), -std=c++23 (2026-10-26)
+:END:
+#+title: C++ STL Algorithms and Ranges
+#+filetags: :C++:STL:
+
+* Mental Model
+- Algorithms work on *iterator ranges*, not containers. That is why ~std::remove_if~ cannot shrink a vector: it only moves the kept elements forward and returns the new logical end; the container's ~erase~ must cut the tail.
+- Algorithms that write need room: an output iterator like ~std::back_inserter(out)~ appends; writing to ~out.begin()~ of an empty vector is undefined behavior.
+- C++20 ranges (~std::ranges::~) take the whole container, accept projections, and are constrained by concepts, so misuse fails at the call with a readable error.
+- *Views* (~std::views::filter~, ~transform~, ~take~, ...) are lazy: composing them with ~|~ builds a description, and elements are computed only while iterating. Nothing is stored.
+
+#+begin_src cpp
+auto even = [](int x) { return x % 2 == 0; };
+std::vector<int> src{1, 2, 3, 4, 5, 6}, out;
+
+std::copy_if(src.begin(), src.end(), std::back_inserter(out), even);   // classic
+std::ranges::copy_if(src, std::back_inserter(out), even);              // ranges
+
+for (int x : src | std::views::filter(even)
+                 | std::views::transform([](int x) { return x * 10; }))
+  std::printf("%d ", x);                                               // 20 40 60
+#+end_src
+
+* Capability Map
+| Task                         | Reach for                                                                          |
+|------------------------------+------------------------------------------------------------------------------------|
+| find                         | ~find~, ~find_if~, ~ranges::contains~ (C++23); sorted data: ~lower_bound~, ~binary_search~ |
+| count / test                 | ~count_if~, ~all_of~ / ~any_of~ / ~none_of~                                        |
+| sort                         | ~sort~ (unstable), ~stable_sort~, ~partial_sort~ / ~nth_element~ for top-k or median in O(n) |
+| remove / dedupe              | ~std::erase_if~ (C++20), ~unique~ after ~sort~                                     |
+| fold                         | ~accumulate~ (sequential, left fold), ~reduce~ (any order, can run in parallel), ~ranges::fold_left~ (C++23) |
+| transform into another range | ~transform~, or a ~views::transform~ pipeline; ~ranges::to<std::vector>()~ (C++23) materializes a view |
+| parallel                     | execution policy as the first argument: ~std::sort(std::execution::par, ...)~ (libstdc++ needs TBB) |
+| parse numbers from text      | ~std::from_chars~ (fast, no locale, no exceptions) rather than ~istringstream~      |
+
+* Pitfalls
+- Assigning the result of ~std::ranges::copy_if~ to a vector: it returns an ~{in, out}~ iterator pair, not a container.
+- A view over a temporary container dangles once the temporary dies; ranges reject the most obvious cases with ~std::ranges::dangling~.
+- ~std::accumulate(v.begin(), v.end(), 0)~ over doubles sums in ~int~: the type of the initial value decides. Write ~0.0~.

@@ -1,0 +1,100 @@
+:PROPERTIES:
+:ID:       c400a8cc-46b7-4afb-a0e1-29bde365fe36
+:ROAM_ALIASES: "C++ 线程与异步任务"
+:VERIFIED_WITH: GCC 16.2.1, -std=c++23 (2026-10-26)
+:END:
+#+title: C++ Threads and Async Tasks
+#+filetags: :C++:Concurrency:
+
+* TOC :TOC_1:
+- [[#mental-model][Mental Model]]
+- [[#passing-arguments][Passing Arguments]]
+- [[#joining-and-detaching][Joining and Detaching]]
+- [[#tasks-promise-future-async][Tasks: Promise, Future, Async]]
+- [[#parallelizing-a-loop][Parallelizing a Loop]]
+- [[#version-drift][Version Drift]]
+- [[#pitfalls][Pitfalls]]
+
+* Mental Model
+- A ~std::thread~ object owns one OS thread running a callable. Before the object is destroyed it must be *joined* (wait for it) or *detached* (let it run on alone); otherwise the destructor calls ~std::terminate~.
+- The constructor *copies* (decays) every argument into storage owned by the new thread, then passes them to the callable *as rvalues*. Nothing is passed by reference unless you wrap it in ~std::ref~ / ~std::cref~.
+- A *task* is "a function whose result I want later". The result travels through a one-shot channel: the writing end is a ~std::promise~, the reading end a ~std::future~. ~std::packaged_task~ and ~std::async~ are promise + future with the plumbing done for you.
+- Why use threads at all: *separation of concerns* (a GUI thread, an I/O thread; thread count follows the design, not the core count) or *performance* (task parallelism: split one job into parts; data parallelism: same operation on different chunks).
+
+* Passing Arguments
+| You write                            | What the thread gets                         | Consequence                                           |
+|--------------------------------------+----------------------------------------------+-------------------------------------------------------|
+| ~std::thread t(f, buf)~, ~buf~ a ~char[]~ | a ~char*~ into the caller's stack          | if ~f~ takes ~std::string~, the conversion happens *in the new thread*, possibly after ~buf~ is gone; pass ~std::string(buf)~ |
+| ~std::thread t(f, s)~, ~f(std::string&)~  | a copy of ~s~, passed as an rvalue         | compile error: an rvalue cannot bind to ~T&~; use ~std::ref(s)~ |
+| ~std::thread t(&C::m, obj, 1)~       | a copy of ~obj~                               | the member function mutates the copy                  |
+| ~std::thread t(&C::m, &obj, 1)~      | a pointer to ~obj~                            | ~obj~ must outlive the thread (or pass a ~shared_ptr~) |
+| ~std::thread t(f, std::move(p))~     | the moved-in value                            | the way to hand over move-only types (~unique_ptr~, ~promise~) |
+
+The second row's error from GCC 16 says it directly: =std::thread arguments must be invocable after conversion to rvalues=.
+
+* Joining and Detaching
+- ~join()~ can be skipped by an exception thrown between starting the thread and the call. Guard it with RAII: ~std::jthread~ (C++20) joins in its destructor and also carries a ~std::stop_token~ for cooperative cancellation. Before C++20 the same thing was hand-written as a =scoped_thread= / =thread_guard= class.
+- ~detach()~ turns the thread into a daemon: nothing can wait for it, and any local data it still references dangles when the creating scope ends. When ~main~ returns, detached threads are killed.
+
+* Tasks: Promise, Future, Async
+| Tool                 | Who runs the function                       | Typical use                                                   |
+|----------------------+---------------------------------------------+---------------------------------------------------------------|
+| ~std::promise~        | nobody; some thread calls ~set_value~ / ~set_exception~ | a result produced in the middle of a longer-running thread |
+| ~std::packaged_task~  | whoever invokes the task object             | queues of work items: a thread pool or GUI thread pops and runs them |
+| ~std::async~          | the library, by launch policy              | "run this and give me the result", without managing threads |
+| ~std::shared_future~  | —                                           | several threads waiting for the same result; give each thread its own copy |
+
+Facts that hold for all of them:
+- ~future::get()~ blocks, returns the value (moved out) or *rethrows* the stored exception, and can be called once; afterwards ~valid()~ is false. ~future.share()~ (or moving into a ~shared_future~) allows many readers.
+- The channel is one-way and one-shot. For repeated hand-offs use a queue with a condition variable ([[id:890f2b58-21c3-48b7-a975-c532eedc01ec][C++ Condition Variables]]).
+
+** Launch Policies
+| Policy                               | Behavior                                                                                   |
+|--------------------------------------+--------------------------------------------------------------------------------------------|
+| ~std::launch::async~                 | runs as if on a new thread                                                                 |
+| ~std::launch::deferred~              | runs lazily, on the thread that calls ~get()~ / ~wait()~; never runs if nobody asks         |
+| default (async or deferred)          | implementation chooses; ~wait_for~ may return ~future_status::deferred~, so a timeout loop can spin forever |
+
+Whether ~async~ reuses a thread pool is implementation-specific: MSVC uses a pool, libstdc++ starts a new thread each time. Do not rely on it to cap the number of threads.
+
+** Example
+#+begin_src cpp
+auto fut = std::async(std::launch::async, []() -> int { throw std::runtime_error("boom"); });
+try { fut.get(); } catch (const std::exception& e) { std::printf("caught: %s\n", e.what()); }
+
+auto t0 = steady_clock::now();
+std::async(std::launch::async, [] { std::this_thread::sleep_for(200ms); });   // future discarded
+std::printf("discarded async waited %lld ms\n",
+            (long long)duration_cast<milliseconds>(steady_clock::now() - t0).count());
+
+auto d = std::async(std::launch::deferred, [&] { return std::this_thread::get_id() == main_id; });
+// d.wait_for(0s) == std::future_status::deferred
+// d.get() == true: ran on the calling thread
+#+end_src
+
+#+begin_example
+caught: boom
+discarded async waited 200 ms
+#+end_example
+
+The second line is the classic trap: the temporary future returned by ~std::async~ *blocks in its destructor* until the task finishes, so "fire and forget" with ~std::async~ is actually synchronous. GCC marks ~std::async~ =[[nodiscard]]= and warns.
+
+* Parallelizing a Loop
+The hand-written pattern: choose ~n = min(std::thread::hardware_concurrency(), size / min_per_thread)~ (fall back to 2 when ~hardware_concurrency()~ returns 0), split the range into ~n~ blocks, run ~n - 1~ blocks on threads and the last on the current thread, join, combine partial results. Collecting partials through futures instead of output references also propagates exceptions.
+
+Since C++17 prefer the parallel algorithms: ~std::reduce(std::execution::par, v.begin(), v.end())~. With libstdc++ they need TBB at link time.
+
+* Version Drift
+| Standard | Added                                                                                       |
+|----------+---------------------------------------------------------------------------------------------|
+| C++11    | memory model, atomics, ~thread~, mutexes and locks, ~thread_local~, condition variables, ~async~ / ~future~ |
+| C++14    | ~shared_timed_mutex~                                                                        |
+| C++17    | ~shared_mutex~, ~scoped_lock~, parallel algorithms, ~hardware_destructive_interference_size~ |
+| C++20    | ~jthread~ and ~stop_token~, ~latch~, ~barrier~, ~counting_semaphore~, ~atomic<shared_ptr>~, ~atomic::wait~ / ~notify~, coroutines |
+
+* Pitfalls
+- Thread destroyed while joinable → =terminate called without an active exception=. Use ~std::jthread~ or join on every path.
+- Passing a reference without ~std::ref~ → compile error (non-const ref) or a silent copy (const ref).
+- Passing a pointer to a local buffer to a detached thread → the implicit conversion runs later, on dangling memory.
+- Calling ~get()~ twice on a ~std::future~ → ~std::future_error~ (no state).
+- Expecting ~std::async~ with the default policy to be concurrent → it may be deferred until ~get()~.

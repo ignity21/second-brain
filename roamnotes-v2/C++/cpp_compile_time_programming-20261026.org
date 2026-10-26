@@ -1,0 +1,58 @@
+:PROPERTIES:
+:ID:       8872bcad-77ba-4ddf-912d-b159c3d2f252
+:ROAM_ALIASES: "C++ 编译期编程"
+:VERIFIED_WITH: GCC 16.2.1, -std=c++23 (2026-10-26)
+:END:
+#+title: C++ Compile-time Programming
+#+filetags: :C++:
+
+* Mental Model
+Compile-time programming moves work and checks from run time to compile time: values computed once by the compiler, branches removed before code generation, wrong types rejected with a clear message. Each keyword below says /how strongly/ something must happen at compile time.
+
+| Keyword                  | Meaning                                                                                   |
+|--------------------------+-------------------------------------------------------------------------------------------|
+| ~const~                  | not modified after initialization; the value may be known only at run time               |
+| ~constexpr~ variable     | must be initialized by a constant expression; usable as a template argument or array size |
+| ~constexpr~ function     | /may/ be evaluated at compile time; with run-time arguments it is an ordinary function     |
+| ~consteval~ function (C++20) | /must/ be evaluated at compile time; calling it with a run-time value is an error     |
+| ~constinit~ variable (C++20) | static storage variable initialized at compile time, but still mutable; avoids the static initialization order problem |
+
+#+begin_src cpp
+constexpr int fib(int n) { return n <= 1 ? n : fib(n - 1) + fib(n - 2); }
+consteval int sq(int n) { return n * n; }
+
+static_assert(fib(10) == 55);    // computed by the compiler
+int n = 10;
+fib(n);                          // fine: run-time call
+constexpr int c = fib(n);        // error: n is not usable in a constant expression
+sq(n);                           // error: call to consteval function is not a constant expression
+#+end_src
+
+What a ~constexpr~ function may contain has grown with each standard: C++11 allowed a single return statement, C++14 loops and local variables, C++20 ~try~ blocks, virtual calls and transient ~new~ / ~std::vector~ / ~std::string~. Calls to non-constexpr functions are allowed in branches not taken during constant evaluation. GCC limits recursion depth with =-fconstexpr-depth=. A class with a ~constexpr~ constructor can produce compile-time objects (a "literal type").
+
+* ~if constexpr~
+In a template, ~if constexpr (cond)~ discards the branch not taken *before instantiation*, so it may contain code that would not compile for this ~T~:
+
+#+begin_src cpp
+template <typename T> auto increment(const T& t) {
+  if constexpr (std::is_integral_v<T>) return t + 1;
+  else return t + 0.01;
+}
+// increment(1) == 2 (int), increment(1.0) == 1.01 (double)
+#+end_src
+
+A plain ~if~ would need both branches to compile and would give the function two different return types. ~if constexpr~ replaces most tag dispatching and many ~enable_if~ overload sets.
+
+* ~static_assert~
+~static_assert(std::is_integral_v<T>, "T must be an integral type");~ fails compilation with the message. Use it for assumptions the code relies on: ~sizeof~ of a wire struct, ~std::atomic<T>::is_always_lock_free~, ~std::is_trivially_copyable_v<T>~ before a ~memcpy~. In a template, a constraint (concept) is often the better tool because it rejects the call instead of failing inside the body.
+
+* Type Traits
+~<type_traits>~ answers questions about types (~is_integral~, ~is_trivially_copyable~, ~is_same~) and transforms them (~remove_reference~, ~decay~, ~underlying_type~). They are ordinary class templates evaluated by specialization:
+
+#+begin_src cpp
+template <typename T> struct IsIntegral : std::false_type {};   // primary: false
+template <> struct IsIntegral<int> : std::true_type {};          // specialization: true
+template <typename T> constexpr bool IsIntegral_v = IsIntegral<T>::value;
+#+end_src
+
+~std::true_type~ / ~std::false_type~ supply the ~static constexpr bool value~. The suffixes are shortcuts: ~_v~ (C++17) is a variable template for ~::value~, ~_t~ (C++14) an alias template for ~typename ...::type~. Prefer them: ~std::remove_reference_t<T>~ over ~typename std::remove_reference<T>::type~.

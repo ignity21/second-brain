@@ -1,0 +1,59 @@
+:PROPERTIES:
+:ID:       5efa3691-4464-4a11-9d52-1e83016d8bc1
+:ROAM_ALIASES: "C++ 动态内存分配"
+:VERIFIED_WITH: GCC 16.2.1, -std=c++23 (2026-10-26)
+:END:
+#+title: C++ Dynamic Memory Allocation
+#+filetags: :C++:
+
+* Storage Durations
+| Duration  | Objects                                   | Where (typical)         | Lifetime                                       |
+|-----------+-------------------------------------------+-------------------------+------------------------------------------------|
+| static    | globals, ~static~ locals and members      | data / BSS segment      | whole program (static locals: from first use)  |
+| automatic | locals, parameters                        | stack frame of the call | until the scope ends                           |
+| dynamic   | created with ~new~ (or ~malloc~)          | heap / free store       | until ~delete~, i.e. under program control      |
+| thread    | ~thread_local~                            | per-thread storage      | the thread's lifetime                          |
+
+Stack allocation is a pointer bump and is freed for free on return; its size must be known at compile time and the stack is small (8 MiB default on Linux). Heap allocation handles run-time sizes and lifetimes beyond a scope, at the cost of an allocator call that can take locks, touch new pages, and fragment memory.
+
+* ~new~ / ~delete~ vs ~malloc~ / ~free~
+~new T(args)~ is two steps: call ~operator new(sizeof(T))~ to get raw memory, then run the constructor in it. ~delete p~ reverses them: destructor, then ~operator delete~.
+
+| ~new~ / ~delete~                         | ~malloc~ / ~free~                                       |
+|------------------------------------------+---------------------------------------------------------|
+| constructs and destroys objects          | raw bytes only                                          |
+| typed: returns ~T*~                      | returns ~void*~, needs a cast                           |
+| failure throws ~std::bad_alloc~          | failure returns ~NULL~                                  |
+| array form ~new T[n]~ / ~delete[]~ must match | ~calloc~ zero-fills, ~realloc~ resizes (may move; only for trivially copyable data) |
+| replaceable / overloadable per class     | not                                                     |
+
+Never mix the families (~free~ on ~new~ memory, ~delete~ on ~new[]~).
+
+* Separating Allocation from Construction
+Containers and pools allocate raw memory once and construct objects into it later:
+
+#+begin_src cpp
+void* mem = std::malloc(sizeof(W));
+W* w = new (mem) W(1);    // placement new: construct only
+w->~W();                  // destroy only; there is no "placement delete" expression
+std::free(mem);
+#+end_src
+
+C++20 spells the two halves as ~std::construct_at(p, args...)~ and ~std::destroy_at(p)~. The raw buffer must be suitably aligned (~alignas(W) unsigned char buf[sizeof(W)]~).
+
+* Avoiding the Allocator on Hot Paths
+Latency-sensitive code allocates up front and reuses memory:
+- ~reserve()~ containers to their maximum size at startup.
+- Object pools / free lists for fixed-size objects.
+- Class-specific ~operator new~ / ~operator delete~ to route one type to a pool, or a replaced global ~operator new~ to count or track allocations.
+- Polymorphic memory resources (C++17): ~std::pmr::monotonic_buffer_resource~ on a stack buffer makes ~std::pmr::vector~ and friends allocate from it without touching the heap.
+
+* Memory Errors
+| Error                     | Example                                          | Prevention                               |
+|---------------------------+--------------------------------------------------+------------------------------------------|
+| leak                      | ~new~ without ~delete~ on some path              | RAII ([[id:474df27e-ed1f-42f0-997f-633339b91cb5][C++ RAII and Smart Pointers]]) |
+| buffer overrun            | ~strcpy~ of 9 bytes into a 4-byte buffer         | ~std::string~, ~std::span~, bounds-checked ~at()~ in debug |
+| use after free / double free | dereferencing after ~delete[]~                | RAII, no raw owning pointers             |
+| uninitialized read        | ~int x; use(x);~                                 | always initialize; =-Wall= catches many  |
+
+Detection tools are in [[id:55c7e05b-9c7a-447e-8245-33f568b777d7][C++ Debugging Tools]]; AddressSanitizer reported the ~strcpy~ overrun above as =heap-buffer-overflow=.

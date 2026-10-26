@@ -1,0 +1,80 @@
+:PROPERTIES:
+:ID:       76959270-4bbe-4a53-ab41-942a492f734b
+:ROAM_ALIASES: "C++ 可调用对象"
+:VERIFIED_WITH: GCC 16.2.1, -std=c++23 (2026-10-26)
+:END:
+#+title: C++ Callables: Lambdas, Function Pointers and std::function
+#+filetags: :C++:
+
+* Lambdas Are Closure Objects
+A lambda expression creates an object of a unique, unnamed class (the *closure type*) with an ~operator()~. The two halves below are equivalent:
+
+#+begin_src cpp
+int x = 4, y = 6;
+auto sum_all = [x, y](int a, int b) { return a + b + x + y; };
+
+struct SumAll {
+  int x_, y_;
+  int operator()(int a, int b) const { return a + b + x_ + y_; }   // const by default
+} sum_all2{x, y};
+#+end_src
+
+Everything else follows from that picture:
+- Captured-by-value variables are *data members copied when the lambda is created*. Later changes to the original are not seen.
+- ~operator()~ is ~const~, so by-value captures cannot be modified unless the lambda is ~mutable~. The modification changes the closure's own copy and persists across calls of that closure.
+- By-reference captures are reference members; the lambda must not outlive the variables.
+- A lambda without captures converts to a plain function pointer.
+- Each lambda has its own type, so storing it needs ~auto~, a template parameter, or type erasure (~std::function~).
+
+#+begin_src cpp
+int x = 1;
+auto byval = [x] { return x; };
+auto byref = [&x] { return x; };
+x = 2;                                    // byval() == 1, byref() == 2
+
+int id = 0;
+auto counter = [id]() mutable { return ++id; };
+counter(); counter();                     // counter() == 3, id is still 0
+#+end_src
+
+* Captures
+| Capture              | Meaning                                                                                    |
+|----------------------+--------------------------------------------------------------------------------------------|
+| ~[x]~ / ~[&x]~       | one variable by value / by reference                                                       |
+| ~[=]~ / ~[&]~        | default by value / by reference for every variable actually used                          |
+| ~[p = std::move(up)]~ | init capture (C++14): any expression; the way to move a ~unique_ptr~ into a lambda       |
+| ~[this]~             | the ~this~ pointer; members are accessed through it, effectively by reference              |
+| ~[*this]~            | C++17: a copy of the whole object                                                          |
+
+~[=]~ capturing ~this~ implicitly is deprecated since C++20; write ~[=, this]~.
+
+Generic lambdas (C++14) take ~auto~ parameters, which makes ~operator()~ a template; C++20 also allows an explicit template parameter list: ~[]<typename T>(std::vector<T>& v) { ... }~.
+
+* Other Callables
+| Callable                   | Declaration and call                                                                 |
+|----------------------------+--------------------------------------------------------------------------------------|
+| function pointer           | ~int (*fp)(int, int) = add;~ then ~fp(1, 2)~                                         |
+| pointer to member function | ~double (Calc::*mp)(double, double) = &Calc::add;~ then ~(obj.*mp)(1, 2)~ or ~(ptr->*mp)(1, 2)~ |
+| function object            | any class with ~operator()~                                                          |
+| ~std::function<R(Args...)>~ | holds any callable with a compatible signature                                      |
+
+Aliases make the pointer syntax readable: ~using BinOp = int (*)(int, int);~.
+
+~std::invoke(f, args...)~ (C++17) calls any of them uniformly, including member pointers: ~std::invoke(mp, obj, 1.0, 2.0)~. Generic code that accepts "a callable" should call it through ~std::invoke~.
+
+* Choosing How to Pass a Callable
+| Need                                                   | Use                                     | Cost                                                   |
+|--------------------------------------------------------+-----------------------------------------+--------------------------------------------------------|
+| call it inside a template, e.g. an algorithm           | template parameter ~F f~ (or ~auto~)    | none: the call is inlined; one instantiation per type  |
+| store callables of different types in one container, or keep a callback in a non-template class | ~std::function~ | type erasure: 32 bytes here vs 4 for the lambda, a possible heap allocation for large captures, an indirect call |
+| C API callback                                         | function pointer (captureless lambda)   | no state except a ~void*~ user-data argument           |
+| non-owning reference to a callable for one call        | ~std::function_ref~ (C++26) or a template | —                                                    |
+
+C++23 adds ~std::move_only_function~ for callables that capture move-only state.
+
+~std::bind~ and ~std::mem_fn~ predate lambdas. A lambda says the same thing more readably and inlines better: prefer ~[](int b) { return add(5, b); }~ to ~std::bind(add, 5, std::placeholders::_1)~. ~std::bind~ also copies its arguments, so references need ~std::ref~ / ~std::cref~.
+
+* Pitfalls
+- Returning or storing a lambda that captures locals by reference (~[&]~) → dangling once the scope ends. Typical case: a callback registered for later, or a lambda handed to a thread.
+- ~[this]~ in a callback that outlives the object → dangling. Capture a ~shared_from_this()~ / ~weak_ptr~, or copy with ~[*this]~.
+- Expecting a by-value capture to track later changes; it is a snapshot.

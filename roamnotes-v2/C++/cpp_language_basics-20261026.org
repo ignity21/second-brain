@@ -1,0 +1,62 @@
+:PROPERTIES:
+:ID:       5e72dbf9-f281-4f99-9d26-c5a663e4c8a2
+:ROAM_ALIASES: "C++ 基础语法"
+:VERIFIED_WITH: GCC 16.2.1, -std=c++23 (2026-10-26)
+:END:
+#+title: C++ Language Basics: Pitfalls and Modern Replacements
+#+filetags: :C++:
+
+Syntax itself is easy to look up. This note keeps only what changes decisions: the traps inherited from C and the modern form that replaces each.
+
+* TOC :TOC_1:
+- [[#pointers-and-arrays][Pointers and Arrays]]
+- [[#enum-class-vs-enum][~enum class~ vs ~enum~]]
+- [[#names-and-aliases][Names and Aliases]]
+- [[#macros][Macros]]
+- [[#exceptions][Exceptions]]
+- [[#small-modern-conveniences][Small Modern Conveniences]]
+- [[#pitfalls][Pitfalls]]
+
+* Pointers and Arrays
+- Read declarations right to left: ~const int* p~ is a pointer to const int (the pointer may move, the int may not be changed through it); ~int* const p~ is a const pointer to a mutable int.
+- An array decays to a pointer to its first element almost everywhere: passed to a function, ~int a[]~ is really ~int* a~, and ~sizeof(a)~ is 8, not the array size (GCC: =-Wsizeof-array-argument=). Pass ~std::span<int>~ (C++20) or ~std::array~ instead; ~std::size(arr)~ works only where the array has not decayed.
+- C strings: a ~char[]~ is a string only if it ends with ~'\0'~; ~strcpy~ into a short buffer overruns it. Use ~std::string~ and ~std::string_view~.
+- ~new T[n]~ must be paired with ~delete[]~, ~new T~ with ~delete~; mixing them is undefined behavior. In application code, use containers and smart pointers instead ([[id:474df27e-ed1f-42f0-997f-633339b91cb5][C++ RAII and Smart Pointers]]).
+
+* ~enum class~ vs ~enum~
+| ~enum class Color { red, blue };~                    | ~enum Color { red, blue };~                    |
+|------------------------------------------------------+------------------------------------------------|
+| names scoped: ~Color::red~                           | names leak into the enclosing scope           |
+| no implicit conversion to ~int~                      | converts implicitly to ~int~                  |
+| underlying type ~int~ by default, can be forward-declared | underlying type must be given to forward-declare |
+
+Specify the underlying type when size matters (~enum class Side : std::uint8_t~). To get the number out, C++23 has ~std::to_underlying(e)~, replacing the hand-written ~static_cast<std::underlying_type_t<E>>(e)~ helper. Unscoped enums remain handy as named indices, e.g. ~std::get<email>(tuple)~; with ~enum class~ it is ~std::get<std::to_underlying(Field::email)>(tuple)~.
+
+* Names and Aliases
+- ~using myns::foo;~ (using-declaration) brings one name in and hides an outer ~foo~. ~using namespace myns;~ (using-directive) makes names visible as if declared in the nearest common enclosing namespace, so with a global ~foo~ also present the call ~foo()~ is ambiguous. Never put a using-directive in a header.
+- Prefer ~using Alias = Type;~ to ~typedef~: it reads left to right (~using FP = void (*)(int);~) and can be templated (~template <typename T> using Vec = std::vector<T, MyAlloc<T>>;~), which ~typedef~ cannot. This is why the standard has ~std::remove_const_t<T>~ for ~typename std::remove_const<T>::type~.
+
+* Macros
+Macros are text substitution before compilation: no types, no scopes.
+- Unparenthesized arguments break precedence: with ~#define MULT(x, y) x*y~, ~MULT(5, 6+1)~ is ~5*6+1 = 31~. Parenthesize every argument and the whole body, or better, use a ~constexpr~ or ~inline~ function.
+- Still legitimate: include guards, conditional compilation (~#ifdef NDEBUG~, platform checks), and things a function cannot do: stringizing with ~#x~, token pasting with ~a##b~, capturing ~__FILE__~ / ~__LINE__~ at the call site (C++20: ~std::source_location~ does this without a macro).
+- ~__cplusplus~ reports the language version, e.g. ~202302L~ for C++23.
+
+* Exceptions
+- Throw by value, catch by ~const&~: ~catch (const std::exception& e)~. Catching by value slices derived exceptions.
+- Throw types derived from ~std::exception~ (usually ~std::runtime_error~ / ~std::logic_error~ and their families), overriding ~what()~ if needed. Throwing ints or string literals works but cannot be caught generically.
+- Mark functions that cannot throw ~noexcept~, especially move operations and destructors (destructors are ~noexcept~ by default). An exception escaping a ~noexcept~ function calls ~std::terminate~.
+- Many low-latency code bases compile with ~-fno-exceptions~ and use error codes or ~std::expected<T, E>~ (C++23).
+
+* Small Modern Conveniences
+| Old                                                  | Modern                                                           |
+|------------------------------------------------------+------------------------------------------------------------------|
+| return a ~std::tuple~, unpack with ~std::tie~        | structured bindings (C++17): ~auto [k, v] = *m.begin();~        |
+| declare ~it~ before ~if~, leaking it into the scope  | init-statement (C++17): ~if (auto it = m.find(k); it != m.end())~ |
+| ~NULL~ / ~0~                                         | ~nullptr~                                                        |
+| ~printf~ / iostream formatting                       | ~std::format~ (C++20), ~std::print~ / ~std::println~ (C++23)     |
+
+* Pitfalls
+- ~sizeof~ on an array parameter → size of a pointer, not of the array.
+- Macros with side-effecting arguments (~SQUARE(i++)~) evaluate them twice.
+- ~using namespace std;~ in a header → name clashes in every including file.

@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       de67ad04-b348-4367-9a6f-88404e0f38b0
+:ROAM_ALIASES: "C++ 标准库"
+:END:
+#+title: C++ Standard Library
+
+* [[id:a2807e14-ea95-4d42-aa97-eebdc0798c95][Containers and Iterators]]
+* [[id:a370c3b2-547e-4ab7-8f39-86c57d8cbfee][Algorithms and Ranges]]
