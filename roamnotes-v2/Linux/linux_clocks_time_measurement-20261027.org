@@ -1,0 +1,67 @@
+:PROPERTIES:
+:ID:       87695f72-2053-4412-9bb9-d163bd2eb882
+:ROAM_ALIASES: "Linux 时钟与计时"
+:VERIFIED_WITH: Linux 6.5, glibc 2.44, GCC 16.2.1 (2026-10-27)
+:END:
+#+title: Linux Clocks and Time Measurement
+#+filetags: :Linux:
+
+* TOC :TOC_1:
+- [[#三种时间][三种时间]]
+- [[#测间隔用单调时钟][测间隔用单调时钟]]
+- [[#读时钟的代价][读时钟的代价]]
+- [[#tsc][TSC]]
+- [[#跨机器的时间戳][跨机器的时间戳]]
+- [[#realuser-与-sys][real、user 与 sys]]
+
+* 三种时间
+| 时间 | 含义 | 接口 | 用于 |
+|---|---|---|---|
+| 墙钟时间（wall-clock time） | 日历时间，自 1970-01-01 UTC 起的秒数 | ~CLOCK_REALTIME~ 、 ~time()~ 、 ~gettimeofday~ | 日志和成交记录的时间戳、跨机器对齐 |
+| 单调时间 | 从某个固定起点（通常是开机）起流逝的时间，不会倒退 | ~CLOCK_MONOTONIC~ | 测间隔、超时 |
+| CPU 时间（process time） | 进程或线程实际在 CPU 上运行的时间，分 user 和 sys | ~CLOCK_PROCESS_CPUTIME_ID~ 、 ~CLOCK_THREAD_CPUTIME_ID~ 、 ~getrusage~ | 算了多久，不含等待 |
+
+内核的时钟中断频率 HZ 和 =/proc= 中 CPU 时间的单位 ~USER_HZ~ 见 [[id:d525dfda-0943-4e82-b4a8-cad648ad48b5][Linux CPU Scheduling and Affinity]]。
+
+* 测间隔用单调时钟
+~CLOCK_REALTIME~ 会被改：手动设置时间，或 NTP / chrony 校时时直接跳变（step），都可能让它倒退，两次读数相减得到负数或很大的值。
+
+| 时钟 | 跳变 | 跟随 NTP 调频 | 系统挂起期间 |
+|---|---|---|---|
+| ~CLOCK_REALTIME~ | 会 | 会 | 继续走 |
+| ~CLOCK_MONOTONIC~ | 不会 | 会 | 停止 |
+| ~CLOCK_MONOTONIC_RAW~ | 不会 | 不会，按硬件原始频率 | 停止 |
+| ~CLOCK_BOOTTIME~ | 不会 | 会 | 继续走 |
+| ~*_COARSE~ 变体 | 同对应时钟 | 同对应时钟 | 同对应时钟；精度只有一个 tick（本机 4 ms，即 HZ = 250） |
+
+NTP 调频（slew）是让时钟略快或略慢地走，内核限制在 500 ppm 以内，不会跳变，所以测间隔时 ~CLOCK_MONOTONIC~ 已经够用。
+
+** C++ 中的对应
+- ~std::chrono::system_clock~ 是 ~CLOCK_REALTIME~ ， ~steady_clock~ 是 ~CLOCK_MONOTONIC~ 。
+- *坑* ：libstdc++ 的 ~high_resolution_clock~ 是 ~system_clock~ 的别名（本机 GCC 16 用 ~static_assert~ 核对），会跳变；libc++ 中它是 ~steady_clock~ 。测间隔直接写 ~steady_clock~ 。
+
+* 读时钟的代价
+本机各调用 200 万次的平均值：
+
+| 接口 | 每次 |
+|---|---|
+| ~clock_gettime~ ： ~REALTIME~ 、 ~MONOTONIC~ | 约 15 ns（vDSO，不进内核） |
+| ~clock_gettime~ ： ~MONOTONIC_RAW~ 、 ~BOOTTIME~ | 约 17–18 ns |
+| ~clock_gettime~ ： ~*_COARSE~ | 约 5 ns，但精度 4 ms |
+| ~clock_gettime~ ： ~PROCESS_CPUTIME_ID~ 、 ~THREAD_CPUTIME_ID~ | 约 190–220 ns：不在 vDSO 中，要进内核 |
+| ~rdtsc~ / ~rdtscp~ | 约 9 / 12 ns |
+
+vDSO 的前提是时钟源为 =tsc= ，见 [[id:b740640d-e1b6-4d3e-a151-44653e269df7][Linux System Calls]]。在热路径上频繁统计线程 CPU 时间，代价是读墙钟的十几倍。
+
+* TSC
+- 时间戳计数器（Time Stamp Counter，TSC）是 CPU 的计数寄存器，用 ~rdtsc~ 读。 =constant_tsc= （频率不随调频变化）和 =nonstop_tsc= （深度休眠时不停）两个特性使它能当时钟用；本机 =/proc/cpuinfo= 中两者都有，时钟源为 =tsc= 。
+- 直接用 ~rdtsc~ 打时间戳省掉了 vDSO 的换算，但要自己校准频率、把周期换成纳秒；它不是串行化指令，可能被乱序执行提前，测很短的代码段时用 ~rdtscp~ 或在前后加 ~lfence~ 。多插槽机器和虚拟机上，各 CPU 的 TSC 不一定同步。
+- 多数情况下 ~clock_gettime(CLOCK_MONOTONIC)~ 的 15 ns 已经够用；只有每条消息都要打多个时间戳的热路径才值得直接用 TSC。
+
+* 跨机器的时间戳
+比较不同机器上的时间戳（如行情到达本机与交易所回报之间的延迟），误差取决于墙钟同步的精度：NTP（chrony）通常在毫秒到亚毫秒级；PTP（IEEE 1588，linuxptp 的 ~ptp4l~ 、 ~phc2sys~ ）配合网卡硬件时间戳可到亚微秒级。 ~timedatectl~ 显示当前是否已同步。
+
+* real、user 与 sys
+~time cmd~ 输出 real（墙钟）、user 和 sys（CPU 时间）：
+- user + sys 大于 real：多个线程并行。本机 4 个线程各跑一个忙循环：real 2.22 s，user 8.88 s。
+- real 远大于 user + sys：大部分时间在等待 I/O、锁、 ~sleep~ 或排队等 CPU。本机 ~sleep 1~ ：real 1.00 s，user + sys 约为 0。

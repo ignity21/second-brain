@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       2f57cc5e-c1ec-482a-95c2-a9fa96d73a9c
+:ROAM_ALIASES: "Linux 用户与用户组"
+:VERIFIED_WITH: shadow 4 (Arch), Linux-PAM (2026-10-27)
+:END:
+#+title: Linux Users, Groups and Credentials
+#+filetags: :Linux:
+
+* 核心模型
+- *内核只认数字* ：进程凭证（credentials）里是 UID、GID 和附加组列表，文件 inode 里记的是属主 UID 和 GID。用户名、组名是用户态的映射：glibc 按 =/etc/nsswitch.conf= 通过 NSS 查 =/etc/passwd= 、 =/etc/group= ，也可以查 LDAP、systemd-userdb 等来源。所以：
+  - 用户删除后，他的文件在 ~ls -l~ 中显示为数字 UID。
+  - 两台机器上同名用户的 UID 不同时，NFS 共享、容器的 bind mount 中属主会对不上。
+- *凭证在登录时确定* ：login、sshd 经 PAM 认证后，按 passwd 和 group 设置 UID、主组和附加组，再 ~exec~ 用户的 shell；之后的子进程全部继承。所以 ~usermod -aG docker <user>~ 后，已登录的会话仍不在新组里，要重新登录（或用 ~newgrp docker~ 开一个新 shell）。 ~id~ 显示的是当前进程的凭证。
+- *真实 UID 与有效 UID* ：权限检查用有效 UID。setuid 程序（ ~passwd~ 、 ~sudo~ ）运行时有效 UID 变成文件属主 root，真实 UID 仍是调用者，程序据此知道是谁在调用。
+- root 的特权实际上是一组能力（capabilities）的集合，如 ~CAP_NET_BIND_SERVICE~ （绑定 1024 以下端口）。程序只需要其中一项时，授予这一项比以 root 运行安全。
+
+* 三个文件
+| 文件 | 每行的字段 | 权限 |
+|---|---|---|
+| =/etc/passwd= | 用户名:x:UID:GID:注释:主目录:登录 shell。这里的 GID 是主组 | 所有人可读 |
+| =/etc/shadow= | 用户名:密码哈希:上次修改日期:最短:最长:提前警告:过期后宽限:账户过期日 | 只有 root 可读（本机 =-rw-------= ） |
+| =/etc/group= | 组名:x:GID:用户1,用户2。第四个字段是以此为附加组的成员 | 所有人可读 |
+
+- passwd 中的 =x= 表示哈希在 shadow 里。早期哈希直接写在 passwd 中，人人可读、可以离线爆破，才拆出只有 root 可读的 shadow。
+- 用 ~getent passwd <name>~ 查用户，它走 NSS，能看到 LDAP 等来源的用户； ~grep /etc/passwd~ 只看本地文件。改这些文件用 ~useradd~ / ~usermod~ / ~vipw~ ，它们会加锁并同步修改 shadow。
+
+* 密码哈希
+- 格式为 =$id$salt$hash= ： =$6$= 是 SHA-512-crypt， =$y$= 是 yescrypt（Debian 11、Fedora 35 起的默认）， =$2b$= 是 bcrypt。算法由 PAM 的 =pam_unix= 参数或 =/etc/login.defs= 的 ~ENCRYPT_METHOD~ 决定；本机 Arch 为 SHA512。
+- 盐（salt）让相同密码得到不同哈希，预先算好的彩虹表失效。
+- 哈希字段以 =!= 开头表示账户被锁（ ~passwd -l~ ），为 =*= 表示不能用密码登录（系统账户）。
+- 程序要验证用户密码时调用 PAM，而不是自己读 shadow 再调用 ~crypt()~ ：后者需要 root 权限，还绕过了 PAM 的锁定、二次验证等策略。

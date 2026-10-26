@@ -528,3 +528,29 @@ Source: TCP Reliable Delivery and Flow Control
 CUBIC 的增长只取决于时间、不按 RTT 轮次加，所以 RTT 长、窗口大的链路上恢复快得多；接近上次丢包点时放缓，越过后再加速试探。窗口小、RTT 短时它切到 TCP 友好模式，表现接近 Reno。
 
 Source: TCP Congestion Control
+
+** curl 测指定源站
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+网站在 CDN 后面有多台源站，想用 curl 直接测 203.0.113.34 这台的 HTTPS 和证书，不改 DNS。为什么 ~curl -H 'Host: example.com' https://203.0.113.34/~ 不行？应怎么写？
+
+*** Back
+直接用 IP 时 SNI 不带域名，证书按 IP 校验，会失败。用 ~curl --resolve example.com:443:203.0.113.34 https://example.com/~ （或 ~--connect-to example.com:443:203.0.113.34:443~ ）：连接改到指定 IP，URL 中的域名照常用于 SNI、证书校验和 ~Host~ 头。
+
+Source: curl for HTTP and TLS Debugging
+
+** curl 的分阶段计时
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~curl -w~ 输出 ~time_namelookup~ 0.01、 ~time_connect~ 0.05、 ~time_appconnect~ 0.15、 ~time_starttransfer~ 0.95。TCP 握手、TLS 握手和服务器处理各大约花了多久？
+
+*** Back
+这些值是从请求开始累计的时刻，要相减：TCP 握手 0.05 − 0.01 = 0.04 s，TLS 握手 0.15 − 0.05 = 0.10 s，服务器处理加一个往返 ≈ 0.95 − 0.15 = 0.80 s，瓶颈在服务器。经本地代理时 connect 只是到代理的时间，握手被算进后面的阶段。
+
+Source: curl for HTTP and TLS Debugging

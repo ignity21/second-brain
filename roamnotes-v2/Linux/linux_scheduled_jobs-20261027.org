@@ -1,0 +1,38 @@
+:PROPERTIES:
+:ID:       61298d1f-75b7-445d-aab3-cd796dc1bee7
+:ROAM_ALIASES: "Linux 定时任务"
+:VERIFIED_WITH: systemd 262 (2026-10-27)
+:END:
+#+title: Linux Scheduled Jobs with cron and systemd Timers
+#+filetags: :Linux:
+
+* cron 表达式
+五个字段：分（0–59） 时（0–23） 日（1–31） 月（1–12） 星期（0–7，0 和 7 都是周日），后面是命令。字段中可用 =*= 、 =,= 列举、 =-= 范围、 =/= 步长；另有 ~@reboot~ 、 ~@daily~ 等简写。
+
+- *「日」和「星期」都不是 =*= 时取「或」* ： =0 0 13 * 5= 是每月 13 号 *和* 每个周五都执行，不是「逢 13 号的周五」。要「且」，就在命令里再判断一次星期。
+- 网上速查表中的 =L= （最后一天）、 =W= （最近工作日）、 =#= （第几个星期几）、 =?= 是 Quartz 等调度器的扩展，cronie / Vixie cron 不支持。
+- 用户 crontab（ ~crontab -e~ ，存在 =/var/spool/cron/= ）与系统的 =/etc/crontab= 、 =/etc/cron.d/= 格式不同：后者在命令前多一个「以哪个用户运行」的字段。
+
+* cron 的坑
+- *环境极简* ：任务不经登录 shell，不读 =.bashrc= / =.zshrc= ， ~PATH~ 通常只有 =/usr/bin:/bin= ，shell 是 =/bin/sh= 。终端里能运行、cron 里报 =command not found= ，多半是这个原因：写绝对路径，或在 crontab 顶部写 ~PATH=...~ 。环境变量的来源见 [[id:956bf88a-baa4-459c-aebc-a1a29260efb5][Shell Startup Files and Environment Variables]]。
+- ~%~ 在 crontab 的命令中表示换行（其后的内容作为 stdin），所以 ~date +%F~ 要写成 ~date +\%F~ 。
+- 输出默认邮寄给用户，没配邮件就丢了：在命令后重定向 ~>> /path/to/log 2>&1~ 。
+- 不防重叠：上一轮还没跑完，下一轮照样启动。用 ~flock -n /path/to/lock <cmd>~ 。
+- 关机期间错过的任务不补跑；anacron 可以补跑按天、周、月执行的任务。
+
+* systemd timer
+一个 =.timer= unit 按时间激活同名的 =.service= unit。
+
+| | cron | systemd timer |
+|---|---|---|
+| 日志 | 自己重定向 | 进 journal，用 ~journalctl -u <unit>~ 查看 |
+| 错过的任务 | 不补跑 | ~Persistent=true~ 时开机后补跑 |
+| 重叠 | 会重叠 | 服务还在运行时，再次触发不会启动第二个实例 |
+| 环境与资源 | 极简环境 | 与普通服务相同，可设依赖和 cgroup 限制 |
+| 随机延迟 | 无 | ~RandomizedDelaySec=~ ，避免多台机器同时启动 |
+| 写法 | 一行 | 两个文件 |
+
+- 日历时间用 ~OnCalendar=~ ，如 =Mon..Fri 03:00= ；写完用 ~systemd-analyze calendar '<表达式>'~ 检查规范形式和下次触发时间。相对时间用 ~OnBootSec=~ 、 ~OnUnitActiveSec=~ 。
+- ~systemctl list-timers~ 查看所有 timer。本机（Arch）没有安装 cron，系统的定时任务全部是 timer，如每天检查 passwd / shadow 一致性的 =shadow.timer= 。
+- 用户级 timer 用 ~systemctl --user~ ；用户未登录时也要运行，需 ~loginctl enable-linger <user>~ 。
+- 临时的一次性任务： ~systemd-run --on-active=30m <cmd>~ 。

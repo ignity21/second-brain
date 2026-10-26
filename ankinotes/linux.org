@@ -1228,3 +1228,147 @@ Source: Linux Benchmarking and Load Generation
 用的是同步 I/O 引擎（如 ~psync~ ），每个 job 一次只能有一个请求在途， ~iodepth~ 实际为 1。改用异步引擎（ ~libaio~ 、 ~io_uring~ ），或增加 ~numjobs~ 提高并发。
 
 Source: Linux Benchmarking and Load Generation
+
+** initramfs 的作用
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Linux 启动时，内核为什么不直接挂载根文件系统，而要先用一个 initramfs？
+
+*** Back
+根所在设备的驱动（NVMe、RAID、LVM、LUKS 加密）可能编译成了模块，而模块就放在根文件系统里，内核还读不到。initramfs 是装进内存的小根文件系统，带着这些模块和工具，由它挂载真正的根后再 ~switch_root~ 、 ~exec~ systemd。改了磁盘控制器或加密、LVM 配置后要重建 initramfs。
+
+Source: Linux Boot Process
+
+** 加组后不生效
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+执行 ~sudo usermod -aG docker $USER~ 后，在同一个终端里运行 ~docker ps~ 仍然提示没有权限。为什么？怎么办？
+
+*** Back
+进程的 UID、主组和附加组在登录时由 login / sshd 经 PAM 设置，之后的子进程只继承这份凭证，不会重新读 ~/etc/group~ 。重新登录，或用 ~newgrp docker~ 开一个带新组的 shell。 ~id~ 显示的是当前进程的凭证。
+
+Source: Linux Users, Groups and Credentials
+
+** cron 中 command not found
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+一个脚本在终端里运行正常，放进 crontab 后报 ~command not found~ 。最可能的原因是什么？怎么改？
+
+*** Back
+cron 不经登录 shell，不读 ~.bashrc~ / ~.zshrc~ ， ~PATH~ 通常只有 ~/usr/bin:/bin~ ，shell 是 ~/bin/sh~ 。在脚本中写命令的绝对路径，或在 crontab 顶部设置 ~PATH=...~ 。
+
+Source: Linux Scheduled Jobs with cron and systemd Timers
+
+** cron 的日与星期字段
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+crontab 中 ~0 0 13 * 5 /opt/job.sh~ 什么时候执行？
+
+*** Back
+每月 13 号和每个周五的 0 点都执行，不是「逢 13 号的周五」：「日」和「星期」两个字段都不是 ~*~ 时取「或」。要「且」，需在命令中再判断一次星期。
+
+Source: Linux Scheduled Jobs with cron and systemd Timers
+
+** GUI 程序看不到 shell 中的环境变量
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+在 ~$HOME/.zshrc~ 中 ~export HTTPS_PROXY=...~ 后，终端里的程序走了代理，从桌面图标启动的编辑器和 systemd 用户服务却没有。为什么？应写在哪里？
+
+*** Back
+环境只在 ~execve~ 时从父进程传给子进程；图形会话和 systemd 用户实例不是从交互 shell 派生的，不读 rc 文件。写进 ~$HOME/.config/environment.d/*.conf~ （systemd 用户实例及其启动的程序，文件名须以 ~.conf~ 结尾），或经 PAM 登录时读取的 ~/etc/environment~ （所有用户可读，不放密钥）。
+
+Source: Shell Startup Files and Environment Variables
+
+** 重定向的顺序
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~cmd 2>&1 >out.txt~ 运行后，stderr 的内容去了哪里？要让 stdout 和 stderr 都写进文件，应怎么写？
+
+*** Back
+重定向从左到右处理： ~2>&1~ 时 stdout 还指向终端（或管道），所以 stderr 去了终端，只有 stdout 进文件。应写 ~cmd >out.txt 2>&1~ ；送进管道写 ~cmd 2>&1 | grep x~ 。
+
+Source: Shell Scripting Pitfalls in Bash and Zsh
+
+** set -e 不退出的情况
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Bash 脚本开了 ~set -e~ ，函数 ~f~ 中第一条命令 ~false~ 失败，后面的语句却继续执行了。 ~f~ 可能是怎么被调用的？
+
+*** Back
+在 ~if f; then~ 的条件中，或在 ~&&~ / ~||~ 的左侧被调用。这些上下文中 ~set -e~ 对整个函数体都不生效。另外管道的退出码默认只看最后一条命令，需要 ~set -o pipefail~ 。关键步骤要显式检查返回值。
+
+Source: Shell Scripting Pitfalls in Bash and Zsh
+
+** 测间隔用哪个时钟
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+用 ~clock_gettime(CLOCK_REALTIME)~ 前后各读一次来测一段代码的耗时，偶尔得到负数。原因是什么？应改用什么？
+
+*** Back
+~CLOCK_REALTIME~ 是墙钟，手动设置时间或 NTP / chrony 跳变校时都会让它倒退。测间隔用 ~CLOCK_MONOTONIC~ （C++ 中为 ~std::chrono::steady_clock~ ）：不会跳变，NTP 只在 500 ppm 内调频。
+
+Source: Linux Clocks and Time Measurement
+
+** high_resolution_clock
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+用 GCC 的标准库 libstdc++ 时，拿 ~std::chrono::high_resolution_clock~ 测耗时，有什么隐患？
+
+*** Back
+libstdc++ 中它是 ~system_clock~ （墙钟）的别名，会随校时跳变；libc++ 中它才是 ~steady_clock~ 。测间隔直接写 ~steady_clock~ 。
+
+Source: Linux Clocks and Time Measurement
+
+** 读线程 CPU 时间的代价
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+热路径上每条消息都调用 ~clock_gettime(CLOCK_THREAD_CPUTIME_ID)~ 统计 CPU 时间，比 ~clock_gettime(CLOCK_MONOTONIC)~ 贵多少？为什么？
+
+*** Back
+本机约 190 ns 对 15 ns，贵十几倍。 ~CLOCK_MONOTONIC~ 、 ~CLOCK_REALTIME~ 在 vDSO 中用 TSC 直接算出，不进内核；CPU 时间时钟不在 vDSO 中，每次都是真正的系统调用。
+
+Source: Linux Clocks and Time Measurement
+
+** time 的 real、user、sys
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~time ./app~ 输出 real 2.2 s、user 8.9 s、sys 0 s；另一个程序 real 10 s、user 0.3 s、sys 0.1 s。分别说明了什么？
+
+*** Back
+- 第一个：user + sys 大于 real，约 4 个线程在并行占用 CPU。
+- 第二个：real 远大于 user + sys，大部分时间在等待（I/O、锁、sleep 或排队等 CPU），优化计算没用，要找等待的原因。
+
+Source: Linux Clocks and Time Measurement

@@ -1,0 +1,42 @@
+:PROPERTIES:
+:ID:       6148d379-331e-4565-ab00-9413e87c1d22
+:ROAM_ALIASES: "curl HTTP 与 TLS 调试"
+:VERIFIED_WITH: curl 8.23.0 (OpenSSL 3.6.5, 2026-10-27)
+:END:
+#+title: curl for HTTP and TLS Debugging
+#+filetags: :Network:Linux:
+
+* 用途
+命令行 HTTP 客户端。排查时主要用它看清三件事：请求实际连到了哪台机器、TLS 握手协商出了什么、时间花在哪个阶段。
+
+* 看 TLS 握手与证书
+~curl -sv -o /dev/null https://example.com/~ ， ~-v~ 输出中以 =*= 开头的行包括：
+- 解析出的 IP 和实际连接的地址；
+- TLS 版本与密码套件（ =SSL connection using TLSv1.3 / ...= ），ALPN 协商的协议（ =h2= 或 =http/1.1= ）；
+- 证书的 subject、subjectAltName 是否匹配、有效期（ =start date= / =expire date= ）、签发者。
+
+其他常用选项：
+- ~--tlsv1.2 --tls-max 1.2~ ：限定版本，测服务器是否还支持 TLS 1.2。
+- ~-k~ 跳过证书校验，只用来确认问题出在证书上，不写进脚本。
+
+* 绕过 DNS 连接指定服务器
+CDN 或负载均衡后面有多台源站，想单独测其中一台、又不改 DNS 时：
+- ~--resolve example.com:443:203.0.113.34~ ：把这个域名和端口解析为指定 IP。
+- ~--connect-to example.com:443:203.0.113.34:443~ ：把连接改到另一台主机和端口；前两段留空表示任意，如 ~--connect-to ::203.0.113.34:~ 。
+
+两种方式下，URL 中的域名照常用于 SNI、证书校验和 =Host= 头，所以能测出源站的证书是否匹配。反过来直接请求 ~https://203.0.113.34/~ 并加 ~-H 'Host: example.com'~ 不行：SNI 不带域名，证书校验失败。
+
+* 分阶段计时
+#+begin_src sh
+curl -s -o /dev/null -w 'dns %{time_namelookup}\nconnect %{time_connect}\ntls %{time_appconnect}\nttfb %{time_starttransfer}\ntotal %{time_total}\n' https://example.com/
+#+end_src
+
+各值都是从请求开始累计的时刻，不是各阶段的时长：TCP 握手 = connect − dns，TLS 握手 = tls − connect，服务器处理加一个往返 ≈ ttfb − tls。
+
+本机经 fake-IP 模式的代理上网（域名解析为 =198.18.0.0/15= 中的地址）：connect 只有 3 ms，是连到本地代理的时间，到远端的握手被算进了 tls（1.26 s）。有代理时这些数字不代表到服务器的网络延迟。
+
+* 坑
+- 本机 zsh 中 ~curl~ 是 ~xh~ 的别名（ =conf.d/40-aliases.zsh= ），用 curl 特有的选项时写 ~command curl~ 。
+- 默认不跟随重定向，要加 ~-L~ 。
+- HTTP 4xx / 5xx 默认退出码仍为 0；脚本中加 ~-f~ （或 ~--fail-with-body~ ，同时保留响应体）。
+- zsh 中 URL 含 ~?~ 、 ~[]~ 时要加引号，否则被当作通配符。

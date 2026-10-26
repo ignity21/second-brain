@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       3dc23ed1-a507-4c85-bcfe-3ba0409c0c7c
+:ROAM_ALIASES: "grep、sed 与 awk 文本处理"
+:VERIFIED_WITH: GNU grep 3.12, GNU sed 4.10, GNU Awk 5.4.1 (2026-10-27)
+:END:
+#+title: Text Processing with grep, sed and awk
+#+filetags: :Linux:Shell:
+
+* 分工
+| 工具 | 处理单位 | 用于 |
+|---|---|---|
+| ~grep~ | 行，筛选 | 找出匹配的行； ~-v~ 反选、 ~-o~ 只取匹配部分、 ~-c~ 计数、 ~-r~ 递归、 ~-l~ 只列文件名 |
+| ~sed~ | 行，流式编辑 | 替换（ ~s/old/new/g~ ）、删除行、按行号或地址范围操作； ~-i~ 原地修改文件 |
+| ~awk~ | 记录与字段 | 按列取值、按条件过滤、汇总，如 ~awk '$3 > 100 {s += $3} END {print s}'~ |
+
+- 在代码仓库中搜索用 ~rg~ （ripgrep）：默认递归、跳过 =.gitignore= 中的文件、更快。处理 JSON 用 ~jq~ 。多文件关联、需要测试的处理改用 Python。
+- 具体选项和 awk 语法交给 AI 或 ~man~ ；需要判断的是下面的方言和平台差异。
+
+* 正则方言
+| 方言 | 用于 | 特点 |
+|---|---|---|
+| BRE（基本） | ~grep~ 、 ~sed~ 的默认 | ~+~ 、 ~?~ 、竖线、 ~()~ 、 ~{}~ 要加反斜杠才是元字符 |
+| ERE（扩展） | ~grep -E~ 、 ~sed -E~ 、 ~awk~ | 上述符号直接是元字符 |
+| PCRE | ~grep -P~ 、 ~rg -P~ | 支持 ~\d~ 、非贪婪 ~*?~ 、环视 ~(?=...)~ |
+
+- ~\d~ 不属于 BRE / ERE：GNU grep 3.12 中 ~grep -E '\d'~ 警告 =stray \ before d= 并把它当作字母 =d= ，要写 ~[0-9]~ 或用 ~-P~ 。
+- ~rg~ 默认的正则引擎不支持环视和反向引用，需要时加 ~-P~ 。
+
+* GNU 与 BSD（macOS）的差异
+- ~sed -i~ ：GNU 写 ~sed -i 's/a/b/' f~ ；BSD 必须给备份后缀，不要备份时写 ~sed -i '' 's/a/b/' f~ 。两边通用的写法是 ~perl -pi -e~ 。
+- ~awk~ 有多种实现：Arch 为 gawk，Debian 默认 mawk，macOS 为 BSD awk。 ~gensub~ 、 ~strftime~ 、 ~FIELDWIDTHS~ 等是 gawk 扩展，别处不可用。
+- macOS 自带的 ~grep~ 不支持 ~-P~ 。

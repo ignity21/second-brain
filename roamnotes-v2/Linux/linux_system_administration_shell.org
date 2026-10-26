@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       deb3103a-8c5e-46d7-a0f3-c7eb52dbd383
+:ROAM_ALIASES: "Linux 系统管理与 Shell"
+:END:
+#+title: Linux System Administration and Shell
+#+filetags: :Linux:
+
+* [[id:2fd5f48e-1354-47be-be34-c7f700b5028a][Boot Process]]
+* [[id:2f57cc5e-c1ec-482a-95c2-a9fa96d73a9c][Users, Groups and Credentials]]
+* [[id:61298d1f-75b7-445d-aab3-cd796dc1bee7][Scheduled Jobs]]
+* [[id:956bf88a-baa4-459c-aebc-a1a29260efb5][Shell Startup Files and Environment Variables]]
+* [[id:08fd1b02-968d-42e0-851f-f6b33c58e281][Shell Scripting Pitfalls]]
+* [[id:3dc23ed1-a507-4c85-bcfe-3ba0409c0c7c][Text Processing]]

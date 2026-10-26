@@ -1,0 +1,42 @@
+:PROPERTIES:
+:ID:       08fd1b02-968d-42e0-851f-f6b33c58e281
+:ROAM_ALIASES: "Shell 脚本的坑"
+:VERIFIED_WITH: bash 5.3.20, zsh 5.9.2 (2026-10-27)
+:END:
+#+title: Shell Scripting Pitfalls in Bash and Zsh
+#+filetags: :Linux:Shell:
+
+* 核心模型
+shell 先展开、再执行：变量和命令替换 → 分词（按 ~IFS~ 拆开 *未加引号* 的展开结果） → 文件名通配 → 处理重定向 → 执行命令。所有值都是字符串。大多数坑来自分词和通配作用到了不该作用的地方。
+
+写完用 ~shellcheck~ 检查，它能发现下面的大部分问题。脚本超过几十行、要处理数据结构或复杂的错误分支时，改用 Python。
+
+* 引号
+| 写法 | 展开 ~$var~ 、 ~$(cmd)~ | 分词与通配 |
+|---|---|---|
+| 不加引号 | 是 | 是 |
+| ~"..."~ | 是 | 否 |
+| ~'...'~ | 否 | 否 |
+
+- 默认给每个展开加双引号： ~"$file"~ 、 ~"$@"~ 。文件名含空格时， ~rm $f~ 会删错文件。
+- 数组： ~"${arr[@]}"~ 每个元素一个词； ~"${arr[*]}"~ 拼成一个字符串；不加引号的 ~${arr[@]}~ 会把含空格的元素再拆开。本机核对： ~a=("x y" z)~ ，不加引号循环三次（ =x= 、 =y= 、 =z= ），加引号循环两次。
+- 交互式 Bash 的双引号中 ~!~ 会触发历史展开，而 ~"\!"~ 会保留反斜杠（ ~echo "hi\!"~ 输出 =hi\!= ）。要输出 ~!~ 就用单引号。脚本中历史展开是关闭的，不用处理。
+
+* Bash 与 Zsh 的差异
+| | Bash | Zsh |
+|---|---|---|
+| 未加引号的 ~$var~ | 分词并通配 | 不分词（除非 ~setopt SH_WORD_SPLIT~ ）：本机 ~v="x y"; for i in $v~ 只循环一次 |
+| 数组下标 | 从 0 开始 | 从 1 开始（除非 ~setopt KSH_ARRAYS~ ） |
+| ~echo "\e[31m"~ | 原样输出 =\e= ，要 ~echo -e~ | 解释转义 |
+| ~$(( 5 / 2.0 ))~ | 只支持整数，报语法错误 | 得 2.5 |
+| 通配没有匹配 | 原样保留模式 | 报错 =no matches found= ；URL 中的 ~?~ 、 ~pip install 'pkg[extra]'~ 要加引号 |
+
+- 脚本开头写 ~#!/usr/bin/env bash~ ，不依赖当前交互 shell 的行为；可移植的输出用 ~printf~ 。Bash 中算浮点用 ~awk~ 或 ~bc~ 。
+- ~$SHELL~ 是 =/etc/passwd= 中的登录 shell，不随当前运行的 shell 变化；看当前 shell 用 ~ps -p $$~ 。
+
+* 语法与执行
+- *赋值的等号两侧不能有空格* ： ~var = value~ 执行的是命令 ~var~ ，参数为 ~=~ 和 ~value~ ，报 =command not found= 。比较写在 ~[ "$a" = "$b" ]~ 或 ~[[ ]]~ 中，且 ~[~ 两侧必须有空格（ ~[~ 本身是一条命令）。
+- *重定向从左到右处理* ： ~cmd >file 2>&1~ 两路都进文件； ~cmd 2>&1 >file~ 让 stderr 指向原来的 stdout（终端或管道），只有 stdout 进文件。把两路都送进管道： ~cmd 2>&1 | grep x~ ，或 ~cmd |& grep x~ （Bash 4 起与 zsh 支持）。
+- *管道的退出码* 默认是最后一条命令的， ~false | true~ 返回 0；加 ~set -o pipefail~ 后，任一命令失败即返回非零。
+- ~set -e~ 并不可靠：失败的命令出现在 ~if~ 条件、 ~&&~ / ~||~ 的左侧，或在被这样调用的函数内部时，不会退出。本机核对： ~set -e~ 下 ~if f; then ...~ 中函数 =f= 里的 ~false~ 之后的语句照样执行。关键步骤显式检查返回值。
+- ~--~ 表示选项结束，其后的参数即使以 ~-~ 开头也当作普通参数： ~rm -- -file~ ； ~uv run -- python --version~ 把 ~--version~ 交给 python。单独的 ~-~ 作为文件名时，多数工具表示 stdin 或 stdout。

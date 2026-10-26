@@ -1,0 +1,48 @@
+:PROPERTIES:
+:ID:       956bf88a-baa4-459c-aebc-a1a29260efb5
+:ROAM_ALIASES: "Shell 启动文件与环境变量"
+:VERIFIED_WITH: bash 5.3.20, zsh 5.9.2, systemd 262 (2026-10-27)
+:END:
+#+title: Shell Startup Files and Environment Variables
+#+filetags: :Linux:Shell:
+
+* 环境变量怎么传递
+- 环境是 ~execve~ 时交给新程序的一组 =KEY=VALUE= 字符串，见 [[id:6f1e5033-7e68-4eb1-a7d7-d5fd9db8b863][Linux Process Lifecycle]]。子进程拿到的是副本：它改环境不影响父进程，已经在运行的进程也看不到之后的修改。所以改了 rc 文件要开新 shell 或 ~source~ 它。
+- *shell 变量不等于环境变量* ： ~X=1~ 只在当前 shell 中有效； ~export X~ 后才进入子进程的环境； ~X=1 cmd~ 只给这一条命令。本机核对： ~X=1; bash -c 'echo $X'~ 输出空， ~export X~ 后输出 =1= 。
+- 查看一个进程启动时的环境： =/proc/<pid>/environ= （以 =\0= 分隔，用 ~tr '\0' '\n'~ 转换），见 [[id:8e974bc1-a02f-4567-8e13-5e8b37b5babb][Linux /proc and sysctl Interfaces]]。
+
+* Bash 读哪些文件
+| shell 类型 | 例子 | 读取 |
+|---|---|---|
+| 登录 shell | ssh、tty 登录， ~bash -l~ | =/etc/profile= ，然后 =~/.bash_profile= 、 =~/.bash_login= 、 =~/.profile= 中第一个存在的 |
+| 交互、非登录 | 终端模拟器中打开的 bash | =/etc/bash.bashrc= （Debian、Arch；Red Hat 系为 =/etc/bashrc= ，由 =~/.bashrc= 引入）、 =~/.bashrc= |
+| 非交互 | ~bash script.sh~ | 只读 ~$BASH_ENV~ 指向的文件 |
+
+- 登录 shell 不读 =.bashrc= ，惯例是在 =~/.bash_profile= 中 ~source ~/.bashrc~ 。
+- 存在 =~/.bash_profile= 时 =~/.profile= 被忽略：某个安装脚本把 ~PATH~ 写进了 =.profile= 却不生效，常是这个原因。
+
+* Zsh 读哪些文件
+按下表顺序读取，每个用户文件之前先读系统目录下的同名文件（Arch 为 =/etc/zsh/= ）：
+
+| 文件 | 何时读 | 放什么 |
+|---|---|---|
+| =.zshenv= | 每个 zsh，包括运行脚本的 | 尽量少；不产生输出，不假设有终端 |
+| =.zprofile= | 登录 shell，在 =.zshrc= 之前 | 环境变量，如 ~PATH~ |
+| =.zshrc= | 交互 shell | 别名、函数、补全、键绑定、提示符 |
+| =.zlogin= | 登录 shell，在 =.zshrc= 之后 | 很少用 |
+| =.zlogout= | 登录 shell 退出时 | 清理 |
+
+- ~PATH~ 放 =.zprofile= 而不是 =.zshenv= ：系统的 =zprofile= 在 =.zshenv= 之后执行，可能改写 ~PATH~ （macOS 的 ~path_helper~ 会把系统路径移到前面）。
+- 本机 Arch 的 =/etc/zsh/zprofile= 只有一行 ~emulate sh -c 'source /etc/profile'~ ，让 zsh 的登录 shell 也读 =/etc/profile= 。zsh 不读 =~/.profile= 。
+
+* 不经过 shell 启动的程序
+图形会话、systemd 服务、cron 任务、从桌面图标启动的编辑器，都不是从交互 shell 派生的，看不到 =.bashrc= / =.zshrc= 中 export 的变量。症状：终端里能运行，GUI 程序或服务里找不到命令、代理不生效。
+
+| 设置位置 | 作用于 | 格式 |
+|---|---|---|
+| =/etc/environment= | 经 PAM 登录的会话（ =pam_env= ） | =KEY=VALUE= ，不是脚本，不展开 ~$VAR~ |
+| =~/.config/environment.d/*.conf= | systemd 用户实例及其启动的程序（多数桌面会话） | =KEY=VALUE= ，可引用 ~${VAR}~ ；文件名必须以 =.conf= 结尾 |
+| unit 中的 ~Environment=~ 、 ~EnvironmentFile=~ | 系统服务 | |
+| crontab 顶部的 =KEY=VALUE= 行 | 该 crontab 中的任务 | |
+
+=/etc/environment= 所有用户可读，不要放令牌、密码等密钥。
