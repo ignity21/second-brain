@@ -16,8 +16,11 @@ Linux 尽量把空闲内存用作页缓存，所以 =free= 列通常很小，这
 
 两类页的区别来自映射的种类，见 [[id:c2e41773-cd6c-4697-84fd-33a1178a0407][Linux Memory Mappings]]。内核自己的可回收缓存（目录项、inode 缓存等 slab）也在回收范围内。
 
-* 何时回收：水位线
-每个内存区（zone）有三条水位线（watermark），在 =/proc/zoneinfo= 中为 =min= 、 =low= 、 =high= （单位：页）：
+* Linux Memory Zones and Watermarks
+:PROPERTIES:
+:ID:       b879e051-9bf6-48d5-a135-0da0ee8ee2d4
+:END:
+何时回收由水位线决定。物理内存先按 NUMA 节点、再按内存区（zone）划分，x86-64 上主要有 =DMA= （最低 16 MiB，给只能寻址这一段的老设备）、 =DMA32= （4 GiB 以下）和 =Normal= （其余）；本机只有一个节点，Normal 约 29 GiB。每个 zone 有三条水位线（watermark），在 =/proc/zoneinfo= 中为 =min= 、 =low= 、 =high= （单位：页）：
 
 | 空闲页 | 行为 |
 |---|---|

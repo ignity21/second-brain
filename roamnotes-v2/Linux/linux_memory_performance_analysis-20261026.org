@@ -1,0 +1,61 @@
+:PROPERTIES:
+:ID:       0696af2e-fb7a-49a4-a88a-8d32ba0e7c43
+:ROAM_ALIASES: "Linux 内存性能分析"
+:VERIFIED_WITH: Linux 6.5, procps-ng 4.0.7 (2026-10-26)
+:END:
+#+title: Linux Memory Performance Analysis
+#+filetags: :Linux:
+
+* 读 free
+| 列 | 含义（来自 =/proc/meminfo= ） |
+|---|---|
+| =total= | 内核可管理的物理内存 |
+| =used= | procps-ng 4 起为 total − available；3.x 为 total − free − buff/cache，本机两种算法差 0.8 GiB |
+| =free= | 完全没用的页 |
+| =shared= | =Shmem= ：tmpfs 中的文件和共享内存 |
+| =buff/cache= | =Buffers= + =Cached= + =SReclaimable= （可回收的 slab） |
+| =available= | =MemAvailable= ：不换页的前提下还能给新程序的内存，约等于 free + 可回收的页缓存和 slab − 水位线保留 |
+
+本机核对：total 32,631,716 KiB − available 21,848,492 KiB = used 10,783,224 KiB；buff/cache = 11,840 + 14,520,032 + 6,089,512 KiB。
+
+- 看 =available= ，不看 =free= ：Linux 把空闲内存用作页缓存， =free= 很小是正常的，原因见 [[id:065d6f74-0113-4308-b158-b2333a6f7339][Linux Memory Reclaim]]。
+- =buff/cache= 不全是可回收的： =Shmem= 计在 =Cached= 里，但只能换出、不能丢弃； =/dev/shm= 或 tmpfs 中残留的大文件会让 =available= 变小。
+- 进程级的 =VIRT= 、 =RES= 、 =SHR= 、 =PSS= 怎么读见 [[id:4dc805d4-c007-4526-bd64-c9ca9af200a4][Linux Virtual Memory and Page Faults]]；多个进程的 =RES= 相加会重复计算共享页。
+
+* 内存去哪了
+=available= 少时，按 =/proc/meminfo= 拆分去向：
+
+| 去向 | 字段 | 再查到具体是谁 |
+|---|---|---|
+| 进程的匿名内存（堆、栈、 ~malloc~ ） | =AnonPages= | ~ps aux --sort=-rss~ ；准确值看 =/proc/<pid>/smaps_rollup= 的 =Pss= |
+| 文件的页缓存 | =Cached= − =Shmem= 、 =Buffers= | ~fincore~ 、 ~vmtouch~ 看某个文件有多少在缓存，见 [[id:a20150eb-3731-4848-8a33-c55c4a318b7b][Linux Page Cache and Writeback]] |
+| tmpfs 和共享内存 | =Shmem= | ~df -t tmpfs~ 、 ~ipcs -m~ |
+| 内核 slab | =SReclaimable= / =SUnreclaim= | ~slabtop~ 看是哪个缓存（ =dentry= 、 =kmalloc-*= 等） |
+| 内核其他 | =KernelStack= 、 =PageTables= 、 =VmallocUsed= | 线程很多时 =KernelStack= 大；映射很多时 =PageTables= 大 |
+| 大页 | =HugePages_Total= × =Hugepagesize= | 预留后即占用，不论是否被使用 |
+
+本机：total − free = 30.6 GB，上面各项合计 30.1 GB，差的约 0.5 GB 是驱动、per-CPU 等没有单独列出的内核内存。
+
+- =SUnreclaim= 持续上涨说明内核内存在泄漏（驱动、大量 socket、残留的 cgroup 等），用 ~slabtop~ 找增长的缓存。
+- 容器里看 cgroup 的 =memory.current= 和 =memory.stat= ，不看 ~free~ 。页缓存也计入 cgroup 的用量，接近 =memory.max= 时先回收该 cgroup 自己的缓存，回收不动才在 cgroup 内 OOM。
+
+* 压力信号
+用量大不等于有问题，内存不够时会出现下列信号。机制见 [[id:065d6f74-0113-4308-b158-b2333a6f7339][Linux Memory Reclaim]]：
+
+| 信号 | 看哪里 | 说明 |
+|---|---|---|
+| 主缺页 | ~pidstat -r~ 的 =majflt/s= 、 =/proc/vmstat= 的 =pgmajfault= | 要访问的页不在内存，在读盘：工作集放不下或代码、缓存被挤出去了 |
+| 换页 | ~vmstat~ 的 =si= / =so= | 持续非零是颠簸 |
+| 直接回收 | =/proc/vmstat= 的 =allocstall_*= 、 ~sar -B~ 的 =pgscand/s= | 分配内存时同步回收，延迟尖峰的来源 |
+| PSI | =/proc/pressure/memory= | =some= ：有任务因回收、换入、颠簸而停顿的时间比例； =full= ：所有非空闲任务同时停顿 |
+| OOM | ~dmesg~ 、 ~journalctl -k~ 中的 =Out of memory= | 被杀的进程和当时各进程的用量 |
+
+* 泄漏、碎片还是缓存
+| 现象 | 判断 | 下一步 |
+|---|---|---|
+| 进程的 =RssAnon= 随时间单调上涨，业务量不变 | 泄漏或分配器碎片 | 用分配器统计区分，见 [[id:f659b32b-4b09-46a7-818e-791ca3855765][Linux Memory Allocation with malloc]]。找泄漏点：不重启进程用 ~memleak~ （bcc）跟踪长期未释放的分配；能重启或重编译时用 ASan 的 LeakSanitizer、Valgrind、heaptrack |
+| =buff/cache= 涨， =available= 稳定 | 正常的缓存 | 不用处理 |
+| =Shmem= 涨 | tmpfs、 =/dev/shm= 中的文件没删 | ~df -t tmpfs~ |
+| =SUnreclaim= 涨 | 内核内存泄漏 | ~slabtop~ |
+| =VIRT= 很大而 =RES= 不大 | 只预留了地址空间（malloc arena、线程栈） | 通常无害 |
+| =available= 还多，日志里却有 =page allocation failure: order:N= | 物理内存碎片，凑不出 2^N 个连续页 | =/proc/buddyinfo= 看各阶的空闲块数 |

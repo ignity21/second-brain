@@ -1,0 +1,64 @@
+:PROPERTIES:
+:ID:       8e974bc1-a02f-4567-8e13-5e8b37b5babb
+:ROAM_ALIASES: "Linux /proc 与 sysctl"
+:VERIFIED_WITH: Linux 6.5, systemd 262 (2026-10-26)
+:END:
+#+title: Linux /proc and sysctl Interfaces
+#+filetags: :Linux:
+
+* /proc 是什么
+- procfs 是伪文件系统：文件内容在读取时由内核即时生成，不占磁盘，多数文件的大小显示为 0。
+- 计数类文件（ =/proc/stat= 、 =/proc/diskstats= 、 =/proc/vmstat= ）给的是开机以来的累计值，速率要采样两次作差，监控工具就是这样算的。 ~top~ 、 ~free~ 、 ~vmstat~ 、 ~iostat~ 、 ~ps~ 本质上都是在格式化 =/proc= ；精简系统或容器里没有这些工具时，直接读文件即可。
+- =/proc= 只放进程和内核的状态；设备和驱动的属性在 sysfs（ =/sys= ），例如磁盘的调度器 =/sys/block/<dev>/queue/scheduler= 。
+- 字段的含义随时查 ~man 5 proc~ 或内核文档 =Documentation/filesystems/proc.rst= ，下面只记「什么问题看哪个文件」。
+
+* 系统级文件
+| 想知道 | 文件 | 解读见 |
+|---|---|---|
+| CPU 时间分布、开机以来创建的任务数 | =/proc/stat= | [[id:00e92d55-5469-4d5d-9566-e889d0b86ab3][Linux CPU Performance Analysis]] |
+| 平均负载 | =/proc/loadavg= | 同上 |
+| 资源压力（PSI） | =/proc/pressure/{cpu,memory,io}= | 同上 |
+| 内存去向 | =/proc/meminfo= | [[id:0696af2e-fb7a-49a4-a88a-8d32ba0e7c43][Linux Memory Performance Analysis]] |
+| 缺页、回收、换页计数 | =/proc/vmstat= | 同上 |
+| 各 zone 的水位线 | =/proc/zoneinfo= | [[id:b879e051-9bf6-48d5-a135-0da0ee8ee2d4][Linux Memory Zones and Watermarks]] |
+| 物理内存碎片 | =/proc/buddyinfo= | 内存性能分析 |
+| 内核 slab 缓存 | =/proc/slabinfo= （需要 root，常用 ~slabtop~ 读） | 内存性能分析 |
+| 中断和软中断计数 | =/proc/interrupts= 、 =/proc/softirqs= | [[id:3158f50d-42bd-46d5-8862-2801f343fe72][Linux Interrupt Counters in /proc]] |
+| 磁盘 I/O 计数 | =/proc/diskstats= | [[id:f44727ab-e7c3-42cf-8d66-d0c595a352d6][Linux I/O Performance Analysis]] |
+| 挂载 | =/proc/mounts= （即 =/proc/self/mounts= ） | |
+| 网络计数和 socket 表 | =/proc/net/= （按网络命名空间） | |
+| CPU 型号和特性标志 | =/proc/cpuinfo= | |
+
+* 进程级文件
+=/proc/<pid>/= ， =/proc/self= 指向读取者自己。
+
+| 想知道 | 文件 |
+|---|---|
+| 命令行、可执行文件、工作目录 | =cmdline= （参数以 =\0= 分隔）、 =exe= 、 =cwd= |
+| 环境变量 | =environ= ：启动时的环境，进程之后调用 ~setenv~ 不会反映在这里 |
+| 状态、内存摘要、线程数、上下文切换次数、允许运行的核 | =status= （给人读） |
+| CPU 时间、缺页次数等 | =stat= （给程序读）。第二个字段是括号中的命令名，本身可以含空格和括号，解析时要从最后一个 =)= 之后开始分割 |
+| 内存映射和逐区域用量 | =maps= 、 =smaps= 、 =smaps_rollup= |
+| 打开的 fd、每个 fd 的偏移和标志 | =fd/= 、 =fdinfo/= |
+| 每个线程 | =task/<tid>/= ，下面有同样的文件 |
+| 睡在哪个内核函数 | =wchan= ；完整内核栈 =stack= （需要 root） |
+| 读写字节数 | =io= |
+| 资源限制 | =limits= |
+| 运行与排队时间 | =schedstat= |
+| OOM 评分 | =oom_score= 、 =oom_score_adj= |
+
+读别人进程的 =environ= 、 =fd/= 、 =mem= 等敏感文件需要能 ptrace 它（同用户且未被禁止，或 root）。
+
+* /proc/sys 与 sysctl
+=/proc/sys/= 下的文件是可调的内核参数，路径中的 =/= 换成 =.= 就是 sysctl 的名字： =/proc/sys/vm/swappiness= ↔ ~vm.swappiness~ 。四个主要子树： =kernel= 、 =vm= 、 =fs= 、 =net= 。
+
+| 操作 | 做法 |
+|---|---|
+| 读 | ~sysctl vm.swappiness~ ，或 ~cat~ 对应文件 |
+| 临时改（重启失效） | ~sysctl -w vm.swappiness=10~ ，或 ~echo~ 写入文件 |
+| 永久改 | 写入 =/etc/sysctl.d/<名字>.conf= ，开机时由 =systemd-sysctl.service= 应用；立即应用全部配置用 ~sysctl --system~ |
+
+- ~sysctl -p~ 不带参数只读 =/etc/sysctl.conf= 。systemd 只读 =sysctl.d= 目录，有的发行版（Arch 默认没有这个文件）用一个符号链接把它接进 =sysctl.d= ，所以新配置一律放 =/etc/sysctl.d/= 。
+- *上游默认与本机值* ：发行版和 systemd 在 =/usr/lib/sysctl.d/= 中改了不少默认值， =/etc/sysctl.d/= 中的同名文件覆盖它。查一个值从哪来： ~grep -r <名字> /usr/lib/sysctl.d /etc/sysctl.d~ 。本机的例子： ~vm.max_map_count~ 上游 65530，Arch 的 =10-arch.conf= 改为 1048576； ~kernel.pid_max~ 上游 32768（CPU 多时按每核 1024 放大），systemd 的 =50-pid-max.conf= 改为 4194304。
+- *命名空间* ： ~net.*~ 的大多数参数按网络命名空间独立，容器有自己的一份；容器中 =/proc/sys= 默认只读，用 ~docker run --sysctl~ 设置。
+- 常调参数的含义写在各自的机制笔记里：回收和 swap 见 [[id:065d6f74-0113-4308-b158-b2333a6f7339][Linux Memory Reclaim]]，脏页写回见 [[id:a20150eb-3731-4848-8a33-c55c4a318b7b][Linux Page Cache and Writeback]]，overcommit 见 [[id:4dc805d4-c007-4526-bd64-c9ca9af200a4][Linux Virtual Memory and Page Faults]]。

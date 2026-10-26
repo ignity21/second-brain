@@ -1,0 +1,51 @@
+:PROPERTIES:
+:ID:       f44727ab-e7c3-42cf-8d66-d0c595a352d6
+:ROAM_ALIASES: "Linux I/O 性能分析"
+:VERIFIED_WITH: Linux 6.5, btrfs on HDD (2026-10-26)
+:END:
+#+title: Linux I/O Performance Analysis
+#+filetags: :Linux:
+
+* 指标
+~iostat -x~ 的数字来自 =/proc/diskstats= 中每块盘的累计计数，两次采样作差：
+
+| 指标 | ~iostat -x~ 列 | 含义 |
+|---|---|---|
+| IOPS | =r/s= 、 =w/s= | 每秒完成的读写请求数 |
+| 吞吐 | =rkB/s= 、 =wkB/s= | 每秒读写的数据量 |
+| 请求大小 | =rareq-sz= 、 =wareq-sz= （KiB） | 吞吐 / IOPS；小说明是随机小 I/O |
+| 延迟 | =r_await= 、 =w_await= （ms） | 请求从进入块层到完成的平均时间， *包括在块层排队的时间* ，不只是设备服务时间 |
+| 队列长度 | =aqu-sz= | 平均在途请求数 |
+| 利用率 | =%util= | 至少有一个请求在途的时间比例 |
+
+- 三者的关系（Little 定律）：平均队列长度 ≈ IOPS × 平均延迟。例如 2,000 IOPS、await 5 ms，队列里平均有 10 个请求。延迟上升而 IOPS 不变，队列就在变长。
+- 按负载选指标：数据库、大量小文件这类随机小 I/O 看 IOPS 和延迟；日志、备份、多媒体这类顺序大 I/O 看吞吐。同一块盘两种负载能达到的上限可以相差几个数量级（机械盘尤其明显，见 [[id:d5d10c24-2f44-46a6-aa2d-1277d2af4fc6][Linux Block Layer and I/O Stack]]）。
+
+* =%util= 与饱和
+- =%util= 只说明「有没有请求在途」，不说明盘能不能接受更多请求。机械盘一次服务一个请求， =%util= 接近 100% 基本就是饱和；SSD、NVMe 和 RAID 能并行处理很多请求， =%util= 100% 时可能离上限还很远（ ~iostat~ 的手册也这样说明）。
+- 饱和要看排队：await 远高于该设备空载时的延迟、 =aqu-sz= 持续偏高、 =/proc/pressure/io= 的 =some= 上升。设备的真实上限用 ~fio~ 按实际负载的块大小和队列深度测出来再比较。
+- 旧版 ~iostat~ 的 =svctm= （服务时间）是按 =%util= 推算的，对并行设备没有意义，已废弃，不要用。
+
+* 排查顺序
+1. *空间* ： ~df -h~ 、 ~df -i~ 。写入报 ~ENOSPC~ 而空间还有，是 inode 用完；删了大文件 ~df~ 不降，是文件仍被打开。两者见 [[id:72e5eb39-6c7e-41ea-9a28-86e0fb144c6f][Linux File System Structure]]。
+2. *是否真的到了磁盘* ：页缓存命中的读不会到达块层。应用读了很多而 ~iostat~ 的读很少，说明缓存在起作用。进程的 =/proc/<pid>/io= 中 =rchar= 是 ~read~ 类调用读到的字节（含缓存命中）， =read_bytes= 是真正从存储读的字节。本机读 64 MiB 文件：热读 =rchar= 64 MiB、 =read_bytes= 0；清掉缓存后冷读 =read_bytes= 53 MiB。
+3. *哪块盘* ： ~iostat -xz 1~ ，按上一节判断是否饱和。
+4. *哪个进程* ： ~pidstat -d 1~ 。 ~iotop~ 需要延迟统计，5.14 起默认关闭，要先 ~sysctl kernel.task_delayacct=1~ （本机为 0）。
+5. *哪个文件、什么调用* ： ~lsof -p <pid>~ 看打开的文件， ~strace -e trace=desc -p <pid>~ 看读写调用；bcc 的 ~filetop~ 、 ~opensnoop~ 按文件统计， ~biolatency~ 给出块 I/O 延迟的直方图（看长尾）， ~biosnoop~ 列出每个请求。
+6. *谁在等* ：长期处于 =D= 状态的任务和它睡在哪个内核函数（ ~ps -eo pid,stat,wchan:32,comm~ ）。
+
+写延迟有尖峰而磁盘并不忙时，先怀疑脏页阈值导致的写入节流，见 [[id:a20150eb-3731-4848-8a33-c55c4a318b7b][Linux Page Cache and Writeback]]。
+
+* 优化手段的判断
+| 手段 | 何时有效 | 注意 |
+|---|---|---|
+| 顺序化、合并小写（追加写日志、批量提交） | 机械盘收益最大；SSD 上也减少请求数和写放大 | |
+| 批量 ~fsync~ （group commit）代替每次写都 ~O_SYNC~ | 需要持久化的写入 | 一次 ~fsync~ 覆盖多条记录，代价是这批记录一起等；机制见 [[id:c7ce9028-6f2b-467d-a4e2-989926573aa4][Linux File I/O Buffering and Durability]] |
+| 依靠页缓存或应用内缓存 | 读多、热点集中 | 缓存与其他内存竞争，可能被回收 |
+| ~mmap~ 代替 ~read~ | 随机访问大文件、多进程共享只读数据 | 省一次拷贝，但每页首次访问都缺页，何时读盘不可控，I/O 错误变成 ~SIGBUS~ ；顺序读用 ~read~ 加大缓冲区通常一样快 |
+| ~O_DIRECT~ | 自己管理缓存的数据库 | 要对齐，绕过页缓存后预读和合并都要自己做 |
+| io_uring 或线程池 | 普通文件的异步 I/O | 普通文件不支持 epoll 就绪通知，见 [[id:6a9a7f5c-361c-42f1-a284-d8f16d992040][Linux I/O Models and Multiplexing]] |
+| ~ionice~ 调 I/O 优先级 | 只有 BFQ 和 mq-deadline（5.14 起支持优先级类）按优先级调度 | NVMe 默认的调度器 =none= 下无效；调度器的选择见 Block Layer 笔记 |
+| cgroup v2 的 =io.max= | 限制某个服务的 IOPS 和带宽，防止它挤占共享磁盘 | systemd 中为 ~IOReadBandwidthMax=~ 、 ~IOWriteIOPSMax=~ 等 |
+| 挂载选项 ~noatime~ | 读多的文件系统 | 默认的 ~relatime~ 已经只在必要时更新访问时间，收益有限 |
+| 文件系统选择 | 大文件、高并发写多用 xfs | xfs 不能缩小，ext4 可以 |

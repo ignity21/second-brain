@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       8a6eab8f-f865-4344-8245-ad7a9b09f79a
+:ROAM_ALIASES: "Linux 观测与排障"
+:END:
+#+title: Linux Observability and Troubleshooting
+#+filetags: :Linux:
+
+* [[id:fa3e0959-819d-4d3e-abcd-e4bdc1cea072][Performance Troubleshooting Method]]
+* [[id:00e92d55-5469-4d5d-9566-e889d0b86ab3][CPU Performance Analysis]]
+* [[id:0696af2e-fb7a-49a4-a88a-8d32ba0e7c43][Memory Performance Analysis]]
+* [[id:f44727ab-e7c3-42cf-8d66-d0c595a352d6][I/O Performance Analysis]]
+* [[id:8e974bc1-a02f-4567-8e13-5e8b37b5babb][/proc and sysctl Interfaces]]
+* [[id:505fb55e-6b4a-4a66-9f8a-7925d2983d27][Resource Limits]]

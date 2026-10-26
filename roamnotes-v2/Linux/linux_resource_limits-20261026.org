@@ -1,0 +1,54 @@
+:PROPERTIES:
+:ID:       505fb55e-6b4a-4a66-9f8a-7925d2983d27
+:ROAM_ALIASES: "Linux 资源限制"
+:VERIFIED_WITH: Linux 6.5, glibc 2.44, systemd 262 (2026-10-26)
+:END:
+#+title: Linux Resource Limits
+#+filetags: :Linux:
+
+* 四层限制
+| 层 | 例子 | 作用范围 | 查看和设置 |
+|---|---|---|---|
+| 进程的资源限制（rlimit） | ~RLIMIT_NOFILE~ 、 ~RLIMIT_NPROC~ 、 ~RLIMIT_STACK~ 、 ~RLIMIT_MEMLOCK~ 、 ~RLIMIT_CORE~ | 单个进程（ ~RLIMIT_NPROC~ 按用户统计） | ~ulimit~ 、 ~prlimit~ 、 =/proc/<pid>/limits= 、 ~setrlimit~ |
+| 内核全局参数 | ~fs.file-max~ 、 ~fs.nr_open~ 、 ~kernel.pid_max~ 、 ~kernel.threads-max~ 、 ~vm.max_map_count~ 、 ~fs.inotify.max_user_watches~ | 全系统、每用户或每个命名空间 | ~sysctl~ ，见 [[id:8e974bc1-a02f-4567-8e13-5e8b37b5babb][Linux /proc and sysctl Interfaces]] |
+| cgroup | =pids.max= 、 =memory.max= 、 =cpu.max= | 一组进程（容器、systemd 服务） | =/sys/fs/cgroup/= ；systemd 的 ~TasksMax=~ 、 ~MemoryMax=~ 、 ~CPUQuota=~ |
+| 实现常量 | ~ARG_MAX~ 、 ~NAME_MAX~ 、 ~PATH_MAX~ 、 ~PAGESIZE~ 、 ~CLK_TCK~ | 系统或某个文件系统 | ~getconf~ 、 ~sysconf~ 、 ~pathconf~ |
+
+* rlimit
+- 每项有软限制（soft）和硬限制（hard）。生效的是软限制；进程可以在硬限制以内自己调高软限制，调高硬限制需要 ~CAP_SYS_RESOURCE~ ，普通进程降低硬限制后无法再调回。
+- 随 ~fork~ 继承，跨 ~exec~ 保持，所以要在启动服务的那一层设置。正在运行的进程用 ~prlimit --pid <pid> --nofile=<soft>:<hard>~ 修改。
+- *谁设置的* ：
+  - 交互登录（ssh、终端）经过 PAM， =pam_limits= 读 =/etc/security/limits.conf= 。
+  - systemd 启动的服务不经过 PAM， =limits.conf= 对它无效，要在 unit 中写 ~LimitNOFILE=~ 等。systemd 的默认值是 ~DefaultLimitNOFILE=1024:524288~ ：软限制保持 1024，是为了不让使用 ~select~ 的老程序在 fd 号超过 1024 后出错；需要大量 fd 的程序应自己把软限制调到硬限制。
+- ~RLIMIT_NPROC~ 统计的是该用户（真实用户 ID）的全部任务，线程也算，不是单个进程的子进程数；root 和有 ~CAP_SYS_RESOURCE~ 的进程不受它限制。
+
+* 错误码对应的限制
+资源类错误往往不是代码 bug，而是撞了某个上限。日志里只打印 ~strerror~ 不够，要能判断撞的是哪一个：
+
+| 现象 | 撞到的限制 |
+|---|---|
+| ~open~ 、 ~accept~ 、 ~socket~ 返回 ~EMFILE~ | 本进程的 ~RLIMIT_NOFILE~ ，见 [[id:937b44b4-497a-466a-924d-0a01a2228266][Linux File Descriptors and Open Files]] |
+| 同样的调用返回 ~ENFILE~ | 全系统的 ~fs.file-max~ |
+| ~fork~ 、 ~pthread_create~ 返回 ~EAGAIN~ | 该用户的 ~RLIMIT_NPROC~ 、cgroup 的 =pids.max= 、 ~kernel.threads-max~ ，或 PID 用尽（ ~kernel.pid_max~ ） |
+| 内存还多， ~mmap~ 或 ~malloc~ 却失败（ ~ENOMEM~ ） | ~vm.max_map_count~ （每个进程的映射数，上游默认 65530），或 overcommit 策略、 ~RLIMIT_AS~ |
+| ~inotify_add_watch~ 返回 ~ENOSPC~ （「No space left on device」，但磁盘没满） | ~fs.inotify.max_user_watches~ |
+| ~execve~ 返回 ~E2BIG~ （「Argument list too long」） | 参数和环境变量的总大小超过 ~RLIMIT_STACK~ 的 1/4，或单个参数达到 128 KiB（含结尾的 =\0= ） |
+| 主线程栈溢出， ~SIGSEGV~ | ~RLIMIT_STACK~ ，见 [[id:c864c39e-2dd7-4c4d-ad24-9b541abc2f30][Linux Process Address Space]] |
+| 写文件收到 ~SIGXFSZ~ 或 ~EFBIG~ | ~RLIMIT_FSIZE~ |
+| 程序崩溃却没有 core 文件 | ~RLIMIT_CORE~ 为 0，或 ~kernel.core_pattern~ 交给了 systemd-coredump（用 ~coredumpctl~ 查） |
+
+本机核对：软限制 16 时第 14 次 ~open~ 返回 ~EMFILE~ （0–2 已被占用）；8 MiB 栈时 ~getconf ARG_MAX~ 为 2 MiB， ~ulimit -s 16384~ 后为 4 MiB；131,071 字节的单个参数可以 ~exec~ ，131,072 字节返回 ~E2BIG~ 。
+
+- 这类错误多是暂时的或可调的，程序可以退避重试，但不能忙等。坑：监听 socket 上 ~accept~ 返回 ~EMFILE~ 时，新连接留在队列里，epoll 会一直报告可读，事件循环空转占满 CPU。常见做法是预先保留一个空闲 fd，出错时关掉它、 ~accept~ 后立即关闭这个连接，再重新保留。
+
+* 实现常量：运行时查询，不要硬编码
+- =<limits.h>= 中 ~_POSIX_~ 开头的常量（如 ~_POSIX_ARG_MAX~ = 4096）是 POSIX 要求各系统 *至少* 支持的值，不是本机的实际上限。实际值在运行时查询：代码中用 ~sysconf(_SC_ARG_MAX)~ 、 ~pathconf(path, _PC_NAME_MAX)~ ，shell 中用 ~getconf ARG_MAX~ 、 ~getconf NAME_MAX /~ 。
+- 为什么不能硬编码：
+
+| 常量 | 本机 | 变化的原因 |
+|---|---|---|
+| ~ARG_MAX~ | 2,097,152 | 随 ~RLIMIT_STACK~ 变 |
+| ~NAME_MAX~ | 255 | 按文件系统 |
+| ~PATH_MAX~ | 4096 | 只是单个路径参数的上限，通过相对路径可以访问更深的文件 |
+| ~PAGESIZE~ | 4096 | ARM64 上可能是 16 KiB 或 64 KiB |
+| ~CLK_TCK~ | 100 | 即 ~USER_HZ~ ， =/proc= 中 CPU 时间的单位 |

@@ -1,0 +1,56 @@
+:PROPERTIES:
+:ID:       00e92d55-5469-4d5d-9566-e889d0b86ab3
+:ROAM_ALIASES: "Linux CPU 性能分析"
+:VERIFIED_WITH: Linux 6.5 (2026-10-26)
+:END:
+#+title: Linux CPU Performance Analysis
+#+filetags: :Linux:
+
+* 平均负载
+- 平均负载（load average）是 =R= （运行或可运行）和 =D= （不可中断睡眠）任务数的指数衰减平均，按线程计，三个值的时间常数分别为 1、5、15 分钟。来源 =/proc/loadavg= ，第四列是「当前可运行任务数 / 总任务数」。状态的含义见 [[id:925ecbf4-455e-437d-a1bb-432542685263][Linux Process States]]。
+- 读法：与核数（ ~nproc~ ）比较，持续高于核数说明有任务在排队；1 分钟值远高于 15 分钟值表示负载正在上升。
+- 因为包含 =D= ，Linux 的负载不是纯 CPU 指标，要和 CPU 使用率一起看：
+
+| 负载 | CPU 使用率 | 说明 | 下一步 |
+|---|---|---|---|
+| 高 | user / system 高 | CPU 密集，任务在排队 | 找占 CPU 的进程和线程 |
+| 高 | 低，iowait 高 | 大量 =D= 任务在等磁盘 | [[id:f44727ab-e7c3-42cf-8d66-d0c595a352d6][Linux I/O Performance Analysis]] |
+| 高 | 低，iowait 也低 | =D= 任务在等别的东西（NFS、内核锁） | ~ps -eo pid,stat,wchan:32,comm~ 找 =D= 任务和它睡在哪个内核函数 |
+| 不高 | 总使用率不高，但某个核 100% | 单线程瓶颈或中断集中在一个核 | ~mpstat -P ALL 1~ 看各核 |
+
+* CPU 使用率的组成
+=/proc/stat= 记录每个核开机以来在各类状态的时间，单位是 1 / ~USER_HZ~ 秒（即 10 ms）。工具每隔一段时间采样两次，用差值计算：使用率 = 1 − Δidle / Δtotal。各列：
+
+| 列 | 含义 | 高了查什么 |
+|---|---|---|
+| user / nice | 用户态代码；nice 是 nice 值大于 0 的低优先级进程 | 应用自身的计算：定位线程（ ~top -H~ ），再用 ~perf top~ 或 ~perf record -g~ 生成火焰图找热点函数 |
+| system | 内核替进程干活：系统调用、缺页、内核锁的自旋 | 系统调用次数和耗时（ ~strace -c~ 、 ~perf trace -s~ ），或用 perf 看内核栈 |
+| idle | 空闲 | |
+| iowait | 空闲，且有任务在等 I/O（见下文） | I/O 指标本身 |
+| irq / softirq | 处理硬中断 / 软中断：网络收包、高 IOPS 的磁盘 | =/proc/softirqs= 哪一类涨得快、集中在哪个核，见 [[id:18ebf2c0-c945-4bbc-ad58-9477849c7bbb][Linux Interrupts and Softirqs]] |
+| steal | 虚拟机中，hypervisor 把物理 CPU 给了其他虚拟机的时间 | 持续几个百分点以上说明宿主机超卖，换实例规格或专用宿主机 |
+| guest / guest_nice | 本机作为宿主运行虚拟机的时间 | 已经计入 user / nice，相加会重复 |
+
+- *iowait 不是忙* ：它是空闲时间的一部分，只表示「CPU 没事做，同时有任务在等 I/O」。同样慢的磁盘，CPU 上另有计算任务时 iowait 就变小；一个任务等 I/O 时并不在任何核上，多核的 iowait 也很难归到某个核上（ ~man 5 proc~ 明确说这个值不可靠）。所以高 iowait 不等于磁盘慢，低 iowait 也不能排除 I/O 问题，要看 I/O 指标本身。
+- 上下文切换多时，自愿切换说明在等资源，非自愿切换说明在抢 CPU，见 [[id:706d7e91-8a8f-466f-b871-602e2efcd187][Linux Context Switching]]。
+- 使用率 100% 不代表在「计算」：CPU 等内存时也算忙。 ~perf stat~ 给出 IPC（每周期指令数，instructions / cycles），IPC 很低（粗略地说小于 1）时多数周期在等缓存未命中，该优化的是数据布局和访问模式，而不是指令数量。
+
+* 饱和度：排队等 CPU
+使用率只说明 CPU 有多忙，不说明有没有任务在等。等待时任务处于 =R= 状态但不在运行，这段时间直接加到请求延迟上：
+
+| 看哪里 | 读法 |
+|---|---|
+| ~vmstat 1~ 的 =r= 列 | 可运行任务数（含正在运行的），持续大于核数说明在排队 |
+| =/proc/<pid>/schedstat= | 三个数：在 CPU 上运行的时间（ns）、在运行队列中等待的时间（ns）、调度次数。两次读取的差值就是这段时间的运行和等待；看线程用 =/proc/<pid>/task/<tid>/schedstat= |
+| =/proc/pressure/cpu= | 压力停顿信息（PSI，Pressure Stall Information，4.20 起）： =some avg10= 是最近 10 秒内至少一个任务因等 CPU 而停顿的时间比例。系统级的 =full= 对 CPU 恒为 0，只在 cgroup 中有意义 |
+
+本机实测：两个死循环绑在同一个核上 3 秒，其中一个的 =schedstat= 增加了运行 1.50 s、等待 1.50 s； =/proc/pressure/cpu= 的 =some avg10= 从 0.02 升到 9.99（8 个核中有一个核在排队）。
+
+- 延迟敏感的线程要避免排队：绑核、隔离核，见 [[id:d525dfda-0943-4e82-b4a8-cad648ad48b5][Linux CPU Scheduling and Affinity]]。
+- *cgroup 的 CPU 配额* ：容器或 systemd 服务设了 =cpu.max= 时，一个周期（默认 100 ms）内的配额用完，整个 cgroup 就被暂停到下一个周期，即使机器空闲。多线程程序很容易在周期开头就耗尽配额。现象是平均使用率低于限额，延迟却出现周期性尖峰；看该 cgroup 的 =cpu.stat= 中 =nr_throttled= 、 =throttled_usec= 是否在增长。
+
+* 看不到是谁占的 CPU：短时进程
+- 现象：CPU 使用率高（常见是 user 和 system 都高），但 ~top~ 、 ~pidstat~ 里没有哪个进程占得多。
+- 原因：这些工具在每次刷新时遍历现有进程，两次刷新之间启动又退出的进程看不到。常见来源是服务崩溃后被反复拉起、脚本在循环中调用外部命令（shell 中每个 ~$(...)~ 和管道都会 fork）、启动失败的子进程不断重试。
+- 确认：看 =/proc/stat= 中 =processes= （开机以来创建的任务数）的增速，或 ~sar -w 1~ 的 =proc/s= 。
+- 找出是谁： ~execsnoop~ （bcc）列出每次 ~exec~ 及其父进程；或用 ~perf record -a -g~ 对全系统采样，已经退出的进程也会出现在报告中。

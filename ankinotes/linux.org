@@ -686,3 +686,242 @@ Source: Linux I/O Models and Multiplexing
 不能。普通文件加入 ~epoll~ 返回 ~EPERM~ ， ~O_NONBLOCK~ 对它也不起作用：页缓存未命中时 ~read~ 照样阻塞等磁盘。文件 I/O 交给线程池（libuv 的做法），或用 io_uring 做真正的异步读写。
 
 Source: Linux I/O Models and Multiplexing
+
+** USE 方法
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Cloze
+:END:
+
+*** Text
+USE 方法对每种资源依次检查三项：{{c1::利用率（Utilization）}}、{{c2::饱和度（Saturation），即有没有在排队}}、{{c3::错误（Errors）}}。
+
+*** Back
+饱和度比利用率更能说明问题：利用率是平均值，70% 的平均里可能有一半时间在排队。
+
+Source: Linux Performance Troubleshooting Method
+
+** CPU 火焰图看不出问题
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+一个服务延迟很高，但进程 CPU 使用率很低， ~perf record~ 生成的火焰图里也没有明显热点。为什么？接下来查什么？
+
+*** Back
+CPU 采样只能看到 on-CPU 的时间，而这个请求的时间主要花在等待上（off-CPU）：I/O、锁、网络、缺页读盘或排队等 CPU。看线程的状态（ =S= / =D= ）、 =/proc/<pid>/wchan= 、 ~strace -c~ 的系统调用耗时，或用 off-CPU 分析工具（ ~offcputime~ ）找它在等什么。
+
+Source: Linux Performance Troubleshooting Method
+
+** iowait 能说明什么
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~top~ 显示 iowait 30%。这说明磁盘慢吗？iowait 很低能排除 I/O 问题吗？
+
+*** Back
+都不能。iowait 是空闲时间的一部分，只表示「CPU 没事做，同时有任务在等 I/O」：同样慢的磁盘，CPU 上另有计算任务时 iowait 就变小。判断 I/O 问题要看 I/O 指标本身（ ~iostat -x~ 的 await、 =aqu-sz= 等）。
+
+Source: Linux CPU Performance Analysis
+
+** 衡量 CPU 饱和
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+CPU 使用率只说明 CPU 有多忙。怎样看出线程在 *排队等 CPU* ？给出两个观测位置。
+
+*** Back
+- =/proc/<pid>/schedstat= （线程用 =task/<tid>/schedstat= ）：第二个数是在运行队列中等待的累计纳秒，两次读取作差。
+- =/proc/pressure/cpu= 的 =some avg10= ：最近 10 秒内有任务因等 CPU 而停顿的时间比例。
+- 也可以看 ~vmstat~ 的 =r= 是否持续大于核数。
+
+Source: Linux CPU Performance Analysis
+
+** 容器的 CPU 配额节流
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+容器设了 CPU 限额，平均使用率远低于限额，请求延迟却出现周期性尖峰（约 100 ms 一次）。可能是什么原因？怎么确认？
+
+*** Back
+cgroup 的 =cpu.max= 按周期（默认 100 ms）发配额，多线程程序在周期开头就把配额用完，整个 cgroup 被暂停到下一个周期。看该 cgroup 的 =cpu.stat= 中 =nr_throttled= 、 =throttled_usec= 是否在增长。
+
+Source: Linux CPU Performance Analysis
+
+** CPU 很忙却找不到进程
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+CPU 使用率很高，但 ~top~ 里没有哪个进程占得多。最可能是什么情况？怎么确认和找出来源？
+
+*** Back
+短时进程：进程在 ~top~ 两次刷新之间启动又退出（服务被反复拉起、脚本循环调用外部命令）。确认：看 =/proc/stat= 中 =processes= 的增速或 ~sar -w~ 的 =proc/s= 。找来源： ~execsnoop~ 列出每次 ~exec~ 及其父进程，或 ~perf record -a -g~ 全系统采样。
+
+Source: Linux CPU Performance Analysis
+
+** buff/cache 很大但 available 很小
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~free~ 显示 =buff/cache= 很大， =available= 却很小，内存还在紧张。页缓存为什么没有让出来？查什么？
+
+*** Back
+=buff/cache= 中有不能丢弃的部分： =Shmem= （tmpfs、 =/dev/shm= 、共享内存）计在 =Cached= 里，只能换出。看 =/proc/meminfo= 的 =Shmem= 和 ~df -t tmpfs~ ，找残留的大文件。（procps-ng 4 起 =used= = total − available。）
+
+Source: Linux Memory Performance Analysis
+
+** 内核内存泄漏
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+所有进程的 RSS 加起来不大，页缓存也不多，可用内存却一天天变少。 =/proc/meminfo= 中先看哪个字段？用什么工具继续？
+
+*** Back
+看 =SUnreclaim= （不可回收的内核 slab）是否持续上涨，这是内核内存泄漏（驱动、大量 socket、残留 cgroup 等）。用 ~slabtop~ 找在增长的缓存。
+
+Source: Linux Memory Performance Analysis
+
+** 内存不够的信号
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+内存「用得多」不等于有问题。哪些指标说明内存真的不够、在影响性能？
+
+*** Back
+- 主缺页持续出现（ =majflt/s= ）：在读盘。
+- ~vmstat~ 的 =si= / =so= 持续非零：颠簸。
+- 直接回收（ =/proc/vmstat= 的 =allocstall_*= 、 ~sar -B~ 的 =pgscand/s= ）：分配时同步回收，造成延迟尖峰。
+- =/proc/pressure/memory= 的 =some= 上升；最终是 ~dmesg~ 中的 OOM。
+
+Source: Linux Memory Performance Analysis
+
+** NVMe 的 %util 是 100%
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~iostat -x~ 显示一块 NVMe 盘 =%util= 为 100%。能断定它饱和了吗？应该看什么？
+
+*** Back
+不能。 =%util= 只是「至少有一个请求在途」的时间比例；NVMe、SSD、RAID 能并行处理很多请求，100% 时可能离上限还很远（机械盘才基本等于饱和）。看 await 是否远高于空载延迟、 =aqu-sz= 是否持续偏高、 =/proc/pressure/io= ，并与 ~fio~ 测出的设备上限比较。
+
+Source: Linux I/O Performance Analysis
+
+** I/O 队列长度、IOPS 与延迟
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Cloze
+:END:
+
+*** Text
+按 Little 定律，磁盘的平均队列长度（ =aqu-sz= ）≈ {{c1::IOPS × 平均延迟（await）}}。例如 2,000 IOPS、await 5 ms，平均有 {{c2::10}} 个请求在途。
+
+*** Back
+await 包括请求在块层排队的时间，不只是设备服务时间。
+
+Source: Linux I/O Performance Analysis
+
+** 进程的读到底到没到磁盘
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+=/proc/<pid>/io= 中 =rchar= 和 =read_bytes= 有什么区别？一个进程 =rchar= 很大而 =read_bytes= 接近 0，说明什么？
+
+*** Back
+=rchar= 是 ~read~ 类调用读到的字节，包括页缓存命中； =read_bytes= 是真正从存储读的字节。后者接近 0 说明读几乎都命中了页缓存，没有到达磁盘。
+
+Source: Linux I/O Performance Analysis
+
+** ionice 不起作用
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+在一台 NVMe 机器上用 ~ionice -c3~ 把备份任务设为 idle 级，业务的 I/O 延迟却没有改善。为什么？有什么替代办法？
+
+*** Back
+I/O 优先级只有 BFQ 和 mq-deadline 调度器会处理，NVMe 默认调度器是 =none= ， ~ionice~ 不起作用。替代：用 cgroup v2 的 =io.max= （systemd 的 ~IOReadBandwidthMax=~ 等）限制备份任务的带宽或 IOPS，或给该盘换调度器。
+
+Source: Linux I/O Performance Analysis
+
+** limits.conf 对服务不生效
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+在 =/etc/security/limits.conf= 里把 =nofile= 调到 65535，ssh 登录后 ~ulimit -n~ 也是 65535，但 systemd 启动的服务仍然 ~EMFILE~ 。为什么？怎么改？
+
+*** Back
+=limits.conf= 由 PAM 的 =pam_limits= 在登录会话中应用，systemd 启动服务不经过 PAM。在服务的 unit 中设置 ~LimitNOFILE=~ （systemd 默认 1024:524288，程序也可以自己把软限制调到硬限制）。用 =/proc/<pid>/limits= 确认生效值。
+
+Source: Linux Resource Limits
+
+** EMFILE 与 ENFILE
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~open~ 失败时返回 ~EMFILE~ 和 ~ENFILE~ 分别说明撞了哪个限制？
+
+*** Back
+~EMFILE~ ：本进程的 fd 数达到 ~RLIMIT_NOFILE~ （ ~ulimit -n~ ）。 ~ENFILE~ ：全系统打开文件数达到 ~fs.file-max~ 。
+
+Source: Linux Resource Limits
+
+** fork 返回 EAGAIN
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+内存充足， ~fork~ 或 ~pthread_create~ 却返回 ~EAGAIN~ 。可能撞了哪些限制？
+
+*** Back
+该用户的 ~RLIMIT_NPROC~ （按真实用户统计全部任务，线程也算）、cgroup 的 =pids.max= （容器、systemd 的 ~TasksMax=~ ）、 ~kernel.threads-max~ ，或 PID 用尽（ ~kernel.pid_max~ ）。
+
+Source: Linux Resource Limits
+
+** inotify 报 No space left on device
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+文件监视工具启动时报「No space left on device」，但 ~df~ 显示磁盘有大量空间。原因是什么？
+
+*** Back
+~inotify_add_watch~ 返回的 ~ENOSPC~ ：该用户的 inotify 监视数达到 ~fs.inotify.max_user_watches~ 。调大这个 sysctl，或减少监视的目录。
+
+Source: Linux Resource Limits
+
+** accept 遇到 EMFILE 时 CPU 打满
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+基于 epoll 的服务器在 fd 用完后 CPU 跑到 100%。为什么？常见的处理办法是什么？
+
+*** Back
+~accept~ 返回 ~EMFILE~ 时新连接还留在监听队列里，epoll 一直报告监听 socket 可读，事件循环空转。常见做法：预先保留一个空闲 fd，出错时关掉它、 ~accept~ 后立即关闭这个连接，再重新保留；同时调大 ~RLIMIT_NOFILE~ 。
+
+Source: Linux Resource Limits
