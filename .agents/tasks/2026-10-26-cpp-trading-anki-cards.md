@@ -6,7 +6,7 @@ C++、Trading 迁移（2026-10-26）后，按新笔记制卡。用 `anki-cards` 
 
 ## C++
 
-- Deck 已有：`ankinotes/cpp.org`（`CS::C++`）。只有 2 张旧卡（Pointers、Pointers to Array），保留其 `ANKI_NOTE_ID` / `ANKI_NOTE_HASH`。
+- Deck：`ankinotes/cpp.org`（`RoamCards::C++`，2026-10-26 由 `CS::C++` 改名）。只有 2 张旧卡（Pointers、Pointers to Array），保留其 `ANKI_NOTE_ID` / `ANKI_NOTE_HASH`。
 - 旧卡问题，制卡时一并请用户决定是否修改：
   - Pointers to Array 的 Back 写 ~ptr~ 是「address of array」，应为首元素地址（类型 ~int*~，与 ~&array~ 的类型 ~int(*)[5]~ 不同）。
   - ~*(++ptr)~ 和 ~*(ptr++)~ 两行的说明依赖前面几行的执行顺序，没有写清楚。
@@ -21,7 +21,7 @@ C++、Trading 迁移（2026-10-26）后，按新笔记制卡。用 `anki-cards` 
 
 ## Trading
 
-- Deck *待定*：没有对应文件。开始前请用户输入完整的 Deck 名称，不要猜测；拿到名称后新建 `ankinotes/trading.org`。
+- Deck：`RoamCards::Trading`（按 anki-cards skill 的大类规则），新建 `ankinotes/trading.org`。
 - 来源：`roamnotes-v2/Trading/` 的 16 篇笔记，约 20 张。英文笔记用英文制卡，Money Market Instruments、Perpetual Futures Funding Rate、Python Quant Ecosystem 用中文。
 - 候选：
   - 对数收益与简单收益：各自适合跨时间还是跨资产累加；+50% 再 −50% 的例子
@@ -38,5 +38,5 @@ C++、Trading 迁移（2026-10-26）后，按新笔记制卡。用 `anki-cards` 
 ## Checklist
 
 - [ ] C++：确认是否修改 2 张旧卡；写新卡；行内标记检查
-- [ ] Trading：拿到 Deck 名称；写卡；行内标记检查
+- [ ] Trading：新建 `ankinotes/trading.org`；写卡；行内标记检查
 - [ ] 提交并推送

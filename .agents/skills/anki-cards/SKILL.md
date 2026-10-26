@@ -7,7 +7,7 @@ description: Create or modify Anki cards in ankinotes/*.org. Use when the user a
 
 创建或修改 `ankinotes/*.org` 时使用；这些文件默认是 Anki 笔记，不套用 org-roam 主索引和 TOC 结构。
 
-- `ankinotes/` 下每个 Org 文件对应一个 Deck；先查找匹配的已有 Deck，并写入对应文件。若没有匹配文件，**必须先请用户亲自输入目标 Deck 的完整名称**，等待答复后才新建文件；不可根据主题自动猜测 Deck、擅自创建 Deck，或用建议选项替代用户输入。每个文件以 `* Deck` 为唯一一级标题，在其 property drawer 中填写用户提供的 `:ANKI_DECK:`。
+- Deck 按来源笔记所在的 `roamnotes-v2/` 大类目录决定：`RoamCards::<大类目录名>`，写入 `ankinotes/<目录名小写>.org`，例如 `Trading/` 的笔记 → `RoamCards::Trading` → `ankinotes/trading.org`，`C++/` → `RoamCards::C++` → `ankinotes/cpp.org`（文件名中的 `+` 写作 `p`）。一个大类一个文件、一个 Deck。文件不存在时直接新建，以 `#+title: <大类目录名>` 开头、`* Deck` 为唯一一级标题，在其 property drawer 中填写 `:ANKI_DECK:`。不来自 `roamnotes-v2/` 笔记的卡片，先请用户指定 Deck。
 - 每张卡片是 Deck 下的二级标题，主题根据内容确定；字段使用三级标题，名称由 Note Type 决定。
 - 新卡片的 property drawer 只填 `:ANKI_NOTE_TYPE: <支持的类型名称>`，名称按下表原样填写。牌组继承自 Deck，不在卡片中重复填写 `:ANKI_DECK:`。
 - 不预填 `:ANKI_NOTE_ID:` 或 `:ANKI_NOTE_HASH:`，由同步流程生成；编辑已有卡片时保留已有同步字段。

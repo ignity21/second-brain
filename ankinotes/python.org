@@ -2,7 +2,7 @@
 
 * Deck
   :PROPERTIES:
-  :ANKI_DECK: CS::Python
+  :ANKI_DECK: RoamCards::Python
   :END:
 
 ** Radon 的代码度量
