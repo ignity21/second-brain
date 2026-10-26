@@ -554,3 +554,201 @@ Source: curl for HTTP and TLS Debugging
 这些值是从请求开始累计的时刻，要相减：TCP 握手 0.05 − 0.01 = 0.04 s，TLS 握手 0.15 − 0.05 = 0.10 s，服务器处理加一个往返 ≈ 0.95 − 0.15 = 0.80 s，瓶颈在服务器。经本地代理时 connect 只是到代理的时间，握手被算进后面的阶段。
 
 Source: curl for HTTP and TLS Debugging
+
+** 收包时数据何时拷贝到用户空间
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Linux 收到一个 TCP 包，从网卡到应用的缓冲区，CPU 一共拷贝几次数据？发生在哪一步？应用一直不调用 ~recv~ 会怎样？
+
+*** Back
+一次，在应用调用 ~recv~ 时从内核拷贝到用户缓冲区。网卡写内存是 DMA，不占 CPU；协议栈各层和放入 socket 接收队列都只传递 ~sk_buff~ 指针。应用不读，包就一直占着内核内存，直到接收缓存记账满：TCP 收窄窗口让对端减速，UDP 直接丢包。
+
+Source: Linux Network Stack Receive and Transmit Paths
+
+** send 返回意味着什么
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+TCP socket 上 ~send~ 成功返回了 1000，能说明对方已经收到这 1000 字节吗？这些数据此时在哪里？
+
+*** Back
+不能。只说明数据已拷贝进本机的 socket 发送缓存。TCP 把它留在发送缓存里，直到被对方 ACK（以便重传）；即使 ACK 了也只表示对方内核收到，对方应用读没读要靠应用层确认。
+
+Source: Linux Network Stack Receive and Transmit Paths
+
+** UDP 服务端丢包排查
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+UDP 行情接收程序偶尔丢包，网卡计数没有丢包。先看哪个计数器确认是 socket 层丢的？怎么缓解？
+
+*** Back
+~nstat -az UdpRcvbufErrors~ 上涨说明 socket 接收缓存满了被丢（UDP 没有窗口让对端减速）。缓解：加大 ~SO_RCVBUF~ （上限受 ~net.core.rmem_max~ 限制），并让接收线程更快地读走数据（专用核、批量读）。
+
+Source: Linux Network Stack Receive and Transmit Paths
+
+** softnet_stat 的 time_squeeze
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+收包压力大时 ~ksoftirqd~ CPU 占用高， ~/proc/net/softnet_stat~ 某个 CPU 行的第 3 列持续上涨。它表示什么？相关的可调项是什么？
+
+*** Back
+第 3 列是 ~time_squeeze~ ：一轮 ~NET_RX~ 软中断用完预算还没处理完，剩余交给 ~ksoftirqd~ ，收包延迟增加。预算是 ~net.core.netdev_budget~ （默认 300 个包）和 ~netdev_budget_usecs~ （默认 2 个 jiffy）。第 2 列上涨则是 backlog 队列满丢包，调 ~netdev_max_backlog~ （默认 1000）。
+
+Source: Linux Network Stack Receive and Transmit Paths
+
+** RSS 与 RPS
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~/proc/softirqs~ 中 ~NET_RX~ 全压在一个 CPU 上。RSS 和 RPS 分别怎样把收包处理分散开？什么时候 RPS 是多余的？单条大流量连接能被分散吗？
+
+*** Back
+- RSS：网卡按流的哈希把包分到多个硬件接收队列，每个队列一个中断，再把中断分到不同核。
+- RPS：软件实现，在软中断里把协议栈处理转给别的 CPU（入 backlog、发 IPI），默认关闭。
+硬件队列数不少于 CPU 数且中断已分开时 RPS 多余。两者都按四元组哈希，同一条流总落在同一个核上，单条连接无法分摊。
+
+Source: Linux Network Stack Receive and Transmit Paths
+
+** 内核忙轮询
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+不换网卡、不用内核旁路，想减少 socket 阻塞读的唤醒延迟，可以开什么？它省掉了什么，代价是什么？
+
+*** Back
+忙轮询：socket 选项 ~SO_BUSY_POLL~ ，或全局 ~net.core.busy_read~ （ ~poll~ / ~epoll~ 用 ~net.core.busy_poll~ ），上游默认 0（关），文档建议 50 µs。阻塞读时线程先在设备接收队列上自旋这么久再睡，省掉「中断 → 软中断 → 唤醒线程」的延迟；数据仍走内核协议栈和系统调用。代价是一个核空转、功耗上升；需要驱动支持 NAPI。
+
+Source: Linux Network Stack Receive and Transmit Paths
+
+** 中断合并与延迟
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+网卡的中断合并（ ~ethtool -C <dev> rx-usecs~ ）在做什么？低延迟系统为什么常把它调小或关掉，代价是什么？
+
+*** Back
+网卡攒够若干微秒或若干个包再发一次中断，以减少中断次数、提高吞吐。代价是包在网卡上多等一会儿才通知 CPU。低延迟系统调小或关掉（也关自适应），让每个包更快送达，换来更多中断和更高的 CPU 开销。
+
+Source: Linux Network Stack Receive and Transmit Paths
+
+** 内核旁路省掉了什么
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+与普通内核收包路径相比，DPDK 这类内核旁路省掉了哪三类开销？运维上要付出什么代价？
+
+*** Back
+省掉：中断与线程唤醒、内核协议栈的通用处理、用户态与内核态之间的拷贝和系统调用（应用线程直接忙轮询网卡）。代价：网卡由用户态驱动独占、脱离内核， ~ip~ 、 ~ss~ 、 ~tcpdump~ 都看不到它；协议要用户态栈自己处理；一个核 100% 空转。
+
+Source: Linux Network Stack Receive and Transmit Paths
+
+** netfilter 转发路径
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+一台 Linux 路由器（或宿主机上的容器网桥）转发一个包，这个包依次经过 netfilter 的哪些 hook？会经过 INPUT 吗？
+
+*** Back
+PREROUTING → 路由决策 → FORWARD → POSTROUTING，不经过 INPUT。INPUT 只处理目的地是本机进程的包（PREROUTING → INPUT）；本机发出的包走 OUTPUT → POSTROUTING。
+
+Source: Linux Netfilter and iptables
+
+** 为什么先放行 ESTABLISHED
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+服务器 INPUT 默认策略设为 DROP，只加了 ~-p tcp --dport 22 -j ACCEPT~ 。SSH 能进来，但本机 ~curl https://example.com~ 超时。为什么？加哪条规则？
+
+*** Back
+本机发起的连接，回包的源端口是 443、目的端口是随机端口，不匹配 ~--dport 22~ ，被默认策略丢弃。在最前面加 ~iptables -I INPUT 1 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT~ ，放行已建立连接的回包。
+
+Source: Linux Netfilter and iptables
+
+** DROP 与 REJECT
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+iptables 用 ~-j DROP~ 和 ~-j REJECT~ 挡住 8080 端口，客户端连接时分别看到什么？各适合什么场合？
+
+*** Back
+- DROP：对端什么也收不到，SYN 反复重传直到连接超时。适合面向公网，不暴露端口的存在。
+- REJECT：默认回 ICMP port unreachable（或 ~--reject-with tcp-reset~ 回 RST），客户端立即得到 Connection refused。适合内网和本机，让客户端快速失败、便于排查。
+
+Source: Linux Netfilter and iptables
+
+** iptables -F 锁死 SSH
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+远程服务器上 INPUT 默认策略为 DROP，为了重写规则先执行 ~iptables -F~ ，SSH 立刻断开。为什么？正确顺序是什么？
+
+*** Back
+~-F~ 只清空各链中的规则，不重置默认策略（ ~-P~ ）。放行 SSH 的规则没了，策略仍是 DROP，所有包都被丢。先 ~iptables -P INPUT ACCEPT~ ，再 ~-F~ ，加好规则后再把策略改回 DROP。
+
+Source: Linux Netfilter and iptables
+
+** Docker 端口绕过防火墙
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+宿主机用 ufw / iptables 的 INPUT 规则只开了 22 端口，但 ~docker run -p 8080:80~ 发布的端口仍能从外网访问。为什么？限制访问的规则应写在哪里？
+
+*** Back
+Docker 在 ~nat~ 表的 PREROUTING 把到 8080 的包 DNAT 给容器，包走 FORWARD 而不经过 INPUT，INPUT 规则和 ufw 都挡不住。规则写进 Docker 留给用户的 ~DOCKER-USER~ 链。
+
+Source: Linux Netfilter and iptables
+
+** iperf3 测 UDP
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+用 ~iperf3 -c server -u~ 测一条万兆链路的 UDP 吞吐，结果只有约 1 Mbit/s。问题出在哪？怎么改？
+
+*** Back
+iperf3 的 UDP 默认目标速率是 1 Mbit/s（TCP 默认不限速），测到的是这个限速。用 ~-b~ 指定速率，如 ~-b 10G~ ，或 ~-b 0~ 不限速。
+
+Source: Network Performance Testing with iperf3 and pktgen
+
+** pktgen 测的是什么
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+用内核的 pktgen 测出 64 字节包每秒能发 1400 万个，能说明应用通过 socket 也能达到这个包速率吗？为什么？
+
+*** Back
+不能。pktgen 默认在驱动的发送函数处直接注入预先构造好的包，跳过 socket 和整个协议栈，测的是网卡和驱动（或下游转发设备）的 PPS 上限。应用经 socket 发包还要付系统调用和协议栈的每包开销。
+
+Source: Network Performance Testing with iperf3 and pktgen

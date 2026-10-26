@@ -1,0 +1,44 @@
+:PROPERTIES:
+:ID:       87bbc997-d5eb-4c45-9a86-b0c184b6c9dd
+:ROAM_ALIASES: "网络性能测试"
+:VERIFIED_WITH: iperf3 3.19.1 (2026-10-27)
+:END:
+#+title: Network Performance Testing with iperf3 and pktgen
+#+filetags: :Network:Linux:
+
+* 测什么、用什么
+| 指标 | 含义 | 瓶颈通常在 | 工具 |
+|---|---|---|---|
+| 吞吐（throughput） | 两点之间每秒实际传输的数据量，链路带宽是它的上限 | 链路带宽、TCP 窗口与 RTT、单核处理能力 | iperf3 |
+| PPS（packets per second） | 每秒处理的包数；小包时先到达的是这个上限，而不是带宽 | 每个包的固定开销：中断、协议栈、驱动 | pktgen（构造发包），iperf3 发小包 UDP |
+| 延迟 | 往返时间 | 路径、排队、中断与调度 | ~ping~ ；对方禁 ICMP 时用 hping3 发 TCP SYN 测 |
+
+路由器、交换机、负载均衡这类转发设备主要看 PPS；文件传输、备份看吞吐；交易、RPC 看延迟和抖动。
+
+* iperf3
+两端各运行一个：服务端 ~iperf3 -s~ ，客户端 ~iperf3 -c <服务端>~ 。默认 TCP、测 10 秒、客户端发服务端收。
+
+| 任务 | 选项 |
+|---|---|
+| 测反方向（服务端发，相当于客户端下载） | ~-R~ |
+| 两个方向同时测 | ~--bidir~ |
+| 多条并行流 | ~-P <n>~ |
+| 测 UDP | ~-u -b <速率>~ ， ~-b 0~ 不限速 |
+| 测试时长 | ~-t <秒>~ |
+
+** Pitfalls
+- *UDP 默认只发 1 Mbit/s* ：不加 ~-b~ 的 UDP 测试结果约 1 Mbit/s，测的是这个限速而不是网络。TCP 默认不限速。
+- *单条 TCP 流的上限是窗口 ÷ RTT* ：高带宽、高延迟的链路上单流跑不满，用 ~-P~ 多流对比；窗口与接收缓存的关系见 [[id:d43414ac-35ca-4f1d-a603-8026943a9801][TCP Reliable Delivery and Flow Control]]。
+- *版本漂移* ：3.16 之前所有流在同一个线程里， ~-P~ 在高速链路上受单核限制，结果看起来像链路瓶颈；3.16 起每条流一个线程。
+- *回环和同机容器测的是内存拷贝* ：本机回环上 2 条 TCP 流约 60 Gbit/s，与网卡无关。
+- *服务端一次只跑一个测试* ：第二个客户端会收到 =the server is busy running a test= ，并发测试要在不同端口（ ~-p~ ）上起多个服务端。
+
+* pktgen Kernel Packet Generator
+:PROPERTIES:
+:ID:       663e9802-5bd1-447d-937e-b471dc5ff17a
+:END:
+Linux 内核自带的发包器，用来测网卡、驱动或下游转发设备的 PPS 上限：
+- 内核模块（ ~modprobe pktgen~ ），每个 CPU 一个内核线程 ~kpktgend_N~ ；通过 =/proc/net/pktgen/= 下的文件配置和启停，运行结束后在设备对应的文件中给出 pps 和 bps。内核源码 =samples/pktgen/= 有现成脚本。
+- 默认在驱动的发送函数处直接注入预先构造好的包，跳过 socket 和整个协议栈，所以结果是「网卡和驱动最多能发多快」，不代表应用能达到的速率。注入点在收发路径上的位置见 [[id:f226240d-ec04-44ce-a1bd-1394443d27be][Linux Network Stack Receive and Transmit Paths]]。
+- ~xmit_mode netif_receive~ 改为把包注入接收路径，用来测本机协议栈的收包能力。
+- 测 PPS 极限时用最小帧（64 字节），这时每个包的固定开销占主导。

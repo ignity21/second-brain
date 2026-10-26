@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       1921bccf-d469-491a-8e2f-cc0997db17cb
+:ROAM_ALIASES: "Linux 内核网络"
+:END:
+#+title: Linux Kernel Networking
+
+* [[id:f226240d-ec04-44ce-a1bd-1394443d27be][Network Stack Receive and Transmit Paths]]
+* [[id:cee785fb-8f4b-4230-ad02-312714729965][Netfilter and iptables]]
