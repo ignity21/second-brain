@@ -103,7 +103,7 @@ while (!x.compare_exchange_weak(expected, expected * 2)) {}
 | use in a loop where computing ~desired~ is cheap               | use when not looping, or when recomputing ~desired~ is expensive |
 
 * Performance
-- An uncontended atomic RMW costs a few nanoseconds; under contention every operation needs exclusive ownership of the cache line, which then bounces between cores.
+- An uncontended atomic RMW costs a few nanoseconds; under contention every operation needs exclusive ownership of the cache line, which then bounces between cores (coherence and a false-sharing measurement in [[id:d734bb0e-c8fc-4cd7-a1d9-5432aed0c7d0][CPU Cache Hierarchy]]).
 - *False sharing*: per-thread data that happens to share a cache line contends as if it were shared. Pad or align per-thread slots to ~std::hardware_destructive_interference_size~ (64 on this machine; GCC warns that the value may change between compiler versions, so ABI-visible types should use a literal 64). On NUMA machines, also keep per-thread data on separate pages.
 - Atomics do not make code fast. A mutex is often as fast under low contention and much easier to reason about.
 

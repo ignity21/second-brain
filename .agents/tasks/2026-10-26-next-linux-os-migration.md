@@ -1,6 +1,6 @@
 # Linux / OS 迁移总计划（来自 `Default/`）
 
-Status: In progress — 批次 1–7 已完成，下一批为批次 8
+Status: Complete — 批次 1–8 均已完成（2026-10-27）
 
 把 `roamnotes/Default/` 中 `filetags` 含 `Linux`、`OS`、`SystemCall`、`Performance`、`Hardware` 的 103 篇笔记（约 3,000 行）分 8 批迁入 `roamnotes-v2/`。*每批开一个新 session*，按 note-migration skill 执行。本文件是总计划；各批的归属方案、目标树和 ID 映射写在各自的任务文件里。
 
@@ -44,7 +44,7 @@ Status: In progress — 批次 1–7 已完成，下一批为批次 8
 - [x] 批次 5：性能与诊断工具 —— 已完成（2026-10-26），任务文件：`2026-10-26-linux-batch5-tools.md`
 - [x] 批次 6：系统管理与 Shell —— 已完成（2026-10-27），任务文件：`2026-10-27-linux-batch6-admin-shell.md`
 - [x] 批次 7：Linux 网络 —— 已完成（2026-10-27），任务文件：`2026-10-27-linux-batch7-network.md`
-- [ ] 批次 8：硬件与 Python 性能分析 ——
+- [x] 批次 8：硬件与 Python 性能分析 —— 已完成（2026-10-27），任务文件：`2026-10-27-linux-batch8-hardware-python-profiling.md`；硬件并入 `Linux/`，`motherboard`、`computer_display` 经用户决定不迁移
 
 ## 每批新 session 的开场白
 

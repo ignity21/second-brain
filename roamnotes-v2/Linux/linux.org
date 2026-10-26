@@ -10,3 +10,4 @@
 * [[id:603a0f71-fd7e-4c20-8607-9a2998fc3d4c][Files and I/O]]
 * [[id:8a6eab8f-f865-4344-8245-ad7a9b09f79a][Observability and Troubleshooting]]
 * [[id:deb3103a-8c5e-46d7-a0f3-c7eb52dbd383][System Administration and Shell]]
+* [[id:66716bea-36fc-4002-9a38-2081669626dd][CPU and Memory Hardware]]

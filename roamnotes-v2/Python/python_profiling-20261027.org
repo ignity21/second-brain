@@ -1,0 +1,75 @@
+:PROPERTIES:
+:ID:       021750fa-d093-477f-a572-a5a24538e103
+:ROAM_ALIASES: "Python 性能剖析"
+:VERIFIED_WITH: CPython 3.11.14 / 3.12.14 / 3.14.2 / 3.15.0, line_profiler 5.1.0, py-spy 0.4.2, VizTracer 1.1.1 (2026-10-27)
+:END:
+#+title: Python Profiling
+#+filetags: :Python:Performance:
+
+* Mental Model: Three Kinds of Profilers
+| Kind | How it works | Overhead | Answers | Tools |
+|---|---|---|---|---|
+| Deterministic | Hooks every function call and return (~line_profiler~: every line) inside the process | Proportional to the number of calls; inflates call-heavy code | Exact call counts, time per function, who calls whom | ~cProfile~ , ~line_profiler~ |
+| Sampling | Reads the interpreter's stack periodically, usually from another process | Small and independent of code shape; can attach to a running process | Where the time goes, as proportions | py-spy, ~profiling.sampling~ (3.15+), Scalene |
+| Event tracing | Records every call with timestamps into a buffer | High, and the buffer is finite | What happened in order: timelines across threads, processes and async tasks | VizTracer |
+
+Measured on a script that calls a trivial function 3 million times (~many_calls~) and runs an equivalent inline loop (~inline_loop~):
+
+| | ~many_calls~ | ~inline_loop~ | Ratio |
+|---|---|---|---|
+| No profiler | 0.19 s | 0.11 s | 1.8 |
+| ~python -m cProfile~ | 1.10 s | 0.11 s | 10.2 |
+| VizTracer | 0.77 s | 0.10 s | 7.9 |
+| py-spy (sample counts) | 35 | 23 | 1.5 |
+
+Deterministic and tracing profilers make call-heavy code look several times worse than it is; a sampling profiler preserves the proportions.
+
+Second axis: *wall time or CPU time*. Wall time includes sleeping and waiting for I/O or locks; CPU time shows only computation. Pick by the question: "why is this request slow" needs wall time; "what burns the CPU" needs CPU time. Defaults differ (see Pitfalls).
+
+* Choosing a Tool
+| Question | Tool |
+|---|---|
+| Is snippet A faster than B? | ~timeit~ / IPython ~%timeit~ ; pyperf for benchmarks you will publish or compare across machines |
+| Which function is slow, in a script I can rerun? | ~python -m cProfile -o out.prof~ , browse with snakeviz; or a sampling flame graph |
+| Which line inside a known-hot function? | ~line_profiler~; ~profiling.sampling~ and Scalene also report per line |
+| A production process is slow or stuck right now | ~py-spy dump --pid~ (current stacks), ~py-spy top~ , ~py-spy record --pid~ ; on 3.15+ ~python -m profiling.sampling attach PID~ |
+| Is time going to C extensions (NumPy, native code)? | ~py-spy --native~ ; Scalene splits Python, native and system time; ~perf~ with ~-X perf~ (3.12+), see [[id:894e26d6-8bae-49ab-ac0c-e9812dd08d9b][Linux perf Profiler]] |
+| Are threads fighting over the GIL? | ~py-spy --gil~ , ~profiling.sampling --mode gil~ |
+| In what order did things happen across threads, processes or asyncio tasks? | VizTracer |
+| Where is memory allocated, what grows? | ~tracemalloc~ snapshot diff (stdlib), memray (includes native allocations) |
+| Whole-process totals: peak RSS, page faults | ~/usr/bin/time -v~ |
+
+* Measurement Pitfalls
+- *Timing with ~time.time()~* → wall clock that NTP can step, and coarse on some platforms → use ~time.perf_counter()~ .
+- *~timeit~ turns off the garbage collector* while timing (verified: ~gc.isenabled()~ is ~False~ inside the timed code) → allocation-heavy code looks faster than in production → add ~gc.enable()~ to the setup string when GC cost matters.
+- *Trusting cProfile's proportions* → it charges a fixed overhead to every call, so code made of many small functions looks worst → confirm hot spots with a sampling profiler before rewriting.
+- *Different defaults for idle time* → cProfile measures wall time (a ~time.sleep(0.5)~ shows as 0.5 s); py-spy skips idle threads unless ~--idle~ ; ~profiling.sampling~ defaults to ~--mode wall~ and ~--mode cpu~ drops waiting → know which one you are reading before concluding "this function is slow".
+- *py-spy cannot attach* → attaching to a non-child process needs ptrace permission: Yama ~kernel.yama.ptrace_scope~ = 1 (Ubuntu's default) only allows tracing your own children → run under ~sudo~ , or start the program through ~py-spy record -- python app.py~ ; in Docker add ~--cap-add SYS_PTRACE~ . This machine has ~ptrace_scope~ = 0, so attaching to a process of the same user works.
+- *Noisy machine* → CPU frequency, turbo and background jobs shift results more than many optimisations do → fix the frequency and repeat runs, see [[id:5dc17fb2-544c-433d-bd94-394a0c37457f][CPU Core Execution Features]].
+- *Reading "Major page faults" in ~/usr/bin/time -v~ as CPU cache misses* → a major fault is a page that had to be read from disk (or swap); CPU cache misses are only visible through hardware counters (~perf stat~).
+
+Version drift (verified 2026-10-27):
+
+| Old advice (AI often writes) | Current | Since |
+|---|---|---|
+| ~python -m cProfile~ only sees the main thread; add ~threading.setprofile~ | cProfile is built on ~sys.monitoring~ and records every thread (3.11 missed a worker thread entirely, 3.12 records it) | 3.12 |
+| Define a no-op ~profile~ when not running under kernprof | ~from line_profiler import profile~ : a no-op unless ~LINE_PROFILE=1~ is set (then it writes =profile_output.txt= and =.lprof= ) or run under ~kernprof~ | ~line_profiler~ 4.1 |
+| Sampling needs a third-party tool | Stdlib ~profiling.sampling~ ( ~run~ , ~attach~ , ~dump~ , ~--live~ , flame graph output); cProfile is also available as ~profiling.tracing~ | 3.15 (PEP 799) |
+| ~memory_profiler~ and ~%memit~ | memray, ~tracemalloc~ , Scalene; ~memory_profiler~ is no longer maintained (last release 0.61.0, 2022) | |
+
+* VizTracer for Python
+:PROPERTIES:
+:ID:       5a4eceee-3c7b-4eb8-937b-94e439bbf33e
+:END:
+VizTracer records every function entry and exit with timestamps and shows them as a timeline (opened with ~vizviewer~ , a Perfetto UI). It answers "what happened, in what order, and where were the gaps" rather than "what is hot on average": a slow request among fast ones, overlap between threads and processes, asyncio tasks waiting on each other (~--log_async~).
+
+- Cost: about 4× on call-heavy code in the measurement above; recording arguments, return values or variables (~--log_func_args~ , ~--log_func_retval~ , ~--log_var~) adds more.
+- *The buffer is circular* : the default is 1,000,000 entries, and older entries are overwritten. In the 3-million-call script, only the last third of the calls survived, with the warning "Circular buffer is full, you lost some early data". Trace a narrow window instead: start and stop it in code around the interesting part (~with VizTracer(...)~), or filter with ~--max_stack_depth~ , ~--include_files~ / ~--exclude_files~ , ~--ignore_c_function~ , ~--min_duration~ ; raise ~--tracer_entries~ only when needed.
+
+* Capability Map
+- *snakeviz*: browser view (icicle / sunburst) of a cProfile =.prof= file.
+- *pyperf*: benchmark runner that spawns worker processes, calibrates loops and reports mean ± std; ~pyperf system tune~ prepares the machine.
+- *Scalene*: sampling profiler with per-line CPU (Python / native / system), memory and GPU usage.
+- *memray*: tracks every allocation, including in C extensions; flame graphs and a live mode. Linux and macOS.
+- *tracemalloc*: stdlib; compare two snapshots to find what grew.
+- *torch.profiler*: per-operator time on CPU and GPU in PyTorch; ~nvidia-smi~ / ~gpustat~ for GPU utilisation at a glance.

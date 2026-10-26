@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       66716bea-36fc-4002-9a38-2081669626dd
+:ROAM_ALIASES: "CPU 与内存硬件"
+:END:
+#+title: CPU and Memory Hardware
+#+filetags: :Linux:Hardware:
+
+* [[id:d734bb0e-c8fc-4cd7-a1d9-5432aed0c7d0][CPU Cache Hierarchy]]
+* [[id:5dc17fb2-544c-433d-bd94-394a0c37457f][CPU Core Execution Features]]
+* [[id:29001a4b-0d21-4602-b9b5-535c0f8ee122][NUMA Memory Architecture]]

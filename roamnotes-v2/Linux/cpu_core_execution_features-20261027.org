@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       5dc17fb2-544c-433d-bd94-394a0c37457f
+:ROAM_ALIASES: "CPU 核心执行特性"
+:VERIFIED_WITH: Intel i5-1155G7, Linux 6.5, GCC 16.2.1 (2026-10-27)
+:END:
+#+title: CPU Core Execution Features
+#+filetags: :Linux:Hardware:
+
+* 流水线、乱序执行与分支预测
+- 流水线（pipelining）把一条指令拆成取指、译码、执行、写回等阶段，不同指令的不同阶段重叠进行；现代核每周期能发射多条指令（超标量），并且乱序执行（out-of-order execution）：前一条指令在等缓存未命中时，先执行后面与它无关的指令。所以 IPC 可以大于 1。
+- 乱序执行只能越过 *无关* 的指令。指针追逐、链表遍历这种每一步依赖上一步结果的依赖链无法重叠，每次未命中的延迟都完整计入，见 [[id:d734bb0e-c8fc-4cd7-a1d9-5432aed0c7d0][CPU Cache Hierarchy]] 中的实测。
+- 流水线要在分支结果算出之前就取后面的指令，于是靠分支预测器（branch predictor）猜方向。猜错时清空流水线重来，浪费约 15–20 个周期。
+- 判断：有规律的分支（循环条件、很少触发的错误检查）几乎不花钱；依赖随机数据的分支（如对无序数组按阈值过滤）预测失败率接近 50%，是热循环里的隐藏成本。对策：先排序或分组让分支有规律，或改写成无分支的形式（条件传送 ~cmov~ 、按掩码计算），用 ~perf stat~ 的 =branch-misses= 验证。
+
+* SMT（超线程）
+- 同时多线程（Simultaneous Multithreading，SMT；Intel 称为超线程，Hyper-Threading）：一个物理核保存两套寄存器状态，操作系统看到两个逻辑 CPU。两个硬件线程共享该核的执行单元、L1 / L2、TLB 和分支预测器。
+- 收益来自一个线程停顿（等内存）时另一个线程用上空闲的执行单元，混合负载下总吞吐通常多 10%–30%；两个线程都在计算时，各自都变慢。本机实测：两个线程各做 1 亿次原子加，在两个物理核上 0.97 s，在同一核的两个超线程上 1.62 s。
+- *兄弟线程的编号不一定相邻* ：本机 CPU 0 和 4 是同一个物理核，1 和 5 是同一个。查看 ~lscpu -e~ 的 =CORE= 列，或 =/sys/devices/system/cpu/cpu<N>/topology/thread_siblings_list= 。
+- 低延迟场景的判断：只隔离一个逻辑 CPU 不够，兄弟线程上的其他任务仍在抢同一套执行单元和 L1 / L2。要么把整个物理核（两个兄弟）都隔离出来、只用其中一个，要么关闭 SMT（启动参数 ~nosmt~ ，或运行时向 =/sys/devices/system/cpu/smt/control= 写 =off= ）。核隔离的做法见 [[id:d525dfda-0943-4e82-b4a8-cad648ad48b5][Linux CPU Scheduling and Affinity]]。
+
+* SIMD
+- 单指令多数据（Single Instruction, Multiple Data，SIMD）：一条指令同时处理一个向量中的多个元素。x86 上 SSE 为 128 位，AVX2 为 256 位，AVX-512 为 512 位；本机支持哪些看 =/proc/cpuinfo= 的 flags（ =avx2= 、 =avx512f= 等）。
+- 多数时候由编译器自动向量化：GCC 12 起 ~-O2~ 就做低成本的向量化， ~-O3~ 更积极。不加 ~-march~ 时只能用 x86-64 基线的 SSE2（16 字节向量）； ~-march=native~ 才用上 AVX2 / AVX-512，但生成的二进制在缺少这些指令的机器上会因非法指令（ ~SIGILL~ ）崩溃。本机 ~-O3 -march=native~ 下 GCC 仍选 32 字节向量而不是 AVX-512 的 64 字节，这是它对该 CPU 的默认偏好（可用 ~-mprefer-vector-width=512~ 改）。
+- 能向量化的前提：数据连续、迭代之间没有依赖、编译器能确认指针不重叠（ ~restrict~ ）。用 ~-fopt-info-vec~ 查看哪些循环被向量化。
+- 坑：浮点求和这类归约（reduction）要求按顺序相加，重排会改变舍入结果。本机 GCC 16 在 ~-O3~ 下对 ~float~ 求和循环也报告 =loop vectorized= ，但汇编中仍是逐个的标量加法 ~addss~ ，只有加上 ~-ffast-math~ （允许重排结合律）才变成向量加法 ~addps~ 。报告「已向量化」不代表真的并行了，要看汇编或实测。
+- 旧的 Intel 服务器 CPU（如 Skylake-SP）运行密集的 AVX-512 指令时会降低核心频率，并在指令结束后维持一段时间，拖慢同一核上随后的标量代码；之后的架构降频幅度小得多。在旧机器上，零星的 AVX-512 指令可能得不偿失。
+
+* 频率与省电状态
+- 频率随负载和温度变化：调频驱动和策略（governor）决定频率，turbo 让少数核短时超过基础频率，具体上限取决于活跃核数和散热。本机为 =intel_pstate= 驱动、 =powersave= 策略、turbo 开启，范围 400–4500 MHz；笔记本上还会因发热降频。
+- 空闲的核进入 C-state 省电，越深越省电，唤醒越慢。本机 =/sys/devices/system/cpu/cpu0/cpuidle/state*/= 中各状态的退出延迟： =POLL= 0、 =C1_ACPI= 1 µs、 =C2_ACPI= 253 µs、 =C3_ACPI= 1048 µs。
+- 低延迟的判断：线程阻塞等待消息时，核可能进入深度 C-state，消息到达后先要付唤醒延迟和低频启动的代价。对策是在隔离核上忙轮询，或限制 C-state：启动参数 ~intel_idle.max_cstate=~ 、 ~processor.max_cstate=~ ，或运行时打开 =/dev/cpu_dma_latency= 写入 0 并保持打开（tuned 的 =latency-performance= 配置就这样做），同时把 governor 设为 =performance= 。
+- 基准测试的判断：频率不固定时，前后两次运行的差别可能大于优化本身的效果。比较前固定频率（ =performance= 策略，关闭 turbo：Intel 写 =/sys/devices/system/cpu/intel_pstate/no_turbo= ，其他驱动看 =/sys/devices/system/cpu/cpufreq/boost= ），笔记本接电源，关掉后台任务，多次运行看分布而不是只看一次。

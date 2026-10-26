@@ -22,3 +22,107 @@ Radon 是一个用于分析 Python 源代码的工具，可以计算：
 - 原始度量（raw metrics），包括 SLOC、注释行数和空白行数等
 - Halstead 度量
 - 可维护性指数（Maintainability Index），即 Visual Studio 使用的那种指数
+
+** cProfile inflates call-heavy code
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+cProfile says a tiny helper function called millions of times is the hot spot. Before inlining it, what should you check, and why?
+
+*** Back
+Confirm with a sampling profiler (py-spy, ~profiling.sampling~). cProfile is deterministic: it adds a fixed cost to every call, so call-heavy code looks several times worse than it is (measured: 0.19 s became 1.10 s while an inline loop stayed 0.11 s). Sampling preserves the proportions.
+
+Source: Python Profiling
+
+** Profiling a live Python process
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+A production Python service is slow (or stuck) right now and must not be restarted. How do you see where it spends its time?
+
+*** Back
+Attach a sampling profiler from outside: ~py-spy dump --pid PID~ for current stacks, ~py-spy top~ or ~py-spy record --pid PID~ for a profile; on 3.15+ also ~python -m profiling.sampling attach PID~. Attaching needs ptrace permission (sudo when ~ptrace_scope~ is 1; ~--cap-add SYS_PTRACE~ in Docker).
+
+Source: Python Profiling
+
+** Waiting time missing from a profile
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+A function spends most of its time waiting on a socket, yet ~py-spy record~ barely shows it. Why, and how do you include it?
+
+*** Back
+py-spy skips idle threads by default, so it shows CPU time; add ~--idle~ to include waiting. Defaults differ between tools: cProfile measures wall time, and ~profiling.sampling~ defaults to ~--mode wall~ (~--mode cpu~ drops waiting).
+
+Source: Python Profiling
+
+** timeit and the garbage collector
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Why can ~timeit~ make allocation-heavy code look faster than it is in production, and how do you correct for it?
+
+*** Back
+~timeit~ disables the garbage collector while timing, so GC pauses are not counted. Put ~gc.enable()~ at the start of the setup string when GC cost matters.
+
+Source: Python Profiling
+
+** cProfile and threads
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~python -m cProfile app.py~ on Python 3.12, where ~app.py~ does its work in a ~threading.Thread~. Do the worker's functions appear in the output? What about 3.11?
+
+*** Back
+3.12+: yes. cProfile is built on ~sys.monitoring~, which covers every thread. 3.11: no, only the thread that enabled the profiler (here the main thread).
+
+Source: Python Profiling
+
+** Profiling one slow request among many
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+One request in a hundred is slow, and it involves several threads and asyncio tasks. Which kind of profiler fits, and why not cProfile or a sampling profiler?
+
+*** Back
+An event tracer such as VizTracer: it records every call with timestamps, so you can see that request's timeline, gaps and overlaps. cProfile and sampling profilers aggregate over the whole run, so one slow request is averaged away.
+
+Source: Python Profiling
+
+** VizTracer loses the start of a long run
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+A VizTracer trace of a long run is missing everything from the beginning. Why, and what is the better fix than just raising the limit?
+
+*** Back
+Its buffer is circular (1,000,000 entries by default), so older entries are overwritten. Trace a narrow window instead: start and stop it in code (~with VizTracer(...)~), or filter with ~--max_stack_depth~, ~--include_files~ or ~--min_duration~. Raise ~--tracer_entries~ only if needed.
+
+Source: Python Profiling
+
+** Leaving line_profiler decorators in code
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+With current ~line_profiler~ (4.1+), how do you keep ~@profile~ decorators in the code so that normal runs are unaffected, and how do you turn profiling on?
+
+*** Back
+~from line_profiler import profile~. The decorator is a no-op unless the environment variable ~LINE_PROFILE=1~ is set (or the script runs under ~kernprof~); with it set, results are written to ~profile_output.txt~. The old hand-written no-op ~profile~ shim is unnecessary.
+
+Source: Python Profiling

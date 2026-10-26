@@ -1372,3 +1372,134 @@ Source: Linux Clocks and Time Measurement
 - 第二个：real 远大于 user + sys，大部分时间在等待（I/O、锁、sleep 或排队等 CPU），优化计算没用，要找等待的原因。
 
 Source: Linux Clocks and Time Measurement
+
+** 指针追逐为什么慢
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+遍历一个 256 MiB 的链表比顺序遍历同样大小的数组慢一个数量级以上，而每步的指令几乎一样。硬件上的原因是什么？
+
+*** Back
+- 链表节点散落在随机的缓存行上，每一步都可能是一次内存访问（约 100 ns 量级）；而且下一步的地址要等这一步读出来，乱序执行无法重叠这些未命中。
+- 数组顺序访问时硬件预取器提前取下一行。本机同样做指针追逐：顺序排列 7 ns 一次，随机排列 150 ns 一次。
+
+Source: CPU Cache Hierarchy
+
+** 伪共享
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+两个线程各自对结构体中自己的 ~std::atomic<long>~ 计数器做自增，互不读对方的计数器，扩展到两个线程后反而比单线程慢得多。原因是什么？怎么改？
+
+*** Back
+伪共享（false sharing）：两个计数器在同一个 64 字节的缓存行里，一致性协议按行工作，每次写都要独占这一行，于是这一行在两个核之间来回传递。把每个线程的计数器对齐到 64 字节（或 ~std::hardware_destructive_interference_size~ ）。本机实测相距 8 字节 4.28 s，相距 64 字节 0.97 s。
+
+Source: CPU Cache Hierarchy
+
+** 伪共享与超线程兄弟
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+两个线程对同一缓存行中的两个原子计数器做自增。分别放在两个物理核上、放在同一物理核的两个超线程上，哪种情况伪共享的代价大？为什么？
+
+*** Back
+两个物理核上代价大（本机慢 4.4 倍）。超线程兄弟共享同一个 L1，缓存行不需要在核之间传递，伪共享几乎没有额外代价；它们变慢是因为争用同一套执行单元。
+
+Source: CPU Cache Hierarchy
+
+** 共享 L3 的相邻负载干扰
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+关键线程的热数据只有约 3 MiB，机器的 L3 有 8 MiB，但在共享机器上测得的访问延迟接近内存延迟。可能的原因和对策是什么？
+
+*** Back
+L3 由所有核共享，同时运行的其他负载把它的数据挤了出去，可用的 L3 远小于标称容量（本机负载约为 6 时，工作集超过 2–3 MiB 就接近内存延迟）。对策：把噪声负载移到其他插槽或机器，或用 Intel RDT 的 CAT（ ~/sys/fs/resctrl~ ）给关键核划出专用的 L3 路。
+
+Source: CPU Cache Hierarchy
+
+** 只隔离一个逻辑 CPU 不够
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+开了超线程的机器上，把 CPU 1 隔离给关键线程，延迟仍有抖动且吞吐偏低。硬件上可能是什么原因？怎么查、怎么改？
+
+*** Back
+CPU 1 的超线程兄弟（编号不一定相邻，本机是 CPU 5）上还跑着别的任务，二者共享执行单元和 L1 / L2。查 ~/sys/devices/system/cpu/cpu1/topology/thread_siblings_list~ 或 ~lscpu -e~ 的 CORE 列。把整个物理核的两个兄弟都隔离、只用一个，或启动参数 ~nosmt~ 关闭 SMT。
+
+Source: CPU Core Execution Features
+
+** 分支预测失败
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+热循环按阈值过滤一个随机数组（ ~if (a[i] > t) sum += a[i];~ ）。先把数组排序再跑同样的循环，循环本身反而快很多。为什么？
+
+*** Back
+随机数据使分支方向无规律，预测失败率接近 50%，每次失败清空流水线、浪费约 15–20 个周期。排序后分支先一直为假、再一直为真，几乎每次都猜对。也可以改写成无分支形式（ ~cmov~ 、掩码计算）。用 ~perf stat~ 的 branch-misses 验证。
+
+Source: CPU Core Execution Features
+
+** 浮点求和的向量化
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+GCC 的 ~-fopt-info-vec~ 报告 ~float~ 求和循环 loop vectorized，实测却几乎没变快。为什么？怎么让它真正并行？
+
+*** Back
+浮点加法不满足结合律，不允许重排时 GCC 只向量化了加载，加法仍按顺序逐个做（汇编里是标量 ~addss~ ）。加 ~-ffast-math~ （或 ~-fassociative-math~ 等）允许重排后才用向量加法 ~addps~ ，代价是舍入结果可能改变。
+
+Source: CPU Core Execution Features
+
+** 深度 C-state 的唤醒延迟
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+一个阻塞等待消息的线程，平时处理延迟很低，但在消息稀疏时偶尔多出几百微秒。硬件层面的可能原因和对策是什么？
+
+*** Back
+核空闲时进入深度 C-state，消息到达后要先付退出延迟（本机 C2 约 253 µs、C3 约 1 ms），频率也可能刚从低位升起。对策：在隔离核上忙轮询；或限制 C-state（启动参数 ~intel_idle.max_cstate=~ ，或打开 ~/dev/cpu_dma_latency~ 写 0 并保持打开），governor 设为 performance。
+
+Source: CPU Core Execution Features
+
+** NUMA 首次触碰
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+双路服务器上，主线程先 ~memset~ 初始化一个大数组，再把它切成两半交给分别绑在两个 NUMA 节点上的工作线程。一个节点上的线程明显更慢。为什么？怎么改？
+
+*** Back
+默认的首次触碰（first-touch）策略把物理页分配在第一次写入它的 CPU 所在的节点上，所以整个数组都在主线程的节点，另一个节点的线程全是远程访问（延迟约 1.5–2 倍）。改为让每个工作线程初始化自己那一半；或用 ~numactl --interleave~ 、 ~mbind~ 显式指定。
+
+Source: NUMA Memory Architecture
+
+** 低延迟进程与自动 NUMA 平衡
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+已经用 ~numactl --cpunodebind=0 --membind=0~ 固定了 CPU 和内存的低延迟进程，为什么通常还要关闭 ~kernel.numa_balancing~ ？
+
+*** Back
+自动 NUMA 平衡会周期性地解除页映射，靠提示缺页（NUMA hinting fault）统计访问并迁移页或任务，这些缺页和迁移是不可预测的停顿。显式绑定后它已无收益，只剩抖动。
+
+Source: NUMA Memory Architecture
