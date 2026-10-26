@@ -9,7 +9,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740539763658
-:ANKI_NOTE_HASH: cfc6002d7d305dc69a54d2f88bdcb04c
+:ANKI_NOTE_HASH: 18d730833c1eba214ef4635149b8467b
 :END:
 *** Front
 在 Emacs 中，如何交换 point 和 mark 的位置？
@@ -22,7 +22,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740539764688
-:ANKI_NOTE_HASH: a69c0044d915925527a2ec7cbc37bfd4
+:ANKI_NOTE_HASH: 2a87dec6999ec902cb4f86728723fd39
 :END:
 *** Front
 在 Emacs 中，如何选中当前段落？
@@ -34,7 +34,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740539765693
-:ANKI_NOTE_HASH: a264b6838f51b2b4c68b19e5fbce48ed
+:ANKI_NOTE_HASH: 787d0d6f2fd35f4c7f22ebde104b0a99
 :END:
 *** Front
 在 Emacs Lisp 中，临时移动 point 执行操作，结束后恢复 point 和当前 buffer，应使用什么？
@@ -47,7 +47,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740540768688
-:ANKI_NOTE_HASH: 7c23d60453f64dbe15f0b9abe63f07f9
+:ANKI_NOTE_HASH: 724b2985b866032548b50e26e800ca1d
 :END:
 *** Front
 在 Emacs 中，如何跳转到光标处符号的定义？
@@ -59,7 +59,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740540940353
-:ANKI_NOTE_HASH: b642e54c2dbe3bca210da54c4ab30f2a
+:ANKI_NOTE_HASH: d35a29eeecf55783786b71b4c6b3c0be
 :END:
 *** Front
 在 Emacs 中，如何选中整个 buffer？
@@ -71,7 +71,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740618021304
-:ANKI_NOTE_HASH: 649969fffd55ebe640d2a4d0f526349c
+:ANKI_NOTE_HASH: 0824eceab65982095cf0a846822169e2
 :END:
 *** Front
 在 Emacs 中，操作完缩窄的 buffer 后，如何恢复显示全部内容？
@@ -84,7 +84,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1740703084489
-:ANKI_NOTE_HASH: a08094273539a13958bcabc5fe24a25e
+:ANKI_NOTE_HASH: 379a27ab6625eff4b2fc3bbaa1bed202
 :END:
 *** Front
 在 Emacs 中，粘贴后如何换成 kill ring 中的另一项？
@@ -108,7 +108,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1741060392230
-:ANKI_NOTE_HASH: 5aee2266a87efc98d1dba4eaf6b6c742
+:ANKI_NOTE_HASH: 084e76bed4d8f4452c19362de3c2e6d1
 :END:
 *** Front
 在当前 Doom 个人配置中，如何打开 Embark 的候选操作菜单？
@@ -121,7 +121,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1741060392234
-:ANKI_NOTE_HASH: 577eb9973e2b7c793488976c348e451f
+:ANKI_NOTE_HASH: cf436439eda9abbde7efd61b9e80c1c8
 :END:
 *** Front
 在当前 Doom 个人配置的 Vertico 候选列表中，如何切换到下一组？
@@ -134,7 +134,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1789285640698
-:ANKI_NOTE_HASH: d2c3225f72451841169a2e9bfbe1835e
+:ANKI_NOTE_HASH: 74c05e783939af08d6eb8a393cbb2c13
 :END:
 *** Front
 在 Emacs Lisp 中，后一个局部变量的初始值需要引用前一个刚绑定的变量，应使用 ~let~ 还是 ~let*~ ？
@@ -147,7 +147,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1789285640701
-:ANKI_NOTE_HASH: feeaf4c628d7611d41be2bb542b88e9a
+:ANKI_NOTE_HASH: 519e12cf7d72966d1dd0ef32874b429e
 :END:
 *** Front
 在 Emacs Lisp 中，想用 ~:name~ 这样的关键字参数定义函数，应使用 ~defun~ 还是 ~cl-defun~ ？
@@ -160,7 +160,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1789285640703
-:ANKI_NOTE_HASH: fb350bcb7954c1b46f511bd061252c0e
+:ANKI_NOTE_HASH: 256dcc5605c681e623718bc6c835ac5f
 :END:
 *** Front
 在 Emacs Lisp 的反引号列表中，如何把 ~(+ 3 4)~ 的结果作为一个元素插入？若结果本身是列表，如何展开为多个元素？
@@ -173,7 +173,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1789285640706
-:ANKI_NOTE_HASH: 93bf41b931516a5dfbbd1f90be091305
+:ANKI_NOTE_HASH: 4dd619ae37f3cca557396876f4ded8e3
 :END:
 *** Front
 在 Emacs Lisp 中，想在另一个 buffer 内执行一段操作，并在结束后恢复原来的当前 buffer，应使用什么？
@@ -187,6 +187,7 @@
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1789285640710
 :ANKI_NOTE_HASH: 53330cc8309d6b7b3962440fb1d2fe41
+:ANKI_FAILURE_REASON: Note was not found: 1789285640710
 :END:
 *** Front
 在 Emacs Lisp 中，想临时 ~widen~ 来处理整个 buffer，结束后恢复原来的 narrowing，应使用什么？
@@ -199,7 +200,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1789285640712
-:ANKI_NOTE_HASH: 8b3ea31679075e29747a28e185463030
+:ANKI_NOTE_HASH: 9dc2fe651d61e7145b85ff45121be8c3
 :END:
 *** Front
 在 Emacs Lisp 的 ~interactive~ 声明中，哪种代码字母会把数字前缀参数传给函数？

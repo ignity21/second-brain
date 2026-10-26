@@ -25,7 +25,7 @@ Source: Polars Core Operations
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428285
-:ANKI_NOTE_HASH: 2a41295b281b2fbdcf947c7bc38e54d2
+:ANKI_NOTE_HASH: a8c9a7ad2b7f7f5b280a5ad74b1fefd6
 :END:
 
 *** Front
@@ -116,7 +116,7 @@ Source: Polars Core Operations
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428292
-:ANKI_NOTE_HASH: a1756e02d13e21669bd55b6ecd09d062
+:ANKI_NOTE_HASH: 22cdae544621117e99b8ff9a278fd3f7
 :END:
 
 *** Front
@@ -151,7 +151,7 @@ Source: Polars Core Operations
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428295
-:ANKI_NOTE_HASH: 99a7906e3ab881ea24d9cdd81ff40235
+:ANKI_NOTE_HASH: 488d921ed74b8c5d78fdf086c602eb67
 :END:
 
 *** Front
@@ -192,7 +192,7 @@ Source: Polars Core Operations
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428299
-:ANKI_NOTE_HASH: c8ae2aeb867f0c860c14ff27873366ea
+:ANKI_NOTE_HASH: 07e83eb0a01935399aa2b4b2613b6e14
 :END:
 
 *** Front
@@ -223,7 +223,7 @@ Source: Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428302
-:ANKI_NOTE_HASH: 84e151718fe4a834fcb12128e63cce3e
+:ANKI_NOTE_HASH: b5002b016f746685001457e4b8b262e1
 :END:
 
 *** Front
@@ -304,7 +304,7 @@ Source: Practical Data Transformation with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428305
-:ANKI_NOTE_HASH: afc35d1c0147dc9daf436cf28f95bdae
+:ANKI_NOTE_HASH: fc113acb198cd0eb2a5b1a378ed86bc5
 :END:
 
 *** Front
@@ -324,7 +324,7 @@ Source: Practical Data Transformation with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428307
-:ANKI_NOTE_HASH: 79d8bcf2ce1b9e1df8825382d88dcfd2
+:ANKI_NOTE_HASH: 26c0a992e962264a9ded19df953d3d4b
 :END:
 
 *** Front
@@ -384,7 +384,7 @@ Source: Practical Data Transformation with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428310
-:ANKI_NOTE_HASH: 58f2c1183583ce720b0e1aebf05c4158
+:ANKI_NOTE_HASH: de5b990d64099065107e5e36d4a59647
 :END:
 
 *** Front
@@ -399,7 +399,7 @@ Source: Practical Data Transformation with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428312
-:ANKI_NOTE_HASH: 827c577d2c19a08e7c048bcb9419ed25
+:ANKI_NOTE_HASH: de24966208a92309a850d1e1abba3471
 :END:
 
 *** Front
@@ -414,7 +414,7 @@ Source: Practical Data Transformation with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428314
-:ANKI_NOTE_HASH: 582a37368f6957ad9407ff1eb99651e1
+:ANKI_NOTE_HASH: 9299f239d0c1dfa5287bafcefa09b45f
 :END:
 
 *** Front
@@ -429,7 +429,7 @@ Source: Practical Data Transformation with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428316
-:ANKI_NOTE_HASH: 8bdad85bb0e994c7410b684acead7d9c
+:ANKI_NOTE_HASH: f9de1ee128295ae889a0048e67b43ad4
 :END:
 
 *** Front
@@ -518,7 +518,7 @@ Source: Practical Data Transformation with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428319
-:ANKI_NOTE_HASH: b288025e7c6e3dd960c8250012edc43b
+:ANKI_NOTE_HASH: 4baba0d8ae5545959837a63a3e706c91
 :END:
 
 *** Front
@@ -535,7 +535,7 @@ Source: Time Series with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428321
-:ANKI_NOTE_HASH: 05a41efc5f9cbd57a1ce5beba3aa820c
+:ANKI_NOTE_HASH: 54df591b8f1ea64fce9e10e26e50d54c
 :END:
 
 *** Front
@@ -550,7 +550,7 @@ Source: Time Series with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428323
-:ANKI_NOTE_HASH: 113a115bbbe4219fbccc6a5b954d2319
+:ANKI_NOTE_HASH: 4ecf2831c6787ca6dbe1619aa7cb1344
 :END:
 
 *** Front
@@ -565,7 +565,7 @@ Source: Time Series with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428326
-:ANKI_NOTE_HASH: d4a63a735888775c3d8bece3f66b772f
+:ANKI_NOTE_HASH: 569658062c3f4921ad0a95e74b87dfb6
 :END:
 
 *** Front
@@ -580,7 +580,7 @@ Source: Time Series with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428328
-:ANKI_NOTE_HASH: 4001aa669ce271e28f5e30c67ff79057
+:ANKI_NOTE_HASH: c9ea76db98cfe1adbb0b59e1a1dd4104
 :END:
 
 *** Front
@@ -595,7 +595,7 @@ Source: Time Series with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428330
-:ANKI_NOTE_HASH: 7e12f8bc122cd32f35f83ceb6c6396a1
+:ANKI_NOTE_HASH: f9a086984c252470d18d52ed03cc83ad
 :END:
 
 *** Front
@@ -616,7 +616,7 @@ Source: Time Series with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428334
-:ANKI_NOTE_HASH: 7d1e1367e3aa9b6da3ff4d68da9e2766
+:ANKI_NOTE_HASH: 706c9d66b78473b359d331e850744b00
 :END:
 
 *** Front
@@ -631,7 +631,7 @@ Source: Time Series with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428337
-:ANKI_NOTE_HASH: c6dcb8fb21c9f338dfd0e8c2248c2d2d
+:ANKI_NOTE_HASH: 2c453894d138a7fc70619d7bcf08d842
 :END:
 
 *** Front
@@ -646,7 +646,7 @@ Source: Time Series with Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1790671428341
-:ANKI_NOTE_HASH: 4fdcda7a56b1f8a1edf35f7beb60d221
+:ANKI_NOTE_HASH: c548e330299fe5a37f09968b74ce00a3
 :END:
 
 *** Front
@@ -665,6 +665,8 @@ Source: Time Series with Polars
 ** Polars Expressions Do Not Touch Data
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793029835325
+:ANKI_NOTE_HASH: aba3f74d1ef32e99286ff36d6a8248d7
 :END:
 
 *** Front
@@ -678,6 +680,8 @@ Source: Polars
 ** Same Polars Expression in select and with_columns
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793029835339
+:ANKI_NOTE_HASH: 9f148e9f29ae97c0b5c11ea363470f0b
 :END:
 
 *** Front
@@ -694,6 +698,8 @@ Source: Polars
 ** Aggregate Inside a Polars filter
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793029835352
+:ANKI_NOTE_HASH: f40ac1c31743621bda7743e09e5aaece
 :END:
 
 *** Front
@@ -707,6 +713,8 @@ Source: Polars
 ** Referencing a Sibling Column in with_columns
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793029835366
+:ANKI_NOTE_HASH: 38fc647ddb3d2e8088a48ed47c7668c8
 :END:
 
 *** Front
@@ -722,6 +730,8 @@ Source: Polars
 ** Default Output Name of a Polars Expression
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793029835382
+:ANKI_NOTE_HASH: a6cfeed715ccfbe4aa4b7bf41afeb802
 :END:
 
 *** Front
@@ -735,6 +745,8 @@ Source: Polars
 ** Duplicate Output Names in Polars select
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793029835394
+:ANKI_NOTE_HASH: 8554da3c9ad93bc93767ba58f0885614
 :END:
 
 *** Front
@@ -748,6 +760,8 @@ Source: Polars
 ** Memory Cost of Polars with_columns
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793029835409
+:ANKI_NOTE_HASH: c639b26b8e3b84473df0e10f86ea9da6
 :END:
 
 *** Front
@@ -761,6 +775,8 @@ Source: Polars
 ** Polars Eager Methods and the Lazy Engine
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793029835416
+:ANKI_NOTE_HASH: 33cb16d74b2e7b07cebe035072d0f9f7
 :END:
 
 *** Front
@@ -776,6 +792,8 @@ Source: Polars
 ** Reading Order of a Polars Query Plan
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Cloze
+:ANKI_NOTE_ID: 1793029835429
+:ANKI_NOTE_HASH: 56110f7c076f7a4a66d143529f684d60
 :END:
 
 *** Text
@@ -787,6 +805,8 @@ Source: Polars
 ** Predicate Pushdown in Polars explain
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793029835443
+:ANKI_NOTE_HASH: 7cd5c70f3a2921994acbfca1eed8af07
 :END:
 
 *** Front
@@ -800,6 +820,8 @@ Source: Polars
 ** Projection Pushdown in Polars explain
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793029835457
+:ANKI_NOTE_HASH: 4ee6330359d31377af9f0b1685866d58
 :END:
 
 *** Front
@@ -813,6 +835,8 @@ Source: Polars
 ** Common-subexpression Elimination in Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793029835470
+:ANKI_NOTE_HASH: b2cb7cd27f27c9162d6d6e00da7f24e6
 :END:
 
 *** Front
@@ -826,6 +850,8 @@ Source: Polars
 ** Collecting a LazyFrame Twice
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793029835484
+:ANKI_NOTE_HASH: 09e1b00f4cbc1502fcbe94f5182b73af
 :END:
 
 *** Front
@@ -841,6 +867,8 @@ Source: Polars
 ** Streaming Engine in Polars 2.0
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793029835498
+:ANKI_NOTE_HASH: 50ae7a8c544f15a0c06b8a7971fff167
 :END:
 
 *** Front
@@ -856,6 +884,8 @@ Source: Polars
 ** Python's Role in Polars Execution
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793029835509
+:ANKI_NOTE_HASH: 6c83f2a091d2a9293b6cd46f53ccfacc
 :END:
 
 *** Front
@@ -869,6 +899,8 @@ Source: Polars
 ** Limit Polars Threads
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793029835527
+:ANKI_NOTE_HASH: 2a487c8ad0a26110e3dfddbdc0ef11bd
 :END:
 
 *** Front
@@ -882,6 +914,8 @@ Source: Polars
 ** Nulls in Integer Columns: Polars vs pandas
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793029835540
+:ANKI_NOTE_HASH: 252390dc80624b9a181dc44a84927129
 :END:
 
 *** Front
@@ -895,6 +929,8 @@ Source: Polars
 ** Null vs NaN in a Polars Series
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793029835554
+:ANKI_NOTE_HASH: 7568b7759041a5a6f0b435141631f634
 :END:
 
 *** Front
@@ -908,6 +944,8 @@ Source: Polars
 ** Treat NaN as Missing in Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793029835562
+:ANKI_NOTE_HASH: a5e442b2b93f204df011b61fb4b94b92
 :END:
 
 *** Front
@@ -921,6 +959,8 @@ Source: Polars
 ** Chunked Columns After Polars concat
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793029835575
+:ANKI_NOTE_HASH: 60c67e2c83c708bfbc4fdce7e0b6fb0f
 :END:
 
 *** Front
@@ -934,6 +974,8 @@ Source: Polars
 ** When Polars Is Not Faster Than pandas
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793029835589
+:ANKI_NOTE_HASH: 5115d7d6abde4cda1b78d60f1b728805
 :END:
 
 *** Front
@@ -949,6 +991,8 @@ Source: Polars
 ** Replacing a pandas Index in Polars
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793029835602
+:ANKI_NOTE_HASH: 2ae211d040dbd42a3c1366821c257fe7
 :END:
 
 *** Front
