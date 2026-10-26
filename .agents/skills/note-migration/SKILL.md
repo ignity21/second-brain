@@ -28,7 +28,7 @@ description: Migrate old org-roam notes from the legacy library (roamnotes/) int
 
 1. 在 `.agents/tasks/` 建任务文件，写明归属方案、新索引树和合并/删减计划；检查目标文件是否已存在，避免覆盖已有笔记或资源。
 2. 按方案写入目标笔记和依赖资源，接入主索引，按新位置更新资源路径。
-3. 用 `anki-cards` skill 从本次迁移的笔记制卡，写入目标大类对应的 Deck 文件。深度按 `.agents/learning-goals.md` 中该领域的档位：优先「能判断」的模型、对比、坑和面试高频题，能力地图中只「知道」的工具和命令不制卡。卡片所依据的事实以改写、核对后的笔记为准。
+3. 用 `anki-cards` skill 为本次迁入的笔记制卡，写入目标大类对应的 Deck 文件。分批迁移时每批只为本批的笔记制卡，在同一批内完成，卡片做完才算该批完成。深度按 `.agents/learning-goals.md` 中该领域的档位：优先「能判断」的模型、对比、坑和面试高频题，能力地图中只「知道」的工具和命令不制卡。卡片所依据的事实以改写、核对后的笔记为准。
 4. 迁移完成后 *保留* 源笔记、`images/`、`assets/`，由用户比对后决定何时删除；只有用户要求清理时才删除，删除前检查剩余引用（含 `Default/puml/SystemDesign/` 的 PlantUML 资源）。
 5. 按根规则完成受影响范围的验证，并执行一次 `org-roam-db-sync`；无法同步时说明原因。
 
