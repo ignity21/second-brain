@@ -16,7 +16,7 @@
 - [[#pitfalls][Pitfalls]]
 
 * Mental Model
-- A ~std::thread~ object owns one OS thread running a callable. Before the object is destroyed it must be *joined* (wait for it) or *detached* (let it run on alone); otherwise the destructor calls ~std::terminate~.
+- A ~std::thread~ object owns one OS thread running a callable; on Linux that is a kernel task sharing the process's address space ([[id:d63d5c4d-c88c-426b-8166-ff39e8bf15d9][Linux Processes vs Threads]]). Before the object is destroyed it must be *joined* (wait for it) or *detached* (let it run on alone); otherwise the destructor calls ~std::terminate~.
 - The constructor *copies* (decays) every argument into storage owned by the new thread, then passes them to the callable *as rvalues*. Nothing is passed by reference unless you wrap it in ~std::ref~ / ~std::cref~.
 - A *task* is "a function whose result I want later". The result travels through a one-shot channel: the writing end is a ~std::promise~, the reading end a ~std::future~. ~std::packaged_task~ and ~std::async~ are promise + future with the plumbing done for you.
 - Why use threads at all: *separation of concerns* (a GUI thread, an I/O thread; thread count follows the design, not the core count) or *performance* (task parallelism: split one job into parts; data parallelism: same operation on different chunks).

@@ -1,0 +1,49 @@
+:PROPERTIES:
+:ID:       d525dfda-0943-4e82-b4a8-cad648ad48b5
+:ROAM_ALIASES: "Linux CPU 调度与亲和性"
+:VERIFIED_WITH: Linux 6.5 (2026-10-26)
+:END:
+#+title: Linux CPU Scheduling and Affinity
+#+filetags: :Linux:
+
+* 时钟节拍与 HZ
+- 内核按 ~CONFIG_HZ~ 的频率触发周期性的时钟中断（tick），上游 Kconfig 可选 100、250、300、1000，默认 250。查看： ~grep 'CONFIG_HZ=' /boot/config-$(uname -r)~ 。
+- tick 时调度器更新时间统计并检查当前任务是否该被抢占。 *HZ 不是时间片* ：时间片的长度由调度器按负载决定，HZ 只决定多久检查一次。
+- ~USER_HZ~ 在 x86 上固定为 100： =/proc/stat= 、 =/proc/<pid>/stat= 中的 CPU 时间以它为单位。脚本里用 ~getconf CLK_TCK~ 读取，不要假设它等于内核 HZ。
+- 空闲的 CPU 不需要 tick，多数发行版内核会停掉它（ ~CONFIG_NO_HZ_IDLE~ ）。启动参数 ~nohz_full=~ 让只有一个可运行任务的 CPU 也停 tick（需要 ~CONFIG_NO_HZ_FULL~ ），用于低延迟的隔离核。
+
+* 调度策略
+| 策略 | 用途 | 规则 |
+|---|---|---|
+| ~SCHED_OTHER~ （ ~SCHED_NORMAL~ ） | 默认 | 按 nice 值（-20 到 19）分配 CPU 份额；调度器为 CFS，6.6 起为 EEVDF |
+| ~SCHED_BATCH~ / ~SCHED_IDLE~ | 后台批处理 / 只用空闲 CPU | 比普通任务更少抢占 / 最低优先 |
+| ~SCHED_FIFO~ | 实时 | 优先级 1–99；不主动让出就一直运行，只被更高优先级的实时任务抢占 |
+| ~SCHED_RR~ | 实时 | 同 FIFO，同优先级之间按时间片轮转 |
+| ~SCHED_DEADLINE~ | 周期性实时任务 | 按 runtime / deadline / period 预留 CPU 时间 |
+
+- 实时任务总是先于普通任务运行。设置： ~chrt -f 50 <cmd>~ 、 ~nice~ / ~renice~ ，需要 ~CAP_SYS_NICE~ 或 ~RLIMIT_RTPRIO~ 。
+- *RT 限流* ：默认 ~sched_rt_runtime_us~ = 950000、 ~sched_rt_period_us~ = 1000000，即每秒最多 95% 的 CPU 给实时任务，防止失控的 FIFO 死循环饿死整个系统（本机同为默认值）。
+
+* CPU 亲和性与核隔离
+CPU 亲和性（CPU affinity）限定一个线程可以在哪些核上运行，是每线程属性：
+- ~taskset -c 2 <cmd>~ 启动时绑定， ~taskset -pc 2 <tid>~ 修改已有线程；代码中用 ~sched_setaffinity(tid, ...)~ 或 ~pthread_setaffinity_np~ 。
+- 新线程和子进程继承创建者的亲和性：先绑主线程再创建工作线程，工作线程全挤在同一个核上。
+- 查看： ~ps -eLo pid,tid,psr,comm~ 的 =psr= 列是线程最近运行的核； =/proc/<pid>/status= 的 ~Cpus_allowed_list~ 是允许的核。
+
+** 为什么绑核
+- 线程在核之间迁移后，L1 / L2 缓存是冷的。
+- 多路服务器上，线程留在内存所在的 NUMA 节点，访问本地内存。
+- 让关键线程的运行位置可预测，便于排除干扰。
+
+** 只绑核不够：核隔离
+亲和性只约束被绑定的线程，其他任务仍会被调度到这个核上，中断也照样送来。低延迟交易系统通常组合使用：
+
+| 手段 | 去掉的干扰 |
+|---|---|
+| ~isolcpus=~ 或 cpuset 分区 | 普通任务不会被调度到这些核 |
+| ~nohz_full=~ | 单任务核上的时钟中断 |
+| ~rcu_nocbs=~ | RCU 回调，改在其他核上执行 |
+| 中断亲和性 | 设备中断，见 [[id:18ebf2c0-c945-4bbc-ad58-9477849c7bbb][Linux Interrupts and Softirqs]] |
+
+- 隔离核上的忙轮询线程保持 ~SCHED_OTHER~ 即可，核上本来就没有竞争者。改成 ~SCHED_FIFO~ 后，必须在该核上运行的每核内核线程（如 kworker）会被饿死，表现为系统其他部分卡顿。
+- 验证隔离效果：在关键线程上看非自愿上下文切换是否接近 0（见 [[id:706d7e91-8a8f-466f-b871-602e2efcd187][Linux Context Switching]]），在 =/proc/interrupts= 中看该核的中断计数是否还在涨。

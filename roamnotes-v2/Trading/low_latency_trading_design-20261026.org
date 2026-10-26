@@ -36,13 +36,13 @@ A *microburst* is a sudden spike in the data rate lasting milliseconds or less. 
 Serialization delay is packet size ÷ link speed: a 1,500-byte frame takes 1.2 µs at 10 Gbps, a 64-byte frame 51 ns. It matters for large messages and slower links, and it is paid again at every store-and-forward hop.
 
 ** Interrupts and Kernel Bypass
-Normally the network card raises an *interrupt* and the kernel processes the packet through its network stack before copying it to the application. That costs latency for the new packet, and the interrupt also disturbs whatever was running on that core.
+Normally the network card raises an *interrupt* and the kernel processes the packet through its network stack before copying it to the application. That costs latency for the new packet, and the interrupt also disturbs whatever was running on that core. [[id:18ebf2c0-c945-4bbc-ad58-9477849c7bbb][Linux Interrupts and Softirqs]] shows where that work runs and how to steer interrupts away from chosen cores.
 
 Kernel bypass hands packet processing to user space. For example, OpenOnload (originally from Solarflare, now AMD) runs the TCP/UDP stack in the application's process and *busy-polls* the network card instead of waiting for interrupts. Interrupts are avoided completely, at the price of a CPU core spinning at 100%. TCP settings still matter on the normal kernel path: [[id:d43414ac-35ca-4f1d-a603-8026943a9801][TCP Reliable Delivery and Flow Control]] explains why low-latency systems set ~TCP_NODELAY~.
 
 ** Application
 Application latency depends on how much work the logic does, how complex the calculations are, and how efficient the code is.
-- *Dedicate cores*: pin the critical threads (market data, strategy) to isolated cores, so they are not moved between cores and do not lose their caches.
+- *Dedicate cores*: pin the critical threads (market data, strategy) to isolated cores, so they are not moved between cores and do not lose their caches. [[id:d525dfda-0943-4e82-b4a8-cad648ad48b5][Linux CPU Scheduling and Affinity]] covers pinning and the kernel options that keep other work off those cores.
 - *Stay in cache*: know the cache sizes, keep hot data contiguous, avoid allocation and locks on the hot path. [[id:2569c73d-2087-4aad-89db-809f0ac3619a][C++ Lock-free Data Structures]] covers the queues used to hand data between threads.
 - *FPGA* (Field-Programmable Gate Array): implement the parsing, risk checks, or the whole strategy in hardware for the lowest latency, at the cost of slow development and limited logic.
 

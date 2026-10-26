@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       7d47a7bc-c1f8-41ae-96b4-cd01950cd21b
+:ROAM_ALIASES: "Linux 进程"
+:END:
+#+title: Linux Processes
+#+filetags: :Linux:
+
+* [[id:6f1e5033-7e68-4eb1-a7d7-d5fd9db8b863][Process Lifecycle]]
+* [[id:925ecbf4-455e-437d-a1bb-432542685263][Process States]]
+* [[id:d63d5c4d-c88c-426b-8166-ff39e8bf15d9][Processes vs Threads]]
