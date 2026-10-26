@@ -1,0 +1,39 @@
+:PROPERTIES:
+:ID:       7fdff970-42aa-4d49-975e-cff07eead309
+:ROAM_ALIASES: "市场微观结构"
+:END:
+#+title: Market Microstructure
+#+filetags: :Trading:
+
+* Mental Model
+A US stock trades on many venues at once: exchanges, Electronic Communication Networks (ECN), and dark pools. Every venue competes for order flow, so where an order goes is a decision with a price: fees, the chance of being filled, and how much the order reveals. Microstructure studies how these rules turn orders into prices.
+
+- *Maker*: an order that rests in the book and *provides* liquidity (a limit order away from the market).
+- *Taker*: an order that executes immediately against resting orders and *removes* liquidity (a market order or marketable limit order).
+
+* Venues
+| Venue | Pre-trade transparency | Why use it |
+|---|---|---|
+| Exchange / ECN (NYSE Arca, Nasdaq) | Visible order book | Best displayed prices, most liquidity |
+| Dark pool | Orders hidden until after execution and reporting | Large institutional orders without showing their size |
+
+An ECN is an electronic system that matches buy and sell orders automatically. Today most exchanges work the same way, so the distinction is mostly historical.
+
+* Fee Models
+| Model | Maker | Taker | Effect |
+|---|---|---|---|
+| Maker-taker (most venues) | Gets a rebate | Pays a fee | Rewards resting liquidity and tightens spreads |
+| Inverted (taker-maker) | Pays a fee | Gets a rebate | Takers route here first, so resting orders here fill sooner |
+
+On an inverted venue a liquidity provider pays to be *first in line*: queue position and fill probability are worth more to it than the rebate. Comparing venues means comparing fee + fill probability + adverse selection, not the fee alone.
+
+* Smart Order Router
+A Smart Order Router (SOR) splits and sends an order across venues to get the best available price while minimizing *market impact and transaction costs*. Under US Reg NMS a marketable order may not trade through a better displayed price on another venue, so the SOR has to watch every lit venue.
+
+* Risks from Predatory HFT
+| Tactic | How it works | Defense |
+|---|---|---|
+| Front-running a sliced order | Detects the pattern of child orders hitting venue after venue, then trades ahead on the slower venues | Randomize child order size and timing; send to all venues at the same instant |
+| Pinging dark pools | Sends small immediate-or-cancel orders to discover large hidden orders | Minimum fill size; venues that restrict HFT participation |
+| Spoofing | Places large orders it intends to cancel, to fake supply or demand | Illegal in the US (Dodd-Frank, 2010); venues monitor cancel ratios |
+| Quote stuffing | Floods a venue with orders and cancels to slow other participants' market data | Message-rate limits |

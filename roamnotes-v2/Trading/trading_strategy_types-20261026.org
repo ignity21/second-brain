@@ -1,0 +1,38 @@
+:PROPERTIES:
+:ID:       fac02460-82e1-4da3-9ea7-702c25095669
+:ROAM_ALIASES: "交易策略类型"
+:END:
+#+title: Trading Strategy Types
+#+filetags: :Trading:Quant:
+
+* What a Strategy Is
+A trading strategy is a set of rules that turns input data into entry and exit signals. It is only a strategy if the rules are written down precisely enough to backtest (see [[id:6e4ae290-6a89-4208-8559-a97fd08e356e][Quantitative Trading]]).
+
+An *alpha-seeking* strategy aims for returns that do not depend on the overall market direction. Returns that just come from being long in a rising market are beta, which an index fund gives you more cheaply.
+
+* Momentum vs Mean Reversion
+| | Momentum | Mean reversion |
+|---|---|---|
+| Bet | A move continues | A stretched price returns to an average |
+| Entry | Breakout, new high, strength | Overbought / oversold, touch of an outer band |
+| Indicators | Breakouts, moving-average trend, volume | Bollinger Bands, RSI, VWAP (see [[id:ede0aad7-a06d-4c84-9081-1c8f40f122da][Technical Analysis]]) |
+| Wins in | Trending markets | Range-bound markets |
+| Fails in | Choppy markets: repeated false breakouts | Strong trends: keeps fading a move that keeps going |
+
+The same stock can switch between regimes, so a strategy needs a rule for when it stays out.
+
+* Which Stocks Suit Which
+| Factor | Momentum | Mean reversion |
+|---|---|---|
+| Float | Low | High |
+| Institutional ownership | Low | High |
+| Company type | Growth | Value |
+
+- *Low float*: little money moves the price, so moves run further. The same property makes swings large in both directions, which raises risk.
+- *High institutional ownership*: institutions need to buy a lot of shares, so they do not chase a rising price; they accumulate gradually and buy on dips. Their buying puts a floor under the price, which pulls it back toward the mean.
+- *Growth vs value*: a growth stock's price rides on changing expectations, which tend to trend; a value stock is anchored by its current earnings and assets.
+
+* Idea: Sector Laggards
+When a whole sector moves on news, buy the companies that have not moved yet and bet that they catch up. Example: after the Wednesday EIA inventory report (see [[id:916f4d11-e91d-4574-bfa2-befca1493e58][Macroeconomic Drivers of Markets]]) oil moves; watch USO, then look for oil stocks that lag it.
+
+This is a hypothesis, not yet a strategy: a laggard may lag for a reason specific to that company. It needs a precise definition of "lag" and a backtest.

@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       7a671aa8-b668-4ca4-95df-31659052d9c3
+:ROAM_ALIASES: "交易"
+:END:
+#+title: Trading
+#+filetags: :Trading:
+
+* [[id:1241ce9f-84ca-479b-865a-05f1f1ba21d8][Markets and Instruments]]
+* [[id:916f4d11-e91d-4574-bfa2-befca1493e58][Macroeconomic Drivers]]
+* [[id:e74c2c72-f576-4fc3-a444-967a0cba270d][Stock Analysis]]
+* [[id:d6f2b675-1500-4337-b7d7-67d575ccdc72][Strategy and Risk Control]]
+* [[id:6e4ae290-6a89-4208-8559-a97fd08e356e][Quantitative Trading]]
+* [[id:5955446b-3073-4880-822f-83081da78d11][Trading Systems]]
+* [[id:af4b6edc-c8e9-43f2-af92-bb1cbc6d49e8][Cryptocurrency]]

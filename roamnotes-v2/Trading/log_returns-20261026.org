@@ -1,0 +1,75 @@
+:PROPERTIES:
+:ID:       dae7eefe-f83e-4426-8440-676d382c28b9
+:ROAM_ALIASES: "对数收益率"
+:END:
+#+title: Log Returns in Quantitative Finance
+#+filetags: :Trading:Quant:
+
+* TOC :TOC_1:
+- [[#intuition][Intuition]]
+- [[#definitions][Definitions]]
+- [[#derivation-continuous-compounding][Derivation: Continuous Compounding]]
+- [[#worked-example][Worked Example]]
+- [[#log-vs-simple-returns][Log vs Simple Returns]]
+- [[#assumptions-are-log-returns-normal][Assumptions: Are Log Returns Normal?]]
+
+* Intuition
+A log return is the continuously compounded rate that takes the price from $p_{t-1}$ to $p_t$. Because compounding multiplies, its logarithm adds: log returns over consecutive periods simply add up, which makes analysis across time easy.
+
+* Definitions
+$$r = \frac{p_t - p_{t-1}}{p_{t-1}} \qquad \text{(simple / raw return)}$$
+
+$$R = \ln\frac{p_t}{p_{t-1}} = \ln p_t - \ln p_{t-1} \qquad \text{(log return)}$$
+
+$$R = \ln(1 + r), \qquad r = e^{R} - 1$$
+
+* Derivation: Continuous Compounding
+Compounding $n$ times a year at annual rate $r$:
+
+$$p_t = p_{t-1}\left(1 + \frac{r}{n}\right)^n$$
+
+Letting $n$ grow without bound, by the definition of $e$:
+
+$$\lim_{n \to \infty}\left(1 + \frac{r}{n}\right)^n = e^r \quad\Rightarrow\quad p_t = p_{t-1} e^r$$
+
+Solving for $r$ gives $r = \ln(p_t / p_{t-1})$, exactly the log return. So the log return is the *continuously compounded return*.
+
+* Worked Example
+$100 at 4% a year:
+
+| Compounding | Value after 1 year |
+|---|---|
+| Annually ($n = 1$) | $104.00 |
+| Quarterly ($n = 4$) | $104.06 |
+| Weekly ($n = 52$) | $104.08 |
+| Daily ($n = 252$) | $104.08 |
+| Continuous, $100e^{0.04}$ | $104.08 |
+
+Reversed: $\ln(104.08/100) = 0.04$.
+
+*Time additivity*: $\ln\frac{p_{Mar}}{p_{Jan}} = \ln\frac{p_{Mar}}{p_{Feb}} + \ln\frac{p_{Feb}}{p_{Jan}}$. A monthly continuously compounded rate of 2% for 12 months gives $100e^{0.02 \times 12} = 100e^{0.24} = 127.12$.
+
+*Annualizing*: if every month has the same expected log return, the annual log return is 12 × the mean monthly log return; convert back with $r_{year} = e^{R_{year}} - 1$.
+
+* Log vs Simple Returns
+| Need | Use | Why |
+|---|---|---|
+| Aggregate across *time* (one asset, many periods) | Log | Multi-period log return = sum of single-period log returns |
+| Aggregate across *assets* (one period, a portfolio) | Simple | Portfolio simple return = weight-averaged simple returns; log returns do not average this way |
+| Report to people | Simple | It is what the account actually gained |
+
+When returns are small the two are nearly equal ($\ln(1.01) = 0.00995$), and they diverge as returns grow ($\ln(1.10) = 0.0953$, $\ln(0.5) = -0.693$).
+
+*Example*: +50% then −50%. The simple returns average 0%, yet $100 → 150 → 75$. The log returns sum to $\ln 1.5 + \ln 0.5 = -0.288$, and $e^{-0.288} = 0.75$ gives the actual result. Averaging simple returns over time overstates growth.
+
+Other practical advantages:
+- A model that draws log returns from any distribution, including the normal, never produces a negative price, since $p_t = p_{t-1}e^R > 0$.
+- Summing logs is more numerically stable than multiplying many factors close to 1.
+
+* Assumptions: Are Log Returns Normal?
+Only approximately. Models often assume normally distributed log returns (equivalently, log-normal prices; see [[id:6ec38f0c-dde2-44f7-94b2-b5a7d4096a06][Normal Distribution]]) because sums of normals stay normal, which fits time additivity. Real returns differ:
+- *Fat tails*: large moves happen far more often than a normal distribution predicts, so a normal-based risk estimate understates crash risk.
+- *Volatility clustering*: calm and turbulent periods come in runs, so returns are not independent and identically distributed.
+- Over longer horizons (monthly, yearly) sums of many daily returns look closer to normal than daily returns do.
+
+Which model is "best" depends on what the analysis needs; the debate has run for a century. The normal is a convenient default for averages and a poor one for tail risk.

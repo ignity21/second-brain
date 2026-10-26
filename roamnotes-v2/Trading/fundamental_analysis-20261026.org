@@ -1,0 +1,100 @@
+:PROPERTIES:
+:ID:       f31358d3-84a6-48c8-97a1-2847d65b48c4
+:ROAM_ALIASES: "股票基本面分析" FA
+:END:
+#+title: Fundamental Analysis of Stocks
+#+filetags: :Trading:FA:
+
+* TOC :TOC_1:
+- [[#intuition][Intuition]]
+- [[#how-the-three-statements-connect][How the Three Statements Connect]]
+- [[#ratio-map][Ratio Map]]
+- [[#free-cash-flow][Free Cash Flow]]
+- [[#worked-example][Worked Example]]
+- [[#dividend-discount-model][Dividend Discount Model]]
+- [[#using-the-ratios][Using the Ratios]]
+
+* Intuition
+A share is a claim on a business. Fundamental analysis asks what the business earns, owns, and generates in cash, then compares that with the price. Every valuation ratio has the form /price ÷ something the company produces or owns/: the lower it is, the less you pay per unit of that thing. Whether a lower number is a bargain or a warning depends on growth and quality, which is why ratios are compared, never read alone.
+
+* How the Three Statements Connect
+| Statement | Shows | Identity |
+|---|---|---|
+| Income statement | Profit over a period, on an accrual basis | Net income (earnings) = revenue − expenses |
+| Balance sheet | What the company owns and owes at a moment | Assets = liabilities + equity |
+| Cash flow statement | Cash that actually came in and went out over a period | Operating + investing + financing cash flows |
+
+The link that matters: net income not paid out as dividends stays in the company as retained earnings, so
+
+$$\text{Equity}_{t} = \text{Equity}_{t-1} + \text{Net income} - \text{Dividends}$$
+
+Book value is equity: total assets − total liabilities. /Tangible/ book value also subtracts intangible assets such as goodwill, which could not be sold separately.
+
+* Ratio Map
+| Group | Ratio | Formula | Answers |
+|---|---|---|---|
+| Valuation | P/E | price / EPS, EPS = net income / shares | How many years of current earnings the price buys |
+| Valuation | Forward P/E | price / next year's estimated EPS | Same, on expected earnings |
+| Valuation | P/B | price / book value per share | Price relative to net assets; meaningful for banks and asset-heavy firms |
+| Valuation | FCF yield | FCF per share / price | Cash return on the price; higher = cheaper |
+| Profitability | ROE | net income / equity (start-of-period or average) | Profit per dollar of shareholders' money |
+| Profitability | FCF margin | FCF / revenue | Cash generated per dollar of sales |
+| Solvency | Debt-to-equity | total debt / shareholders' equity | Ability to carry long-term debt |
+| Activity | Asset turnover | revenue / total assets | How hard the assets work |
+| Liquidity | Current ratio | current assets / current liabilities | Ability to pay bills due within a year |
+
+Size by market capitalization (price × shares outstanding): small cap 300M–2B, mid cap 2B–10B, large cap above 10B (USD).
+
+** Ownership and Short Interest
+| Metric | Meaning | Read |
+|---|---|---|
+| Insider ownership and transactions | Shares held and traded by executives and directors | Insider buying is a stronger signal than selling; insiders sell for many reasons |
+| Institutional ownership | Share of float held by funds | High → more stable, mean-reverting behavior (see [[id:fac02460-82e1-4da3-9ea7-702c25095669][Trading Strategy Types]]) |
+| Short float | Shares sold short / float | How many investors bet on a fall |
+| Short ratio (days to cover) | Short interest / average daily volume | High → shorts would need many days to buy back, so a rally can turn into a short squeeze |
+
+* Free Cash Flow
+$$\text{FCF} = \text{operating cash flow} - \text{capital expenditure (CAPEX)}$$
+
+- Operating cash flow is the cash produced by normal business operations; CAPEX is money spent to maintain or buy physical assets.
+- Why look past earnings: earnings follow accounting choices (revenue recognition, depreciation); FCF is money that actually entered and left. "Earnings are an opinion, cash is a fact."
+- FCF conversion = FCF / net income. Persistent conversion well below 100% means reported profit is not turning into cash. A common screen asks for at least 85%.
+- What a company can do with FCF: reinvest for growth, pay down debt, acquire other companies, pay dividends, buy back shares. How it chooses tells you how management sees its own growth opportunities.
+
+* Worked Example
+Two companies IPO at $1.5 per share with no intangible assets. A has 30M shares and $2M liabilities; B has 90M shares and $5M liabilities. Year 1: A earns $2M and pays all of it out; B earns $5M and pays out $1M.
+
+| Year 1 | A | B |
+|---|---|---|
+| Equity | 45M + 2M − 2M = $45M | 135M + 5M − 1M = $139M |
+| Assets | $47M | $144M |
+| Market price | $2.00 | $2.50 |
+| Market cap | $60M | $225M |
+| Book value per share | $1.50 | $1.544 |
+| P/B | 1.33 | 1.62 |
+| EPS | $0.0667 | $0.0556 |
+| P/E | 30 | 45 |
+| ROE (on start equity) | 4.44% | 3.70% |
+| Dividend per share (yield) | $0.0667 (3.33%) | $0.0111 (0.44%) |
+
+B is less profitable per dollar of equity, yet the market pays 45× earnings for it versus 30× for A. The difference is what happens next: A pays out everything, so its book does not grow; B keeps 80% of its earnings and grows equity. A higher multiple is a bet on growth, and only pays off if the retained earnings later earn a good return.
+
+* Dividend Discount Model
+Value a stock as the present value of all future dividends. Assume the next dividend is $D_1$, dividends grow at a constant rate $g$, and the required return is $r$:
+
+$$P_0 = \frac{D_1}{1+r} + \frac{D_1(1+g)}{(1+r)^2} + \frac{D_1(1+g)^2}{(1+r)^3} + \cdots$$
+
+This is a geometric series with first term $\frac{D_1}{1+r}$ and ratio $q = \frac{1+g}{1+r}$. It converges only when $q < 1$, i.e. $g < r$:
+
+$$P_0 = \frac{D_1/(1+r)}{1 - \frac{1+g}{1+r}} = \frac{D_1}{r-g}, \qquad D_1 = D_0(1+g)$$
+
+$P_0$ is the stock's value today, $D_0$ the dividend just paid.
+
+- *Sensitivity*: the value depends on $r - g$. With $D_1 = 1$, $r = 8\%$: $g = 5\% \Rightarrow P_0 = 33$; $g = 6\% \Rightarrow P_0 = 50$. One percentage point of assumed growth changes the value by half, so the output is only as good as the growth guess.
+- *Assumptions*: constant growth forever, $g < r$, and dividends that reflect earnings. It does not fit companies that pay no dividends or grow fast for a few years; those need a multi-stage model or a cash-flow model.
+- Lower interest rates lower $r$ and raise $P_0$, which is the link from [[id:916f4d11-e91d-4574-bfa2-befca1493e58][monetary policy]] to stock prices.
+
+* Using the Ratios
+- *Benchmark* against peers in the same industry: a P/E of 30 is expensive for a utility and cheap for a fast-growing software company.
+- *Trend*: compare the same company across years; a ratio moving in the wrong direction matters more than its level.
+- Data: [[https://finviz.com/][Finviz]] (screening, ratio snapshots), Yahoo Finance (statements).

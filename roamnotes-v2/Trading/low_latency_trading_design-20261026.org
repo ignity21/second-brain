@@ -1,0 +1,60 @@
+:PROPERTIES:
+:ID:       dbc6bea0-6803-45f0-8fa1-1f3aefc1731b
+:ROAM_ALIASES: "低延迟交易系统设计"
+:END:
+#+title: Low Latency Trading Design
+#+filetags: :Trading:
+
+* Why Latency Matters
+- Some strategies only make sense when they are fast: arbitrage between venues, market making, reacting to news or to the order book.
+- Survival of the fittest: a market maker whose quotes lag the market gets *picked off*. Faster traders hit its stale quotes before it can update them.
+- Latency only needs to beat the competition for the strategy in question. A daily rebalancing strategy gains nothing from microseconds.
+
+* Latency Sources
+| Source | What it is | Main optimizations |
+|---|---|---|
+| Propagation | Time for the signal to travel the distance; bounded by the speed of light in the medium | Shorter path, colocation, microwave / laser links |
+| Network processing | Time spent in routers and switches along the way | Fewer hops, low-latency (cut-through) switches |
+| Serialization | Time to put the bits of a packet on the wire: size ÷ link speed | Faster links, smaller messages |
+| Interrupt and kernel | Time from a packet arriving to the application seeing it | Kernel bypass, busy polling |
+| Application | Time the program spends deciding | Core pinning, cache-friendly code, FPGA |
+
+** Propagation
+Light in fiber travels at about 2/3 of its speed in vacuum; microwave through air travels at nearly full speed and along a straighter line.
+- Chicago ↔ New York round trip: about 13 ms over the best fiber route, about 8.5 ms over microwave; the vacuum limit for the ~1,150 km straight line is about 7.6 ms.
+- Laser links shave off further nanoseconds over short distances, such as between data centers.
+- Colocation, placing the servers in the exchange's data center, removes most of the distance.
+
+** Network Processing and Microbursts
+Each router or switch hop adds processing and queueing time, so fewer hops is faster.
+
+A *microburst* is a sudden spike in the data rate lasting milliseconds or less. The average rate can look low while the bursts exceed the link's bandwidth several times a second. During a burst packets queue in switch buffers, which adds latency, or get dropped. Market data is bursty by nature, since many quotes change at once on news, so:
+- monitor at millisecond resolution; one-second averages hide bursts;
+- size links and buffers for the peak, not the average.
+
+** Serialization
+Serialization delay is packet size ÷ link speed: a 1,500-byte frame takes 1.2 µs at 10 Gbps, a 64-byte frame 51 ns. It matters for large messages and slower links, and it is paid again at every store-and-forward hop.
+
+** Interrupts and Kernel Bypass
+Normally the network card raises an *interrupt* and the kernel processes the packet through its network stack before copying it to the application. That costs latency for the new packet, and the interrupt also disturbs whatever was running on that core.
+
+Kernel bypass hands packet processing to user space. For example, OpenOnload (originally from Solarflare, now AMD) runs the TCP/UDP stack in the application's process and *busy-polls* the network card instead of waiting for interrupts. Interrupts are avoided completely, at the price of a CPU core spinning at 100%. TCP settings still matter on the normal kernel path: [[id:d43414ac-35ca-4f1d-a603-8026943a9801][TCP Reliable Delivery and Flow Control]] explains why low-latency systems set ~TCP_NODELAY~.
+
+** Application
+Application latency depends on how much work the logic does, how complex the calculations are, and how efficient the code is.
+- *Dedicate cores*: pin the critical threads (market data, strategy) to isolated cores, so they are not moved between cores and do not lose their caches.
+- *Stay in cache*: know the cache sizes, keep hot data contiguous, avoid allocation and locks on the hot path. [[id:2569c73d-2087-4aad-89db-809f0ac3619a][C++ Lock-free Data Structures]] covers the queues used to hand data between threads.
+- *FPGA* (Field-Programmable Gate Array): implement the parsing, risk checks, or the whole strategy in hardware for the lowest latency, at the cost of slow development and limited logic.
+
+* Cost and Complexity
+Each step down in latency costs more and makes the system harder to change:
+
+| Step | Typical latency gain | Cost |
+|---|---|---|
+| Efficient code on a normal kernel | Baseline | Low |
+| Kernel bypass, core pinning, tuning | Large | Specialist network cards, dedicated cores |
+| Colocation | Removes most propagation delay | Rack fees, exchange connectivity fees |
+| Microwave / laser links | Milliseconds between data centers | Very high; capacity is small and weather-sensitive |
+| FPGA | Down to sub-microsecond tick-to-trade | Hardware engineers, long development cycles, hard to change strategy |
+
+Go only as far as the strategy's edge requires. Measure tick-to-trade end to end before optimizing any one part.

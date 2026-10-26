@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       d6f2b675-1500-4337-b7d7-67d575ccdc72
+:ROAM_ALIASES: "交易策略与风控"
+:END:
+#+title: Trading Strategy and Risk Control
+#+filetags: :Trading:
+
+* [[id:fac02460-82e1-4da3-9ea7-702c25095669][Strategy Types]]
+* [[id:a8be299b-df31-4034-9332-355601045101][Position Sizing]]

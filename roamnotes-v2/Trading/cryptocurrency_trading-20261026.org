@@ -1,0 +1,27 @@
+:PROPERTIES:
+:ID:       af4b6edc-c8e9-43f2-af92-bb1cbc6d49e8
+:ROAM_ALIASES: "加密货币交易"
+:END:
+#+title: Cryptocurrency Trading
+#+filetags: :Trading:Crypto:
+
+* 出金
+出金（off-ramp）是把交易所里的加密资产换成法币，转到自己的银行账户。加密资产先在中心化交易所（CEX）换成法币，再经交易所支持的法币通道转出，往往要经过几家银行或支付机构才能到达最终的银行卡。比较路径时看：
+- 每一跳的手续费和换汇损耗；
+- 单日或单笔限额；
+- 到账时间；
+- 收款机构是否接受来自加密交易所的资金。
+
+[[https://jichangtuijian.com/usdt%E5%87%BA%E9%87%91.html][USDT 出金详细说明]]。陆港美欧各机构之间可走的币种和手续费（第三方信息图，2025-05 截取）：
+
+[[file:images/crypto_offramp_map.png]]
+
+* 我的出金路径 :mine:
+Kraken → iFAST → Wise → 香港银行卡：
+1. 在 Kraken 把 USDT 换成英镑（GBP）；
+2. 英镑提现到 iFAST（2 欧元）；
+3. iFAST 通过 FPS 转账到 Wise（每天限额 5000 欧元）；
+4. 在 Wise 把英镑换成港币（0.33% 损耗）；
+5. 从 Wise 转到香港银行卡。
+
+* [[id:62003c7e-6bf5-4b57-b0d3-79e70c5f1053][Perpetual Futures Funding Rate]]

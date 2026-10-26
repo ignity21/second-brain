@@ -1,0 +1,47 @@
+:PROPERTIES:
+:ID:       916f4d11-e91d-4574-bfa2-befca1493e58
+:ROAM_ALIASES: "影响市场的宏观因素"
+:END:
+#+title: Macroeconomic Drivers of Markets
+#+filetags: :Trading:
+
+* Economic Cycle
+Expansion → peak → contraction → trough → expansion. A strong economy shows:
+- rising output (GDP);
+- falling unemployment;
+- rising inflation (moderate, from demand);
+- rising business investment (capital expenditure);
+- political stability, which lets businesses plan and invest.
+
+Markets price the *expected* cycle, so stocks usually turn before the economy does. That is why the S&P 500 is itself a leading indicator (see [[*Composite Indexes][Composite Indexes]]).
+
+* Monetary Policy
+The central bank controls the money supply and short-term interest rates.
+- Lower rates → cheaper credit → more borrowing and spending → a stronger economy, and higher stock valuations because future earnings are discounted less.
+- Higher rates → the reverse; used to fight inflation.
+- US: the Federal Open Market Committee (FOMC) meets 8 times a year and sets the target range for the federal funds rate (see [[id:167c14ef-51ed-4a7c-9cb6-b6906fee366d][Money Market Instruments]]). It also sets rules for banks. Rate decisions and the guidance about future decisions move all markets.
+
+* Fiscal Policy
+The government taxes and spends.
+- Lower taxes or more spending → more money in circulation → stimulates the economy, at the cost of a larger deficit.
+- Higher taxes → less money in circulation → slows the economy, but can pay down government debt.
+
+* Scheduled Reports
+Markets react to the *surprise*: the actual number minus the consensus forecast. A good number that was expected moves nothing. Release times and consensus values are on an economic calendar such as Bloomberg's.
+
+| Report | Frequency (ET) | Measures | Typical reading |
+|---|---|---|---|
+| EIA Weekly Petroleum Status Report | Wednesday 10:30 | US crude and product inventory changes | Inventory draw → more demand or less supply → oil up |
+| Initial Jobless Claims | Thursday 8:30 | New unemployment insurance claims | Rising claims → weakening labor market |
+| NAHB Housing Market Index | Monthly | Home builders' view of the single-family housing market | Rising → housing demand, and spending on furniture and appliances follows |
+| Consumer Sentiment (University of Michigan) | Monthly | Households' attitude toward near-term spending | Rising → consumers likely to spend |
+
+* Composite Indexes
+The Conference Board publishes both monthly (around the 20th):
+
+| Index | Role | Components (current list) |
+|---|---|---|
+| Leading Economic Index (LEI) | Moves before the economy; anticipates turning points by months | Average weekly manufacturing hours, initial jobless claims, new orders (consumer goods, nondefense capital goods, ISM new orders), building permits, S&P 500, Leading Credit Index, 10-year minus fed funds spread, consumer expectations |
+| Coincident Economic Index (CEI) | Moves with the economy; confirms where it is now | Nonfarm payroll employment, personal income less transfers, industrial production, manufacturing and trade sales |
+
+The LEI component list changes over time: money supply and supplier deliveries were dropped in earlier revisions.

@@ -1,0 +1,47 @@
+:PROPERTIES:
+:ID:       77055920-d7f4-49a5-82b2-23cb35698f0b
+:ROAM_ALIASES: "Python 量化库"
+:END:
+#+title: Python Quant Ecosystem
+#+filetags: :Trading:Quant:
+
+* 定位
+按量化研究流程（数据 → 存储 → 分析 → 回测 → 绩效 / 风险 → 实盘）列出常用库，用于选型时想得起名字。具体用法交给文档和 AI。维护状态以 2026-10-26 的 PyPI 发布记录为准。更全的清单见 [[https://github.com/wilsonfreitas/awesome-quant][awesome-quant]]。
+
+* 选型判断
+- *先看是否还在维护* ：量化库更替快，很多教程里的库已停更，或者换了维护者和包名（见下表）。AI 常按旧教程推荐原包。
+- *数据决定市场* ：美股、港股用 yfinance 一类免费源足够研究，A 股用 AKShare / tushare；实盘级别的数据（复权、点时一致的基本面、退市股）通常要付费，回测中的幸存者偏差和前视偏差往往来自数据而不是代码。
+- *回测框架分两类* ：事件驱动（逐 bar 回调，贴近实盘撮合，慢）和向量化（整列运算，快，适合参数扫描但容易引入前视偏差）。
+- 数据处理用 pandas / Polars，统计建模用 [[id:ba10e7ca-778d-4e4b-8251-e398cf189a83][statsmodels]]。
+
+* 停更与改名
+| 旧包（AI 常写） | 现状 | 用这个 |
+|---|---|---|
+| ~zipline~ | 1.4.1（2020）后停更，Quantopian 已关闭 | ~zipline-reloaded~ |
+| ~pyfolio~ | 0.9.2（2019）后停更 | ~pyfolio-reloaded~ |
+| ~alphalens~ | 0.4.0（2020）后停更 | ~alphalens-reloaded~ |
+| ~empyrical~ | 0.5.5（2020）后停更 | ~empyrical-reloaded~ |
+| ~arctic~ | 维护模式（2024 后无发布） | ~arcticdb~ |
+| ~pyql~ | 3.0.0（2020）后无发布 | 官方 SWIG 绑定 ~QuantLib~ |
+| OpenBB Terminal（v3，源码 + poetry 安装） | 已被 OpenBB Platform 取代 | ~openbb~ （Python 包）、 ~openbb-cli~ （命令行） |
+| Backtrader、Blankly | 2023 年后无发布 | 仍可用，但不再修 bug，新项目慎选 |
+
+* 能力地图
+| 环节 | 库 | 一句话 |
+|---|---|---|
+| 数据 | yfinance | Yahoo Finance 行情与基本面，免费，非官方接口，偶尔失效 |
+| 数据 | AKShare、tushare | A 股等国内数据；AKShare 爬虫式免费，tushare 积分制 |
+| 数据 | OpenBB | 统一接口接多家数据供应商，适合研究时快速取数 |
+| 数据 | rqdata（米筐）、WindPy、Alpha Vantage | 收费数据服务或终端 |
+| 存储 | Parquet + Polars / DuckDB | 单机研究的默认选择 |
+| 存储 | ArcticDB、ClickHouse、DolphinDB | 大规模时序或 tick 数据；DolphinDB 在国内机构常见 |
+| 回测 | zipline-reloaded、Backtrader | 事件驱动回测 |
+| 回测 | vectorbt | 向量化回测，参数扫描快 |
+| 回测 / 平台 | RQAlpha（米筐）、Qlib（微软，AI 因子研究）、VeighNa（vn.py，国内实盘框架）、QUANTAXIS | 国内常用的研究与交易框架 |
+| 定价 | QuantLib | 衍生品与固定收益定价 |
+| 定价 | py_vollib | 期权隐含波动率与希腊字母 |
+| 绩效 / 风险 | pyfolio-reloaded、empyrical-reloaded | 组合绩效与风险指标（夏普、回撤等） |
+| 因子 | alphalens-reloaded | 因子收益、IC、分层表现分析 |
+| 组合优化 | Riskfolio-Lib | 均值方差、风险平价等组合优化 |
+| 实盘（A 股） | 恒生 PTrade、迅投 QMT；接口 恒生 T2SDK、中泰 XTP、华鑫 TORA | 券商提供的量化交易终端和柜台 API |
+| 代码保护 | Nuitka | 把 Python 编译成二进制扩展（Linux ~.so~ 、Windows ~.pyd~ ），交付策略时不暴露源码 |

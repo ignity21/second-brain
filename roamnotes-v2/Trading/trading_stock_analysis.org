@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       e74c2c72-f576-4fc3-a444-967a0cba270d
+:ROAM_ALIASES: "股票分析"
+:END:
+#+title: Stock Analysis Methods
+#+filetags: :Trading:
+
+* [[id:f31358d3-84a6-48c8-97a1-2847d65b48c4][Fundamental Analysis]]
+* [[id:ede0aad7-a06d-4c84-9081-1c8f40f122da][Technical Analysis]]

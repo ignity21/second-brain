@@ -1,0 +1,43 @@
+:PROPERTIES:
+:ID:       a8be299b-df31-4034-9332-355601045101
+:ROAM_ALIASES: "仓位管理"
+:END:
+#+title: Position Sizing and Risk per Trade
+#+filetags: :Trading:
+
+* Why Size by Risk
+Losing streaks are not rare. Chance of at least one run of 10 losses in a row:
+
+| Win rate | 100 trades | 500 trades | 1000 trades |
+|---|---|---|---|
+| 50% | 4% | 22% | 39% |
+| 40% | 21% | 71% | 92% |
+
+Risking a fixed fraction $f$ of the account per trade, 10 straight losses leave $(1-f)^{10}$ of it:
+
+| Risk per trade | Drawdown after 10 losses | Gain needed to recover |
+|---|---|---|
+| 1% | 9.6% | 10.6% |
+| 2% | 18.3% | 22.4% |
+| 5% | 40.1% | 67.0% |
+| 10% | 65.1% | 186.8% |
+
+Recovering takes a larger gain than the loss, and the gap widens fast. Hence the rule of thumb: risk *2% per trade*, never more than *5%*.
+
+* Position Size Formula
+$$\text{Shares} = \frac{\text{account} \times \text{risk per trade}}{\text{entry price} - \text{stop price}}$$
+
+Example: account $100,000, risk 2%, entry 4.56, stop 4.08.
+- Max loss per trade: $100,000 × 2% = $2,000
+- Risk per share: 4.56 − 4.08 = 0.48
+- Shares: 2,000 / 0.48 = 4,166 (rounded down); loss if stopped: 4,166 × 0.48 = $1,999.68
+
+The position is worth 4,166 × 4.56 ≈ $19,000, about 19% of the account. *Risk* is 2%, not the position. A tight stop gives a large position, so also cap the position value (buying power, concentration).
+
+* Stops
+- Decide the stop before entering. It goes where the trade idea is proven wrong, such as below support, the pattern's low, or a multiple of ATR (see [[id:ede0aad7-a06d-4c84-9081-1c8f40f122da][Technical Analysis]]), not at the loss you can stomach. The position size then follows from the stop, not the other way round.
+- *Taking the loss is the important part.* Loss aversion makes a loss feel worse than an equal gain feels good, so traders move stops further away or remove them. That turns a 2% loss into an unbounded one.
+- A stop order is not a guaranteed price: a gap through the stop fills at the next available price, so the real loss can exceed the plan. Size more conservatively ahead of earnings or overnight holds.
+
+* Across Positions
+Per-trade risk adds up. Five open positions at 2% each put 10% at risk. If they are correlated (same sector, same factor) they behave like one large position, so cap total open risk as well as risk per trade.

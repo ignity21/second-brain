@@ -1,0 +1,92 @@
+:PROPERTIES:
+:ID:       ede0aad7-a06d-4c84-9081-1c8f40f122da
+:ROAM_ALIASES: TA "技术分析"
+:END:
+#+title: Technical Analysis
+#+filetags: :Trading:TA:
+
+* TOC :TOC_1:
+- [[#premise][Premise]]
+- [[#choosing-indicators][Choosing Indicators]]
+- [[#bollinger-bands][Bollinger Bands]]
+- [[#rsi][RSI]]
+- [[#atr][ATR]]
+- [[#vwap][VWAP]]
+- [[#chart-patterns][Chart Patterns]]
+
+* Premise
+Technical analysis forecasts price direction from past price and volume alone. It can work for two reasons:
+- Participants react to the same situations in similar ways, so some patterns repeat.
+- Many traders watch the same levels, so their orders and stop-losses cluster there. A pattern can be partly *self-fulfilling*.
+
+So the real question is always what *other people* are likely to do at this price. The basic rule follows: go long above support, short below resistance. Support is a level where buyers have repeatedly stepped in; resistance is a level where sellers have.
+
+* Choosing Indicators
+An indicator is a fixed formula over past prices, so it has no edge by itself. Pick it for the strategy type and the stock: a mean-reversion indicator in a strongly trending stock generates losing signals one after another. Several indicators built from the same closing prices mostly repeat each other; adding them does not add confirmation.
+
+| Indicator | Measures | Default | Typical use |
+|---|---|---|---|
+| Bollinger Bands | Price relative to its recent volatility | 20-period SMA ± 2σ | Mean reversion: fade touches of the outer band |
+| RSI | Size of recent up moves vs down moves | 14 periods | Mean reversion: overbought / oversold |
+| ATR | Average daily range, in price units | 14 periods | Volatility: stop-loss and take-profit distance |
+| VWAP | Volume-weighted average price since the session open | Intraday, resets daily | Execution benchmark; intraday entry level |
+
+Indicators are rolling computations over a price series; [[id:3848f66e-9f41-4201-a213-c44e581b7e16][Rolling Windows in Polars]] computes them on a DataFrame.
+
+* Bollinger Bands
+Middle band = 20-period moving average (SMA or EMA); upper and lower bands = middle ± 2 standard deviations of the same window.
+- If returns were roughly normal, about 95% of closes would fall inside the bands, so a close outside is "stretched" and a mean-reversion strategy bets on a return toward the middle.
+- Narrow bands (a squeeze) mean volatility is unusually low; low volatility tends to be followed by a large move, in either direction.
+- In a strong trend price can "walk the band" for a long time; fading it then is fighting the trend.
+
+* RSI
+Relative Strength Index:
+
+$$RSI = 100 - \frac{100}{1 + RS}, \qquad RS = \frac{\text{average gain}}{\text{average loss}} \text{ over 14 periods}$$
+
+$RS \in [0, \infty)$ is mapped onto $[0, 100)$. The mapping is steep near zero and flattens out, so extreme readings need extreme imbalances:
+
+| RS | 0 | 0.43 | 1 | 2.33 | 4 | 9 |
+|---|---|---|---|---|---|---|
+| RSI | 0 | 30 | 50 | 70 | 80 | 90 |
+
+RSI 70 means average gains are 2.33 times average losses; RSI 50 means they are equal.
+
+- *Overbought* near 100 (conventionally above 70), *oversold* near 0 (below 30).
+- Entry: buy when RSI drops below 30 *and then rises back above it*; sell when it rises above 70 and then falls back below. Waiting for the cross back avoids buying while the price is still falling.
+- In a strong uptrend RSI can stay above 70 for weeks. "Overbought" describes the past move, not a forecast.
+
+* ATR
+Average True Range is the average of the true range over 14 periods:
+
+$$TR = \max(H - L,\ |H - C_{prev}|,\ |L - C_{prev}|)$$
+
+The previous close is included so that overnight gaps count.
+- ATR is in currency units: an ATR of 1.20 means the stock typically moves $1.20 a day. It measures volatility, not direction or trend strength.
+- Use it to place a stop-loss or take-profit outside normal noise, for example 1.5–2 ATR from entry. A fixed percentage stop is too tight on a volatile stock and too loose on a quiet one.
+
+* VWAP
+$$VWAP = \frac{\sum_i p_i v_i}{\sum_i v_i} \quad \text{from the session open}$$
+
+- Institutions benchmark their execution against VWAP: a buy filled below VWAP counts as a good fill, a sell above it likewise. Algorithms that work large orders aim to trade near VWAP.
+- So in stocks with high institutional ownership, institutional buying tends to show up near VWAP, and VWAP acts as intraday support or resistance and as an entry level.
+- It accumulates from the open and resets each session, so it only makes sense on intraday data.
+
+* Chart Patterns
+| Pattern | Shape | Suggests | Confirmation |
+|---|---|---|---|
+| Head and shoulders | Three peaks, the middle highest; the lows between them form the neckline | Uptrend reversing | Close below the neckline |
+| Double / multiple top | Two or more peaks at the same level | A large seller sits at that level; a reversal down. Most meaningful short term, especially intraday | Break below the low between the peaks |
+| Double / multiple bottom | Mirror of the top | Reversal up | Break above the high between the bottoms |
+| Ascending triangle | Flat resistance with rising lows | Buyers are getting more aggressive | Break above resistance on rising volume |
+| Descending triangle | Flat support with falling highs | Sellers are getting more aggressive | Break below support |
+| Symmetrical triangle / wedge | Converging trendlines | Indecision; a breakout either way | Direction of the breakout |
+| Rising / falling wedge | Both lines slope the same way and converge | Rising wedge often breaks down, falling wedge breaks up | Trendline break |
+| Cup and handle | Rounded bottom whose decline slows and recovery speeds up, then a small pullback (the handle) | Continuation up | Break above the cup's rim |
+| Rounding bottom | Long, gradual U shape | Slow shift from selling to buying | Break above the start of the decline |
+
+** Trading a Breakout: Ascending Triangle
+- *Entry*: go long when price closes above the horizontal resistance on higher volume. Why the move accelerates: short sellers have their stop-loss buy orders just above resistance, and triggering them adds buying.
+- *Stop-loss*: just below the last low inside the triangle, or below the rising trendline.
+- *Profit target*: the common measured-move rule projects the triangle's height (at its widest) up from the breakout point. It is a convention, not a law; check it on your own data.
+- Patterns are more reliable on longer time frames. A breakout without volume often fails and falls back into the pattern.

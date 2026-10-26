@@ -1,0 +1,70 @@
+:PROPERTIES:
+:ID:       09ea9033-4067-4a2f-b442-b7da136fa5be
+:ROAM_ALIASES: "证券与交易机制"
+:END:
+#+title: Securities and Exchange Mechanics
+#+filetags: :Trading:
+
+* TOC :TOC_1:
+- [[#claims-on-a-company][Claims on a Company]]
+- [[#primary-and-secondary-markets][Primary and Secondary Markets]]
+- [[#shares-and-float][Shares and Float]]
+- [[#trading-sessions][Trading Sessions]]
+- [[#dividends][Dividends]]
+- [[#etfs][ETFs]]
+
+* Claims on a Company
+A security is a tradable claim. What the holder is owed decides how it behaves:
+
+| Class | Holder is owed | Price driven by | Examples |
+|---|---|---|---|
+| Debt (fixed income) | Fixed payments; paid before equity | Interest rates, default risk | Government and corporate bonds, certificates of deposit |
+| Equity (股权工具) | Residual claim on earnings and assets after all debt | Expected future earnings | Common and preferred stock |
+| Derivative | Whatever the contract says about an underlying asset | The underlying | Futures, options, perpetual futures |
+
+- *Common vs preferred stock*: common stock votes and gets whatever is left; preferred stock usually does not vote but is paid dividends and liquidation proceeds before common.
+- *Futures vs options*: a futures contract *obliges* both sides to trade at the agreed price on the agreed date; an option gives the buyer the *right but not the obligation*, so the buyer pays a premium up front and the seller carries the obligation.
+
+* Primary and Secondary Markets
+- 一级市场（primary market）: the issuer sells newly created securities and receives the money, for example an IPO underwritten by an 投资银行（investment bank） that commits to a price and resells to the public.
+- 二级市场（secondary market）: investors trade already-issued securities among themselves; the issuer receives nothing. Why it still matters to the issuer:
+  - Liquidity: buyers pay more for something they can sell later, which makes new issues easier to place.
+  - Price discovery: the secondary-market price is the reference for any new issue, so it sets what the company can raise.
+- Intermediaries: a 经纪人（broker） is an agent that matches buyers and sellers and earns a commission; a 交易商（dealer） trades from its own inventory at quoted prices and earns the bid-ask spread.
+- Exchange vs 场外交易市场（over-the-counter, OTC）: an exchange matches orders centrally under its rules; OTC trades are negotiated between dealers.
+- 货币市场（money market） vs 资本市场（capital market）: short-term debt (under a year) vs long-term debt and equity. The money market is covered in [[id:167c14ef-51ed-4a7c-9cb6-b6906fee366d][Money Market Instruments]].
+
+* Shares and Float
+- Float: shares available for public trading, excluding insiders' locked or restricted holdings. Low float means little money moves the price, in both directions; [[id:fac02460-82e1-4da3-9ea7-702c25095669][Trading Strategy Types]] uses this to pick stocks.
+- American Depositary Receipt (ADR): a US-listed certificate representing shares of a foreign company, so the stock trades in USD during US hours.
+
+* Trading Sessions
+| Session (US) | Use | Caveat |
+|---|---|---|
+| Pre-market | Gauge direction before the open, react to overnight news | Thin liquidity, wide spreads, limit orders only at most brokers |
+| Regular | Main session | |
+| Post-market | React to earnings released after the close | Same as pre-market |
+
+Prices outside the regular session are set by little volume, so a big pre-market move can reverse at the open.
+
+* Dividends
+- Cash dividend: the company pays out part of its profit. On the ex-dividend date the price opens lower by about the dividend, so the dividend is not free money; it moves value from the share price to cash (and may be taxed).
+- Stock dividend: extra shares instead of cash. Total value is unchanged; there are just more shares.
+- Dates: declaration → ex-dividend → record → payment. You must already own the stock *before* the ex-dividend date.
+- Settlement drives the ex-date: the buyer must be on the register by the record date, so the ex-date is set by the settlement cycle. Since 2024-05-28 US stocks settle T+1, and the ex-dividend date is the same business day as the record date. Hong Kong stocks still settle T+2.
+
+* ETFs
+An Exchange-Traded Fund (ETF) is a fund that trades like a stock. Sector ETFs serve as a quick proxy for a whole sector, for example to see whether a stock lags its sector:
+
+| ETF | Exposure |
+|---|---|
+| SPY | S&P 500 |
+| XLK | Technology |
+| XLF | Financials |
+| XLE | Energy |
+| XLV | Health care |
+| XLU | Utilities |
+| USO | WTI crude oil futures |
+
+- USO holds front-month oil *futures*, not oil and not oil companies. Rolling the futures each month loses money when later contracts are more expensive (contango), so over months USO can fall while spot oil is flat. It tracks oil well intraday, poorly over long holds.
+- Finviz has an ETF screener.
