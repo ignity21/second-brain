@@ -17,9 +17,18 @@
 ## 工作范围与完成标准
 
 - 按任务读取相关笔记、索引和说明；普通文字修改无需预读全库或执行迁移检查。
-- 在用户请求范围内完成编辑、必要的索引和链接更新、相关验证，并修复本次改动引入的问题，无需在每一步重复确认。发现无关历史问题时说明即可。
+- 在用户请求范围内完成编辑、必要的索引和链接更新、相关验证，并修复本次改动引入的问题，无需在每一步重复确认。发现无关历史问题时说明；需要后续处理的，记入相关的未完成任务文件。
 - 保留用户已有改动。`inbox/` 是 gitignore 的学习材料暂存区，不属于知识库。
-- 多轮或大型改动前，在 `.agents/tasks/` 建立任务文件（Markdown 检查清单 + 状态），进度记录写入该文件；不使用工具私有的 todo 存储（如 `.pi/`）。
+
+## 任务文件
+
+- 多轮或大型改动前，在 `.agents/tasks/` 建立任务文件 `YYYY-MM-DD-<slug>.md`（Markdown 检查清单 + 进度记录）。跨 session 要接续的计划、待用户决定的问题和遗留事项只写在任务文件里，不依赖工具私有的 todo 或记忆存储（如 `.pi/`、Claude 的 memory）。
+- 标题下第一行写 `Status: <状态> — <下一步>`，状态用 Open、In progress、Paused、Not started 或 Complete；进度变化时同步更新，做完改为 Complete。一项工作拆成多个文件时，指定一个汇总文件，其余文件的 Status 写明由它统筹。
+- 用户问还有什么没做、要接着之前的工作，或提到某个计划而没给文件名时，先列出未完成的任务文件，从汇总文件或最相关的一个继续：
+
+  ```sh
+  rg -n '^Status:' .agents/tasks/ | rg -v 'Status: Complete'
+  ```
 - 仓库级 skills 放 `.agents/skills/<name>/SKILL.md`。撰写、整理或改写笔记内容时用 `cc-note-writing` skill；迁移旧笔记时用 `note-migration` skill；创建或修改 Anki 卡片时用 `anki-cards` skill；用户说「处理收件箱」或要从 `inbox/` 材料提取笔记时用 `inbox-processing` skill；修改 `AGENTS.md`、`CLAUDE.md` 或 `.agents/skills/` 下的指导内容时用 `cc-agent-instructions` skill（用户级）。
 
 ## 入库与学习辅助

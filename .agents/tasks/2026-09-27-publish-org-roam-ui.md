@@ -1,6 +1,7 @@
 # 发布 org-roam-ui 到 GitHub Pages
 
-- 状态: 完成
+Status: Complete
+
 - 日期: 2026-09-27
 - 计划: 静态化自用 fork（`ignity21/org-roam-ui` 的 `search` 分支），发布 `roamnotes-v2/` 全部笔记到
   `https://ignity21.github.io/second-brain/`。

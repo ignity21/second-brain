@@ -1,6 +1,7 @@
 # DataScience 迁移到 roamnotes-v2
 
-- 状态: 完成
+Status: Complete
+
 - 日期: 2026-09-19
 - 提交: `eb44b4c`（迁移）、`58f9238`（清理源资源）
 

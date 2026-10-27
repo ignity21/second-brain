@@ -1,6 +1,6 @@
 # inbox-processing 试用观察
 
-状态：第一份材料（`tcp.md`）于 2026-10-16 合并回 `master`；第二份（`tcp2.md`）于 2026-10-17 在 `trial/inbox` 上完成，试用记录与收尾改动见下文，待合并回 `master`。
+Status: Complete — 第一份材料（`tcp.md`）于 2026-10-16、第二份（`tcp2.md`）于 2026-10-17 合并回 `master`（`trial/inbox` 已合并）
 
 ## 已知可能的问题
 

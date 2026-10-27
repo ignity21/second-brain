@@ -1,6 +1,7 @@
 # DataScience 分类拆分
 
-- 状态: 完成
+Status: Complete
+
 - 日期: 2026-09-23
 
 ## 范围

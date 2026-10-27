@@ -1,6 +1,7 @@
 # PlantUML 渲染与 org-roam-ui 文件链接
 
-- 状态: 完成
+Status: Complete
+
 - 日期: 2026-10-17
 - 计划: UI 隐藏带 `:file` 的 plantuml 代码块；`file:` 资源链接（如 show-me 的 `demos/*.html`）可在新标签页打开；
   写笔记时由 agent 用 PlantUML CLI 生成图片。

@@ -1,6 +1,6 @@
 # 已完成迁移中未迁的笔记（待复查）
 
-Status: Open，等用户逐篇检查
+Status: Open — 等用户逐篇决定；由 `2026-10-27-migration-followups.md`（A2）统筹
 
 C++、Trading 和 Linux/OS 三次迁移完成后（以及剩余笔记迁移计划中），源笔记全部留在 `roamnotes/` 作备份。下面前 6 篇是这三次迁移的范围内、经决定 *没有迁入* `roamnotes-v2/` 的笔记，其后是剩余笔记迁移计划中决定不迁的个人内容和其他笔记，与已迁移的备份区分开。用户检查后决定：迁入（按 note-migration skill，保留原 ID），或确认不迁。
 

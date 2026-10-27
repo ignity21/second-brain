@@ -1,6 +1,6 @@
 # C++ 与 Trading 的 Anki 卡片
 
-Status: Not started
+Status: Not started — 由 `2026-10-27-migration-followups.md`（A4、B 节）统筹
 
 C++、Trading 迁移（2026-10-26）后，按新笔记制卡。用 `anki-cards` skill；只写卡片文件，由用户自己同步到 Anki。制卡深度参考 `.agents/learning-goals.md` 中这两个领域的档位。
 

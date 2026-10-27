@@ -1,6 +1,7 @@
 # 脚本生成 toc-org 目录
 
-- 状态: 完成
+Status: Complete
+
 - 日期: 2026-10-18
 - 计划: 用 batch Emacs（`-Q`，只加载 Doom straight 里的 org 和 toc-org）调用 `toc-org-insert-toc`，
   不依赖运行中的 Emacs；AGENTS.md 改为由脚本生成 TOC；补齐现有 13 篇空的或过时的 TOC。
