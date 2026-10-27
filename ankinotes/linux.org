@@ -1047,7 +1047,7 @@ Source: Linux Resource Limits
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1793029848165
-:ANKI_NOTE_HASH: 053b93ae67b4289df53c5fd2db4c4814
+:ANKI_NOTE_HASH: 465c879e053341281685fd2c03b13e07
 :END:
 
 *** Front
@@ -1061,6 +1061,8 @@ Source: Linux Resource Limits
 ** 三种观测方式的分工
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793030779464
+:ANKI_NOTE_HASH: fa2e0c8ee94d9dc868fbd7aeffe2493f
 :END:
 
 *** Front
@@ -1078,6 +1080,8 @@ Source: Linux Performance Tools
 ** strace 的代价
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793030779477
+:ANKI_NOTE_HASH: fe5aa2a71b734fd010c20ace9b004dcf
 :END:
 
 *** Front
@@ -1091,6 +1095,8 @@ Source: Linux Performance Tools
 ** strace 只看到 futex
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793030779488
+:ANKI_NOTE_HASH: 4c1cf1d4c23d1531ea398431f26c7ab2
 :END:
 
 *** Front
@@ -1104,6 +1110,8 @@ Source: Linux Performance Tools
 ** eBPF 工具为何能用于生产
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793030779493
+:ANKI_NOTE_HASH: 2c53af02fa66c3974f6d26a7c44d8c83
 :END:
 
 *** Front
@@ -1117,6 +1125,8 @@ Source: Linux Performance Tools
 ** vmstat 的第一行
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793030779500
+:ANKI_NOTE_HASH: 86cf40144ae03062a1ef7313b448c05d
 :END:
 
 *** Front
@@ -1130,6 +1140,8 @@ Source: Linux Performance Tools
 ** perf 调用栈只有一两层
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793030779505
+:ANKI_NOTE_HASH: c4c57057af9e32221be3a773e8347c29
 :END:
 
 *** Front
@@ -1143,6 +1155,8 @@ Source: Linux perf Profiler
 ** IPC 高是否更快
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793030779509
+:ANKI_NOTE_HASH: 767507d37d3aaef79c4a010a82c8d40a
 :END:
 
 *** Front
@@ -1156,6 +1170,8 @@ Source: Linux perf Profiler
 ** perf 的 cache-misses 统计哪一级
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Cloze
+:ANKI_NOTE_ID: 1793030779513
+:ANKI_NOTE_HASH: c9ae539162a586d01da2590da38e27f4
 :END:
 
 *** Text
@@ -1167,6 +1183,8 @@ Source: Linux perf Profiler
 ** 非特权用户用不了 perf
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793030779517
+:ANKI_NOTE_HASH: d0aaea028740c6e9162a3c2354d51217
 :END:
 
 *** Front
@@ -1180,6 +1198,8 @@ Source: Linux perf Profiler
 ** 云主机上 perf stat 不支持
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793030779521
+:ANKI_NOTE_HASH: 4125c97ea7e65a8bdae4ab7ff66e91da
 :END:
 
 *** Front
@@ -1193,6 +1213,8 @@ Source: Linux perf Profiler
 ** 火焰图的横轴
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793030779526
+:ANKI_NOTE_HASH: 2e92f038d61583de721927558295fdba
 :END:
 
 *** Front
@@ -1206,6 +1228,8 @@ Source: Linux perf Profiler
 ** dd 测出的磁盘速度
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793030779531
+:ANKI_NOTE_HASH: 928337efc53c3a4c5e83522eb697c8a0
 :END:
 
 *** Front
@@ -1219,6 +1243,8 @@ Source: Linux Benchmarking and Load Generation
 ** fio 的 iodepth 不起作用
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793030779536
+:ANKI_NOTE_HASH: d15e6f0278b08e2c2ae15f068be8ed78
 :END:
 
 *** Front
