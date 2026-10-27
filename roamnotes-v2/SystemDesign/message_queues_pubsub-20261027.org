@@ -1,0 +1,36 @@
+:PROPERTIES:
+:ID:       5561dbba-1542-4b9a-8cdc-334ca6501990
+:ROAM_ALIASES: "消息队列与发布订阅"
+:END:
+#+title: Message Queues and Pub/Sub
+#+filetags: :SystemDesign:
+
+* Intuition
+A message queue sits between producers and consumers so that they no longer need to be up at the same time or run at the same speed. In a web application, the web tier puts slow jobs (sending email, resizing images) on a queue and returns; workers take them off at their own pace. The two sides can then be scaled independently, and a burst of requests becomes a longer queue instead of an outage.
+
+| Model | Each message goes to | Examples |
+|---|---|---|
+| Queue (point-to-point, competing consumers) | One of the consumers | RabbitMQ queues, SQS |
+| Publish-subscribe | Every subscriber (each subscriber group, in Kafka) | Kafka topics, Redis Pub/Sub, Google Pub/Sub |
+
+* Guarantees to Ask About
+| Property | Question | Typical answers |
+|---|---|---|
+| Delivery | Can a message be lost or delivered twice? | At-most-once (may lose), at-least-once (may duplicate), "exactly-once" only within one system's transactions |
+| Persistence | Does a message survive a broker crash? | Written to disk and replicated (Kafka, durable RabbitMQ queues), or memory only (Redis Pub/Sub) |
+| Ordering | Are messages consumed in the order sent? | Usually only within one partition or queue |
+| Replay | Can a consumer re-read old messages? | Yes for log-based brokers (Kafka keeps messages for a retention period); no for queues that delete on acknowledgement |
+
+At-least-once delivery is the common practical choice, so consumers must be *idempotent*: processing the same message twice has the same effect as once, for example by recording processed message IDs or using upserts keyed by an ID.
+
+* Getting Updates from a Server
+| Approach | How | Trade-off |
+|---|---|---|
+| Polling | Fetch the resource at a fixed interval | Simple; stale between polls, and most requests return nothing |
+| Long polling | The server holds the request open until there is data or a timeout | Fewer empty responses; one request per update |
+| Streaming | Keep a connection open and push updates continuously (Server-Sent Events, WebSocket) | Lowest latency; long-lived connections to manage, scale, and reconnect |
+
+* Pitfalls
+- *Ordering versus parallelism*: one partition per key keeps order for that key; a single global order means a single consumer. Decide which ordering the application really needs.
+- *Poison messages*: a message that always makes the consumer fail is redelivered forever and blocks the queue. Limit retries and move it to a dead-letter queue.
+- *Unbounded queues hide overload*: a growing backlog means consumers are too slow. Monitor consumer lag and apply backpressure or add consumers.

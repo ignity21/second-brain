@@ -1,0 +1,54 @@
+:PROPERTIES:
+:ID:       8e0d2181-f0e0-4e39-94ae-94df96168095
+:ROAM_ALIASES: "存储引擎"
+:END:
+#+title: Storage Engines: Hash Indexes, LSM-Trees and B-Trees
+#+filetags: :SystemDesign:
+
+* TOC :TOC_1:
+- [[#intuition][Intuition]]
+- [[#hash-index][Hash Index]]
+- [[#lsm-tree][LSM-Tree]]
+- [[#b-tree][B-Tree]]
+- [[#comparison][Comparison]]
+- [[#pitfalls][Pitfalls]]
+
+* Intuition
+Two families of storage engines:
+- *Log-structured*: only append to files and never modify them in place; merge files in the background. Hash indexes and LSM-trees.
+- *Page-oriented*: split the data into fixed-size pages and overwrite pages in place. B-trees.
+
+Any index speeds up reads and slows down writes, because every write must also update the index.
+
+* Hash Index
+An in-memory hash map from each key to the byte offset of its latest value in an append-only file (Bitcask).
+- Appending and merging segments are *sequential* writes, much faster than random writes, especially on spinning disks.
+- Append-only, immutable segments make concurrency and crash recovery simple: a crash can only leave a partially written record at the end.
+- Old segments are compacted: keep only the latest value per key, merge into new segments, delete the old ones.
+- Limits: *all keys must fit in memory*, and range queries are inefficient (every key must be looked up separately).
+
+* LSM-Tree
+Writes go to an in-memory balanced tree (memtable). When it grows large, it is written out as a sorted file (SSTable); background compaction merges SSTables.
+- Reads check the memtable, then the SSTables from newest to oldest; Bloom filters skip files that cannot contain the key.
+- Because SSTables are sorted, the in-memory index can be *sparse*: one key every few kilobytes is enough, and the block between two index keys is scanned. Those blocks can be compressed before writing.
+- A write-ahead log protects the memtable against crashes.
+- Used by LevelDB, RocksDB, Cassandra, HBase.
+
+* B-Tree
+Fixed-size pages (usually 4 KiB) form a balanced tree; each page holds keys and references to child pages, and the leaves hold the values or references to them. Lookups take O(log n) page reads; a tree four levels deep with 4 KiB pages and a branching factor of 500 holds 256 TB.
+- Updates overwrite pages in place. Splitting a page touches several pages, so a crash midway would corrupt the tree; a write-ahead log (redo log) records each change before it is applied.
+- Optimizations: copy-on-write pages instead of a WAL (LMDB), which also helps concurrency control; leaf pages linked to their siblings, so range scans need not go back up to the parent; abbreviated keys in interior pages for a higher branching factor; fractal trees borrow log-structured ideas to reduce disk seeks.
+- Used by almost all relational databases.
+
+* Comparison
+| | LSM-tree | B-tree |
+|---|---|---|
+| Write throughput | Higher: sequential writes, lower write amplification | Lower: each write updates whole pages, plus the WAL |
+| Reads | Possibly several SSTables per lookup | One path from root to leaf; more predictable |
+| Disk space | Compresses better, no page fragmentation | Pages are partly empty after splits |
+| Each key | May exist in several files until compaction | Exactly one place, which makes range locks for transactions simple |
+| Main risk | Compaction competes with live reads and writes for disk bandwidth | Write amplification on random writes |
+
+* Pitfalls
+- *Compaction falling behind*: if writes come in faster than compaction can merge, unmerged SSTables pile up, reads slow down, and disk fills. LSM engines usually do not throttle incoming writes, so this needs explicit monitoring.
+- High-percentile read latency on LSM engines can be unpredictable because of compaction; B-trees are steadier.

@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       88d8cbc5-90af-479d-a9f3-9086b1129a7f
+:ROAM_ALIASES: "分布式系统组件"
+:END:
+#+title: Distributed System Building Blocks
+#+filetags: :SystemDesign:
+
+* [[id:1d92f19c-ff18-4006-904d-146a3ce03878][Load Balancing]]
+* [[id:e6126815-01d8-4c71-b870-ba30432b3a69][Caching]]
+* [[id:5561dbba-1542-4b9a-8cdc-334ca6501990][Message Queues and Pub/Sub]]
+* [[id:5521b2f9-f8ea-44d3-887a-1e9190e366f7][ZeroMQ]]
+* [[id:8f34f2a8-55bc-4870-b2fc-05ec5ab7f80e][MapReduce]]

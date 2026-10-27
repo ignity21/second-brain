@@ -1,0 +1,61 @@
+:PROPERTIES:
+:ID:       8f34f2a8-55bc-4870-b2fc-05ec5ab7f80e
+:ROAM_ALIASES: "MapReduce 批处理"
+:VERIFIED_WITH: Python 3.14 (2026-10-27)
+:END:
+#+title: MapReduce Batch Processing
+#+filetags: :SystemDesign:
+
+* Intuition
+MapReduce processes a large dataset in parallel on many machines in three steps:
+1. *Map*: for each input record, emit zero or more key-value pairs.
+2. *Shuffle*: the framework groups all values by key and sends each key's values to one reducer.
+3. *Reduce*: for each key, combine its values into the result.
+
+The programmer writes only the two functions; the framework handles partitioning, scheduling, moving data, and rerunning failed tasks.
+
+#+begin_src python :results output
+from collections import defaultdict
+
+def map_fn(line):
+    for word in line.split():
+        yield word.lower(), 1
+
+def reduce_fn(word, counts):
+    return word, sum(counts)
+
+def mapreduce(records, map_fn, reduce_fn):
+    groups = defaultdict(list)               # shuffle: group by key
+    for r in records:
+        for k, v in map_fn(r):
+            groups[k].append(v)
+    return dict(reduce_fn(k, vs) for k, vs in groups.items())
+
+lines = ["the cat", "The dog", "a cat"]
+assert mapreduce(lines, map_fn, reduce_fn) == {"the": 2, "cat": 2, "dog": 1, "a": 1}
+print("ok")
+#+end_src
+
+#+RESULTS:
+: ok
+
+* Why the Functions Must Be Pure
+Map and reduce must not have side effects and must depend only on their input. This is what lets the framework run them anywhere, in any order, in parallel, and simply rerun a task after a machine fails, without corrupting the result.
+
+MongoDB's old ~mapReduce~ command expressed the same model with JavaScript functions:
+
+#+begin_src js
+db.users.mapReduce(
+    function map() { emit(this.age, this.height); },     // key, value
+    function reduce(key, values) { return Array.avg(values); },
+    { query: { gender: "male" }, out: "AvgHeightReport" }
+);
+#+end_src
+
+* Version Drift
+- MongoDB deprecated map-reduce in 5.0; use the aggregation pipeline ( ~$match~ , ~$group~ ) instead.
+- Hadoop MapReduce, which writes every intermediate result to disk, has largely been replaced by dataflow engines such as Spark and Flink that keep intermediate data in memory and plan whole jobs at once. The map-shuffle-reduce model lives on in their ~groupBy~ / ~reduceByKey~ operations.
+
+* Pitfalls
+- *Skewed keys*: one hot key (a celebrity, a null value) sends most of the data to one reducer, which finishes long after the others. Pre-aggregate in a combiner on the map side, or split the hot key.
+- A reduce function that is not associative and commutative (an average of averages) cannot be used as a combiner; carry ~(sum, count)~ instead and divide at the end.

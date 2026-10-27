@@ -1,0 +1,44 @@
+:PROPERTIES:
+:ID:       6de26b38-0e0a-4142-a2ad-5437b2263305
+:ROAM_ALIASES: "数据模型"
+:END:
+#+title: Data Models: Relational, Document and Graph
+#+filetags: :SystemDesign:
+
+* Intuition
+A data model decides what is easy and what is awkward. The deciding factor is the shape of the *relationships* in the data:
+
+| Relationships | Fits | Examples |
+|---|---|---|
+| Mostly one-to-many, self-contained records (a tree) | Document model | MongoDB, CouchDB; JSON columns in PostgreSQL |
+| Many-to-one and many-to-many, needs joins | Relational model | PostgreSQL, MySQL |
+| Anything potentially related to everything | Graph model | Neo4j (property graph), Datomic (triple store) |
+
+Specialized stores exist for other shapes: blob storage (S3, GCS), time series (InfluxDB, Prometheus), full-text search indexes (Elasticsearch), spatial indexes (quadtrees, R-trees).
+
+* Comparison
+| | Relational | Document |
+|---|---|---|
+| Schema | Schema-on-write: enforced by the database | Schema-on-read: implicit, interpreted when the data is read |
+| Locality | A record is spread across tables; reading it needs joins | One document holds everything; one read fetches it all |
+| Joins | Native | Weak or absent: the application emulates them with several queries |
+| Denormalized data | Avoided by normalizing | Common; the application must keep the copies consistent |
+| Changing the structure | Migration (fast in most databases, except rewriting large tables) | Write new fields; old documents are handled in code |
+
+Use a document model when:
+- there are many types of objects and a table per type is impractical;
+- the structure is decided by external systems that may change at any time;
+- the data is mostly tree-shaped and documents rarely refer to each other.
+
+Graphs are good for evolvability: new kinds of vertices and edges can be added without changing a schema, and queries can follow paths of any length (Cypher, SPARQL, Datalog).
+
+* Choosing in an Interview
+Default to a relational database: joins, transactions, and a mature ecosystem. Reasons to choose a non-relational store:
+- super-low latency key-value access (Redis, DynamoDB);
+- unstructured data, or data without relationships;
+- a massive volume that has to be spread over many machines from the start;
+- the access pattern matches a specialized model (wide-column for time-ordered writes, graph for traversals).
+
+* Pitfalls
+- *Meaningful values as keys*: use opaque IDs as primary keys and references. An ID has no meaning to humans, so it never needs to change; a name, email, or region does, and every copy of it would have to be updated.
+- *Declarative vs imperative queries*: SQL says *what* result is wanted and hides how the engine gets it, which lets the database change indexes, storage, and parallelism without changing queries. Imperative access code (loops over records, as in MongoDB's old MapReduce) fixes the algorithm.

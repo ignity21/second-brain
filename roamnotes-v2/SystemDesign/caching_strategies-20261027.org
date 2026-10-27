@@ -1,0 +1,30 @@
+:PROPERTIES:
+:ID:       e6126815-01d8-4c71-b870-ba30432b3a69
+:ROAM_ALIASES: "缓存策略"
+:END:
+#+title: Caching Strategies in System Design
+#+filetags: :SystemDesign:
+
+* Intuition
+A cache is a temporary data store, usually in memory, that holds the results of expensive reads so later requests skip the database or the computation. Use one when data is read frequently and modified infrequently; the price is that the cache and the data store can disagree.
+
+* Strategies
+| Strategy | Read path | Write path | Trade-off |
+|---|---|---|---|
+| Cache-aside (lazy loading) | Application checks the cache; on a miss, reads the database and fills the cache | Application writes the database, then deletes the cache entry | The most common; only requested data is cached; the first read after a change is a miss |
+| Read-through | The cache itself loads from the database on a miss | | Simpler application code; suits frequent, predictable hits |
+| Write-through | | Write goes to the cache and the database together | Cache always fresh; every write pays both latencies |
+| Write-behind (write-back) | | Write goes to the cache; the database is updated later, in batches | Fast writes; data is lost if the cache fails before flushing |
+
+* Decisions
+- *Expiration*: a TTL bounds how stale data can be. Too short and the hit rate drops; too long and users see old data.
+- *Eviction* when memory is full: LRU (least recently used), LFU (least frequently used), FIFO. LRU is the usual default.
+- *Consistency*: decide how stale each kind of data may be. Prices and balances may need write-through or no cache; profile pictures can be minutes old.
+- *Avoid a single point of failure*: several cache servers, replicated or spread with consistent hashing, so losing one does not send all traffic to the database.
+- *CDN* for static content (images, scripts, video): a cache at the network edge close to users. Decide the cost, the expiry, a fallback to the origin when the CDN fails, and how to invalidate: vendor APIs, or versioned URLs such as ~image.png?v=2~ .
+
+* Pitfalls
+- *Update the cache, or delete it?* With cache-aside, delete the entry after writing the database. Updating it instead lets two concurrent writers leave the older value in the cache.
+- *Cache stampede*: a popular entry expires and thousands of requests miss at once and hit the database together. Let one request recompute while others wait or serve the stale value, and add random jitter to TTLs.
+- *Cache penetration*: requests for keys that exist nowhere always miss and always reach the database (often from attackers). Cache the "not found" result briefly, or check a Bloom filter first.
+- *Cold start*: after a restart or a new cache cluster the hit rate is zero; warm it up before taking full traffic.

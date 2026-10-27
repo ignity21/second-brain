@@ -1,6 +1,6 @@
 # 迁移剩余旧笔记（Default/、Games/）的总计划
 
-Status: In progress — 归属方案已确认（2026-10-27）；批次 1–2 完成，下一步批次 3
+Status: In progress — 归属方案已确认（2026-10-27）；批次 1–3 完成，下一步批次 4
 
 C++、Trading、Linux/OS 三轮迁移之后，`roamnotes/` 中从未进入任何迁移计划的笔记共 130 篇（`Default/` 128 篇、`Games/` 2 篇），约 3,700 行；另加复查清单里延后的 `C++/zeromq`。旧根 `Default/contents.org` 不迁（其链接的 ID 均已迁移）。
 
@@ -102,11 +102,11 @@ DevOps、个人工具、前端作为 `Tools/` 下的分组，全部「知道」�
 - [x] 用户确认归属方案和档位，写入 `.agents/learning-goals.md`
 - [x] 批次 1：Network 剩余（2026-10-27）
 - [x] 批次 2：Algorithms（2026-10-27）
-- [ ] 批次 3：SystemDesign
+- [x] 批次 3：SystemDesign（2026-10-27）
 - [ ] 批次 4：Python 与零散归属
 - [ ] 批次 5：DevOps、工具、前端
 - [x] 批次 6：个人内容（不迁，已列入复查清单）
-- [ ] 复查清单 `2026-10-27-unmigrated-notes-review.md` 中的 ZeroMQ 随批次 3 处理
+- [x] 复查清单 `2026-10-27-unmigrated-notes-review.md` 中的 ZeroMQ 随批次 3 处理
 
 ## 批次 1 执行记录（Network）
 
@@ -167,3 +167,39 @@ Algorithms (09857801)
 Anki：新建 `ankinotes/algorithms.org`（Deck `RoamCards::Algorithms`），30 张。
 
 验证：行内标记检查为空；9 篇加 ~TOC_1~ 并生成；全库结构检查通过；`org-roam-db-sync` 完成。
+
+## 批次 3 执行记录（SystemDesign）
+
+新大类 `SystemDesign/`，笔记用英语（源笔记多为 DDIA、System Design Interview 的英文摘录）；错误处理一篇源笔记是中文，保持中文。
+
+```
+System Design (882501dd，原 system_design；4 个标题级 ID 废弃)
+├─ System Design Goals（新 10d96252）
+│   ├─ Reliability and Availability (28a88260) ← reliability, availability（bf48570b 废弃）
+│   ├─ Scalability in System Design (45f0ae67) ← scalability
+│   ├─ Maintainability and Architecture Principles (b5ea1dbf) ← maintainability, 软件架构设计原则（6ed2ea7c）, data_system（665b238c），后两个废弃
+│   └─ Error Handling Design (b4fd80ae) ← error_handling（→ C++ RAII 的链接保留）
+├─ Data Storage in System Design（新 581d29e4）
+│   ├─ Data Models: Relational, Document and Graph (6de26b38，原 database；3 个标题级 ID 废弃) ← database, no_sql, mongodb, mysql, document_model, graph_like_data_model, full_text_search_data_model（后 6 个 ID 废弃）
+│   ├─ Database Transactions and Isolation (33927767，原 sql；2 个标题级 ID 废弃) ← sql（补隔离级别与异常）
+│   ├─ Storage Engines: Hash Indexes, LSM-Trees and B-Trees (8e0d2181，原 b_trees) ← b_trees, lsm_trees（25329cd5）, hash_indexes（26bfc8e3）
+│   ├─ Database Replication (54f046db) ← replication, leader_election（e2798f28）, web_application_design 的主从复制一节
+│   └─ Database Sharding and Consistent Hashing (3f815adf) ← sharding, consistent_hashing（3237b43a）, rendezvous_hashing（9fe0a1a4）, hashing（87987610）
+├─ Distributed System Building Blocks（新 88d8cbc5）
+│   ├─ Load Balancing (1d92f19c) ← load_balancing
+│   ├─ Caching Strategies in System Design（新 e6126815）← web_application_design 的缓存与 CDN 两节
+│   ├─ Message Queues and Pub/Sub (5561dbba) ← pub_sub_pattern, polling（6e803f5c）, streaming（c009f066）
+│   ├─ ZeroMQ Messaging Patterns (5521b2f9，原 C++/zeromq) ← C++/zeromq, Default/zeromq（b09fb519 废弃；7 张 zguide 截图改写为模式表和拓扑列表）
+│   └─ MapReduce Batch Processing (8f34f2a8) ← mapreduce, mongodb_mapreduce（da5d484d）
+└─ System Design Interview (bed8b081)
+    └─ Scaling a Web Application (66b1a5a2) ← web_application_design（6 个 PlantUML 块迁入 `images/web_*.png` 并重新渲染；单机图中「服务器把 IP 返回给浏览器」改为 HTTP 请求）
+```
+
+- 不迁：`sha`（空）。
+- `low_latency` → 并入 Trading 的 Low Latency Trading Design（新增 NUMA 本地内存、SIMD 两条，链接 Linux 笔记）；其余条目（剖析工具、大页、核绑定、实时调度、Nagle、内核旁路）已在 Trading / Linux / Network 笔记中，ID `e7e8f2c3` 废弃。
+- 所有废弃 ID 在迁移范围外没有入链；`Default/system_design` → ZeroMQ 的入链随本批迁移恢复。
+- 核对：一致性哈希与 rendezvous 代码在 Python 3.14 上运行，4 → 5 个节点时取模移动 80%、一致性哈希 17%、rendezvous 20%；MapReduce 词频示例运行通过；ZeroMQ（pyzmq 27.2.0 / libzmq 4.3.5，scratchpad `zmq/check.py`）：SUB 连接后立即发送的 5 条全部丢失、200 ms 后的能收到；HWM 设为 10 时 PUB 0.09 s「发出」10 万条、SUB 收到 710 条；无对端的 PUSH 在 ~NOBLOCK~ 下返回 ~zmq.Again~ ；REQ 未收回复就再发报错。
+
+Anki：新建 `ankinotes/systemdesign.org`（Deck `RoamCards::SystemDesign`），31 张（英语 29、中文 2）。
+
+验证：行内标记检查为空；3 篇 TOC 已生成；全库结构检查通过；`org-roam-db-sync` 完成。

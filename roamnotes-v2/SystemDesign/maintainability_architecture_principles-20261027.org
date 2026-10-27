@@ -1,0 +1,45 @@
+:PROPERTIES:
+:ID:       b5ea1dbf-519e-439f-aa26-af2dc166955b
+:ROAM_ALIASES: "可维护性与架构原则"
+:END:
+#+title: Maintainability and Architecture Principles
+#+filetags: :SystemDesign:
+
+* Intuition
+Most of a system's cost is not the initial build but the years of operating, fixing and adapting it, done by many different people. Maintainability means all of them can keep working on it productively. It has three parts:
+
+| Part | Goal | Practices |
+|---|---|---|
+| Operability | Easy for operations to keep it running | Monitoring and fast recovery, tracing problems, keeping software patched, good deployment and configuration tooling, predictable processes, keeping knowledge as people leave |
+| Simplicity | Easy for new engineers to understand | Remove accidental complexity with good abstractions |
+| Evolvability | Easy to change for unanticipated requirements | Follows from simplicity and good abstractions |
+
+Signs of accidental complexity: an explosion of the state space, tight coupling between modules, tangled dependencies, inconsistent naming and terminology, special cases and hacks for performance.
+
+* What Shapes a Design
+Before choosing an architecture, the questions a data-intensive system has to answer:
+- How do you keep data correct and complete, even when things go wrong?
+- How do you provide consistently good performance to clients when parts are degraded?
+- How do you scale to handle an increase in load?
+- What does a good API for the service look like?
+
+The answers depend on more than technology: the skills and experience of the team, legacy dependencies, the delivery timescale, *the organization's tolerance of different kinds of risk*, and regulatory constraints.
+
+Most such systems combine the same building blocks: databases to store data, caches for the results of expensive operations, search indexes, stream processing for asynchronous messages, and batch processing for periodic crunching of accumulated data.
+
+* Three Architecture Principles
+1. *Fit over industry-leading*: choose what fits the current team, scale, and budget, not what the largest companies use.
+2. *Simple over complex*: more components and more clever mechanisms mean more ways to fail and harder debugging.
+3. *Evolution over getting it right at once*: design for the current scale with room to grow, and refactor as requirements become clear.
+
+* Sources of Complexity
+Architecture exists to handle complexity, which comes from a few requirements:
+
+| Requirement | Typical mechanisms |
+|---|---|
+| High performance | Load balancing across machines; I/O multiplexing and concurrency within one machine |
+| High availability | Active-standby (master-slave) setups; clusters |
+| Extensibility | Layered design; plugin architectures |
+| Others | Security; low cost |
+
+Each requirement has to be justified by the business: adding high-availability or high-performance machinery that is not needed violates the first two principles.

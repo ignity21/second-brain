@@ -1,0 +1,39 @@
+:PROPERTIES:
+:ID:       28a88260-5abb-48a9-bf27-5678acd7be3b
+:ROAM_ALIASES: "可靠性与可用性"
+:END:
+#+title: Reliability and Availability
+#+filetags: :SystemDesign:
+
+* Intuition
+- *Reliability*: the system keeps working correctly (the right function at the expected performance) even when things go wrong: hardware faults, software bugs, human error.
+- *Availability*: the fraction of time the system is up and serving. A system can be available but unreliable (it answers, with wrong data) and the reverse.
+
+A *fault* is one component deviating from its spec; a *failure* is the system as a whole no longer providing the service. Fault tolerance means preventing faults from turning into failures. It is impossible to prevent every fault, so the design question is which faults to tolerate.
+
+* Availability in Nines
+| Availability | Downtime per year | Per month (30 days) |
+|---|---|---|
+| 99% | 3.65 days | 7.2 hours |
+| 99.9% | 8.77 hours | 43.2 minutes |
+| 99.99% | 52.6 minutes | 4.3 minutes |
+| 99.999% | 5.26 minutes | 26 seconds |
+
+- *SLA* (service-level agreement): the availability promised to customers, usually with penalties. *SLO* (service-level objective): the internal target, set tighter than the SLA.
+- *Serial dependencies multiply*: a service that needs three dependencies at 99.9% each can be at most 0.999³ ≈ 99.7% available. Every synchronous dependency on the request path lowers the ceiling.
+- *Redundancy adds nines*: two independent replicas at 99% each give 1 − 0.01² = 99.99%, if failover is automatic and the failures are really independent.
+- *Active redundancy*: all replicas serve traffic (load balanced). *Passive redundancy*: a standby takes over on failure (hot, warm, or cold standby, depending on how ready it is).
+
+* Three Kinds of Faults
+| Kind | Character | Main defenses |
+|---|---|---|
+| Hardware | Mostly random and independent (disks, power, machines) | Redundancy; prefer software fault tolerance that survives losing whole machines, which also allows rolling upgrades without planned downtime |
+| Software | Systematic and correlated: the same bug hits every instance at once | Careful thinking about assumptions, thorough testing, process isolation, letting processes crash and restart, monitoring production behavior |
+| Human | Configuration errors are a leading cause of outages | Good abstractions and admin interfaces, sandboxes with real data, easy rollback, gradual rollout, detailed monitoring |
+
+Correlated software faults are why redundancy alone is not enough: the examples are a bad input that crashes every server, a runaway process that exhausts a shared resource, a dependency that slows down, and *cascading failures* where one overloaded component pushes load onto the next.
+
+* Pitfalls
+- *Retries without limits cause cascading failures*: when a dependency slows down, clients retry, the load multiplies, and the dependency falls over completely. Use timeouts, retries with exponential backoff and jitter, retry budgets, and circuit breakers.
+- *Redundant but not independent*: two replicas in the same rack, behind the same switch, or running the same buggy release fail together.
+- *Untested failover*: a standby that has never taken over usually fails to when it matters. Exercise it regularly.

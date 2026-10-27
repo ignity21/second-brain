@@ -1,0 +1,86 @@
+:PROPERTIES:
+:ID:       3f815adf-8a11-42cd-8eed-94ee7d2b46b9
+:ROAM_ALIASES: "数据库分片与一致性哈希"
+:VERIFIED_WITH: Python 3.14 (2026-10-27)
+:END:
+#+title: Database Sharding and Consistent Hashing
+#+filetags: :SystemDesign:
+
+* TOC :TOC_1:
+- [[#intuition][Intuition]]
+- [[#choosing-a-sharding-key][Choosing a Sharding Key]]
+- [[#problems-sharding-creates][Problems Sharding Creates]]
+- [[#consistent-hashing][Consistent Hashing]]
+- [[#template][Template]]
+- [[#pitfalls][Pitfalls]]
+
+* Intuition
+Sharding (partitioning) splits a large dataset into smaller pieces, shards, each stored on a different node, so that data volume and write load are spread beyond what one machine can handle. It is usually combined with replication: each shard has its own replicas.
+
+* Choosing a Sharding Key
+The key decides which shard a record goes to. It should spread data *and load* evenly:
+
+| Strategy | Good at | Problem |
+|---|---|---|
+| By key range (A–F, G–M, …) | Range scans stay on one shard | Hot spots when writes follow the key order, such as timestamps |
+| By hash of the key | Even distribution | Range queries must ask every shard |
+| By type of data (users here, payments there) | Separating concerns | Shards grow unevenly |
+| By client region | Data near its users, data residency rules | Regions differ greatly in size |
+
+* Problems Sharding Creates
+- *Hot keys* (the celebrity problem): one key receives far more traffic than others, so its shard is overloaded no matter how the rest is spread. Give such keys their own shard, or split one key over several by appending a random suffix and merge on read.
+- *Cross-shard joins* are expensive or impossible. The usual workaround is to denormalize, so that a query can be answered from one table on one shard.
+- *Resharding*: when nodes are added or removed, data must move. The naive ~hash(key) % n~ moves almost every key when n changes; consistent hashing moves only about 1/n of them.
+
+* Consistent Hashing
+Map both nodes and keys onto the same hash ring; each key belongs to the first node clockwise from its position.
+- Adding a node takes over only the keys between it and its predecessor; removing a node hands its keys to its successor.
+- With few nodes, the ring positions are uneven. *Virtual nodes*: each physical node takes many positions on the ring (hundreds), which evens out the load and lets a removed node's keys spread over all remaining nodes instead of one.
+
+*Rendezvous hashing* (highest random weight) is the alternative without a ring: for each key, compute a score for every node from ~hash(key, node)~ and pick the highest. Removing a node only moves the keys that had it as their top choice. It costs O(n) per lookup, fine for tens of nodes.
+
+* Template
+#+begin_src python :results output
+import bisect
+import hashlib
+
+def h(s):
+    return int.from_bytes(hashlib.md5(s.encode()).digest()[:8], "big")
+
+class ConsistentHash:
+    def __init__(self, nodes, vnodes=100):
+        self.ring = sorted((h(f"{n}#{i}"), n) for n in nodes for i in range(vnodes))
+        self.keys = [k for k, _ in self.ring]
+
+    def node(self, key):
+        i = bisect.bisect(self.keys, h(key)) % len(self.ring)   # first node clockwise, wrapping around
+        return self.ring[i][1]
+
+def rendezvous(key, nodes):
+    return max(nodes, key=lambda n: h(f"{key}|{n}"))
+
+keys = [f"user{i}" for i in range(10_000)]
+old_nodes = ["s1", "s2", "s3", "s4"]
+new_nodes = old_nodes + ["s5"]
+
+def moved(assign_old, assign_new):
+    return sum(assign_old(k) != assign_new(k) for k in keys) / len(keys)
+
+modulo = moved(lambda k: old_nodes[h(k) % 4], lambda k: new_nodes[h(k) % 5])
+a, b = ConsistentHash(old_nodes), ConsistentHash(new_nodes)
+ring = moved(a.node, b.node)
+hrw = moved(lambda k: rendezvous(k, old_nodes), lambda k: rendezvous(k, new_nodes))
+print(f"moved: modulo {modulo:.0%}, consistent {ring:.0%}, rendezvous {hrw:.0%}")
+assert modulo > 0.7 and ring < 0.3 and hrw < 0.3
+# every key that moved went to the new node
+assert all(b.node(k) == "s5" for k in keys if a.node(k) != b.node(k))
+#+end_src
+
+#+RESULTS:
+: moved: modulo 80%, consistent 17%, rendezvous 20%
+
+Going from 4 to 5 nodes, modulo hashing moves about 4/5 of the keys; both consistent hashing (17% here, with 100 virtual nodes per server) and rendezvous hashing move about 1/5, all of them to the new node.
+
+* Pitfalls
+- Use a hash with a stable, well-mixed output across processes: Python's built-in ~hash()~ of strings is randomized per process ( ~PYTHONHASHSEED~ ), so two servers would disagree on the mapping.
+- Sharding is a one-way door: queries, transactions and unique constraints across shards get much harder. Exhaust a single node with read replicas and caching first.

@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       bed8b081-8910-4309-9aa5-b4fc5179b0ef
+:ROAM_ALIASES: "系统设计面试"
+:END:
+#+title: System Design Interview
+#+filetags: :SystemDesign:
+
+* [[id:66b1a5a2-36a4-4421-8edc-a470ec0e2292][Scaling a Web Application]]

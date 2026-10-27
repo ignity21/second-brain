@@ -44,6 +44,8 @@ Kernel bypass hands packet processing to user space. For example, OpenOnload (or
 Application latency depends on how much work the logic does, how complex the calculations are, and how efficient the code is.
 - *Dedicate cores*: pin the critical threads (market data, strategy) to isolated cores, so they are not moved between cores and do not lose their caches. [[id:d525dfda-0943-4e82-b4a8-cad648ad48b5][Linux CPU Scheduling and Affinity]] covers pinning and the kernel options that keep other work off those cores.
 - *Stay in cache*: know the cache sizes, keep hot data contiguous, avoid allocation and locks on the hot path. [[id:2569c73d-2087-4aad-89db-809f0ac3619a][C++ Lock-free Data Structures]] covers the queues used to hand data between threads.
+- *Stay on the local NUMA node*: on multi-socket servers, run the critical threads and allocate their memory on the same node, since remote memory is noticeably slower; [[id:29001a4b-0d21-4602-b9b5-535c0f8ee122][NUMA Memory Architecture]] covers how to check and bind.
+- *Vectorize hot loops*: SIMD instructions process several values per instruction, for example when computing indicators over a price array; [[id:5dc17fb2-544c-433d-bd94-394a0c37457f][CPU Core Execution Features]] covers what the CPU supports.
 - *Avoid page faults*: the first touch of a new page costs about a microsecond, and a page read back from disk far more. Pre-fault and lock memory at startup and use huge pages for large tables; [[id:4dc805d4-c007-4526-bd64-c9ca9af200a4][Linux Virtual Memory and Page Faults]] covers how.
 - *FPGA* (Field-Programmable Gate Array): implement the parsing, risk checks, or the whole strategy in hardware for the lowest latency, at the cost of slow development and limited logic.
 

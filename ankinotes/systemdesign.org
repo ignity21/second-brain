@@ -1,0 +1,432 @@
+#+title: SystemDesign
+
+* Deck
+:PROPERTIES:
+:ANKI_DECK: RoamCards::SystemDesign
+:END:
+
+** Availability of serial dependencies
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+A request synchronously calls three services, each 99.9% available. What is the best availability the request path can have? What does that imply for design?
+
+*** Back
+About 0.999³ ≈ 99.7%: availabilities of serial dependencies multiply, so every synchronous dependency on the request path lowers the ceiling.
+- Cut synchronous dependencies (async via queues, caches, graceful degradation) or make each one redundant.
+
+Source: Reliability and Availability
+
+** Redundancy and independence
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Two replicas, each 99% available, with automatic failover. What availability do they give together, and what assumption makes that number wrong in practice?
+
+*** Back
+1 − 0.01² = 99.99%, but only if failures are independent. Replicas in the same rack, behind the same switch, or running the same buggy release fail together. Software faults are systematic and correlated, which is why redundancy alone does not stop them.
+
+Source: Reliability and Availability
+
+** Retry storms
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+A dependency slows down and the whole system collapses shortly after, although the dependency never fully failed. What is the usual mechanism, and what prevents it?
+
+*** Back
+Clients time out and retry, multiplying the load on the slow dependency until it falls over (a cascading failure).
+- Timeouts, retries with exponential backoff and jitter, retry budgets, and circuit breakers that stop calling a failing dependency.
+
+Source: Reliability and Availability
+
+** Percentiles instead of the mean
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Why describe response time with p50, p99 and p999 rather than the mean? Why do slow percentiles matter more for a request that fans out to 100 backends?
+
+*** Back
+The mean hides the tail; p50 shows the typical request, p99 / p999 what the slowest users see (often the ones with the most data).
+A fan-out request is as slow as its slowest backend: with 100 backends, a per-backend p99 is hit by most requests (tail latency amplification).
+
+Source: Scalability in System Design
+
+** Twitter timeline fan-out
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Twitter can build home timelines on read (merge followed users' tweets) or on write (push each tweet into every follower's timeline). Which load parameter decides, and what hybrid was used?
+
+*** Back
+The distribution of followers per user, which sets the fan-out cost of a write. Fan-out on write for most users; celebrities with millions of followers are excluded and their tweets merged in at read time.
+
+Source: Scalability in System Design
+
+** When to use a document model
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+When is a document database a better fit than a relational one?
+
+*** Back
+When the data is mostly one-to-many and self-contained (a tree), documents rarely refer to each other, the structure comes from external systems that may change, or there are many object types that would each need a table.
+It gives locality (one read fetches the whole record) and schema-on-read; it is weak at joins and many-to-many relationships.
+
+Source: Data Models: Relational, Document and Graph
+
+** Opaque IDs as keys
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Why use meaningless IDs instead of names or email addresses as primary keys and references?
+
+*** Back
+An ID has no meaning to humans, so it never needs to change. A meaningful value does change, and every copy and reference to it would have to be updated.
+
+Source: Data Models: Relational, Document and Graph
+
+** Write skew
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Two doctors are on call. Each, in a separate transaction, checks that at least two are on call and then takes themselves off call. Both commit and nobody is on call. What anomaly is this, and which isolation level prevents it?
+
+*** Back
+Write skew: both read the same data and write different rows based on it, together breaking an invariant. Snapshot isolation (repeatable read) does not prevent it; serializable does, or an explicit lock on the rows read ( ~SELECT ... FOR UPDATE~ ).
+
+Source: Database Transactions and Isolation
+
+** Lost update
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Application code runs ~x = SELECT counter~ then ~UPDATE counter = x + 1~ in concurrent requests and some increments disappear. Give two fixes.
+
+*** Back
+Concurrent read-modify-write cycles overwrite each other (lost update).
+- Atomic update: ~UPDATE ... SET counter = counter + 1~ .
+- Lock the row when reading ( ~SELECT ... FOR UPDATE~ ), or compare-and-set.
+MySQL's repeatable read does not detect this; PostgreSQL's aborts one transaction.
+
+Source: Database Transactions and Isolation
+
+** LSM-tree write and read paths
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+How does an LSM-tree handle a write and a read, and why can its in-memory index be sparse?
+
+*** Back
+Write: append to a write-ahead log, insert into the in-memory memtable; when full, flush it as a sorted SSTable; compaction merges SSTables in the background.
+Read: memtable, then SSTables newest to oldest, skipping files with Bloom filters.
+SSTables are sorted, so one index key every few kilobytes is enough; the block between two keys is scanned.
+
+Source: Storage Engines: Hash Indexes, LSM-Trees and B-Trees
+
+** LSM-tree vs B-tree
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+For a write-heavy workload, why might you choose an LSM engine over a B-tree, and what is the main operational risk?
+
+*** Back
+LSM writes are sequential with lower write amplification and compress better, so write throughput is higher. B-trees overwrite whole pages plus a WAL.
+Risk: compaction competes with live traffic for disk bandwidth; if it falls behind, SSTables pile up, reads slow, and disk fills, and writes are usually not throttled, so it needs monitoring.
+
+Source: Storage Engines: Hash Indexes, LSM-Trees and B-Trees
+
+** Synchronous vs asynchronous replication
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+What does the leader lose with fully synchronous replication, and what does it risk with asynchronous replication? What is the usual compromise?
+
+*** Back
+Synchronous: one slow or dead follower blocks every write.
+Asynchronous: writes not yet replicated are lost if the leader fails.
+Compromise: semi-synchronous, one synchronous follower and the rest asynchronous.
+
+Source: Database Replication
+
+** Read-your-writes
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+A user updates their profile, reloads the page, and sees the old version. Why, and how do you fix it?
+
+*** Back
+The reload was served by an asynchronous follower that had not yet received the write (replication lag).
+Fix: read data the user may have modified from the leader (e.g. for a while after their last write), or wait until the follower has caught up to the user's last write.
+
+Source: Database Replication
+
+** Split brain
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+After a failover, the old leader comes back still believing it is the leader. What goes wrong and how is it prevented?
+
+*** Back
+Two leaders accept conflicting writes (split brain), corrupting data.
+Prevent it by fencing: shut down or reject the old leader, e.g. with fencing tokens that storage checks, and choose leaders through consensus (Raft, etcd, ZooKeeper).
+
+Source: Database Replication
+
+** Leaderless quorums
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+In a leaderless (Dynamo-style) store with n replicas, writes wait for w acknowledgements and reads for r responses. What condition makes a read see the latest write?
+
+*** Back
+$w + r > n$ : the read set and the write set must overlap in at least one replica.
+
+Source: Database Replication
+
+** Modulo hashing vs consistent hashing
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Growing from 4 to 5 shards, roughly what fraction of keys moves with ~hash(key) % n~ , and with consistent hashing? Why add virtual nodes?
+
+*** Back
+Modulo: about 4/5 of the keys move. Consistent hashing: about 1/5, all to the new node.
+Virtual nodes (many ring positions per server) even out the load, and spread a removed node's keys over all remaining nodes instead of one neighbor.
+
+Source: Database Sharding and Consistent Hashing
+
+** Hot keys
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+One celebrity account gets far more traffic than any other, overloading its shard. How do you handle it?
+
+*** Back
+Better key distribution cannot fix one hot key. Give it a dedicated shard, or split it across several shards by appending a random suffix to the key and merge on read.
+
+Source: Database Sharding and Consistent Hashing
+
+** Python hash() for sharding
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Why is Python's built-in ~hash()~ of strings a bad choice for mapping keys to shards across servers?
+
+*** Back
+String hashing is randomized per process ( ~PYTHONHASHSEED~ ), so different servers compute different shards for the same key. Use a stable hash such as one derived from ~hashlib~ .
+
+Source: Database Sharding and Consistent Hashing
+
+** Layer 4 vs layer 7 load balancing
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+What can a layer 7 load balancer do that a layer 4 one cannot, and what does it cost?
+
+*** Back
+L7 sees HTTP: it routes by host, path, headers or cookies, terminates TLS, rewrites and retries requests. L4 only forwards connections by IP and port.
+Cost: L7 parses every request, so more CPU and latency; L4 is faster and cheaper.
+
+Source: Load Balancing
+
+** Sticky sessions vs stateless
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Why prefer a stateless web tier over sticky sessions?
+
+*** Back
+With sticky sessions the user's session lives on one server: adding, removing or losing servers breaks sessions and load becomes uneven.
+Stateless: sessions in a shared store, any server handles any request, and auto-scaling only adds or removes servers.
+
+Source: Load Balancing
+
+** Cache-aside: delete or update
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+With cache-aside, after writing the database, should you update the cache entry or delete it? Why?
+
+*** Back
+Delete it. Updating lets two concurrent writers race and leave the older value in the cache; deleting makes the next read reload the current value from the database.
+
+Source: Caching Strategies in System Design
+
+** Cache stampede and penetration
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Distinguish cache stampede from cache penetration and give one fix for each.
+
+*** Back
+- Stampede: a hot entry expires and many requests miss at once and hit the database together. Let one request recompute while others wait or get the stale value; add jitter to TTLs.
+- Penetration: requests for keys that exist nowhere always miss. Cache the not-found result briefly, or check a Bloom filter first.
+
+Source: Caching Strategies in System Design
+
+** At-least-once delivery
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Your message broker guarantees at-least-once delivery. What must consumers do, and how?
+
+*** Back
+Be idempotent: processing a message twice must have the same effect as once. Record processed message IDs, or write with upserts keyed by a message ID.
+
+Source: Message Queues and Pub/Sub
+
+** Poison messages
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+One message always crashes the consumer and the queue stops making progress. What is the standard fix?
+
+*** Back
+Limit the number of delivery attempts and move the message to a dead-letter queue for inspection, so the rest of the queue can proceed.
+
+Source: Message Queues and Pub/Sub
+
+** ZeroMQ slow joiner
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+A ZeroMQ SUB connects and the PUB immediately sends five messages; the subscriber receives none of them. Why, and how do you fix it?
+
+*** Back
+Slow joiner: the connection and subscription are not established yet, and PUB silently drops messages with no subscriber.
+Fix: synchronize first (each subscriber reports ready over a REQ-REP channel before publishing starts), or accept losing the first messages.
+
+Source: ZeroMQ Messaging Patterns
+
+** ZeroMQ high-water mark
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+A ZeroMQ subscriber falls behind and the high-water mark is reached. What does a PUB socket do, and what does a PUSH socket do in the same situation?
+
+*** Back
+PUB drops messages for that subscriber and never blocks the publisher. PUSH (also DEALER, REQ) blocks, or returns ~EAGAIN~ with ~NOBLOCK~ . Default HWM is 1000 messages.
+
+Source: ZeroMQ Messaging Patterns
+
+** ZeroMQ REQ gets stuck
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+A ZeroMQ REQ client sent a request and the server crashed before replying. What happens, and what is the usual reliable-client pattern?
+
+*** Back
+REQ is strict send-receive lockstep: it waits forever for the reply and refuses another send. Lazy pirate: poll with a timeout, then close and recreate the socket and resend, up to a retry limit.
+
+Source: ZeroMQ Messaging Patterns
+
+** Why MapReduce functions must be pure
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Why must map and reduce functions have no side effects?
+
+*** Back
+So the framework can run them anywhere, in any order and in parallel, and simply rerun a task after a machine fails without corrupting or duplicating results.
+
+Source: MapReduce Batch Processing
+
+** Averages as a combiner
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Why can't a reduce function that computes an average be reused as a map-side combiner, and what do you carry instead?
+
+*** Back
+An average of partial averages is wrong when the parts have different sizes. Carry ~(sum, count)~ through the combiner and reducer, and divide at the end.
+
+Source: MapReduce Batch Processing
+
+** 错误码与异常的选择
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+设计一个接口时，什么情况用返回值（错误码、 ~Result~ ）表达失败，什么情况用异常？
+
+*** Back
+- 可预期、调用方必须处理的结果（「没找到」「余额不足」）用返回值。
+- 不期望发生的事用异常：不会被静默忽略，正常路径清晰。
+- RPC、跨语言边界只能用返回码，受条件限制时统一用一种。
+
+Source: Error Handling Design
+
+** 哪些错误该重试
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+资源错误、程序错误、用户输入错误，各该怎么处理？哪一类重试没有用？
+
+*** Back
+- 资源错误：暂时性的（超时、连接断开）带退避和次数上限重试；关键资源耗尽时报错停止。
+- 程序错误（空指针、非法参数）是 bug，重试没有用：记录日志、告警、尽早失败。
+- 用户输入错误：给客户端明确的错误，并统计错误率。
+
+Source: Error Handling Design

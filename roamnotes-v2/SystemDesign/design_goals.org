@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       10d96252-f9d4-4641-9d0b-71d690cbb993
+:ROAM_ALIASES: "系统设计目标"
+:END:
+#+title: System Design Goals
+#+filetags: :SystemDesign:
+
+* [[id:28a88260-5abb-48a9-bf27-5678acd7be3b][Reliability and Availability]]
+* [[id:45f0ae67-48c3-4879-95ef-ebbf67ab3d12][Scalability]]
+* [[id:b5ea1dbf-519e-439f-aa26-af2dc166955b][Maintainability and Architecture Principles]]
+* [[id:b4fd80ae-26fe-4fe4-9095-b1fe0b371440][Error Handling]]

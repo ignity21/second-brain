@@ -29,7 +29,7 @@ C++、Trading 和 Linux/OS 三次迁移完成后（以及剩余笔记迁移计�
 
 ## Checklist
 
-- [ ] ZeroMQ（C++）：随 `Default/` 的 ZeroMQ 和 Pub/Sub 一起处理
+- [x] ZeroMQ（C++）：已在剩余笔记迁移批次 3 中与 `Default/zeromq` 合并为 SystemDesign 的 ZeroMQ Messaging Patterns（保留 `5521b2f9`），Pub/Sub 并入 Message Queues and Pub/Sub
 - [ ] Literal
 - [ ] ~std::istringstream~
 - [ ] Static Local Variable

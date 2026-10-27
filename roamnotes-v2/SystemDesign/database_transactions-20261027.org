@@ -1,0 +1,42 @@
+:PROPERTIES:
+:ID:       33927767-d660-4b2c-9297-3167aa7531e5
+:ROAM_ALIASES: "数据库事务与隔离级别"
+:END:
+#+title: Database Transactions and Isolation
+#+filetags: :SystemDesign:
+
+* ACID
+| Property | Guarantee | What provides it |
+|---|---|---|
+| Atomicity | All operations in the transaction succeed or none take effect; a failure halfway is rolled back | Undo or write-ahead log |
+| Consistency | The transaction moves the data from one valid state to another (invariants, constraints) | Mostly the application; the database only enforces declared constraints |
+| Isolation | Concurrent transactions behave as if run one after another (at the strongest level) | Locks, MVCC |
+| Durability | Once committed, the data survives crashes | Writing to non-volatile storage (fsync), replication |
+
+"C" is the odd one out: atomicity, isolation and durability are database properties; consistency is what the application builds on top of them.
+
+* Isolation Levels
+Full serializability is expensive, so databases offer weaker levels, each allowing some anomalies:
+
+| Anomaly | What happens |
+|---|---|
+| Dirty read | Reading another transaction's uncommitted write, which may be rolled back |
+| Non-repeatable read | Reading the same row twice in one transaction and getting different values |
+| Phantom | Re-running a range query returns rows another transaction inserted |
+| Lost update | Two read-modify-write cycles run concurrently; one overwrites the other |
+| Write skew | Two transactions read the same data, each writes a different row based on it, and together they break an invariant (two on-call doctors both go off call) |
+
+| Level | Prevents | Typical default of |
+|---|---|---|
+| Read committed | Dirty reads and dirty writes | PostgreSQL, Oracle, SQL Server |
+| Repeatable read / snapshot isolation | Also non-repeatable reads, using a consistent snapshot (MVCC) | MySQL InnoDB |
+| Serializable | All of the above, including write skew | Must be requested explicitly in most databases |
+
+The names are not consistent across databases: PostgreSQL's "repeatable read" is snapshot isolation; MySQL's repeatable read does not prevent lost updates unless the query uses ~SELECT ... FOR UPDATE~ . Check what a level actually guarantees in the database at hand.
+
+* Eventual Consistency
+Replicated systems that do not wait for every replica may return stale data: reads can lag behind writes, but if writes stop, all replicas eventually converge. This is a property of replication, not of a single transaction; the anomalies it causes and the guarantees that limit them are in [[id:54f046db-4dda-4c76-a56a-299945f8da25][Database Replication]].
+
+* Pitfalls
+- *Read-modify-write in application code*: ~x = SELECT counter; UPDATE counter = x + 1~ loses updates under concurrency at the default level. Use an atomic update ( ~UPDATE ... SET counter = counter + 1~ ), an explicit lock ( ~FOR UPDATE~ ), or compare-and-set.
+- *Retrying aborted transactions blindly*: at serializable, aborts are expected and must be retried, but retrying a transaction with external side effects (sending an email) repeats them.

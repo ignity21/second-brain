@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       882501dd-d927-4a30-a8c3-b1bc8121f9b0
+:ROAM_ALIASES: "系统设计"
+:END:
+#+title: System Design
+#+filetags: :SystemDesign:
+
+* [[id:10d96252-f9d4-4641-9d0b-71d690cbb993][Design Goals]]
+* [[id:581d29e4-a822-47a2-b0a5-a27120095173][Data Storage]]
+* [[id:88d8cbc5-90af-479d-a9f3-9086b1129a7f][Distributed Building Blocks]]
+* [[id:bed8b081-8910-4309-9aa5-b4fc5179b0ef][Interview Designs]]

@@ -1,0 +1,48 @@
+:PROPERTIES:
+:ID:       54f046db-4dda-4c76-a56a-299945f8da25
+:ROAM_ALIASES: "数据库复制"
+:END:
+#+title: Database Replication
+#+filetags: :SystemDesign:
+
+* Intuition
+Replication keeps copies of the same data on several machines, for three reasons:
+- *Availability*: keep serving when a machine or a whole region fails.
+- *Read scaling*: spread reads over more machines.
+- *Latency*: keep data geographically close to users.
+
+All the difficulty is in handling *changes* to the replicated data.
+
+* Leader-Follower Replication
+One replica, the leader (master, primary), accepts writes and sends the changes to the followers (slaves, replicas), which serve reads. Most applications read far more than they write, so adding followers scales reads.
+
+| | Synchronous | Asynchronous |
+|---|---|---|
+| Leader waits for | The follower to confirm | Nothing |
+| On leader failure | No committed write is lost | Recent writes not yet replicated are lost |
+| Cost | One slow or dead follower blocks all writes | None |
+
+In practice, *semi-synchronous*: one follower is synchronous, the rest asynchronous.
+
+* Replication Lag
+Asynchronous followers lag behind, usually by milliseconds, sometimes by minutes. Reads from them see stale data, which breaks expectations:
+
+| Guarantee | Problem it prevents | How |
+|---|---|---|
+| Read-your-writes | A user saves a profile, reloads, and sees the old version | Read what the user may have modified from the leader, or wait until the follower has caught up to the user's last write |
+| Monotonic reads | Successive reads hit different followers and data appears to go back in time | Route each user to the same replica |
+| Consistent prefix reads | An answer appears before the question it replies to | Write causally related data to the same partition |
+
+* Failover
+When the leader fails, a follower must be promoted:
+1. Detect the failure, usually by a timeout. Too short causes unnecessary failovers under load; too long means longer outages.
+2. Choose the new leader: the most up-to-date follower. Getting all nodes to agree on it is a *consensus* problem: Raft and Paxos solve it; in practice a coordination service such as etcd or ZooKeeper holds the leader lock.
+3. Reconfigure clients to send writes to the new leader.
+
+Problems:
+- With asynchronous replication, the new leader may lack the old leader's last writes; they are usually discarded, and missing data may need recovery scripts.
+- *Split brain*: the old leader comes back and still believes it is the leader; two leaders accept conflicting writes. Fencing (shutting down or rejecting the old leader, fencing tokens) prevents it.
+
+* Other Topologies
+- *Multi-leader*: several leaders, typically one per data center, accept writes and replicate to each other. Better write latency and tolerance of data-center outages, but concurrent writes to the same data conflict and must be resolved.
+- *Leaderless* (Dynamo-style, Cassandra): clients write to and read from several replicas; with n replicas, w write acknowledgements and r read responses, $w + r > n$ ensures the read set overlaps the latest write.

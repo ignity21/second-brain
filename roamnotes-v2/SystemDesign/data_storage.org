@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       581d29e4-a822-47a2-b0a5-a27120095173
+:ROAM_ALIASES: "数据存储"
+:END:
+#+title: Data Storage in System Design
+#+filetags: :SystemDesign:
+
+* [[id:6de26b38-0e0a-4142-a2ad-5437b2263305][Data Models]]
+* [[id:33927767-d660-4b2c-9297-3167aa7531e5][Transactions and Isolation]]
+* [[id:8e0d2181-f0e0-4e39-94ae-94df96168095][Storage Engines]]
+* [[id:54f046db-4dda-4c76-a56a-299945f8da25][Replication]]
+* [[id:3f815adf-8a11-42cd-8eed-94ee7d2b46b9][Sharding and Consistent Hashing]]

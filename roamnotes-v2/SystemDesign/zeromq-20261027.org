@@ -1,0 +1,47 @@
+:PROPERTIES:
+:ID:       5521b2f9-f8ea-44d3-887a-1e9190e366f7
+:ROAM_ALIASES: "ZeroMQ 消息模式"
+:VERIFIED_WITH: libzmq 4.3.5, pyzmq 27.2.0 (2026-10-27)
+:END:
+#+title: ZeroMQ Messaging Patterns
+#+filetags: :SystemDesign:
+
+* Positioning
+ZeroMQ is a messaging *library*, not a broker: there is no server process and no persistence. It gives sockets that implement a messaging pattern (request-reply, publish-subscribe, pipeline) over ~tcp://~ , ~ipc://~ (Unix domain sockets) or ~inproc://~ (between threads in one process), and handles connecting, reconnecting, framing and queueing in background I/O threads.
+
+Choose it for low-latency messaging between processes you control; choose a broker such as Kafka or RabbitMQ when messages must survive crashes or be replayed, as described in [[id:5561dbba-1542-4b9a-8cdc-334ca6501990][Message Queues and Pub/Sub]].
+
+* Patterns
+| Pattern | Sockets | Behavior |
+|---|---|---|
+| Request-reply | REQ ↔ REP | Strict lockstep: REQ must send, then receive, then send again |
+| Asynchronous request-reply | DEALER ↔ ROUTER (also REQ ↔ ROUTER, DEALER ↔ REP, DEALER ↔ DEALER, ROUTER ↔ ROUTER) | DEALER sends without waiting and load-balances over peers; ROUTER prefixes each message with the sender's identity so replies can be routed back |
+| Publish-subscribe | PUB → SUB (XPUB / XSUB for proxies) | Fan-out by topic prefix; subscribers filter |
+| Pipeline | PUSH → PULL | Distribute tasks round-robin to workers, collect results |
+| Exclusive pair | PAIR ↔ PAIR | One-to-one, typically for signaling between threads over ~inproc~ |
+
+Combinations from the patterns that need care:
+- *REQ ↔ ROUTER*: REQ inserts an empty delimiter frame before the payload; the ROUTER side sees ~[identity, "", payload]~ .
+- *DEALER ↔ REP*: REP expects that empty frame, so the DEALER must add it itself.
+
+** Common Topologies
+- *Pub-sub forwarder*: an XSUB socket connects to many publishers and an XPUB socket binds for many subscribers, with ~zmq_proxy~ between them. Subscriptions flow upstream through XPUB → XSUB, data flows downstream. Publishers and subscribers only need to know the proxy's address.
+- *Pub-sub synchronization*: the publisher waits until each subscriber has said it is ready over a separate REQ-REP channel, then starts publishing. This is the fix for the slow joiner problem below.
+- *Extended request-reply*: clients (REQ) connect to a ROUTER front end, workers (REP) to a DEALER back end, with a proxy between them, so clients and workers can be added independently.
+- *Parallel pipeline with kill signaling*: a ventilator PUSHes tasks to workers, workers PUSH results to a sink; when the sink has all results it PUBlishes a kill message that every worker SUBscribes to.
+- *Signaling between threads*: PAIR sockets over ~inproc~ pass "step done" signals from one thread to the next.
+
+* Pitfalls
+- *Slow joiner*: a SUB that has just connected misses whatever the PUB sends before the connection and subscription are established. Verified: messages 0–4 sent right after ~connect~ were all lost; one sent 200 ms later arrived. Synchronize as above, or accept that the first messages are lost.
+- *PUB drops, PUSH blocks*: when a subscriber cannot keep up and the high-water mark (HWM, default 1000 messages) is reached, PUB *drops* messages for that subscriber and never blocks the publisher. Verified: 100,000 messages of 1 kB were "sent" in 0.09 s with ~SNDHWM~ and ~RCVHWM~ set to 10; the subscriber received 710. PUSH, DEALER and REQ instead *block* (or return ~EAGAIN~ with ~NOBLOCK~ ) when no peer can take the message.
+- *REQ gets stuck*: a second ~send~ before ~recv~ fails with "Operation cannot be accomplished in current state", and if the reply is lost, REQ waits forever. Reliable clients poll with a timeout, then close and recreate the socket and retry ("lazy pirate").
+- *No delivery guarantee*: messages in memory queues are lost when a process dies. Acknowledgements, retries, and deduplication are the application's job.
+- *Sockets are not thread-safe*: use one socket per thread and pass messages between threads over ~inproc~ ; the context is shared.
+
+* Overheads
+Even on one machine, a message costs more than a function call:
+- serialization of the payload and buffering in ZeroMQ's queues;
+- IPC buffering: Unix domain sockets also pass data through kernel buffers;
+- memory copies between the application's memory and ZeroMQ's buffers. ~zmq_msg_init_data~ with a free function hands over a buffer without copying it for large messages.
+
+For threads in one process, ~inproc~ avoids the kernel entirely.

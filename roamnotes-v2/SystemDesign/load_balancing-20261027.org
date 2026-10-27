@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       1d92f19c-ff18-4006-904d-146a3ce03878
+:ROAM_ALIASES: "负载均衡"
+:END:
+#+title: Load Balancing
+#+filetags: :SystemDesign:
+
+* Intuition
+A load balancer is a reverse proxy that spreads incoming traffic over several servers. Clients only know the balancer's public address; the servers sit behind it on private addresses. It gives two things at once: more capacity, by adding servers, and failover, by sending traffic only to servers that pass health checks.
+
+* Layer 4 and Layer 7
+| | Layer 4 (transport) | Layer 7 (application) |
+|---|---|---|
+| Decides on | IP addresses and ports | HTTP host, path, headers, cookies |
+| Can do | Forward TCP / UDP connections | Route by URL, terminate TLS, rewrite requests, retry, cache |
+| Cost | Very fast, cheap | Parses every request; more CPU |
+| Examples | LVS, cloud network load balancers | NGINX, HAProxy, Envoy, cloud application load balancers |
+
+* Strategies
+| Strategy | How | Suits |
+|---|---|---|
+| Round-robin | Next server in turn | Identical servers and similar requests |
+| Weighted round-robin | In turn, proportional to configured weights | Servers of different sizes |
+| Random | Pick at random | Large pools; simple |
+| Least connections / least response time | Pick the least loaded, from health checks or live statistics | Requests of very different cost |
+| IP or key hash | Hash the client IP or a key to choose a server | Keeping a client on the same server to maximize cache hits; use consistent hashing so adding a server does not remap everyone, see [[id:3f815adf-8a11-42cd-8eed-94ee7d2b46b9][Database Sharding and Consistent Hashing]] |
+| Path-based | Route by URL path to different backend pools | Splitting a site into services |
+
+* Pitfalls
+- *The load balancer is itself a single point of failure*: run a pair with a floating virtual IP, or rely on DNS with several addresses or on the cloud provider's managed balancer.
+- *Sticky sessions* tie a user to one server because the session lives there. Adding or removing servers then breaks sessions and the load becomes uneven. Keep the web tier stateless instead, with sessions in a shared store.
+- *Health checks that are too shallow* (the port is open) keep sending traffic to a server whose dependencies are broken; checks that are too deep (every dependency) can take the whole pool out when one shared dependency hiccups.

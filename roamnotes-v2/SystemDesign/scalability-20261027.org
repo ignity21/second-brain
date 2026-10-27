@@ -1,0 +1,35 @@
+:PROPERTIES:
+:ID:       45f0ae67-48c3-4879-95ef-ebbf67ab3d12
+:ROAM_ALIASES: "可扩展性"
+:END:
+#+title: Scalability in System Design
+#+filetags: :SystemDesign:
+
+* Intuition
+Scalability is not a yes/no property. The useful question is: if load grows in a particular way, what are the options for coping with it? Answering that needs two descriptions: of the load, and of the performance.
+
+* Describing Load
+Load is described by a few *load parameters*, chosen for the system's architecture:
+- requests per second, the ratio of reads to writes, cache hit rate, simultaneously active users;
+- Twitter's home timeline: the distribution of followers per user, which determines the fan-out (how many timelines one tweet must be written to). Precomputing timelines on write is cheap for most users but expensive for celebrities with millions of followers, so a hybrid was used: fan out on write for most users, merge celebrities' tweets on read.
+
+* Describing Performance
+Two ways to look at it:
+1. Increase a load parameter and keep the resources fixed: how does performance change?
+2. Increase a load parameter: how much must the resources grow to keep performance the same?
+
+| Metric | Meaning | Matters for |
+|---|---|---|
+| Throughput | Records processed per second, or time to run a job over a dataset | Batch processing |
+| Response time | What the client sees: from sending the request to receiving the response | Online systems |
+| Latency | The time a request waits to be handled, a part of response time | Diagnosing queueing |
+
+- *Use percentiles, not the mean*: the median (p50) says what a typical request sees; p99 and p999 show the tail. Outliers come from context switches, lost packets and retransmission, garbage collection pauses, and page faults that read from disk.
+- Amazon sets internal targets at p999, because the slowest requests often belong to the customers with the most data, who are the most valuable.
+- *Tail latency amplification*: a request that fans out to many backends is as slow as the slowest one. With 100 backends, even a p99 that is rarely hit on one backend is hit by most requests.
+- Optimizing the very high percentiles is hard: they are dominated by random events outside your control, and the returns diminish.
+
+* Coping with Load
+- *Scale up* (a bigger machine) is simpler; *scale out* (more machines) is needed beyond one machine's limits or for availability. Stateless services scale out easily; stateful ones, especially databases, are hard.
+- Keep the database on a single node until scaling cost or availability requirements force distribution.
+- An architecture that scales well is built around assumptions about which operations are common and which are rare, the load parameters. The wrong assumptions make the scaling effort wasted or counterproductive.
