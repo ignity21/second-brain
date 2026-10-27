@@ -8,6 +8,8 @@
 ** Mean or median for skewed data
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078001750
+:ANKI_NOTE_HASH: 3281e68fd5e3f9f707a1c335431e1685
 :END:
 
 *** Front
@@ -21,6 +23,8 @@ Source: Descriptive Statistics
 ** Why the sample variance divides by n − 1
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078001763
+:ANKI_NOTE_HASH: c1448f45f1bacc44f1f855412fb5071a
 :END:
 
 *** Front
@@ -34,6 +38,8 @@ Source: Degrees of Freedom
 ** IQR outlier rule
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078001780
+:ANKI_NOTE_HASH: b0729ab002b6fd8f688b68373a1461f7
 :END:
 
 *** Front
@@ -47,6 +53,8 @@ Source: Descriptive Statistics
 ** PMF, PDF and CDF
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078001794
+:ANKI_NOTE_HASH: b81316a01bab9b203c719f5affdf87df
 :END:
 
 *** Front
@@ -62,6 +70,8 @@ Source: Probability
 ** Binomial distribution assumption
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078001810
+:ANKI_NOTE_HASH: 2900aee50edff74c9f15d37ee6f21d22
 :END:
 
 *** Front
@@ -75,6 +85,8 @@ Source: Binomial Distribution
 ** Poisson vs exponential
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078001836
+:ANKI_NOTE_HASH: 1be278f19186ec87b893c32a8cf93da9
 :END:
 
 *** Front
@@ -89,6 +101,8 @@ Source: Poisson Distribution, Exponential Distribution
 ** Exponential waiting time
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078001849
+:ANKI_NOTE_HASH: 9774b035619cc2de9601c6145c42c387
 :END:
 
 *** Front
@@ -102,6 +116,8 @@ Source: Exponential Distribution
 ** 68-95-99.7 rule
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Cloze
+:ANKI_NOTE_ID: 1793078001865
+:ANKI_NOTE_HASH: fe3e4730099ed20e8d657b229311cfe8
 :END:
 
 *** Text
@@ -113,6 +129,8 @@ Source: Normal Distribution
 ** t-distribution vs normal
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078001885
+:ANKI_NOTE_HASH: 8eb84d285a1442dae752c396e94122fe
 :END:
 
 *** Front
@@ -126,6 +144,8 @@ Source: T-Distribution
 ** Central limit theorem and standard error
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078001897
+:ANKI_NOTE_HASH: 8d9a67173e0bc92daf82d4704230b84c
 :END:
 
 *** Front
@@ -139,6 +159,8 @@ Source: Central Limit Theorem
 ** Bootstrap procedure
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078001919
+:ANKI_NOTE_HASH: 044346336f42c0b8c3c07183dafcd83b
 :END:
 
 *** Front
@@ -156,6 +178,8 @@ Source: Bootstrap Distribution
 ** What bootstrapping cannot fix
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078001933
+:ANKI_NOTE_HASH: fb8885c9066a8e42bf506056a08df8c1
 :END:
 
 *** Front
@@ -169,6 +193,8 @@ Source: Bootstrap Distribution
 ** Population standard deviation from the bootstrap
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078001949
+:ANKI_NOTE_HASH: 57264f12b6e25c8eb778164b5b6b8d5a
 :END:
 
 *** Front
@@ -182,6 +208,8 @@ Source: Bootstrap Distribution, Sampling Distribution
 ** Two ways to get a confidence interval
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078001961
+:ANKI_NOTE_HASH: 71913aff184765c45b1e813de0bbc3c2
 :END:
 
 *** Front
@@ -196,6 +224,8 @@ Source: Confidence Intervals
 ** Margin of error
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078001973
+:ANKI_NOTE_HASH: c081204e0b018ea8233ba7578194b12c
 :END:
 
 *** Front
@@ -209,6 +239,8 @@ Source: Z-Distribution
 ** Definition of the p-value
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078001990
+:ANKI_NOTE_HASH: e648b987b39e219c8b3b7c79be10423b
 :END:
 
 *** Front
@@ -222,6 +254,8 @@ Source: P-Values
 ** Type I and Type II errors
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078002010
+:ANKI_NOTE_HASH: 54193e4b41176117413d444b568aafb2
 :END:
 
 *** Front
@@ -238,6 +272,8 @@ Source: Hypothesis Testing
 ** One-tailed vs two-tailed critical values
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078002022
+:ANKI_NOTE_HASH: 22a6d19846ad4dc9aba40edf8ec656c4
 :END:
 
 *** Front
@@ -252,6 +288,8 @@ Source: Z-Test
 ** Choosing a test
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078002037
+:ANKI_NOTE_HASH: 8a51c9f48d0dddd034b7db32792f5015
 :END:
 
 *** Front
@@ -272,6 +310,8 @@ Source: Hypothesis Testing
 ** After a significant ANOVA
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078002052
+:ANKI_NOTE_HASH: 7d8dc3b62984877e15ef63045c0a662c
 :END:
 
 *** Front
@@ -285,6 +325,8 @@ Source: ANOVA
 ** Paired vs two-sample t-test
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078002065
+:ANKI_NOTE_HASH: f0b76ef946ea020aa03ad3bd93503fe9
 :END:
 
 *** Front
@@ -298,6 +340,8 @@ Source: T-Test
 ** Two-sample t statistic
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078002080
+:ANKI_NOTE_HASH: b552e4669a6e7252f6434abe1d1de492
 :END:
 
 *** Front
@@ -311,6 +355,8 @@ Source: T-Test
 ** Zero correlation
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078002093
+:ANKI_NOTE_HASH: 43d152ce78ca6165f8d9562904ea218a
 :END:
 
 *** Front
@@ -324,6 +370,8 @@ Source: Correlation
 ** Confounders and spurious correlation
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078002105
+:ANKI_NOTE_HASH: ed9b338ddd02a18ea1b024df914075e1
 :END:
 
 *** Front
@@ -337,6 +385,8 @@ Source: Correlation
 ** Experiments vs observational studies
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078002127
+:ANKI_NOTE_HASH: eff6bb6a1da91b9b43983f5fdb33cd8e
 :END:
 
 *** Front
@@ -350,6 +400,8 @@ Source: Statistic Experiments
 ** Stratified vs cluster sampling
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078002141
+:ANKI_NOTE_HASH: 526260d07cff98d967799ffc768f7ef6
 :END:
 
 *** Front
@@ -366,6 +418,8 @@ Source: Data Sampling
 ** Systematic sampling pitfall
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078002154
+:ANKI_NOTE_HASH: 195d7fcae351c652bbbdb69c3493ab98
 :END:
 
 *** Front
@@ -379,6 +433,8 @@ Source: Data Sampling
 ** Uses of the chi-squared distribution
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078002168
+:ANKI_NOTE_HASH: f18e35b765866893cf0381afba7f9640
 :END:
 
 *** Front
@@ -394,6 +450,8 @@ Source: Chi-squared Distribution
 ** Cross-sectional study confounding
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078002183
+:ANKI_NOTE_HASH: 6021da52659e0522ff7b5d53af712dbf
 :END:
 
 *** Front

@@ -8,6 +8,8 @@
 ** Log vs simple returns
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077984949
+:ANKI_NOTE_HASH: b29395c67634379f858cca74d9d8e359
 :END:
 
 *** Front
@@ -24,6 +26,8 @@ Source: Log Returns in Quantitative Finance
 ** +50% then −50%
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077984963
+:ANKI_NOTE_HASH: c9c2535f47830c09b939a959a0860f26
 :END:
 
 *** Front
@@ -37,6 +41,8 @@ Source: Log Returns in Quantitative Finance
 ** Position size from risk per trade
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077984973
+:ANKI_NOTE_HASH: 44853d7f057498597d0e64b26aa60361
 :END:
 
 *** Front
@@ -52,6 +58,8 @@ Source: Position Sizing and Risk per Trade
 ** Drawdown from a losing streak
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077984988
+:ANKI_NOTE_HASH: aff55aa65984acfd7b8ad739737742be
 :END:
 
 *** Front
@@ -68,6 +76,8 @@ Source: Position Sizing and Risk per Trade
 ** Where to place a stop
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077985001
+:ANKI_NOTE_HASH: c160aa3750dff0be31b16303835ab9ef
 :END:
 
 *** Front
@@ -81,6 +91,8 @@ Source: Position Sizing and Risk per Trade
 ** Momentum vs mean reversion
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077985015
+:ANKI_NOTE_HASH: f42d3e94ac4c8cfe3155a05c0afc10b9
 :END:
 
 *** Front
@@ -97,6 +109,8 @@ Source: Trading Strategy Types
 ** Stock traits for momentum vs mean reversion
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077985029
+:ANKI_NOTE_HASH: cba96ee036eb700bec7be5a4afa2db72
 :END:
 
 *** Front
@@ -112,6 +126,8 @@ Source: Trading Strategy Types
 ** RSI levels and entry rule
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077985042
+:ANKI_NOTE_HASH: afd39c4ef8833393c9e1de781853cd89
 :END:
 
 *** Front
@@ -125,6 +141,8 @@ Source: Technical Analysis
 ** ATR for stop distance
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077985057
+:ANKI_NOTE_HASH: 1871d0fe3f094fbdc1c475f779b1b1f8
 :END:
 
 *** Front
@@ -138,6 +156,8 @@ Source: Technical Analysis
 ** VWAP as intraday support
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077985070
+:ANKI_NOTE_HASH: bedb20341446614c24b45b7905aeca06
 :END:
 
 *** Front
@@ -151,6 +171,8 @@ Source: Technical Analysis
 ** Dividend discount model sensitivity
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077985084
+:ANKI_NOTE_HASH: 357b183ebb94a7db3f7c4a15488e3976
 :END:
 
 *** Front
@@ -166,6 +188,8 @@ Source: Fundamental Analysis of Stocks
 ** Free cash flow and conversion
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077985099
+:ANKI_NOTE_HASH: 741cd93a82b32761bd5f7774cdc721f8
 :END:
 
 *** Front
@@ -179,6 +203,8 @@ Source: Fundamental Analysis of Stocks
 ** Latency sources and fixes
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077985119
+:ANKI_NOTE_HASH: b6f9b499640c039074408b68d7ed925b
 :END:
 
 *** Front
@@ -200,6 +226,8 @@ Source: Low Latency Trading Design
 ** Kernel bypass trade-off
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077985133
+:ANKI_NOTE_HASH: 59eac3645ebf7b86edf0fda1510623d1
 :END:
 
 *** Front
@@ -213,6 +241,8 @@ Source: Low Latency Trading Design
 ** Pre-trade risk checks
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077985148
+:ANKI_NOTE_HASH: 642e4615f7d828f0d72989680255c195
 :END:
 
 *** Front
@@ -229,6 +259,8 @@ Source: Order and Risk Management Systems
 ** Inverted fee venues
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077985162
+:ANKI_NOTE_HASH: 15cffc794c1036bb8bba8634de1c5a4e
 :END:
 
 *** Front
@@ -242,6 +274,8 @@ Source: Market Microstructure
 ** Backtest look-ahead and survivorship bias
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077985175
+:ANKI_NOTE_HASH: 86733190267f31fe083aa3aaaa204fbd
 :END:
 
 *** Front
@@ -256,6 +290,8 @@ Source: Quantitative Trading
 ** Ex-dividend date
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077985188
+:ANKI_NOTE_HASH: 045d8323b014cdadda881181726da6eb
 :END:
 
 *** Front
@@ -269,6 +305,8 @@ Source: Securities and Exchange Mechanics
 ** USO and contango
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077985204
+:ANKI_NOTE_HASH: 3cf8fca1023d99f734145c244325c561
 :END:
 
 *** Front
@@ -282,6 +320,8 @@ Source: Securities and Exchange Mechanics
 ** Markets react to the surprise
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077985218
+:ANKI_NOTE_HASH: 9d02bc8c21649496119da320b99e6f38
 :END:
 
 *** Front
@@ -295,6 +335,8 @@ Source: Macroeconomic Drivers of Markets
 ** 永续合约谁付资金费用
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077985231
+:ANKI_NOTE_HASH: ca5ba58e5926a84d17bcf6595be19084
 :END:
 
 *** Front
@@ -310,6 +352,8 @@ Source: Perpetual Futures Funding Rate
 ** 资金费率为什么平稳时是 0.01%
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077985244
+:ANKI_NOTE_HASH: 5d4df9fb68ef132277b7f98370160ccd
 :END:
 
 *** Front
@@ -323,6 +367,8 @@ Source: Perpetual Futures Funding Rate
 ** 永续多仓的年化持仓成本
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Cloze
+:ANKI_NOTE_ID: 1793077985259
+:ANKI_NOTE_HASH: f00ca4f2362b0f2bc4e856e1b680f6c4
 :END:
 
 *** Text
@@ -336,6 +382,8 @@ Source: Perpetual Futures Funding Rate
 ** 央行逆回购
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077985272
+:ANKI_NOTE_HASH: 2c6a6efcf17db6599be4c9477816fdf8
 :END:
 
 *** Front
@@ -349,6 +397,8 @@ Source: Money Market Instruments
 ** AI 推荐的量化库已停更
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077985288
+:ANKI_NOTE_HASH: bc6150ee1be19fa2c88f8b5a0fad6da3
 :END:
 
 *** Front

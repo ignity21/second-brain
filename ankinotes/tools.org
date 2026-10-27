@@ -8,6 +8,8 @@
 ** NGINX ~proxy_pass~ trailing slash
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077971723
+:ANKI_NOTE_HASH: cae198a52caeb4fa7470af5fa1a2c048
 :END:
 
 *** Front
@@ -22,6 +24,8 @@ Source: NGINX
 ** NGINX root vs alias
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077971736
+:ANKI_NOTE_HASH: 24d2f6fa13347461efbbb1c1499400f7
 :END:
 
 *** Front
@@ -36,6 +40,8 @@ Source: NGINX
 ** Ansible command vs shell module
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077971751
+:ANKI_NOTE_HASH: d2c129bc1ea09f21aed43f6c28a8281e
 :END:
 
 *** Front
@@ -49,6 +55,8 @@ Source: Ansible
 ** Kubernetes Service without endpoints
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077971763
+:ANKI_NOTE_HASH: 7da5c2d02d07bcaaacc228c1d0403909
 :END:
 
 *** Front

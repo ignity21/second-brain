@@ -32,7 +32,7 @@ p
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1744601946301
-:ANKI_NOTE_HASH: 612fab129bbdaadfbad8527ad7a17994
+:ANKI_NOTE_HASH: 6177de67f1d409da076d21bbce617310
 :END:
 
 *** Front
@@ -60,6 +60,8 @@ ptr[0]
 ** Named rvalue reference is an lvalue
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044542
+:ANKI_NOTE_HASH: 2ddcdcf0b7bef12f26b9de299d9331ac
 :END:
 
 *** Front
@@ -80,6 +82,8 @@ Source: C++ Value Categories and Move Semantics
 ** What std::move does
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044562
+:ANKI_NOTE_HASH: acbb7b4d871218eac4ca2a205780e813
 :END:
 
 *** Front
@@ -93,6 +97,8 @@ Source: C++ Value Categories and Move Semantics
 ** User-declared destructor suppresses moves
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044571
+:ANKI_NOTE_HASH: fcac34829ca2f178c405dd56d1720ed0
 :END:
 
 *** Front
@@ -111,6 +117,8 @@ Source: C++ Value Categories and Move Semantics
 ** Rule of zero and rule of five
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044586
+:ANKI_NOTE_HASH: cda472ba940f253a7e3337de0881a845
 :END:
 
 *** Front
@@ -125,6 +133,8 @@ Source: C++ Value Categories and Move Semantics
 ** noexcept move and vector growth
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044599
+:ANKI_NOTE_HASH: 65ae2e9c888fe335bfaeaacc3dac66b5
 :END:
 
 *** Front
@@ -138,6 +148,8 @@ Source: C++ Value Categories and Move Semantics
 ** Returning a local with std::move
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044613
+:ANKI_NOTE_HASH: 6bcaa660d86cc7b42a79c17674e7dda8
 :END:
 
 *** Front
@@ -151,6 +163,8 @@ Source: C++ Value Categories and Move Semantics
 ** Perfect forwarding with std::forward
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044647
+:ANKI_NOTE_HASH: 623002097593070d60d5d1da5950221e
 :END:
 
 *** Front
@@ -167,6 +181,8 @@ Source: C++ Value Categories and Move Semantics
 ** auto drops reference and top-level const
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044657
+:ANKI_NOTE_HASH: b520d2e254c8417481450cbaeee1a906
 :END:
 
 *** Front
@@ -190,6 +206,8 @@ Source: C++ Type Deduction
 ** decltype of a name vs a parenthesized name
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044669
+:ANKI_NOTE_HASH: f93d339c7b23aa0d7fc6692a9c66ef79
 :END:
 
 *** Front
@@ -203,6 +221,8 @@ Source: C++ Type Deduction
 ** Braces vs parentheses with initializer_list constructors
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044683
+:ANKI_NOTE_HASH: 5655a95daf31c4c5b5644e5799f5e3ed
 :END:
 
 *** Front
@@ -216,6 +236,8 @@ Source: C++ Type Deduction
 ** Member initialization order
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044691
+:ANKI_NOTE_HASH: cb0fa785e8dbfad824bf41a93635eaa0
 :END:
 
 *** Front
@@ -235,6 +257,8 @@ Source: C++ Classes and Special Member Functions
 ** Static vs dynamic dispatch and slicing
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044704
+:ANKI_NOTE_HASH: 530761b588dc800a5e1981433e45b1b0
 :END:
 
 *** Front
@@ -260,6 +284,8 @@ Source: C++ Polymorphism and Object Layout
 ** Virtual call in a constructor
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044718
+:ANKI_NOTE_HASH: c814ac32f3b59fcce98e9f34f9b46509
 :END:
 
 *** Front
@@ -273,6 +299,8 @@ Source: C++ Polymorphism and Object Layout
 ** Virtual destructor
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044732
+:ANKI_NOTE_HASH: dde0771e08dfecf4f3a33a2fff12a186
 :END:
 
 *** Front
@@ -286,6 +314,8 @@ Source: C++ Polymorphism and Object Layout
 ** Cost of a virtual call
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044745
+:ANKI_NOTE_HASH: f9ffa3368ef4b3d92422b98a29e99538
 :END:
 
 *** Front
@@ -299,6 +329,8 @@ Source: C++ Polymorphism and Object Layout
 ** make_shared vs shared_ptr from new
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044761
+:ANKI_NOTE_HASH: fdbc03f510b262a51847907c794c6731
 :END:
 
 *** Front
@@ -315,6 +347,8 @@ Source: C++ RAII and Smart Pointers
 ** Breaking shared_ptr cycles with weak_ptr
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044774
+:ANKI_NOTE_HASH: a404a7c2c4a8daca203a9b3cd020ba0a
 :END:
 
 *** Front
@@ -328,6 +362,8 @@ Source: C++ RAII and Smart Pointers
 ** shared_ptr thread safety
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044787
+:ANKI_NOTE_HASH: 8750f560c2091ff6336ad942dd5af60a
 :END:
 
 *** Front
@@ -343,6 +379,8 @@ Source: C++ RAII and Smart Pointers
 ** shared_ptr from this
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044803
+:ANKI_NOTE_HASH: 074079266223cc5308044f101d5f0f2a
 :END:
 
 *** Front
@@ -356,6 +394,8 @@ Source: C++ RAII and Smart Pointers
 ** Race in a thread-safe stack interface
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044816
+:ANKI_NOTE_HASH: ca957866c326f9a4e4fad46dae0c1fdc
 :END:
 
 *** Front
@@ -369,6 +409,8 @@ Source: C++ Mutexes, Locks and Deadlock
 ** Locking two mutexes without deadlock
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044830
+:ANKI_NOTE_HASH: eb8779b2ab432bce2b0d8e21b24b86af
 :END:
 
 *** Front
@@ -386,6 +428,8 @@ Source: C++ Mutexes, Locks and Deadlock
 ** Thread-safe lazy initialization
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044844
+:ANKI_NOTE_HASH: dfd5d78f3ed6771d2175fa6227a8c3c4
 :END:
 
 *** Front
@@ -403,6 +447,8 @@ Source: C++ Mutexes, Locks and Deadlock
 ** Condition variable needs a predicate
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044859
+:ANKI_NOTE_HASH: 724114d79e91c46ab41ae4733df9ac10
 :END:
 
 *** Front
@@ -416,6 +462,8 @@ Source: C++ Condition Variables
 ** Release / acquire publication
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044880
+:ANKI_NOTE_HASH: 7dbb4808189f63ccf0e0656f05338c70
 :END:
 
 *** Front
@@ -429,6 +477,8 @@ Source: C++ Memory Model and Atomics
 ** Compound expressions on atomics
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044891
+:ANKI_NOTE_HASH: 09d063748f353ea61c0775dc8479e1d4
 :END:
 
 *** Front
@@ -447,6 +497,8 @@ Source: C++ Memory Model and Atomics
 ** False sharing
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044905
+:ANKI_NOTE_HASH: d571c992eb4c412b26eb2e36c8f7e648
 :END:
 
 *** Front
@@ -460,6 +512,8 @@ Source: C++ Memory Model and Atomics
 ** Lock-free vs wait-free
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Cloze
+:ANKI_NOTE_ID: 1793078044927
+:ANKI_NOTE_HASH: 08e84a2c004247372ca2e2ca4728723b
 :END:
 
 *** Text
@@ -471,6 +525,8 @@ Source: C++ Lock-free Data Structures
 ** ABA problem
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044943
+:ANKI_NOTE_HASH: bac7f51ce3b4a17c51ed1569815dc099
 :END:
 
 *** Front
@@ -486,6 +542,8 @@ Source: C++ Lock-free Data Structures
 ** Choosing lock-free or lock-based
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044961
+:ANKI_NOTE_HASH: 4ab8a01a2d7d639eb00472467f16269e
 :END:
 
 *** Front
@@ -499,6 +557,8 @@ Source: C++ Lock-free Data Structures
 ** Discarded std::async future
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078044976
+:ANKI_NOTE_HASH: 120e77b1a6777616cd1c80ed4be536d4
 :END:
 
 *** Front

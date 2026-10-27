@@ -8,6 +8,8 @@
 ** Linear independence test
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077997574
+:ANKI_NOTE_HASH: 804cfc6d3df89951e66b53dd25474548
 :END:
 
 *** Front
@@ -21,6 +23,8 @@ Source: Linear Algebra Overview
 ** Rank, column space and null space
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077997585
+:ANKI_NOTE_HASH: 46a9587e42b0dfc85d3ab6861a4d58a5
 :END:
 
 *** Front
@@ -34,6 +38,8 @@ Source: Linear Algebra Overview
 ** Meaning of the determinant
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077997599
+:ANKI_NOTE_HASH: 0b2a5355b4f1dbdafb7e171c1c3c1d82
 :END:
 
 *** Front
@@ -49,6 +55,8 @@ Source: Matrix
 ** Determinant of a product
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Cloze
+:ANKI_NOTE_ID: 1793077997619
+:ANKI_NOTE_HASH: fa896583a45a7496bede16a0d9b29ce6
 :END:
 
 *** Text
@@ -60,6 +68,8 @@ Source: Matrix
 ** Testing invertibility numerically
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077997633
+:ANKI_NOTE_HASH: 15fd08b1724ec9d6d2a7ebf6805a322f
 :END:
 
 *** Front
@@ -73,6 +83,8 @@ Source: Matrix
 ** Inverse of a product
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077997648
+:ANKI_NOTE_HASH: 16e597471adbcdb87b63591e51261463
 :END:
 
 *** Front
@@ -86,6 +98,8 @@ Source: Linear Transformation
 ** Composing transformations
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077997665
+:ANKI_NOTE_HASH: e41c856f2d0c881017fc131a955e1870
 :END:
 
 *** Front
@@ -99,6 +113,8 @@ Source: Linear Transformation
 ** Eigenvalue equation
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077997686
+:ANKI_NOTE_HASH: 3ce79260a8ac593c806cf15abe661444
 :END:
 
 *** Front
@@ -112,6 +128,8 @@ Source: Eigenvectors
 ** Eigenvalues of a triangular matrix
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077997698
+:ANKI_NOTE_HASH: f3112458d56df033ec7e589f20b9f280
 :END:
 
 *** Front
@@ -127,6 +145,8 @@ Source: Eigenvectors
 ** Matrix powers by diagonalization
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077997711
+:ANKI_NOTE_HASH: 2a9ac97a35e572c6da1adea8d2fdf8d8
 :END:
 
 *** Front
@@ -140,6 +160,8 @@ Source: Eigenvectors
 ** Change of basis
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077997725
+:ANKI_NOTE_HASH: 4f1f4a32ad31b4d25380faa0bab73bee
 :END:
 
 *** Front
@@ -155,6 +177,8 @@ Source: Linear Algebra Overview
 ** Dot product and angle
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077997739
+:ANKI_NOTE_HASH: 249603cd456f8b06d7cbc36af1655cf9
 :END:
 
 *** Front
@@ -168,6 +192,8 @@ Source: Vector
 ** Clipping before arccos
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077997753
+:ANKI_NOTE_HASH: de2a0d199e049e0ac47ca4d67d6e9cff
 :END:
 
 *** Front
@@ -181,6 +207,8 @@ Source: Vector
 ** NumPy elementwise vs dot product
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077997763
+:ANKI_NOTE_HASH: 065341ea82876b09ad2eb705d11598b7
 :END:
 
 *** Front
@@ -194,6 +222,8 @@ Source: Vector
 ** Vector projection
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077997780
+:ANKI_NOTE_HASH: 4a805ef79a1e691f5ef50f0952a2fcf2
 :END:
 
 *** Front
@@ -207,6 +237,8 @@ Source: Vector
 ** Gram–Schmidt step
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077997796
+:ANKI_NOTE_HASH: 3a8b4fe8d34dca9cd8993bb66cc57bb8
 :END:
 
 *** Front
@@ -220,6 +252,8 @@ Source: Orthonormal Basis
 ** SVD as three simple steps
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077997802
+:ANKI_NOTE_HASH: 531552e08c288cc5d34fe3d9390c2986
 :END:
 
 *** Front
@@ -233,6 +267,8 @@ Source: Linear Transformation
 ** Pseudoinverse via SVD
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077997819
+:ANKI_NOTE_HASH: 302ecbc91c7964d7e8cdc23d14cbe580
 :END:
 
 *** Front
@@ -246,6 +282,8 @@ Source: Pseudoinverse
 ** Jacobian of a linear map
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077997830
+:ANKI_NOTE_HASH: a9fddd43cf624be8107088d48d72eb2b
 :END:
 
 *** Front
@@ -259,6 +297,8 @@ Source: The Jacobian
 ** Multivariate chain rule shapes
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077997845
+:ANKI_NOTE_HASH: 5a491f38f8c5b1d2e1c5e565c40d19ee
 :END:
 
 *** Front
@@ -272,6 +312,8 @@ Source: The Jacobian
 ** Second derivative test with the Hessian
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077997858
+:ANKI_NOTE_HASH: 5fe6e4f8e51572706a0dd6fedc66b0df
 :END:
 
 *** Front
@@ -287,6 +329,8 @@ Source: The Hessian
 ** Cross product direction
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077997871
+:ANKI_NOTE_HASH: 6fae572bf9945202d6921ca0ef474c24
 :END:
 
 *** Front

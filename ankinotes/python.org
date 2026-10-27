@@ -9,7 +9,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1785249007074
-:ANKI_NOTE_HASH: 22f5d4314d43df24d743cc98affb5ac8
+:ANKI_NOTE_HASH: d2eca8e84ed1ad72c941b96c08765d5d
 :END:
 
 *** Front
@@ -26,6 +26,8 @@ Radon 是一个用于分析 Python 源代码的工具，可以计算：
 ** cProfile inflates call-heavy code
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078037913
+:ANKI_NOTE_HASH: 474a800feb1ad85dd974b059f29a98e8
 :END:
 
 *** Front
@@ -39,6 +41,8 @@ Source: Python Profiling
 ** Profiling a live Python process
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078037936
+:ANKI_NOTE_HASH: 2c781f65584c9c88cb0715ca8a4a04b5
 :END:
 
 *** Front
@@ -52,6 +56,8 @@ Source: Python Profiling
 ** Waiting time missing from a profile
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078037945
+:ANKI_NOTE_HASH: 957561aefa60743085a0fd9d9c8ead32
 :END:
 
 *** Front
@@ -65,6 +71,8 @@ Source: Python Profiling
 ** timeit and the garbage collector
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078037952
+:ANKI_NOTE_HASH: dba6320718df5d1f9cdea23d115bcdb7
 :END:
 
 *** Front
@@ -78,6 +86,8 @@ Source: Python Profiling
 ** cProfile and threads
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078037966
+:ANKI_NOTE_HASH: ef58b73269df0388d234b5007b309270
 :END:
 
 *** Front
@@ -91,6 +101,8 @@ Source: Python Profiling
 ** Profiling one slow request among many
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078037973
+:ANKI_NOTE_HASH: 736bb413e78997c8c0b88e6d07eb4263
 :END:
 
 *** Front
@@ -104,6 +116,8 @@ Source: Python Profiling
 ** VizTracer loses the start of a long run
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078037986
+:ANKI_NOTE_HASH: f067a912490a5a5029e899f88b071167
 :END:
 
 *** Front
@@ -117,6 +131,8 @@ Source: Python Profiling
 ** Leaving line_profiler decorators in code
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078038000
+:ANKI_NOTE_HASH: 0b2392b710ec7d902734cd835060c52e
 :END:
 
 *** Front
@@ -130,6 +146,8 @@ Source: Python Profiling
 ** Why dicts keep insertion order
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078038015
+:ANKI_NOTE_HASH: 5bd153db21b0d2cc0ae9771ad6b7b263
 :END:
 
 *** Front
@@ -143,6 +161,8 @@ Source: Python dict and set Internals
 ** When a dict resizes
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078038030
+:ANKI_NOTE_HASH: 56409e555f44626b1be6197c8ca08773
 :END:
 
 *** Front
@@ -156,6 +176,8 @@ Source: Python dict and set Internals
 ** __eq__ without __hash__
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078038043
+:ANKI_NOTE_HASH: 23faff85ac40bb6f0d94a34d30d662d1
 :END:
 
 *** Front
@@ -169,6 +191,8 @@ Source: Python dict and set Internals
 ** Circular imports
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078038058
+:ANKI_NOTE_HASH: 8565635194d727e4fe5d8ad527f21757
 :END:
 
 *** Front
@@ -182,6 +206,8 @@ Source: Python Import System
 ** Relative import in a script
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078038071
+:ANKI_NOTE_HASH: efa3dc15709538191f339e2a8a3036ab
 :END:
 
 *** Front
@@ -195,6 +221,8 @@ Source: Python Import System
 ** Shadowing the standard library
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078038084
+:ANKI_NOTE_HASH: baed92af51dc27b34555cd5a9e28c5bb
 :END:
 
 *** Front
@@ -208,6 +236,8 @@ Source: Python Import System
 ** SQLAlchemy 2.0 raw SQL
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078038097
+:ANKI_NOTE_HASH: 86e07efcb5fa8d38f7679f0fc4ffc824
 :END:
 
 *** Front
@@ -222,6 +252,8 @@ Source: SQLAlchemy
 ** pandas read_sql vs read_sql_table
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078038112
+:ANKI_NOTE_HASH: 4e333636736057bef69ff96d5033d6a9
 :END:
 
 *** Front

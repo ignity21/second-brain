@@ -8,6 +8,8 @@
 ** 反转链表
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949281
+:ANKI_NOTE_HASH: 4ca8e9880f9fa759bb3b046e4e992b48
 :END:
 
 *** Front
@@ -28,6 +30,8 @@ Source: Linked List Techniques
 ** 链表的哨兵节点
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949295
+:ANKI_NOTE_HASH: a2a85afda11252ddae3f875b3bff9238
 :END:
 
 *** Front
@@ -41,6 +45,8 @@ Source: Linked List Techniques
 ** Floyd 判圈找环入口
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949308
+:ANKI_NOTE_HASH: 0f55a55c0d0d6f69df3748f72cd4832b
 :END:
 
 *** Front
@@ -55,6 +61,8 @@ Source: Linked List Techniques
 ** 单调栈：下一个更大元素
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949323
+:ANKI_NOTE_HASH: b4d3861fcfea1d29ecbf946c02197d21
 :END:
 
 *** Front
@@ -78,6 +86,8 @@ Source: Stacks and Queues
 ** 循环队列的空与满
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Cloze
+:ANKI_NOTE_ID: 1793077949336
+:ANKI_NOTE_HASH: b2af4e1d5ef5ff9468257c80dd12386c
 :END:
 
 *** Text
@@ -89,6 +99,8 @@ Source: Stacks and Queues
 ** 堆的删除堆顶
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949350
+:ANKI_NOTE_HASH: 1dd9fc39f94bd70cc31509b85e2f79a9
 :END:
 
 *** Front
@@ -103,6 +115,8 @@ Source: Heaps and Priority Queues
 ** 前 k 大用小顶堆
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949366
+:ANKI_NOTE_HASH: 9318ae8019557f94d22d518bedd19d6a
 :END:
 
 *** Front
@@ -116,6 +130,8 @@ Source: Heaps and Priority Queues
 ** heapq 元组比较的 TypeError
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949378
+:ANKI_NOTE_HASH: d3f7c56b9f749370e04505fd9745c365
 :END:
 
 *** Front
@@ -129,6 +145,8 @@ Source: Heaps and Priority Queues
 ** 数据流的中位数
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949391
+:ANKI_NOTE_HASH: 4863eefef7362860d920efe155a68036
 :END:
 
 *** Front
@@ -143,6 +161,8 @@ Source: Heaps and Priority Queues
 ** 中序遍历的迭代写法
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949405
+:ANKI_NOTE_HASH: 83f553c10533e2b4169d4e2e6a238a90
 :END:
 
 *** Front
@@ -168,6 +188,8 @@ Source: Binary Tree Traversal
 ** 后序遍历的反转技巧
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949419
+:ANKI_NOTE_HASH: 134031593ccc78026b5dd5e2ef65c62f
 :END:
 
 *** Front
@@ -182,6 +204,8 @@ Source: Binary Tree Traversal
 ** Morris 遍历的思路
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949432
+:ANKI_NOTE_HASH: b821720ae1cf4d0e7b304a89dabc5983
 :END:
 
 *** Front
@@ -196,6 +220,8 @@ Source: Binary Tree Traversal
 ** 快排的退化
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949440
+:ANKI_NOTE_HASH: 74554268bebfce8bba98c2cb068431ea
 :END:
 
 *** Front
@@ -210,6 +236,8 @@ Source: Sorting Algorithms
 ** 稳定排序与多关键字
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949453
+:ANKI_NOTE_HASH: 56ebe32dc94493b5ce9017c3746fd8d1
 :END:
 
 *** Front
@@ -223,6 +251,8 @@ Source: Sorting Algorithms
 ** 计数排序为什么从后往前放
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949468
+:ANKI_NOTE_HASH: cf3897e4a7108e7b345a358e75a25d5e
 :END:
 
 *** Front
@@ -236,6 +266,8 @@ Source: Sorting Algorithms
 ** A* 的启发函数条件
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949481
+:ANKI_NOTE_HASH: 15fbd390c9e9139d7755e0a581490e83
 :END:
 
 *** Front
@@ -251,6 +283,8 @@ Source: A* Search
 ** Python 递归深度
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949496
+:ANKI_NOTE_HASH: 65c0f65f53aeee5ca82d0dbeb834e72a
 :END:
 
 *** Front
@@ -264,6 +298,8 @@ Source: Recursive Problem Solving
 ** 回溯：同层去重
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949510
+:ANKI_NOTE_HASH: 14193c54455f8b737c39a45d28c05476
 :END:
 
 *** Front
@@ -278,6 +314,8 @@ Source: Backtracking
 ** 回溯：used 数组去重
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949524
+:ANKI_NOTE_HASH: 3b7db0aa3844d1e2c2de3bc71f54b91d
 :END:
 
 *** Front
@@ -292,6 +330,8 @@ Source: Backtracking
 ** 回溯存结果要复制
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949537
+:ANKI_NOTE_HASH: bfbbf24c807733906783c699ac496cb7
 :END:
 
 *** Front
@@ -305,6 +345,8 @@ Source: Backtracking
 ** 贪心的反例
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949546
+:ANKI_NOTE_HASH: 7e2fd0e307a8194bc32461df990eae76
 :END:
 
 *** Front
@@ -318,6 +360,8 @@ Source: Greedy Algorithms
 ** 区间调度按结束时间排序
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949557
+:ANKI_NOTE_HASH: b9d5437516c8257f9382356412ccd532
 :END:
 
 *** Front
@@ -331,6 +375,8 @@ Source: Greedy Algorithms
 ** 0-1 背包与完全背包的遍历方向
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949572
+:ANKI_NOTE_HASH: 66fc369a4e30cf59f6ba696ea4d3f440
 :END:
 
 *** Front
@@ -345,6 +391,8 @@ Source: Dynamic Programming
 ** 组合数与排列数的循环顺序
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949586
+:ANKI_NOTE_HASH: ccf039fe203d0ecbd021c2490ce7ad9d
 :END:
 
 *** Front
@@ -359,6 +407,8 @@ Source: Dynamic Programming
 ** 动态规划、分治与贪心
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949601
+:ANKI_NOTE_HASH: 5fdb851cac2c87276f75176e2ee076f7
 :END:
 
 *** Front
@@ -373,6 +423,8 @@ Source: Dynamic Programming
 ** 有序数组去重保留 k 个
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949614
+:ANKI_NOTE_HASH: 273e978d77d6b7c2f62951032b22a595
 :END:
 
 *** Front
@@ -395,6 +447,8 @@ Source: Array In-place Techniques
 ** 找重复数的约束
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949628
+:ANKI_NOTE_HASH: 8ad8b49c4f992e4ff05608b23b8f18c5
 :END:
 
 *** Front
@@ -411,6 +465,8 @@ Source: Array In-place Techniques
 ** Boyer-Moore 投票
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949642
+:ANKI_NOTE_HASH: ee959a2318c4c6742a7572ee563ec071
 :END:
 
 *** Front
@@ -431,6 +487,8 @@ Source: Array In-place Techniques
 ** KMP 前缀函数
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949663
+:ANKI_NOTE_HASH: d1734bef611b2369238e0f0d93bdd91c
 :END:
 
 *** Front
@@ -455,6 +513,8 @@ Source: KMP String Matching
 ** 重复子串的判断
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077949676
+:ANKI_NOTE_HASH: f784f2ba2ee511c95eee835a24bbd4fd
 :END:
 
 *** Front

@@ -8,6 +8,8 @@
 ** 语言构造的三要素
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077990521
+:ANKI_NOTE_HASH: 65ba5cf6021b92fbd337e627872c553d
 :END:
 
 *** Front
@@ -23,6 +25,8 @@ Source: Function Bindings and Calls in ML
 ** SML 函数绑定的求值
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077990534
+:ANKI_NOTE_HASH: 18fe59783368117d640169be0891939b
 :END:
 
 *** Front
@@ -36,6 +40,8 @@ Source: Function Bindings and Calls in ML
 ** SML 函数调用的求值步骤
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077990548
+:ANKI_NOTE_HASH: 17e5ceeb9c13d7bd4b1812c8287d1095
 :END:
 
 *** Front
@@ -53,6 +59,8 @@ Source: Function Bindings and Calls in ML
 ** SML 遮蔽与闭包
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077990563
+:ANKI_NOTE_HASH: af0e544ebc651241c388e19f16aea43d
 :END:
 
 *** Front
@@ -73,6 +81,8 @@ Source: Function Bindings and Calls in ML
 ** Python 闭包捕获变量
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077990575
+:ANKI_NOTE_HASH: c08ad62e55027cf85dfd1220d38aeaab
 :END:
 
 *** Front
@@ -93,6 +103,8 @@ Source: Function Bindings and Calls in ML
 ** 循环中创建的 lambda
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077990589
+:ANKI_NOTE_HASH: c9cea92ccc86bf711710ce14b10ea663
 :END:
 
 *** Front
@@ -106,6 +118,8 @@ Source: Function Bindings and Calls in ML
 ** Python 默认参数的求值时机
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077990604
+:ANKI_NOTE_HASH: 890f9a61059087119f57d1673acc952e
 :END:
 
 *** Front
@@ -119,6 +133,8 @@ Source: Function Bindings and Calls in ML
 ** 及早求值
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077990624
+:ANKI_NOTE_HASH: 913699c1258d577ae88f1961a6b8a47c
 :END:
 
 *** Front

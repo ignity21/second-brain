@@ -9,7 +9,7 @@
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1778729504142
-:ANKI_NOTE_HASH: 59b80d0a8ff73dbeb5c6f85894ac7929
+:ANKI_NOTE_HASH: ec855cbd96ce9517fc4fee29a05b13ed
 :END:
 
 *** Front
@@ -26,7 +26,7 @@ Source: Ethernet Switching, ARP and VLAN
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1778730929296
-:ANKI_NOTE_HASH: 7fbf4e2ed375029694ccee4a35f27b09
+:ANKI_NOTE_HASH: 53a2b2610461c9e69f5b5a106ad033ee
 :END:
 
 *** Front
@@ -42,7 +42,7 @@ Source: Ethernet Switching, ARP and VLAN
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1778731536244
-:ANKI_NOTE_HASH: 30742aeab169bfaeb70d73362c8c9f60
+:ANKI_NOTE_HASH: 323908af39beb11398988651c8f6df59
 :END:
 
 *** Front
@@ -499,7 +499,7 @@ Source: TCP Reliable Delivery and Flow Control
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1792210224476
-:ANKI_NOTE_HASH: 456266c15c0fd43408f5f3bade63627c
+:ANKI_NOTE_HASH: 3cd2e6cf8e4740ed53904109e113f5f5
 :END:
 
 *** Front
@@ -515,6 +515,8 @@ Source: TCP Congestion Control
 ** curl 测指定源站
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032142
+:ANKI_NOTE_HASH: edd644fd30d5595665162b02da7c359b
 :END:
 
 *** Front
@@ -528,6 +530,8 @@ Source: curl for HTTP and TLS Debugging
 ** curl 的分阶段计时
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032164
+:ANKI_NOTE_HASH: 99a07afc4f8b4922884fec697555fffb
 :END:
 
 *** Front
@@ -541,6 +545,8 @@ Source: curl for HTTP and TLS Debugging
 ** 收包时数据何时拷贝到用户空间
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032172
+:ANKI_NOTE_HASH: ad7a4e64b88715c2905431c2a020513c
 :END:
 
 *** Front
@@ -554,6 +560,8 @@ Source: Linux Network Stack Receive and Transmit Paths
 ** send 返回意味着什么
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032187
+:ANKI_NOTE_HASH: 44a8b19e4d9ef8b8738a7922540aa18a
 :END:
 
 *** Front
@@ -567,6 +575,8 @@ Source: Linux Network Stack Receive and Transmit Paths
 ** UDP 服务端丢包排查
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032200
+:ANKI_NOTE_HASH: 9b56c37d408b1c42bb355bbf824347c4
 :END:
 
 *** Front
@@ -580,6 +590,8 @@ Source: Linux Network Stack Receive and Transmit Paths
 ** softnet_stat 的 time_squeeze
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032214
+:ANKI_NOTE_HASH: 6c10cd4f09bb3fd28a6103db6b064048
 :END:
 
 *** Front
@@ -593,6 +605,8 @@ Source: Linux Network Stack Receive and Transmit Paths
 ** RSS 与 RPS
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032229
+:ANKI_NOTE_HASH: a595e45e666832b52e4982575a9e6b49
 :END:
 
 *** Front
@@ -608,6 +622,8 @@ Source: Linux Network Stack Receive and Transmit Paths
 ** 内核忙轮询
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032242
+:ANKI_NOTE_HASH: 2a7a7c6ead526ff4e3bc5eedcd1b73b2
 :END:
 
 *** Front
@@ -621,6 +637,8 @@ Source: Linux Network Stack Receive and Transmit Paths
 ** 中断合并与延迟
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032256
+:ANKI_NOTE_HASH: 7e1aee552701f37178bc2b48f3abce2b
 :END:
 
 *** Front
@@ -634,6 +652,8 @@ Source: Linux Network Stack Receive and Transmit Paths
 ** 内核旁路省掉了什么
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032272
+:ANKI_NOTE_HASH: 719fa03c7a25cf3da48a8321805b2edf
 :END:
 
 *** Front
@@ -647,6 +667,8 @@ Source: Linux Network Stack Receive and Transmit Paths
 ** netfilter 转发路径
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032284
+:ANKI_NOTE_HASH: f85311a27f1aa7053b17d0546a5764c6
 :END:
 
 *** Front
@@ -660,6 +682,8 @@ Source: Linux Netfilter, iptables and nftables
 ** 为什么先放行 ESTABLISHED
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032299
+:ANKI_NOTE_HASH: f5f8ea73a4e876c9821c26e1f11cfff7
 :END:
 
 *** Front
@@ -673,6 +697,8 @@ Source: Linux Netfilter, iptables and nftables
 ** DROP 与 REJECT
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032319
+:ANKI_NOTE_HASH: aa67271d36b9fda65a7cc5c9586f827d
 :END:
 
 *** Front
@@ -687,6 +713,8 @@ Source: Linux Netfilter, iptables and nftables
 ** iptables -F 锁死 SSH
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032332
+:ANKI_NOTE_HASH: f8f15590646d670fc39c17d22a74d5e9
 :END:
 
 *** Front
@@ -700,6 +728,8 @@ Source: Linux Netfilter, iptables and nftables
 ** Docker 端口绕过防火墙
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032346
+:ANKI_NOTE_HASH: 287a85f1a7c5bccf2457cc3d76777e96
 :END:
 
 *** Front
@@ -713,6 +743,8 @@ Source: Linux Netfilter, iptables and nftables
 ** iperf3 测 UDP
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032360
+:ANKI_NOTE_HASH: f95edad143646e8a95e1a1459a20d24e
 :END:
 
 *** Front
@@ -726,6 +758,8 @@ Source: Network Performance Testing with iperf3 and pktgen
 ** pktgen 测的是什么
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032375
+:ANKI_NOTE_HASH: a4a8a3fb2c31913694c3ade8f42649fa
 :END:
 
 *** Front
@@ -739,6 +773,8 @@ Source: Network Performance Testing with iperf3 and pktgen
 ** 交换机的 MAC 学习与泛洪
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032389
+:ANKI_NOTE_HASH: 5670715a767e9f6c7a126516d2525459
 :END:
 
 *** Front
@@ -755,6 +791,8 @@ Source: Ethernet Switching, ARP and VLAN
 ** 邻居表溢出
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032402
+:ANKI_NOTE_HASH: 900a24f3e5bdf273e08dc580bb4cd92f
 :END:
 
 *** Front
@@ -769,6 +807,8 @@ Source: Ethernet Switching, ARP and VLAN
 ** NAT 回包与入站连接
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032416
+:ANKI_NOTE_HASH: 9fba990321dcc92eb02fa81eced9ca9b
 :END:
 
 *** Front
@@ -784,6 +824,8 @@ Source: NAT and DHCP in Home Networks
 ** CGNAT 下端口转发无效
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032425
+:ANKI_NOTE_HASH: 327c62926de0cd3a285768e44a3e4936
 :END:
 
 *** Front
@@ -798,6 +840,8 @@ Source: NAT and DHCP in Home Networks
 ** NAT 超时导致长连接假死
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032437
+:ANKI_NOTE_HASH: d7f5a243ea1c836417cadba7b8b5fbf4
 :END:
 
 *** Front
@@ -813,6 +857,8 @@ Source: NAT and DHCP in Home Networks
 ** DHCP 为什么用广播
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032451
+:ANKI_NOTE_HASH: 648ca3bd9cf59606533607835e518696
 :END:
 
 *** Front
@@ -829,6 +875,8 @@ Source: NAT and DHCP in Home Networks
 ** 网络中有两台 DHCP 服务器
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032467
+:ANKI_NOTE_HASH: d9220cccebe224c5953692edaaa1766e
 :END:
 
 *** Front
@@ -843,6 +891,8 @@ Source: NAT and DHCP in Home Networks
 ** HTTPS 首字节前的 RTT
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032479
+:ANKI_NOTE_HASH: 065aa6111f6350c0cbb2c35cff567696
 :END:
 
 *** Front
@@ -858,6 +908,8 @@ Source: TLS Handshake and Certificates
 ** TLS 前向保密
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032493
+:ANKI_NOTE_HASH: 6b9487be47a20ba338a4469bcb4439fb
 :END:
 
 *** Front
@@ -873,6 +925,8 @@ Source: TLS Handshake and Certificates
 ** 服务器缺中间证书
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032507
+:ANKI_NOTE_HASH: ad56e1d13b94bcb17a45c9e69bc1ba08
 :END:
 
 *** Front
@@ -888,6 +942,8 @@ Source: TLS Handshake and Certificates
 ** nftables 多条 base chain
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032605
+:ANKI_NOTE_HASH: 0f8f3f43ea44e1dce3f452902ad9054a
 :END:
 
 *** Front
@@ -902,6 +958,8 @@ Source: Linux Netfilter, iptables and nftables
 ** Linux 路由查找顺序
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032620
+:ANKI_NOTE_HASH: 5805a4c335d67c52f073887556b6e749
 :END:
 
 *** Front
@@ -917,6 +975,8 @@ Source: Linux Routing and Policy Routing
 ** ~rp_filter~ 与非对称路由
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032632
+:ANKI_NOTE_HASH: 30588cc3b4f7c2ede262bb58399cf75b
 :END:
 
 *** Front
@@ -932,6 +992,8 @@ Source: Linux Routing and Policy Routing
 ** PMTU 黑洞
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793078032646
+:ANKI_NOTE_HASH: 84e4d7d278050abb804f8ad0c3d7da26
 :END:
 
 *** Front
@@ -947,6 +1009,8 @@ Source: Network Layers and Data Units
 ** 以太网的检错
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Cloze
+:ANKI_NOTE_ID: 1793078032660
+:ANKI_NOTE_HASH: 308f1c9e08a3377686e1026ee7bf7159
 :END:
 
 *** Text

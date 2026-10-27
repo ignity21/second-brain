@@ -1,6 +1,6 @@
 # 迁移收尾：待决定与待处理事项
 
-Status: Open — 迁移收尾的汇总入口：A、B 节已完成（2026-10-27）；剩 C 节由用户同步 Anki，以及 A3「删除 `roamnotes/` 备份」待用户以后决定
+Status: Complete — 迁移收尾全部完成（2026-10-27）；用户已完成 Anki 同步，`roamnotes/` 备份由用户后续自行管理，无需追踪。
 
 用户说「处理迁移遗留」「迁移收尾」或问「还有什么没处理」时，从这个文件开始。旧笔记迁移（`roamnotes/` → `roamnotes-v2/`）在 2026-10-27 全部完成：`roamnotes/` 中每篇笔记都已迁入、合并，或记入复查清单；各批次的新旧 ID 对应在各迁移任务文件里，最后一轮见 `2026-10-27-remaining-categories-migration.md`。这里只收迁移之后还没做完的事。
 
@@ -12,7 +12,7 @@ Status: Open — 迁移收尾的汇总入口：A、B 节已完成（2026-10-27�
    - 截图或链接类：netcat、Calculus、Git Cheat Sheet、AI Prompts、UML 不迁。Python Cookbook 改写成「工具 → 适用场景」，并扩展到常用标准库工具（collections、itertools、bisect、functools 等），不写具体用法——用户只需知道有哪些工具、什么场景用。SML 迁入，新建大类 `Programming/`（用户认为这门课的内容是理论概念类）。
    - 个人内容：新建 `Personal/`，迁有内容的 4 篇（Atomic Habits、Oxygen Not Included、MC Server、Warhammer3）；Books、Have Fun 两个索引和 English、English Grammar 截图不迁。
    - `Default/computer_hardware` 的 Architecture、Glossary 两节：挑有用的并入（MCC、地址总线、时钟、POST / ROM / UEFI 启动链等与 CPU、Memory Hierarchy 相关的概念）；散热器、导热硅脂、Mb/s 这类不收。
-3. ~~删除 `roamnotes/` 备份~~：用户决定暂不删除（2026-10-27），以后再定；本轮不执行清理步骤。
+3. ~~删除 `roamnotes/` 备份~~：用户决定先保留，后续自行处理，无需继续追踪。
 4. ~~C++ 的 2 张旧卡~~：已修改（2026-10-27）。Pointers 无误未动；Pointers to Array 的 Back 改为首元素地址并注明类型，Front 注明最后两行按顺序执行（详见 `2026-10-26-cpp-trading-anki-cards.md`）。
 5. ~~还没有 Deck 的大类~~：已决定（2026-10-27），LinearAlgebra、Statistics 都新建 Deck，档位「能判断」；已记入 `.agents/learning-goals.md`。
 6. ~~`Unsorted/` 的两篇~~：已决定（2026-10-27），删除 `roamtest-20260901.org`；Model vs Effect 移到 `Tools/`，由 AI Tools 索引收录，标题改得带上下文，保留原 ID。
@@ -34,7 +34,7 @@ Status: Open — 迁移收尾的汇总入口：A、B 节已完成（2026-10-27�
 
 ## C. 用户自己操作
 
-- [ ] 把新卡同步到 Anki：新建的 Deck `RoamCards::Algorithms`（30 张）、`RoamCards::SystemDesign`（31 张）、`RoamCards::Tools`（4 张）；`RoamCards::Network` 新增 15 张、改写 3 张（ARP、VLAN、3 层交换机，保留了同步字段）；`RoamCards::Python` 新增 8 张；`RoamCards::C++` 新增 30 张、改写 1 张（Pointers to Array，保留了同步字段）；新建的 Deck `RoamCards::Trading`（25 张）、`RoamCards::Programming`（8 张）、`RoamCards::LinearAlgebra`（22 张）、`RoamCards::Statistics`（29 张）。
+- [x] 把新卡同步到 Anki：新建的 Deck `RoamCards::Algorithms`（30 张）、`RoamCards::SystemDesign`（31 张）、`RoamCards::Tools`（4 张）；`RoamCards::Network` 新增 15 张、改写 3 张（ARP、VLAN、3 层交换机，保留了同步字段）；`RoamCards::Python` 新增 8 张；`RoamCards::C++` 新增 30 张、改写 1 张（Pointers to Array，保留了同步字段）；新建的 Deck `RoamCards::Trading`（25 张）、`RoamCards::Programming`（8 张）、`RoamCards::LinearAlgebra`（22 张）、`RoamCards::Statistics`（29 张）。（已于 2026-10-27 由用户同步完成）
 - [x] 推送后确认 Publish 工作流部署成功：run 40439719314 的 build、deploy 均成功；线上 `data/graphdata.json` 已包含 Algorithms、System Design、Tools 等新节点（2026-10-27）。
 
 ## D. 与迁移无关、仍未完成的计划（只作索引）

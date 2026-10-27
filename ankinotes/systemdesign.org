@@ -8,6 +8,8 @@
 ** Availability of serial dependencies
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963524
+:ANKI_NOTE_HASH: 6e95f8a42e29793589ea189911496016
 :END:
 
 *** Front
@@ -22,6 +24,8 @@ Source: Reliability and Availability
 ** Redundancy and independence
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963535
+:ANKI_NOTE_HASH: f245f01e2ad98c8c5767bcab3dc64380
 :END:
 
 *** Front
@@ -35,6 +39,8 @@ Source: Reliability and Availability
 ** Retry storms
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963553
+:ANKI_NOTE_HASH: 2cfbe6cf05663c6e158981d8a53429e0
 :END:
 
 *** Front
@@ -49,6 +55,8 @@ Source: Reliability and Availability
 ** Percentiles instead of the mean
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963566
+:ANKI_NOTE_HASH: 2e20b5fb3dd56556da5faf598ef2654c
 :END:
 
 *** Front
@@ -63,6 +71,8 @@ Source: Scalability in System Design
 ** Twitter timeline fan-out
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963580
+:ANKI_NOTE_HASH: 66c8f0a42dfba3fcac0651df312850e2
 :END:
 
 *** Front
@@ -76,6 +86,8 @@ Source: Scalability in System Design
 ** When to use a document model
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963594
+:ANKI_NOTE_HASH: cbe46d1f1cf7c3ba5e4bffe5ba0cee5e
 :END:
 
 *** Front
@@ -90,6 +102,8 @@ Source: Data Models: Relational, Document and Graph
 ** Opaque IDs as keys
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963608
+:ANKI_NOTE_HASH: d8bd203c0f82aa32e7e33217d43e6fde
 :END:
 
 *** Front
@@ -103,6 +117,8 @@ Source: Data Models: Relational, Document and Graph
 ** Write skew
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963623
+:ANKI_NOTE_HASH: 513bb34e020672a13f28fcc2b0c678f5
 :END:
 
 *** Front
@@ -116,6 +132,8 @@ Source: Database Transactions and Isolation
 ** Lost update
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963635
+:ANKI_NOTE_HASH: 01e0c25e2295065b38fe6d035d6a9da2
 :END:
 
 *** Front
@@ -132,6 +150,8 @@ Source: Database Transactions and Isolation
 ** LSM-tree write and read paths
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963649
+:ANKI_NOTE_HASH: 8405cd3c04e7b43ab06807064f698ef2
 :END:
 
 *** Front
@@ -147,6 +167,8 @@ Source: Storage Engines: Hash Indexes, LSM-Trees and B-Trees
 ** LSM-tree vs B-tree
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963665
+:ANKI_NOTE_HASH: d69a4f623592273c2f6a70bfe1bb8d6b
 :END:
 
 *** Front
@@ -161,6 +183,8 @@ Source: Storage Engines: Hash Indexes, LSM-Trees and B-Trees
 ** Synchronous vs asynchronous replication
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963677
+:ANKI_NOTE_HASH: 9c32db7bcb1cd8e5d9350b97bb27c33d
 :END:
 
 *** Front
@@ -176,6 +200,8 @@ Source: Database Replication
 ** Read-your-writes
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963690
+:ANKI_NOTE_HASH: 00b7aaa09784e335c2121f732eb08761
 :END:
 
 *** Front
@@ -190,6 +216,8 @@ Source: Database Replication
 ** Split brain
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963706
+:ANKI_NOTE_HASH: 69a14ecde1f51a6766016c430ae29bd3
 :END:
 
 *** Front
@@ -204,6 +232,8 @@ Source: Database Replication
 ** Leaderless quorums
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963719
+:ANKI_NOTE_HASH: 31842fd91394ae164dcef334347761ee
 :END:
 
 *** Front
@@ -217,6 +247,8 @@ Source: Database Replication
 ** Modulo hashing vs consistent hashing
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963733
+:ANKI_NOTE_HASH: 77da31447ab019b7dbc8b652265b2830
 :END:
 
 *** Front
@@ -231,6 +263,8 @@ Source: Database Sharding and Consistent Hashing
 ** Hot keys
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963748
+:ANKI_NOTE_HASH: 7f4b5ff17dd55b2137502930a0733208
 :END:
 
 *** Front
@@ -244,6 +278,8 @@ Source: Database Sharding and Consistent Hashing
 ** Python hash() for sharding
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963755
+:ANKI_NOTE_HASH: afc5de0f274f2a7c0cda2722d17120d7
 :END:
 
 *** Front
@@ -257,6 +293,8 @@ Source: Database Sharding and Consistent Hashing
 ** Layer 4 vs layer 7 load balancing
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963767
+:ANKI_NOTE_HASH: cc2bd0290e3a2c1fc33189a608337774
 :END:
 
 *** Front
@@ -271,6 +309,8 @@ Source: Load Balancing
 ** Sticky sessions vs stateless
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963781
+:ANKI_NOTE_HASH: 390539d6687de62008680db618f4eef8
 :END:
 
 *** Front
@@ -285,6 +325,8 @@ Source: Load Balancing
 ** Cache-aside: delete or update
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963795
+:ANKI_NOTE_HASH: b63f8aa59b6c05478cc157f439a8fee2
 :END:
 
 *** Front
@@ -298,6 +340,8 @@ Source: Caching Strategies in System Design
 ** Cache stampede and penetration
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963810
+:ANKI_NOTE_HASH: ab297b111e138c87452e6127fb28d1cb
 :END:
 
 *** Front
@@ -312,6 +356,8 @@ Source: Caching Strategies in System Design
 ** At-least-once delivery
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963825
+:ANKI_NOTE_HASH: dce9601544945081cb17748a016f3e30
 :END:
 
 *** Front
@@ -325,6 +371,8 @@ Source: Message Queues and Pub/Sub
 ** Poison messages
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963844
+:ANKI_NOTE_HASH: 2240084d087bfb34c31c05fd3a438bc4
 :END:
 
 *** Front
@@ -338,6 +386,8 @@ Source: Message Queues and Pub/Sub
 ** ZeroMQ slow joiner
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963857
+:ANKI_NOTE_HASH: 9d28d060060a1e02554450652e4fca31
 :END:
 
 *** Front
@@ -352,6 +402,8 @@ Source: ZeroMQ Messaging Patterns
 ** ZeroMQ high-water mark
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963872
+:ANKI_NOTE_HASH: 6d84864e5d4dfb4e5939ec705373c04d
 :END:
 
 *** Front
@@ -365,6 +417,8 @@ Source: ZeroMQ Messaging Patterns
 ** ZeroMQ REQ gets stuck
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963885
+:ANKI_NOTE_HASH: ebc0204205504d36a6a8e7caf74c4032
 :END:
 
 *** Front
@@ -378,6 +432,8 @@ Source: ZeroMQ Messaging Patterns
 ** Why MapReduce functions must be pure
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963899
+:ANKI_NOTE_HASH: e98bd3f53947a17289edeebf0795efab
 :END:
 
 *** Front
@@ -391,6 +447,8 @@ Source: MapReduce Batch Processing
 ** Averages as a combiner
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077963992
+:ANKI_NOTE_HASH: 88d2c55fa1996af844a3a885123f1b06
 :END:
 
 *** Front
@@ -404,6 +462,8 @@ Source: MapReduce Batch Processing
 ** 错误码与异常的选择
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077964007
+:ANKI_NOTE_HASH: d18aa6aaf67b4dbffaed46688d42d796
 :END:
 
 *** Front
@@ -419,6 +479,8 @@ Source: Error Handling Design
 ** 哪些错误该重试
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1793077964018
+:ANKI_NOTE_HASH: c1ea30a358be5ea072994e0f62deb990
 :END:
 
 *** Front
