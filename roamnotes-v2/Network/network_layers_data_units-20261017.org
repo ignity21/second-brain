@@ -14,7 +14,7 @@
 | 应用层 | 消息（message）                             |          | 对 TCP 来说只是一串字节，消息边界不保留  |
 | 传输层 | 报文段（segment）；UDP 叫数据报（datagram） | 端口     | TCP 在这里按 MSS 把字节流切段，加 TCP 头 |
 | 网络层 | 包 / 分组（packet）                         | IP 地址  | 加 IP 头，一个 segment 对应一个 packet   |
-| 链路层 | 帧（frame），如以太网帧（Ethernet frame）   | MAC 地址 | 加帧头和帧尾                             |
+| 链路层 | 帧（frame），如以太网帧（Ethernet frame）   | MAC 地址 | 加帧头和帧尾；帧尾的 FCS 校验出错就丢弃  |
 | 物理层 | 比特（bit）                                 |          |                                          |
 
 * 切分发生在哪一层
@@ -22,6 +22,18 @@
 - 真正切分的是 TCP：按 MSS（maximum segment size）切，让一个 segment 加上 IP 头后正好放进链路允许的最大载荷 MTU（maximum transmission unit，以太网 1500 字节）。所以 MSS 通常是 1500 − 20（IP 头）− 20（TCP 头）= 1460 字节。
 - 往下各层只封装、不切分。IP 层也能分片（fragmentation），但 TCP 用 MSS 尽量避免分片。
 - 应用层的消息边界在 TCP 字节流里不保留（「粘包」）。
+
+* MTU 不一致时
+路径上某一段的 MTU 更小（PPPoE 拨号 1492、各种隧道和 VPN 更小）时，靠路径 MTU 发现（PMTUD）：Linux 发 TCP 包时在 IP 头设置 DF（don't fragment），放不下的路由器丢包并回 ICMP「需要分片」，发送方据此调小 MSS。
+
+- *PMTU 黑洞* ：路径上有设备丢弃了这类 ICMP，大包永远发不过去、发送方也不知道原因。现象是 TCP 握手成功、小请求正常，传大一点的数据（网页、SSH 登录后的大输出、 ~git clone~ ）就卡住。
+- *MSS clamping* ：路由器在转发 SYN 时把其中的 MSS 改小到出口 MTU 能容纳的值，从源头避开问题。PPPoE 和 VPN 出口常用；OpenWRT 在防火墙 wan 区域上开启「MSS clamping」（ ~mtu_fix~ ），iptables 写法是 ~-p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu~ 。
+
+| Linux 选项 | 上游默认 | 作用 |
+|---|---|---|
+| ~net.ipv4.ip_no_pmtu_disc~ | 0 | 0 表示启用 PMTUD（设置 DF） |
+| ~net.ipv4.tcp_mtu_probing~ | 0 | 1：怀疑遇到黑洞时主动用更小的包探测；2：始终探测 |
+| ~net.ipv4.tcp_base_mss~ | 1024 | 探测时起步的 MSS |
 
 * Misconceptions
 
@@ -33,3 +45,7 @@
 
 例：以太网上发 3000 字节，TCP 切成 1460 + 1460 + 80 三个 segment，IP 层得到 3 个 packet，链路层得到 3 个帧。
 
+** 链路层负责纠错和流量控制？
+原来以为：数据链路层提供 MAC 寻址、检错、纠错和流量控制。
+
+实际：以太网只检错不纠错。接收方用帧尾的 FCS（CRC32）校验，出错就丢弃，不通知发送方，丢失由 TCP 等上层重传补回。以太网也没有通用的流量控制，只有相邻设备之间可选的 PAUSE 帧；端到端的流量控制由 TCP 负责。Wi-Fi 不同：无线信道误码率高，802.11 在链路层有确认和重传，但仍不纠错。

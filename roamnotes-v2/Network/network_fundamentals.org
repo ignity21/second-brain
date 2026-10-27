@@ -5,3 +5,6 @@
 #+title: Networking Fundamentals
 
 * [[id:72d3cced-60c4-4109-bc8c-a4ccbec10039][Layers and Data Units]]
+* [[id:5dd548b6-be23-4868-b45b-0737c1d87509][Ethernet Switching, ARP and VLAN]]
+* [[id:42efb840-bcf5-418a-a608-ccaea803b08c][NAT and DHCP]]
+* [[id:176c3083-6489-4b3e-a17e-41eaebc62bee][TLS Handshake and Certificates]]

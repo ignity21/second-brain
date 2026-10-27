@@ -1,0 +1,51 @@
+:PROPERTIES:
+:ID:       4cfade54-5db2-4bc1-a4a1-561bce26aac7
+:ROAM_ALIASES: "GOST 代理隧道"
+:END:
+#+title: GOST Proxy Tunnels
+#+filetags: :Network:
+
+* Positioning
+GOST（GO Simple Tunnel）是用 Go 写的代理和隧道工具：一个二进制同时能当 HTTP / SOCKS5 代理服务器、端口转发器和加密隧道的两端。用户用它在自己的服务器与本地之间搭隧道（2024-08 的配置，下文命令未在本机运行）。
+
+* Mental Model
+GOST 的配置由两部分组成：
+
+- *服务（service）* ：在本地监听，接收流量。由 handler（按什么协议处理请求，如 =http= 、 =socks5= 、 =relay= 、 =tcp= 端口转发）和 listener（用什么传输层接收，如 =tcp= 、 =wss= 、 =mwss= ）组成。命令行的 ~-L~ 定义一个服务。
+- *链（chain）* ：服务收到的流量往哪里转发。链由若干跳（hop）组成，每跳中的节点（node）又分 connector（用什么协议与下一跳对话）和 dialer（用什么传输层连过去）。命令行的 ~-F~ 定义转发目标，写多个 ~-F~ 就是多跳。
+
+URL 形式 =<handler 或 connector>+<listener 或 dialer>://[用户:密码@]地址:端口?参数= 同时表达这两层，例如 =relay+wss= 是「relay 协议跑在 WebSocket over TLS 上」， =mwss= 是在一条 wss 连接上多路复用。
+
+* 认证
+- 用户名和密码直接写在 URL 中： ~gost -L http://user:pass@:8080~ ；客户端转发时同样写在 ~-F~ 的 URL 中。
+- 也可以用 ~?auth=<base64(user:pass)>~ 参数，避免特殊字符出问题。
+- 多个用户写在配置文件的 =authers= 中，服务通过 =auther= 引用：
+
+#+begin_src yaml
+services:
+- name: service-0
+  addr: ":8080"
+  handler:
+    type: http
+    auther: auther-0
+  listener:
+    type: tcp
+authers:
+- name: auther-0
+  auths:
+  - username: user1
+    password: pass1
+#+end_src
+
+* 用户的配置
+relay 隧道，WebSocket 外面套 TLS，看起来像普通 HTTPS 流量：
+
+| 模式 | 服务器端 | 客户端 | 效果 |
+|---|---|---|---|
+| 代理 | ~gost -L "relay+mwss://gost:gost@:443?path=/ws"~ | ~gost -L socks://:1080 -F "relay+mwss://gost:gost@www.ignity.xyz:443?path=/ws"~ | 本地 1080 是 SOCKS5 代理，流量经隧道从服务器出去 |
+| 代理（内网） | ~gost -L relay+wss://gost:gost@:8420?path=/ws~ | ~gost -L http://:8080 -F relay+wss://gost:gost@192.168.1.1:8420?path=/ws~ | 本地 8080 是 HTTP 代理 |
+| 端口转发 | ~gost -L relay+wss://:8420/:18080~ | ~gost -L tcp://:8080 -F relay+wss://:8420~ | 访问客户端的 8080 等于访问服务器上的 18080 |
+
+* Pitfalls
+- 命令行参数含 ~?~ 、 ~&~ 时要加引号，否则 shell 把它们当通配符或后台运行符。
+- relay 隧道两端的协议组合必须一致：服务器是 =relay+mwss= ，客户端的 ~-F~ 也要是 =relay+mwss= ，写成 =relay+wss= 连不上。

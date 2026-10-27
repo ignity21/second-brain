@@ -1,10 +1,19 @@
 :PROPERTIES:
 :ID:       cee785fb-8f4b-4230-ad02-312714729965
-:ROAM_ALIASES: "iptables 防火墙"
-:VERIFIED_WITH: iptables 1.8.13 (nf_tables) (2026-10-27)
+:ROAM_ALIASES: "Linux 防火墙：iptables 与 nftables"
+:VERIFIED_WITH: iptables 1.8.13 (nf_tables), nftables 1.1.7 (2026-10-27)
 :END:
-#+title: Linux Netfilter and iptables
+#+title: Linux Netfilter, iptables and nftables
 #+filetags: :Network:Linux:
+
+* TOC :TOC_1:
+- [[#netfilter-与五个-hook][Netfilter 与五个 hook]]
+- [[#表链与规则顺序][表、链与规则顺序]]
+- [[#drop-与-reject][DROP 与 REJECT]]
+- [[#nftables][nftables]]
+- [[#ufw][ufw]]
+- [[#pitfalls][Pitfalls]]
+- [[#capability-map][Capability Map]]
 
 * Netfilter 与五个 hook
 Netfilter 是内核协议栈上的一组 hook。iptables、nftables、ufw、firewalld、Docker 的端口映射都只是往这些 hook 上挂规则的不同前端。包按方向经过的 hook：
@@ -62,6 +71,46 @@ iptables 按用途把规则分成几张表，每张表在部分 hook 上有同�
 
 SYN 重传和 RST 的含义见 [[id:1ece815b-5c13-4d67-b816-b2ff98f34696][TCP Connection Management]]。
 
+* nftables
+nftables 是 iptables 的继任者，挂在同一组 Netfilter hook 上，但模型不同：
+
+| | iptables | nftables |
+|---|---|---|
+| 表和链 | 内置 =filter= 、 =nat= 等表和同名链 | 没有预置，自己建表，再建挂到 hook 上的 base chain |
+| 地址族 | iptables / ip6tables 分开两套 | 一张 =inet= 族的表同时管 IPv4 和 IPv6 |
+| 链的类型和顺序 | 由表决定 | 建 base chain 时写明 ~type filter hook input priority 0~ ，同一 hook 上的多条链按 priority 从小到大执行 |
+| 多个地址或端口 | 一条规则一个，或借助 ipset | 规则内直接写集合 ~tcp dport { 22, 80, 443 }~ ，也有命名集合和映射 |
+| 加载 | 逐条命令修改 | ~nft -f 文件~ 整体原子替换规则集 |
+
+最小的单机配置：
+
+#+begin_src sh
+nft add table inet filter
+nft add chain inet filter input '{ type filter hook input priority 0; policy drop; }'
+nft add rule inet filter input ct state established,related accept
+nft add rule inet filter input iif lo accept
+nft add rule inet filter input tcp dport 22 accept
+#+end_src
+
+在 shell 中写链定义要加引号，否则 ~{~ 、 ~;~ 会被 shell 解释。 ~nft -a list ruleset~ 显示每条规则的 handle，删除、插入都按 handle 定位。
+
+** 多个 base chain 时 accept 不是最终结果
+同一 hook 上有多条 base chain（自己的表、Docker、firewalld、ufw 各建一套）时，包要依次经过每一条：某条链里的 =accept= 只结束这一条链，后面 priority 更大的链仍会处理它；任何一条链 =drop= 都是最终结果。所以「我这张表里已经放行了」不代表包能到达。本机核对：两张 =inet= 表的 input 链（priority 0 放行 ping，priority 10 丢弃 ping），ping 127.0.0.1 失败，第二条链的计数器为 1。
+
+* ufw
+ufw（Uncomplicated Firewall）是 Ubuntu、Debian 上的前端，把 ~ufw allow 22/tcp~ 这类命令翻译成 iptables 规则（底层仍可能是 nft）。常用的只有几条：
+
+#+begin_src sh
+ufw default deny incoming
+ufw default allow outgoing
+ufw allow 22/tcp
+ufw enable
+ufw status numbered
+#+end_src
+
+- 远程启用前先放行 SSH，否则 ~ufw enable~ 之后连接立即断开。
+- 与 Docker 一起用时，发布的容器端口不受 ufw 限制，原因见下文 Pitfalls。
+
 * Pitfalls
 - *规则加在兜底规则之后* ：链末已有 ~-j DROP~ 时，再 ~-A~ 追加的放行规则永远不会被匹配。用 ~-I INPUT <位置>~ 插入，先 ~iptables -L INPUT -n --line-numbers~ 看位置。
 - ~-F~ *不重置默认策略* ：它只清空（默认 filter 表）各链中的规则，不删表、链，也不改 ~-P~ 。策略是 DROP 时远程执行 ~iptables -F~ ，SSH 立刻断开。清空前先 ~iptables -P INPUT ACCEPT~ 。
@@ -76,5 +125,6 @@ SYN 重传和 RST 的含义见 [[id:1ece815b-5c13-4d67-b816-b2ff98f34696][TCP Co
 | 看当前规则 | ~iptables -S~ （命令形式）、 ~iptables -L -n -v --line-numbers~ （带命中计数）、 ~iptables -t nat -S~ |
 | 删一条规则 | ~iptables -D INPUT <行号>~ |
 | 把 iptables 命令改写成 nft 语法 | ~iptables-translate~ ，如 ~-A INPUT -p tcp --dport 22 -j ACCEPT~ → ~add rule ip filter INPUT tcp dport 22 counter accept~ |
-| 新写防火墙 | nftables：一套规则同时管 IPv4 / IPv6（ =inet= 族），iptables 的继任者 |
+| 新写防火墙 | nftables，见 [[*nftables][nftables]] |
 | 简单的单机防火墙 | ufw（Ubuntu、Debian）、firewalld（Fedora、RHEL，按「区域」组织），都是生成底层规则的前端 |
+| 过滤 ARP 或网桥上的二层流量 | nftables 的 =arp= 、 =bridge= 族 |

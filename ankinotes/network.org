@@ -13,25 +13,14 @@
 :END:
 
 *** Front
-1. 发送方...
-2. 交换机...
-3. 交换机...
-4. 接收方...
-5. 交换机...
-6. 交换机...
+主机 A（192.168.1.10/24，网关 192.168.1.1）第一次访问 8.8.8.8：ARP 请求查的是谁的 MAC？随后发出的数据帧，目的 MAC 和目的 IP 各是什么？
 
 *** Back
-1. 发送方发送已知信息：
-   - 发送方 IP 地址
-   - 发送方 MAC 地址
-   - 目标 IP 地址
-   - 目标 MAC 地址填广播地址 ~FF:FF:FF:FF:FF:FF~
+ARP 查的是网关 192.168.1.1 的 MAC，不是 8.8.8.8 的：路由表判断目的地不在本网段，下一跳是网关，而 ARP 只在本广播域内有效。
+- 数据帧：目的 MAC = 网关的 MAC，目的 IP = 8.8.8.8。
+- 每经过一个路由器换一次 MAC，IP 头的地址不变（NAT 除外）。
 
-2. 交换机关联(缓存)发送方 MAC 地址和物理端口
-3. 交换机向网络广播
-4. 接收方验证目标 IP 地址是否匹配，不匹配直接丢弃。匹配发送响应包。
-5. 交换机根据响应包关联响应方 MAC 地址和物理端口
-6. 交换机将响应包发回发送方
+Source: Ethernet Switching, ARP and VLAN
 
 ** VLAN
 :PROPERTIES:
@@ -41,18 +30,13 @@
 :END:
 
 *** Front
-VLAN 用途 
+家里想让 IoT 设备不能访问主网段，为什么用 VLAN 能做到？两个 VLAN 之间的设备要通信需要什么？
 
 *** Back
-通俗理解：在同一套交换机和网线基础设施上，虚拟出多台彼此隔离的交换机。
-- 网络隔离、划分安全边界
-- VLAN 之间通信必须通过路由
-- 独立广播域
+每个 VLAN 是独立的广播域，相当于在同一套交换机上虚拟出互相隔离的交换机：广播（ARP、mDNS 等）只在本 VLAN 内泛洪，ARP 欺骗、广播嗅探这类二层攻击也出不了本 VLAN。
+- VLAN 之间的流量必须经过三层设备（路由器或三层交换机），所以可以在那里用防火墙规则只放行 IoT → 互联网。
 
-大网络不划分 VLAN 的问题：
-- 广播风暴，整个网络都会收到奇怪协议 mDNS、NetBIOS、Windows 广播、某些发现协议等等
-- 不同部门之间可以直接访问, 容易实现 ARP 欺骗、中间人攻击、广播嗅探
-- 二层攻击就被限制在各自 VLAN 内；而跨 VLAN 流量必须经过三层设备，路由端可以做访问控制。
+Source: Ethernet Switching, ARP and VLAN
 
 ** 3 层交换机
 :PROPERTIES:
@@ -62,20 +46,19 @@ VLAN 用途
 :END:
 
 *** Front
-为什么会出现 3 层交换机？
+已经有路由器了，为什么园区网里还要用三层交换机？它和路由器的分工是什么？
 
 *** Back
-- 一般是大网络环境需要路由器的场景
-- 路由器痛点：
-  - 不会设置太多物理端口
-  - 路由器处理事情过多，速度慢
+VLAN 很多、VLAN 间流量大时，路由器端口少、转发慢；三层交换机在交换芯片里完成 VLAN 间路由，端口数和吞吐与交换机相当。
+- 连接外网、NAT、拨号和复杂策略仍交给路由器：NAT 要维护每条连接的转换状态，一般的三层交换机不做。
 
-3 层交换机包含 2 层交换机所有功能，加上部分路由器功能，如 NAT, QoS 等等，但是没有 WAN 口
-| 功能        | 2层交换机 | 3层交换机 | 路由器 |
-|-------------+-----------+-----------+--------|
-| 处理协议    | MAC       | MAC / IP  | IP     |
-| VLAN间通信  | ❌        | ✔️         | ✔️      |
-| 有无 WAN 口 | ❌        | ❌        | ✔️      |
+| | 二层交换机 | 三层交换机 | 路由器 |
+|---|---|---|---|
+| 转发依据 | MAC | MAC 和 IP | IP |
+| VLAN 间通信 | 不能 | 能（硬件转发） | 能 |
+| NAT | 无 | 一般没有 | 有 |
+
+Source: Ethernet Switching, ARP and VLAN
 
 ** TCP 三次握手
 :PROPERTIES:
@@ -672,7 +655,7 @@ Source: Linux Network Stack Receive and Transmit Paths
 *** Back
 PREROUTING → 路由决策 → FORWARD → POSTROUTING，不经过 INPUT。INPUT 只处理目的地是本机进程的包（PREROUTING → INPUT）；本机发出的包走 OUTPUT → POSTROUTING。
 
-Source: Linux Netfilter and iptables
+Source: Linux Netfilter, iptables and nftables
 
 ** 为什么先放行 ESTABLISHED
 :PROPERTIES:
@@ -685,7 +668,7 @@ Source: Linux Netfilter and iptables
 *** Back
 本机发起的连接，回包的源端口是 443、目的端口是随机端口，不匹配 ~--dport 22~ ，被默认策略丢弃。在最前面加 ~iptables -I INPUT 1 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT~ ，放行已建立连接的回包。
 
-Source: Linux Netfilter and iptables
+Source: Linux Netfilter, iptables and nftables
 
 ** DROP 与 REJECT
 :PROPERTIES:
@@ -699,7 +682,7 @@ iptables 用 ~-j DROP~ 和 ~-j REJECT~ 挡住 8080 端口，客户端连接时�
 - DROP：对端什么也收不到，SYN 反复重传直到连接超时。适合面向公网，不暴露端口的存在。
 - REJECT：默认回 ICMP port unreachable（或 ~--reject-with tcp-reset~ 回 RST），客户端立即得到 Connection refused。适合内网和本机，让客户端快速失败、便于排查。
 
-Source: Linux Netfilter and iptables
+Source: Linux Netfilter, iptables and nftables
 
 ** iptables -F 锁死 SSH
 :PROPERTIES:
@@ -712,7 +695,7 @@ Source: Linux Netfilter and iptables
 *** Back
 ~-F~ 只清空各链中的规则，不重置默认策略（ ~-P~ ）。放行 SSH 的规则没了，策略仍是 DROP，所有包都被丢。先 ~iptables -P INPUT ACCEPT~ ，再 ~-F~ ，加好规则后再把策略改回 DROP。
 
-Source: Linux Netfilter and iptables
+Source: Linux Netfilter, iptables and nftables
 
 ** Docker 端口绕过防火墙
 :PROPERTIES:
@@ -725,7 +708,7 @@ Source: Linux Netfilter and iptables
 *** Back
 Docker 在 ~nat~ 表的 PREROUTING 把到 8080 的包 DNAT 给容器，包走 FORWARD 而不经过 INPUT，INPUT 规则和 ufw 都挡不住。规则写进 Docker 留给用户的 ~DOCKER-USER~ 链。
 
-Source: Linux Netfilter and iptables
+Source: Linux Netfilter, iptables and nftables
 
 ** iperf3 测 UDP
 :PROPERTIES:
@@ -752,3 +735,224 @@ Source: Network Performance Testing with iperf3 and pktgen
 不能。pktgen 默认在驱动的发送函数处直接注入预先构造好的包，跳过 socket 和整个协议栈，测的是网卡和驱动（或下游转发设备）的 PPS 上限。应用经 socket 发包还要付系统调用和协议栈的每包开销。
 
 Source: Network Performance Testing with iperf3 and pktgen
+
+** 交换机的 MAC 学习与泛洪
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+交换机的「MAC 地址 → 端口」表从哪里学到？收到目的 MAC 不在表中的帧怎么处理？
+
+*** Back
+从每个进来的帧的 *源* MAC 学习：记下这个 MAC 在哪个端口。
+- 目的 MAC 已在表中：只从对应端口发出。
+- 不在表中或是广播地址：从除入端口外的所有端口发出（泛洪）。
+- 交换机只看帧头的 MAC，不看 IP。
+
+Source: Ethernet Switching, ARP and VLAN
+
+** 邻居表溢出
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+一台 Kubernetes 节点与上千个同网段地址通信后，连接随机超时，内核日志出现 ~neighbour table overflow~ 。原因是什么？调哪个参数？
+
+*** Back
+ARP 邻居表超过了硬上限 ~net.ipv4.neigh.default.gc_thresh3~ （上游默认 1024），新邻居无法解析。
+- 调大 ~gc_thresh1~ / ~gc_thresh2~ / ~gc_thresh3~ （默认 128 / 512 / 1024）。
+
+Source: Ethernet Switching, ARP and VLAN
+
+** NAT 回包与入站连接
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+家用路由器做 NAT 后，回包怎么找回内网主机？为什么外部不能主动连进内网的服务？
+
+*** Back
+路由器在转换表里记下每条连接的映射（内网 IP:端口 ↔ 公网 IP:端口），回包按表改写目的地址；Linux 上这张表就是 conntrack。
+- 外部主动发来的新连接在表中没有对应项，路由器不知道该给谁，直接丢弃。
+- 要对外提供服务：端口转发（DNAT）或 UPnP / NAT-PMP。
+
+Source: NAT and DHCP in Home Networks
+
+** CGNAT 下端口转发无效
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+路由器上配置好了端口转发，外网仍然连不进来。怎么判断是不是在运营商级 NAT（CGNAT）后面？
+
+*** Back
+对比路由器 WAN 口拿到的地址和外部看到的公网 IP（如 ~curl ifconfig.me~ ）：不一致，或 WAN 口地址在 ~100.64.0.0/10~ 、私有地址段内，就是在 CGNAT 后面。
+- 运营商那一层 NAT 不受你的端口转发控制，只能向运营商要公网 IP，或改用隧道、IPv6。
+
+Source: NAT and DHCP in Home Networks
+
+** NAT 超时导致长连接假死
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+经过家用路由器的 SSH 或数据库长连接，空闲一段时间后再发数据就卡住、最终超时，但新建连接正常。最可能的原因和对策是什么？
+
+*** Back
+路径上某层 NAT（或有状态防火墙）的转换表项空闲超时被删除，之后的包找不到映射被丢弃，两端都不知道。
+- 对策：应用层心跳或 TCP keepalive，间隔短于路径上最短的 NAT 超时。
+- Linux conntrack 默认：已建立 TCP 432000 秒，UDP 30 / 120 秒；家用路由器和运营商设备往往短得多。
+
+Source: NAT and DHCP in Home Networks
+
+** DHCP 为什么用广播
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+DHCP 的 Discover 和第一次 Request 为什么都要广播？续租时又是怎么发的？
+
+*** Back
+- Discover：客户端还没有 IP，也不知道服务器在哪，只能广播（ ~0.0.0.0:68 → 255.255.255.255:67~ ）。
+- Request 也广播：通知其他发过 Offer 的服务器「没选你」，让它们收回预留地址。
+- 续租：租期过半（T1）时单播给原服务器；到 87.5%（T2）仍未续上才广播找任意服务器。
+- 广播不跨路由器，服务器在别的网段时要 DHCP 中继。
+
+Source: NAT and DHCP in Home Networks
+
+** 网络中有两台 DHCP 服务器
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+家里加了一台旧路由器当 AP，之后部分设备时好时坏、有的拿到 192.168.0.x 有的拿到 192.168.1.x。原因是什么？
+
+*** Back
+旧路由器的 DHCP 没关，同一网段有两台 DHCP 服务器，设备随机采用先应答的那台给的地址和网关。
+- 把第二台设备当 AP 或交换机用时关掉它的 DHCP，并接它的 LAN 口。
+
+Source: NAT and DHCP in Home Networks
+
+** HTTPS 首字节前的 RTT
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+一个全新的 HTTPS 请求（无会话恢复），在发出第一个应用数据字节前要几个 RTT？TLS 1.2 与 TLS 1.3 各是多少？TLS 1.3 靠什么省掉一个 RTT？
+
+*** Back
+TCP 握手 1 个 RTT，加 TLS：TLS 1.3 共 2 个，TLS 1.2 共 3 个。
+- TLS 1.3 的客户端在 ClientHello 中直接附上密钥交换的公钥（key_share），服务器回 ServerHello 时双方就能算出密钥。
+- 会话恢复可省掉证书校验；0-RTT 能在第一个包带数据，但可被重放，只用于幂等请求。
+
+Source: TLS Handshake and Certificates
+
+** TLS 前向保密
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+有人录下了一段 HTTPS 流量，几年后拿到了服务器的证书私钥。用 TLS 1.2 RSA 密钥交换和用 ECDHE 时，他能解出当年的内容吗？为什么？
+
+*** Back
+- RSA 密钥交换：能。premaster secret 是用服务器公钥加密后传输的，拿到私钥就能解出它，进而算出会话密钥。
+- ECDHE：不能。会话密钥来自双方的临时密钥，用完即弃；证书私钥只用来签名证明身份，从不参与加密（前向保密）。
+- TLS 1.3 已删除 RSA 密钥交换。
+
+Source: TLS Handshake and Certificates
+
+** 服务器缺中间证书
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+新部署的 HTTPS 站点在浏览器里正常，但 curl 和 Python requests 报 ~unable to get local issuer certificate~ 。最常见的原因是什么？怎么确认？
+
+*** Back
+服务器只配置了叶子证书，没把中间证书一起发出来。客户端只预装根证书，补不上中间这一级；浏览器常常缓存或自行下载了中间证书，所以看起来正常。
+- 确认： ~openssl s_client -connect host:443 -servername host~ 看服务器发了几级证书。
+- 修复：配置完整链（叶子 + 中间证书）。
+
+Source: TLS Handshake and Certificates
+
+** nftables 多条 base chain
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+你在自己的 nftables 表的 input 链里放行了 TCP 8080，但连接仍被拒，而机器上还有 firewalld 建的表。为什么你的 accept 没用？
+
+*** Back
+同一 hook 上的多条 base chain 按 priority 依次执行：一条链的 ~accept~ 只结束这一条链，包仍要经过其他链；任何一条链 ~drop~ 都是最终结果。firewalld 的链把它丢了。
+- 用 ~nft list ruleset~ 看同一 hook 上所有链及其 priority。
+
+Source: Linux Netfilter, iptables and nftables
+
+** Linux 路由查找顺序
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Linux 查路由时 ~ip rule~ 和 ~ip route~ 是什么关系？规则指向的表里没有匹配的路由会怎样？怎么直接看内核对某个包的决定？
+
+*** Back
+先按优先级逐条匹配 ~ip rule~ ，命中的规则决定查哪张路由表，再在表中做最长前缀匹配。
+- 表里没有匹配的路由：回落到下一条规则继续查。默认规则依次是 ~local~ （0）、 ~main~ （32766）、 ~default~ （32767）。
+- 验证： ~ip route get <目的> [from <源>]~ 。
+
+Source: Linux Routing and Policy Routing
+
+** ~rp_filter~ 与非对称路由
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+双网卡服务器配了策略路由，eth1 上的服务收不到任何连接，tcpdump 却能看到 SYN 到达。最可能是哪个内核检查丢了包？
+
+*** Back
+反向路径过滤 ~rp_filter~ ：严格模式（1）下，内核检查回复这个源地址会不会从包进来的接口发出；回程路由指向 eth0，所以从 eth1 进来的包被丢弃（tcpdump 在过滤之前抓到）。
+- 改为宽松模式 2 或修正路由使其对称；生效值取 ~conf.all~ 与 ~conf.<接口>~ 中较大者。
+- 上游默认 0，systemd 的 ~50-default.conf~ 设为 2。
+
+Source: Linux Routing and Policy Routing
+
+** PMTU 黑洞
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+通过 PPPoE 或 VPN 访问某些网站：TCP 握手成功、小请求正常，但页面加载到一半或 ~git clone~ 卡住。可能是什么问题？路由器上的常见对策是什么？
+
+*** Back
+PMTU 黑洞：路径上某段 MTU 较小，带 DF 的大包被丢弃，而回给发送方的 ICMP「需要分片」被某处过滤，发送方不知道要减小包。
+- 对策：路由器做 MSS clamping，转发 SYN 时把 MSS 改小到出口 MTU 能容纳的值（OpenWRT 的 ~mtu_fix~ ，iptables 的 ~TCPMSS --clamp-mss-to-pmtu~ ）。
+- 主机侧可开 ~net.ipv4.tcp_mtu_probing=1~ 。
+
+Source: Network Layers and Data Units
+
+** 以太网的检错
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Cloze
+:END:
+
+*** Text
+以太网接收方用帧尾的 {{c1::FCS（CRC32）}} 校验，出错时 {{c2::直接丢弃帧，不纠错也不通知发送方}}，丢失由 {{c3::TCP 等上层重传}} 补回。
+
+*** Back
+Wi-Fi 不同：802.11 在链路层有确认和重传。
+
+Source: Network Layers and Data Units

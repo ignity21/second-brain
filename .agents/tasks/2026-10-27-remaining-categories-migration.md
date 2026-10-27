@@ -1,0 +1,136 @@
+# 迁移剩余旧笔记（Default/、Games/）的总计划
+
+Status: In progress — 归属方案已确认（2026-10-27）；批次 1 完成，下一步批次 2
+
+C++、Trading、Linux/OS 三轮迁移之后，`roamnotes/` 中从未进入任何迁移计划的笔记共 130 篇（`Default/` 128 篇、`Games/` 2 篇），约 3,700 行；另加复查清单里延后的 `C++/zeromq`。旧根 `Default/contents.org` 不迁（其链接的 ID 均已迁移）。
+
+盘点方法：`roamnotes/` 中文件级 `:ID:` 不在 `roamnotes-v2/` 的笔记，再排除已在 C++ / Trading / Linux 各批任务文件的 `←` 合并表中被吸收的。脚本在 scratchpad（`inv.py`、`inv2.py`），清单 `final.txt`。
+
+## 总体情况
+
+- 内容以碎片为主：一半以上不足 15 行；空笔记或只有链接的旧索引约 25 篇（`sha`、`consistent_hashing`、`shell_sort`、`physical_layer`、`mysql`、`full_text_search_data_model`、`pyside6` 等）；只有一张截图的约 15 篇（`arp`、`dhcp`、`nat`、`netcat`、`ufw`、`k8s`、`git_cheat_sheet`、`english*`、`calculus`、`ai_prompts`）。
+- 较长的：`web_application_design`（283 行，6 张 PlantUML 图，源在 `Default/puml/SystemDesign/`）、`anki_tips`（175）、`nftables`（163）、`aider`（117）、`warhammer3`（111）、`ip`（92）、`preorder_traversal`（80，含 Morris 遍历）、`linux_directories`（80）、`ansible`（81）、`dynamic_programming`（76）。
+- 新库对这批笔记的入链只有两处：`Linux/linux_benchmarking_load_generation` 指向 `dd` `17daaa09`、`ab` `49b1d0cc`。这批笔记对新库的出链：`error_handling` → RAII `474df27e`、`firewall` / `nftables` → iptables `cee785fb`、`network_troubleshooting` → pktgen `663e9802`、`py_troubleshooting` → VizTracer `5a4eceee`、`languages` → C++ 根，均有效。
+- `.agents/learning-goals.md` 只记录了网络、C++、Trading、Linux、Python（性能剖析）、Polars；算法、系统设计、DevOps 等新领域的档位需要用户给出。
+
+## 归属方案与批次
+
+每批独立完成：写笔记、接索引、制卡、验证、提交。顺序先迁入现有大类（规则已定），再做新大类。
+
+### 批次 1：Network 剩余（迁入现有 `Network/`，约 26 篇）
+
+档位按「计算机网络」：IP 层能判断，VLAN 和路由器配置项知道，企业组网不需要。
+
+```
+Computer Networking
+├─ Fundamentals (13ee1f3a，出度 1 → 4)
+│   ├─ Network Layers and Data Units (72d3cced) ← physical / data_link / network / transport / application_layer（各层职责一节）, mtu（并入切分一节）
+│   ├─ 新 Ethernet Switching, ARP and VLAN (保留 switchers 的 ID) ← switchers, arp
+│   ├─ 新 NAT and DHCP (保留 nat 的 ID) ← nat, dhcp
+│   └─ 新 TLS Handshake and Certificates (保留 tls 的 ID 176c3083) ← tls, tls_handshake, ssl_certificate（原文是 TLS 1.2 RSA 密钥交换，改写时补 1.3 / ECDHE）
+├─ Linux Kernel Networking (1921bccf，出度 2 → 3)
+│   ├─ Linux Netfilter and iptables (cee785fb) → 改为 Linux Netfilter: iptables, nftables and ufw ← firewall, nftables, ufw
+│   └─ 新 Linux Routing and Policy Routing (保留 ip_route 的 ID) ← ip_route, ip_rule, ip 的 route / neigh 部分
+└─ Tools (ca95e333 Linux Network Tools)
+    ├─ Network Performance Testing (87bbc997) ← network_troubleshooting（指标一节）, hping3
+    └─ ip、netcat、gost：并入 Linux Network Tools 的工具表或单列，执行时按内容决定；gost 是自用代理，可能只留一段
+```
+
+- `dd`、`ab`：不迁。Linux Benchmarking 已写了二者的用法和坑，把那两处 ID 链接改成纯文本。
+- 制卡写入 `ankinotes/network.org`。
+
+### 批次 2：算法与数据结构（新大类 `Algorithms/`，约 37 篇）
+
+```
+Algorithms (保留 algorithm 的 ID)
+├─ Data Structures (data_structure) ← linked_list（+ floyd 快慢指针）, stack, queue（循环队列、阻塞 / 并发队列）, heap, 二叉树遍历（tree, tree_traversal, preorder, inorder, postorder；Morris 遍历一节）
+├─ Sorting Algorithms (sorting_algorithm) ← bucket / counting / radix / shell_sort（线性排序一篇）
+├─ Algorithm Design Paradigms ← recursion, backtracking（去重套路）, greedy, dynamic_programming
+├─ astar_search（截图为主，改写或只留一段）
+└─ LeetCode Techniques (leetcode) ← lt287, negative_marking, kmp（只有视频链接）
+```
+
+- `hashing`、`sha`、`consistent_hashing`（空）、`rendezvous_hashing`：分布式场景的哈希放批次 3 的分片笔记；`sha` 不迁。
+- 档位：面试刷题能判断（见 learning-goals）。
+
+### 批次 3：系统设计与数据库（新大类 `SystemDesign/`，约 33 篇）
+
+```
+System Design (保留 system_design 的 ID；其 → ZeroMQ 的入链随 ZeroMQ 归属处理)
+├─ Design Goals ← reliability, availability, scalability, maintainability, data_system, 软件架构设计原则, error_handling（→ C++ RAII 的引用保留）
+├─ Data Storage (database) ← sql（ACID）, no_sql / mongodb / mysql（空，废弃）, document_model, graph_like_data_model,
+│                             b_trees, lsm_trees, hash_indexes（合成一篇存储引擎）, replication, sharding（+ consistent / rendezvous hashing）
+├─ Distributed Systems ← load_balancing, leader_election, mapreduce, mongodb_mapreduce
+├─ Messaging ← pub_sub_pattern, polling, streaming, ZeroMQ 三篇（C++/zeromq 保留 5521b2f9，Default/zeromq 截图改写）
+└─ Web Application Design (system_design_interview 并入) ← web_application_design（6 张 PlantUML 图重渲染进 `SystemDesign/images/`）
+```
+
+- `low_latency`：并入 Trading 的 Low Latency Trading Design（内容是 Linux / C++ / 网络调优清单，与之重叠）。
+- `nginx`、`keycloak`：归批次 5 的 Tools / DevOps。
+- 数据库是否单独成大类：笔记合并后预计 4–5 篇，先放 SystemDesign 下。
+
+### 批次 4：Python 与零散归属（迁入现有大类，约 12 篇）
+
+- Python：`dictionary`（dict 的紧凑哈希表实现）→ Python Language Features 下新笔记或并入现有；`import_system` → 新笔记 Python Import System；`py_troubleshooting` → Python Profiling 或 Development Practices（icecream / PySnooper / hunter，「知道」）；`sqlalchemy` → Python Third-Party Libraries；`python_cookbook` 只有 collections / heapq 用法，不迁；`python_modules`（旧索引）、`pyside6`（空，新库已有 PySide6）不迁。
+- Linux：`linux_directories`（FHS）→ Linux System Administration and Shell 下，「知道」档。
+- Trading：`出入金流程` → Trading 的 Securities and Exchange Mechanics 或 Cryptocurrency Trading 附近，个人操作记录。
+- 数学：`calculus`（截图）、`multivariate_derivative`（多元链式法则两行）→ 并入 LinearAlgebra 的 Matrix Calculus。
+- `languages`（旧索引）不迁；`sml`（Coursera Programming Languages 课的语法摘录）→ `Unsorted/` 或不迁。
+
+### 批次 5：DevOps、工具、前端（新大类 `Tools/`，约 21 篇）
+
+DevOps、个人工具、前端作为 `Tools/` 下的分组，全部「知道」档，命令和截图大量删减，基本不制卡。
+
+- DevOps：`devops`（索引）、`ansible`、`docker`、`docker_troubleshooting`（nsenter）、`k8s`（截图）、`nginx`、`keycloak`、`opencat`（自建服务的 docker 命令）、`uml`（一个外链）。
+- 工具：`git_cheat_sheet`（截图）、`zotero`（设置记录）、`anki_tips`（175 行，含 20 rules 和模板技巧）、`ai_tools`（索引）、`ai_prompts`（截图）、`aider`（117 行；`Unsorted/` 已有另一篇 Aider，30 行安装配置，迁移时合并）。
+- 前端：`frontend`、`html`、`html_examples`、`html_header`、`html_layout`、`meta_tag`、`css`，合计约 180 行，HTML / CSS 入门摘录，合并后 1–2 篇。
+
+### 批次 6：个人内容（8 篇）— 不迁
+
+用户决定不迁，已列入 `2026-10-27-unmigrated-notes-review.md`。
+`atomic_habits`、`books`、`english`、`english_grammar`（截图）、`have_fun`、`oxygen_not_included`、`Games/mc_server`、`Games/warhammer3`。
+
+## 已确认（2026-10-27）
+
+- [x] 算法：建 `Algorithms/`，面试刷题能判断
+- [x] 系统设计：建 `SystemDesign/`（数据库作其中一组），面试能判断
+- [x] DevOps / 工具 / 前端：建一个 `Tools/` 大类，「知道」档
+- [x] 个人内容：不迁，列入复查清单
+
+## Checklist
+
+- [x] 用户确认归属方案和档位，写入 `.agents/learning-goals.md`
+- [x] 批次 1：Network 剩余（2026-10-27）
+- [ ] 批次 2：Algorithms
+- [ ] 批次 3：SystemDesign
+- [ ] 批次 4：Python 与零散归属
+- [ ] 批次 5：DevOps、工具、前端
+- [x] 批次 6：个人内容（不迁，已列入复查清单）
+- [ ] 复查清单 `2026-10-27-unmigrated-notes-review.md` 中的 ZeroMQ 随批次 3 处理
+
+## 批次 1 执行记录（Network）
+
+新笔记与合并：
+
+| 新笔记 | ID | 吸收的旧笔记 |
+|---|---|---|
+| Ethernet Switching, ARP and VLAN | `5dd548b6`（原 switchers） | switchers、arp（`84b36379` 废弃） |
+| NAT and DHCP in Home Networks | `42efb840`（原 nat） | nat、dhcp（`e38ec05a` 废弃） |
+| TLS Handshake and Certificates | `176c3083`（原 tls） | tls、tls_handshake（`9699bb2e`）、ssl_certificate（`eeb31a4c`），后两个废弃 |
+| Linux Routing and Policy Routing | `e29921b0`（原 ip_route） | ip_route、ip_rule（`9b34dbd7`）、ip（`6f61b842`），后两个废弃 |
+| GOST Proxy Tunnels | `4cfade54`（原 gost） | gost |
+
+并入现有笔记：
+- Network Layers and Data Units ← 五篇分层笔记（链路层只检错，改为误解一节）、mtu（新增「MTU 不一致时」：PMTUD、黑洞、MSS clamping）。分层笔记 ID 均废弃。
+- Linux Netfilter and iptables → 改名 *Linux Netfilter, iptables and nftables* ← firewall（索引，废弃）、nftables（`df7a26d0` 废弃；新增 nftables 一节和「多个 base chain 时 accept 不是最终结果」）、ufw（`684bdb05` 废弃）。
+- Network Performance Testing ← network_troubleshooting（使用率、Web 服务指标；`d53d47ee` 废弃）、hping3（已有，`a07e73bd` 废弃）。
+
+不迁：`netcat`（只有一张速查截图，可随时查询）；`dd`、`ab`（Linux Benchmarking 已有其用法，那里的两处 ID 链接改为纯文本）。所有废弃 ID 在迁移范围外都没有入链。
+
+纠正的旧说法：三层交换机带 NAT（实际一般没有）；链路层纠错（以太网只检错）；TLS 握手中客户端用公钥加密 premaster secret（是 TLS 1.2 RSA 密钥交换，1.3 已删除）。
+
+核对（scratchpad `tls/`、用户命名空间）：iproute2 7.2.0 中源地址策略路由与最长前缀匹配、规则指向的表无匹配路由时回落到下一条规则；nftables 1.1.7 中两条 input base chain（priority 0 accept、10 drop）时 ping 被丢弃；OpenSSL 3.6.5 只配叶子证书时校验返回 21、补中间证书后 0、主机名不符返回 62，TLS 1.3 协商组 =X25519MLKEM768= ；本机 sysctl：~rp_filter~ 由 systemd =50-default.conf= 设为 2，conntrack 超时 432000 / 30 / 120。邻居表 ~gc_thresh*~ 在容器的网络命名空间中不可见，写上游默认值。GOST 未安装，用户配置未运行。
+
+Anki（`ankinotes/network.org`）：改写 ARP、VLAN、3 层交换机 3 张已有卡（保留同步字段，修正三层交换机卡的 NAT 说法），新增 15 张。
+
+验证：行内标记检查为空；TOC（ARP、Netfilter 两篇加 ~TOC_1~ ）已生成；PlantUML 4 张图已渲染；全库 ID、标题、别名无重复，链接目标存在，主树唯一父节点、可达；`org-roam-db-sync` 完成（537 个节点）。
