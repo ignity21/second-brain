@@ -41,7 +41,7 @@ part of the error is to clean up the data.
 
 *** [[id:1c60f0fb-302d-4a1c-b95e-a89d533afbe7][Learning Curve]]
 To generate the plots, train the model several times on different sized subsets of the training set.
-- [[file:~/second-brain/notebooks/ML/plot_learning_curves.ipynb][Plotting Learning Curves]]
+- [[file:../../notebooks/ML/plot_learning_curves.ipynb][Plotting Learning Curves]]
 
 * Overfitting/Underfitting Causes
 - Choosing too simple a model is called underfitting

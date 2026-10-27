@@ -1,6 +1,6 @@
 # 迁移收尾：待决定与待处理事项
 
-Status: Open — 迁移收尾的汇总入口：等用户一次性回答 A 节剩下的 4 个问题（A2、A3、A5、A6），然后执行 B 节剩余项
+Status: Open — 迁移收尾的汇总入口：等用户一次性回答 A 节剩下的 4 个问题（A2、A3、A5、A6），然后按决定执行 B 节最后一项
 
 用户说「处理迁移遗留」「迁移收尾」或问「还有什么没处理」时，从这个文件开始。旧笔记迁移（`roamnotes/` → `roamnotes-v2/`）在 2026-10-27 全部完成：`roamnotes/` 中每篇笔记都已迁入、合并，或记入复查清单；各批次的新旧 ID 对应在各迁移任务文件里，最后一轮见 `2026-10-27-remaining-categories-migration.md`。这里只收迁移之后还没做完的事。
 
@@ -20,8 +20,8 @@ Status: Open — 迁移收尾的汇总入口：等用户一次性回答 A 节剩
 ## B. 可以直接做的（A 节答完后执行）
 
 - [x] *C++ 与 Trading 制卡* ：已完成（2026-10-27），见 `2026-10-26-cpp-trading-anki-cards.md`。C++ 新增 30 张、修正 1 张旧卡；Trading 新建 Deck，25 张。
-- [ ] *Keycloak 的 ~TODO verify~* ：「User Attribute 映射器是否读取用户所在组的属性」。用 Docker 起一个临时 Keycloak，建组、加属性、看 token，再改笔记。
-- [ ] *两处既有链接问题* （不在迁移范围内，迁移时发现）：
+- [x] *Keycloak 的 ~TODO verify~* ：已完成（2026-10-27）。在临时 Keycloak 26.4.0 容器里验证：User Attribute 映射器会读取组属性（含父组继承），顺序为用户自身 → 最近的组 → 父组；关闭 Aggregate 时只取第一个值，开启后合并成列表。笔记的 Pitfalls 已改写；容器、镜像和测试脚本已清理。
+- [x] *两处既有链接问题* （不在迁移范围内，迁移时发现）：已完成（2026-10-27）。notebook 链接改为相对路径并确认文件存在；probability 中两个索引链接改为纯文本「离散分布（discrete distribution）」「连续分布（continuous distribution）」，它们与 Probability 同在 Probability and Distributions 索引下。已执行 `org-roam-db-sync`。
   - `MachineLearning/overfitting_underfitting` 第 44 行用 =file:~/second-brain/notebooks/ML/...= 绝对路径；文件存在，但不符合「相对路径以引用文件为基准」，发布后失效。改为 =file:../../notebooks/ML/plot_learning_curves.ipynb= 。
   - `Statistics/probability` 第 11 行正文链接了两个索引（Discrete Distributions、Continuous Distributions），违反「引用不指向索引」；改为纯文本或指向具体分布。
 - [ ] 按 A 节的决定执行：迁入复查清单中选中的笔记、删除备份、整理 `Unsorted/`，每项完成后跑对应验证和 `org-roam-db-sync`。
