@@ -1,0 +1,360 @@
+#+title: Trading
+
+* Deck
+:PROPERTIES:
+:ANKI_DECK: RoamCards::Trading
+:END:
+
+** Log vs simple returns
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+You need (a) the total return of one asset over 12 months from monthly returns, and (b) a portfolio's return for one month from its assets' returns. Which kind of return, log or simple, aggregates by summing or averaging in each case?
+
+*** Back
+- (a) Log returns: the multi-period log return is the sum of the single-period log returns, $\ln\frac{p_t}{p_0} = \sum_i \ln\frac{p_i}{p_{i-1}}$.
+- (b) Simple returns: the portfolio's simple return is the weight-averaged simple return of its assets; log returns do not average this way.
+
+Report simple returns to people: that is what the account actually gained.
+
+Source: Log Returns in Quantitative Finance
+
+** +50% then −50%
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+A stock rises 50% and then falls 50%. What is the final value of 100 USD, what do the two log returns sum to, and what does this say about averaging simple returns over time?
+
+*** Back
+100 → 150 → 75 USD. The simple returns average 0%, but the log returns sum to $\ln 1.5 + \ln 0.5 = -0.288$, and $e^{-0.288} = 0.75$ is the actual result. Averaging simple returns over time overstates growth.
+
+Source: Log Returns in Quantitative Finance
+
+** Position size from risk per trade
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Account 100,000 USD, risk 2% per trade, entry 4.56, stop 4.08. How many shares do you buy, and roughly what fraction of the account is the position worth?
+
+*** Back
+$$\text{Shares} = \frac{\text{account} \times \text{risk per trade}}{\text{entry} - \text{stop}} = \frac{2{,}000}{0.48} \approx 4{,}166$$
+
+The position is worth 4,166 × 4.56 ≈ 19,000 USD, about 19% of the account. *Risk* is 2%, not the position. A tight stop makes the position large, so also cap the position value.
+
+Source: Position Sizing and Risk per Trade
+
+** Drawdown from a losing streak
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Risking a fixed 5% of the account per trade, what drawdown do 10 straight losses cause, and what gain is needed to recover? Compare with 2% per trade.
+
+*** Back
+- 5%: $0.95^{10} \approx 0.60$, a 40.1% drawdown; recovering needs a 67% gain.
+- 2%: $0.98^{10} \approx 0.82$, an 18.3% drawdown; recovering needs 22.4%.
+
+Recovery always needs a larger gain than the loss, and the gap widens fast. Rule of thumb: risk 2% per trade, never more than 5%. Ten losses in a row are not rare: at a 40% win rate over 500 trades the chance is about 71%.
+
+Source: Position Sizing and Risk per Trade
+
+** Where to place a stop
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+How should you decide where the stop-loss goes, and which comes first: the stop or the position size? Why can the real loss still exceed the plan?
+
+*** Back
+Put the stop where the trade idea is proven wrong (below support, below the pattern's low, or 1.5–2 ATR from entry), not at the loss you can stomach. The stop comes first; the position size follows from it. A gap through the stop fills at the next available price, so size more conservatively before earnings or overnight holds.
+
+Source: Position Sizing and Risk per Trade
+
+** Momentum vs mean reversion
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+What does each strategy bet on, and in which market does each one fail: momentum, mean reversion?
+
+*** Back
+- Momentum bets that a move continues; it wins in trending markets and fails in choppy ones (repeated false breakouts).
+- Mean reversion bets that a stretched price returns to an average; it wins in range-bound markets and fails in strong trends (it keeps fading a move that keeps going).
+
+The same stock can switch regimes, so a strategy needs a rule for when to stay out.
+
+Source: Trading Strategy Types
+
+** Stock traits for momentum vs mean reversion
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Which float and institutional ownership suit a momentum strategy, and which suit mean reversion? Why?
+
+*** Back
+Momentum: low float, low institutional ownership. Little money moves the price, so moves run further (in both directions, which raises risk).
+
+Mean reversion: high float, high institutional ownership. Institutions accumulate gradually and buy on dips instead of chasing, which puts a floor under the price and pulls it back toward the mean.
+
+Source: Trading Strategy Types
+
+** RSI levels and entry rule
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+$RSI = 100 - \frac{100}{1 + RS}$, with $RS$ = average gain / average loss over 14 periods. What does RSI 70 mean in terms of $RS$, and when does a mean-reversion trader buy on RSI?
+
+*** Back
+RSI 70 means average gains are 2.33 times average losses (RSI 50: equal). Buy when RSI drops below 30 *and then rises back above it*, rather than as soon as it goes below 30, to avoid buying while the price is still falling. In a strong uptrend RSI can stay above 70 for weeks: "overbought" describes the past move, not a forecast.
+
+Source: Technical Analysis
+
+** ATR for stop distance
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+What does an ATR of 1.20 tell you, and why place stops in ATR multiples rather than a fixed percentage?
+
+*** Back
+The stock typically moves about 1.20 USD a day, gaps from the previous close included. It measures volatility, not direction. A stop 1.5–2 ATR from entry sits outside normal noise; a fixed percentage is too tight on a volatile stock and too loose on a quiet one.
+
+Source: Technical Analysis
+
+** VWAP as intraday support
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Why does VWAP often act as intraday support or resistance in stocks with high institutional ownership?
+
+*** Back
+Institutions benchmark execution against VWAP (a buy below VWAP is a good fill), and their algorithms work large orders near it. Their buying therefore clusters around VWAP. It accumulates from the open and resets each session, so it only means something on intraday data.
+
+Source: Technical Analysis
+
+** Dividend discount model sensitivity
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Write the constant-growth dividend discount model. With next dividend $D_1 = 1$ and required return $r = 8\%$, what is the value at $g = 5\%$ and at $g = 6\%$? What does that imply?
+
+*** Back
+$$P_0 = \frac{D_1}{r - g}, \qquad g < r$$
+
+$g = 5\%$: $1/0.03 \approx 33$; $g = 6\%$: $1/0.02 = 50$. One percentage point of assumed growth changes the value by half, so the result is only as good as the growth guess. Lower interest rates lower $r$ and raise $P_0$.
+
+Source: Fundamental Analysis of Stocks
+
+** Free cash flow and conversion
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+How is free cash flow computed, and what does persistently low FCF conversion warn about?
+
+*** Back
+FCF = operating cash flow − capital expenditure. FCF conversion = FCF / net income. Conversion well below 100% year after year means reported profit is not turning into cash; earnings follow accounting choices, cash does not. A common screen asks for at least 85%.
+
+Source: Fundamental Analysis of Stocks
+
+** Latency sources and fixes
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Name the main sources of tick-to-trade latency in a trading system and the main fix for each.
+
+*** Back
+| Source | Main fixes |
+|---|---|
+| Propagation (distance) | Colocation, microwave / laser links |
+| Network processing (hops) | Fewer hops, cut-through switches |
+| Serialization (size ÷ link speed) | Faster links, smaller messages |
+| Interrupts and kernel stack | Kernel bypass with busy polling |
+| Application | Core pinning, cache-friendly code, no allocation or locks on the hot path, FPGA |
+
+Go only as far as the strategy's edge requires; measure end to end first.
+
+Source: Low Latency Trading Design
+
+** Kernel bypass trade-off
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+What does kernel bypass (e.g. OpenOnload) remove from the receive path, and what does it cost?
+
+*** Back
+It runs the network stack in the application's process and busy-polls the network card, so packets skip interrupts and the kernel stack, and no interrupt disturbs the core. The cost is a CPU core spinning at 100%, plus specialist network cards.
+
+Source: Low Latency Trading Design
+
+** Pre-trade risk checks
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+At which two places does a trading system check risk, and what does each guard against? What is the difference between SLRMS and GRMS limits?
+
+*** Back
+- When parameters are set, in the application: fat-finger values (price bands, maximum order size, sanity checks).
+- Before the order leaves, in front of the OMS: everything else, the most critical check (position and notional limits, order rate limits, duplicate detection, kill switch).
+
+SLRMS limits each strategy, so one misbehaving strategy is stopped alone. GRMS limits across all strategies: two strategies each within their limits can together exceed the firm's exposure. Both are on the tick-to-trade path, so limits stay in memory.
+
+Source: Order and Risk Management Systems
+
+** Inverted fee venues
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+On an inverted (taker-maker) venue the liquidity provider *pays* a fee for resting orders. Why would it rest orders there instead of collecting a rebate on a maker-taker venue?
+
+*** Back
+Takers get a rebate on the inverted venue, so they route there first, and resting orders there fill sooner. The provider pays to be first in line: fill probability and queue position are worth more to it than the rebate. Venues are compared on fee + fill probability + adverse selection, not on the fee alone.
+
+Source: Market Microstructure
+
+** Backtest look-ahead and survivorship bias
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Give an example of look-ahead bias and of survivorship bias in a backtest, and the guard against each.
+
+*** Back
+- Look-ahead: entering at today's close on a signal computed from today's close, or using restated fundamentals or an index's current members. Guard: shift signals by one bar, use point-in-time data.
+- Survivorship: testing only on stocks that still exist, so the delisted losers are missing. Guard: include delisted securities.
+
+Source: Quantitative Trading
+
+** Ex-dividend date
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Is buying a stock just before its dividend "free money"? By when must you own it to receive the dividend?
+
+*** Back
+No. On the ex-dividend date the price opens lower by about the dividend, so value moves from the share price to cash (which may be taxed). You must own the stock before the ex-dividend date. With US T+1 settlement (since 2024-05-28) the ex-date is the same business day as the record date.
+
+Source: Securities and Exchange Mechanics
+
+** USO and contango
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Spot oil ends a year flat, yet the USO ETF fell over the same period. How can that happen?
+
+*** Back
+USO holds front-month oil futures and rolls them every month. In contango later contracts cost more, so each roll sells cheap and buys expensive, losing money. USO tracks oil well intraday and poorly over long holds.
+
+Source: Securities and Exchange Mechanics
+
+** Markets react to the surprise
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Initial jobless claims come out much lower (better) than last week, but the market does not move. Why?
+
+*** Back
+Markets react to the surprise, the actual number minus the consensus forecast. A good number that was already expected is priced in. Check the consensus on an economic calendar before the release.
+
+Source: Macroeconomic Drivers of Markets
+
+** 永续合约谁付资金费用
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+永续合约（perpetual futures）价格高于现货价格时，资金费用（funding fee）由谁付给谁？这个机制为什么能把合约价格拉回现货？
+
+*** Back
+多头付给空头。持多变贵、持空有收入，于是多头减少、空头增加，压低合约价格；合约低于现货时方向相反。永续合约没有到期交割，只能靠它让价格向现货收敛。费率持续为正时，买现货、做空等量永续可以对冲价格风险，净收资金费用（期现套利）。
+
+只有在结算时刻持有仓位才支付或收取。
+
+Source: Perpetual Futures Funding Rate
+
+** 资金费率为什么平稳时是 0.01%
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+币安的资金费率 $F = P + \operatorname{clamp}(I - P,\ -0.05\%,\ +0.05\%)$ ，利率 $I = 0.01\%$ 。为什么行情平稳时费率总显示 0.0100%？什么时候会偏离？
+
+*** Back
+只要溢价指数 $P$ 落在 $[I - 0.05\%,\ I + 0.05\%] = [-0.04\%,\ 0.06\%]$ ，clamp 正好抵消 $P$ ，结果恰好等于 $I = 0.01\%$ 。$P$ 超出这个区间后，$F$ 跟着 $P$ 走，与 $P$ 相差 0.05%，例如 $P = 0.10\%$ 时 $F = 0.05\%$ 。
+
+Source: Perpetual Futures Funding Rate
+
+** 永续多仓的年化持仓成本
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Cloze
+:END:
+
+*** Text
+资金费率 0.01%、每 8 小时结算一次，长期持有永续多仓的年化成本约为 {{c1::11%}}（0.01% × 3 × 365），所以长期持多用永续远比持有现货贵，牛市费率升高时更贵。
+
+*** Back
+资金费用 = 持仓名义价值（标记价格 × 数量）× 费率。
+
+Source: Perpetual Futures Funding Rate
+
+** 央行逆回购
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+央行开展「逆回购」时，资金流向哪一方？是投放还是回收流动性？
+
+*** Back
+央行作为逆回购方：从一级交易商买入证券（收进质押）、借出资金，向市场 *投放* 流动性；到期交易商买回证券，资金回笼。央行正回购方向相反，用来回收流动性。回购协议（repurchase agreement, repo）实质是以证券作抵押的短期借款。
+
+Source: Money Market Instruments
+
+** AI 推荐的量化库已停更
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+AI 或旧教程让你 ~pip install zipline pyfolio alphalens~ 。选型前应先检查什么？这几个包现在该用什么？
+
+*** Back
+先看是否还在维护：这三个包 2019–2020 年后就停更了（Quantopian 已关闭），应改用社区维护的 ~zipline-reloaded~ 、 ~pyfolio-reloaded~ 、 ~alphalens-reloaded~ 。同理 ~empyrical~ → ~empyrical-reloaded~ ， ~arctic~ → ~arcticdb~ 。
+
+Source: Python Quant Ecosystem

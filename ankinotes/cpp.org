@@ -44,15 +44,470 @@ ptr
 array
 *ptr
 ptr[0]
-*(++ptr)
-*(ptr++)
+*(++ptr)   // evaluated after the lines above
+*(ptr++)   // evaluated after *(++ptr)
 #+end_src
 
 *** Back
-- ~&ptr~ : address of pointer itself
-- ~ptr~ : address of array
-- ~array~ : address of array
-- ~*ptr~ : value of first element
-- ~ptr[0]~ : value of first element
-- ~*(++ptr)~ : increment pointer second and value of second
-- ~*(ptr++)~ : increment pointer to third and value of second
+- ~&ptr~ : address of the pointer itself (type ~int**~)
+- ~ptr~ : address of the first element ~array[0]~ (type ~int*~)
+- ~array~ : decays to the address of the first element (type ~int*~). ~&array~ has the same address but type ~int(*)[5]~
+- ~*ptr~ : 1, the first element
+- ~ptr[0]~ : 1, the first element
+- ~*(++ptr)~ : moves ~ptr~ to ~array[1]~ first, then reads it: 2
+- ~*(ptr++)~ : reads ~array[1]~ (2), then moves ~ptr~ to ~array[2]~
+
+** Named rvalue reference is an lvalue
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+What does each call print?
+#+begin_src cpp
+void print(const int&) { std::puts("lvalue"); }
+void print(int&&)      { std::puts("rvalue"); }
+int&& r = 5;
+print(r);
+print(std::move(r));
+#+end_src
+
+*** Back
+=lvalue=, then =rvalue=. ~r~ is declared as ~int&&~, but anything with a name is an lvalue expression; only ~std::move(r)~ turns it into an xvalue.
+
+Source: C++ Value Categories and Move Semantics
+
+** What std::move does
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+What does ~std::move(x)~ actually do at run time? What happens when the type of ~x~ has no move constructor?
+
+*** Back
+Nothing at run time: it is ~static_cast<T&&>(x)~, which turns an lvalue into an xvalue so overload resolution can pick the move constructor or move assignment. Without a move overload, the copy overload (~const T&~) binds and the object is copied.
+
+Source: C++ Value Categories and Move Semantics
+
+** User-declared destructor suppresses moves
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~Loud~ prints =copy= or =move= from its copy / move constructor. What does the last line print, and why?
+#+begin_src cpp
+struct WithDtor { Loud l; ~WithDtor() {} };
+WithDtor w1;
+WithDtor w2{std::move(w1)};
+#+end_src
+
+*** Back
+=copy=. A user-declared destructor, even an empty one, stops the compiler from generating the move constructor and move assignment. The xvalue then binds to the implicit copy constructor. Remove the destructor (rule of zero) or declare the moves ~= default~.
+
+Source: C++ Value Categories and Move Semantics
+
+** Rule of zero and rule of five
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+When should a class declare none of the five special member functions, and when should it declare all five? Name the five.
+
+*** Back
+- Rule of zero: when its members already manage themselves (~std::string~, ~std::vector~, smart pointers), declare none; the generated ones are correct.
+- Rule of five: when it manages a resource directly and needs to declare any one, declare all five: destructor, copy constructor, copy assignment, move constructor, move assignment.
+
+Source: C++ Value Categories and Move Semantics
+
+** noexcept move and vector growth
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+A class has a move constructor that is not ~noexcept~. What does ~std::vector~ do with its elements when it reallocates, and why?
+
+*** Back
+It copies them instead of moving. Reallocation keeps the strong exception guarantee: if a move threw halfway, the old buffer would already be damaged, so it only moves when the move cannot throw. Mark move operations ~noexcept~; ~= default~ does so automatically when the members allow it.
+
+Source: C++ Value Categories and Move Semantics
+
+** Returning a local with std::move
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Why is ~return std::move(local);~ worse than ~return local;~ for a local object?
+
+*** Back
+The cast makes the return expression no longer just the name of the local, so the compiler cannot apply NRVO (construct the result in place) and must move. Plain ~return local;~ gets NRVO in practice, and if NRVO is not applied it still moves, never copies. GCC warns with =-Wpessimizing-move=.
+
+Source: C++ Value Categories and Move Semantics
+
+** Perfect forwarding with std::forward
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~print~ is overloaded for ~const int&~ (prints =lvalue=) and ~int&&~ (prints =rvalue=). What does ~pass(1)~ print, and how do you make it print =rvalue=?
+#+begin_src cpp
+template <typename T> void pass(T&& x) { print(x); }
+#+end_src
+
+*** Back
+=lvalue=: inside the function ~x~ has a name, so it is an lvalue even though it bound to an rvalue. Write ~print(std::forward<T>(x))~. ~T~ is deduced as ~int~ for an rvalue argument and ~int&~ for an lvalue, and ~std::forward<T>~ uses that to cast back to what the caller passed.
+
+Source: C++ Value Categories and Move Semantics
+
+** auto drops reference and top-level const
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+What type does each variable get?
+#+begin_src cpp
+int i = 0; const int ci = 0; const int& rci = i;
+auto  a1 = rci;
+auto& a2 = ci;
+auto&& a3 = i;
+auto&& a4 = 1;
+#+end_src
+
+*** Back
+- ~a1~: ~int~. By value, the reference and then the top-level ~const~ are dropped; it is an independent copy.
+- ~a2~: ~const int&~. By reference, the argument's ~const~ is kept.
+- ~a3~: ~int&~. ~auto&&~ is a forwarding reference; an lvalue makes it an lvalue reference.
+- ~a4~: ~int&&~.
+
+Source: C++ Type Deduction
+
+** decltype of a name vs a parenthesized name
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+With ~int i = 0;~, what are ~decltype(i)~ and ~decltype((i))~? Why do they differ?
+
+*** Back
+~int~ and ~int&~. For an unparenthesized name, ~decltype~ gives its declared type. ~(i)~ is an expression, and for expressions ~decltype~ follows the value category: lvalue → ~T&~, xvalue → ~T&&~, prvalue → ~T~. So ~decltype(auto)~ returning ~(local)~ returns a dangling reference.
+
+Source: C++ Type Deduction
+
+** Braces vs parentheses with initializer_list constructors
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+How many elements do ~std::vector<int> a(10, 20);~ and ~std::vector<int> b{10, 20};~ have? What rule causes the difference?
+
+*** Back
+~a~ has 10 elements (each 20); ~b~ has 2 elements (10 and 20). With braces, a constructor taking ~std::initializer_list~ wins overload resolution whenever it is viable. Use parentheses when you mean "size and value".
+
+Source: C++ Type Deduction
+
+** Member initialization order
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+What is wrong with this constructor?
+#+begin_src cpp
+struct Order {
+  int b; int a;
+  Order(int x) : a(x), b(a + 1) {}
+};
+#+end_src
+
+*** Back
+Members are initialized in their declaration order in the class, not in the order of the initializer list. ~b~ is initialized first, from ~a~, which is still uninitialized. Keep the list in declaration order; GCC warns with =-Wreorder= and =-Wuninitialized= (both in =-Wall=).
+
+Source: C++ Classes and Special Member Functions
+
+** Static vs dynamic dispatch and slicing
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Which function does each call run?
+#+begin_src cpp
+struct Base    { void print(); virtual void v(); virtual ~Base() = default; };
+struct Derived : Base { void print(); void v() override; };
+Derived d;
+Base* pb = &d;
+pb->print();
+pb->v();
+Base sliced = d;
+sliced.v();
+#+end_src
+
+*** Back
+- ~pb->print()~: ~Base::print~. Non-virtual calls are chosen by the static type ~Base*~.
+- ~pb->v()~: ~Derived::v~. Virtual calls are chosen by the dynamic type.
+- ~sliced.v()~: ~Base::v~. Copying into a ~Base~ by value slices off the derived part; polymorphism needs a pointer or reference.
+
+Source: C++ Polymorphism and Object Layout
+
+** Virtual call in a constructor
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~Base~'s constructor calls the virtual function ~init()~, which ~Derived~ overrides. When a ~Derived~ object is constructed, which ~init()~ runs, and why?
+
+*** Back
+~Base::init()~. While the ~Base~ part is being constructed (or destroyed), the vptr points to ~Base~'s vtable, the class currently being constructed, so the call never reaches the derived override. The ~Derived~ members do not exist yet at that point.
+
+Source: C++ Polymorphism and Object Layout
+
+** Virtual destructor
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+What happens on ~delete base_ptr;~ when ~base_ptr~ points to a ~Derived~ object and ~Base~'s destructor is not virtual? What is the rule of thumb?
+
+*** Back
+Undefined behavior; in practice only the ~Base~ part is destroyed and ~Derived~'s resources leak. A class with any virtual function gets a ~virtual~ destructor (or a ~protected~ non-virtual one, if deletion through the base must be impossible). With a virtual destructor, the derived destructor runs first, then the base one.
+
+Source: C++ Polymorphism and Object Layout
+
+** Cost of a virtual call
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+What does a virtual call cost compared with a direct call, and what do low-latency hot paths use instead?
+
+*** Back
+Load the object's vptr, load the function pointer from the vtable slot (two dependent loads), then an indirect call: no inlining unless the compiler can devirtualize, and a possible branch mispredict. Hot paths use static polymorphism (templates, CRTP) or ~std::variant~; ~final~ also lets the compiler devirtualize.
+
+Source: C++ Polymorphism and Object Layout
+
+** make_shared vs shared_ptr from new
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Why prefer ~std::make_shared<T>(args)~ over ~std::shared_ptr<T>(new T(args))~? What is its one memory drawback?
+
+*** Back
+- One allocation for the object and the control block instead of two.
+- No leak if evaluating another argument of the same call throws.
+
+Drawback: since object and control block share one allocation, the memory of a large ~T~ is not freed until the last ~weak_ptr~ is gone too, even though ~T~ was destroyed when the strong count hit 0.
+
+Source: C++ RAII and Smart Pointers
+
+** Breaking shared_ptr cycles with weak_ptr
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+A parent holds ~shared_ptr~ to its children and each child holds ~shared_ptr~ to its parent. What goes wrong, how do you fix it, and how does a child then use its parent?
+
+*** Back
+Both strong counts stay above zero forever, so neither destructor runs: a leak. Make the back-pointer (child → parent) a ~std::weak_ptr~. To use it: ~if (auto p = parent.lock()) { ... }~. ~lock()~ checks and obtains a ~shared_ptr~ atomically; checking ~expired()~ first and then using it is a race.
+
+Source: C++ RAII and Smart Pointers
+
+** shared_ptr thread safety
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+"~shared_ptr~ is thread-safe." Which parts are, and which are not?
+
+*** Back
+Only the control block: copying and destroying different ~shared_ptr~ objects that share one object update the counts atomically. Not safe:
+- concurrent access to the pointed-to object (needs its own lock);
+- two threads assigning to the same ~shared_ptr~ variable (a data race; use ~std::atomic<std::shared_ptr<T>>~, C++20).
+
+Source: C++ RAII and Smart Pointers
+
+** shared_ptr from this
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+A member function returns ~std::shared_ptr<T>(this)~ for an object already owned by a ~shared_ptr~. What happens, and what should it do instead?
+
+*** Back
+A second control block is created for the same object, so it is deleted twice. Derive from ~std::enable_shared_from_this<T>~ and return ~shared_from_this()~, which shares the existing control block.
+
+Source: C++ RAII and Smart Pointers
+
+** Race in a thread-safe stack interface
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Every member function of a stack locks the same mutex. Why is ~if (!s.empty()) { v = s.top(); s.pop(); }~ still a race, and how do you fix it?
+
+*** Back
+Each call is atomic, but the check-then-act sequence is not: two threads can both read the same ~top()~ and then pop two elements, one of which nobody read. Fix the interface, not the locking: merge ~top()~ and ~pop()~ into one ~pop()~ that returns the value, as ~std::shared_ptr<T>~ or through a ~T&~ argument, so a throwing copy cannot lose an element that was already removed.
+
+Source: C++ Mutexes, Locks and Deadlock
+
+** Locking two mutexes without deadlock
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~swap(X& lhs, X& rhs)~ must lock both objects' mutexes. How do you write the locking so two threads calling ~swap(a, b)~ and ~swap(b, a)~ cannot deadlock? What special case must be checked first?
+
+*** Back
+#+begin_src cpp
+if (&lhs == &rhs) return;            // locking the same mutex twice is UB
+std::scoped_lock lk(lhs.m, rhs.m);   // C++17: both or neither, any order
+#+end_src
+~std::scoped_lock~ acquires several mutexes in one step with a deadlock-avoidance algorithm. When locks are taken separately in different functions, use a fixed global order instead.
+
+Source: C++ Mutexes, Locks and Deadlock
+
+** Thread-safe lazy initialization
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Why is double-checked locking on a plain pointer (~if (!p) { lock; if (!p) p = new T; }~) broken, and what are the two correct standard alternatives?
+
+*** Back
+The unlocked first check reads ~p~ while another thread writes it: a data race, and a reader can see the pointer before the object it points to is constructed. Use:
+- a function-local ~static~ (thread-safe since C++11; the Meyers singleton);
+- ~std::call_once~ with a ~std::once_flag~.
+
+If a pointer is really needed, make it ~std::atomic<T*>~ with acquire / release.
+
+Source: C++ Mutexes, Locks and Deadlock
+
+** Condition variable needs a predicate
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+A consumer writes ~cv.wait(lk); int v = q.front(); q.pop();~. What can go wrong, and what should it write?
+
+*** Back
+The thread can wake while the queue is still empty: a spurious wake-up, or another consumer took the item first. Write ~cv.wait(lk, [&] { return !q.empty(); });~, which is exactly ~while (!pred()) cv.wait(lk);~. The condition lives in the mutex-protected state; the condition variable is only a wake-up signal with no memory.
+
+Source: C++ Condition Variables
+
+** Release / acquire publication
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Thread 1 fills a plain buffer and then sets ~std::atomic<bool> ready~ to true; thread 2 waits for ~ready~ and then reads the buffer. Which memory orders are needed on the store and the load, and what can go wrong with ~relaxed~ on both?
+
+*** Back
+Store with ~memory_order_release~, load with ~memory_order_acquire~. When the acquire load reads ~true~, everything thread 1 wrote before the release store is visible to thread 2 (a happens-before edge). With ~relaxed~ only ~ready~ itself is atomic: thread 2 may see ~true~ but stale buffer contents. It often happens to work on x86, whose plain loads and stores already behave as acquire / release, and breaks on ARM.
+
+Source: C++ Memory Model and Atomics
+
+** Compound expressions on atomics
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+With ~std::atomic<int> x;~ shared by several threads, why is ~x = x + 1;~ wrong? How do you double ~x~ atomically?
+
+*** Back
+Each operation is atomic, but the expression is an atomic load followed by an atomic store; another thread's update between them is lost. Use ~x.fetch_add(1)~ (or ~++x~). Doubling has no ~fetch_~ form (~x *= 2~ does not compile), so use a CAS loop:
+#+begin_src cpp
+int expected = x.load();
+while (!x.compare_exchange_weak(expected, expected * 2)) {}
+#+end_src
+A failed CAS writes the current value into ~expected~, so the loop needs no extra load.
+
+Source: C++ Memory Model and Atomics
+
+** False sharing
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Each thread increments only its own counter in ~long counters[8];~, yet the loop scales badly with more threads. Why, and what is the fix?
+
+*** Back
+False sharing: the counters share a cache line, so every write needs exclusive ownership of that line and it bounces between cores as if the data were shared. Pad or align each per-thread slot to its own cache line, ~alignas(64)~ (or ~std::hardware_destructive_interference_size~, which GCC warns may change between versions).
+
+Source: C++ Memory Model and Atomics
+
+** Lock-free vs wait-free
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Cloze
+:END:
+
+*** Text
+A data structure is lock-free if {{c1::some thread}} completes its operation in a bounded number of steps even when others are suspended, and wait-free if {{c2::every thread}} does. A CAS retry loop is {{c3::lock-free but not wait-free}}: a failed CAS means another thread succeeded, but one thread can keep retrying forever.
+
+*** Back
+Source: C++ Lock-free Data Structures
+
+** ABA problem
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+In a lock-free stack, ~pop~ reads ~head == A~ and ~A->next == B~, then CASes ~head~ from ~A~ to ~B~. Describe the ABA failure and two ways to prevent it.
+
+*** Back
+The thread is suspended after reading. Others pop ~A~ and ~B~, free them, and push a new node that reuses ~A~'s address. The CAS sees ~head == A~ and succeeds, installing the freed ~B~. Prevent it by:
+- never reusing a node while any thread may still hold it (hazard pointers, epoch-based reclamation);
+- pairing the pointer with a version counter updated by a double-width CAS.
+
+Source: C++ Lock-free Data Structures
+
+** Choosing lock-free or lock-based
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+When is a lock-free structure worth it over a mutex-based one, and why is it not automatically faster?
+
+*** Back
+Worth it when a descheduled lock holder blocking everyone is unacceptable: latency-sensitive paths such as single-producer single-consumer ring buffers in trading systems; it also cannot deadlock. Not automatically faster: contended atomics bounce cache lines, an uncontended mutex is cheap, and correctness (memory reclamation, ABA, memory orders) is far harder. Measure worst-case and average latency and throughput before switching.
+
+Source: C++ Lock-free Data Structures
+
+** Discarded std::async future
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+How long does this statement take, and why?
+#+begin_src cpp
+std::async(std::launch::async, [] { std::this_thread::sleep_for(200ms); });
+#+end_src
+
+*** Back
+About 200 ms. The returned temporary ~std::future~ is destroyed at the end of the statement, and a future from ~std::async~ blocks in its destructor until the task finishes, so "fire and forget" with ~std::async~ is synchronous. GCC declares ~std::async~ nodiscard and warns.
+
+Source: C++ Threads and Async Tasks

@@ -1,6 +1,6 @@
 # C++ 与 Trading 的 Anki 卡片
 
-Status: Not started — 由 `2026-10-27-migration-followups.md`（A4、B 节）统筹
+Status: Complete — 卡片已写好并提交；同步到 Anki 由用户操作（记在 `2026-10-27-migration-followups.md` C 节）
 
 C++、Trading 迁移（2026-10-26）后，按新笔记制卡。用 `anki-cards` skill；只写卡片文件，由用户自己同步到 Anki。制卡深度参考 `.agents/learning-goals.md` 中这两个领域的档位。
 
@@ -37,6 +37,13 @@ C++、Trading 迁移（2026-10-26）后，按新笔记制卡。用 `anki-cards` 
 
 ## Checklist
 
-- [ ] C++：确认是否修改 2 张旧卡；写新卡；行内标记检查
-- [ ] Trading：新建 `ankinotes/trading.org`；写卡；行内标记检查
-- [ ] 提交并推送
+- [x] C++：用户确认修改 2 张旧卡（2026-10-27）；写新卡；行内标记检查
+- [x] Trading：新建 `ankinotes/trading.org`；写卡；行内标记检查
+- [x] 提交（用户这次只要求提交，未推送）
+
+## 记录
+
+- 2026-10-27：用户决定修正旧卡。Pointers 卡无误未改；Pointers to Array 改了 Back（ ~ptr~ / ~array~ 为首元素地址并注明类型，与 ~&array~ 区分），Front 的最后两行加注释说明按顺序执行，结果用 GCC 16 编译运行核对过；保留 `ANKI_NOTE_ID` / `ANKI_NOTE_HASH`。
+- C++ 新增 30 张（Deck 共 32 张），来源 12 篇笔记，覆盖值类别与移动语义、类型推导、特殊成员函数、多态、智能指针、锁与死锁、条件变量、内存序与原子、无锁结构、 ~std::async~ 。CMake、Conan、编译链接、模板、STL、调试工具等未制卡（档位为默认，且多为可查询细节）。
+- Trading 新增 25 张，新建 `ankinotes/trading.org`。未制卡：Cryptocurrency Trading（个人出入金路线）、Trading System Architecture（组件表，与 RMS、低延迟卡重叠）、图表形态表。金额写成 USD 而不用 `$`，避免与 LaTeX 公式混淆。
+- 结构检查（字段、Note Type、Source 行）和行内标记检查均通过；没有同步到 Anki。
