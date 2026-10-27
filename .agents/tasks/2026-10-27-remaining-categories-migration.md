@@ -257,4 +257,4 @@ Anki：新建 `ankinotes/tools.org`（Deck `RoamCards::Tools`），4 张（NGINX
 ## 收尾
 
 - 130 篇未迁笔记全部有去向：迁入或合并的记录在各批次表中，不迁的 15 篇（个人内容 8 篇及 netcat、python_cookbook、sml、calculus、git_cheat_sheet、ai_prompts、uml）列在 `2026-10-27-unmigrated-notes-review.md`；旧索引和空笔记（contents、languages、python_modules、pyside6、sha、hashing、tree、data_structure 的旧链接等）不单列。
-- 本计划之外发现的既有问题（未处理）：`MachineLearning/overfitting_underfitting` 的 `file:~/second-brain/notebooks/ML/plot_learning_curves.ipynb` 指向不存在的文件；`Statistics/probability` 的正文链接指向索引 Continuous Distributions。
+- 本计划之外发现的既有问题、待用户决定的事项和其余收尾工作，统一记在 `2026-10-27-migration-followups.md`。
