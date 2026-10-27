@@ -1,12 +1,12 @@
 # 迁移收尾：待决定与待处理事项
 
-Status: Open — 迁移收尾的汇总入口：等用户一次性回答 A 节的问题，然后执行 B 节
+Status: Open — 迁移收尾的汇总入口：等用户一次性回答 A 节剩下的 5 个问题（A2–A6），然后执行 B 节
 
 用户说「处理迁移遗留」「迁移收尾」或问「还有什么没处理」时，从这个文件开始。旧笔记迁移（`roamnotes/` → `roamnotes-v2/`）在 2026-10-27 全部完成：`roamnotes/` 中每篇笔记都已迁入、合并，或记入复查清单；各批次的新旧 ID 对应在各迁移任务文件里，最后一轮见 `2026-10-27-remaining-categories-migration.md`。这里只收迁移之后还没做完的事。
 
 ## A. 需要用户决定（一次问完）
 
-1. *推送* ：本地有 6 个未推送的提交（`223171f` 计划，`576a8bb`…`cac7790` 批次 1–5）。推送后 Publish 工作流会把新大类 Algorithms、SystemDesign、Tools 发布到笔记站。选项：现在推送 / 先自己在 Emacs 里看过再推。
+1. ~~推送~~：已完成（2026-10-27，用户确认后推送到 `origin/master`，`87df866..2536dd9`）。
 2. *复查清单* （`2026-10-27-unmigrated-notes-review.md`，21 篇 + 1 处部分内容）：逐篇决定迁入还是确认不迁。可以按组回答：
    - 已迁大类里跳过的 5 篇：Literal、 ~std::istringstream~ 、Static Local Variable（C++）；Motherboard、Computer Display（硬件）。ZeroMQ 已处理。
    - 截图或链接类 7 篇：netcat、Python Cookbook、SML、Calculus、Git Cheat Sheet、AI Prompts、UML。
@@ -29,7 +29,7 @@ Status: Open — 迁移收尾的汇总入口：等用户一次性回答 A 节的
 ## C. 用户自己操作
 
 - [ ] 把新卡同步到 Anki：新建的 Deck `RoamCards::Algorithms`（30 张）、`RoamCards::SystemDesign`（31 张）、`RoamCards::Tools`（4 张）；`RoamCards::Network` 新增 15 张、改写 3 张（ARP、VLAN、3 层交换机，保留了同步字段）；`RoamCards::Python` 新增 8 张。
-- [ ] 推送后确认 Publish 工作流部署成功（AGENTS.md「org-roam-ui 发布」）。
+- [x] 推送后确认 Publish 工作流部署成功：run 40439719314 的 build、deploy 均成功；线上 `data/graphdata.json` 已包含 Algorithms、System Design、Tools 等新节点（2026-10-27）。
 
 ## D. 与迁移无关、仍未完成的计划（只作索引）
 
