@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       ec97948e-1632-450e-81f1-06a485060cc6
+:ROAM_ALIASES: "工具"
+:END:
+#+title: Tools
+#+filetags: :Tools:
+
+* [[id:4f3470ae-0fbc-4dcd-84f9-ceba42ba887f][DevOps]]
+* [[id:6bb8a181-257e-42d3-bd64-6858e2a80043][AI Tools]]
+* [[id:c30d6ce0-67b4-4371-844b-9c55ff115768][Personal Productivity]]
+* [[id:c336c653-61a7-4c15-a43e-7f76644e2b75][Frontend]]

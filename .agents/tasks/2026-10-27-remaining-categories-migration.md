@@ -1,6 +1,6 @@
 # 迁移剩余旧笔记（Default/、Games/）的总计划
 
-Status: In progress — 归属方案已确认（2026-10-27）；批次 1–4 完成，下一步批次 5
+Status: Complete — 批次 1–5 完成（2026-10-27），批次 6 按用户决定不迁；源笔记保留在 `roamnotes/`，待用户比对后决定何时删除
 
 C++、Trading、Linux/OS 三轮迁移之后，`roamnotes/` 中从未进入任何迁移计划的笔记共 130 篇（`Default/` 128 篇、`Games/` 2 篇），约 3,700 行；另加复查清单里延后的 `C++/zeromq`。旧根 `Default/contents.org` 不迁（其链接的 ID 均已迁移）。
 
@@ -104,7 +104,7 @@ DevOps、个人工具、前端作为 `Tools/` 下的分组，全部「知道」�
 - [x] 批次 2：Algorithms（2026-10-27）
 - [x] 批次 3：SystemDesign（2026-10-27）
 - [x] 批次 4：Python 与零散归属（2026-10-27）
-- [ ] 批次 5：DevOps、工具、前端
+- [x] 批次 5：DevOps、工具、前端（2026-10-27）
 - [x] 批次 6：个人内容（不迁，已列入复查清单）
 - [x] 复查清单 `2026-10-27-unmigrated-notes-review.md` 中的 ZeroMQ 随批次 3 处理
 
@@ -223,3 +223,38 @@ Anki：新建 `ankinotes/systemdesign.org`（Deck `RoamCards::SystemDesign`）�
 Anki：`ankinotes/python.org` 新增 8 张（dict、import、SQLAlchemy）。Debugging Tools、Filesystem Hierarchy 是「知道」档，不制卡；链式法则所在的 LinearAlgebra 没有 Deck，本批不新建。
 
 验证：行内标记检查为空（ =decorator= 笔记中「函数/类」的旧误报除外）；全库结构检查通过；`org-roam-db-sync` 完成。
+
+## 批次 5 执行记录（Tools）
+
+新大类 `Tools/`，笔记用英语（源笔记均为英文）。
+
+```
+Tools（新 ec97948e）
+├─ DevOps Tools (4f3470ae，原 devops)
+│   ├─ Docker and Kubernetes Basics (745af194，原 docker) ← docker（生命周期截图改为表格）, docker_troubleshooting（eab9fb9a）, k8s（05ada1ee；排障流程图改写为分层表）
+│   ├─ Ansible (183ad4d8)
+│   ├─ NGINX (10f94034)
+│   └─ Keycloak (53273cbd)
+├─ AI Tools (6bb8a181，原 ai_tools)
+│   ├─ Aider (964c2294，原 `Unsorted/aider-20250407.org`，git mv 到 `Tools/`) ← Default/aider（9b992503 废弃）
+│   └─ OpenCat Self-hosted API Proxy (41518626) ← opencat
+├─ Personal Productivity Tools（新 c30d6ce0）
+│   ├─ Anki Card Writing and Templates (95582cbe) ← anki_tips
+│   └─ Zotero Setup (960a00b2) ← zotero
+└─ Frontend Development (c336c653，原 frontend；只有一个子节点，作为稳定领域边界保留)
+    └─ HTML and CSS for Responsive Pages (0dba51d3，原 html) ← html, html_examples（8009f6d2）, html_header（f052c7d3）, html_layout（72a0721e）, meta_tag（8081a5ae）, css（51e7a901），后 5 个 ID 废弃
+```
+
+- 不迁：git_cheat_sheet、ai_prompts（截图）、uml（一个外链），列入复查清单。
+- 纠正：Ansible 源笔记的 inventory 缩进有误、 ~become: ture~ 笔误；Aider 的 editor mode 命令写成 ~/architect~ （实为 architect 模式的第二步， ~/editor~ 是打开编辑器写提示），AI 注释需要 ~--watch-files~ ；Anki 的 ~{{hanji:}}~ 应为 ~{{kanji:}}~ ；CSS 的 ~padding: 1.5em inherit~ 无效（ ~inherit~ 只能作为整个值），改为误解一节；HTML 示例的 ~herf~ 笔误。
+- Keycloak：「User Attribute 映射器是否读取组属性」无法在本机核对，标 ~TODO verify~ 。
+- 核对：ansible-core 2.21.5（Python 3.13；3.15 下启动报错）：inventory 图、 ~ping~ 、command 与 shell 模块对管道的不同处理；aider 0.86.2（Python 3.12）的命令列表与 ~--watch-files~ 默认关闭，Python 3.14 下依赖 scipy 1.15.3 构建失败；Docker 29.9.1：普通用户 ~nsenter~ 报权限错误、 ~--network container:~ 共享网络命名空间可访问对方 127.0.0.1（临时容器已删除，未触碰已有容器）。
+
+Anki：新建 `ankinotes/tools.org`（Deck `RoamCards::Tools`），4 张（NGINX 两张、Ansible、Kubernetes Service）；其余为「知道」档，不制卡。
+
+验证：行内标记检查为空；Aider、HTML 两篇 TOC 已生成；全库结构检查通过；`org-roam-db-sync` 完成。
+
+## 收尾
+
+- 130 篇未迁笔记全部有去向：迁入或合并的记录在各批次表中，不迁的 15 篇（个人内容 8 篇及 netcat、python_cookbook、sml、calculus、git_cheat_sheet、ai_prompts、uml）列在 `2026-10-27-unmigrated-notes-review.md`；旧索引和空笔记（contents、languages、python_modules、pyside6、sha、hashing、tree、data_structure 的旧链接等）不单列。
+- 本计划之外发现的既有问题（未处理）：`MachineLearning/overfitting_underfitting` 的 `file:~/second-brain/notebooks/ML/plot_learning_curves.ipynb` 指向不存在的文件；`Statistics/probability` 的正文链接指向索引 Continuous Distributions。

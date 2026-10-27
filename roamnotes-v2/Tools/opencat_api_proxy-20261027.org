@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       41518626-fa11-416e-ad92-190bc9202561
+:END:
+#+title: OpenCat Self-hosted API Proxy
+#+filetags: :Tools:
+
+* Positioning
+OpenCat is a chat client for AI APIs; ~opencatd~ ( =bayedev/opencatd= image) is its self-hosted server, which forwards requests to the model APIs and manages keys for the client. The user ran it on their own server at =opencat.ignity.xyz= , with the upstream API at =aiproxy.ignity.xyz= (2024-04; not run on this machine).
+
+* The User's Deployment
+| Setup | Command |
+|---|---|
+| HTTPS handled by the container (ACME certificate) | ~docker run -d --name opencatd -e TLS_DOMAIN="opencat.ignity.xyz" -e API_DOMAIN="https://aiproxy.ignity.xyz" -p 443:443 -p 80:80 -v "${HOME}/dockervols/db:/opt/db" -v "${HOME}/dockervols/certs:/opt/certs" bayedev/opencatd~ |
+| Behind NGINX, which terminates TLS | ~docker run -d --name opencatd -e API_DOMAIN="https://aiproxy.ignity.xyz" -p 80:80 -v "${HOME}/dockervols/db:/opt/db" bayedev/opencatd~ |
+
+- Port 80 must be reachable in the first setup: the ACME HTTP challenge that proves control of the domain arrives there.
+- The volumes keep the database (keys, users) and the certificates across container upgrades.

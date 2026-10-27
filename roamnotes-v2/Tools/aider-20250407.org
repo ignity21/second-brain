@@ -1,0 +1,87 @@
+:PROPERTIES:
+:ID:       964c2294-759f-4758-84ff-be9887557496
+:VERIFIED_WITH: aider 0.86.2 (2026-10-27)
+:END:
+#+title: Aider
+#+filetags: :Tools:
+
+* TOC :TOC_1:
+- [[#positioning][Positioning]]
+- [[#modes][Modes]]
+- [[#commands][Commands]]
+- [[#edit-formats][Edit Formats]]
+- [[#ai-comments-in-code][AI Comments in Code]]
+- [[#installation-and-configuration][Installation and Configuration]]
+- [[#pitfalls][Pitfalls]]
+- [[#references][References]]
+
+* Positioning
+Aider is a terminal AI pair programmer that edits files in a git repository and commits each change, so every edit can be reviewed with ~git diff~ and undone. The official usage tips (aider.chat/docs/usage/tips.html) are worth reading first.
+
+* Modes
+| Mode | Command | What happens |
+|---|---|---|
+| Code (default) | ~/code~ | Makes changes to the files to satisfy the request |
+| Ask | ~/ask~ | Discusses the code and answers questions without editing |
+| Architect | ~/architect~ | The main model *proposes* a solution; a second request asks the editor model ( ~--editor-model~ ) to turn the proposal into concrete file edits |
+| Context | ~/context~ | Works out which files are relevant to the request and adds them |
+
+A typical loop: ~/ask~ to agree on an approach, ~/code~ (or ~/architect~ for larger changes) to implement it, then ~/run~ or ~/test~ and let aider fix failures.
+
+* Commands
+| Area | Commands |
+|---|---|
+| Files in the chat | ~/add~ , ~/read-only~ (reference only, not edited), ~/drop~ , ~/ls~ |
+| Repository | ~/diff~ , ~/commit~ , ~/undo~ (the last commit aider made), ~/git~ , ~/map~ and ~/map-refresh~ (the repository map sent to the model) |
+| Models | ~/model~ , ~/editor-model~ , ~/weak-model~ (commit messages and history summaries), ~/models~ , ~/reasoning-effort~ , ~/think-tokens~ |
+| Running | ~/run~ (alias ~!~ ; adds the output to the chat), ~/test~ , ~/lint~ (lint and fix the files in the chat) |
+| Session | ~/clear~ (history), ~/reset~ (files and history), ~/tokens~ , ~/settings~ , ~/save~ / ~/load~ , ~/help~ , ~/exit~ |
+| Input | ~/multiline-mode~ (Enter inserts a newline, Alt+Enter sends), ~/editor~ (write the prompt in an editor), ~/paste~ , ~/voice~ , ~/web~ (scrape a page into the chat; works best with Playwright: ~playwright install --with-deps chromium~ ) |
+
+* Edit Formats
+How the model returns edits ( ~--edit-format~ ):
+- *whole*: a full updated copy of each file;
+- *diff*: search/replace blocks;
+- *diff-fenced*: diff with the file path inside the fence, used for the Gemini family;
+- *udiff*: unified diff, as ~git diff~ prints.
+
+* AI Comments in Code
+With ~aider --watch-files~ running, comments in any editor trigger aider when the file is saved:
+- a comment starting or ending with =AI!= asks for changes;
+- one ending with =AI?= asks a question about the code;
+- plain =AI= comments add context to the next =AI!= / =AI?= comment.
+
+#+begin_src python
+@app.route('/factorial/<int:n>')
+def factorial(n):
+    # AI: Refactor this code...
+    result = 1
+    for i in range(1, n + 1):
+        result *= i
+    # ... into a compute_factorial() function. AI!
+    return jsonify(result=result)
+#+end_src
+
+* Installation and Configuration
+- ~curl -LsSf https://aider.chat/install.sh | sh~ installs it with ~uv tool~ ; directly: ~uv tool install --force --python python3.12 aider-chat@latest~ . On Arch-based systems also ~pamac install aider-chat~ .
+- Settings live in =.aider.conf.yml= (in the home directory or the repository):
+
+#+begin_src yaml
+model: xxx                       # main chat model
+thinking-tokens: 8k
+reasoning-effort: "medium"       # low, medium, high
+openai-api-key: <key>            # or the OPENAI_API_KEY environment variable
+anthropic-api-key: <key>         # or ANTHROPIC_API_KEY
+api-key:
+- gemini=foo                     # sets GEMINI_API_KEY=foo
+dark-mode: false
+light-mode: true
+pretty: true
+#+end_src
+
+* Pitfalls
+- *AI comments do nothing* unless aider was started with ~--watch-files~ (off by default).
+- *Python version*: aider pins its dependencies; on Python 3.14 the pinned scipy 1.15.3 fails to build (verified), on 3.12 it installs. Hence ~--python python3.12~ above; ~uvx --python 3.12 --from aider-chat aider~ runs it without installing.
+
+* References
+- aider.chat docs: Tutorials, Specifying coding conventions, Linting and testing, Editing config and text files.

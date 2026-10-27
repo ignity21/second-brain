@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       6bb8a181-257e-42d3-bd64-6858e2a80043
+:ROAM_ALIASES: "AI 工具"
+:END:
+#+title: AI Tools
+#+filetags: :Tools:
+
+* [[id:964c2294-759f-4758-84ff-be9887557496][Aider]]
+* [[id:41518626-fa11-416e-ad92-190bc9202561][OpenCat Self-hosted API Proxy]]

@@ -1,0 +1,9 @@
+:PROPERTIES:
+:ID:       c30d6ce0-67b4-4371-844b-9c55ff115768
+:ROAM_ALIASES: "个人效率工具"
+:END:
+#+title: Personal Productivity Tools
+#+filetags: :Tools:
+
+* [[id:95582cbe-1989-4662-b5d3-a9c9fccefb6f][Anki]]
+* [[id:960a00b2-a9ee-4008-b5e9-ede784e33395][Zotero]]

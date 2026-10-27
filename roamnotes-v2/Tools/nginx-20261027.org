@@ -1,0 +1,46 @@
+:PROPERTIES:
+:ID:       10f94034-98aa-4a2a-a4da-602db5c59ccd
+:END:
+#+title: NGINX
+#+filetags: :Tools:
+
+* Mental Model
+- One *master* process reads and checks the configuration and manages the *worker* processes; the workers handle the requests, each with an event loop serving many connections.
+- Configuration is nested blocks: ~http~ → ~server~ (one per site: ~listen~ , ~server_name~ ) → ~location~ (what to do for a URI).
+- ~location~ matching: an exact ~= /path~ wins; otherwise the longest matching prefix is remembered, then regular expressions ( =~= , case-insensitive =~*= ) are tried in file order and the first match wins; a prefix marked =^~= skips the regex step.
+
+* Examples
+#+begin_src conf
+http {
+    server {                     # static files
+        location / {
+            root /data/www;      # /index.html -> /data/www/index.html
+        }
+        location /images/ {
+            root /data;          # /images/a.png -> /data/images/a.png
+        }
+    }
+    server {                     # reverse proxy
+        listen 8080;
+        location / {
+            proxy_pass http://localhost:9000;
+        }
+        location ~ \.(gif|jpg|png)$ {   # regex: images served locally
+            root /data;
+        }
+    }
+}
+#+end_src
+
+* Capability Map
+| Need | Command |
+|---|---|
+| Check the configuration | ~nginx -t~ |
+| Reload configuration without dropping connections | ~nginx -s reload~ |
+| Graceful / fast shutdown | ~nginx -s quit~ / ~nginx -s stop~ |
+| Reopen log files after rotation | ~nginx -s reopen~ |
+
+* Pitfalls
+- *root vs alias*: ~root~ appends the whole URI to the path ( ~location /images/ { root /data; }~ serves =/data/images/...= ); ~alias~ replaces the matched prefix ( ~alias /data/;~ serves =/data/...= ).
+- *Trailing slash in the proxy URL*: with a URI part ( ~proxy_pass http://backend/;~ ) the matched location prefix is replaced by it; without one ( ~proxy_pass http://backend;~ ) the original URI is passed unchanged. ~location /api/ { proxy_pass http://b/; }~ sends =/api/x= as =/x= .
+- Run ~nginx -t~ before ~reload~ : a broken configuration is rejected and the old one keeps running, but only ~-t~ tells you why.

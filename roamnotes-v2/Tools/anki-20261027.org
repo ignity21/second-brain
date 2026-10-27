@@ -1,0 +1,58 @@
+:PROPERTIES:
+:ID:       95582cbe-1989-4662-b5d3-a9c9fccefb6f
+:ROAM_ALIASES: "Anki 技巧"
+:END:
+#+title: Anki Card Writing and Templates
+#+filetags: :Tools:
+
+* Writing Cards
+- *Keep it simple*: the shorter the card, the easier the review. This is rule 4 of SuperMemo's "Effective learning: Twenty rules of formulating knowledge", the *minimum information principle*.
+- *Don't memorize without understanding*: learn in context, for example words inside sentences.
+- *Prefer cloze deletion* for facts in context (rule 5): ~{{c1::Canberra::city}} was founded in 1913.~ shows =[city] was founded in 1913.= ; the text after the second ~::~ is the hint.
+- An easy question is not a good one: the easier a card makes recalling the answer, the less likely you are to recall it in real life without the card's cues.
+
+This repository's own card rules are in the =anki-cards= skill.
+
+* Template Capability Map
+| Need | Template syntax |
+|---|---|
+| Show a hint behind a click, only if the field is filled | ~{{hint:MyField}}~ |
+| A field without HTML formatting (e.g. in a URL) | ~{{text:Front}}~ , as in ~<a href="https://example.com/search?q={{text:Front}}">dictionary</a>~ |
+| Ruby annotations for Japanese | Field text ~日本語[にほんご]~ ; template ~{{furigana:MyField}}~ (both), ~{{kana:MyField}}~ , ~{{kanji:MyField}}~ |
+| Type the answer and check it | ~{{type:Text}}~ ; for cloze ~{{cloze:Text}}~ plus ~{{type:cloze:Text}}~ |
+| Show something only if a field is filled / empty | ~{{#Field}}...{{/Field}}~ / ~{{^Field}}...{{/Field}}~ , e.g. a "Tags:" label shown only when there are tags |
+| Built-in fields | ~{{Tags}}~ , ~{{Type}}~ , ~{{Deck}}~ , ~{{Subdeck}}~ , ~{{CardFlag}}~ , ~{{Card}}~ , ~{{FrontSide}}~ |
+
+* Styling Capability Map
+Card styles are CSS on the note type:
+| Need | CSS |
+|---|---|
+| Base style | ~.card { font-family: arial; font-size: 20px; text-align: center; }~ |
+| Keep large images at full size | ~img { max-width: none; max-height: none; }~ |
+| Style one field | Wrap it: ~<div class=mystyle1>{{MyField}}</div>~ , then style ~.mystyle1~ |
+| Night mode | ~.card.nightMode { ... }~ , ~.nightMode .myclass { ... }~ |
+| Audio replay buttons | ~.replay-button svg { width: 20px; height: 20px; }~ |
+| Per platform | Classes on the card: ~.win~ , ~.mac~ , ~.linux:not(.android)~ , ~.mobile~ , ~.iphone~ , ~.ipad~ , ~.android~ |
+
+Fonts can be installed into the collection's media folder (Anki manual, "Styling & HTML").
+
+* The User's Add-ons
+| Add-on | Code |
+|---|---|
+| Advanced Review Bottom Bar | 1136455830 |
+| Review Heatmap | 1771074083 |
+| AnkiConnect | 2055492159 |
+| AwesomeTTS | 1436550454 |
+| Aglish | 38866997 |
+| Bulk Image Downloader | 8280891 |
+| Ankimon | 1908235722 |
+| AnkiBrain | 1915225457 |
+
+AnkiBrain in local mode needs its own Python environment, set up in the add-on's directory =~/.local/share/Anki2/addons21/1915225457/= :
+
+#+begin_src sh
+uv python pin 3.9.13
+uv venv -p 3.9.13
+sudo pacman -S openmp            # libomp-dev on Ubuntu
+uv pip install -r linux_requirements.txt
+#+end_src

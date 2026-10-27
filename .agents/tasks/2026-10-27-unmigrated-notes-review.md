@@ -28,6 +28,9 @@ C++、Trading 和 Linux/OS 三次迁移完成后（以及剩余笔记迁移计�
 | `Default/python_cookbook-20250102.org` | `f3b97038-dc5e-4f69-aa6d-8466b26df753` | 序列解包、 ~deque(maxlen)~ 、 ~heapq~ 用法 | 可查询的基础用法；堆的用法已在 Algorithms 的 Heaps and Priority Queues（批次 4） | 通常不需要 | 同上 |
 | `Default/sml-20230802.org` | `499faa16-204e-40a9-9792-63107b2cdb08` | Coursera Programming Languages 课的 SML 语法与函数求值规则 | 不在任何学习目标内（批次 4） | 迁入 `Unsorted/` | 同上 |
 | `Default/calculus-20230809.org` | `fc70dfaa-fbe9-4c89-a23b-72ac83d6d917` | 微积分速查截图（多元链式法则已并入 LinearAlgebra 的 The Jacobian） | 截图，可查询（批次 4） | 通常不需要 | 同上 |
+| `Default/git_cheat_sheet-20250505.org` | `dd9e4aab-9876-4614-bb41-df6b1d02cc7d` | Git 速查截图 | 可查询的命令（批次 5） | 写进 Tools 的一篇 Git 笔记 | `2026-10-27-remaining-categories-migration.md` |
+| `Default/ai_prompts-20231123.org` | `f350adc2-8a9a-4058-b0e5-f099edce5004` | 提示词速查截图 | 第三方速查图（批次 5） | 通常不需要 | 同上 |
+| `Default/uml-20241225.org` | `fb8a2b1f-761c-4e47-8f4c-da29478bfe39` | 一个 UML 部署图的外链 | 只有链接（批次 5） | 通常不需要 | 同上 |
 
 另有一处部分内容未迁：`Default/computer_hardware` 的 Architecture、Glossary 两节（CPU、内存控制器与内存的截图，MCC、地址总线、时钟、POST、UEFI 等词汇）。该文件的 ID 已用作新索引 CPU and Memory Hardware。
 
@@ -39,5 +42,5 @@ C++、Trading 和 Linux/OS 三次迁移完成后（以及剩余笔记迁移计�
 - [ ] Static Local Variable
 - [ ] Motherboard
 - [ ] Computer Display
-- [ ] netcat、Python Cookbook、SML、Calculus
+- [ ] netcat、Python Cookbook、SML、Calculus、Git Cheat Sheet、AI Prompts、UML
 - [ ] 个人内容 8 篇（Atomic Habits、Books、English、English Grammar、Have Fun、Oxygen Not Included、MC Server、Warhammer3）

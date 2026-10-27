@@ -1,0 +1,63 @@
+:PROPERTIES:
+:ID:       0dba51d3-139a-4f79-b878-a662c2c34b6e
+:ROAM_ALIASES: "HTML 与 CSS 响应式页面"
+:END:
+#+title: HTML and CSS for Responsive Pages
+#+filetags: :Tools:
+
+* TOC :TOC_1:
+- [[#minimal-page][Minimal Page]]
+- [[#pixels-and-the-viewport][Pixels and the Viewport]]
+- [[#units][Units]]
+- [[#responsive-layout-rules][Responsive Layout Rules]]
+- [[#selectors][Selectors]]
+- [[#misconceptions][Misconceptions]]
+
+* Minimal Page
+#+begin_src html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Test</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>Title</h1>
+    <p>A paragraph with a <a href="https://example.com">link</a>.</p>
+    <figure>
+      <img src="logo.png" alt="Logo">
+      <figcaption>Logo</figcaption>
+    </figure>
+  </body>
+</html>
+#+end_src
+
+* Pixels and the Viewport
+- *Hardware pixels* are the screen's physical dots. *Device-independent pixels* (DIPs, which CSS pixels map to) relate a pixel to a real-world size. *Device pixel ratio* (DPR) = hardware pixels ÷ DIPs. A viewport 1280 DIPs wide on a DPR 2 screen is drawn with 2560 hardware pixels.
+- Without the viewport meta tag, mobile browsers lay the page out at a desktop width (about 980 px) and shrink it. ~width=device-width~ makes the layout viewport match the screen width in DIPs; ~initial-scale=1~ sets a 1:1 relation between DIPs and CSS pixels at load.
+
+* Units
+| Kind | Units | Relative to |
+|---|---|---|
+| Absolute | ~px~ , ~in~ , ~mm~ , ~cm~ | Fixed size (a CSS px is a DIP) |
+| Relative to fonts | ~em~ , ~rem~ | ~1.5em~ = 1.5 × the current element's font size; ~rem~ uses the root element's font size, so it does not compound when nested |
+| Relative to the container or screen | ~%~ , ~vw~ , ~vh~ | Parent's size; 1% of the viewport width / height |
+
+* Responsive Layout Rules
+- *Never overflow the viewport*: ~img, embed, object, video { max-width: 100%; }~ keeps media inside narrow screens and avoids horizontal scrolling.
+- *Tap targets of 48 CSS pixels*: ~nav a, button { min-height: 48px; min-width: 48px; }~ ; 40–48 px fits a finger.
+
+* Selectors
+| Selector | Matches |
+|---|---|
+| ~h1~ , ~.class~ , ~#id~ | Element type, class, id |
+| ~a[attr]~ , ~a[attr="abc"]~ | Has the attribute / attribute equals a value |
+| ~a:hover~ | Pseudo-class: a state |
+| ~p::first-line~ | Pseudo-element: part of an element |
+| ~article > p~ | Paragraphs that are direct children of an ~article~ |
+
+* Misconceptions
+** ~padding: 1.5em inherit;~ sets the vertical padding and inherits the horizontal?
+The old notes used this to "set the top and bottom padding and inherit the left and right". It is invalid: CSS-wide keywords such as ~inherit~ can only be the *entire* value of a property, so the browser drops the whole declaration. Write the shorthand and override the sides that should inherit: ~padding: 1.5em; padding-left: inherit; padding-right: inherit;~ .

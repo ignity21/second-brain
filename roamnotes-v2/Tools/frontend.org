@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       c336c653-61a7-4c15-a43e-7f76644e2b75
+:ROAM_ALIASES: "前端"
+:END:
+#+title: Frontend Development
+#+filetags: :Tools:
+
+* [[id:0dba51d3-139a-4f79-b878-a662c2c34b6e][HTML and CSS for Responsive Pages]]

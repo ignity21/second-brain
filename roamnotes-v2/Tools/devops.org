@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       4f3470ae-0fbc-4dcd-84f9-ceba42ba887f
+:ROAM_ALIASES: "运维工具"
+:END:
+#+title: DevOps Tools
+#+filetags: :Tools:
+
+* [[id:745af194-1a85-4f7a-94ff-940cf20532c3][Docker and Kubernetes]]
+* [[id:183ad4d8-6a07-43b3-80b0-dd2f321f3c2d][Ansible]]
+* [[id:10f94034-98aa-4a2a-a4da-602db5c59ccd][NGINX]]
+* [[id:53273cbd-8b59-468b-a173-d8da1b863133][Keycloak]]

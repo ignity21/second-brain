@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       960a00b2-a9ee-4008-b5e9-ede784e33395
+:END:
+#+title: Zotero Setup
+#+filetags: :Tools:
+
+* The User's Settings (Zotero 7)
+| Area | Setting |
+|---|---|
+| General | Customize the file name format: ~{{citationKey}}~ , so attachments are named after the citation key |
+| Sync | File syncing over WebDAV; download files "as needed" |
+| Export | Item format: Better BibTeX |
+
+* Better BibTeX
+Plugin that gives every item a stable citation key and keeps a ~.bib~ file up to date (installed from the GitHub releases page as an ~.xpi~ ; the user used 7.0.50).
+- Citation key formula: ~shorttitle(3,3)+year+authorsAlpha~ (syntax: retorque.re/zotero-better-bibtex/citing/)
+- Keep keys unique: across all libraries
+- Automatic export: on change (the default)

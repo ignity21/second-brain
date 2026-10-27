@@ -1,0 +1,34 @@
+:PROPERTIES:
+:ID:       745af194-1a85-4f7a-94ff-940cf20532c3
+:ROAM_ALIASES: "Docker 与 Kubernetes"
+:VERIFIED_WITH: Docker 29.9.1 (2026-10-27)
+:END:
+#+title: Docker and Kubernetes Basics
+#+filetags: :Tools:
+
+* Docker Image Lifecycle
+| Step | Command | Notes |
+|---|---|---|
+| Build from a Dockerfile | ~docker build -t my-app .~ | ~-t~ names (tags) the image |
+| List, remove | ~docker images~ , ~docker rmi my-app~ | |
+| Publish | ~docker login~ , ~docker tag my-app user/my-app~ , ~docker push user/my-app~ | Pushing to Docker Hub needs the image named under your username |
+| Download | ~docker pull user/my-app~ | |
+
+* Debugging a Container Without Tools
+Slim images often have no shell utilities ( ~ip~ , ~curl~ , ~ps~ ). Two ways to use tools from elsewhere inside the container's namespaces:
+- *Share its namespaces with a tool container*: ~docker run --rm -it --network container:<name> <image-with-tools>~ (also ~--pid container:<name>~ ). Verified: a second container started this way reached the first one's server on ~127.0.0.1:8000~ .
+- *Enter the namespaces with the host's tools*: ~nsenter -t $(docker inspect -f '{{.State.Pid}}' <name>) -n ip addr~ runs the host's ~ip~ in the container's network namespace. Needs root; as a normal user it fails with "reassociate to namespaces failed: Operation not permitted". ~nsenter~ ships with util-linux; the old ~jpetazzo/nsenter~ image that installed it is no longer needed.
+
+* Kubernetes Troubleshooting Order
+Debug from the bottom up: Pods, then the Service, then the Ingress.
+
+| Layer | Symptom | Check | Common causes |
+|---|---|---|---|
+| Pod | ~Pending~ | ~kubectl describe pod~ | Cluster full, ResourceQuota limits, PersistentVolumeClaim pending; not assigned to a node: scheduler problem |
+| Pod | ~ImagePullBackOff~ | ~kubectl describe pod~ | Wrong image name or tag, private registry without pull credentials |
+| Pod | ~CrashLoopBackOff~ | ~kubectl logs <pod> --previous~ | The app crashes, missing ~CMD~ in the Dockerfile, failing liveness probe |
+| Pod | Running but not Ready | ~kubectl describe pod~ | Failing readiness probe |
+| Pod | Ready but unreachable | ~kubectl port-forward <pod> 8080:<port>~ | The app listens on ~127.0.0.1~ instead of ~0.0.0.0~ , or on a port other than ~containerPort~ |
+| Service | No endpoints | ~kubectl describe service~ | Selector does not match the Pod labels |
+| Service | Endpoints but unreachable | ~kubectl port-forward service/<name> 8080:<port>~ | ~targetPort~ does not match the ~containerPort~ |
+| Ingress | No backends, or wrong backend | ~kubectl describe ingress~ | ~service.name~ / ~service.port.number~ do not match the Service; otherwise an ingress controller issue |

@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       53273cbd-8b59-468b-a173-d8da1b863133
+:END:
+#+title: Keycloak
+#+filetags: :Tools:
+
+* Concepts
+Keycloak is an identity provider: applications (clients) delegate login to it and receive OpenID Connect tokens describing the user.
+
+| Concept | Analogy | Purpose |
+|---|---|---|
+| Realm | Isolated tenant / namespace | Separates an entire user space: users, clients and settings |
+| Client | An application | Something that asks Keycloak to authenticate users |
+| Group / subgroup | Department / team | Manage users in bulk by membership; members inherit the group's role mappings |
+| Role mapping | Permission label | What a user is allowed to do; realm roles are global, client roles belong to one client |
+| Client scope | A reusable bundle of mappers | Decides which claims go into the tokens of the clients it is bound to |
+| Mapper | A rule that writes a claim | Copies a role, group membership, user attribute or constant into the token |
+
+* Configuration Paths (Admin Console)
+| Task | Path |
+|---|---|
+| Client role | Clients → <client> → Roles → Create role |
+| Shared client scope | Client Scopes → Create; bind it with Clients → <client> → Client scopes → Add client scope |
+| Constant claim for every token | <client scope> → Mappers → Add by configuration → Hardcoded claim |
+| Per-group values (recommended in the user's notes) | Groups → <group> → Attributes; then a "User Attribute" mapper with the same name in the client scope, or a "Group Membership" mapper for the group path |
+| Per-role values | Clients → <client> → Roles → <role> → Attributes |
+
+* Pitfalls
+- Each mapper has its own switches *Add to ID token*, *Add to access token* and *Add to userinfo*. A claim that is missing from one token type is usually switched off there.
+- *Include in token scope* on a client scope only controls whether the scope's *name* appears in the access token's ~scope~ claim; its mappers apply either way.
+- TODO verify: whether a "User Attribute" mapper picks up attributes set on the user's groups (the user's notes were unsure); test with a user in a group before relying on it.

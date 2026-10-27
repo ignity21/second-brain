@@ -1,0 +1,60 @@
+#+title: Tools
+
+* Deck
+:PROPERTIES:
+:ANKI_DECK: RoamCards::Tools
+:END:
+
+** NGINX ~proxy_pass~ trailing slash
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+With ~location /api/ { ... }~ , what path does the backend receive for a request to ~/api/users~ with ~proxy_pass http://backend/;~ and with ~proxy_pass http://backend;~ ?
+
+*** Back
+- With a URI part (trailing ~/~ ): the matched prefix ~/api/~ is replaced, so the backend gets ~/users~ .
+- Without a URI part: the original URI is passed unchanged, ~/api/users~ .
+
+Source: NGINX
+
+** NGINX root vs alias
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+For ~location /images/ { ... }~ and a request to ~/images/a.png~ , which file does ~root /data;~ serve, and which does ~alias /data/;~ serve?
+
+*** Back
+- ~root /data;~ appends the whole URI: ~/data/images/a.png~ .
+- ~alias /data/;~ replaces the matched prefix: ~/data/a.png~ .
+
+Source: NGINX
+
+** Ansible command vs shell module
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~ansible web -a "cat /var/log/app.log | grep ERROR"~ prints an error from ~cat~ instead of filtering. Why, and what should you use?
+
+*** Back
+~-a~ alone runs the command module, which executes the program directly without a shell, so ~|~ and ~grep~ are passed to ~cat~ as file names. Use ~-m ansible.builtin.shell -a "..."~ for pipes, redirects and variables.
+
+Source: Ansible
+
+** Kubernetes Service without endpoints
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~kubectl describe service web~ shows no endpoints although the Pods are Running and Ready. What is the usual cause?
+
+*** Back
+The Service's selector does not match the Pods' labels, so no Pod is selected. Compare ~spec.selector~ with the Pod labels ( ~kubectl get pods --show-labels~ ).
+
+Source: Docker and Kubernetes Basics

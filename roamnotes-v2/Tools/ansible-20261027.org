@@ -1,0 +1,49 @@
+:PROPERTIES:
+:ID:       183ad4d8-6a07-43b3-80b0-dd2f321f3c2d
+:VERIFIED_WITH: ansible-core 2.21.5 on Python 3.13 (2026-10-27)
+:END:
+#+title: Ansible
+#+filetags: :Tools:
+
+* Mental Model
+Ansible configures machines over SSH with nothing installed on them except Python: the control machine pushes small modules, runs them, and removes them.
+- *Inventory*: which hosts exist, grouped, with variables per host and per group.
+- *Modules*: units of work ( ~copy~ , ~file~ , ~apt~ , ~service~ , ~shell~ …). Most are idempotent: they describe a desired state ( ~state=started~ ) and only change something when the host differs, so running them twice is safe.
+- *Ad hoc commands* run one module on a group from the command line; *playbooks* (YAML) list the tasks to apply in order and are what you keep in version control.
+
+* Inventory
+#+begin_src yaml
+group1:
+  hosts:
+    host_local:                  # alias used in ansible commands
+      ansible_host: localhost
+      ansible_connection: local
+      proxy: test.sock5          # a host variable
+    host_remote:
+      ansible_host: foo.remote   # domain name or IP
+      ansible_connection: ssh
+      ansible_user: testuser     # default: the current local user
+  vars:                          # group variables
+    ntp_server: ntp.example.com
+group_all:
+  children:
+    group1:
+#+end_src
+
+Check it with ~ansible-inventory -i inventory.yaml --graph~ (verified: ~group_all~ → ~group1~ → both hosts) and ~ansible -i inventory.yaml all -m ping~ .
+
+* Capability Map
+| Need | Command |
+|---|---|
+| Install | ~pipx install --include-deps ansible~ , or the distribution package |
+| Sample configuration file | ~ansible-config init --disabled > ansible.cfg~ |
+| Run a command on a group | ~ansible group1 -a "uptime"~ ( ~-f 5~ for 5 hosts in parallel, ~-u~ remote user) |
+| Copy a file, set permissions | ~-m ansible.builtin.copy -a "src=/etc/hosts dest=/tmp/hosts"~ , ~-m ansible.builtin.file -a "dest=/srv/b.txt mode=600 owner=..."~ |
+| Install a package | ~-m ansible.builtin.apt -a "name=build-essential" --become --ask-become-pass~ |
+| Start a service | ~-m ansible.builtin.service -a "name=httpd state=started"~ |
+| SSH keys without typing passphrases | ~ssh-agent~ , =ssh-add ~/.ssh/key= |
+
+* Pitfalls
+- *The command module bypasses the shell*: ~-a~ alone uses it, so pipes, redirects and variables are passed as literal arguments. Verified: ~-a "echo hi | tr a-z A-Z"~ printed =hi | tr a-z A-Z= ; with ~-m ansible.builtin.shell~ it printed =HI= .
+- *sudo*: ~become: true~ in the playbook (or ~--become~ ) plus a password via ~--ask-become-pass~ . Adding ~NOPASSWD: ALL~ to sudoers avoids the prompt but lets anything running as that user become root without a password.
+- *Control-node Python*: in this check, ansible-core failed to start under Python 3.15 ( ~AttributeError~ in its patches of ~dataclasses~ ) and worked under 3.13. Run it with a Python version the release supports.
