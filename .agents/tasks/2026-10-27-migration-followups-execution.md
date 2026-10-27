@@ -44,6 +44,7 @@ Doom 配置（`~/.config/doom/modules/cc/notes`）按目录动态识别类别，
   - LinearAlgebra：Eigenvectors 的特征向量一节原本没写完，补上特征向量和 $M^{10}=PD^{10}P^{-1}$；The Hessian 的判别条件只对两个变量成立，改为按特征值判别，并用笔记自己的三元例子作反例；Rotation Matrix 注明该形式对列向量是顺时针旋转；Linear Transformation 中 SVD 的 $U$ 为 $m\times m$；Matrix 的可逆性测试（原为 ~assert LA.inv(M) != 0~ ）、 ~angle30~ 、 ~np.array[[...]]~ 语法。
   - Statistics：Bessel 校正公式缺平方；Pearson 公式缺 $1/n$；Bootstrap 中由 SE 估计总体标准差的代码写反（应为 ~standard_error * np.sqrt(n)~ ）；P-Values 的定义补上「至少同样极端」并说明不是 $H_0$ 为真的概率；T-Test 的 ~std(df=1)~ 、Normal Distribution 的 ~std1~ 笔误。
 - 2026-10-27：验证：改动的 Org 文件行内标记检查只剩 Personal 笔记中中文之间的单个 `+` 、 `/` （不构成标记）；所有 ID 和 file 链接存在；新节点唯一主父节点、可从根到达；执行了 `org-roam-db-sync`（临时 daemon，共 475 个节点）。
+- 2026-10-27：用户确认后提交并推送（`2b66184..6fbe580`）；Publish 工作流 run 40451329464 的 build、deploy 均成功，线上 `data/graphdata.json` 已包含 Programming、Personal 和新硬件、Python 笔记的节点。
 
 ## 遗留问题（未处理，供以后整理这些笔记时参考）
 
