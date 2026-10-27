@@ -55,3 +55,5 @@ Status: Complete — 批次 1–8 均已完成（2026-10-27）
 ## 其他遗留
 
 C++ 和 Trading 的 Anki 卡片另见 `2026-10-26-cpp-trading-anki-cards.md`，与本计划互不依赖。
+
+C++、Trading 和本计划中决定不迁或延后的 6 篇旧笔记（ZeroMQ、Literal、`std::istringstream`、Static Local Variable、Motherboard、Computer Display）汇总在 `2026-10-27-unmigrated-notes-review.md`，待用户复查。
