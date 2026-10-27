@@ -1,0 +1,30 @@
+:PROPERTIES:
+:ID:       fae08b2e-d4fb-4524-8564-924d0b3fc937
+:ROAM_ALIASES: "Linux 目录结构"
+:END:
+#+title: Linux Filesystem Hierarchy
+#+filetags: :Linux:
+
+* Capability Map
+The layout follows the Filesystem Hierarchy Standard (FHS); knowing it tells you where to look for a file and what is safe to delete.
+
+| Directory | Holds | Notes |
+|---|---|---|
+| =/usr= | Almost all installed programs and libraries: =/usr/bin= , =/usr/lib= , =/usr/share= | Read-only in normal operation; *not* user files |
+| =/bin= , =/sbin= , =/lib= | Historically the minimal programs needed to boot | On merged-/usr distributions (Arch, Fedora, Debian 12+) these are symlinks into =/usr= ; on this machine =/bin → usr/bin= , and Arch also merges =/sbin= and =/usr/sbin= into =/usr/bin= |
+| =/boot= | Kernel image, initial RAM disk ( ~initramfs~ ), bootloader files such as =grub.cfg= | |
+| =/etc= | System-wide configuration | |
+| =/home= | Users' files; =/root= for root | |
+| =/var= | Data that changes while the system runs: logs ( =/var/log= ), caches, spool queues, package-manager state ( =/var/lib= ) | Often a separate partition, so runaway logs cannot fill the root file system |
+| =/run= | Runtime data since boot (PID files, sockets, =/run/user/<uid>= ), in RAM | Replaces =/var/run= and =/var/lock= , which are now symlinks to it |
+| =/tmp= | Temporary files | Cleared on reboot on most systems, and a RAM-backed tmpfs on some (Arch, Fedora); sticky bit set, so users cannot delete each other's files |
+| =/dev= | Device files: block devices (disks, read in blocks) and character devices (terminals, keyboards, read as a byte stream) | |
+| =/proc= , =/sys= | Virtual file systems exposing processes, kernel state, devices and drivers; some files are writable to change settings | See [[id:8e974bc1-a02f-4567-8e13-5e8b37b5babb][Linux /proc and sysctl Interfaces]] |
+| =/media= | Mount points for removable media, mounted automatically when plugged in | |
+| =/mnt= | Temporary mount points for file systems the administrator mounts by hand | |
+| =/opt= | Self-contained third-party packages (Chrome, some commercial software) | |
+| =/srv= | Data served by this machine (web or FTP roots) | Rarely used in practice |
+
+* Misconceptions
+** =/usr= stands for "Unix System Resources"?
+That expansion is a later backronym. =/usr= was originally where users' home directories lived on early Unix, before they moved to =/home= ; today it holds the installed software, not user files.

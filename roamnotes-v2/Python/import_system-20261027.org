@@ -1,0 +1,35 @@
+:PROPERTIES:
+:ID:       6efd9059-d477-48e0-a25e-8f3545b364c3
+:ROAM_ALIASES: "Python 导入系统"
+:VERIFIED_WITH: CPython 3.14.8 (2026-10-27)
+:END:
+#+title: Python Import System
+#+filetags: :Python:
+
+* Mental Model
+~import m~ runs ~__import__("m")~ , which does:
+1. *Resolve the name*: a relative import ( ~from . import x~ ) is resolved against the current module's ~__package__~ .
+2. *Check the cache*: if ~"m"~ is in ~sys.modules~ , return it. A module's code runs only once per process; later imports reuse the object.
+3. *Find*: ask each *finder* on ~sys.meta_path~ for a ~ModuleSpec~ . On this machine: ~BuiltinImporter~ (modules compiled into the interpreter), ~FrozenImporter~ , and ~PathFinder~ , which walks ~sys.path~ and uses the path hooks ( ~zipimporter~ for zip files, ~FileFinder~ for directories).
+4. *Load*: the spec's *loader* creates the module object, inserts it into ~sys.modules~ *before* executing it, then executes the code. Loaders include ~SourceFileLoader~ ( ~.py~ ), ~SourcelessFileLoader~ ( ~.pyc~ only) and ~ExtensionFileLoader~ (C extensions; ~math~ is one).
+5. Bind the name in the importing namespace.
+
+Each module records how it was imported: ~__spec__~ (the ModuleSpec), ~__loader__~ , ~__package__~ (the package for relative imports), ~__name__~ , and ~__file__~ .
+
+* Running Scripts and ~__main__~
+The script being run gets the name ~__main__~ , not its file name. Hence the ~if __name__ == "__main__":~ guard, and two consequences:
+- Running ~python pkg/run_me.py~ gives the module no parent package, so a relative import in it fails with =ImportError: attempted relative import with no known parent package= . Running it as ~python -m pkg.run_me~ from the project root sets ~__package__~ and works (both verified).
+- If a module is both run as a script and imported elsewhere, it is loaded twice, as ~__main__~ and under its real name, with separate globals.
+
+* Pitfalls
+- *Shadowing the standard library*: ~sys.path[0]~ is the script's directory (the empty string for ~-c~ and the REPL, meaning the current directory). A local ~json.py~ is imported instead of the standard library's ~json~ (verified). ~python -I~ removes it from the path.
+- *Circular imports*: because a module is in ~sys.modules~ before its code finishes, a second module importing it back gets a partially initialized module, and ~from a import name~ fails if ~name~ is not defined yet. Move the import into the function that needs it, or restructure.
+- *Reloading does not update references*: ~importlib.reload(m)~ re-executes the module, but objects created earlier and names bound with ~from m import x~ still refer to the old versions.
+
+* Capability Map
+| Need | Use |
+|---|---|
+| Import a module by name at run time | ~importlib.import_module("pkg.mod")~ |
+| See where a module came from | ~mod.__spec__.origin~ , ~python -c "import m; print(m.__file__)"~ |
+| Trace imports and their time | ~python -X importtime -c "import m"~ |
+| Explain the details | "How the Python import system works" in the Python behind the scenes series (tenthousandmeters.com) |

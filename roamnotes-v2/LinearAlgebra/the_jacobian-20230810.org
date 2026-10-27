@@ -6,7 +6,7 @@
 
 * Jacobian Vector
 - Partial derivatives: f respect to t
-$$f(x, y)=\frac{\partial f}{\partial x}\frac{dx}{dt} + \frac{\partial f}{\partial y}\frac{dy}{dt}$$
+$$\frac{df}{dt}=\frac{\partial f}{\partial x}\frac{dx}{dt} + \frac{\partial f}{\partial y}\frac{dy}{dt}$$
 
 - Given function: $f(x_1, x_2, x_3, ...)$
 
@@ -33,3 +33,14 @@ $$J=\begin{bmatrix}\frac{\partial u}{\partial x} & \frac{\partial u}{\partial y}
 =\begin{bmatrix}1 & -2 \\ -2 & 3\end{bmatrix}$$
 
 The gradients are constant everywhere.
+
+* Multivariate Chain Rule
+When $f$ depends on $t$ through a vector $\vec{x}(t)$ , the sum above becomes a product of the Jacobian row vector and the derivative vector:
+
+$$\frac{df}{dt}=\frac{\partial f}{\partial \vec{x}}\frac{d\vec{x}}{dt}$$
+
+With one more layer, $\vec{x}(\vec{u}(t))$ , insert the Jacobian matrix of $\vec{x}$ with respect to $\vec{u}$ :
+
+$$\frac{df}{dt}=\frac{\partial f}{\partial \vec{x}}\frac{\partial \vec{x}}{\partial \vec{u}}\frac{d\vec{u}}{dt}$$
+
+Each factor is a Jacobian, and the shapes chain like matrix multiplication: $(1 \times n)(n \times m)(m \times 1)$ . Backpropagation in neural networks is this product evaluated from the left, one layer at a time.

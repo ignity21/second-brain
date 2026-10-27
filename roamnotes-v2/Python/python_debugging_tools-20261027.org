@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       949864f8-e572-43ae-b269-92bfd62d3605
+:ROAM_ALIASES: "Python 调试工具"
+:END:
+#+title: Python Debugging Tools
+#+filetags: :Python:
+
+* Capability Map
+| Need | Tool | How |
+|---|---|---|
+| Stop and inspect at a point | ~pdb~ | ~breakpoint()~ in the code; ~PYTHONBREAKPOINT=0~ disables all of them |
+| Better print debugging: prints the expression and its value, with file and line | icecream | ~from icecream import ic; ic(x, f(y))~ |
+| Log every line a function executes and how local variables change | PySnooper | ~@pysnooper.snoop()~ on the function |
+| Trace calls across modules without editing them, filtered by module or function | hunter | ~hunter.trace(module="posixpath", action=hunter.CallPrinter)~ |
+| See the bytecode a function compiles to | ~dis~ | ~dis.dis(func)~ |
+| Timeline of calls across threads and processes | VizTracer, see [[id:5a4eceee-3c7b-4eb8-937b-94e439bbf33e][VizTracer for Python]] | |
+
+* Choosing
+- One value at one moment: ~ic()~ ; remove the calls before committing.
+- "How did this variable get this value inside this function?": PySnooper on that function.
+- "Which code path runs, across files I do not want to edit?": hunter, filtered to the modules of interest; unfiltered tracing produces enormous output.
+- Questions about what Python does under the hood (is this one bytecode or several, which makes ~x += 1~ not atomic across threads): ~dis~ .

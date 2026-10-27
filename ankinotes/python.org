@@ -126,3 +126,108 @@ With current ~line_profiler~ (4.1+), how do you keep ~@profile~ decorators in th
 ~from line_profiler import profile~. The decorator is a no-op unless the environment variable ~LINE_PROFILE=1~ is set (or the script runs under ~kernprof~); with it set, results are written to ~profile_output.txt~. The old hand-written no-op ~profile~ shim is unnecessary.
 
 Source: Python Profiling
+
+** Why dicts keep insertion order
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+How is a CPython ~dict~ laid out so that iteration follows insertion order? Does a ~set~ keep order too?
+
+*** Back
+Two arrays: a dense entries array of ~(hash, key, value)~ appended in insertion order, and a sparse hash table whose slots only hold indices into it. Iteration walks the entries array. A ~set~ is a plain hash table of keys with no entries array, so it has no order.
+
+Source: Python dict and set Internals
+
+** When a dict resizes
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+In current CPython, when does a dict's hash table resize, and what sizes does it take?
+
+*** Back
+When it is about two-thirds full; sizes are powers of two starting at 8 (resizes happen at the 6th, 11th, 22nd, 43rd insert). Older material showing 8 → 18 → 39 → 81 describes Python 2. Resizing is O(n) once in a while, O(1) amortized.
+
+Source: Python dict and set Internals
+
+** __eq__ without __hash__
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+A class defines ~__eq__~ but not ~__hash__~ . What happens when you put an instance in a set?
+
+*** Back
+~TypeError~ (in 3.14: "cannot use 'A' as a set element (unhashable type: 'A')"): defining ~__eq__~ sets ~__hash__~ to ~None~ . Define ~__hash__~ from the same (immutable) fields that ~__eq__~ compares.
+
+Source: Python dict and set Internals
+
+** Circular imports
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Module ~a~ imports ~b~ , and ~b~ runs ~from a import name~ at the top. Why can this fail with ImportError even though ~name~ is defined in ~a~ ?
+
+*** Back
+~a~ is put into ~sys.modules~ before its code finishes. When ~b~ imports it back it gets the partially initialized module, and ~name~ is not defined yet if it comes after ~import b~ in ~a~ . Move the import into the function that needs it, or restructure.
+
+Source: Python Import System
+
+** Relative import in a script
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~python pkg/run_me.py~ fails with "attempted relative import with no known parent package" because the file contains ~from . import helper~ . Why, and how do you run it?
+
+*** Back
+Run as a script, the module is named ~__main__~ with no parent package, so the relative import cannot be resolved. Run it as a module from the project root: ~python -m pkg.run_me~ , which sets ~__package__~ .
+
+Source: Python Import System
+
+** Shadowing the standard library
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+A script in a directory that also contains ~json.py~ does ~import json~ and gets errors about missing ~json.loads~ . Why?
+
+*** Back
+~sys.path[0]~ is the script's directory, searched before the standard library, so the local ~json.py~ is imported instead. Rename the file (and delete its ~__pycache__~ ), or run with ~python -I~ .
+
+Source: Python Import System
+
+** SQLAlchemy 2.0 raw SQL
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+In SQLAlchemy 2.x, ~conn.execute("SELECT * FROM t")~ raises ~ObjectNotExecutableError~ , and inserts made inside ~with engine.connect() as conn:~ disappear. Why, and what is the fix for each?
+
+*** Back
+- Plain strings are no longer executable: wrap them in ~sa.text(...)~ and bind parameters ( ~:name~ ).
+- Every connection runs in a transaction that is rolled back on exit unless you call ~conn.commit()~ ; or use ~with engine.begin() as conn:~ , which commits on exit.
+
+Source: SQLAlchemy
+
+** pandas read_sql vs read_sql_table
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Which pandas function loads the result of a SQL query through a SQLAlchemy engine, and what does ~read_sql_table~ expect?
+
+*** Back
+~pd.read_sql(sa.text(query), engine)~ (or ~read_sql_query~ ) for a query. ~read_sql_table~ takes a table name; passing a query raises ~ValueError~ .
+
+Source: SQLAlchemy

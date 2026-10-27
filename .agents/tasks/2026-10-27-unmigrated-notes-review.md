@@ -2,7 +2,7 @@
 
 Status: Open，等用户逐篇检查
 
-C++、Trading 和 Linux/OS 三次迁移完成后（以及剩余笔记迁移计划中），源笔记全部留在 `roamnotes/` 作备份。下面前 6 篇是这三次迁移的范围内、经决定 *没有迁入* `roamnotes-v2/` 的笔记，后 8 篇是剩余笔记迁移计划中决定不迁的个人内容，与已迁移的备份区分开。用户检查后决定：迁入（按 note-migration skill，保留原 ID），或确认不迁。
+C++、Trading 和 Linux/OS 三次迁移完成后（以及剩余笔记迁移计划中），源笔记全部留在 `roamnotes/` 作备份。下面前 6 篇是这三次迁移的范围内、经决定 *没有迁入* `roamnotes-v2/` 的笔记，其后是剩余笔记迁移计划中决定不迁的个人内容和其他笔记，与已迁移的备份区分开。用户检查后决定：迁入（按 note-migration skill，保留原 ID），或确认不迁。
 
 `Default/` 其余未迁笔记由 `2026-10-27-remaining-categories-migration.md` 统一规划；其中决定不迁的个人内容（书、英语、游戏）也列在本清单。
 
@@ -24,6 +24,10 @@ C++、Trading 和 Linux/OS 三次迁移完成后（以及剩余笔记迁移计�
 | `Default/oxygen_not_included.org` | `dcc27a97-92dc-4e4f-ae2a-d0a8979a05c7` | 缺氧开局安排与技巧 | 同上 | 需要时另建个人类别 | 同上 |
 | `Games/mc_server-20240721.org` | `f75bc364-5441-414d-b48d-5e35c41ca0ec` | PaperMC / Forge 服务器安装 | 同上 | 同上 | 同上 |
 | `Games/warhammer3-20230820.org` | `35ca03c6-3482-48e7-9577-3bc2a218ff26` | 战锤 3 高精种族、法术、亲随 | 同上 | 同上 | 同上 |
+| `Default/netcat-20240922.org` | `94c3d3d6-9be5-46fa-82ad-426fdd0ffe72` | netcat 速查截图 | 可随时查询的命令（剩余笔记迁移批次 1） | 写成 Linux Network Tools 下的一篇工具笔记 | `2026-10-27-remaining-categories-migration.md` |
+| `Default/python_cookbook-20250102.org` | `f3b97038-dc5e-4f69-aa6d-8466b26df753` | 序列解包、 ~deque(maxlen)~ 、 ~heapq~ 用法 | 可查询的基础用法；堆的用法已在 Algorithms 的 Heaps and Priority Queues（批次 4） | 通常不需要 | 同上 |
+| `Default/sml-20230802.org` | `499faa16-204e-40a9-9792-63107b2cdb08` | Coursera Programming Languages 课的 SML 语法与函数求值规则 | 不在任何学习目标内（批次 4） | 迁入 `Unsorted/` | 同上 |
+| `Default/calculus-20230809.org` | `fc70dfaa-fbe9-4c89-a23b-72ac83d6d917` | 微积分速查截图（多元链式法则已并入 LinearAlgebra 的 The Jacobian） | 截图，可查询（批次 4） | 通常不需要 | 同上 |
 
 另有一处部分内容未迁：`Default/computer_hardware` 的 Architecture、Glossary 两节（CPU、内存控制器与内存的截图，MCC、地址总线、时钟、POST、UEFI 等词汇）。该文件的 ID 已用作新索引 CPU and Memory Hardware。
 
@@ -35,4 +39,5 @@ C++、Trading 和 Linux/OS 三次迁移完成后（以及剩余笔记迁移计�
 - [ ] Static Local Variable
 - [ ] Motherboard
 - [ ] Computer Display
+- [ ] netcat、Python Cookbook、SML、Calculus
 - [ ] 个人内容 8 篇（Atomic Habits、Books、English、English Grammar、Have Fun、Oxygen Not Included、MC Server、Warhammer3）

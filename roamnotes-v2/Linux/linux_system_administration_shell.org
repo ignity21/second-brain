@@ -11,3 +11,4 @@
 * [[id:956bf88a-baa4-459c-aebc-a1a29260efb5][Shell Startup Files and Environment Variables]]
 * [[id:08fd1b02-968d-42e0-851f-f6b33c58e281][Shell Scripting Pitfalls]]
 * [[id:3dc23ed1-a507-4c85-bcfe-3ba0409c0c7c][Text Processing]]
+* [[id:fae08b2e-d4fb-4524-8564-924d0b3fc937][Filesystem Hierarchy]]

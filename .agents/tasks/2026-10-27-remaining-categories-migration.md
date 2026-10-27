@@ -1,6 +1,6 @@
 # 迁移剩余旧笔记（Default/、Games/）的总计划
 
-Status: In progress — 归属方案已确认（2026-10-27）；批次 1–3 完成，下一步批次 4
+Status: In progress — 归属方案已确认（2026-10-27）；批次 1–4 完成，下一步批次 5
 
 C++、Trading、Linux/OS 三轮迁移之后，`roamnotes/` 中从未进入任何迁移计划的笔记共 130 篇（`Default/` 128 篇、`Games/` 2 篇），约 3,700 行；另加复查清单里延后的 `C++/zeromq`。旧根 `Default/contents.org` 不迁（其链接的 ID 均已迁移）。
 
@@ -103,7 +103,7 @@ DevOps、个人工具、前端作为 `Tools/` 下的分组，全部「知道」�
 - [x] 批次 1：Network 剩余（2026-10-27）
 - [x] 批次 2：Algorithms（2026-10-27）
 - [x] 批次 3：SystemDesign（2026-10-27）
-- [ ] 批次 4：Python 与零散归属
+- [x] 批次 4：Python 与零散归属（2026-10-27）
 - [ ] 批次 5：DevOps、工具、前端
 - [x] 批次 6：个人内容（不迁，已列入复查清单）
 - [x] 复查清单 `2026-10-27-unmigrated-notes-review.md` 中的 ZeroMQ 随批次 3 处理
@@ -203,3 +203,23 @@ System Design (882501dd，原 system_design；4 个标题级 ID 废弃)
 Anki：新建 `ankinotes/systemdesign.org`（Deck `RoamCards::SystemDesign`），31 张（英语 29、中文 2）。
 
 验证：行内标记检查为空；3 篇 TOC 已生成；全库结构检查通过；`org-roam-db-sync` 完成。
+
+## 批次 4 执行记录（Python 与零散归属）
+
+| 旧笔记 | 去向 |
+|---|---|
+| dictionary `6694ff04` | 新笔记 Python dict and set Internals，接在 Python Language Features 下（出度 5 → 7，另一篇是下一行） |
+| import_system `6efd9059` | 新笔记 Python Import System，同上；原图片链接 `file:.../resources/...` 本就失效，不迁 |
+| py_troubleshooting `949864f8` | 新笔记 Python Debugging Tools（「知道」档），接在 Python Development Practices 下（5 → 6），引用 Python Profiling 的 VizTracer 标题节点 |
+| sqlalchemy `65ffd859` | 新笔记 SQLAlchemy，接在 Python Third-Party Libraries 下（5 → 6）；原示例是 1.x API，改写为 2.x 并加版本漂移表 |
+| linux_directories `fae08b2e` | 新笔记 Linux Filesystem Hierarchy，接在 Linux System Administration and Shell 下（6 → 7）；改正 =/user= 笔误和「Unix System Resources」的说法，补 merged /usr |
+| multivariate_derivative `a6bfbb45` | 并入 LinearAlgebra 的 The Jacobian（新增 Multivariate Chain Rule 一节，并把原有公式左边的 f(x, y) 改为 df/dt），ID 废弃 |
+| 出入金流程 `b09d29da` | 并入 Trading 的 Cryptocurrency Trading，作为「我的出入金路线（2026-06） :mine:」一节（用户自己的路线，原样保留），ID 废弃 |
+| python_modules、pyside6、languages、calculus（索引）| 不迁：旧索引或空笔记；calculus 的速查截图列入复查清单 |
+| python_cookbook、sml | 不迁，列入复查清单 |
+
+核对（CPython 3.14.8）：dict 在第 1、6、11、22、43、86、171 次插入时扩容（ ~sys.getsizeof~ ），set 在第 5、19、77 次；import：本机 ~sys.meta_path~ 为 DistutilsMetaFinder（setuptools 注入）、BuiltinImporter、FrozenImporter、PathFinder，path hooks 为 zipimporter 与 FileFinder，脚本方式运行相对导入报错、 ~-m~ 正常，本地 =json.py= 遮蔽标准库；SQLAlchemy 2.1.6 / pandas 3.1.0（scratchpad `sqla/check.py`）：无 ~table_names~ 、字符串执行报 ~ObjectNotExecutableError~ 、 ~connect()~ 不提交即回滚、 ~read_sql_table~ 传查询报 ~ValueError~ ；merged /usr：本机 =/bin= 、 =/sbin= 、 =/var/run= 均为符号链接。
+
+Anki：`ankinotes/python.org` 新增 8 张（dict、import、SQLAlchemy）。Debugging Tools、Filesystem Hierarchy 是「知道」档，不制卡；链式法则所在的 LinearAlgebra 没有 Deck，本批不新建。
+
+验证：行内标记检查为空（ =decorator= 笔记中「函数/类」的旧误报除外）；全库结构检查通过；`org-roam-db-sync` 完成。

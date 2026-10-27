@@ -1,0 +1,61 @@
+:PROPERTIES:
+:ID:       65ffd859-1077-49ff-b553-11eed302b111
+:VERIFIED_WITH: SQLAlchemy 2.1.6, pandas 3.1.0 (2026-10-27)
+:END:
+#+title: SQLAlchemy
+#+filetags: :Python:Database:
+
+* Positioning
+SQLAlchemy is Python's standard database toolkit, in two layers: *Core* (an engine with connection pooling, and SQL expressions built in Python) and the *ORM* (classes mapped to tables, sessions). For analysis work the common use is Core: connect, run SQL, load results into pandas.
+
+* Mental Model
+- The ~Engine~ is a factory and a connection pool for one database URL; create it once per process.
+- Work happens on a ~Connection~ inside a ~with~ block. Since 2.0 every connection runs in a transaction: ~engine.connect()~ rolls back on exit unless you call ~conn.commit()~ ; ~engine.begin()~ commits on exit (rolls back on an exception).
+- Raw SQL strings must be wrapped in ~text()~ , with named parameters ( ~:name~ ) instead of string formatting.
+
+* Core Vocabulary
+#+begin_src python :results output
+import warnings; warnings.simplefilter("error")
+import sqlalchemy as sa
+import pandas as pd
+
+engine = sa.create_engine("sqlite:///:memory:")
+
+with engine.begin() as conn:                    # commits on exit
+    conn.execute(sa.text("CREATE TABLE orders (id INTEGER PRIMARY KEY, amount REAL)"))
+    conn.execute(sa.text("INSERT INTO orders (amount) VALUES (:a)"),
+                 [{"a": 10.0}, {"a": 20.5}])    # a list of dicts: executemany
+
+assert sa.inspect(engine).get_table_names() == ["orders"]
+
+with engine.connect() as conn:
+    rows = conn.execute(sa.text("SELECT * FROM orders WHERE amount > :m"), {"m": 15}).all()
+    assert rows == [(2, 20.5)]
+
+with engine.connect() as conn:                  # no commit: rolled back on exit
+    conn.execute(sa.text("INSERT INTO orders (amount) VALUES (99)"))
+with engine.connect() as conn:
+    assert conn.execute(sa.text("SELECT count(*) FROM orders")).scalar() == 2
+
+df = pd.read_sql(sa.text("SELECT * FROM orders"), engine)   # a query
+assert df.shape == (2, 2)
+assert pd.read_sql_table("orders", engine).shape == (2, 2)  # a whole table by name
+engine.dispose()
+print("ok")
+#+end_src
+
+#+RESULTS:
+: ok
+
+* Pitfalls
+- *Version drift (1.x → 2.0)*: tutorials written for 1.x fail on 2.x.
+
+  | 1.x | 2.x |
+  |---|---|
+  | ~engine.table_names()~ | ~sa.inspect(engine).get_table_names()~ (the old method no longer exists) |
+  | ~conn.execute("SELECT ...")~ | ~conn.execute(sa.text("SELECT ..."))~ ; a plain string raises ~ObjectNotExecutableError~ |
+  | Autocommit after each statement | Explicit ~conn.commit()~ , or ~engine.begin()~ |
+  | ~df.columns = rs.keys()~ after ~fetchall()~ | ~pd.read_sql(...)~ builds the DataFrame with column names |
+
+- ~pd.read_sql_table~ takes a *table name*; passing a query raises ~ValueError~ . Use ~pd.read_sql~ (or ~read_sql_query~ ) for queries.
+- Formatting values into the SQL string opens the door to SQL injection and breaks on quotes; always bind parameters.

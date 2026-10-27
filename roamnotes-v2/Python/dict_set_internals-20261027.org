@@ -1,0 +1,37 @@
+:PROPERTIES:
+:ID:       6694ff04-abaf-4585-ac60-7960360f1158
+:ROAM_ALIASES: "Python dict 与 set 的实现"
+:VERIFIED_WITH: CPython 3.14.8 (2026-10-27)
+:END:
+#+title: Python dict and set Internals
+#+filetags: :Python:
+
+* Mental Model
+A CPython ~dict~ is two arrays:
+- a dense *entries* array of ~(hash, key, value)~ , appended in insertion order;
+- a sparse *index* table (the hash table proper) whose slots hold only small integers pointing into the entries array.
+
+A lookup hashes the key, probes the index table (open addressing) until it finds a slot whose entry has an equal key, or an empty slot. Because entries are appended, iteration follows insertion order, a language guarantee since Python 3.7. Storing only indices in the sparse table is what makes this "compact dict" smaller than the old layout that stored full entries in every slot.
+
+A ~set~ is a plain open-addressing table of keys, without the separate entries array, so it does *not* keep insertion order.
+
+* Resizing
+The table size is a power of two, at least 8, and the dict resizes when it is about two-thirds full. Measured with ~sys.getsizeof~ while inserting integer keys:
+
+| Inserting item number | 1 | 6 | 11 | 22 | 43 | 86 | 171 |
+|---|---|---|---|---|---|---|---|
+| Size of the dict (bytes) | 64 → 224 | → 352 | → 632 | → 1168 | → 2264 | → 4688 | → 9304 |
+
+The resize points 6, 11, 22, 43, … are where 5, 10, 21, 42 used slots of tables of 8, 16, 32, 64 run out. A ~set~ grows differently: it fills to about 60% and multiplies its size by 4 while small (resizes after 5, 19, 77 items here).
+
+Resizing rebuilds the index table, so a single insert is occasionally O(n), but the amortized cost stays O(1).
+
+* Performance
+- Average O(1) lookup, insert and delete; worst case O(n) when many keys collide.
+- How evenly keys spread over the table (the load factor and the quality of the hash function) decides the number of probes. Small integers hash to themselves, which spreads consecutive integers perfectly.
+- Deleting leaves a dummy entry so probe chains are not broken; the space is reclaimed at the next resize, so a dict that grew large and then shrank keeps its memory.
+
+* Pitfalls
+- *Version drift*: older material (Python 2 era, such as the first edition of High Performance Python) describes sizes growing 8 → 18 → 39 → 81. In current CPython, sizes are powers of two, as measured above.
+- *Mutable keys*: an object used as a key must keep the same hash while it is in the dict. Defining ~__eq__~ on a class without ~__hash__~ makes its instances unhashable; defining ~__hash__~ from mutable fields and then mutating them makes the entry unreachable.
+- *Ordering is for dicts only*: rely on insertion order for ~dict~ , never for ~set~ .
