@@ -1,0 +1,69 @@
+:PROPERTIES:
+:ID:       be7a4b6e-7291-4f17-b485-285144e4bf1b
+:ROAM_ALIASES: "KMP 字符串匹配"
+:VERIFIED_WITH: Python 3.14 (2026-10-27)
+:END:
+#+title: KMP String Matching
+#+filetags: :Algorithms:
+
+* Recognition
+- 在文本中找模式串，要求最坏 O(n + m)（LT28）。
+- 与字符串「最长相等前后缀」有关：判断字符串是否由重复子串构成（LT459）、最短回文串（LT214）。
+
+实际工作中用语言内置的查找（Python 的 ~str.find~ 、 ~in~ ）即可，KMP 主要出现在面试和需要前缀函数的题里。
+
+* Core Idea
+- 暴力匹配失配时，文本指针回退、模式串从头开始，最坏 O(nm)。
+- KMP 失配时文本指针 *不回退* ：已经匹配的部分 ~p[:j]~ 是已知的，如果它的某个前缀等于后缀，就可以直接把模式串移动到让这个前缀对齐后缀的位置，从前缀之后继续比。
+- 前缀函数 ~pi[i]~ （也叫 next 数组）： ~p[:i+1]~ 的最长相等真前缀与真后缀的长度。例如 ~p = "aabaaf"~ 时 ~pi = [0, 1, 0, 1, 2, 0]~ 。失配时 ~j = pi[j - 1]~ 。
+
+* Template
+#+begin_src python :results output
+def prefix_function(p):
+    pi = [0] * len(p)
+    j = 0                              # 当前最长相等前后缀的长度
+    for i in range(1, len(p)):
+        while j > 0 and p[i] != p[j]:
+            j = pi[j - 1]              # 退到更短的候选前缀
+        if p[i] == p[j]:
+            j += 1
+        pi[i] = j
+    return pi
+
+def kmp_find(text, p):
+    """返回 p 在 text 中第一次出现的下标，没有则 -1；p 为空返回 0（与 str.find 一致）。"""
+    if not p:
+        return 0
+    pi, j = prefix_function(p), 0
+    for i, ch in enumerate(text):
+        while j > 0 and ch != p[j]:
+            j = pi[j - 1]
+        if ch == p[j]:
+            j += 1
+        if j == len(p):
+            return i - len(p) + 1
+    return -1
+
+def repeated_substring(s):
+    """LT459：s 是否由某个子串重复多次构成。"""
+    n, longest = len(s), prefix_function(s)[-1] if s else 0
+    return longest > 0 and n % (n - longest) == 0
+
+assert prefix_function("aabaaf") == [0, 1, 0, 1, 2, 0]
+for text, p in [("aabaabaaf", "aabaaf"), ("hello", "ll"), ("aaaaa", "bba"), ("abc", ""), ("", "a")]:
+    assert kmp_find(text, p) == text.find(p)
+assert repeated_substring("abab") and repeated_substring("abcabcabc")
+assert not repeated_substring("aba") and not repeated_substring("a")
+print("ok")
+#+end_src
+
+#+RESULTS:
+: ok
+
+构造前缀函数和匹配是同一段逻辑：构造时是模式串和自己匹配。
+
+* Complexity
+O(n + m) 时间，O(m) 空间。 ~while~ 循环看起来是嵌套的，但 ~j~ 每次回退至少减 1，而它总共只增加 n 次，所以回退的总次数不超过 n。
+
+* Practice
+- LT28、LT459、LT214、LT1392（最长快乐前缀，直接就是 ~pi[-1]~ ）

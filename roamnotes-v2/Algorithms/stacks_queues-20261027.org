@@ -1,0 +1,98 @@
+:PROPERTIES:
+:ID:       4b726816-d357-47d6-a932-2783ec6b1bf6
+:ROAM_ALIASES: "栈与队列"
+:VERIFIED_WITH: Python 3.14 (2026-10-27)
+:END:
+#+title: Stacks and Queues
+#+filetags: :Algorithms:
+
+* TOC :TOC_1:
+- [[#recognition][Recognition]]
+- [[#core-idea][Core Idea]]
+- [[#template][Template]]
+- [[#variants][Variants]]
+- [[#pitfalls][Pitfalls]]
+- [[#practice][Practice]]
+
+* Recognition
+- 后进先出：括号匹配、表达式求值、撤销 / 浏览器后退、把递归改成循环 → 栈。
+- 「每个元素左边或右边第一个比它大 / 小的元素」（下一个更高温度、柱状图最大矩形）→ 单调栈。
+- 先进先出：BFS 按层扩展、排队处理请求 → 队列；两端都要进出（滑动窗口最大值）→ 双端队列。
+- 固定容量的缓冲区，不想搬移数据 → 循环队列。
+
+* Core Idea
+- 栈和队列只是限制了访问方式的线性表，底层用动态数组或链表都可以。
+- *单调栈* ：栈中元素保持单调。新元素到来时，把破坏单调性的栈顶都弹出，每个被弹出的元素的「右边第一个更大元素」就是这个新元素。每个元素只进出栈一次，总共 O(n)。
+- *循环队列* ：数组 + 头尾两个下标，下标到末尾后回绕到 0，出队不用搬移数据。空出一个格子来区分空和满：
+  - 空： ~head == tail~
+  - 满： ~(tail + 1) % n == head~
+- 基于链表的队列可以无限排队，但请求堆积会让响应时间无限变长；基于数组的有界队列满了就拒绝或阻塞，容量是吞吐与延迟的取舍。
+
+* Template
+#+begin_src python :results output
+def next_greater(nums):
+    """每个位置右边第一个更大元素的值，没有则为 -1。"""
+    res = [-1] * len(nums)
+    stack = []                       # 存下标，对应的值从栈底到栈顶递减
+    for i, x in enumerate(nums):
+        while stack and nums[stack[-1]] < x:
+            res[stack.pop()] = x
+        stack.append(i)
+    return res
+
+def valid_brackets(s):
+    pairs = {")": "(", "]": "[", "}": "{"}
+    stack = []
+    for ch in s:
+        if ch in pairs:
+            if not stack or stack.pop() != pairs[ch]:
+                return False
+        else:
+            stack.append(ch)
+    return not stack
+
+class CircularQueue:
+    def __init__(self, k):
+        self.buf = [None] * (k + 1)  # 多留一格区分空和满
+        self.head = self.tail = 0
+
+    def enqueue(self, x):
+        if (self.tail + 1) % len(self.buf) == self.head:
+            return False             # 满
+        self.buf[self.tail] = x
+        self.tail = (self.tail + 1) % len(self.buf)
+        return True
+
+    def dequeue(self):
+        if self.head == self.tail:
+            return None              # 空
+        x = self.buf[self.head]
+        self.head = (self.head + 1) % len(self.buf)
+        return x
+
+assert next_greater([2, 1, 2, 4, 3]) == [4, 2, 4, -1, -1]
+assert next_greater([]) == []
+assert valid_brackets("([]{})") and not valid_brackets("(]") and not valid_brackets("((")
+q = CircularQueue(2)
+assert q.enqueue(1) and q.enqueue(2) and not q.enqueue(3)
+assert q.dequeue() == 1 and q.enqueue(3)
+assert [q.dequeue(), q.dequeue(), q.dequeue()] == [2, 3, None]
+print("ok")
+#+end_src
+
+#+RESULTS:
+: ok
+
+* Variants
+- 单调栈求「更小」：把比较改成 ~>~ ；要「左边第一个」就从右往左扫，或在入栈时读栈顶。
+- 滑动窗口最大值（LT239）：单调递减的 ~deque~ 存下标，队头超出窗口时从左边弹出。
+- 阻塞队列：队列空时取数据阻塞、满时插入阻塞，用于生产者-消费者。并发版本的实现见 [[id:f8a4353c-d3ec-4439-824a-23c454a71a31][C++ Lock-based Concurrent Data Structures]]；用 CAS 实现的无锁循环队列见 [[id:2569c73d-2087-4aad-89db-809f0ac3619a][C++ Lock-free Data Structures]]。
+
+* Pitfalls
+- Python 中用 ~list.pop(0)~ 当队列出队是 O(n)，用 ~collections.deque~ 的 ~popleft()~ 。
+- 单调栈里存下标而不是值：既能取值，又能算距离（LT739 要的是相隔天数）。
+
+* Practice
+- 栈：LT20（括号）、LT150（逆波兰表达式）、LT232（两个栈实现队列）
+- 单调栈：LT496、LT739、LT84
+- 队列：LT622（循环队列）、LT239（单调队列）

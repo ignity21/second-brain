@@ -1,0 +1,114 @@
+:PROPERTIES:
+:ID:       0361445c-3228-4f6c-b0da-89fc49337c78
+:ROAM_ALIASES: "动态规划"
+:VERIFIED_WITH: Python 3.14 (2026-10-27)
+:END:
+#+title: Dynamic Programming
+#+filetags: :Algorithms:
+
+* TOC :TOC_1:
+- [[#recognition][Recognition]]
+- [[#core-idea][Core Idea]]
+- [[#template][Template]]
+- [[#variants][Variants]]
+- [[#edge-cases][Edge Cases]]
+- [[#与其他范式的比较][与其他范式的比较]]
+- [[#practice][Practice]]
+
+* Recognition
+同时满足下面几条时考虑动态规划：
+1. 求最优解（最大、最小）、方案数，或能否达成。
+2. 每一步有多个选项，一个选项对应一个子状态。
+3. 整体最优解包含子问题的最优解（最优子结构）。
+4. 不同的选择路径会到达同一个子状态（重复子问题），中间结果值得缓存。
+
+* Core Idea
+动态规划简单归纳就是 *递推 + 记忆* ：定义子问题，写出子问题之间的递推关系，把每个子问题的解存起来只算一次。
+
+** 解题四步
+1. 确定 ~dp~ 数组（dp table）以及下标的含义。
+2. 确定递推公式（状态转移方程）。
+3. 初始化：举例推导前几个 ~dp~ 值。
+4. 确定遍历顺序：计算 ~dp[i]~ 时，它依赖的状态必须已经算好。
+
+例：0-1 背包（求最大价值）
+1. ~dp[i][j]~ ：只考虑前 ~i~ 个物品、背包容量为 ~j~ 时的最大价值。
+2. 第 ~i~ 个物品不放： ~dp[i-1][j]~ ；放： ~dp[i-1][j - w[i]] + v[i]~ ，取两者较大值。
+3. 没有物品时价值为 0： ~dp[0][j] = 0~ 。
+4. ~i~ 从小到大，每行内 ~j~ 任意顺序（只依赖上一行）。
+
+** 两种思路
+| | 状态转移表法 | 状态转移方程法 |
+|---|---|---|
+| 做法 | 先用回溯写出暴力解，画递归树找出重复子问题，再画状态表，按阶段逐格填 | 直接找最优子结构，写出递推公式 |
+| 方向 | 自底向上迭代 | 递归 + 缓存（自顶向下），或迭代递推 |
+| 适合 | 二维状态；行、列、值分别对应阶段、限制、最优值 | 状态多维、表画不出来时 |
+
+自顶向下是在递归上加缓存（递归的写法和栈深问题见 [[id:c2cf012a-4f1d-4d6a-993b-721e20cee9dc][Recursive Problem Solving]]）；自底向上把递归的「从上往下拆」改成循环的「从下往上算」。
+
+* Template
+#+begin_src python :results output
+from functools import cache
+
+def knapsack_01(weights, values, cap):
+    """0-1 背包，一维 dp：容量必须倒序遍历。"""
+    dp = [0] * (cap + 1)
+    for w, v in zip(weights, values):
+        for j in range(cap, w - 1, -1):      # 倒序：dp[j - w] 还是上一行（未放这个物品）的值
+            dp[j] = max(dp[j], dp[j - w] + v)
+    return dp[cap]
+
+def coin_change(coins, amount):
+    """完全背包：每种硬币可以用无限次，求最少枚数。容量正序遍历。"""
+    INF = float("inf")
+    dp = [0] + [INF] * amount
+    for c in coins:
+        for j in range(c, amount + 1):       # 正序：dp[j - c] 可能已经用过这枚硬币
+            dp[j] = min(dp[j], dp[j - c] + 1)
+    return dp[amount] if dp[amount] != INF else -1
+
+def lcs(a, b):
+    """最长公共子序列，自顶向下写法。"""
+    @cache
+    def f(i, j):                             # a[i:] 与 b[j:] 的 LCS 长度
+        if i == len(a) or j == len(b):
+            return 0
+        if a[i] == b[j]:
+            return 1 + f(i + 1, j + 1)
+        return max(f(i + 1, j), f(i, j + 1))
+    return f(0, 0)
+
+assert knapsack_01([1, 3, 4], [15, 20, 30], 4) == 35
+assert knapsack_01([2], [10], 1) == 0
+assert coin_change([1, 3, 4], 6) == 2        # 3 + 3，贪心会得到 3 枚
+assert coin_change([2], 3) == -1 and coin_change([1], 0) == 0
+assert lcs("abcde", "ace") == 3 and lcs("", "a") == 0
+print("ok")
+#+end_src
+
+#+RESULTS:
+: ok
+
+* Variants
+- *0-1 背包 vs 完全背包* ：一维写法中唯一的区别是容量的遍历方向。0-1 倒序，保证每个物品只放一次；完全背包正序，允许同一物品重复放入。
+- *求方案数* ：把 ~max~ / ~min~ 换成加法，初始化 ~dp[0] = 1~ 。求组合数时外层遍历物品、内层遍历容量；外层遍历容量、内层遍历物品得到的是排列数（LT518 与 LT377 的区别）。
+- *哨兵值* ：用 ~INF~ 表示「凑不出来」，或在 ~dp~ 表前多留一行一列，可以省掉边界判断。
+- 二维状态只依赖上一行时，可以压成一维滚动数组；思考时仍按二维画表。
+
+* Edge Cases
+- 一维 0-1 背包正序遍历：同一个物品被放入多次，结果偏大。
+- ~dp[0]~ 的含义：容量 0、空字符串、不选任何物品时的值，常常决定整个表对不对。
+- 不可达状态要和「值为 0」区分开（如 ~coin_change~ 用 ~INF~ ）。
+
+* 与其他范式的比较
+| | 与动态规划的区别 |
+|---|---|
+| 回溯（[[id:3c0f22b4-1dd8-433c-aec4-13eda95dffea][Backtracking]]） | 穷举所有路径。能用动态规划的问题都能回溯，但效率低；反过来，列出所有方案这类没有重复子问题可利用的问题只能回溯 |
+| 分治 | 子问题互不重叠（如归并排序）；动态规划正是因为子问题重叠才需要缓存 |
+| 贪心（[[id:836f3c49-46ec-4e5d-9047-6e051c9ad763][Greedy Algorithms]]） | 每步只做局部最优选择，不保留其他状态；要求问题有贪心选择性质，即局部最优能导出全局最优 |
+
+* Practice
+- 入门：LT509、LT70、LT746、LT62
+- 背包：LT416（0-1）、LT494（0-1 求方案数）、LT322（完全背包最少数量）、LT518 和 LT377（组合数与排列数）
+- 序列：LT300、LT1143、LT72
+- 打家劫舍、股票：LT198、LT121、LT309

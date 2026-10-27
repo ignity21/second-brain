@@ -1,6 +1,6 @@
 # 迁移剩余旧笔记（Default/、Games/）的总计划
 
-Status: In progress — 归属方案已确认（2026-10-27）；批次 1 完成，下一步批次 2
+Status: In progress — 归属方案已确认（2026-10-27）；批次 1–2 完成，下一步批次 3
 
 C++、Trading、Linux/OS 三轮迁移之后，`roamnotes/` 中从未进入任何迁移计划的笔记共 130 篇（`Default/` 128 篇、`Games/` 2 篇），约 3,700 行；另加复查清单里延后的 `C++/zeromq`。旧根 `Default/contents.org` 不迁（其链接的 ID 均已迁移）。
 
@@ -101,7 +101,7 @@ DevOps、个人工具、前端作为 `Tools/` 下的分组，全部「知道」�
 
 - [x] 用户确认归属方案和档位，写入 `.agents/learning-goals.md`
 - [x] 批次 1：Network 剩余（2026-10-27）
-- [ ] 批次 2：Algorithms
+- [x] 批次 2：Algorithms（2026-10-27）
 - [ ] 批次 3：SystemDesign
 - [ ] 批次 4：Python 与零散归属
 - [ ] 批次 5：DevOps、工具、前端
@@ -134,3 +134,36 @@ DevOps、个人工具、前端作为 `Tools/` 下的分组，全部「知道」�
 Anki（`ankinotes/network.org`）：改写 ARP、VLAN、3 层交换机 3 张已有卡（保留同步字段，修正三层交换机卡的 NAT 说法），新增 15 张。
 
 验证：行内标记检查为空；TOC（ARP、Netfilter 两篇加 ~TOC_1~ ）已生成；PlantUML 4 张图已渲染；全库 ID、标题、别名无重复，链接目标存在，主树唯一父节点、可达；`org-roam-db-sync` 完成（537 个节点）。
+
+## 批次 2 执行记录（Algorithms）
+
+新大类 `Algorithms/`，根索引 Algorithms 沿用旧 `algorithm` 的 ID `09857801`（其两个标题级 ID 废弃）。
+
+```
+Algorithms (09857801)
+├─ Data Structures for Algorithms (92ec20d3，原 data_structure)
+│   ├─ Linked List Techniques (f40d4fa6) ← linked_list, floyd_s_cycle_finding_algorithm（b3b36188 废弃）
+│   ├─ Stacks and Queues (4b726816) ← stack, queue（571dac23 废弃）
+│   ├─ Heaps and Priority Queues (6bda11af) ← heap, sorting_algorithm 的「多路归并」TODO
+│   └─ Binary Tree Traversal (d1d44f25) ← tree_traversal, tree（1f50f329）, preorder（9e22e9d1，Morris 标题 60aec15c）, inorder（c38e1fa9）, postorder（cb25d06b），均废弃
+├─ Sorting and Searching Algorithms（新 5327de41）
+│   ├─ Sorting Algorithms (8426d96d) ← sorting_algorithm（4 个标题级 ID 废弃）, bucket / counting / radix / shell_sort（均废弃）
+│   └─ A* Search (2b951be4) ← astar_search
+├─ Algorithm Design Paradigms（新 e6313ffb）
+│   ├─ Recursive Problem Solving (c2cf012a) ← recursion
+│   ├─ Backtracking (3c0f22b4) ← backtracking
+│   ├─ Greedy Algorithms (836f3c49) ← greedy_algorithm
+│   └─ Dynamic Programming (0361445c) ← dynamic_programming
+└─ LeetCode Problem-Solving Techniques（新 2a5c55d1）
+    ├─ Array In-place Techniques (796f0cbe，原 leetcode；2 个标题级 ID 废弃) ← leetcode, lt287（37465830）, negative_marking（00d69c0f），后两个废弃
+    └─ KMP String Matching (be7a4b6e) ← kmp（原只有视频链接，补写前缀函数与匹配模板）
+```
+
+- 所有废弃 ID 在迁移范围外没有入链（唯一的外部入链是 `contents.org` → 旧根）。
+- 资源：旧截图（A* 课程结构图、启发函数手绘、回溯树、树遍历、链表插入示意）不迁；回溯树改用 PlantUML 重画（`images/backtracking_tree.png`），A* 课程的结构改写为 Pitfalls 中的两条。`roamnotes/assets/Algorithm/` 无需迁移。
+- 补充与纠正：排序表补最坏情况和空间，基数排序空间改为 O(n + k)；后序遍历的 deepcopy 写法改为 ~prev~ 指针变体；贪心补交换论证和硬币反例；DP 补完全背包、组合数 / 排列数的循环顺序；LT287 各解法补「是否修改数组」一列。
+- 核对：14 个 Python 代码块在 Python 3.14.8 上以 ~warnings.simplefilter("error")~ 运行通过（ ~scratchpad/runblocks.py~ ）；默认递归上限 1000、超过抛 ~RecursionError~ 已实测。
+
+Anki：新建 `ankinotes/algorithms.org`（Deck `RoamCards::Algorithms`），30 张。
+
+验证：行内标记检查为空；9 篇加 ~TOC_1~ 并生成；全库结构检查通过；`org-roam-db-sync` 完成。

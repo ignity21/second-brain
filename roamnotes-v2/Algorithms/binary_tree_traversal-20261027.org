@@ -1,0 +1,155 @@
+:PROPERTIES:
+:ID:       d1d44f25-6889-4c33-a970-2ab35e6e20fd
+:ROAM_ALIASES: "二叉树遍历"
+:VERIFIED_WITH: Python 3.14 (2026-10-27)
+:END:
+#+title: Binary Tree Traversal
+#+filetags: :Algorithms:
+
+* TOC :TOC_1:
+- [[#recognition][Recognition]]
+- [[#core-idea][Core Idea]]
+- [[#template][Template]]
+- [[#complexity][Complexity]]
+- [[#variants][Variants]]
+- [[#edge-cases][Edge Cases]]
+- [[#practice][Practice]]
+
+* Recognition
+- 处理节点前需要先知道祖先的信息（路径、深度、复制树）→ 前序（中左右）。
+- 二叉搜索树要按大小顺序访问（验证 BST、第 k 小）→ 中序（左中右）。
+- 节点的结果依赖子树的结果（高度、直径、删除树、子树和）→ 后序（左右中）。
+- 按层处理、求最小深度、每层最右节点 → 层序（BFS）。
+- 面试要求 O(1) 额外空间 → Morris 遍历。
+
+* Core Idea
+- 三种深度优先遍历走的路线完全一样，区别只是在第几次经过节点时 *处理* 它：第一次到达（前序）、从左子树回来（中序）、从右子树回来（后序）。
+- 递归用的是调用栈；迭代写法就是自己维护这个栈。前序的 *访问顺序* 和 *处理顺序* 一致，所以一个栈就能直接写；中序、后序不一致，需要先一路向左压栈，回来时再处理。
+- 后序的捷径：前序是「中左右」，把左右入栈顺序对调得到「中右左」，整体反转就是「左右中」。
+
+* Template
+** 递归与迭代
+#+begin_src python :results output
+from collections import deque
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val, self.left, self.right = val, left, right
+
+def preorder(root):
+    res, stack = [], [root]
+    while stack:
+        node = stack.pop()
+        if node:
+            res.append(node.val)
+            stack.append(node.right)     # 右先入栈，左先出栈
+            stack.append(node.left)
+    return res
+
+def inorder(root):
+    res, stack, node = [], [], root
+    while node or stack:
+        if node:                         # 一路向左压栈
+            stack.append(node)
+            node = node.left
+        else:                            # 左边到底：处理栈顶，转向右子树
+            node = stack.pop()
+            res.append(node.val)
+            node = node.right
+    return res
+
+def postorder(root):
+    res, stack = [], [root]
+    while stack:
+        node = stack.pop()
+        if node:
+            res.append(node.val)         # 得到「中右左」
+            stack.append(node.left)
+            stack.append(node.right)
+    return res[::-1]                     # 反转为「左右中」
+
+def level_order(root):
+    res, q = [], deque([root] if root else [])
+    while q:
+        level = []
+        for _ in range(len(q)):          # 当前队列长度就是这一层的节点数
+            node = q.popleft()
+            level.append(node.val)
+            q.extend(c for c in (node.left, node.right) if c)
+        res.append(level)
+    return res
+
+#       1
+#      / \
+#     2   3
+#    / \
+#   4   5
+t = TreeNode(1, TreeNode(2, TreeNode(4), TreeNode(5)), TreeNode(3))
+assert preorder(t) == [1, 2, 4, 5, 3]
+assert inorder(t) == [4, 2, 5, 1, 3]
+assert postorder(t) == [4, 5, 2, 3, 1]
+assert level_order(t) == [[1], [2, 3], [4, 5]]
+assert preorder(None) == inorder(None) == postorder(None) == [] and level_order(None) == []
+print("ok")
+#+end_src
+
+#+RESULTS:
+: ok
+
+** Morris 遍历
+#+begin_src python :results output
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val, self.left, self.right = val, left, right
+
+def morris_inorder(root):
+    res, cur = [], root
+    while cur:
+        if not cur.left:
+            res.append(cur.val)
+            cur = cur.right
+            continue
+        pred = cur.left                   # 左子树中最右的节点（中序前驱）
+        while pred.right and pred.right is not cur:
+            pred = pred.right
+        if not pred.right:                # 第一次到达：建线索，进入左子树
+            pred.right = cur
+            cur = cur.left
+        else:                             # 第二次到达：左子树已处理完，拆线索
+            pred.right = None
+            res.append(cur.val)
+            cur = cur.right
+    return res
+
+t = TreeNode(1, TreeNode(2, TreeNode(4), TreeNode(5)), TreeNode(3))
+assert morris_inorder(t) == [4, 2, 5, 1, 3]
+assert morris_inorder(t) == [4, 2, 5, 1, 3]   # 线索已拆除，树结构复原
+print("ok")
+#+end_src
+
+#+RESULTS:
+: ok
+
+思路：栈的作用是「处理完左子树后跳回当前节点」。Morris 把左子树最右节点的空 ~right~ 指针临时指回当前节点，用它代替栈完成这次跳转，第二次经过时再拆掉。前序版本只需把 ~res.append~ 挪到「建线索」那一支。
+
+* Complexity
+| 写法 | 时间 | 额外空间 |
+|---|---|---|
+| 递归、迭代 | O(n) | O(h)，h 为树高，退化成链时 O(n) |
+| 层序 | O(n) | O(w)，w 为最宽一层的节点数 |
+| Morris | O(n)：每条边最多走 3 次 | O(1)，但遍历期间临时修改了树 |
+
+* Variants
+- 不反转的后序迭代：一路向左压栈；栈顶的右子树为空或刚处理过（用 ~prev~ 记住上一个处理的节点）才处理栈顶，否则转向右子树。用 ~prev~ 判断即可，不需要复制节点或修改树。
+
+* Edge Cases
+- 空树：每个函数都要直接返回空结果。
+- 退化成链的树：递归深度等于节点数，Python 默认递归上限约 1000，大输入用迭代。
+- Morris 遍历中途 ~return~ （例如找到第 k 个就停）会留下未拆的线索，树被破坏。
+
+* Practice
+- LT144、LT94、LT145（三种遍历的迭代写法）
+- LT102、LT199（层序）
+- LT98、LT230（中序与 BST）
+- LT104、LT543（后序：子树结果向上汇总）
+- LT99（Morris 中序，O(1) 空间恢复 BST）

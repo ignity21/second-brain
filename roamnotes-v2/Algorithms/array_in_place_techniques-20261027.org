@@ -1,0 +1,107 @@
+:PROPERTIES:
+:ID:       796f0cbe-2619-47ee-895d-e2a76129f20f
+:ROAM_ALIASES: "数组原地技巧"
+:VERIFIED_WITH: Python 3.14 (2026-10-27)
+:END:
+#+title: Array In-place Techniques
+#+filetags: :Algorithms:
+
+* TOC :TOC_1:
+- [[#recognition][Recognition]]
+- [[#core-idea][Core Idea]]
+- [[#template][Template]]
+- [[#lt287-各解法的比较][LT287 各解法的比较]]
+- [[#pitfalls][Pitfalls]]
+- [[#practice][Practice]]
+
+* Recognition
+- 键的范围受限（题目里只有小写字母、数字 0–9、值都在 =[1, n]= ）→ 用数组代替哈希表。
+- 原地删除、去重、移动元素，要求 O(1) 额外空间 → 快慢双指针。
+- n 个数都在 =[1, n]= 范围内，找缺失或重复，O(1) 空间 → 把值当下标：取负标记，或把数放到「它该在的位置」。
+- 找出现次数超过一半的元素，O(1) 空间 → Boyer-Moore 投票。
+
+* Core Idea
+- *数组作哈希表* ：字母只有 26 个，用 ~[0] * 26~ 计数，比字典快且省空间（LT383、LT242）。
+- *快慢指针原地改写* ：快指针扫描所有元素、找有效元素；慢指针指向新数组的下一个写入位置。快指针遇到要保留的元素就写到慢指针处，慢指针前进。
+- *取负标记* ：值都是正数且在 =[1, n]= 时，看到 ~x~ 就把 ~nums[x - 1]~ 变成负数，表示「 ~x~ 出现过」；如果它已经是负数，说明 ~x~ 是重复的。数组本身同时存了原值（取绝对值）和一个布尔标记。
+- *Boyer-Moore 投票* ：候选人与其他元素两两抵消。出现超过一半的元素抵消到最后一定还剩下。
+
+* Template
+#+begin_src python :results output
+def remove_duplicates(nums, k=1):
+    """有序数组原地去重，每个值最多保留 k 个（LT26：k=1，LT80：k=2），返回新长度。"""
+    slow = 0                                 # nums[:slow] 是结果
+    for x in nums:                           # x 由快指针读出
+        if slow < k or nums[slow - k] != x:
+            nums[slow] = x
+            slow += 1
+    return slow
+
+def find_duplicate_by_marking(nums):
+    """LT287 的取负标记解法（会修改数组）。"""
+    for x in nums:
+        i = abs(x) - 1
+        if nums[i] < 0:
+            return abs(x)
+        nums[i] = -nums[i]
+
+def find_duplicate_floyd(nums):
+    """LT287 的判圈解法：把 i -> nums[i] 看成链表，重复的数就是环的入口。不修改数组。"""
+    slow = fast = nums[0]
+    while True:
+        slow, fast = nums[slow], nums[nums[fast]]
+        if slow == fast:
+            break
+    slow = nums[0]
+    while slow != fast:
+        slow, fast = nums[slow], nums[fast]
+    return slow
+
+def majority(nums):
+    cand, cnt = None, 0
+    for x in nums:
+        if cnt == 0:
+            cand = x
+        cnt += 1 if x == cand else -1
+    return cand
+
+a = [0, 0, 1, 1, 1, 2, 3, 3]
+n = remove_duplicates(a); assert a[:n] == [0, 1, 2, 3]
+a = [1, 1, 1, 2, 2, 3]
+n = remove_duplicates(a, 2); assert a[:n] == [1, 1, 2, 2, 3]
+assert remove_duplicates([]) == 0
+assert find_duplicate_by_marking([1, 3, 4, 2, 2]) == 2
+assert find_duplicate_floyd([3, 1, 3, 4, 2]) == 3 and find_duplicate_floyd([1, 1]) == 1
+assert majority([2, 2, 1, 1, 1, 2, 2]) == 2
+print("ok")
+#+end_src
+
+#+RESULTS:
+: ok
+
+* LT287 各解法的比较
+找重复数：n + 1 个数都在 =[1, n]= 中，只有一个数重复（可能重复多次）。
+
+| 解法 | 时间 | 空间 | 修改数组 |
+|---|---|---|---|
+| 排序后找相邻相等 | O(n log n) | O(log n)（快排）/ O(n)（Timsort） | 是 |
+| 哈希集合 | O(n) | O(n) | 否 |
+| 取负标记 | O(n) | O(1) | 是 |
+| 数组作哈希表（把每个数换到下标等于它的位置） | O(n) | O(1) | 是 |
+| 对值域二分：数 ≤ mid 的元素个数 | O(n log n) | O(1) | 否 |
+| 按位统计 | O(n log n) | O(1) | 否 |
+| Floyd 判圈 | O(n) | O(1) | 否 |
+
+题目要求不修改数组且 O(1) 空间时，只剩二分、按位统计和 Floyd。Floyd 找环入口的证明见 [[id:f40d4fa6-6687-44ec-8a73-22fcbb2e352f][Linked List Techniques]]。
+
+* Pitfalls
+- 取负标记前先取绝对值：前面的步骤可能已经把 ~nums[i]~ 变成了负数。
+- 快慢指针去重要求数组 *有序* ，否则相同的值不相邻。
+- 用异或交换两个数（ ~a ^= b; b ^= a; a ^= b~ ）时，若 ~a~ 、 ~b~ 是同一个位置（如 ~swap(arr[i], arr[j])~ 且 ~i == j~ ），结果变成 0。Python 直接写 ~a, b = b, a~ 。
+
+* Practice
+- 数组作哈希表：LT383、LT242、LT1
+- 快慢指针：LT27、LT26、LT80、LT283
+- 取负标记 / 原地哈希：LT41、LT448、LT442、LT287
+- 投票：LT169、LT229
+- 字符串原地操作：LT344、LT151（先整体反转，再逐个单词反转）

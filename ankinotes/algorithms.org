@@ -1,0 +1,467 @@
+#+title: Algorithms
+
+* Deck
+:PROPERTIES:
+:ANKI_DECK: RoamCards::Algorithms
+:END:
+
+** 反转链表
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+用 Python 迭代地反转单链表 ~reverse(head)~ ，写出循环体。
+
+*** Back
+#+begin_src python
+def reverse(head):
+    prev = None
+    while head:
+        head.next, prev, head = prev, head, head.next
+    return prev
+#+end_src
+三个指针：已反转部分的头 ~prev~ 、当前节点 ~head~ 、下一个节点（在同一行赋值里取到）。
+
+Source: Linked List Techniques
+
+** 链表的哨兵节点
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+删除链表中所有值为 ~val~ 的节点时，为什么要在头前加一个哨兵节点 ~dummy~ ？最后返回什么？
+
+*** Back
+头节点本身也可能被删。加了 ~dummy~ 后每个真实节点都有前驱，「删头」和「删中间」是同一段 ~cur.next = cur.next.next~ ，不用特判；最后返回 ~dummy.next~ 。
+
+Source: Linked List Techniques
+
+** Floyd 判圈找环入口
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+快慢指针在环内相遇后，为什么让一个指针回到链表头、两个指针都每次走 1 步，它们会在环入口相遇？
+
+*** Back
+设头到入口距离 $a$ ，入口到相遇点 $b$ ，环长 $L$ 。慢指针走了 $a+b$ ，快指针走了 $2(a+b)=a+b+kL$ ，所以 $a=kL-b$ 。
+从相遇点走 $kL-b$ 步正好回到入口，而从头走 $a$ 步也到入口，两者同时到达。
+
+Source: Linked List Techniques
+
+** 单调栈：下一个更大元素
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+写出 ~next_greater(nums)~ ：返回每个位置右边第一个更大元素的值，没有则为 -1，要求 O(n)。
+
+*** Back
+#+begin_src python
+def next_greater(nums):
+    res = [-1] * len(nums)
+    stack = []                     # 存下标，对应值递减
+    for i, x in enumerate(nums):
+        while stack and nums[stack[-1]] < x:
+            res[stack.pop()] = x
+        stack.append(i)
+    return res
+#+end_src
+每个元素只进出栈一次。存下标而不是值，才能算距离（LT739）。
+
+Source: Stacks and Queues
+
+** 循环队列的空与满
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Cloze
+:END:
+
+*** Text
+长度为 n 的数组实现循环队列，空出一格区分空和满：队空条件是 {{c1::~head == tail~}}，队满条件是 {{c2::~(tail + 1) % n == head~}}。
+
+*** Back
+Source: Stacks and Queues
+
+** 堆的删除堆顶
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+数组实现的小顶堆如何删除堆顶？为什么不能直接删掉根再把较小的子节点提上来？
+
+*** Back
+把最后一个元素移到根，再与较小的子节点比较、交换，向下调整直到不大于子节点。
+直接删根再逐层提子节点会在中间留下空洞，破坏完全二叉树的形状，数组表示就失效了。
+
+Source: Heaps and Priority Queues
+
+** 前 k 大用小顶堆
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+从 n 个数中找前 k 大，用 ~heapq~ 维护什么样的堆？复杂度多少？
+
+*** Back
+大小为 k 的 *小* 顶堆：堆顶是当前 k 个里最小的（第 k 大）。新元素比堆顶大才 ~heapreplace~ 。时间 O(n log k)，空间 O(k)。
+
+Source: Heaps and Priority Queues
+
+** heapq 元组比较的 TypeError
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+往 ~heapq~ 里放 ~(priority, task_dict)~ ，两个任务优先级相同时抛 ~TypeError~ 。为什么？怎么改？
+
+*** Back
+元组第一项相等时会比较第二项，而字典之间不能比较大小。中间插入一个递增计数器： ~(priority, next(counter), task)~ ，计数器既打破平局又保持先进先出。
+
+Source: Heaps and Priority Queues
+
+** 数据流的中位数
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+数据流中随时求中位数，用什么结构？插入时如何保持平衡？
+
+*** Back
+两个堆：大顶堆 ~lo~ 存较小的一半（ ~heapq~ 存相反数），小顶堆 ~hi~ 存较大的一半。
+插入：先放进 ~lo~ ，再把 ~lo~ 的最大值移到 ~hi~ ；若 ~hi~ 比 ~lo~ 多，再移回一个。保持 ~len(lo) >= len(hi)~ ，中位数是 ~lo~ 堆顶或两个堆顶的平均。
+
+Source: Heaps and Priority Queues
+
+** 中序遍历的迭代写法
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+用一个栈写出二叉树中序遍历 ~inorder(root)~ 。
+
+*** Back
+#+begin_src python
+def inorder(root):
+    res, stack, node = [], [], root
+    while node or stack:
+        if node:
+            stack.append(node)
+            node = node.left       # 一路向左压栈
+        else:
+            node = stack.pop()
+            res.append(node.val)   # 左边到底：处理栈顶
+            node = node.right      # 转向右子树
+    return res
+#+end_src
+
+Source: Binary Tree Traversal
+
+** 后序遍历的反转技巧
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+已经会写迭代前序遍历（弹出处理，先压右再压左），如何改两处得到后序遍历？
+
+*** Back
+1. 入栈顺序改为先压左再压右，得到「中右左」。
+2. 把结果整体反转，得到「左右中」。
+
+Source: Binary Tree Traversal
+
+** Morris 遍历的思路
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Morris 中序遍历如何做到 O(1) 额外空间？它用什么代替了栈？
+
+*** Back
+栈的作用是「处理完左子树后跳回当前节点」。Morris 把左子树最右节点（中序前驱）的空 ~right~ 指针临时指向当前节点：第一次到达当前节点时建这条线索并进入左子树；沿线索第二次回到它时拆掉线索、处理它、转向右子树。
+代价：遍历期间修改了树，中途退出会留下线索。
+
+Source: Binary Tree Traversal
+
+** 快排的退化
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+快速排序在什么输入下退化成 O(n²)？分别怎么避免？
+
+*** Back
+- 固定取首元素作 pivot 时输入已排序：每次只分出一个元素。随机选 pivot 或三数取中。
+- 大量重复元素：两路划分在全相同时也失衡。用三路划分（小于、等于、大于）。
+
+Source: Sorting Algorithms
+
+** 稳定排序与多关键字
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+要把学生按（班级，分数）排序，只有一个按单个关键字排序的稳定排序函数可用，怎么做？
+
+*** Back
+先按次要关键字（分数）排，再按主要关键字（班级）用稳定排序排。稳定性保证同班学生保持上一轮的分数顺序。基数排序从最低位开始逐位稳定排序，靠的也是这一点。
+
+Source: Sorting Algorithms
+
+** 计数排序为什么从后往前放
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+计数排序算出前缀和 ~cnt~ 后，把元素放进结果数组时为什么要从原数组的 *末尾* 往前遍历？
+
+*** Back
+~cnt[v]~ 是小于等于 ~v~ 的元素个数，即值为 ~v~ 的最后一个元素该放的位置 + 1。从后往前放时，同值元素中最后出现的先放到最后的位置，原有先后顺序得以保持，排序才稳定。
+
+Source: Sorting Algorithms
+
+** A* 的启发函数条件
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+A* 的 $f = g + h$ 中，启发函数 $h$ 满足什么条件才保证找到最短路径？满足什么条件节点第一次出堆就可以关闭？
+
+*** Back
+- 可采纳（admissible）：$h$ 从不高估到终点的真实距离 → 结果最短。
+- 一致（consistent）：每条边满足 $h(n) \le c(n,m) + h(m)$ → 节点第一次出堆时的 $g$ 已是最优，可直接关闭。
+- $h \equiv 0$ 时就是 Dijkstra。四方向单位代价网格上，曼哈顿距离两者都满足。
+
+Source: A* Search
+
+** Python 递归深度
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+在一棵退化成链、有 5000 个节点的二叉树上用递归 DFS，Python 会怎样？根本的解决办法是什么？
+
+*** Back
+超过默认递归上限 1000（ ~sys.getrecursionlimit()~ ），抛 ~RecursionError~ 。调大上限只是推迟问题（还可能撑爆 C 栈），根本办法是改写成循环或显式栈。
+
+Source: Recursive Problem Solving
+
+** 回溯：同层去重
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+LT40 组合总和 II：候选数有重复、每个数只能用一次、结果不能有重复组合。排序后，在 ~for i in range(start, len(c))~ 循环里用什么条件跳过？为什么不能写成 ~i > 0~ ？
+
+*** Back
+~if i > start and c[i] == c[i-1]: continue~ ：只在 *同一树层* 跳过相同的值。
+写成 ~i > 0~ 会把同一树枝上的合法组合（如 [1, 1, 6] 中第二个 1）也跳过。
+
+Source: Backtracking
+
+** 回溯：used 数组去重
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+有重复数字的全排列（LT47），排序后用 ~used~ 数组去重。 ~nums[i] == nums[i-1]~ 时， ~used[i-1]~ 为 ~True~ 和 ~False~ 各说明什么？哪种情况跳过？
+
+*** Back
+- ~used[i-1] == True~ ： ~nums[i-1]~ 在当前树枝（路径）上，可以继续用 ~nums[i]~ 。
+- ~used[i-1] == False~ ： ~nums[i-1]~ 在同一树层已经试过并撤销，再用 ~nums[i]~ 会生成重复排列，跳过。
+
+Source: Backtracking
+
+** 回溯存结果要复制
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+回溯函数里写 ~res.append(path)~ ，最后 ~res~ 中的结果全部是空列表。为什么？
+
+*** Back
+存进去的是同一个 ~path~ 对象的引用，回溯过程中它不断被 ~pop~ ，最后变空。要存副本： ~res.append(path[:])~ 。
+
+Source: Backtracking
+
+** 贪心的反例
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+硬币面值 [1, 3, 4]，凑 6 元，「每次拿面值最大的」贪心得到几枚？最优是几枚？该用什么方法？
+
+*** Back
+贪心：4 + 1 + 1，3 枚；最优：3 + 3，2 枚。任意面值的找零要用动态规划（完全背包）。
+
+Source: Greedy Algorithms
+
+** 区间调度按结束时间排序
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+选出最多的互不重叠区间，应按什么排序后贪心？为什么？
+
+*** Back
+按 *结束时间* 排序，依次选与已选区间不重叠的。交换论证：任一最优解的第一个区间都可以换成结束最早的那个而不变差，因为它给后面留出的空间最多。按开始时间或长度排序都有反例。
+
+Source: Greedy Algorithms
+
+** 0-1 背包与完全背包的遍历方向
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+一维 ~dp~ 写背包时，0-1 背包和完全背包的内层容量循环各是什么方向？为什么？
+
+*** Back
+- 0-1 背包： ~for j in range(cap, w - 1, -1)~ 倒序。 ~dp[j - w]~ 还是上一行（没放这个物品）的值，每个物品只放一次。
+- 完全背包：正序。 ~dp[j - w]~ 可能已经放过这个物品，允许重复放入。
+
+Source: Dynamic Programming
+
+** 组合数与排列数的循环顺序
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+完全背包求凑出金额的方案数时，外层遍历物品、内层遍历容量，和反过来，结果分别是组合数还是排列数？
+
+*** Back
+- 外层物品、内层容量：组合数（LT518），每种组合只按物品顺序计一次。
+- 外层容量、内层物品：排列数（LT377），1 + 2 和 2 + 1 算两种。
+
+Source: Dynamic Programming
+
+** 动态规划、分治与贪心
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+动态规划和分治、贪心的本质区别各是什么？
+
+*** Back
+- 分治：子问题互不重叠，直接递归合并；动态规划正是因为子问题重叠才缓存。
+- 贪心：每步只做局部最优选择、不保留其他状态，要求局部最优能导出全局最优；动态规划比较所有子状态。
+
+Source: Dynamic Programming
+
+** 有序数组去重保留 k 个
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+写出 ~remove_duplicates(nums, k)~ ：有序数组原地去重，每个值最多保留 k 个，返回新长度（LT26 / LT80）。
+
+*** Back
+#+begin_src python
+def remove_duplicates(nums, k=1):
+    slow = 0                      # nums[:slow] 是结果
+    for x in nums:
+        if slow < k or nums[slow - k] != x:
+            nums[slow] = x
+            slow += 1
+    return slow
+#+end_src
+和结果中倒数第 k 个比较：相同说明这个值已经有 k 个了。
+
+Source: Array In-place Techniques
+
+** 找重复数的约束
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+LT287：n + 1 个数都在 ~[1, n]~ 中，找重复的数。要求不修改数组、O(1) 额外空间，可以用哪些解法？
+
+*** Back
+- Floyd 判圈：把 ~i → nums[i]~ 看成链表，重复数是环入口，O(n)。
+- 对值域二分：统计小于等于 mid 的数的个数，O(n log n)。
+- 按位统计，O(n log n)。
+排序、取负标记、原地交换都会改数组；哈希集合要 O(n) 空间。
+
+Source: Array In-place Techniques
+
+** Boyer-Moore 投票
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+O(1) 空间找出现次数超过一半的元素，写出投票算法的循环。
+
+*** Back
+#+begin_src python
+cand, cnt = None, 0
+for x in nums:
+    if cnt == 0:
+        cand = x
+    cnt += 1 if x == cand else -1
+#+end_src
+候选与其他元素两两抵消，超过一半的元素最后一定剩下。
+
+Source: Array In-place Techniques
+
+** KMP 前缀函数
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+写出 KMP 的前缀函数 ~prefix_function(p)~ ，并给出 ~"aabaaf"~ 的结果。
+
+*** Back
+#+begin_src python
+def prefix_function(p):
+    pi, j = [0] * len(p), 0
+    for i in range(1, len(p)):
+        while j > 0 and p[i] != p[j]:
+            j = pi[j - 1]          # 退到更短的相等前后缀
+        if p[i] == p[j]:
+            j += 1
+        pi[i] = j
+    return pi
+#+end_src
+~"aabaaf"~ → ~[0, 1, 0, 1, 2, 0]~ 。匹配文本时失配同样执行 ~j = pi[j - 1]~ ，文本指针不回退。
+
+Source: KMP String Matching
+
+** 重复子串的判断
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+LT459：如何用前缀函数判断字符串 ~s~ 是否由某个子串重复多次构成？
+
+*** Back
+设 ~n = len(s)~ 、 ~L = pi[-1]~ （最长相等真前后缀长度）。当 ~L > 0~ 且 ~n % (n - L) == 0~ 时成立，重复单元长度为 ~n - L~ 。
+例： ~"abab"~ 的 ~L = 2~ ，4 % 2 == 0，成立； ~"aba"~ 的 ~L = 1~ ，3 % 2 ≠ 0，不成立。
+
+Source: KMP String Matching

@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       09857801-cb29-4168-b4fb-537ccc83ab0f
+:ROAM_ALIASES: "算法与数据结构"
+:END:
+#+title: Algorithms
+#+filetags: :Algorithms:
+
+* [[id:92ec20d3-96c9-40c5-b80c-de0379733dc3][Data Structures]]
+* [[id:5327de41-f17d-4d80-8819-e72cbb7ab1b4][Sorting and Searching]]
+* [[id:e6313ffb-b29a-4d38-9527-03b0c4f0f5b6][Design Paradigms]]
+* [[id:2a5c55d1-d2f4-4638-9005-31c291e91f17][LeetCode Techniques]]

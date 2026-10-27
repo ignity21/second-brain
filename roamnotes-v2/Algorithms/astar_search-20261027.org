@@ -1,0 +1,75 @@
+:PROPERTIES:
+:ID:       2b951be4-acf8-4778-97e4-111695cb414e
+:ROAM_ALIASES: "A* 搜索"
+:VERIFIED_WITH: Python 3.14 (2026-10-27)
+:END:
+#+title: A* Search
+#+filetags: :Algorithms:
+
+* TOC :TOC_1:
+- [[#recognition][Recognition]]
+- [[#core-idea][Core Idea]]
+- [[#template][Template]]
+- [[#complexity][Complexity]]
+- [[#pitfalls][Pitfalls]]
+- [[#practice][Practice]]
+
+* Recognition
+- 带权图或网格上，从起点到 *某一个* 终点的最短路径，且能估计任一点到终点的距离（地图寻路、游戏 AI、拼图求解）→ A* 搜索。
+- 没有可用的估计，或要求到所有点的最短距离 → Dijkstra；边权都相同 → BFS。
+
+* Core Idea
+- 每个节点的优先级 $f(n) = g(n) + h(n)$ ： $g$ 是从起点到 $n$ 的已知代价， $h$ 是从 $n$ 到终点的估计代价（启发函数，heuristic）。总是先扩展 $f$ 最小的节点。
+- $h \equiv 0$ 时 A* 就是 Dijkstra； $h$ 越接近真实距离，扩展的节点越少。
+- *可采纳* （admissible）：$h(n)$ 从不高估到终点的真实距离。满足时 A* 找到的路径是最短的。网格上只能走上下左右时，曼哈顿距离 $|dx| + |dy|$ 可采纳。
+- *一致* （consistent）：对每条边 $(n, m)$ 有 $h(n) \le c(n, m) + h(m)$ 。满足时节点第一次出堆时的 $g$ 就是最优值，出堆后即可关闭、不再处理。曼哈顿距离在四方向、单位代价的网格上是一致的。
+
+* Template
+#+begin_src python :results output
+import heapq
+
+def astar(grid, start, goal):
+    """grid 中 0 可走、1 是墙；四方向移动，每步代价 1。返回最短步数，不可达返回 -1。"""
+    rows, cols = len(grid), len(grid[0])
+    h = lambda p: abs(p[0] - goal[0]) + abs(p[1] - goal[1])
+    best = {start: 0}                         # 目前已知的最小 g
+    heap = [(h(start), 0, start)]             # (f, g, 节点)
+    while heap:
+        f, g, (r, c) = heapq.heappop(heap)
+        if (r, c) == goal:
+            return g
+        if g > best[(r, c)]:                  # 过期的堆项：之后找到过更短的路
+            continue
+        for nr, nc in ((r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)):
+            if 0 <= nr < rows and 0 <= nc < cols and grid[nr][nc] == 0:
+                ng = g + 1
+                if ng < best.get((nr, nc), float("inf")):
+                    best[(nr, nc)] = ng
+                    heapq.heappush(heap, (ng + h((nr, nc)), ng, (nr, nc)))
+    return -1
+
+grid = [
+    [0, 0, 0, 0],
+    [1, 1, 0, 1],
+    [0, 0, 0, 0],
+    [0, 1, 1, 0],
+]
+assert astar(grid, (0, 0), (3, 3)) == 6
+assert astar(grid, (0, 0), (0, 0)) == 0
+assert astar([[0, 1], [1, 0]], (0, 0), (1, 1)) == -1
+print("ok")
+#+end_src
+
+#+RESULTS:
+: ok
+
+* Complexity
+最坏情况与 Dijkstra 相同：O(E log V)。实际效率取决于启发函数：越准，扩展的节点越少。
+
+* Pitfalls
+- *每轮把整个 open list 排序* ：课程里的 C++ 示例（ReadBoardFile → Search → CellSort → ExpandNeighbors）每轮对 open list 排一次序再取第一个，每轮 O(n log n)。用最小堆，每次只需 O(log n)。
+- *入队时就标记为关闭* ：同一课程在把邻居加入 open list 时就把格子标记为已关闭，之后不再更新它。这在单位代价、一致的启发函数下可以，但边权不同时会错过后来找到的更短路径。通用写法是像模板一样记录最优 $g$ ，出堆时跳过过期项。
+- 启发函数高估（如四方向网格用欧氏距离乘以系数）会更快，但不再保证最短。
+
+* Practice
+- LT1091（二进制矩阵中的最短路径，八方向，切比雪夫距离可采纳）、LT752（打开转盘锁）、LT773（滑动谜题）

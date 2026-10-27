@@ -1,0 +1,108 @@
+:PROPERTIES:
+:ID:       6bda11af-ed0f-4606-af75-7e11a4224199
+:ROAM_ALIASES: "堆与优先队列"
+:VERIFIED_WITH: Python 3.14 (2026-10-27)
+:END:
+#+title: Heaps and Priority Queues
+#+filetags: :Algorithms:
+
+* TOC :TOC_1:
+- [[#recognition][Recognition]]
+- [[#core-idea][Core Idea]]
+- [[#template][Template]]
+- [[#complexity][Complexity]]
+- [[#pitfalls][Pitfalls]]
+- [[#practice][Practice]]
+
+* Recognition
+- 反复取当前最小 / 最大值，同时不断加入新元素（任务调度、Dijkstra、A* 搜索）→ 优先队列。
+- 第 k 大、前 k 个高频元素 → 大小为 k 的堆。
+- 合并 k 个有序序列（k 个有序链表、外部排序的多路归并）→ 存每路当前头元素的最小堆。
+- 数据流的中位数 → 一个大顶堆存较小的一半，一个小顶堆存较大的一半。
+
+* Core Idea
+- 堆是完全二叉树，用数组存：下标 ~i~ 的子节点是 ~2i+1~ 、 ~2i+2~ ，父节点是 ~(i-1)//2~ 。小顶堆的不变式：每个节点不大于它的子节点。
+- *插入* ：放到数组末尾，与父节点比较、交换，向上调整（sift up）。
+- *删除堆顶* ：把最后一个元素移到根，再与较小的子节点比较、交换，向下调整（sift down）。直接删根再「提上来」会破坏完全二叉树的形状。
+- *建堆* ：从最后一个非叶子节点往前逐个向下调整，O(n)，比逐个插入的 O(n log n) 快。
+- *堆排序* ：建堆后反复取堆顶，O(n log n)、原地，但不稳定，访问跳跃、缓存不友好，实际中比快排慢。
+
+* Template
+#+begin_src python :results output
+import heapq
+from itertools import count
+
+def top_k(nums, k):
+    """前 k 大的元素：保持大小为 k 的小顶堆，堆顶是当前第 k 大。"""
+    heap = []
+    for x in nums:
+        if len(heap) < k:
+            heapq.heappush(heap, x)
+        elif x > heap[0]:
+            heapq.heapreplace(heap, x)   # 弹出堆顶再放入 x
+    return sorted(heap, reverse=True)
+
+def merge_k(lists):
+    """合并 k 个有序列表。"""
+    heap = [(lst[0], i, 0) for i, lst in enumerate(lists) if lst]
+    heapq.heapify(heap)
+    out = []
+    while heap:
+        val, i, j = heapq.heappop(heap)
+        out.append(val)
+        if j + 1 < len(lists[i]):
+            heapq.heappush(heap, (lists[i][j + 1], i, j + 1))
+    return out
+
+class MedianFinder:
+    def __init__(self):
+        self.lo = []                     # 大顶堆（存负数），较小的一半
+        self.hi = []                     # 小顶堆，较大的一半
+
+    def add(self, x):
+        heapq.heappush(self.lo, -x)
+        heapq.heappush(self.hi, -heapq.heappop(self.lo))
+        if len(self.hi) > len(self.lo):  # 保持 len(lo) >= len(hi)
+            heapq.heappush(self.lo, -heapq.heappop(self.hi))
+
+    def median(self):
+        if len(self.lo) > len(self.hi):
+            return -self.lo[0]
+        return (-self.lo[0] + self.hi[0]) / 2
+
+assert top_k([3, 1, 5, 12, 2, 11], 3) == [12, 11, 5]
+assert merge_k([[1, 4, 7], [], [2, 5], [3]]) == [1, 2, 3, 4, 5, 7]
+m = MedianFinder()
+for x, want in [(5, 5), (1, 3), (9, 5), (2, 3.5)]:
+    m.add(x)
+    assert m.median() == want
+
+# 优先级相同时用递增计数打破平局，避免比较不可比较的任务对象
+tie = count()
+tasks = []
+heapq.heappush(tasks, (1, next(tie), {"name": "a"}))
+heapq.heappush(tasks, (1, next(tie), {"name": "b"}))
+assert heapq.heappop(tasks)[2]["name"] == "a"
+print("ok")
+#+end_src
+
+#+RESULTS:
+: ok
+
+* Complexity
+| 操作 | 时间 |
+|---|---|
+| 取堆顶 | O(1) |
+| 插入、删除堆顶 | O(log n) |
+| 建堆（ ~heapify~ ） | O(n) |
+| 前 k 大 | O(n log k)，空间 O(k) |
+| k 路合并，共 N 个元素 | O(N log k) |
+
+* Pitfalls
+- ~heapq~ 只有小顶堆：大顶堆存相反数，或存 ~(-优先级, ...)~ 。
+- 元组比较在第一项相等时会比较第二项：第二项是字典或自定义对象时抛 ~TypeError~ 。中间插一个递增计数器（见模板最后一段）。
+- 求前 k 大用 *小* 顶堆：堆顶是 k 个里最小的，新元素只需和它比。
+- ~heapq.nlargest(k, nums)~ 在 k 很小时就是上面的做法；k 接近 n 时直接排序更快。
+
+* Practice
+- LT215（第 k 大）、LT347（前 k 个高频）、LT23（合并 k 个有序链表）、LT295（数据流中位数）、LT621（任务调度）

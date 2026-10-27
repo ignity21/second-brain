@@ -1,0 +1,85 @@
+:PROPERTIES:
+:ID:       c2cf012a-4f1d-4d6a-993b-721e20cee9dc
+:ROAM_ALIASES: "递归"
+:VERIFIED_WITH: Python 3.14 (2026-10-27)
+:END:
+#+title: Recursive Problem Solving
+#+filetags: :Algorithms:
+
+* TOC :TOC_1:
+- [[#recognition][Recognition]]
+- [[#core-idea][Core Idea]]
+- [[#template][Template]]
+- [[#complexity][Complexity]]
+- [[#pitfalls][Pitfalls]]
+- [[#practice][Practice]]
+
+* Recognition
+一个问题能用递归解，需要同时满足三个条件：
+1. 问题的解可以分解为几个子问题的解。
+2. 子问题除了数据规模不同，求解思路与原问题完全一样。
+3. 存在终止条件。
+
+树和链表的大多数题、分治、回溯和自顶向下的动态规划都属于这一类。
+
+* Core Idea
+写递归时不要在脑中展开调用过程，而是假设子问题已经解决，只想三件事：
+1. *递推公式* ：原问题如何由子问题的结果组合出来。
+2. *终止条件* ：最小规模的输入直接返回什么。
+3. 把以上两点翻译成代码。
+
+例：走 n 级台阶，每次 1 级或 2 级。最后一步走了 1 级或 2 级，所以 ~f(n) = f(n-1) + f(n-2)~ ，终止条件 ~f(1) = 1~ 、 ~f(2) = 2~ 。
+
+* Template
+#+begin_src python :results output
+from functools import cache
+
+@cache                                   # 缓存子问题，消除重复计算
+def climb(n):
+    if n <= 2:
+        return n
+    return climb(n - 1) + climb(n - 2)
+
+def climb_iter(n):
+    """自底向上改写：只保留最近两个状态。"""
+    if n <= 2:
+        return n
+    a, b = 1, 2
+    for _ in range(n - 2):
+        a, b = b, a + b
+    return b
+
+def dfs_iter(graph, start):
+    """用显式栈代替调用栈，避免递归过深。"""
+    seen, order, stack = set(), [], [start]
+    while stack:
+        node = stack.pop()
+        if node in seen:
+            continue
+        seen.add(node)
+        order.append(node)
+        stack.extend(reversed(graph[node]))   # 逆序入栈，访问顺序与递归一致
+    return order
+
+assert [climb(n) for n in range(1, 6)] == [1, 2, 3, 5, 8]
+assert climb_iter(50) == climb(50) == 20365011074
+g = {"a": ["b", "c"], "b": ["d"], "c": ["d"], "d": []}
+assert dfs_iter(g, "a") == ["a", "b", "d", "c"]
+print("ok")
+#+end_src
+
+#+RESULTS:
+: ok
+
+* Complexity
+- 时间 = 子问题个数 × 每个子问题的工作量。没有缓存的 ~climb(n)~ 是 O(2ⁿ)，缓存后子问题只有 n 个，O(n)。
+- 空间至少是递归深度（调用栈），加上缓存的大小。
+
+* Pitfalls
+- *栈溢出* ：Python 默认递归上限 1000（ ~sys.getrecursionlimit()~ ），超过抛 ~RecursionError~ 。链状的树、长链表、大 n 都可能触发。调大上限只是推迟问题，根本办法是改写成循环或显式栈。
+- *重复计算* ：子问题重叠时（如上例）不加缓存是指数级。加缓存就是自顶向下的动态规划。
+- *函数调用开销* ：每层递归都有调用和保存现场的开销，性能敏感时改写成循环。
+- *调试* ：递归层次多时逐层单步很难跟，用条件断点只在关心的参数值上停下。
+
+* Practice
+- LT70（爬楼梯）、LT509（斐波那契）、LT206（递归反转链表）、LT104（树的深度）、LT50（快速幂：分治递归）

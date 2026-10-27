@@ -1,0 +1,108 @@
+:PROPERTIES:
+:ID:       8426d96d-fa58-4775-9500-c44546b37266
+:ROAM_ALIASES: "排序算法"
+:VERIFIED_WITH: Python 3.14 (2026-10-27)
+:END:
+#+title: Sorting Algorithms
+#+filetags: :Algorithms:
+
+* Recognition
+- 一般情况：直接用语言内置的排序（Python 是 Timsort，稳定，O(n log n)）。
+- 数据几乎有序、规模很小 → 插入排序，接近 O(n)。
+- 值域小的整数（年龄、分数）→ 计数排序。
+- 能按位拆开、每位范围小（手机号、等长字符串）→ 基数排序。
+- 数据均匀分布、内存放不下 → 桶排序，或外部排序（分块排序后多路归并）。
+- 只要第 k 小、不要整体有序 → 快速选择，平均 O(n)。
+
+* Core Idea
+** 比较排序
+| 算法 | 平均 | 最坏 | 额外空间 | 稳定 | 要点 |
+|---|---|---|---|---|---|
+| 冒泡 | O(n²) | O(n²) | O(1) | 是 | 一趟没有交换就可以提前结束 |
+| 插入 | O(n²) | O(n²) | O(1) | 是 | 已有序时 O(n)，Timsort 用它排短片段 |
+| 选择 | O(n²) | O(n²) | O(1) | 否 | 每趟从未排序区间选最小值放到已排序区间末尾 |
+| 归并 | O(n log n) | O(n log n) | O(n) | 是 | 稳定且最坏情况有保证；适合链表和外部排序 |
+| 快排 | O(n log n) | O(n²) | O(log n) | 否 | 常数小、原地；pivot 选得差时退化 |
+| 堆排序 | O(n log n) | O(n log n) | O(1) | 否 | 见 [[id:6bda11af-ed0f-4606-af75-7e11a4224199][Heaps and Priority Queues]] |
+| 希尔 | 取决于增量序列 | | O(1) | 否 | 分组的插入排序，现在很少用 |
+
+基于比较的排序在最坏情况下至少需要 O(n log n) 次比较，想更快只能利用数据本身的性质，即下面的线性排序。
+
+** 线性排序
+不比较元素，对数据有要求：
+
+| 算法 | 时间 | 空间 | 稳定 | 前提 |
+|---|---|---|---|---|
+| 计数排序 | O(n + k) | O(n + k) | 是 | 整数，值域 k 不大；有负数时先整体平移 |
+| 桶排序 | 均匀时 O(n) | O(n + m) | 取决于桶内排序 | 数据能均匀分到 m 个有序的桶里 |
+| 基数排序 | O(d(n + k)) | O(n + k) | 是 | 能拆成 d 位，每位范围 k 不大；每一位的排序必须稳定 |
+
+- 桶排序：n 个数据分到 m 个桶，每桶 k = n/m 个，桶内快排共 O(m · k log k) = O(n log(n/m))；m 接近 n 时接近 O(n)。数据集中在少数几个桶时退化。
+- 基数排序从 *最低位* 开始，每一位用稳定排序（通常是计数排序）。不等长的字符串在右边补比所有字符都小的值，再按位排序。
+
+* Template
+#+begin_src python :results output
+def counting_sort(nums):
+    """稳定的计数排序，支持负数。"""
+    if not nums:
+        return []
+    lo = min(nums)
+    cnt = [0] * (max(nums) - lo + 1)
+    for x in nums:
+        cnt[x - lo] += 1
+    for i in range(1, len(cnt)):        # 前缀和：cnt[v] = 小于等于 v 的元素个数
+        cnt[i] += cnt[i - 1]
+    out = [None] * len(nums)
+    for x in reversed(nums):            # 从后往前放，相等元素保持原顺序
+        cnt[x - lo] -= 1
+        out[cnt[x - lo]] = x
+    return out
+
+def merge_sort(a):
+    if len(a) <= 1:
+        return a
+    mid = len(a) // 2
+    left, right = merge_sort(a[:mid]), merge_sort(a[mid:])
+    out, i, j = [], 0, 0
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:         # <= 保证稳定
+            out.append(left[i]); i += 1
+        else:
+            out.append(right[j]); j += 1
+    return out + left[i:] + right[j:]
+
+import random
+
+def quick_select(a, k):
+    """第 k 小（k 从 0 开始），平均 O(n)。"""
+    pivot = random.choice(a)
+    less = [x for x in a if x < pivot]
+    equal = [x for x in a if x == pivot]
+    if k < len(less):
+        return quick_select(less, k)
+    if k < len(less) + len(equal):
+        return pivot
+    return quick_select([x for x in a if x > pivot], k - len(less) - len(equal))
+
+data = [3, -1, 2, 3, 0, -1]
+assert counting_sort(data) == sorted(data) and counting_sort([]) == []
+assert merge_sort(data) == sorted(data)
+assert [quick_select(data, k) for k in range(len(data))] == sorted(data)
+
+# 稳定性：按分数排序后，同分的人保持原来的先后
+people = [("a", 2), ("b", 1), ("c", 2), ("d", 1)]
+assert [p for p, _ in sorted(people, key=lambda p: p[1])] == ["b", "d", "a", "c"]
+print("ok")
+#+end_src
+
+#+RESULTS:
+: ok
+
+* Pitfalls
+- *快排的退化* ：固定取第一个元素作 pivot 时，已排序的输入每次只分出一个元素，退化为 O(n²)、递归深度 O(n)。随机选 pivot 或三数取中。
+- *大量重复元素* ：两路划分（只分小于和大于等于两段）在全是相同元素时也会退化；用三路划分（小于、等于、大于三段），如上面的 ~quick_select~ 。
+- *稳定性什么时候重要* ：按多个关键字排序时，先按次要关键字排，再用稳定排序按主要关键字排，结果就是按（主，次）有序。基数排序依赖的正是这一点。
+- *外部排序* ：数据大于内存时，分块读入、各自排序后写回磁盘，再用 k 路归并合并（每次取 k 个块当前最小的元素，用最小堆）。
+
+* Practice
+- LT912（实现排序）、LT215（快速选择）、LT75（三路划分：荷兰国旗）、LT148（链表归并排序）、LT164（桶排序思想求最大间距）

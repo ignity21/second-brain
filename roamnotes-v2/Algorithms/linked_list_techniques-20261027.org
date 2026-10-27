@@ -1,0 +1,150 @@
+:PROPERTIES:
+:ID:       f40d4fa6-6687-44ec-8a73-22fcbb2e352f
+:ROAM_ALIASES: "链表技巧"
+:VERIFIED_WITH: Python 3.14 (2026-10-27)
+:END:
+#+title: Linked List Techniques
+#+filetags: :Algorithms:
+
+* TOC :TOC_1:
+- [[#recognition][Recognition]]
+- [[#core-idea][Core Idea]]
+- [[#template][Template]]
+- [[#complexity][Complexity]]
+- [[#edge-cases][Edge Cases]]
+- [[#practice][Practice]]
+
+* Recognition
+- 头节点可能被删除或替换（删除、插入、合并、反转一部分）→ 哨兵节点（dummy head）。
+- 判环、找环入口、找中点、倒数第 k 个 → 快慢指针。
+- 需要 O(1) 按 key 查找又要维护访问顺序（LRU 缓存）→ 哈希表 + 双向链表。
+- 数组中的值都在下标范围内、要求 O(1) 空间找重复（LT287）→ 把 ~i → nums[i]~ 看成链表，用 Floyd 判圈。
+
+* Core Idea
+** 哨兵节点
+链表代码的 bug 几乎都在边界：空链表、在头部插入或删除、只有一两个节点。以插入为例，往空链表插入要让 ~head~ 指向新节点，在头部插入要改 ~head~ ，在两个节点之间插入改的是前驱的 ~next~ ，三种情况代码各不相同。
+
+在真正的头节点前放一个不存数据的 ~dummy~ ，所有节点（包括原来的头）就都有前驱，「改头」和「改中间」变成同一段代码，最后返回 ~dummy.next~ 。
+
+** Floyd 判圈
+慢指针每次走 1 步，快指针每次走 2 步：
+- 无环：快指针先走到 ~None~ 。
+- 有环：两者进环后，快指针每步追近 1，必然相遇。
+- 找入口：设头到入口距离 $a$ ，入口到相遇点 $b$ ，环长 $L$ 。相遇时慢指针走了 $a+b$ ，快指针走了 $2(a+b) = a + b + kL$ ，得 $a = kL - b$ 。所以一个指针从头、一个从相遇点同速前进，走 $a$ 步后都到达入口（从相遇点走 $kL-b$ 步正好绕回入口）。
+
+* Template
+#+begin_src python :results output
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val, self.next = val, next
+
+def build(vals):
+    dummy = tail = ListNode()
+    for v in vals:
+        tail.next = tail = ListNode(v)
+    return dummy.next
+
+def to_list(head):
+    out = []
+    while head:
+        out.append(head.val)
+        head = head.next
+    return out
+
+def reverse(head):
+    prev = None
+    while head:
+        head.next, prev, head = prev, head, head.next
+    return prev
+
+def remove_all(head, val):
+    dummy = ListNode(next=head)      # 哨兵：删除头节点不用特判
+    cur = dummy
+    while cur.next:
+        if cur.next.val == val:
+            cur.next = cur.next.next
+        else:
+            cur = cur.next
+    return dummy.next
+
+def middle(head):
+    slow = fast = head
+    while fast and fast.next:         # 偶数个节点时返回后半段的第一个
+        slow, fast = slow.next, fast.next.next
+    return slow
+
+def cycle_entry(head):
+    slow = fast = head
+    while fast and fast.next:
+        slow, fast = slow.next, fast.next.next
+        if slow is fast:
+            p = head
+            while p is not slow:
+                p, slow = p.next, slow.next
+            return p
+    return None
+
+assert to_list(reverse(build([1, 2, 3]))) == [3, 2, 1]
+assert reverse(None) is None
+assert to_list(remove_all(build([7, 7, 1, 7]), 7)) == [1]
+assert middle(build([1, 2, 3, 4])).val == 3 and middle(build([1])).val == 1
+
+head = build([3, 2, 0, -4])
+head.next.next.next.next = head.next  # 尾部连回 2
+assert cycle_entry(head).val == 2
+assert cycle_entry(build([1, 2])) is None
+print("ok")
+#+end_src
+
+#+RESULTS:
+: ok
+
+** LRU 缓存
+#+begin_src python :results output
+from collections import OrderedDict
+
+class LRUCache:
+    def __init__(self, capacity):
+        self.cap, self.d = capacity, OrderedDict()
+
+    def get(self, key):
+        if key not in self.d:
+            return -1
+        self.d.move_to_end(key)       # 最近使用的放在末尾
+        return self.d[key]
+
+    def put(self, key, value):
+        self.d[key] = value
+        self.d.move_to_end(key)
+        if len(self.d) > self.cap:
+            self.d.popitem(last=False)  # 淘汰最久未用的（开头）
+
+c = LRUCache(2)
+c.put(1, 1); c.put(2, 2)
+assert c.get(1) == 1
+c.put(3, 3)                            # 淘汰 2
+assert c.get(2) == -1 and c.get(3) == 3
+print("ok")
+#+end_src
+
+#+RESULTS:
+: ok
+
+~OrderedDict~ 本身就是哈希表 + 双向链表。面试要求手写时，自己维护带头尾哨兵的双向链表，哈希表存 key → 节点。
+
+* Complexity
+| 操作 | 时间 | 说明 |
+|---|---|---|
+| 已知前驱时插入、删除 | O(1) | 数组要搬移元素，O(n) |
+| 按位置访问、查找 | O(n) | 不能随机访问，也对 CPU 缓存不友好 |
+| 反转、找中点、判圈 | O(n) 时间，O(1) 空间 | 只用几个指针 |
+
+* Edge Cases
+写完后用四种输入走一遍：空链表、一个节点、两个节点、操作发生在头或尾。
+
+* Practice
+- 反转：LT206、LT92（反转区间，哨兵）
+- 快慢指针：LT141、LT142、LT876、LT19（倒数第 n 个：快指针先走 n 步）
+- 合并：LT21、LT23（k 路合并，用堆）
+- LRU：LT146
+- 数组上的 Floyd：LT287
