@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       dbc8ca9e-e151-4c7f-a872-4fb413110858
+:ROAM_ALIASES: "编程"
+:END:
+#+title: Programming
+#+filetags: :Programming:
+
+* [[id:51c2e040-f83a-4679-a5da-f9f25bd692e1][Programming Language Concepts]]

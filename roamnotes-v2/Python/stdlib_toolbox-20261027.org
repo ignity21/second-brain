@@ -1,0 +1,89 @@
+:PROPERTIES:
+:ID:       f3b97038-dc5e-4f69-aa6d-8466b26df753
+:ROAM_ALIASES: "Python 标准库工具箱"
+:VERIFIED_WITH: CPython 3.12 / 3.13 / 3.14.8 (2026-10-27)
+:END:
+#+title: Python Standard Library Toolbox
+#+filetags: :Python:
+
+* TOC :TOC_1:
+- [[#positioning][Positioning]]
+- [[#counting-and-grouping][Counting and Grouping]]
+- [[#queues-windows-and-top-k][Queues, Windows and Top-k]]
+- [[#sorted-data][Sorted Data]]
+- [[#iteration][Iteration]]
+- [[#functions-and-caching][Functions and Caching]]
+- [[#records-and-context][Records and Context]]
+- [[#pitfalls][Pitfalls]]
+
+* Positioning
+A map of standard-library tools by the problem they solve, so the right one comes to mind before hand-writing a loop. Exact signatures are left to the docs or AI; what matters is knowing the tool exists and when it fits.
+
+* Counting and Grouping
+| Tool | Reach for it when |
+|---|---|
+| ~collections.Counter~ | Counting occurrences; ~most_common(k)~ for the top k; counters add and subtract like multisets |
+| ~collections.defaultdict~ | Building a dict of lists or sets (grouping, adjacency lists) without "if key not in d" checks |
+| ~itertools.groupby~ | Splitting an already sorted stream into runs of equal keys |
+| ~dict.setdefault~ | One-off grouping on a plain dict when a ~defaultdict~ would leak into the API |
+
+* Queues, Windows and Top-k
+| Tool | Reach for it when |
+|---|---|
+| ~collections.deque~ | Queue or stack with O(1) appends and pops at both ends (BFS); a list's ~pop(0)~ is O(n) |
+| ~deque(maxlen=n)~ | Keeping only the last n items: recent history, sliding windows, ~tail~ |
+| ~heapq~ | Priority queue (Dijkstra, scheduling, merging k sorted streams with ~heapq.merge~) |
+| ~heapq.nlargest~ / ~nsmallest~ | Top k of a large iterable when k is small; for k = 1 use ~min~ / ~max~, for k close to n use ~sorted(...)[:k]~ |
+| ~queue.Queue~ | Handing work between threads; ~asyncio.Queue~ between tasks |
+
+* Sorted Data
+| Tool | Reach for it when |
+|---|---|
+| ~bisect.bisect_left~ / ~bisect_right~ | Binary search in a sorted list: insertion point, count of items below a threshold, range queries |
+| ~bisect.insort~ | Keeping a list sorted while inserting (insertion is still O(n) for the shift) |
+| ~sorted(key=...)~ with ~operator.itemgetter~ / ~attrgetter~ | Multi-key sorts; sorting is stable, so sort by the secondary key first, or return a tuple key |
+
+* Iteration
+| Tool | Reach for it when |
+|---|---|
+| Star unpacking ~first, *rest = seq~ | Splitting a sequence into head and tail, or ignoring the middle |
+| ~enumerate~, ~zip(..., strict=True)~ | Index plus value; parallel iteration that must fail on length mismatch (3.10+) |
+| ~itertools.chain~ | Treating several iterables as one, or flattening one level (~chain.from_iterable~) |
+| ~itertools.islice~ | Taking the first n items of a generator or an infinite iterator |
+| ~itertools.pairwise~ | Adjacent pairs: differences, consecutive comparisons (3.10+) |
+| ~itertools.batched~ | Chunking into fixed-size batches (3.12+) |
+| ~itertools.accumulate~ | Running totals, prefix sums, running max |
+| ~itertools.product~, ~permutations~, ~combinations~ | Brute-force search spaces without nested loops |
+
+* Functions and Caching
+| Tool | Reach for it when |
+|---|---|
+| ~functools.cache~ / ~lru_cache~ | Memoizing pure functions: top-down DP, repeated expensive lookups |
+| ~functools.cached_property~ | Computing an attribute once per instance |
+| ~functools.partial~ | Fixing some arguments to make a callback |
+| ~functools.reduce~ | Folding with a binary operation that has no built-in (prefer ~sum~, ~math.prod~, ~any~, ~all~ when they fit) |
+| ~functools.singledispatch~ | A function whose implementation depends on the argument's type |
+| ~functools.wraps~ | Writing decorators, see [[id:40d506d8-6dab-477f-8beb-9a4029ce2b2b][Decorators]] |
+
+* Records and Context
+| Tool | Reach for it when |
+|---|---|
+| ~dataclasses.dataclass~ | A mutable record with generated ~__init__~, ~__repr__~, ~__eq__~ |
+| ~typing.NamedTuple~ | An immutable, tuple-compatible record (unpackable, hashable) |
+| ~enum.Enum~ | A closed set of named constants instead of magic strings |
+| ~contextlib.contextmanager~ | Writing a ~with~ block from a generator (setup, ~yield~, cleanup) |
+| ~contextlib.suppress~, ~ExitStack~ | Ignoring a specific exception; managing a variable number of resources |
+| ~pathlib.Path~ | File paths and simple reads and writes instead of ~os.path~ string handling |
+
+* Pitfalls
+- ~groupby~ only merges *consecutive* equal keys. On unsorted input =["apple", "bob", "avocado", "banana"]= grouped by first letter gives four groups =a, b, a, b=; sort by the same key first.
+- ~deque(maxlen=n)~ discards silently from the opposite end: appending to a full deque drops the leftmost item, ~appendleft~ drops the rightmost.
+- Reading a missing key from a ~defaultdict~ inserts it. =_ = d["missing"]= leaves ={"missing": []}= in the dict, which shows up in later iteration and ~len~.
+- ~Counter~ arithmetic with ~-~ drops zero and negative counts: =Counter(a=1) - Counter(a=3)= is empty, while ~subtract~ keeps =a: -2=.
+- ~lru_cache~ on a method caches ~self~ as part of the key, keeping every instance alive for the life of the cache. Use ~cached_property~ for per-instance values, or cache a module-level function.
+- ~heapq~ is a min-heap.
+
+  | Python | Max-heap |
+  |---|---|
+  | ≤ 3.13 (AI usually writes this) | Push ~-x~, negate again on pop; or push =(-priority, item)= tuples |
+  | 3.14+ | ~heappush_max~, ~heappop_max~, ~heapify_max~ are public |

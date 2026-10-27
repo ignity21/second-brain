@@ -5,6 +5,7 @@
 #+filetags: :LinearAlgebra:Math:
 
 * 2D
+This form rotates a column vector *clockwise* by $\theta$ (it maps $(1, 0)$ to $(\cos\theta, -\sin\theta)$); the counterclockwise rotation is its transpose, $\begin{bmatrix}\cos\theta & -\sin\theta \\ \sin\theta & \cos\theta\end{bmatrix}$. The 3D matrix below rotates about the $z$ axis in the same direction.
 
 \[\begin{bmatrix}
 \cos\theta & \sin\theta \\

@@ -1,0 +1,405 @@
+#+title: Statistics
+
+* Deck
+:PROPERTIES:
+:ANKI_DECK: RoamCards::Statistics
+:END:
+
+** Mean or median for skewed data
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+You summarize household incomes, which have a long right tail of very high earners. Which measure of center do you report, and why?
+
+*** Back
+The median. The mean is pulled toward extreme values, so in skewed data it no longer describes a typical value; the median (and other quantile-based measures such as the IQR) is robust to them.
+
+Source: Descriptive Statistics
+
+** Why the sample variance divides by n − 1
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Why does the sample variance divide by $n-1$ (~ddof=1~) instead of $n$?
+
+*** Back
+The deviations are measured from the sample mean $\bar{x}$, which was computed from the same data. Once $\bar{x}$ is known, only $n-1$ values can vary freely (degrees of freedom), and dividing by $n$ would underestimate the population variance. This is Bessel's correction.
+
+Source: Degrees of Freedom
+
+** IQR outlier rule
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+State the usual box-plot rule for flagging outliers with the IQR.
+
+*** Back
+With $IQR = Q_3 - Q_1$, a value is an outlier if it is below $Q_1 - 1.5 \times IQR$ or above $Q_3 + 1.5 \times IQR$ (1.5 is the default whisker length).
+
+Source: Descriptive Statistics
+
+** PMF, PDF and CDF
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+What do the PMF, PDF and CDF give, and which kind of random variable uses each?
+
+*** Back
+- PMF: $P(X = x)$ for a discrete variable.
+- PDF: a density for a continuous variable; probabilities are areas under it, and $P(X = x) = 0$ for any single value.
+- CDF: $P(X \le x)$, for both kinds.
+
+Source: Probability
+
+** Binomial distribution assumption
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+What does a binomial distribution count, what must hold for the trials, and what is the probability of exactly 3 heads in 5 fair coin flips?
+
+*** Back
+The number of successes in a fixed number of *independent* trials with the same success probability. $P(3) = \binom{5}{3} 0.5^5 = 0.3125$ (~binom.pmf(3, 5, 0.5)~).
+
+Source: Binomial Distribution
+
+** Poisson vs exponential
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+For a Poisson process with rate $\lambda$, which distribution models "how many events in an interval" and which models "how long until the next event"? What is the mean of each?
+
+*** Back
+- Count per interval: Poisson, mean $\lambda$.
+- Time between events: exponential, mean $1/\lambda$ (SciPy's ~scale~ parameter).
+
+Source: Poisson Distribution, Exponential Distribution
+
+** Exponential waiting time
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+On average 2 support tickets arrive every 4 minutes. What is the probability that the next ticket arrives within 2 minutes? Give the SciPy call.
+
+*** Back
+$\lambda = 0.5$ per minute, so the mean wait is 2 minutes. ~expon.cdf(2, scale=2)~ $= 1 - e^{-1} \approx 0.632$.
+
+Source: Exponential Distribution
+
+** 68-95-99.7 rule
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Cloze
+:END:
+
+*** Text
+For a normal distribution, about {{c1::68%}} of values lie within 1 standard deviation of the mean, {{c2::95%}} within 2, and {{c3::99.7%}} within 3.
+
+*** Back
+Source: Normal Distribution
+
+** t-distribution vs normal
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+How does the t-distribution differ from the standard normal, and what controls the difference?
+
+*** Back
+It has fatter tails, so extreme values are more likely. The degrees of freedom control it: as DF grows it approaches the normal (infinite DF = normal). With DF = 5 the two-sided 95% critical value is 2.57 instead of 1.96.
+
+Source: T-Distribution
+
+** Central limit theorem and standard error
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+What does the central limit theorem say about sample means, and how large must the sample become to halve the standard error?
+
+*** Back
+The distribution of sample means approaches a normal distribution centered on the population mean, with standard deviation $SE = \sigma/\sqrt{n}$. Halving SE needs 4 times the sample size.
+
+Source: Central Limit Theorem
+
+** Bootstrap procedure
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+You have one sample and cannot sample the population again. How do you build a bootstrap distribution of the mean?
+
+*** Back
+1. Resample with replacement, the same size as the original sample.
+2. Compute the mean of the resample.
+3. Repeat many times (e.g. 1000).
+
+The resulting means form the bootstrap distribution; its standard deviation approximates the standard error.
+
+Source: Bootstrap Distribution
+
+** What bootstrapping cannot fix
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Your sample is not representative of the population. Does averaging many bootstrap resamples correct the estimate of the population mean? What is bootstrapping for?
+
+*** Back
+No. The bootstrap distribution is centered on the sample's own statistic, so any sampling bias carries over. Bootstrapping quantifies *variability* (standard error, confidence intervals), not bias.
+
+Source: Bootstrap Distribution
+
+** Population standard deviation from the bootstrap
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+The bootstrap distribution of the mean of a sample of size $n$ has standard deviation $SE$. How do you estimate the population standard deviation from it?
+
+*** Back
+$\hat{\sigma} \approx SE \times \sqrt{n}$, because $SE = \sigma/\sqrt{n}$.
+
+Source: Bootstrap Distribution, Sampling Distribution
+
+** Two ways to get a confidence interval
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Given a bootstrap distribution, what are the two ways to compute a 95% confidence interval?
+
+*** Back
+- Quantile method: the 2.5% and 97.5% quantiles of the bootstrap distribution, ~np.quantile(boot, [0.025, 0.975])~.
+- Standard error method: assume normality, use the mean as the point estimate and the bootstrap standard deviation as SE, then ~norm.ppf([0.025, 0.975], loc=estimate, scale=se)~ (estimate $\pm 1.96\,SE$).
+
+Source: Confidence Intervals
+
+** Margin of error
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+What is the margin of error of a 95% confidence interval for a mean, and what happens to it when the sample size grows?
+
+*** Back
+$1.96 \times SE = 1.96 \times \sigma/\sqrt{n}$, half the width of the interval. A larger $n$ makes SE smaller, so the interval narrows.
+
+Source: Z-Distribution
+
+** Definition of the p-value
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Define the p-value precisely. A test gives $p = 0.03$; is the probability that $H_0$ is true 3%?
+
+*** Back
+The probability of a result at least as extreme as the observed one, *assuming $H_0$ is true*. It is not $P(H_0 \text{ true})$; $p = 0.03$ means data this extreme would occur 3% of the time if $H_0$ held. Reject $H_0$ when $p \le \alpha$, with $\alpha$ fixed before the test.
+
+Source: P-Values
+
+** Type I and Type II errors
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+What are Type I and Type II errors, and which one does the significance level $\alpha$ control?
+
+*** Back
+- Type I: rejecting $H_0$ when it is true (false positive).
+- Type II: failing to reject $H_0$ when $H_A$ is true (false negative).
+
+$\alpha$ is the accepted Type I error rate.
+
+Source: Hypothesis Testing
+
+** One-tailed vs two-tailed critical values
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+With $\alpha = 0.05$, what are the z critical values for a right-tailed test of $H_A: \mu > \mu_0$ and for a two-tailed test of $H_A: \mu \ne \mu_0$?
+
+*** Back
+- Right-tailed: reject if $z > 1.645$ (~norm.ppf(0.95)~).
+- Two-tailed: reject if $|z| > 1.96$ (~norm.ppf(0.975)~), because $\alpha$ is split between the two tails.
+
+Source: Z-Test
+
+** Choosing a test
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Which test fits each question?
+1. Do two groups differ in a numeric mean?
+2. Do three or more groups differ in a numeric mean?
+3. Are two categorical variables related?
+4. Are two numeric variables related?
+
+*** Back
+1. t-test (z-test for large samples with known variance).
+2. ANOVA.
+3. Chi-squared test of independence.
+4. Correlation test.
+
+Source: Hypothesis Testing
+
+** After a significant ANOVA
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+A one-way ANOVA across 20 groups gives $p < 0.05$. What does it tell you, what do you do next, and why is a correction needed?
+
+*** Back
+At least two groups differ, but not which. Run pairwise tests (e.g. ~pingouin.pairwise_tests~) with a p-value correction such as Bonferroni (~padjust='bonf'~). Without it, 20 groups give 190 pairwise tests, and at $\alpha = 0.05$ at least one false positive is almost certain.
+
+Source: ANOVA
+
+** Paired vs two-sample t-test
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+The same students take a test before and after a course. Which t-test do you use, what is tested, and how many degrees of freedom does it have?
+
+*** Back
+A paired t-test: compute each student's difference and test whether the mean difference is 0, like a one-sample t-test on the differences. $df = n_{diff} - 1$, since only one statistic (the mean difference) is estimated.
+
+Source: T-Test
+
+** Two-sample t statistic
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Write the two-sample t statistic under $H_0: \mu_1 = \mu_2$, using the usual approximation of the standard error.
+
+*** Back
+$$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$$
+
+Source: T-Test
+
+** Zero correlation
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+For $x$ evenly spaced on $[-1, 1]$ and $y = x^2$, the Pearson correlation is 0. What does this show?
+
+*** Back
+Pearson's $r$ measures only *linear* relationships: $y$ is completely determined by $x$, yet $r = 0$. Always plot the data; for curved but monotonic relationships, transform the variables (e.g. log) or use a rank correlation.
+
+Source: Correlation
+
+** Confounders and spurious correlation
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Coffee drinking correlates with lung cancer. What is the likely explanation, and what is the third variable called?
+
+*** Back
+Smoking causes lung cancer and is also associated with coffee drinking. Smoking is a confounder (lurking variable), and the coffee–cancer relationship is a spurious correlation. Correlation does not imply causation.
+
+Source: Correlation
+
+** Experiments vs observational studies
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Why can a randomized controlled experiment establish causation while an observational study can only show association?
+
+*** Back
+Random assignment makes the treatment and control groups comparable, so differences in the response come from the treatment. In observational studies people choose their own group based on existing characteristics, which can confound the result. Placebos and double-blind designs remove further bias in the response and in the analysis.
+
+Source: Statistic Experiments
+
+** Stratified vs cluster sampling
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+How do stratified and cluster sampling differ, and when is cluster sampling a bad choice?
+
+*** Back
+- Stratified: split the population into subgroups and sample randomly from *every* subgroup, preserving their proportions.
+- Cluster: randomly pick *some* subgroups, then sample only within them; cheaper, since not every subgroup is visited.
+
+Cluster sampling is a bad choice when a metric per subgroup matters, because unpicked subgroups have no data.
+
+Source: Data Sampling
+
+** Systematic sampling pitfall
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+When is systematic sampling (every k-th row) unsafe, and how do you make it safe?
+
+*** Back
+When the data has a pattern in its row order (sorted, periodic); every k-th row then picks a biased subset. Plot the variable against the index to check, or shuffle the rows first (~df.sample(frac=1)~).
+
+Source: Data Sampling
+
+** Uses of the chi-squared distribution
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Name the typical uses of a chi-squared test.
+
+*** Back
+- Goodness of fit: does the data follow a specified distribution?
+- Test of independence: are two categorical variables related?
+- Inference about a variance: the scaled sample variance follows a $\chi^2$ distribution.
+
+Source: Chi-squared Distribution
+
+** Cross-sectional study confounding
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+A cross-sectional study measures height across ages in a single year. Why is its estimate of the effect of age on height confounded, and which design avoids this?
+
+*** Back
+Different ages are also different generations, and each generation is taller, so age is mixed with birth cohort. A longitudinal study follows the same people over time, but costs more and takes longer.
+
+Source: Statistic Experiments

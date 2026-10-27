@@ -7,3 +7,4 @@
 
 * [[id:964c2294-759f-4758-84ff-be9887557496][Aider]]
 * [[id:41518626-fa11-416e-ad92-190bc9202561][OpenCat Self-hosted API Proxy]]
+* [[id:5147c72c-e527-4250-b57f-5d5e7e80215b][Model Size vs Effort Level]]

@@ -20,7 +20,7 @@
 
 * Calculating Correlations
 ** Pearson Product-moment Correlation (r)
-\[r=\sum_{i=1}^{n}\frac{(x_{i}-\bar{x})(y_{i}-\bar{y})}{\sigma_{x}\times\sigma_{y}}\]
+\[r=\frac{1}{n}\sum_{i=1}^{n}\frac{(x_{i}-\bar{x})(y_{i}-\bar{y})}{\sigma_{x}\times\sigma_{y}}\]
 - Most common
 - Some variations on this formula:
 

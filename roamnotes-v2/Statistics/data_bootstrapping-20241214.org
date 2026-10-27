@@ -52,7 +52,7 @@ estimated_pop_mean = np.mean(mean_flavors_1000)
 
 # Estimating standard deviation of the population
 standard_error = np.std(mean_flavors_1000, ddof=1) # note that we use ddof=1 to calculate SE
-estimated_pop_std = sample_std / np.sqrt(len(coffee_sample))
+estimated_pop_std = standard_error * np.sqrt(len(coffee_sample)) # SE = sigma / sqrt(n)
 #+end_src
 
 * Most Important Summary

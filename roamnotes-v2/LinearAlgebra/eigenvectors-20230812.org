@@ -29,4 +29,12 @@ Where $\lambda$ is a scalar value called the eigenvalue associated to the vector
 - The eigenvalues are (3, 2)
 
 *** Finding Eigenvectors
-- $@\lambda_1=3$
+- $\lambda_1=3$: $(M-3I)\bm{v}=\begin{bmatrix}0 & 1 \\ 0 & -1\end{bmatrix}\bm{v}=\bm{0}$ gives $\bm{v}_1=\begin{bmatrix}1 \\ 0\end{bmatrix}$
+- $\lambda_2=2$: $(M-2I)\bm{v}=\begin{bmatrix}1 & 1 \\ 0 & 0\end{bmatrix}\bm{v}=\bm{0}$ gives $\bm{v}_2=\begin{bmatrix}1 \\ -1\end{bmatrix}$
+
+*** Computing $M^{10}$
+Put the eigenvectors in the columns of $P$ and the eigenvalues on the diagonal of $D$; then $M=PDP^{-1}$, and the inner $P^{-1}P$ factors cancel in every power:
+
+\[M^{10}=PD^{10}P^{-1}=\begin{bmatrix}1 & 1 \\ 0 & -1\end{bmatrix}\begin{bmatrix}3^{10} & 0 \\ 0 & 2^{10}\end{bmatrix}\begin{bmatrix}1 & 1 \\ 0 & -1\end{bmatrix}=\begin{bmatrix}59049 & 58025 \\ 0 & 1024\end{bmatrix}\]
+
+Here $P^{-1}=P$. Powering a diagonal matrix only powers its diagonal entries. Checked with NumPy 2.5.4 ~matrix_power~ (2026-10-27).

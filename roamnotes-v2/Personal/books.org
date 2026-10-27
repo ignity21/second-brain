@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       13f42fcf-3c5d-4667-9d6b-f083eb3a6979
+:ROAM_ALIASES: "读书笔记"
+:END:
+#+title: Personal Book Notes
+#+filetags: :Personal:
+
+* [[id:ee0201ca-ae34-4fea-b3bc-b19882a836b3][Atomic Habits]]

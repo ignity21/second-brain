@@ -58,11 +58,11 @@ Matrices make transformations on vectors, potentially changing their magnitude a
 - The dot product of a unit vector and a matrix basically performs a projection on an axis
   - gives us the *coordinates* of the resulting points on that axis.
 #+begin_src python
-  unit_x = np.array[[1, 0]] #  matrix 1x2
+  unit_x = np.array([[1, 0]]) #  matrix 1x2
   unit_x.dot(M) # result => horizontal coordinates
   # just projected  onto the horizontal axis
 
-  angle30 = 30 * np.pi
+  angle30 = np.pi / 6
   unit_30 = np.array([[np.cos(angle30), np.sin(angle30)]])
   unit_30.dot(M) # result => projection onto angle 30 Line
 #+end_src
@@ -106,8 +106,7 @@ g & h & i \end{bmatrix}\]
 #+end_src
 - A matrix that is its own inverse is called an *involution*.
   - e.g. reflection matrices, or a rotation by 180°
-- Test if a matrix can be inversed ~assert LA.inv(M) != 0~
-  - If the determinant is equal to 0, then the matrix cannot be inversed. (it is a singular matrix)
+- Test if a matrix can be inversed: its determinant is not 0 (~LA.det(M) != 0~). In floating point, compare ~LA.matrix_rank(M)~ with $n$ or check ~LA.cond(M)~ instead, since a nearly singular matrix has a tiny but non-zero determinant.
 
 *** [[id:5c4865c6-143e-4351-a1b6-1589464e135e][Pseudoinverse]]
 

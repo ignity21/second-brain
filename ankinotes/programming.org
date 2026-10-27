@@ -1,0 +1,130 @@
+#+title: Programming
+
+* Deck
+:PROPERTIES:
+:ANKI_DECK: RoamCards::Programming
+:END:
+
+** 语言构造的三要素
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Programming Languages 课程（SML）定义任何一种语言构造时，都要回答哪三个问题？
+
+*** Back
+- 语法（syntax）：怎么写。
+- 类型检查规则（type-checking rules）：在静态环境中得到什么类型，或报错。
+- 求值规则（evaluation rules）：在动态环境中得到什么值，或抛异常、不终止。
+
+Source: Function Bindings and Calls in ML
+
+** SML 函数绑定的求值
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+SML 求值 ~fun cube (x : int) = pow (x, 3)~ 这条绑定时，函数体 ~pow (x, 3)~ 会不会执行？这条绑定产生什么？
+
+*** Back
+不执行。函数本身就是值，绑定只把 ~cube~ 加入动态环境（REPL 打印 ~val cube = fn: int -> int~ ）。函数体在调用时才求值，所以递归函数可以在定义里引用自己。
+
+Source: Function Bindings and Calls in ML
+
+** SML 函数调用的求值步骤
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+SML 中求值调用 ~e0 (e1, ..., en)~ 的三步是什么？第三步中函数体在哪个环境里求值？
+
+*** Back
+1. 把 ~e0~ 求值为一个函数。
+2. 从左到右把实参求值为 ~v1~ … ~vn~ 。
+3. 在 *函数定义时的环境* 上加入参数绑定 ~x1 ↦ v1~ … 和函数名自己（供递归），在其中求值函数体。
+
+「定义时的环境」即词法作用域，函数值与该环境合起来就是闭包。
+
+Source: Function Bindings and Calls in ML
+
+** SML 遮蔽与闭包
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+下面的 SML 代码中 ~z~ 是多少？为什么？
+
+#+begin_src sml
+val a = 1;
+fun f (b : int) = a + b;
+val a = 2;
+val z = f 10;
+#+end_src
+
+*** Back
+~11~ 。第二个 ~val a~ 不是赋值，而是新绑定遮蔽了旧的 ~a~ ； ~f~ 的函数体在定义时的环境里求值，看到的仍是 ~a ↦ 1~ 。
+
+Source: Function Bindings and Calls in ML
+
+** Python 闭包捕获变量
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+同样的逻辑写成 Python 模块级代码， ~f(10)~ 返回多少？与 SML 的差别在哪？
+
+#+begin_src python
+a = 1
+def f(b): return a + b
+a = 2
+f(10)
+#+end_src
+
+*** Back
+~12~ 。Python 的 ~a = 2~ 修改的是同一个变量，闭包捕获的是变量（名字），调用时查找当前值；SML 的 ~val a = 2~ 是新绑定，旧闭包仍看到旧值（得 ~11~ ）。
+
+Source: Function Bindings and Calls in ML
+
+** 循环中创建的 lambda
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~[g() for g in [lambda: i for i in range(3)]]~ 的结果是什么？怎样让每个 lambda 记住当时的 ~i~ ？
+
+*** Back
+~[2, 2, 2]~ 。三个 lambda 共享同一个变量 ~i~ ，调用时 ~i~ 已是 2。用默认参数在定义时固定值： ~lambda i=i: i~ 。
+
+Source: Function Bindings and Calls in ML
+
+** Python 默认参数的求值时机
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+~def g(x=[]): x.append(1); return x~ ，连续调用两次 ~g()~ ，第二次返回什么？用「定义时求值什么」解释。
+
+*** Back
+~[1, 1]~ 。 ~def~ 执行时不运行函数体，但会把默认参数求值一次，这个列表在所有调用间共享。改用 ~x=None~ ，在函数体里新建列表。
+
+Source: Function Bindings and Calls in ML
+
+** 及早求值
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+SML 中 ~fun first (p : int, q : int) = p~ ，调用 ~first (1, raise Fail "x")~ 会返回 1 吗？为什么？
+
+*** Back
+不会，抛出 ~Fail~ 。SML 是及早求值（call-by-value）：进入函数体之前先求值所有实参，即使函数用不到 ~q~ 。惰性求值的语言（如 Haskell）才会返回 1。
+
+Source: Function Bindings and Calls in ML

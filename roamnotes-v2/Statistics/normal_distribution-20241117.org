@@ -26,7 +26,7 @@ std = 1
 print(norm.cdf(0.6, mean, std))
 
 # P(0.6 <= X <= 1.6)
-print(norm.cdf(1.6, mean, std1) - norm.cdf(0.6, mean, std))
+print(norm.cdf(1.6, mean, std) - norm.cdf(0.6, mean, std))
 
 # What value are 90% of the values less than?
 print(norm.ppf(0.9, mean, std))

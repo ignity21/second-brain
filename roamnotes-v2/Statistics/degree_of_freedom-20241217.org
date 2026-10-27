@@ -26,4 +26,4 @@
   - Only $n-1$ values are independent *after* we know the mean.
 
 * Bessel's correction
-- $\hat\sigma=\sqrt\frac{\sum_{i=1}^n(x_i-\bar{x})}{n-1}$
+- $\hat\sigma=\sqrt\frac{\sum_{i=1}^n(x_i-\bar{x})^2}{n-1}$

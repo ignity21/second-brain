@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       04eccc31-b7a3-4ba3-870e-64f7640bc447
+:ROAM_ALIASES: "显示面板类型"
+:END:
+#+title: Computer Display Panel Types
+#+filetags: :Hardware:
+
+* 两大类：背光与自发光
+- 液晶显示器（Liquid Crystal Display，LCD）：液晶本身不发光，靠背光模组（backlight unit，BLU，通常是 LED）从后面照亮，液晶只负责控制每个像素透过多少光。背光占厚度；黑色是「挡住光」，总会漏一点，所以对比度有限。
+- 自发光：每个像素自己发光，黑色就是不亮，对比度极高、可以做得很薄。OLED（Organic Light Emitting Diode）用有机材料发光；手机上常见的 AMOLED 是带主动矩阵驱动的 OLED。
+- 名字容易混淆的两个：
+  - mini-LED 仍是 *LCD* ，只是把背光换成成千上万颗小 LED，分区调光，提升对比度。
+  - micro-LED 是 *无机* 材料的自发光像素，不属于 OLED。
+
+* LCD 的三种面板
+
+| 面板 | 优点 | 缺点 | 常见用途 |
+|---|---|---|---|
+| IPS（In-Plane Switching） | 色彩准、可视角度大 | 对比度一般，黑色发灰 | 设计、通用办公 |
+| TN（Twisted Nematic） | 响应快、便宜 | 色彩和可视角度差 | 廉价电竞屏、旧显示器 |
+| VA（Vertical Alignment） | 对比度最高的 LCD | 响应偏慢，暗部拖影 | 看视频、曲面屏 |
+
+* OLED 的取舍
+- 优点：真正的黑色和极高对比度，响应快。
+- 缺点：长时间显示静态画面（任务栏、图标）会烧屏（burn-in）；全屏高亮时亮度不如 mini-LED。

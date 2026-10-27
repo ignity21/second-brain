@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       fbef54d3-f22a-4c80-a5bb-0d922c5025f6
+:ROAM_ALIASES: "游戏"
+:END:
+#+title: Personal Game Notes
+#+filetags: :Personal:
+
+* [[id:dcc27a97-92dc-4e4f-ae2a-d0a8979a05c7][Oxygen Not Included]]
+* [[id:35ca03c6-3482-48e7-9577-3bc2a218ff26][Total War: Warhammer III]]
+* [[id:f75bc364-5441-414d-b48d-5e35c41ca0ec][Minecraft Server Setup]]

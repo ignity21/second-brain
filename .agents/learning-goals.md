@@ -100,3 +100,27 @@
 | 子领域 | 档位 | 说明 |
 |---|---|---|
 | DevOps（Docker、K8s、Ansible、NGINX、Keycloak）、个人工具（Git、Zotero、Anki、AI 工具）、前端（HTML / CSS） | 知道 | 命令和截图大量删减，基本不制卡 |
+
+## LinearAlgebra
+
+记录于 2026-10-27（迁移收尾 A5）。用户在选项「两个都建，能判断」上作答（LinearAlgebra 与 Statistics 都建 Deck；选项描述为侧重几何直觉和 ML 中的用途，如特征分解、伪逆、Jacobian，不背公式）。
+
+| 子领域 | 档位 | 说明 |
+|---|---|---|
+| 向量、矩阵、线性变换、特征分解、伪逆、Jacobian / Hessian | 能判断 | 几何直觉和 ML 中的用途，不背公式 |
+
+## Statistics
+
+记录于 2026-10-27（迁移收尾 A5），同上一次作答。
+
+| 子领域 | 档位 | 说明 |
+|---|---|---|
+| 分布、抽样、置信区间、假设检验、t / z 检验、ANOVA、bootstrap | 能判断 | 未单独说明用途 |
+
+## Programming
+
+记录于 2026-10-27（迁移收尾 B 节）。用户在选项「能判断」上作答：能讲清这些概念、用它们分析其他语言（Python、C++、Elisp）的行为；SML 语法本身不记；制概念卡。
+
+| 子领域 | 档位 | 说明 |
+|---|---|---|
+| 编程语言概念：绑定与环境、求值规则、闭包、模式匹配、类型推断 | 能判断 | 来自 Coursera Programming Languages（SML） |

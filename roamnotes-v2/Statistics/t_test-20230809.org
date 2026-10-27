@@ -108,7 +108,7 @@ p_value = 1 - stats.t.cdf(t_stat, df=degrees_of_freedom)
 sample_data['diff'] = sample_data['2024'] - sample_data['2021']
 xbar_diff = sample_data['diff'].mean()
 n_diff = len(sample_data['diff'])
-s_diff = sample_data['diff'].std(df=1)
+s_diff = sample_data['diff'].std(ddof=1)
 t_stat = (xbar_diff - 0) / np.sqrt(s_diff**2/n_diff)
 degrees_of_freedom = n_diff - 1
 

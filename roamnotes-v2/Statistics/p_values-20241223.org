@@ -5,8 +5,8 @@
 #+filetags: :Statistics:
 
 * Overview
-Probability of obtaining a result, assuming the null hypothesis is true.
-- Quantify evidence for the null hypothesis
+Probability of obtaining a result *at least as extreme* as the observed one, assuming the null hypothesis is true.
+- Quantifies evidence against the null hypothesis; it is not the probability that \(H_{0}\) is true
 - A smaller p-value means stronger evidence in favor of the alternative hypothesis
 - Large p-value -> fail to reject null hypothesis
   - if \(p\le\alpha\), reject \(H_{0}\)

@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       51c2e040-f83a-4679-a5da-f9f25bd692e1
+:ROAM_ALIASES: "编程语言概念"
+:END:
+#+title: Programming Language Concepts
+#+filetags: :Programming:
+
+* [[id:499faa16-204e-40a9-9792-63107b2cdb08][Function Bindings and Calls in ML]]

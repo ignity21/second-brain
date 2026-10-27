@@ -17,5 +17,13 @@ $$H=\begin{bmatrix}2yz & 2xz & 2xy \\
 2xz & 0 & x^2 \\
 2xy & x^2 & 0\end{bmatrix}$$
 
-1. If the $det(H) > 0$, the maximum/minium exists.
-2. If the $H_{11} > 0$, it's a minium value.
+* Second Derivative Test
+At a critical point (the Jacobian is zero), the eigenvalues of $H$ decide:
+- All positive: local minimum.
+- All negative: local maximum.
+- Mixed signs: saddle point.
+- Some zero: the test is inconclusive.
+
+For two variables this reduces to: $det(H) > 0$ and $H_{11} > 0$ → minimum; $det(H) > 0$ and $H_{11} < 0$ → maximum; $det(H) < 0$ → saddle point.
+
+The two-variable shortcut does not extend to three variables. The example above at $(1, 1, 1)$ gives $det(H) = 6 > 0$ and $H_{11} = 2 > 0$, but the eigenvalues are about $-1.37$, $-1$ and $4.37$, so it would be a saddle point (checked with NumPy 2.5.4, 2026-10-27).

@@ -26,7 +26,7 @@
 
 ** Singular Value Decomposition
 It turns out that any $m\times n$ matrix M can be decomposed into the dot product of three simple matrices:
-- a rotation matrix $U$ (an $m\times n$ orthogonal matrix)
+- a rotation matrix $U$ (an $m\times m$ orthogonal matrix)
 - a scaling & projecting matrix $\Sigma$ (an $m\times n$ diagonal matrix)
 - and another rotation matrix $V^T$ (an $n\times n$ orthogonal matrix)
 #+begin_src python

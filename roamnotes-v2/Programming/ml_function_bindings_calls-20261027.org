@@ -1,0 +1,103 @@
+:PROPERTIES:
+:ID:       499faa16-204e-40a9-9792-63107b2cdb08
+:ROAM_ALIASES: "ML 函数绑定与调用"
+:VERIFIED_WITH: Poly/ML 5.7.1, CPython 3.14.8 (2026-10-27)
+:END:
+#+title: Function Bindings and Calls in ML
+#+filetags: :Programming:SML:
+
+* TOC :TOC_1:
+- [[#intuition][Intuition]]
+- [[#definitions][Definitions]]
+- [[#rules][Rules]]
+- [[#worked-example][Worked Example]]
+- [[#lexical-scope-and-shadowing][Lexical Scope and Shadowing]]
+- [[#eager-evaluation-of-arguments][Eager Evaluation of Arguments]]
+- [[#applying-the-rules-to-python][Applying the Rules to Python]]
+- [[#misconceptions][Misconceptions]]
+
+* Intuition
+Coursera Programming Languages（Dan Grossman）用 Standard ML（SML）讲语言语义，思路是：每种语言构造都用三件事定义——语法（syntax）、类型检查规则（type-checking rules）、求值规则（evaluation rules）。掌握这个框架后，看任何语言的新构造都可以问这三个问题，而不必记具体语言的细节。
+
+函数这一节的要点只有两句：
+- 定义函数时 *不执行* 函数体，只产生一个值（函数也是值）。
+- 调用函数时，先把实参求值，再在 *函数定义时的环境* 里执行函数体。
+
+* Definitions
+- 绑定（binding）：把名字和值关联起来，如 ~val x = e~ 。
+- 环境（environment）：程序某处可见的全部绑定。类型检查用静态环境（static environment，名字 → 类型），求值用动态环境（dynamic environment，名字 → 值）。
+- 遮蔽（shadowing）：后面的 ~val x = ...~ 不修改原来的 =x= ，而是新增一个同名绑定挡住它；之前捕获旧绑定的代码不受影响。SML 中的绑定不可变，没有赋值。
+- 值（value）：不能再求值的表达式，如 =8= 、 =true= 、一个函数。
+
+* Rules
+** 变量绑定 ~val x = e~
+- 类型检查：在当前静态环境中检查 =e= 得到类型 =t= ，静态环境加上 =x : t= 。
+- 求值：在当前动态环境中把 =e= 求值为 =v= ，动态环境加上 =x ↦ v= 。
+
+** 函数绑定 ~fun x0 (x1 : t1, ..., xn : tn) = e~
+- 类型检查：在静态环境加上 =x1 : t1= … =xn : tn= ，以及 =x0 : t1 * ... * tn -> t= （允许递归）之后检查函数体 =e= ，得到返回类型 =t= 。之后的绑定看到 =x0= 的类型为 =t1 * ... * tn -> t= 。
+- 求值： *函数本身就是值* ，不执行函数体；动态环境加上 =x0= ，供后面的代码调用。
+
+** 函数调用 ~e0 (e1, ..., en)~
+- 类型检查： =e0= 必须是函数类型 =t1 * ... * tn -> t= ，每个 =ei= 的类型是 =ti= ；整个调用的类型是 =t= 。
+- 求值：
+  1. 把 =e0= 求值为一个函数 =fun x0 (x1 : t1, ..., xn : tn) = e= 。
+  2. 从左到右把实参 =e1= … =en= 求值为 =v1= … =vn= 。
+  3. 在 *该函数定义时的环境* 上加入 =x1 ↦ v1= … =xn ↦ vn= ，以及 =x0= 自己（供递归），在这个环境里求值函数体 =e= ，结果就是调用的值。
+
+第 3 步中的「定义时的环境」就是词法作用域（lexical scope）：函数值实际上带着它定义时的环境，这一对就是闭包（closure），课程在后面的章节展开。
+
+* Worked Example
+#+begin_src sml
+val x = 8;
+fun pow (x : int, y : int) =
+    if y = 0 then 1 else x * pow (x, y - 1);
+fun cube (x : int) = pow (x, 3);
+val y = cube x;
+#+end_src
+
+Poly/ML 5.7.1 的输出：
+
+#+begin_example
+val x = 8: int
+val pow = fn: int * int -> int
+val cube = fn: int -> int
+val y = 512: int
+#+end_example
+
+- 绑定 =pow= 和 =cube= 时只打印 =fn= 和类型：函数体没有执行。
+- 求值 =cube x= ：先把 =x= 求值为 =8= ；再在 =cube= 定义时的环境（含 =x ↦ 8= 、 =pow= ）加上参数 =x ↦ 8= 后求值 =pow (x, 3)= 。参数 =x= 遮蔽了外层的 =x= ，这里两者恰好同值。
+
+* Lexical Scope and Shadowing
+#+begin_src sml
+val a = 1;
+fun f (b : int) = a + b;
+val a = 2;
+val z = f 10;
+#+end_src
+
+结果 =val z = 11: int= ：第二个 ~val a~ 只是新绑定，遮蔽了旧的 =a= ， =f= 的函数体仍在定义时的环境里求值，看到的是 =a ↦ 1= 。
+
+* Eager Evaluation of Arguments
+#+begin_src sml
+fun first (p : int, q : int) = p;
+val w = (first (1, raise Fail "arg evaluated")) handle Fail msg => ~1;
+#+end_src
+
+结果 =val w = ~1: int= ： =first= 用不到 =q= ，但第 2 步先求值所有实参，异常在进入函数体之前就抛出了。SML 是及早求值（eager evaluation，也叫传值调用 call-by-value）；Haskell 这类惰性求值（lazy evaluation）语言里不会抛出。
+
+* Applying the Rules to Python
+同一组问题拿来分析 Python，能解释几个常见的坑（CPython 3.14.8 实测）：
+
+| 问题 | SML | Python |
+|---|---|---|
+| 定义时执行什么 | 什么都不执行 | 函数体不执行，但 *默认参数在 ~def~ 执行时求值一次* ： ~def g(x=[])~ 的列表在多次调用间共享，第二次调用返回 =[1, 1]= |
+| 重新给外层名字赋值 | ~val a = 2~ 是新绑定，旧闭包不受影响，上例得 =11= | 模块级 ~a = 2~ 修改的是同一个变量，闭包按名字查找当前值，同样的代码得 =12= |
+| 循环中创建闭包 | 没有可变的循环变量；用递归或 ~map~ 生成函数时，每次调用都是新的参数绑定 | ~[lambda: i for i in range(3)]~ 共享同一个 =i= ，调用结果都是 =2= ；用默认参数 ~lambda i=i: i~ 在定义时固定值 |
+| 实参何时求值 | 调用前全部求值 | 同样调用前全部求值 |
+
+判断要点：Python 的闭包捕获的是 *变量* （名字到存储位置），不是定义时的值；SML 没有可变绑定，所以「捕获变量」和「捕获值」没有区别。
+
+* Misconceptions
+- 「定义函数时会检查函数体能不能运行」：只做类型检查，函数体在调用时才求值；递归函数在定义时引用自己正因为如此才可行。
+- 「 ~val x = ...~ 第二次出现是赋值」：是遮蔽。已经捕获旧绑定的函数仍看到旧值。

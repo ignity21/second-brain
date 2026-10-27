@@ -1,0 +1,69 @@
+:PROPERTIES:
+:ID:       4baf1454-8d95-40de-ac60-2a13a4eeae60
+:ROAM_ALIASES: "主板与 PC 组件"
+:VERIFIED_WITH: Intel i5-1155G7 (Tiger Lake), Linux 6.5 (2026-10-27)
+:END:
+#+title: PC Motherboard and Components
+#+filetags: :Linux:Hardware:
+
+* TOC :TOC_1:
+- [[#芯片组从南北桥到-cpu--pch][芯片组：从南北桥到 CPU + PCH]]
+- [[#扩展槽与存储接口][扩展槽与存储接口]]
+- [[#主板规格][主板规格]]
+- [[#电源][电源]]
+- [[#usb][USB]]
+- [[#启动链post固件与-bios--uefi][启动链：POST、固件与 BIOS / UEFI]]
+
+* 芯片组：从南北桥到 CPU + PCH
+- 早期主板：北桥（north bridge）连接 CPU、内存和显卡这些高速部件，其中的内存控制器（memory controller chip，MCC）是 CPU 与内存之间的桥；南桥（south bridge）管理 USB、SATA、音频等低速 I/O。
+- CPU 访问内存时，经地址总线（address bus）送出要读写的位置，数据走另一组数据总线。地址总线的宽度决定能寻址多少内存：32 位地址最多 4 GiB。
+- 现在北桥的功能已并入 CPU：集成内存控制器（integrated memory controller，IMC）和一部分 PCIe 通道直接在 CPU 上；南桥演变为平台控制器中枢（Platform Controller Hub，PCH，即通常说的「芯片组」），笔记本 CPU 甚至把它封装在一起（On-Package）。
+- 判断：接在 CPU 自带通道上的设备（显卡、主 NVMe 盘）延迟最低；接在芯片组上的设备共享芯片组到 CPU 的那一条链路。用 ~lspci -tv~ 看设备挂在哪个根端口下。本机：NVMe 盘挂在 CPU 的 PCIe 控制器 =00:06.0= 下；网卡、Wi-Fi、第二个 USB 控制器挂在芯片组的根端口 =00:1c.x= 、 =00:1d.0= 下。
+- 时钟信号为各部件提供节拍，时钟频率是每秒的周期数。现代 CPU 的频率随负载和温度变化，见 [[id:5dc17fb2-544c-433d-bd94-394a0c37457f][CPU Core Execution Features]] 的频率一节。
+
+* 扩展槽与存储接口
+- 扩展槽现在基本只有 PCIe：按通道数分 x1 / x4 / x16；每代单通道带宽约翻倍（Gen3 约 1 GB/s，Gen4 约 2 GB/s，Gen5 约 4 GB/s）。
+- 存储：机械硬盘（HDD）靠旋转盘片和磁头臂，随机访问要寻道，慢在毫秒级；固态硬盘（SSD）没有机械部件，随机访问快几个数量级。
+- 接口与协议要分开看：
+
+  | | SATA（AHCI 协议） | NVMe |
+  |---|---|---|
+  | 物理链路 | SATA 线缆，约 600 MB/s 上限 | PCIe 通道，Gen4 x4 约 8 GB/s |
+  | 命令队列 | 1 个队列，深度 32 | 最多 64K 个队列，每个深度最多 64K |
+  | 适合 | HDD、旧 SSD；支持热插拔 | 高速 SSD；队列可按 CPU 核分配，减少锁竞争 |
+
+  本机实测：NVMe 盘在 =/sys/block/nvme0n1/mq/= 下有 8 个硬件队列（每个逻辑 CPU 一个）；SATA 盘只有 1 个， =/sys/block/sda/device/queue_depth= 为 32。 ~lsblk -d -o NAME,TRAN,ROTA~ 显示每块盘的接口和是否为旋转盘。
+- 坑：M.2 只是插槽和卡的外形，走的协议可能是 SATA 也可能是 NVMe，买盘前看主板说明支持哪种。
+
+* 主板规格
+- 规格（form factor）决定主板尺寸、能装多少插槽，以及能放进什么机箱：ATX 最常见；Micro-ATX 小一号；Mini-ITX（17 × 17 cm）用于小机箱，通常只有一个 PCIe 槽。Nano-ITX、Pico-ITX 更小，用于嵌入式设备。
+
+* 电源
+- 电源（power supply unit，PSU）把墙上的交流电（AC）转成主板和部件用的低压直流电（DC，12 V、5 V、3.3 V）。
+- 功率 = 电压 × 电流（$P = VI$）。选电源时看三点：所在国家的墙插电压标准、各部件的总功耗（留余量）、主板规格要求的接口。
+
+* USB
+- USB 的名字和速度要分开看：USB-C 是接口外形，速度取决于走的协议。
+
+  | 协议名 | 旧名 | 速率 |
+  |---|---|---|
+  | USB 2.0 | | 480 Mbps |
+  | USB 3.2 Gen 1 | USB 3.0 / 3.1 Gen 1 | 5 Gbps |
+  | USB 3.2 Gen 2 | USB 3.1 / 3.1 Gen 2 | 10 Gbps |
+  | USB 3.2 Gen 2x2 | | 20 Gbps（只能用 USB-C） |
+  | USB4 | | 40 Gbps（基于 Thunderbolt 3 协议，只能用 USB-C） |
+
+  本机 ~lspci~ 中的 =USB 3.2 Gen 2x1 (10 Gbs) xHCI Host Controller= 就是 10 Gbps 那一档。
+- 旧主板上端口颜色大致对应速度：黑色 USB 2.0、蓝色 5 Gbps、青色 10 Gbps，但不是强制规范。
+
+* 启动链：POST、固件与 BIOS / UEFI
+- 上电后 CPU 先执行主板上闪存芯片（旧称 ROM 芯片，本机经 SPI 闪存控制器访问）中的固件。固件先做开机自检（Power On Self Test，POST）：识别和初始化 CPU、内存、存储等硬件，失败时用蜂鸣声或指示灯报错。
+- 然后固件找启动设备，交给引导程序（如 GRUB），引导程序再加载内核：
+
+  | | 传统 BIOS | UEFI（Unified Extensible Firmware Interface） |
+  |---|---|---|
+  | 找引导程序 | 读磁盘第一个扇区（MBR）里的代码 | 读 EFI 系统分区（FAT 文件系统）里的 =.efi= 文件 |
+  | 分区表 | MBR，单盘最大 2 TiB | GPT |
+  | 安全启动（Secure Boot） | 无 | 支持 |
+
+- 判断当前系统用哪种方式启动：存在 =/sys/firmware/efi= 目录即为 UEFI。本机为 UEFI。

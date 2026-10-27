@@ -1,6 +1,6 @@
 # 已完成迁移中未迁的笔记（待复查）
 
-Status: Open — 等用户逐篇决定；由 `2026-10-27-migration-followups.md`（A2）统筹
+Status: Complete — 已按用户决定迁入或确认不迁（2026-10-27）；执行记录见 `2026-10-27-migration-followups-execution.md`
 
 C++、Trading 和 Linux/OS 三次迁移完成后（以及剩余笔记迁移计划中），源笔记全部留在 `roamnotes/` 作备份。下面前 6 篇是这三次迁移的范围内、经决定 *没有迁入* `roamnotes-v2/` 的笔记，其后是剩余笔记迁移计划中决定不迁的个人内容和其他笔记，与已迁移的备份区分开。用户检查后决定：迁入（按 note-migration skill，保留原 ID），或确认不迁。
 
@@ -37,10 +37,10 @@ C++、Trading 和 Linux/OS 三次迁移完成后（以及剩余笔记迁移计�
 ## Checklist
 
 - [x] ZeroMQ（C++）：已在剩余笔记迁移批次 3 中与 `Default/zeromq` 合并为 SystemDesign 的 ZeroMQ Messaging Patterns（保留 `5521b2f9`），Pub/Sub 并入 Message Queues and Pub/Sub
-- [ ] Literal
-- [ ] ~std::istringstream~
-- [ ] Static Local Variable
-- [ ] Motherboard
-- [ ] Computer Display
-- [ ] netcat、Python Cookbook、SML、Calculus、Git Cheat Sheet、AI Prompts、UML
-- [ ] 个人内容 8 篇（Atomic Habits、Books、English、English Grammar、Have Fun、Oxygen Not Included、MC Server、Warhammer3）
+- [x] Literal、 ~std::istringstream~ 、Static Local Variable：确认不迁（2026-10-27）
+- [x] Motherboard、Computer Display：已迁入 Linux 的 Computer Hardware 下（PC Motherboard and Components、Computer Display Panel Types），并入了 `computer_hardware` 两节中挑出的概念
+- [x] netcat、Calculus、Git Cheat Sheet、AI Prompts、UML：确认不迁（2026-10-27）
+- [x] Python Cookbook：已改写为 Python Standard Library Toolbox
+- [x] SML：已迁入新大类 `Programming/`（Function Bindings and Calls in ML）
+- [x] Atomic Habits、Oxygen Not Included、MC Server、Warhammer3：已迁入新大类 `Personal/`
+- [x] Books、Have Fun、English、English Grammar：确认不迁（2026-10-27）

@@ -1,0 +1,298 @@
+#+title: LinearAlgebra
+
+* Deck
+:PROPERTIES:
+:ANKI_DECK: RoamCards::LinearAlgebra
+:END:
+
+** Linear independence test
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+How do you state "vectors $\bm{u}$, $\bm{v}$, $\bm{w}$ are linearly independent" with one equation that treats all three vectors equally?
+
+*** Back
+$a\bm{u}+b\bm{v}+c\bm{w}=\bm{0}$ has only the solution $a=b=c=0$. If any other solution exists, one vector lies in the span of the others, so the set is dependent.
+
+Source: Linear Algebra Overview
+
+** Rank, column space and null space
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+A linear transformation $A$ squashes 3D space onto a plane. What are its rank and its column space, and what does its null space contain?
+
+*** Back
+Rank 2: the column space (all possible outputs $A\bm{v}$) is that plane. The null space contains every vector that lands on the origin, here a whole line of vectors, not just $\bm{0}$.
+
+Source: Linear Algebra Overview
+
+** Meaning of the determinant
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+What does each of these say about a 2D transformation $M$: $det(M)=5$, $det(M)=-2$, $det(M)=0$?
+
+*** Back
+- $5$: areas grow by a factor of 5.
+- $-2$: areas double and space is flipped over (orientation reverses).
+- $0$: space is squashed into a lower dimension; the columns are linearly dependent and $M$ has no inverse.
+
+Source: Matrix
+
+** Determinant of a product
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Cloze
+:END:
+
+*** Text
+For square matrices, $det(AB)=$ {{c1::$det(A)\times det(B)$}}: applying two transformations scales areas by the product of their scale factors.
+
+*** Back
+Source: Matrix
+
+** Testing invertibility numerically
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+In theory a square matrix is invertible when $det(M) \ne 0$. Why is ~LA.det(M) != 0~ a poor test in NumPy, and what do you check instead?
+
+*** Back
+A nearly singular matrix has a tiny but non-zero determinant in floating point, so the test passes and the inverse is garbage. Compare ~LA.matrix_rank(M)~ with $n$, or check that ~LA.cond(M)~ is not huge. A truly singular matrix makes ~LA.inv~ raise ~LinAlgError: Singular matrix~.
+
+Source: Matrix
+
+** Inverse of a product
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Write $(QR)^{-1}$ in terms of $Q^{-1}$ and $R^{-1}$, and explain the order.
+
+*** Back
+$(QR)^{-1}=R^{-1}Q^{-1}$. $QR$ applies $R$ first, then $Q$; undoing it must undo $Q$ first, then $R$, like taking off socks and shoes in reverse order.
+
+Source: Linear Transformation
+
+** Composing transformations
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+You want to squeeze points ~P~ with ~F_squeeze~ and then shear them with ~F_shear~, for many point sets. What single matrix do you precompute, and why does precomputing it help?
+
+*** Back
+~F_shear @ F_squeeze~: the transformation applied last goes on the left. Matrix multiplication is associative, so ~F_shear @ (F_squeeze @ P)~ equals ~(F_shear @ F_squeeze) @ P~, and multiplying the small matrices once avoids transforming every point twice.
+
+Source: Linear Transformation
+
+** Eigenvalue equation
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Why must $det(M-\lambda I)=0$ for $\lambda$ to be an eigenvalue of $M$?
+
+*** Back
+$M\bm{v}=\lambda\bm{v}$ rearranges to $(M-\lambda I)\bm{v}=\bm{0}$. An eigenvector is non-zero, so $M-\lambda I$ must send a non-zero vector to the origin, which means it squashes space to a lower dimension: its determinant is 0.
+
+Source: Eigenvectors
+
+** Eigenvalues of a triangular matrix
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Find the eigenvalues and eigenvectors of $M=\begin{bmatrix}3 & 1 \\ 0 & 2\end{bmatrix}$.
+
+*** Back
+$det(M-\lambda I)=(3-\lambda)(2-\lambda)=0$, so $\lambda=3$ and $\lambda=2$ (for a triangular matrix, the diagonal entries).
+- $\lambda=3$: $\bm{v}=(1, 0)$.
+- $\lambda=2$: $\bm{v}=(1, -1)$.
+
+Source: Eigenvectors
+
+** Matrix powers by diagonalization
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+How do eigenvectors make $M^{10}$ cheap to compute?
+
+*** Back
+With eigenvectors as the columns of $P$ and eigenvalues on the diagonal of $D$, $M=PDP^{-1}$. In $M^{10}$ the inner $P^{-1}P$ pairs cancel, leaving $M^{10}=PD^{10}P^{-1}$, and $D^{10}$ just raises each diagonal entry to the 10th power.
+
+Source: Eigenvectors
+
+** Change of basis
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+The columns of $B$ are the new basis vectors written in the old coordinates. Which matrix converts a vector's new coordinates to old coordinates, which converts the other way, and what is the shortcut when $B$ is orthonormal?
+
+*** Back
+- New → old: $B\bm{x}_{new}=\bm{x}_{old}$.
+- Old → new: $B^{-1}\bm{x}_{old}=\bm{x}_{new}$.
+- Orthonormal $B$: $B^{-1}=B^T$, so no inversion is needed.
+
+Source: Linear Algebra Overview
+
+** Dot product and angle
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+What is the geometric form of $\bm{x}\cdot\bm{y}$, and what does $\bm{x}\cdot\bm{y}=0$ tell you?
+
+*** Back
+$\bm{x}\cdot\bm{y}=\|\bm{x}\|\|\bm{y}\|\cos\theta$. A zero dot product (with non-zero vectors) means $\cos\theta=0$: the vectors are perpendicular.
+
+Source: Vector
+
+** Clipping before arccos
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Computing the angle between vectors with ~np.arccos(x @ y / LA.norm(x) / LA.norm(y))~ occasionally returns ~nan~. Why, and what is the fix?
+
+*** Back
+Floating-point error can push the cosine slightly outside $[-1, 1]$ (for example ~1.0000000002~ for parallel vectors), where arccos is undefined. Clip first: ~np.arccos(np.clip(cos_theta, -1, 1))~.
+
+Source: Vector
+
+** NumPy elementwise vs dot product
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+For ~x = np.array([1, 2])~ and ~y = np.array([3, 4])~, what do ~x * y~ and ~x @ y~ return?
+
+*** Back
+~x * y~ is elementwise: ~[3, 8]~. ~x @ y~ (same as ~np.dot(x, y)~) is the dot product: ~11~.
+
+Source: Vector
+
+** Vector projection
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Write the vector projection of $\bm{y}$ onto $\bm{x}$, and compute it for $\bm{x}=(2, 0)$, $\bm{y}=(3, 4)$.
+
+*** Back
+$\text{proj}_{\bm{x}}\bm{y}=\frac{\bm{y}\cdot\bm{x}}{\bm{x}\cdot\bm{x}}\bm{x}=(\bm{y}\cdot\hat{\bm{x}})\hat{\bm{x}}$. Here $\frac{6}{4}(2, 0)=(3, 0)$.
+
+Source: Vector
+
+** Gram–Schmidt step
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+In Gram–Schmidt, $e_1$ is already a unit vector. How do you get $e_2$ from $v_2$?
+
+*** Back
+Remove the part of $v_2$ along $e_1$, then normalize: $u_2=v_2-(v_2\cdot e_1)e_1$, $e_2=\frac{u_2}{\|u_2\|}$. For $e_3$, subtract the projections onto both $e_1$ and $e_2$.
+
+Source: Orthonormal Basis
+
+** SVD as three simple steps
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+What does the singular value decomposition $M=U\Sigma V^T$ of any $m\times n$ matrix say geometrically?
+
+*** Back
+Every linear transformation is a rotation ($V^T$, $n\times n$ orthogonal), then a scaling and projection along the axes ($\Sigma$, $m\times n$ diagonal, holding the singular values), then another rotation ($U$, $m\times m$ orthogonal).
+
+Source: Linear Transformation
+
+** Pseudoinverse via SVD
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+How is the pseudoinverse $X^{+}$ computed from the SVD $X=U\Sigma V^T$, and why is it used instead of the inverse in linear regression?
+
+*** Back
+$X^{+}=V\Sigma^{+}U^T$, where $\Sigma^{+}$ sets singular values below a tiny threshold to zero, inverts the rest, and is transposed. It exists for any matrix, including non-square data matrices and ones with dependent columns, where $X^TX$ has no inverse.
+
+Source: Pseudoinverse
+
+** Jacobian of a linear map
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+Find the Jacobian matrix of $u(x,y)=x-2y$, $v(x,y)=3y-2x$. Why does it not depend on $x$ and $y$?
+
+*** Back
+$J=\begin{bmatrix}1 & -2 \\ -2 & 3\end{bmatrix}$ (rows: $u$, $v$; columns: $\partial x$, $\partial y$). The functions are linear, so their gradients are the same everywhere; the Jacobian of a linear map is the map's own matrix.
+
+Source: The Jacobian
+
+** Multivariate chain rule shapes
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+$f$ depends on $t$ through $\vec{x}(\vec{u}(t))$, with $\vec{x}\in\mathbb{R}^n$ and $\vec{u}\in\mathbb{R}^m$. Write $\frac{df}{dt}$ as a product of Jacobians with their shapes. Where does this show up in machine learning?
+
+*** Back
+$\frac{df}{dt}=\frac{\partial f}{\partial \vec{x}}\frac{\partial \vec{x}}{\partial \vec{u}}\frac{d\vec{u}}{dt}$, with shapes $(1\times n)(n\times m)(m\times 1)$. Backpropagation evaluates this product from the left, one layer at a time.
+
+Source: The Jacobian
+
+** Second derivative test with the Hessian
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+At a critical point the gradient is zero. How does the Hessian tell a minimum, a maximum and a saddle point apart in general, and what is the two-variable shortcut?
+
+*** Back
+By the signs of its eigenvalues: all positive → minimum; all negative → maximum; mixed → saddle point; some zero → inconclusive.
+
+Two variables only: $det(H)>0$ and $H_{11}>0$ → minimum; $det(H)>0$ and $H_{11}<0$ → maximum; $det(H)<0$ → saddle. The shortcut fails in 3D: a Hessian with $det(H)>0$ and $H_{11}>0$ can still have mixed eigenvalues.
+
+Source: The Hessian
+
+** Cross product direction
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:END:
+
+*** Front
+What direction does $\bm{a}\times\bm{b}$ point in for two linearly independent 3D vectors, and what happens when they are parallel?
+
+*** Back
+Perpendicular to both $\bm{a}$ and $\bm{b}$, oriented by the right-hand rule (fingers from $\bm{a}$ toward $\bm{b}$, thumb along $\bm{a}\times\bm{b}$). Parallel vectors give the zero vector.
+
+Source: Cross Product
