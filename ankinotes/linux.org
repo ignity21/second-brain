@@ -1244,7 +1244,7 @@ Source: Linux Benchmarking and Load Generation
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1793030779536
-:ANKI_NOTE_HASH: d15e6f0278b08e2c2ae15f068be8ed78
+:ANKI_NOTE_HASH: ffc321e1d68610f61310a7f44332dd02
 :END:
 
 *** Front
@@ -1258,6 +1258,8 @@ Source: Linux Benchmarking and Load Generation
 ** initramfs 的作用
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315506915
+:ANKI_NOTE_HASH: 69a2b4852d4f015e0628c20719abcf1d
 :END:
 
 *** Front
@@ -1271,6 +1273,8 @@ Source: Linux Boot Process
 ** 加组后不生效
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315506934
+:ANKI_NOTE_HASH: b2bd0eea622bb35fd16bd9863d54d789
 :END:
 
 *** Front
@@ -1284,6 +1288,8 @@ Source: Linux Users, Groups and Credentials
 ** cron 中 command not found
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315506951
+:ANKI_NOTE_HASH: ebd2c5a3982382a6df9f2e80a23dae15
 :END:
 
 *** Front
@@ -1297,6 +1303,8 @@ Source: Linux Scheduled Jobs with cron and systemd Timers
 ** cron 的日与星期字段
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315506965
+:ANKI_NOTE_HASH: 23f4b86503e24a4515fcb4a1bf5bbb95
 :END:
 
 *** Front
@@ -1310,6 +1318,8 @@ Source: Linux Scheduled Jobs with cron and systemd Timers
 ** GUI 程序看不到 shell 中的环境变量
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315506986
+:ANKI_NOTE_HASH: 5f717157d56b7552ba7bb1c70559fd0a
 :END:
 
 *** Front
@@ -1323,6 +1333,8 @@ Source: Shell Startup Files and Environment Variables
 ** 重定向的顺序
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315506999
+:ANKI_NOTE_HASH: be6e108eec234d238a3552cc235bab07
 :END:
 
 *** Front
@@ -1336,6 +1348,8 @@ Source: Shell Scripting Pitfalls in Bash and Zsh
 ** set -e 不退出的情况
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315507009
+:ANKI_NOTE_HASH: bfcd1093c2539a4d47361b5b786f9a9a
 :END:
 
 *** Front
@@ -1349,6 +1363,8 @@ Source: Shell Scripting Pitfalls in Bash and Zsh
 ** 测间隔用哪个时钟
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315507022
+:ANKI_NOTE_HASH: a65ef8ea440ec8d14d3033fa2a68c2b4
 :END:
 
 *** Front
@@ -1362,6 +1378,8 @@ Source: Linux Clocks and Time Measurement
 ** high_resolution_clock
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315507036
+:ANKI_NOTE_HASH: d89a997bf4bf22940a1ab7995ff62a85
 :END:
 
 *** Front
@@ -1375,6 +1393,8 @@ Source: Linux Clocks and Time Measurement
 ** 读线程 CPU 时间的代价
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315507047
+:ANKI_NOTE_HASH: 1b6d0baae2ebddc5a057f02a35a4cdd5
 :END:
 
 *** Front
@@ -1388,6 +1408,8 @@ Source: Linux Clocks and Time Measurement
 ** time 的 real、user、sys
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315507057
+:ANKI_NOTE_HASH: a05f25fa555b9bd03428ef9fb3b16021
 :END:
 
 *** Front
@@ -1402,6 +1424,8 @@ Source: Linux Clocks and Time Measurement
 ** 指针追逐为什么慢
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315507070
+:ANKI_NOTE_HASH: ab57d3c76fc4e2a252dd67e648494543
 :END:
 
 *** Front
@@ -1416,6 +1440,8 @@ Source: CPU Cache Hierarchy
 ** 伪共享
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315507086
+:ANKI_NOTE_HASH: 166533e769399b459313f8305f3fa906
 :END:
 
 *** Front
@@ -1429,6 +1455,8 @@ Source: CPU Cache Hierarchy
 ** 伪共享与超线程兄弟
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315507101
+:ANKI_NOTE_HASH: db39c397f25be3b38d9df364e2bf20d9
 :END:
 
 *** Front
@@ -1442,6 +1470,8 @@ Source: CPU Cache Hierarchy
 ** 共享 L3 的相邻负载干扰
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315507112
+:ANKI_NOTE_HASH: 2243face99101a92d0ba319787ed67fc
 :END:
 
 *** Front
@@ -1455,6 +1485,8 @@ Source: CPU Cache Hierarchy
 ** 只隔离一个逻辑 CPU 不够
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315507130
+:ANKI_NOTE_HASH: c43763e295a3c021deb21bf6577d4547
 :END:
 
 *** Front
@@ -1468,6 +1500,8 @@ Source: CPU Core Execution Features
 ** 分支预测失败
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315507140
+:ANKI_NOTE_HASH: 5ea2da0dc3172d5017dab14ef9957738
 :END:
 
 *** Front
@@ -1481,6 +1515,8 @@ Source: CPU Core Execution Features
 ** 浮点求和的向量化
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315507154
+:ANKI_NOTE_HASH: bad3e24469937d148a7ff7ddca3b2e48
 :END:
 
 *** Front
@@ -1494,6 +1530,8 @@ Source: CPU Core Execution Features
 ** 深度 C-state 的唤醒延迟
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315507168
+:ANKI_NOTE_HASH: 2e3cf6369fcd81bcbc5877866edbc0a3
 :END:
 
 *** Front
@@ -1507,6 +1545,8 @@ Source: CPU Core Execution Features
 ** NUMA 首次触碰
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315507182
+:ANKI_NOTE_HASH: 44803b2079c35611b1fc7ce2529fcbca
 :END:
 
 *** Front
@@ -1520,6 +1560,8 @@ Source: NUMA Memory Architecture
 ** 低延迟进程与自动 NUMA 平衡
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315507198
+:ANKI_NOTE_HASH: 38005e8ad03ab8a78986228912444d29
 :END:
 
 *** Front
@@ -1529,3 +1571,33 @@ Source: NUMA Memory Architecture
 自动 NUMA 平衡会周期性地解除页映射，靠提示缺页（NUMA hinting fault）统计访问并迁移页或任务，这些缺页和迁移是不可预测的停顿。显式绑定后它已无收益，只剩抖动。
 
 Source: NUMA Memory Architecture
+
+** Omarchy 配置改在哪、改坏怎么恢复
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315507209
+:ANKI_NOTE_HASH: 003b5b2adde2d3ae11bcb3d0ea59b379
+:END:
+
+*** Front
+在 Omarchy 上想改某个窗口规则或快捷键：默认配置在哪、自己的改动应写在哪？改坏了怎么恢复？
+
+*** Back
+默认层在 ~/usr/share/omarchy/~ ，归 omarchy 包所有，只读，每次 ~omarchy update~ 都会被覆盖；改动写在用户层 ~$HOME/.config/hypr/~ 、 ~$HOME/.config/omarchy/~ ，它们在默认层之后加载，覆盖默认值。改坏了用 ~omarchy refresh <x>~ （如 ~omarchy refresh hyprland~ ）把用户层恢复成默认，它会先备份当前版本。
+
+Source: Omarchy Desktop Distribution
+
+** Omarchy 里暂时收起窗口
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315507221
+:ANKI_NOTE_HASH: 262cdb4c26e7e3b808887a71c56e8211
+:END:
+
+*** Front
+Omarchy（Hyprland 平铺）没有传统的最小化。想把一个窗口暂时收起、随时再叫出来，用什么快捷键？
+
+*** Back
+用 scratchpad： ~Super+Alt+S~ 把当前窗口移入 scratchpad， ~Super+S~ 在任意工作区上方呼出或收起它。其他办法：移到别的工作区（ ~Super+Shift+<N>~ ），或在 floating 布局的工作区里用 ~Super+M~ 收进 dock。
+
+Source: Omarchy Desktop Distribution（Omarchy 4.5.0 默认绑定）

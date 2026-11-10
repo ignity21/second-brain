@@ -1,0 +1,100 @@
+:PROPERTIES:
+:ID:       8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10
+:ROAM_ALIASES: "Omarchy 桌面发行版"
+:VERIFIED_WITH: Omarchy 4.5.0, Hyprland 0.56.2 (2026-11-10)
+:END:
+#+title: Omarchy Desktop Distribution
+#+filetags: :Linux:Desktop:
+
+* TOC :TOC_2:
+- [[#定位][定位]]
+- [[#运作模型][运作模型]]
+  - [[#两层配置][两层配置]]
+  - [[#hyprland-怎么摆窗口][Hyprland 怎么摆窗口]]
+  - [[#找命令和快捷键][找命令和快捷键]]
+- [[#窗口操作常用键][窗口操作常用键]]
+- [[#待试的窗口工作流][待试的窗口工作流]]
+  - [[#1password-挡住要粘贴的输入框][1Password 挡住要粘贴的输入框]]
+  - [[#一个应用开出很多平铺窗口如-lazycat-nas-客户端][一个应用开出很多平铺窗口（如 LazyCat NAS 客户端）]]
+- [[#坑][坑]]
+- [[#能力地图][能力地图]]
+- [[#my-take][My Take]]
+
+* 定位
+Omarchy 是在 Arch Linux 上预装并配好一整套桌面的发行版：平铺式 Wayland 合成器 Hyprland、Omarchy shell（基于 Quickshell 的状态栏、菜单、通知）、终端、主题，以及把这些串起来的 ~omarchy~ 命令。它的价值不在某个组件，而在默认的键盘工作流：开应用、切换窗口和工作区、截图、换主题都有现成快捷键或菜单。
+
+* 运作模型
+** 两层配置
+| 层 | 位置 | 归属 | 改动方式 |
+|---|---|---|---|
+| 默认层 | =/usr/share/omarchy/= （命令、默认配置、主题、迁移脚本） | omarchy 包 | 只读；每次 ~omarchy update~ 都会被覆盖 |
+| 用户层 | =~/.config/hypr/= 、 =~/.config/omarchy/= 及各应用的 =~/.config/<app>/= | 自己 | 直接编辑；Hyprland 的 Lua 配置在默认层之后加载，覆盖默认值 |
+
+由此推出几条用法：
+- 想看默认行为怎么配的（某个窗口为什么浮动、某个快捷键调用了什么），去读 =/usr/share/omarchy/default/= ；想改，就在用户层覆盖。
+- 改坏了用 ~omarchy refresh <x>~ 把用户层恢复成默认，它会先备份当前版本。
+- 想在系统事件（如换主题）时跑自己的脚本，放 =~/.config/omarchy/hooks/= ，不去改默认层的脚本。
+- ~omarchy update~ 同时升级系统包和 Omarchy，并运行迁移脚本调整用户层；升级前可以用 ~omarchy snapshot create~ 建快照（snapper），出问题时 ~omarchy snapshot restore~ 回滚。
+
+** Hyprland 怎么摆窗口
+- *默认平铺* ：新窗口切分当前聚焦的窗口（dwindle 布局），不重叠、不最小化。所以每开一个应用就多一块平铺区域，这是平铺 WM 的本意，不是故障。
+- *浮动是例外* ：由窗口规则决定。Omarchy 给 1Password、Bitwarden、文件选择器、计算器等打了 ~floating-window~ 标签，统一浮动、居中、875×600（见 =/usr/share/omarchy/default/hypr/apps/= ）。任何窗口都能用 =Super+T= 临时切换平铺 / 浮动。
+- *工作区布局可切换* ： =Super+L= 让当前工作区在 dwindle、scrolling（窗口横向排成一条，可滚动）、floating（整个工作区像传统桌面一样浮动，并显示 dock）三者间循环，设置按工作区保存。
+- 平铺 WM 没有传统的「最小化」。把窗口暂时收起来的办法：放到 *scratchpad* （一个可以叠在任意工作区上方、随时呼出 / 收起的特殊工作区）、移到别的工作区，或在浮动工作区里用 =Super+M= 收进 dock。
+- *分组（group）* ：把几个窗口叠成一块带标签页的区域，只占一个平铺位置，适合同一个应用开出的多个窗口。
+
+** 找命令和快捷键
+需要时现查，不背清单：
+- =Super+K= ：快捷键列表；终端里用 ~omarchy menu keybindings --print~ ，可以接 ~rg~ 过滤。
+- =Super+Space= ：Omarchy 菜单，几乎所有功能都能从这里找到。
+- ~omarchy --help~ 列出命令组， ~omarchy <group> --help~ 看组内命令； ~omarchy commands~ 列出全部命令。
+
+* 窗口操作常用键
+本机 Omarchy 4.5.0 的默认绑定，只收需要形成肌肉记忆的几项：
+
+| 任务 | 快捷键 |
+|---|---|
+| 关闭窗口（1Password 等会退到托盘） | =Super+W= |
+| 平铺 ↔ 浮动 | =Super+T= |
+| 弹出：浮动并置顶（pin，切工作区也跟着） | =Super+O= |
+| 全屏 | =Super+F= |
+| 切换聚焦：方向 / 依次 | =Super+Arrow= / =Alt+Tab= |
+| 交换窗口位置 | =Super+Shift+Arrow= |
+| 切换工作区 / 把窗口移过去 | =Super+<N>= / =Super+Shift+<N>= |
+| 移入 scratchpad / 呼出或收起 scratchpad | =Super+Alt+S= / =Super+S= |
+| 开关分组 / 组内切换标签 | =Super+G= / =Super+Alt+Tab= |
+| 循环工作区布局（dwindle → scrolling → floating） | =Super+L= |
+| 用鼠标移动 / 调整大小 | =Super+LMB= 拖动 / =Super+RMB= 拖动 |
+| 打开 1Password | =Super+Shift+/= |
+
+* 待试的窗口工作流
+以下是针对已遇到问题的候选做法，试用后把结论写进 [[*My Take][My Take]]。
+** 1Password 挡住要粘贴的输入框
+1Password 被规则设为居中浮动，正好盖住屏幕中间的输入框。
+- 最省事：复制密码后直接 =Super+W= 关掉 1Password（它退到托盘），输入框就露出来了，再粘贴。不需要先拖开窗口。
+- 也可以用 1Password 自带的 Quick Access 小窗：只有一个搜索框，搜到条目后复制。它的全局快捷键在 1Password 设置里查看或修改（Wayland 下应用自己注册的全局快捷键不一定生效，不生效时可以在 =~/.config/hypr/bindings.lua= 里绑定）。
+- 想让它固定出现在别处：在 =~/.config/hypr/= 里给 1Password 写窗口规则，覆盖默认的居中和尺寸（例如放到屏幕右侧）。Hyprland 的窗口规则语法变化频繁，写之前查当前版本的官方 wiki。
+** 一个应用开出很多平铺窗口（如 LazyCat NAS 客户端）
+- 把这些窗口 =Super+G= 合成一组，只占一个平铺位置，用标签切换。
+- 给这个应用一个专用工作区，在里面 =Super+L= 切到 floating 布局，按传统桌面的方式使用。
+- 进一步可以写窗口规则，让它的窗口自动进入某个工作区或自动浮动。规则需要窗口的 class，打开应用后用 ~hyprctl clients~ 查。
+
+* 坑
+- *改了 =/usr/share/omarchy/= 不生效或被冲掉* ：那是包管理的默认层，下次更新就被覆盖。改用户层，或用 hooks。
+- *Hyprland 配置写错后窗口行为异常* ：保存后会自动重载，但错误不一定弹出来。改完运行 ~hyprctl configerrors~ 确认没有报错；实在改乱了，用 ~omarchy refresh hyprland~ 恢复默认（会覆盖 =~/.config/hypr/= 里的 Lua 配置，先确认备份）。
+- *网上找到的窗口规则不能用* ：Hyprland 的规则语法多次改版，Omarchy 现在用 Lua 配置（ ~o.window(...)~ ），旧教程里的 =windowrulev2= 写法要换算。
+
+* 能力地图
+- ~omarchy pkg install~ / ~omarchy pkg remove~ ：模糊搜索的 TUI，装或删 Arch 包，记不清包名时用。
+- ~omarchy webapp install~ / ~omarchy tui install~ ：把一个网址或终端程序做成启动器里的「应用」，有独立窗口和图标。
+- ~omarchy launch or focus ...~ ：已经开着就切过去，没开才启动；自定义快捷键时用它，避免重复开窗口。
+- ~omarchy theme~ 、 ~omarchy font~ ：换主题和字体，所有组件一起变。
+- ~omarchy capture~ ：截图、录屏、OCR 取字。
+- ~omarchy reminder <分钟> "<内容>"~ ：桌面提醒。
+- ~omarchy hook~ 、 ~omarchy refresh~ 、 ~omarchy snapshot~ ：见 [[*两层配置][两层配置]]。
+- 开发工具：Omarchy 用 mise 在系统层预装一批 CLI（gh、node、各家 AI 编码 agent），见 [[id:f64c61b9-0d46-4bad-80e2-b466ac291920][mise]]。
+
+* My Take :mine:
+- 刚开始用，窗口用起来还不顺：1Password 经常要调出，用完关掉（实际是收到托盘）。它弹出来是一个独立的浮动窗口，挡住了要填的输入框，我得按住 Super 用鼠标把它拖开，再复制粘贴进去。浏览器里没这个问题，扩展会自动填写。
+- LazyCat NAS 也类似：每个应用都弹出一个新的平铺窗口，用起来很麻烦。
+- 先从初级用法入手，跟着官方文档走，慢慢摸索出自己的工作流，再逐步补进这篇笔记。

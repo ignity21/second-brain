@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       1d18e8bf-7e4c-4d93-a4a9-b6b6f71cb148
+:ROAM_ALIASES: "开发环境工具"
+:END:
+#+title: Development Environment Tools
+#+filetags: :Tools:
+
+* [[id:f64c61b9-0d46-4bad-80e2-b466ac291920][mise]]

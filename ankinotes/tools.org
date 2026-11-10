@@ -56,7 +56,7 @@ Source: Ansible
 :PROPERTIES:
 :ANKI_NOTE_TYPE: CC Basic
 :ANKI_NOTE_ID: 1793077971763
-:ANKI_NOTE_HASH: 7da5c2d02d07bcaaacc228c1d0403909
+:ANKI_NOTE_HASH: 083bda4bfdbe480a077c0c7b7371bdaf
 :END:
 
 *** Front
@@ -66,3 +66,18 @@ Source: Ansible
 The Service's selector does not match the Pods' labels, so no Pod is selected. Compare ~spec.selector~ with the Pod labels ( ~kubectl get pods --show-labels~ ).
 
 Source: Docker and Kubernetes Basics
+
+** mise 与 uv：uv 项目的 Python 解释器由谁管
+:PROPERTIES:
+:ANKI_NOTE_TYPE: CC Basic
+:ANKI_NOTE_ID: 1794315507884
+:ANKI_NOTE_HASH: 1bc3a8c753fe6d45b8d4b58366ed9dce
+:END:
+
+*** Front
+机器上同时有 mise（全局 ~python = "latest"~ ）和 uv。一个 uv 管理的 Python 项目，解释器版本应该由谁决定、写在哪里？mise 的全局 python 会影响它吗？
+
+*** Back
+由 uv 决定：版本写在 ~.python-version~ 和 ~pyproject.toml~ 的 ~requires-python~ ，项目的 ~mise.toml~ 不再写 python，避免两个来源。mise 的全局 python 基本不影响：uv 默认优先用自己管理的解释器，mise 装的只被当作 ~PATH~ 上的系统 Python，只有版本恰好匹配时才会用到。mise 负责项目之外的默认 python 和其他语言；可设 ~python.uv_venv_auto = "source"~ 让 mise 进入目录时自动激活 uv 的 ~.venv~ 。
+
+Source: mise Development Tool Manager

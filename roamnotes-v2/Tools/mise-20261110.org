@@ -1,0 +1,106 @@
+:PROPERTIES:
+:ID:       f64c61b9-0d46-4bad-80e2-b466ac291920
+:ROAM_ALIASES: "mise 开发工具版本管理"
+:VERIFIED_WITH: mise 2026.11.5, uv 0.13.5 (2026-11-10)
+:END:
+#+title: mise Development Tool Manager
+#+filetags: :Tools:
+
+* TOC :TOC_2:
+- [[#定位][定位]]
+- [[#运作模型][运作模型]]
+  - [[#配置分层越具体越优先][配置分层：越具体越优先]]
+  - [[#两种生效方式activate-与-shims][两种生效方式：activate 与 shims]]
+  - [[#lazy-工具][lazy 工具]]
+- [[#与-uv-分工][与 uv 分工]]
+  - [[#谁管什么][谁管什么]]
+  - [[#推荐的分工][推荐的分工]]
+  - [[#uv-选哪个解释器][uv 选哪个解释器]]
+- [[#常用命令][常用命令]]
+- [[#坑][坑]]
+- [[#能力地图][能力地图]]
+
+* 定位
+mise 用一套命令和配置文件管理各种语言的运行时和命令行工具（node、python、go、gh 等），取代 nvm、pyenv、asdf 这类一种语言一个的版本管理器。它还能按目录设置环境变量、定义任务（tasks），这两项可以看作附带能力。
+
+- *适合* ：一台机器上要切换多种语言或多个版本；希望「进入项目目录，工具版本就自动对上」；在系统层统一装一批 CLI（Omarchy 就是这样用它的）。
+- *不负责* ：依赖包。Python 的包和锁文件仍交给 [[id:196944f7-2304-448c-9f27-4e3a6d2892f7][uv]]，Node 的包交给 npm / pnpm。mise 只管「用哪个版本的 python、node 可执行文件」。
+
+* 运作模型
+** 配置分层：越具体越优先
+mise 从当前目录向上找配置，再合并全局和系统配置，同一工具以最具体的那层为准：
+
+| 层 | 文件 | 本机内容 |
+|---|---|---|
+| 项目 | =mise.toml= （向上查找，子目录覆盖父目录） | 无 |
+| 用户全局 | =~/.config/mise/config.toml= | ~python = "latest"~ ，以及 kimi CLI |
+| 系统 | =/etc/mise/conf.d/*.toml= | Omarchy 装的 claude、codex、gh、node、uv 等 |
+
+- 配置里的 =[tools]= 写「要什么版本」， =[env]= 写环境变量， =[tasks]= 写任务。
+- ~mise use <tool>@<ver>~ 安装并写进最近的项目配置；加 =-g= 写进用户全局配置。
+- ~mise ls~ 的最后两列显示每个工具的版本来自哪个文件，排查「为什么是这个版本」先看它。
+
+** 两种生效方式：activate 与 shims
+- *activate* ：rc 文件里的 ~eval "$(mise activate zsh)"~ 在每次显示提示符时按当前目录改写 ~PATH~ ，把选中版本的 =bin= 目录放到前面，环境变量也随目录切换。只在交互 shell 里起作用。
+- *shims* ： =~/.local/share/mise/shims/= 下每个工具一个同名小程序（实际都是 ~mise~ ），运行时再按当前目录决定执行哪个版本。脚本、IDE、cron 等非交互环境靠它。
+- 本机两者都开着（ ~mise doctor~ 显示 =activated: yes= 、 =shims_on_path: yes= ）。
+
+** lazy 工具
+Omarchy 的系统配置把许多工具标成 =lazy= ： ~mise ls~ 里显示 =(lazy)= ，平时只有 shim，第一次运行时才下载安装。本机第一次通过 shim 运行 ~uv~ 时，mise 当场装了 uv 0.13.7。
+
+* 与 uv 分工
+** 谁管什么
+| 职责 | mise | uv |
+|---|---|---|
+| Python 解释器 | 能装（默认下载 python-build-standalone 预编译版） | 能装（ ~uv python install~ ），还能按 =.python-version= 自动下载 |
+| 项目的虚拟环境、依赖、锁文件 | 不管（只能顺带激活 =.venv= ） | 核心职责 |
+| 其他语言和 CLI | 核心职责 | 只有 Python 工具（ ~uv tool~ ） |
+
+两者在 Python 解释器上重叠，要定一个负责方。
+
+** 推荐的分工
+- *uv 项目里，解释器版本仍由 uv 决定* ：版本写在 =.python-version= 和 =pyproject.toml= 的 ~requires-python~ ，项目的 =mise.toml= 不再写 python，避免同一件事有两个真相来源。
+- *mise 负责项目之外* ：全局默认的 python（临时脚本、REPL），以及 node 等其他语言。
+- 可选：在全局配置里设置 ~python.uv_venv_auto = "source"~ 。进入含 =uv.lock= 的目录时，mise 自动激活 uv 建好的 =.venv= ，不用 ~source .venv/bin/activate~ 或每条命令都加 ~uv run~ 。设成 ="create|source"= 时，缺 =.venv= 也会用 uv 创建，但这时用的是 mise 选中的 Python。
+
+#+begin_src toml
+# ~/.config/mise/config.toml
+[settings]
+python.uv_venv_auto = "source"
+#+end_src
+
+** uv 选哪个解释器
+本机实测（mise 已激活，无 =.python-version= ）：
+
+| 命令 | 结果 |
+|---|---|
+| ~uv python find~ | uv 自己下载的 3.11（ =~/.local/share/uv/python/= ） |
+| ~uv python find 3.15~ | mise 装的 3.15.2 |
+| ~uv python find 3.14~ | 系统的 =/usr/bin/python3.14= |
+| ~uv python find --python-preference system~ | mise 装的 3.15.2 |
+
+uv 默认优先用它自己管理的解释器，mise 装的在 uv 看来只是 ~PATH~ 上的「系统」Python。只有指定的版本恰好匹配，或改了 ~python-preference~ ，才会用到 mise 的。所以在 uv 项目里，mise 的全局 python 设成什么基本不影响项目。
+
+* 常用命令
+| 任务 | 命令 |
+|---|---|
+| 看当前目录下每个工具的版本及来源 | ~mise ls~ |
+| 给项目固定版本 / 设全局默认 | ~mise use node@22~ / ~mise use -g python@3.13~ |
+| 按配置装齐缺失的工具 | ~mise install~ |
+| 用指定版本临时跑一条命令 | ~mise exec node@20 -- node -v~ （ ~mise x~ ） |
+| 某个命令实际执行哪个文件 | ~mise which python~ |
+| 升级工具 | ~mise upgrade~ （ ~mise up~ ） |
+| 排查激活、shims、配置文件 | ~mise doctor~ |
+
+* 坑
+- *同一个工具有两份* ：本机 =~/.local/bin/uv= 是自己装的 uv 0.13.5，Omarchy 又通过 mise 提供 lazy 的 uv（首次运行装了 0.13.7）。 ~which uv~ 取决于 ~PATH~ 顺序，不同 shell 里可能不同。处理办法：只保留一份（例如删掉自装的，交给 mise 升级），或至少用 ~which -a uv~ 知道当前用的是哪个。
+- *终端里和脚本里的 python 不一样* ：未激活 mise 的环境（脚本、桌面启动的程序）里 ~python~ 可能是系统的 =/usr/bin/python= （本机 3.14.8），激活后是 mise 的 3.15.2。系统工具依赖系统 Python，不要用 mise 的版本替换 =/usr/bin/python= 。
+- *mise 默认不读 =.python-version=* ：需要 ~mise settings add idiomatic_version_file_enable_tools python~ 才读；同一目录的 =mise.toml= 里写了 python 时，以 =mise.toml= 为准。按上面的分工，uv 项目不需要开这个设置。
+- *版本漂移* ：AI 常写 ~python.uv_venv_auto = true~ ，mise 2026.7.0 起已弃用，计划在 2027.7.0 移除。改写成 ="source"= 或 ="create|source"= 。
+
+* 能力地图
+- =[env]= ：按目录设置环境变量，可以加载 =.env= 文件，离开目录自动撤销。
+- =[tasks]= / ~mise run~ ：项目里的命令别名和简单任务编排，可替代 Makefile 的一部分用途。
+- 后端前缀： =npm:= 、 =pipx:= 、 =github:= 、 =http:= 等，可以把 npm 包、GitHub release 的二进制直接当工具装（Omarchy 的配置里大量使用）。
+- ~mise sync python --uv~ ：把 uv 和 mise 各自装的解释器互相链接，避免重复下载。
+- ~mise settings~ ：查看和修改全部设置；加 =--all= 显示默认值。

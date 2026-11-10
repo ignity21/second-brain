@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       00013e1c-2bab-4394-8a9c-44949d43552d
+:ROAM_ALIASES: "Linux 桌面"
+:END:
+#+title: Linux Desktop
+#+filetags: :Linux:
+
+* [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy]]
