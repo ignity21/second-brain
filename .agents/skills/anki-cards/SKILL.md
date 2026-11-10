@@ -11,7 +11,7 @@ description: Create or modify Anki cards in ankinotes/*.org. Use when the user a
 - 每张卡片是 Deck 下的二级标题，主题根据内容确定；字段使用三级标题，名称由 Note Type 决定。
 - 新卡片的 property drawer 只填 `:ANKI_NOTE_TYPE: <支持的类型名称>`，名称按下表原样填写。牌组继承自 Deck，不在卡片中重复填写 `:ANKI_DECK:`。
 - 不预填 `:ANKI_NOTE_ID:` 或 `:ANKI_NOTE_HASH:`，由同步流程生成；编辑已有卡片时保留已有同步字段。
-- 制作卡片的完成标准是结构和所选类型的必填字段内容完整，不需要代替用户确认或同步 Anki。
+- 完成标准：结构和所选类型的必填字段完整，检查通过，并已推送到 Anki（见「推送到 Anki」；Anki 没打开时说明未推送）。
 
 ## 支持的 Note Type
 
@@ -76,5 +76,20 @@ This is a {{c1::apple::hint}}.
 - 数学公式使用 Org 的 `$...$`（行内）或 `$$...$$`（块级）LaTeX 语法；同步器会将其转为 Anki 的 MathJax，而不是需要外部 LaTeX 程序生成的图片。不要把公式伪装成图片链接，也不要在公式前后遗留空的图片占位。
 - 行内代码一律用 `~code~`，不用 `=verbatim=`：代码中常含 `=`（如 `on="key"`、`literal=True`），后面紧跟 `"`、`[` 等字符时，Org 会把它当作 verbatim 的结束标记，导致代码被截断。两段代码之间不要只用 `/` 连接（如 `~a~/~b~` 会被解析成一段），改用 `and` 或 `、` 连接。
 - 中文内容中的 Org 行内标记按 AGENTS.md「Org 排版」书写：标记贴住内容，外侧与中文文字或中文标点各留一个半角空格，例如 `用 ~close()~ 关闭。`。需要标记的代码照常标记，不为省事去掉。
-- **生成后必检：** 对每个新增或修改的 Anki Org 文件运行 AGENTS.md「按改动验证」中的行内标记检查，同步前修复所有匹配。
+- **生成后必检：** 对每个新增或修改的 Anki Org 文件运行 `python3 scripts/check_notes.py <文件>`（对 `ankinotes/` 只做行内标记检查），推送前修复所有匹配。
 - 制卡前核对来源事实和示例；发现错误或歧义时先修正或跳过，不把未经核实的内容固化为记忆。完成后检查题目是否能独立作答、答案是否准确、字段和同步属性是否符合上述格式，并完成上述行内标记检查。
+
+## 推送到 Anki
+
+卡片通过检查后，用 anki-editor 的 `anki-editor-push-notes` 推送本次改动的文件。用户在 Emacs 里用 `C-c n k p` 推送的也是这个命令。
+
+1. 确认 Anki 已打开、AnkiConnect 可用：`curl -s -m 2 localhost:8765 -d '{"action":"version","version":6}'` 有返回才推送。没有返回时，告诉用户打开 Anki 后再推，或自己在 Emacs 里推。
+2. 用 AGENTS.md 中同步数据库时用的命名 daemon（`cc-sync`）推送；它会加载用户的 Doom 配置，包括 anki-editor 的设置。每个文件执行一次，路径用绝对路径：
+
+   ```sh
+   emacsclient -s cc-sync -e '(with-current-buffer (find-file-noselect "/abs/path/ankinotes/x.org") (anki-editor-push-notes) (save-buffer) (kill-buffer) "ok")'
+   ```
+
+   内容没变的卡片按 `:ANKI_NOTE_HASH:` 跳过，所以对整个文件推送是安全的。
+3. 推送后，新卡会写入 `:ANKI_NOTE_ID:` 和 `:ANKI_NOTE_HASH:`。用 `rg -n ANKI_FAILURE_REASON <文件>` 查失败项：本次改动的卡片推送失败，修复后重推；既有的失败项只需说明。
+4. 推送会改写卡片文件，提交时把这些同步字段一并提交。用户的 Emacs 里开着该文件时，提醒用户 revert buffer。

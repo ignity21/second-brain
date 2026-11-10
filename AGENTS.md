@@ -12,12 +12,13 @@
 仓库之外、与本库配套的项目：
 
 - `~/.config/doom`：Doom Emacs 配置，org-roam 的主要配置在 `~/.config/doom/modules/cc/notes`。笔记库目录约定变化（如类别目录名、忽略目录）时需同步修改。
-- `~/repos/org-roam-ui`：笔记站前端 fork `ignity21/org-roam-ui` 的本地仓库，分支约定见「org-roam-ui 发布」。
+- `~/repos/org-roam-ui`：笔记站前端 fork `ignity21/org-roam-ui` 的本地仓库。
 
 ## 工作范围与完成标准
 
 - 按任务读取相关笔记、索引和说明；普通文字修改无需预读全库或执行迁移检查。
 - 在用户请求范围内完成编辑、必要的索引和链接更新、相关验证，并修复本次改动引入的问题，无需在每一步重复确认。发现无关历史问题时说明；需要后续处理的，记入相关的未完成任务文件。
+- 面向用户的使用说明在 `README.md`；新增或改变用户要用的工作流（对 agent 说什么、去哪里看）时同步更新。
 - 保留用户已有改动。`inbox/` 是 gitignore 的学习材料暂存区，不属于知识库。
 
 ## 任务文件
@@ -29,14 +30,12 @@
   ```sh
   rg -n '^Status:' .agents/tasks/ | rg -v 'Status: Complete'
   ```
-- 仓库级 skills 放 `.agents/skills/<name>/SKILL.md`。撰写、整理或改写笔记内容时用 `cc-note-writing` skill；迁移旧笔记时用 `note-migration` skill；创建或修改 Anki 卡片时用 `anki-cards` skill；用户说「处理收件箱」或要从 `inbox/` 材料提取笔记时用 `inbox-processing` skill；修改 `AGENTS.md`、`CLAUDE.md` 或 `.agents/skills/` 下的指导内容时用 `cc-agent-instructions` skill（用户级）。
+- 仓库级 skills 放 `.agents/skills/<name>/SKILL.md`。撰写、整理或改写笔记内容时用 `cc-note-writing` skill；迁移旧笔记时用 `note-migration` skill；创建或修改 Anki 卡片时用 `anki-cards` skill；用户说「处理收件箱」或要从 `inbox/` 材料提取笔记时用 `inbox-processing` skill；建或改学习路径、用户在本库里学习或复习（「继续 <主题> 路径」「考我」）时用 `learning-path` skill；改笔记站前端、发布脚本或工作流，以及推送后确认部署时用 `notes-site` skill；修改 `AGENTS.md`、`CLAUDE.md` 或 `.agents/skills/` 下的指导内容时用 `cc-agent-instructions` skill（用户级）。
 
-## 入库与学习辅助
+## 入库原则
 
 - 有 AI 后，可查询的细节（定义、API、语法）不抄录；笔记保存核心模型、判断依据和用户自己的卡点。从学习材料提取时按该领域的学习目标（`.agents/learning-goals.md`）决定深度，用户的卡点优先；宁可少收，不要把整篇材料重新整理一遍。
-- 用户在本库里直接学习时：讲解深度参考 `.agents/learning-goals.md` 中该领域的档位；先检索相关笔记，在其已有模型上继续讲，并指出与旧笔记冲突之处。简单事实直接答；涉及机制时从最小具体例子出发，外显状态变化再引入术语；用户说「不懂」就换表示或缩小例子，说「考我」就出一道稍有变化的题，等回答后再讲。
 - 专用名词第一次出现时写成「中文（English）」，如「报文段（segment）」；中文译名别扭或不通行时直接用英文（如 silly window syndrome）。对话、预处理稿、笔记和卡片都适用。
-- 讲解随时间变化的过程（窗口滑动、状态演进、曲线）且文字讲不清时，可用 `show-me` 做 HTML 逐步演示，放 scratchpad；标题和说明写清演示的是谁的什么、做了哪些假设，以及超出当前话题的部分。
 - 不符合上述入库规则的既有笔记，列清单请用户确认，不直接删除。
 
 ## org-roam 文件与节点
@@ -71,33 +70,18 @@
 
 ## Org 排版
 
-- 普通笔记的一级内容标题超过 5 个时，以 `* TOC :TOC_1:` 作为首个一级标题；二级内容标题总数超过 5 个时优先使用 `* TOC :TOC_2:`。计数不含 TOC 本身；索引文件不另加 TOC。TOC 标题下的条目由 toc-org 生成（用户的 Emacs 保存时，或运行 `scripts/update_toc.py`，见「按改动验证」），每次重写到下一个标题为止：只添加或保留标题行，不手写条目，也不在其下放正文。
+- 普通笔记的一级内容标题超过 5 个时，以 `* TOC :TOC_1:` 作为首个一级标题；二级内容标题总数超过 5 个时优先使用 `* TOC :TOC_2:`。计数不含 TOC 本身；索引文件不另加 TOC。TOC 标题下的条目由 toc-org 生成（用户的 Emacs 保存时，或运行 `scripts/update_toc.py`），每次重写到下一个标题为止：只添加或保留标题行，不手写条目，也不在其下放正文。
 - 中文与嵌入的英文单词或短语之间留一个半角空格；中文标点前不额外加空格，例如：`你说 he 是谁？他是 Jerry。`
 - 中文内容里加行内标记时，标记贴住内容、空格留在标记外侧，与相邻的中文文字或中文标点之间各留一个半角空格，否则 Org 不识别：`*粗体*`、`/斜体/`、`_下划线_`、`+删除线+`、`=等宽=`、`~代码~`，例如 `他是 *两端* 中的一端。`、`用 ~close()~ 关闭。`。
 - 含下划线的标识符（状态名、选项名、变量名，如 `~CLOSE_WAIT~`、`~tcp_rmem~`）一律用 `~...~` 包裹，标题和卡片里也一样；裸写时 `_` 后面的部分会被渲染成下标。
 - 笔记正文里的流程、时序、状态等结构用 PlantUML 画图，写进 `#+begin_src plantuml :file images/<name>.png ... #+end_src`（本机支持 PlantUML）。必须写 `:file`：不写时 Doom 把结果图写到 `/tmp`，换机或发布后链接失效；生成的图片放本大类 `images/`，随笔记一起提交（生成方式见「按改动验证」）。不放 ASCII 图；数据曲线用 PlantUML 的 `@startchart`（本机 1.2026 支持，点多时加 `scale <宽度> width`）。对话 / review 反馈里为便于即时查看，用 ASCII 草图可以。
 
-## org-roam-ui 发布
-
-修改笔记站前端或发布流程时适用。站点由 `.github/workflows/publish-roam-ui.yml` 按 `ORG_ROAM_UI_REF` 固定的 fork `ignity21/org-roam-ui` 提交构建，导出与构建脚本在 `publish/`。fork 分支约定：
-
-- `main` 跟随上游 `org-roam/org-roam-ui`，不放自有改动。
-- `enhanced` 是自用开发分支，Doom 从它安装并使用其中的 `out/`。Emacs 与静态站都需要的功能（搜索、主题、侧栏等）在这里开发，提交时一并重建 `out/`。
-- `static` = `enhanced` + 仅静态化提交（`NEXT_PUBLIC_STATIC` 模式、快照数据、静态默认值）。`enhanced` 更新后把 `static` rebase 到 `enhanced`，用 `--force-with-lease` 推送，不反向合并；再把 `ORG_ROAM_UI_REF` 改为新的 `static` 提交。
-- 上游已停止维护（最后一次合并 PR 在 2022 年），通用功能只在 `enhanced` 开发，不另开 `pr/*` 分支。现有 `pr/*` 分支及其上游 PR 只作记录保留，不再 rebase 或催审；上游恢复合并 PR 后，再从 `enhanced` 挑提交提 PR。
-- 本机 Node 26 构建需设 `NODE_OPTIONS=--openssl-legacy-provider`。完成标准：受影响分支 `tsc --noEmit` 通过且 `next build && next export` 成功；推送了新的 `ORG_ROAM_UI_REF` 时，确认 Publish 工作流部署成功。
-
 ## 按改动验证
 
-- 内容编辑：检查受影响笔记是否需要 TOC 标题行，以及 Org block、property drawer 和链接语法。带 TOC 的笔记新增 TOC 标题行或改动了标题时，运行 `python3 scripts/update_toc.py <笔记>` 重写目录（batch Emacs，不需要开 Emacs），应无报错；报 TOC 下有正文时，把正文移出 TOC 段后重跑。新增或改动了 PlantUML 块时，运行 `python3 scripts/render_plantuml.py <笔记>` 生成图片，缺 `#+RESULTS:` 时它会补上结果链接（org-roam-ui 对带结果的 plantuml 块只显示图、不显示源码），应无报错；报错时修正块后重跑。对改动的 Org 文件（含 `ankinotes/`）运行行内标记检查，输出应为空；`函数/类` 这类中文之间的斜杠可能误报，确认不是标记即可：
-
-  ```sh
-  rg -n -P '[\p{Han}，。；：！？、（）【】「」『』《》][*/_=+~](?=\S)|(?<=\S)[*/_=+~][\p{Han}，。；：！？、（）【】「」『』《》]' <files>
-  ```
-- 新增或更改标题：在全库比较相关标题，确认领域上下文清晰且没有引入不必要的重名。
-- 移动文件或调整资源引用：确认受影响的 `file:` 链接指向存在的文件，分类目录仍保持扁平。
-- 新增或改动笔记间链接：确认整行链接标题只连直接子节点，正文引用不指向祖先或索引，也不与对方互链。
-- 新增节点、迁移或重组索引：检查受影响主索引树的逐层连接、根节点和中间索引出度、可达性、唯一主父节点，并检查全库对相关 ID 的引用。
+- 运行 `python3 scripts/check_notes.py <改动的文件>`（含 `ankinotes/` 文件）。它检查 ID 与 `file:` 链接、标题重名、主索引树（唯一主父节点、可达性、层级、出度、跨大类）、笔记间链接（指向祖先或索引、互链、指向学习路径）、TOC 标题行和行内标记；不带参数时检查全库。输出中与本次改动相关的问题要修复；其余是既有问题，说明即可。行内标记项里，中文之间作加号、斜杠用的 `+`、`/` 是误报，确认不是标记即可。
+- 新增或改动 TOC 标题行、改动带 TOC 笔记的标题时，运行 `python3 scripts/update_toc.py <笔记>` 重写目录（batch Emacs，不需要开 Emacs），应无报错；报 TOC 下有正文时，把正文移出 TOC 段后重跑。
+- 新增或改动 PlantUML 块时，运行 `python3 scripts/render_plantuml.py <笔记>` 生成图片，应无报错；缺 `#+RESULTS:` 时它会补上结果链接（org-roam-ui 对带结果的 plantuml 块只显示图、不显示源码）。
+- 脚本不判断语义：新增或改标题时，确认领域上下文清晰；新链接要在正文里说明关系；重组索引时确认分组语义合理。
 - 完成文件移动或 ID 索引调整后，对用户的 org-roam 数据库执行一次 `org-roam-db-sync`。没有运行中的 Emacs server 时，起一个命名的临时 daemon，用完关闭（命名 socket 不与用户 Emacs 的 `server-start` 冲突）：
 
   ```sh

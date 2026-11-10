@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       bce16882-1239-4010-9db2-6760234e64d0
+:ROAM_ALIASES: "学习路径"
+:END:
+#+title: Learning Paths
+#+filetags: :learning:
+
+每条路径把某个主题的相关笔记按由浅入深排好，每步一个核心问题。用法见仓库 README「按学习路径学习或复习」。
+
+* [[id:243b2ab6-7699-4a5f-a889-81354950c219][Statistics]]
