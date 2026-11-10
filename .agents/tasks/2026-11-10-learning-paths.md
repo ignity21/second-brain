@@ -1,6 +1,6 @@
 # 学习路径（Learning 大类）
 
-Status: In progress — 统计学路径待用户试用；Omarchy / mise 路径未开始
+Status: In progress — 两条路径已发布，用户在手机上试用；之后陪学并按反馈调整
 
 用户要为近期学习主题建立由浅入深的阅读顺序，跨大类收录相关笔记。规则写在 AGENTS.md「学习路径」。
 
@@ -17,8 +17,8 @@ Status: In progress — 统计学路径待用户试用；Omarchy / mise 路径�
 - [x] `Learning/learning.org` 与 `statistics_learning_path.org`（6 阶段 25 步，含待改项和对应 Anki 卡片）
 - [x] TOC、行内标记、ID 存在性检查；`org-roam-db-sync`（682 节点）
 - [x] 新建 `README.md`（面向用户的目录与工作流说明）；AGENTS.md 要求工作流变化时同步 README
-- [ ] 用户试用统计学路径，按反馈调整格式
-- [ ] Omarchy 路径（含 mise；现有笔记少，以「待补」步骤为主）
+- [ ] 用户在手机上试用两条路径，按反馈调整格式
+- [x] Omarchy 路径（含 mise）：4 阶段 12 步，含 1 个待补步骤和 uv 笔记、本机 uv 两份的待改项
 - [x] 提交并推送后确认 Publish 工作流部署，手机上能看到 Learning 大类
 
 ## 2026-11-10 拆分 skill 与检查脚本

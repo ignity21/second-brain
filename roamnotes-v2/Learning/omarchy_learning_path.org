@@ -1,0 +1,38 @@
+:PROPERTIES:
+:ID:       3141df9d-c8e9-4c56-ba86-662c15024967
+:ROAM_ALIASES: "Omarchy 学习路径"
+:END:
+#+title: Omarchy Learning Path
+#+filetags: :learning:Linux:Tools:
+
+开始于 2026-11-10。主线：在 Omarchy 上把桌面和开发环境用顺手——窗口怎么摆、配置改哪里、改坏了怎么回来、开发工具的版本由谁管。目标是「知道」（见 learning-goals）：常用窗口键形成肌肉记忆，其余知道去哪查。
+
+不少步骤要在电脑前动手，手机上可以先读笔记、想好核心问题，回到电脑再练。「待补」是笔记还缺、用的时候再补的内容。
+
+* 1. 认识 Omarchy [0/2]
+- [ ] [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy Desktop Distribution]] 的「定位」：Omarchy 比装一个 Arch 再配 Hyprland 多给了什么？
+- [ ] [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy]] 的「两层配置」：默认层和用户层各在哪个目录？想改某个行为改哪层？改坏了用什么命令恢复，升级前怎么留后路？
+
+Anki：Omarchy 配置改在哪、改坏怎么恢复。
+
+* 2. 窗口操作 [0/3]
+- [ ] [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy]] 的「Hyprland 怎么摆窗口」：为什么每开一个应用就多一块平铺区域？哪些窗口会浮动、由什么决定？平铺 WM 里没有最小化，用什么代替？
+- [ ] [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy]] 的「窗口操作常用键」：在电脑前练，目标是不看表完成：关窗口、平铺 ↔ 浮动、切工作区并把窗口移过去、scratchpad 收起和呼出、分组。每天用几次，比一次背完有效。
+- [ ] [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy]] 的「待试的窗口工作流」：实际试一遍 1Password 挡输入框、LazyCat 开出多个平铺窗口这两个问题的候选做法，把选定的做法写进 My Take。
+
+Anki：Omarchy 里暂时收起窗口。
+
+* 3. 找命令与改配置 [0/3]
+- [ ] [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy]] 的「找命令和快捷键」和「能力地图」：忘了某个快捷键或命令时去哪查？ ~omarchy~ 命令大致能做哪几类事？
+- [ ] [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy]] 的「坑」：改完 Hyprland 配置怎么确认没写错？网上找到的窗口规则为什么常常不能直接用？
+- [ ] 待补：第一次自定义。挑一个实际需要（例如给 1Password 写窗口规则，或用 ~omarchy launch or focus~ 绑一个快捷键）改用户层，把做法和踩到的坑补进 Omarchy 笔记。
+
+* 4. 开发环境：mise [0/4]
+- [ ] 前置：[[id:956bf88a-baa4-459c-aebc-a1a29260efb5][Shell Startup Files and Environment Variables]]：交互 shell 读哪些启动文件？为什么从桌面启动的程序看不到 =.zshrc= 里 export 的变量？下一步 mise 的两种生效方式就建立在这里。
+- [ ] [[id:f64c61b9-0d46-4bad-80e2-b466ac291920][mise Development Tool Manager]] 的「定位」和「配置分层」：mise 管什么、不管什么？本机某个工具的版本来自哪一层配置，用哪个命令看？
+- [ ] [[id:f64c61b9-0d46-4bad-80e2-b466ac291920][mise]] 的「两种生效方式」和「lazy 工具」：终端里靠什么切换版本，脚本和 IDE 里又靠什么？Omarchy 预装的工具为什么第一次运行时才下载？
+- [ ] [[id:f64c61b9-0d46-4bad-80e2-b466ac291920][mise]] 的「与 uv 分工」，对照 [[id:196944f7-2304-448c-9f27-4e3a6d2892f7][uv]] 笔记：uv 项目的 Python 解释器由谁管？mise 的全局 python 会影响 uv 项目吗？
+  - 待改（uv 笔记）：标题只有 ~uv~ ，缺领域上下文，应改为如 =uv Python Project Manager= ；Work Flow 第 5 步 ~uv pip install -e .~ 多余， ~uv sync~ 默认已以可编辑方式安装项目本身；替代 ~pipx inject~ 的写法应为 ~uv tool install aider-chat --with google-generativeai~ ，现写法 ~uv tool run --from aider-chat pip install ...~ 装不进工具的环境。
+  - 待改（本机）：mise 笔记「坑」里记了 uv 有两份（ =~/.local/bin/uv= 自装 0.13.5 和 mise 的 lazy uv），学到这里时决定留哪一份并清理。
+
+Anki：GUI 程序看不到 shell 中的环境变量、mise 与 uv：uv 项目的 Python 解释器由谁管。
