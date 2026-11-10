@@ -9,7 +9,7 @@ description: Work on the published org-roam-ui notes site. Use when changing the
 
 站点由 `.github/workflows/publish-roam-ui.yml` 构建。推送到 `master` 并改动了 `roamnotes-v2/**`、`publish/**` 或工作流文件时触发，也可以手动触发。工作流按 `ORG_ROAM_UI_REF` 固定的 fork `ignity21/org-roam-ui` 提交构建前端，再用 `publish/export.el` 导出 `roamnotes-v2/` 下的全部笔记。
 
-推送后确认部署：用 `gh run list --workflow publish-roam-ui.yml --limit 1` 找到这次运行，`gh run watch <id>` 等它结束；失败时用 `gh run view <id> --log-failed` 查原因并修复。
+推送后确认部署：用 `gh run list --workflow publish-roam-ui.yml --limit 1` 找到这次运行，`gh run watch <id>` 等它结束；失败时用 `gh run view <id> --log-failed` 查原因并修复。`gh` 没有登录时（匿名 GitHub API 很快会被限流，不要轮询），改为检查站点数据：`curl -sL 'https://roam.ignity.xyz/data/graphdata.json'` 中出现了新增或改名节点的标题，就说明部署已生效；失败原因要由用户登录 `gh` 或到 Actions 页面查看。
 
 ## fork 分支约定
 
