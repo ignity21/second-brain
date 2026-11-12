@@ -1,6 +1,6 @@
 ---
 name: learning-path
-description: Build or update a learning path in roamnotes-v2/Learning/ and tutor the user through notes in this repo. Use when the user names a topic to learn or review (「近期学 X，做一条学习路径」), says 「继续 <主题> 路径」 or 「考我」, or asks to be taught something using their notes.
+description: Build or update a learning path in roamnotes-v2/LearningPath/ and tutor the user through notes in this repo. Use when the user names a topic to learn or review (「近期学 X，做一条学习路径」), says 「继续 <主题> 路径」 or 「考我」, or asks to be taught something using their notes.
 ---
 
 # 学习路径与陪学
@@ -9,7 +9,9 @@ description: Build or update a learning path in roamnotes-v2/Learning/ and tutor
 
 ## 建路径
 
-在 `roamnotes-v2/Learning/` 建 `<topic>_learning_path.org`，标题如 `Statistics Learning Path`，`#+filetags: :learning:<大类>:`，并在根索引 `Learning/learning.org` 加一行 `* [[id:...][<主题>]]`。`Learning/` 是学习路径的专用大类，不是知识领域。
+路径正文、阶段标题、核心问题和待办说明统一用英语；保留节点 ID、学习进度和用于检索的中文别名，引用的 Anki 卡片标题保留原文以便查找。
+
+在 `roamnotes-v2/LearningPath/` 建 `<topic>_learning_path.org`，标题如 `Statistics Learning Path`，`#+filetags: :learning:<大类>:`，并在根索引 `LearningPath/learning.org` 加一行 `* [[id:...][<主题>]]`。`LearningPath/` 是学习路径的专用大类，不是知识领域。
 
 - **收集**：从相关大类的主索引树往下找，再用 `rg` 搜关键词，找出其他大类里的相关笔记，以及 `ankinotes/` 中对应的卡片。
 - **深度**：不为排路径另问目标档位。`.agents/learning-goals.md` 里有该领域，就按它取舍；没有就收录全部相关笔记。

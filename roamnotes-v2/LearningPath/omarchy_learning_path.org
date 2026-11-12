@@ -5,34 +5,34 @@
 #+title: Omarchy Learning Path
 #+filetags: :learning:Linux:Tools:
 
-开始于 2026-11-10。主线：在 Omarchy 上把桌面和开发环境用顺手——窗口怎么摆、配置改哪里、改坏了怎么回来、开发工具的版本由谁管。目标是「知道」（见 learning-goals）：常用窗口键形成肌肉记忆，其余知道去哪查。
+Started on 2026-11-10. The goal is to become comfortable with the Omarchy desktop and development environment: arranging windows, locating configuration, recovering from mistakes, and understanding who manages development tool versions. Target: awareness (see learning-goals), with muscle memory for common window shortcuts and lookup skills for the rest.
 
-不少步骤要在电脑前动手，手机上可以先读笔记、想好核心问题，回到电脑再练。「待补」是笔记还缺、用的时候再补的内容。
+Many steps require practice at a computer. On a phone, read the notes and think through the core questions, then practice later. “To add” marks missing material to fill in when needed.
 
-* 1. 认识 Omarchy [0/2]
-- [ ] [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy Desktop Distribution]] 的「定位」：Omarchy 比装一个 Arch 再配 Hyprland 多给了什么？
-- [ ] [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy]] 的「两层配置」：默认层和用户层各在哪个目录？想改某个行为改哪层？改坏了用什么命令恢复，升级前怎么留后路？
+* 1. Understand Omarchy [0/2]
+- [ ] [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy Desktop Distribution]], positioning: What does Omarchy provide beyond installing Arch and configuring Hyprland yourself?
+- [ ] [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy]], configuration layers: Where do the default and user configurations live? Which layer should you edit? How do you restore a broken configuration and prepare a recovery option before upgrading?
 
-Anki：Omarchy 配置改在哪、改坏怎么恢复。
+Anki (original card titles): Omarchy 配置改在哪、改坏怎么恢复。
 
-* 2. 窗口操作 [0/3]
-- [ ] [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy]] 的「Hyprland 怎么摆窗口」：为什么每开一个应用就多一块平铺区域？哪些窗口会浮动、由什么决定？平铺 WM 里没有最小化，用什么代替？
-- [ ] [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy]] 的「窗口操作常用键」：在电脑前练，目标是不看表完成：关窗口、平铺 ↔ 浮动、切工作区并把窗口移过去、scratchpad 收起和呼出、分组。每天用几次，比一次背完有效。
-- [ ] [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy]] 的「待试的窗口工作流」：实际试一遍 1Password 挡输入框、LazyCat 开出多个平铺窗口这两个问题的候选做法，把选定的做法写进 My Take。
+* 2. Manage windows [0/3]
+- [ ] [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy]], Hyprland window layout: Why does each new application add a tiled region? What determines which windows float? What replaces minimizing in a tiling window manager?
+- [ ] [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy]], common window shortcuts: Practice closing windows, toggling tiling and floating, switching workspaces and moving windows between them, hiding and recalling the scratchpad, and grouping windows without consulting the table. Use them a few times daily.
+- [ ] [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy]], window workflows to try: Test the proposed solutions for 1Password covering input fields and LazyCat opening multiple tiled windows. Record your chosen workflow in My Take.
 
-Anki：Omarchy 里暂时收起窗口。
+Anki (original card title): Omarchy 里暂时收起窗口。
 
-* 3. 找命令与改配置 [0/3]
-- [ ] [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy]] 的「找命令和快捷键」和「能力地图」：忘了某个快捷键或命令时去哪查？ ~omarchy~ 命令大致能做哪几类事？
-- [ ] [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy]] 的「坑」：改完 Hyprland 配置怎么确认没写错？网上找到的窗口规则为什么常常不能直接用？
-- [ ] 待补：第一次自定义。挑一个实际需要（例如给 1Password 写窗口规则，或用 ~omarchy launch or focus~ 绑一个快捷键）改用户层，把做法和踩到的坑补进 Omarchy 笔记。
+* 3. Find commands and edit configuration [0/3]
+- [ ] [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy]], finding commands and shortcuts, and capability map: Where do you look up a forgotten shortcut or command? What kinds of tasks does the ~omarchy~ command support?
+- [ ] [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy]], pitfalls: How do you check a Hyprland configuration after editing it? Why do window rules found online often need changes?
+- [ ] To add: Make your first customization for a real need, such as a 1Password window rule or a shortcut using ~omarchy launch or focus~. Edit the user layer and record the approach and pitfalls in the Omarchy note.
 
-* 4. 开发环境：mise [2/4]
-- [X] 前置：[[id:956bf88a-baa4-459c-aebc-a1a29260efb5][Shell Startup Files and Environment Variables]]：交互 shell 读哪些启动文件？为什么从桌面启动的程序看不到 =.zshrc= 里 export 的变量？下一步 mise 的两种生效方式就建立在这里。
-- [X] [[id:f64c61b9-0d46-4bad-80e2-b466ac291920][mise Development Tool Manager]] 的「定位」和「配置分层」：mise 管什么、不管什么？本机某个工具的版本来自哪一层配置，用哪个命令看？
-- [ ] [[id:f64c61b9-0d46-4bad-80e2-b466ac291920][mise]] 的「两种生效方式」和「lazy 工具」：终端里靠什么切换版本，脚本和 IDE 里又靠什么？Omarchy 预装的工具为什么第一次运行时才下载？
-- [ ] [[id:f64c61b9-0d46-4bad-80e2-b466ac291920][mise]] 的「与 uv 分工」，对照 [[id:196944f7-2304-448c-9f27-4e3a6d2892f7][uv]] 笔记：uv 项目的 Python 解释器由谁管？mise 的全局 python 会影响 uv 项目吗？
-  - 待改（uv 笔记）：标题只有 ~uv~ ，缺领域上下文，应改为如 =uv Python Project Manager= ；Work Flow 第 5 步 ~uv pip install -e .~ 多余， ~uv sync~ 默认已以可编辑方式安装项目本身；替代 ~pipx inject~ 的写法应为 ~uv tool install aider-chat --with google-generativeai~ ，现写法 ~uv tool run --from aider-chat pip install ...~ 装不进工具的环境。
-  - 待改（本机）：mise 笔记「坑」里记了 uv 有两份（ =~/.local/bin/uv= 自装 0.13.5 和 mise 的 lazy uv），学到这里时决定留哪一份并清理。
+* 4. Development environment: mise [2/4]
+- [X] Prerequisite: [[id:956bf88a-baa4-459c-aebc-a1a29260efb5][Shell Startup Files and Environment Variables]]: Which startup files does an interactive shell read? Why can applications launched from the desktop not see variables exported in =.zshrc=? This explains the two ways mise takes effect in the next steps.
+- [X] [[id:f64c61b9-0d46-4bad-80e2-b466ac291920][mise Development Tool Manager]], scope and configuration layers: What does mise manage? Which configuration layer selects a local tool version, and which command shows it?
+- [ ] [[id:f64c61b9-0d46-4bad-80e2-b466ac291920][mise]], activation methods and lazy tools: How are versions selected in terminals, scripts, and IDEs? Why are Omarchy’s preconfigured tools downloaded only on first use?
+- [ ] [[id:f64c61b9-0d46-4bad-80e2-b466ac291920][mise]], division of responsibilities with uv, compared with [[id:196944f7-2304-448c-9f27-4e3a6d2892f7][uv]]: Who manages the Python interpreter in a uv project? Does mise’s global Python affect it?
+  - To fix (uv note): The title ~uv~ lacks domain context; consider =uv Python Project Manager=. Work Flow step 5, ~uv pip install -e .~, is redundant because ~uv sync~ installs the project in editable mode by default. The replacement for ~pipx inject~ should be ~uv tool install aider-chat --with google-generativeai~; the current ~uv tool run --from aider-chat pip install ...~ does not install into the tool environment.
+  - To fix (local setup): The mise pitfalls section records two uv installations: a manually installed 0.13.5 at =~/.local/bin/uv= and mise’s lazy uv. Decide which to keep and clean up when reaching this step.
 
-Anki：GUI 程序看不到 shell 中的环境变量、mise 与 uv：uv 项目的 Python 解释器由谁管。
+Anki (original card titles): GUI 程序看不到 shell 中的环境变量、mise 与 uv：uv 项目的 Python 解释器由谁管。

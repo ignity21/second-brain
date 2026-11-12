@@ -5,70 +5,70 @@
 #+title: Statistics Learning Path
 #+filetags: :learning:Statistics:
 
-开始于 2026-11-10。主线是一个问题：只拿到一份样本，能对总体说什么、有多大把握？前两个阶段准备语言（怎么描述数据、怎么描述随机性），第三阶段从样本走到总体，后两个阶段是两种推断方式：区间估计和假设检验。
+Started on 2026-11-10. The central question: Given a single sample, what can we say about the population, and how confident can we be? The first two stages establish the language of data and randomness. The third connects samples to populations; the next two cover interval estimation and hypothesis testing.
 
-每步一个核心问题，读完能用自己的话回答就算过。「待改」是排路径时发现的笔记问题，学到该步时一起处理。
+Each step has one core question. Move on when you can answer it in your own words. “To fix” records issues found in the notes while planning the path; address them when reaching that step.
 
 * TOC :TOC_1:
-- [[#1-描述一份数据-04][1. 描述一份数据]]
-- [[#2-描述随机性概率分布-05][2. 描述随机性：概率分布]]
-- [[#3-从样本到总体-06][3. 从样本到总体]]
-- [[#4-推断一区间估计-02][4. 推断一：区间估计]]
-- [[#5-推断二假设检验-06][5. 推断二：假设检验]]
-- [[#6-用-python-做-02][6. 用 Python 做]]
+- [[#1-describe-a-dataset-04][1. Describe a dataset]]
+- [[#2-describe-randomness-probability-distributions-05][2. Describe randomness: probability distributions]]
+- [[#3-from-samples-to-populations-06][3. From samples to populations]]
+- [[#4-inference-i-interval-estimation-02][4. Inference I: interval estimation]]
+- [[#5-inference-ii-hypothesis-testing-06][5. Inference II: hypothesis testing]]
+- [[#6-apply-the-concepts-in-python-02][6. Apply the concepts in Python]]
 
-* 1. 描述一份数据 [0/4]
-- [ ] [[id:cf78ad70-6034-4224-80e5-eaf0610ad882][Statistics Overview]]：描述统计（descriptive statistics）和推断统计（inferential statistics）各回答什么问题？
-- [ ] [[id:69c30551-e3b1-4d83-87a9-784dfe71f189][Types of Data]]：数据的测量尺度为什么会限制能用的统计量？
-- [ ] [[id:925a0f11-b567-4e43-a9a7-41006a814c33][Descriptive Statistics]]，接着读 [[id:881a87d5-754b-4791-b398-3345c88fdcb2][IQR]]：偏态数据为什么用中位数和 IQR，而不用均值和标准差？
-  - 待改：总体方差和样本方差的符号混用（样本也写成 \(\mu\)、\(\sigma\)）；偏度（skewness）的内容目前在 Discrete Distributions 里，应移到这里。
-- [ ] [[id:b80406e2-60b3-4607-9dc2-6791405020cc][Correlation]]：相关系数为 0 能说明两个变量无关吗？为什么相关不等于因果？
+* 1. Describe a dataset [0/4]
+- [ ] [[id:cf78ad70-6034-4224-80e5-eaf0610ad882][Statistics Overview]]: What questions do descriptive statistics and inferential statistics answer?
+- [ ] [[id:69c30551-e3b1-4d83-87a9-784dfe71f189][Types of Data]]: Why does the measurement scale constrain which statistics are meaningful?
+- [ ] [[id:925a0f11-b567-4e43-a9a7-41006a814c33][Descriptive Statistics]], then [[id:881a87d5-754b-4791-b398-3345c88fdcb2][IQR]]: Why use the median and IQR for skewed data instead of the mean and standard deviation?
+  - To fix: Population and sample variance notation is mixed up (samples also use \(\mu\) and \(\sigma\)). Move the discussion of skewness here from Discrete Distributions.
+- [ ] [[id:b80406e2-60b3-4607-9dc2-6791405020cc][Correlation]]: Does zero correlation imply that two variables are unrelated? Why does correlation not imply causation?
 
-Anki：Mean or median for skewed data、IQR outlier rule、Zero correlation、Confounders and spurious correlation。
+Anki: Mean or median for skewed data; IQR outlier rule; Zero correlation; Confounders and spurious correlation.
 
-* 2. 描述随机性：概率分布 [0/5]
-- [ ] [[id:0cd40c78-f1e1-4408-962c-f54770bf0606][Probability]]：PMF、PDF、CDF 分别是什么？为什么连续变量取某个具体值的概率是 0？
-- [ ] [[id:408f940c-5870-4c00-b54c-6d4aea4809d6][Discrete Uniform Distribution]] 和 [[id:0a97c486-67fb-40a4-b1ff-e1229a387064][Binomial Distribution]]：二项分布依赖哪个假设？
-- [ ] [[id:85ef2d1a-c912-46c7-a4b1-3af274c4fd4c][Poisson Process]] → [[id:5233b01c-750c-481c-a853-b61b48eac54c][Poisson Distribution]] → [[id:6b3723fd-b1c2-432e-9176-feaec1d9b8b5][Exponential Distribution]]：同一个泊松过程（Poisson process），「单位时间内发生几次」和「两次之间等多久」各是什么分布？三篇连着读。
-- [ ] [[id:41fc96ca-d4b5-44fc-ad46-c8783a7253ff][Continuous Uniform Distribution]] 和 [[id:6ec38f0c-dde2-44f7-94b2-b5a7d4096a06][Normal Distribution]]：68-95-99.7 规则怎样用 CDF 算出来？
-- [ ] [[id:9a78a66a-28e8-4a94-8297-7ef16b48f72d][Log-normal Distribution]]：什么样的量会服从对数正态分布？（与 Trading 中的对数收益相通）
-  - 待改：笔记只有几个例子，缺「乘性因素累积」这个成因。
+* 2. Describe randomness: probability distributions [0/5]
+- [ ] [[id:0cd40c78-f1e1-4408-962c-f54770bf0606][Probability]]: What are the PMF, PDF, and CDF? Why is the probability of a continuous variable taking one exact value zero?
+- [ ] [[id:408f940c-5870-4c00-b54c-6d4aea4809d6][Discrete Uniform Distribution]] and [[id:0a97c486-67fb-40a4-b1ff-e1229a387064][Binomial Distribution]]: What assumptions does the binomial distribution require?
+- [ ] [[id:85ef2d1a-c912-46c7-a4b1-3af274c4fd4c][Poisson Process]] → [[id:5233b01c-750c-481c-a853-b61b48eac54c][Poisson Distribution]] → [[id:6b3723fd-b1c2-432e-9176-feaec1d9b8b5][Exponential Distribution]]: In the same Poisson process, which distribution describes the number of events per time interval, and which describes the waiting time between events? Read these together.
+- [ ] [[id:41fc96ca-d4b5-44fc-ad46-c8783a7253ff][Continuous Uniform Distribution]] and [[id:6ec38f0c-dde2-44f7-94b2-b5a7d4096a06][Normal Distribution]]: How do you derive the 68-95-99.7 rule using the CDF?
+- [ ] [[id:9a78a66a-28e8-4a94-8297-7ef16b48f72d][Log-normal Distribution]]: What kinds of quantities follow a log-normal distribution? Connect this to log returns in trading.
+  - To fix: The note has examples but lacks the underlying mechanism: accumulated multiplicative factors.
 
-Anki：PMF, PDF and CDF、Binomial distribution assumption、Poisson vs exponential、Exponential waiting time、68-95-99.7 rule。
+Anki: PMF, PDF and CDF; Binomial distribution assumption; Poisson vs exponential; Exponential waiting time; 68-95-99.7 rule.
 
-* 3. 从样本到总体 [0/6]
-- [ ] [[id:889cc76c-cbfa-4f3a-b4c7-7ba4acaaf8e6][Statistic Experiments]]：为什么只有随机对照实验能得出因果，观察性研究只能得出关联？
-- [ ] [[id:2be62d58-9f1c-4c6e-a20e-5722a4e0c4e7][Data Sampling]] 和 [[id:0afb7034-f053-47d7-aea2-8d71eb45c627][Relative Error]]：分层抽样和整群抽样各适合什么情况？样本量增大时误差怎么变？
-- [ ] [[id:bc202bb0-0793-4e92-8316-1186e5525c97][Inferential Statistics]]：先分清总体参数和样本统计量的符号，后面每一步都要用。
-- [ ] [[id:4514ee9e-86ef-4f32-bfc3-151320f23d97][Sampling Distribution]] → [[id:193270c8-6738-48fb-b728-8462f10de3c5][Central Limit Theorem]]：「样本均值的分布」是什么分布？它的标准差（标准误，standard error）为什么是 \(\sigma/\sqrt{n}\)？这是整条路径最关键的一步。
-  - 待改：CLT 笔记写成「样本均值的分布是正态分布」，应为：n 足够大时近似正态，且与总体分布的形状无关（总体方差有限）。
-  - 待改：Sampling Distribution 表里用 \(n\) 表示样本个数，与标准误公式中表示样本量的 \(n\) 冲突。
-- [ ] [[id:a200c616-3de2-4340-bb77-8bb77ff2980c][Bootstrap Distribution]]：只有一份样本、无法重复抽样时，怎样估计标准误？自助法（bootstrap）不能纠正什么？
-- [ ] [[id:80cef9fb-e3b0-4903-85a9-ca96efd96428][Degrees of Freedom]]：样本方差为什么除以 n − 1？
+* 3. From samples to populations [0/6]
+- [ ] [[id:889cc76c-cbfa-4f3a-b4c7-7ba4acaaf8e6][Statistic Experiments]]: Why do randomized controlled experiments support causal conclusions, whereas observational studies alone generally establish associations?
+- [ ] [[id:2be62d58-9f1c-4c6e-a20e-5722a4e0c4e7][Data Sampling]] and [[id:0afb7034-f053-47d7-aea2-8d71eb45c627][Relative Error]]: When should you use stratified or cluster sampling? How does error change as sample size grows?
+- [ ] [[id:bc202bb0-0793-4e92-8316-1186e5525c97][Inferential Statistics]]: Distinguish population parameters from sample statistics and their notation; every later step relies on this.
+- [ ] [[id:4514ee9e-86ef-4f32-bfc3-151320f23d97][Sampling Distribution]] → [[id:193270c8-6738-48fb-b728-8462f10de3c5][Central Limit Theorem]]: What is the sampling distribution of the sample mean? Why is its standard deviation (the standard error) \(\sigma/\sqrt{n}\) for independent observations with common variance? This is the key step in the path.
+  - To fix: The CLT note says the sample mean has a normal distribution. State that for sufficiently large n, its distribution is approximately normal regardless of the population shape, under the usual independent, identically distributed sampling assumptions with finite variance.
+  - To fix: The Sampling Distribution table uses \(n\) for the number of samples, conflicting with its use for sample size in the standard error formula.
+- [ ] [[id:a200c616-3de2-4340-bb77-8bb77ff2980c][Bootstrap Distribution]]: How can you estimate standard error with one sample and no opportunity to sample again? What can bootstrapping not correct?
+- [ ] [[id:80cef9fb-e3b0-4903-85a9-ca96efd96428][Degrees of Freedom]]: Why does sample variance divide by n − 1?
 
-Anki：Experiments vs observational studies、Cross-sectional study confounding、Stratified vs cluster sampling、Systematic sampling pitfall、Central limit theorem and standard error、Bootstrap procedure、What bootstrapping cannot fix、Population standard deviation from the bootstrap、Why the sample variance divides by n − 1。
+Anki: Experiments vs observational studies; Cross-sectional study confounding; Stratified vs cluster sampling; Systematic sampling pitfall; Central limit theorem and standard error; Bootstrap procedure; What bootstrapping cannot fix; Population standard deviation from the bootstrap; Why the sample variance divides by n − 1.
 
-* 4. 推断一：区间估计 [0/2]
-- [ ] [[id:e671c7ff-b03d-47a3-aa8a-91277e0e80c3][Z-Distribution]]：为什么要标准化？95% 对应的 1.96 从哪来？
-- [ ] [[id:fd7b8935-0094-403b-ac49-a61c8df0a733][Confidence Intervals]]：「95% 置信区间」中的 95% 是对什么而言的？分位数法和标准误法有什么区别？
-  - 待改：开头写「均值一个标准差以内的值」，不准确；缺少置信水平的含义（重复抽样时区间覆盖真值的比例）。
+* 4. Inference I: interval estimation [0/2]
+- [ ] [[id:e671c7ff-b03d-47a3-aa8a-91277e0e80c3][Z-Distribution]]: Why standardize? Where does the value 1.96 for 95% come from?
+- [ ] [[id:fd7b8935-0094-403b-ac49-a61c8df0a733][Confidence Intervals]]: What does 95% refer to in a 95% confidence interval? How do the percentile and standard error methods differ?
+  - To fix: The opening description as values within one standard deviation of the mean is inaccurate. Explain confidence level as the long-run proportion of intervals that cover the true parameter under repeated sampling.
 
-Anki：Two ways to get a confidence interval、Margin of error。
+Anki: Two ways to get a confidence interval; Margin of error.
 
-* 5. 推断二：假设检验 [0/6]
-- [ ] [[id:61297403-6903-4513-90c7-2b5fc0b49e11][Hypothesis Testing]]：检验的四步是什么？第一类错误和第二类错误分别对应什么？
-  - 待改：\(H_0\) 写成 \(\mu_1\approx\mu_2\)，并用「\(\mu_2\) 是否落在拒绝域」来定义，概念不清（拒绝域针对的是检验统计量）；常用 \(\alpha\) 中的 0.2 不常见。
-- [ ] [[id:4946fa5a-e743-4270-bee9-82e029890d7c][P-Values]]：p 值是什么的概率？为什么它不是「\(H_0\) 为真的概率」？
-- [ ] [[id:3c158478-8d52-4fa3-9262-f0267d6c48c8][Z-Test]]：单尾和双尾的临界值有什么不同？
-  - 待改：「The variances are known (use bootstrapping)」自相矛盾：方差已知时不需要估计；用 bootstrap 估计标准误是另一种做法。「Two Proportion Z-Test」一节为空。
-- [ ] [[id:1bf89458-2878-4fbf-a0b9-9a59a8fdc486][T-Distribution]] → [[id:7c802e9e-8fc0-41fd-8078-1e09ee72378f][T-Test]]：什么时候 z 检验要换成 t 检验？配对 t 检验和双样本 t 检验怎么选？
-  - 待改：单样本 t 检验写「用 bootstrapping」求 \(\hat\sigma\)，应直接用样本标准差；「Compare with Z-Test」的区分标准应为总体 \(\sigma\) 已知还是用样本估计；双样本的 SE 用的是 Welch 形式，自由度却写 \(n_1+n_2-2\)（合并方差形式），两者不配套。
-- [ ] [[id:ac892808-1336-492f-9992-63cb00ea646a][Chi-squared Distribution]]：卡方检验回答哪几类问题？
-- [ ] [[id:802be368-002c-4591-b6a9-3f14c71f0467][ANOVA]]：三组以上为什么不两两做 t 检验？ANOVA 显著之后还要做什么？
+* 5. Inference II: hypothesis testing [0/6]
+- [ ] [[id:61297403-6903-4513-90c7-2b5fc0b49e11][Hypothesis Testing]]: What are the four steps of a test? What are Type I and Type II errors?
+  - To fix: The note writes \(H_0\) as \(\mu_1\approx\mu_2\) and defines it using whether \(\mu_2\) falls in the rejection region, which confuses parameters with the test statistic. The listed common \(\alpha\) value of 0.2 is unusual.
+- [ ] [[id:4946fa5a-e743-4270-bee9-82e029890d7c][P-Values]]: What probability does a p-value describe? Why is it not the probability that \(H_0\) is true?
+- [ ] [[id:3c158478-8d52-4fa3-9262-f0267d6c48c8][Z-Test]]: How do critical values differ between one-tailed and two-tailed tests?
+  - To fix: “The variances are known (use bootstrapping)” is contradictory: known variances need no estimation; bootstrap estimation of standard error is a different approach. The “Two Proportion Z-Test” section is empty.
+- [ ] [[id:1bf89458-2878-4fbf-a0b9-9a59a8fdc486][T-Distribution]] → [[id:7c802e9e-8fc0-41fd-8078-1e09ee72378f][T-Test]]: When should a t-test replace a z-test? How do you choose between paired and two-sample t-tests?
+  - To fix: The one-sample t-test should use the sample standard deviation directly instead of bootstrapping to obtain \(\hat\sigma\). “Compare with Z-Test” should distinguish known population \(\sigma\) from estimation using the sample. The two-sample standard error uses Welch’s form, but the degrees of freedom are \(n_1+n_2-2\), from the pooled-variance form; these do not match.
+- [ ] [[id:ac892808-1336-492f-9992-63cb00ea646a][Chi-squared Distribution]]: What kinds of questions do chi-squared tests answer?
+- [ ] [[id:802be368-002c-4591-b6a9-3f14c71f0467][ANOVA]]: Why avoid pairwise t-tests when comparing three or more groups? What comes after a significant ANOVA?
 
-Anki：Definition of the p-value、Type I and Type II errors、One-tailed vs two-tailed critical values、t-distribution vs normal、Choosing a test、Paired vs two-sample t-test、Two-sample t statistic、Uses of the chi-squared distribution、After a significant ANOVA。
+Anki: Definition of the p-value; Type I and Type II errors; One-tailed vs two-tailed critical values; t-distribution vs normal; Choosing a test; Paired vs two-sample t-test; Two-sample t statistic; Uses of the chi-squared distribution; After a significant ANOVA.
 
-* 6. 用 Python 做 [0/2]
-可选，前五个阶段学完后再看。
-- [ ] [[id:c6961658-1c4b-4f9d-8a52-e919562d6277][SciPy]] 的 ~scipy.stats~ 模块：分布的 ~pmf~ / ~cdf~ / ~ppf~ / ~rvs~ 四件套分别对应前面哪个概念？
-- [ ] [[id:ffde831f-5883-4dd5-b406-caa135d0e53b][pingouin]]：一行做完 t 检验和 ANOVA 时，输出表里每一列对应检验的哪一步？
+* 6. Apply the concepts in Python [0/2]
+Optional: complete the first five stages before this one.
+- [ ] [[id:c6961658-1c4b-4f9d-8a52-e919562d6277][SciPy]], the ~scipy.stats~ module: Which earlier concepts correspond to ~pmf~, ~cdf~, ~ppf~, and ~rvs~?
+- [ ] [[id:ffde831f-5883-4dd5-b406-caa135d0e53b][pingouin]]: When a single call performs a t-test or ANOVA, which part of the test does each output column represent?

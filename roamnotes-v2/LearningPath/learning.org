@@ -5,7 +5,7 @@
 #+title: Learning Paths
 #+filetags: :learning:
 
-每条路径把某个主题的相关笔记按由浅入深排好，每步一个核心问题。用法见仓库 README「按学习路径学习或复习」。
+Each path arranges related notes from foundations to more advanced topics, with one core question per step. See the learning-path workflow in the repository README.
 
 * [[id:243b2ab6-7699-4a5f-a889-81354950c219][Statistics]]
 * [[id:3141df9d-c8e9-4c56-ba86-662c15024967][Omarchy]]
