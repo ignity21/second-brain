@@ -2,6 +2,7 @@
 :ID:       956bf88a-baa4-459c-aebc-a1a29260efb5
 :ROAM_ALIASES: "Shell 启动文件与环境变量"
 :VERIFIED_WITH: bash 5.3.20, zsh 5.9.2, systemd 262 (2026-10-27)
+:ENV_CHECK_VERIFIED_WITH: bash, procps-ng 4.0.7 (2026-11-12)
 :END:
 #+title: Shell Startup Files and Environment Variables
 #+filetags: :Linux:Shell:
@@ -9,7 +10,15 @@
 * 环境变量怎么传递
 - 环境是 ~execve~ 时交给新程序的一组 =KEY=VALUE= 字符串，见 [[id:6f1e5033-7e68-4eb1-a7d7-d5fd9db8b863][Linux Process Lifecycle]]。子进程拿到的是副本：它改环境不影响父进程，已经在运行的进程也看不到之后的修改。所以改了 rc 文件要开新 shell 或 ~source~ 它。
 - *shell 变量不等于环境变量* ： ~X=1~ 只在当前 shell 中有效； ~export X~ 后才进入子进程的环境； ~X=1 cmd~ 只给这一条命令。本机核对： ~X=1; bash -c 'echo $X'~ 输出空， ~export X~ 后输出 =1= 。
-- 查看一个进程启动时的环境： =/proc/<pid>/environ= （以 =\0= 分隔，用 ~tr '\0' '\n'~ 转换），见 [[id:8e974bc1-a02f-4567-8e13-5e8b37b5babb][Linux /proc and sysctl Interfaces]]。
+- 查看环境时先区分：是看某个进程启动时收到的环境，还是当前 shell 现在会传给子进程的环境？
+
+| 要看什么 | 命令 | 注意 |
+|---|---|---|
+| 指定进程启动时的环境 | ~ps eww -p <pid>~ | ~e~ 不带短横线，把环境附在命令后； ~ww~ 不限制输出宽度 |
+| 同上，逐行查看 | ~tr '\0' '\n' < /proc/<pid>/environ~ | 原始条目以空字节分隔，见 [[id:8e974bc1-a02f-4567-8e13-5e8b37b5babb][Linux /proc and sysctl Interfaces]] |
+| 当前 shell 现在导出的环境 | ~printenv~ 或 ~env~ | 能看到 shell 启动后新 ~export~ 的变量，不包含未导出的 shell 变量 |
+
+- Linux 上 ~ps~ 也从 =/proc= 获取环境；它和 =/proc/<pid>/environ= 都不保证反映进程启动后通过 ~setenv()~ 等做的修改。因此 ~ps eww -p $$~ 不能代替 ~printenv~ 来核对当前 shell 新导出的变量。
 
 * Bash 读哪些文件
 | shell 类型 | 例子 | 读取 |

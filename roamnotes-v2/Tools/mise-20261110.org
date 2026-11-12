@@ -30,11 +30,11 @@ mise 用一套命令和配置文件管理各种语言的运行时和命令行工
 ** 配置分层：越具体越优先
 mise 从当前目录向上找配置，再合并全局和系统配置，同一工具以最具体的那层为准：
 
-| 层 | 文件 | 本机内容 |
-|---|---|---|
-| 项目 | =mise.toml= （向上查找，子目录覆盖父目录） | 无 |
-| 用户全局 | =~/.config/mise/config.toml= | ~python = "latest"~ ，以及 kimi CLI |
-| 系统 | =/etc/mise/conf.d/*.toml= | Omarchy 装的 claude、codex、gh、node、uv 等 |
+| 层       | 文件                                       | 本机内容                                    |
+|----------+--------------------------------------------+---------------------------------------------|
+| 项目     | =mise.toml= （向上查找，子目录覆盖父目录） | 无                                          |
+| 用户全局 | =~/.config/mise/config.toml=               | ~python = "latest"~ ，以及 kimi CLI         |
+| 系统     | =/etc/mise/conf.d/*.toml=                  | Omarchy 装的 claude、codex、gh、node、uv 等 |
 
 - 配置里的 =[tools]= 写「要什么版本」， =[env]= 写环境变量， =[tasks]= 写任务。
 - ~mise use <tool>@<ver>~ 安装并写进最近的项目配置；加 =-g= 写进用户全局配置。
@@ -59,7 +59,7 @@ Omarchy 的系统配置把许多工具标成 =lazy= ： ~mise ls~ 里显示 =(la
 两者在 Python 解释器上重叠，要定一个负责方。
 
 ** 推荐的分工
-- *uv 项目里，解释器版本仍由 uv 决定* ：版本写在 =.python-version= 和 =pyproject.toml= 的 ~requires-python~ ，项目的 =mise.toml= 不再写 python，避免同一件事有两个真相来源。
+- *沿用 uv 工作流* ：用 =.python-version= 选择开发解释器，项目的 =mise.toml= 不再重复写 python。这是一种分工选择，不是 uv 的强制要求。
 - *mise 负责项目之外* ：全局默认的 python（临时脚本、REPL），以及 node 等其他语言。
 - 可选：在全局配置里设置 ~python.uv_venv_auto = "source"~ 。进入含 =uv.lock= 的目录时，mise 自动激活 uv 建好的 =.venv= ，不用 ~source .venv/bin/activate~ 或每条命令都加 ~uv run~ 。设成 ="create|source"= 时，缺 =.venv= 也会用 uv 创建，但这时用的是 mise 选中的 Python。
 
@@ -68,6 +68,27 @@ Omarchy 的系统配置把许多工具标成 =lazy= ： ~mise ls~ 里显示 =(la
 [settings]
 python.uv_venv_auto = "source"
 #+end_src
+
+项目的兼容范围、开发版本和测试覆盖是三件事：
+
+| 要决定什么 | 配置或工具 |
+|---|---|
+| 项目支持哪些 Python 版本 | =pyproject.toml= 的 ~requires-python~ |
+| 日常开发用哪个版本 | =mise.toml= 或 =.python-version= ，选择一个负责 |
+| 支持的版本是否真的能运行 | Nox / tox 或持续集成（CI）的多版本测试，各版本使用独立环境 |
+
+=.python-version= 不是必需的。只写 ~requires-python = ">=3.13,<3.14"~ 也能把 uv 的选择限制在 3.13 系列；若支持范围较宽、开发时想固定其中一个版本，才需要另外表达开发版本。
+
+跨前后端项目也可以用 =mise.toml= 统一选择 Python 和 Node.js，再让 uv 管 Python 虚拟环境与依赖。uv 默认优先选自己管理的解释器，不会自动把 =mise.toml= 当成版本要求；首次创建环境时可明确传入 mise 选中的解释器路径：
+
+#+begin_src sh
+uv venv --python "$(mise which python)"
+uv sync
+#+end_src
+
+~mise which python~ 输出当前配置选中的 Python 路径，shell 将它作为 ~--python~ 的参数。前提是 mise 已安装配置要求的 Python；这条命令用于首次建环境，不要为了日常运行反复重建已有的 =.venv= 。
+
+TODO verify: 上述命令尚未在本机完整运行核对（2026-11-12，mise 2026.11.5、uv 0.13.7）；当前 ~mise which python~ 报未找到 mise 管理的 Python。解释器选择规则参见 [[https://docs.astral.sh/uv/concepts/python-versions/][uv 官方文档]]。
 
 ** uv 选哪个解释器
 本机实测（mise 已激活，无 =.python-version= ）：

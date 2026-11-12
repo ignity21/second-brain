@@ -27,9 +27,9 @@ Anki：Omarchy 里暂时收起窗口。
 - [ ] [[id:8f59c6ed-ec02-4dbf-90ab-2463e4f7dd10][Omarchy]] 的「坑」：改完 Hyprland 配置怎么确认没写错？网上找到的窗口规则为什么常常不能直接用？
 - [ ] 待补：第一次自定义。挑一个实际需要（例如给 1Password 写窗口规则，或用 ~omarchy launch or focus~ 绑一个快捷键）改用户层，把做法和踩到的坑补进 Omarchy 笔记。
 
-* 4. 开发环境：mise [0/4]
-- [ ] 前置：[[id:956bf88a-baa4-459c-aebc-a1a29260efb5][Shell Startup Files and Environment Variables]]：交互 shell 读哪些启动文件？为什么从桌面启动的程序看不到 =.zshrc= 里 export 的变量？下一步 mise 的两种生效方式就建立在这里。
-- [ ] [[id:f64c61b9-0d46-4bad-80e2-b466ac291920][mise Development Tool Manager]] 的「定位」和「配置分层」：mise 管什么、不管什么？本机某个工具的版本来自哪一层配置，用哪个命令看？
+* 4. 开发环境：mise [2/4]
+- [X] 前置：[[id:956bf88a-baa4-459c-aebc-a1a29260efb5][Shell Startup Files and Environment Variables]]：交互 shell 读哪些启动文件？为什么从桌面启动的程序看不到 =.zshrc= 里 export 的变量？下一步 mise 的两种生效方式就建立在这里。
+- [X] [[id:f64c61b9-0d46-4bad-80e2-b466ac291920][mise Development Tool Manager]] 的「定位」和「配置分层」：mise 管什么、不管什么？本机某个工具的版本来自哪一层配置，用哪个命令看？
 - [ ] [[id:f64c61b9-0d46-4bad-80e2-b466ac291920][mise]] 的「两种生效方式」和「lazy 工具」：终端里靠什么切换版本，脚本和 IDE 里又靠什么？Omarchy 预装的工具为什么第一次运行时才下载？
 - [ ] [[id:f64c61b9-0d46-4bad-80e2-b466ac291920][mise]] 的「与 uv 分工」，对照 [[id:196944f7-2304-448c-9f27-4e3a6d2892f7][uv]] 笔记：uv 项目的 Python 解释器由谁管？mise 的全局 python 会影响 uv 项目吗？
   - 待改（uv 笔记）：标题只有 ~uv~ ，缺领域上下文，应改为如 =uv Python Project Manager= ；Work Flow 第 5 步 ~uv pip install -e .~ 多余， ~uv sync~ 默认已以可编辑方式安装项目本身；替代 ~pipx inject~ 的写法应为 ~uv tool install aider-chat --with google-generativeai~ ，现写法 ~uv tool run --from aider-chat pip install ...~ 装不进工具的环境。

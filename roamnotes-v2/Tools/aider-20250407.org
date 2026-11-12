@@ -23,7 +23,7 @@ Aider is a terminal AI pair programmer that edits files in a git repository and 
 |---|---|---|
 | Code (default) | ~/code~ | Makes changes to the files to satisfy the request |
 | Ask | ~/ask~ | Discusses the code and answers questions without editing |
-| Architect | ~/architect~ | The main model *proposes* a solution; a second request asks the editor model ( ~--editor-model~ ) to turn the proposal into concrete file edits |
+| Architect | ~/architect~ | The main model *proposes* a solution; a second request asks the editor model (~--editor-model~) to turn the proposal into concrete file edits   |
 | Context | ~/context~ | Works out which files are relevant to the request and adds them |
 
 A typical loop: ~/ask~ to agree on an approach, ~/code~ (or ~/architect~ for larger changes) to implement it, then ~/run~ or ~/test~ and let aider fix failures.
@@ -31,12 +31,12 @@ A typical loop: ~/ask~ to agree on an approach, ~/code~ (or ~/architect~ for lar
 * Commands
 | Area | Commands |
 |---|---|
-| Files in the chat | ~/add~ , ~/read-only~ (reference only, not edited), ~/drop~ , ~/ls~ |
-| Repository | ~/diff~ , ~/commit~ , ~/undo~ (the last commit aider made), ~/git~ , ~/map~ and ~/map-refresh~ (the repository map sent to the model) |
-| Models | ~/model~ , ~/editor-model~ , ~/weak-model~ (commit messages and history summaries), ~/models~ , ~/reasoning-effort~ , ~/think-tokens~ |
-| Running | ~/run~ (alias ~!~ ; adds the output to the chat), ~/test~ , ~/lint~ (lint and fix the files in the chat) |
-| Session | ~/clear~ (history), ~/reset~ (files and history), ~/tokens~ , ~/settings~ , ~/save~ / ~/load~ , ~/help~ , ~/exit~ |
-| Input | ~/multiline-mode~ (Enter inserts a newline, Alt+Enter sends), ~/editor~ (write the prompt in an editor), ~/paste~ , ~/voice~ , ~/web~ (scrape a page into the chat; works best with Playwright: ~playwright install --with-deps chromium~ ) |
+| Files in the chat | ~/add~, ~/read-only~ (reference only, not edited), ~/drop~, ~/ls~  |
+| Repository | ~/diff~, ~/commit~, ~/undo~ (the last commit aider made), ~/git~, ~/map~ and ~/map-refresh~ (the repository map sent to the model) |
+| Models | ~/model~, ~/editor-model~, ~/weak-model~ (commit messages and history summaries), ~/models~, ~/reasoning-effort~, ~/think-tokens~ |
+| Running | ~/run~ (alias ~!~ ; adds the output to the chat), ~/test~, ~/lint~ (lint and fix the files in the chat) |
+| Session | ~/clear~ (history), ~/reset~ (files and history), ~/tokens~, ~/settings~, ~/save~ / ~/load~, ~/help~, ~/exit~ |
+| Input | ~/multiline-mode~ (Enter inserts a newline, Alt+Enter sends), ~/editor~ (write the prompt in an editor), ~/paste~, ~/voice~, ~/web~ (scrape a page into the chat; works best with Playwright: ~playwright install --with-deps chromium~ ) |
 
 * Edit Formats
 How the model returns edits ( ~--edit-format~ ):
